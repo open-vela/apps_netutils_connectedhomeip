@@ -319,9 +319,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.IdentifyTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -387,9 +385,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.IdentifyType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -455,9 +451,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -523,9 +517,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -591,9 +583,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -659,9 +649,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -727,9 +715,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Identify.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -1114,9 +1100,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Groups.NameSupport response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -1182,9 +1166,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Groups.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -1250,9 +1232,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Groups.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -1318,9 +1298,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Groups.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -1386,9 +1364,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Groups.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -1454,9 +1430,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Groups.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2146,9 +2120,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.SceneCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2214,9 +2186,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.CurrentScene response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2282,9 +2252,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.CurrentGroup response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2350,9 +2318,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.SceneValid response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2418,9 +2384,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.NameSupport response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2486,9 +2450,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.LastConfiguredBy response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2554,9 +2516,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2622,9 +2582,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2690,9 +2648,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2758,9 +2714,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -2826,9 +2780,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Scenes.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3174,9 +3126,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.OnOff response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3238,9 +3188,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.GlobalSceneControl response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3340,9 +3288,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.OnTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3442,9 +3388,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.OffWaitTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3544,9 +3488,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.StartUpOnOff response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3608,9 +3550,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3672,9 +3612,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3736,9 +3674,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3800,9 +3736,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3864,9 +3798,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOff.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -3947,9 +3879,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.SwitchType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4052,9 +3982,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.SwitchActions response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4118,9 +4046,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4184,9 +4110,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4250,9 +4174,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4316,9 +4238,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4382,9 +4302,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OnOffSwitchConfiguration.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4929,9 +4847,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.CurrentLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -4997,9 +4913,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.RemainingTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5065,9 +4979,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.MinLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5133,9 +5045,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.MaxLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5201,9 +5111,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.CurrentFrequency response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5269,9 +5177,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.MinFrequency response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5337,9 +5243,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.MaxFrequency response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5445,9 +5349,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.Options response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5553,9 +5455,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.OnOffTransitionTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5661,9 +5561,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.OnLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5769,9 +5667,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.OnTransitionTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5877,9 +5773,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.OffTransitionTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -5985,9 +5879,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.DefaultMoveRate response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6093,9 +5985,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.StartUpCurrentLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6161,9 +6051,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6229,9 +6117,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6297,9 +6183,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6365,9 +6249,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6433,9 +6315,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LevelControl.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6567,9 +6447,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.ActiveText response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6677,9 +6555,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.Description response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6787,9 +6663,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.InactiveText response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6895,9 +6769,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.OutOfService response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -6963,9 +6835,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.Polarity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7071,9 +6941,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.PresentValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7179,9 +7047,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.Reliability response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7247,9 +7113,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.StatusFlags response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7315,9 +7179,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.ApplicationType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7383,9 +7245,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7451,9 +7311,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7519,9 +7377,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7587,9 +7443,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7655,9 +7509,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BinaryInputBasic.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7742,9 +7594,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.DeviceList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7810,9 +7660,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.ServerList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7878,9 +7726,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.ClientList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -7946,9 +7792,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.PartsList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8014,9 +7858,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8082,9 +7924,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8150,9 +7990,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8218,9 +8056,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8286,9 +8122,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Descriptor.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8445,9 +8279,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Binding.Binding response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8513,9 +8345,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Binding.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8581,9 +8411,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Binding.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8649,9 +8477,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Binding.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8717,9 +8543,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Binding.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8785,9 +8609,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Binding.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -8974,9 +8796,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.Acl response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9099,9 +8919,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.Extension response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9168,9 +8986,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.SubjectsPerAccessControlEntry response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9237,9 +9053,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.TargetsPerAccessControlEntry response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9306,9 +9120,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.AccessControlEntriesPerFabric response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9374,9 +9186,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9442,9 +9252,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9510,9 +9318,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9578,9 +9384,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -9646,9 +9450,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccessControl.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10380,9 +10182,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.ActionList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10448,9 +10248,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.EndpointList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10516,9 +10314,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.SetupUrl response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10584,9 +10380,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10652,9 +10446,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10720,9 +10512,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10788,9 +10578,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -10856,9 +10644,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedActions.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11001,9 +10787,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.DataModelRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11065,9 +10849,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.VendorName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11129,9 +10911,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.VendorID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11193,9 +10973,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.ProductName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11257,9 +11035,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.ProductID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11361,9 +11137,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.NodeLabel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11465,9 +11239,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.Location response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11529,9 +11301,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.HardwareVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11593,9 +11363,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.HardwareVersionString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11657,9 +11425,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.SoftwareVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11721,9 +11487,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.SoftwareVersionString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11785,9 +11549,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.ManufacturingDate response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11849,9 +11611,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.PartNumber response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11913,9 +11673,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.ProductURL response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -11977,9 +11735,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.ProductLabel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12041,9 +11797,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.SerialNumber response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12143,9 +11897,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.LocalConfigDisabled response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12207,9 +11959,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.Reachable response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12271,9 +12021,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.UniqueID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12336,9 +12084,7 @@ public:
             }
             reportHandler:^(MTRBasicClusterCapabilityMinimaStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.CapabilityMinima response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12400,9 +12146,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12464,9 +12208,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12528,9 +12270,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12592,9 +12332,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12656,9 +12394,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Basic.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12927,9 +12663,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateProvider.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -12993,9 +12727,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateProvider.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13059,9 +12791,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateProvider.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13125,9 +12855,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateProvider.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13191,9 +12919,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateProvider.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13397,9 +13123,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.DefaultOtaProviders response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13463,9 +13187,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.UpdatePossible response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13529,9 +13251,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.UpdateState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13595,9 +13315,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.UpdateStateProgress response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13661,9 +13379,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13727,9 +13443,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13793,9 +13507,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13859,9 +13571,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -13925,9 +13635,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OtaSoftwareUpdateRequestor.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14049,9 +13757,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.ActiveLocale response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14115,9 +13821,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.SupportedLocales response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14181,9 +13885,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14247,9 +13949,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14313,9 +14013,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14379,9 +14077,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14445,9 +14141,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LocalizationConfiguration.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14568,9 +14262,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.HourFormat response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14673,9 +14365,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.ActiveCalendarType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14739,9 +14429,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.SupportedCalendarTypes response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14805,9 +14493,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14871,9 +14557,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -14937,9 +14621,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15003,9 +14685,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15069,9 +14749,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TimeFormatLocalization.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15193,9 +14871,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UnitLocalization.TemperatureUnit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15261,9 +14937,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UnitLocalization.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15329,9 +15003,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UnitLocalization.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15397,9 +15069,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UnitLocalization.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15465,9 +15135,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UnitLocalization.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15533,9 +15201,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UnitLocalization.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15615,9 +15281,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSourceConfiguration.Sources response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15681,9 +15345,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSourceConfiguration.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15747,9 +15409,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSourceConfiguration.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15813,9 +15473,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSourceConfiguration.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15879,9 +15537,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSourceConfiguration.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -15945,9 +15601,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSourceConfiguration.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16059,9 +15713,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.Status response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16127,9 +15779,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.Order response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16195,9 +15845,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.Description response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16264,9 +15912,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredAssessedInputVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16333,9 +15979,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredAssessedInputFrequency response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16401,9 +16045,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredCurrentType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16469,9 +16111,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredAssessedCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16537,9 +16177,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredNominalVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16605,9 +16243,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredMaximumCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16673,9 +16309,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.WiredPresent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16741,9 +16375,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.ActiveWiredFaults response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16809,9 +16441,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16877,9 +16507,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatPercentRemaining response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -16945,9 +16573,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatTimeRemaining response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17013,9 +16639,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatChargeLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17081,9 +16705,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatReplacementNeeded response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17149,9 +16771,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatReplaceability response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17217,9 +16837,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatPresent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17285,9 +16903,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.ActiveBatFaults response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17354,9 +16970,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatReplacementDescription response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17422,9 +17036,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatCommonDesignation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17490,9 +17102,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatANSIDesignation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17558,9 +17168,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatIECDesignation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17626,9 +17234,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatApprovedChemistry response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17694,9 +17300,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatCapacity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17762,9 +17366,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatQuantity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17830,9 +17432,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatChargeState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17898,9 +17498,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatTimeToFullCharge response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -17967,9 +17565,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatFunctionalWhileCharging response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18035,9 +17631,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.BatChargingCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18103,9 +17697,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.ActiveBatChargeFaults response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18171,9 +17763,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18239,9 +17829,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18307,9 +17895,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18375,9 +17961,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18443,9 +18027,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PowerSource.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18725,9 +18307,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.Breadcrumb response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18794,9 +18374,7 @@ public:
             }
             reportHandler:^(MTRGeneralCommissioningClusterBasicCommissioningInfo * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.BasicCommissioningInfo response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18862,9 +18440,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.RegulatoryConfig response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18930,9 +18506,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.LocationCapability response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -18999,9 +18573,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.SupportsConcurrentConnection response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19067,9 +18639,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19135,9 +18705,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19203,9 +18771,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19271,9 +18837,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19339,9 +18903,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralCommissioning.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19776,9 +19338,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.MaxNetworks response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19844,9 +19404,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.Networks response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19912,9 +19470,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.ScanMaxTimeSeconds response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -19980,9 +19536,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.ConnectMaxTimeSeconds response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20088,9 +19642,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.InterfaceEnabled response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20156,9 +19708,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.LastNetworkingStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20224,9 +19774,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.LastNetworkID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20292,9 +19840,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.LastConnectErrorValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20360,9 +19906,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20428,9 +19972,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20496,9 +20038,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20564,9 +20104,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20632,9 +20170,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"NetworkCommissioning.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20769,9 +20305,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DiagnosticLogs.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20837,9 +20371,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DiagnosticLogs.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20905,9 +20437,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DiagnosticLogs.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -20973,9 +20503,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DiagnosticLogs.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21041,9 +20569,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DiagnosticLogs.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21186,9 +20712,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.NetworkInterfaces response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21254,9 +20778,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.RebootCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21322,9 +20844,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.UpTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21390,9 +20910,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.TotalOperationalHours response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21458,9 +20976,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.BootReasons response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21526,9 +21042,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.ActiveHardwareFaults response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21594,9 +21108,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.ActiveRadioFaults response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21662,9 +21174,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.ActiveNetworkFaults response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21731,9 +21241,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.TestEventTriggersEnabled response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21799,9 +21307,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21867,9 +21373,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -21935,9 +21439,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22003,9 +21505,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22071,9 +21571,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GeneralDiagnostics.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22203,9 +21701,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.ThreadMetrics response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22271,9 +21767,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.CurrentHeapFree response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22339,9 +21833,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.CurrentHeapUsed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22408,9 +21900,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.CurrentHeapHighWatermark response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22476,9 +21966,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22544,9 +22032,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22612,9 +22098,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22680,9 +22164,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22748,9 +22230,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"SoftwareDiagnostics.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -22936,9 +22416,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.Channel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23002,9 +22480,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RoutingRole response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23068,9 +22544,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.NetworkName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23134,9 +22608,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.PanId response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23200,9 +22672,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ExtendedPanId response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23266,9 +22736,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.MeshLocalPrefix response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23332,9 +22800,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.OverrunCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23398,9 +22864,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.NeighborTableList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23464,9 +22928,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RouteTableList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23530,9 +22992,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.PartitionId response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23596,9 +23056,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.Weighting response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23662,9 +23120,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.DataVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23728,9 +23184,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.StableDataVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23794,9 +23248,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.LeaderRouterId response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23860,9 +23312,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.DetachedRoleCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23926,9 +23376,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ChildRoleCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -23992,9 +23440,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RouterRoleCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24058,9 +23504,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.LeaderRoleCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24124,9 +23568,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.AttachAttemptCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24190,9 +23632,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.PartitionIdChangeCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24257,9 +23697,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.BetterPartitionAttachAttemptCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24323,9 +23761,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ParentChangeCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24389,9 +23825,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxTotalCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24455,9 +23889,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxUnicastCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24521,9 +23953,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxBroadcastCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24587,9 +24017,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxAckRequestedCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24653,9 +24081,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxAckedCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24719,9 +24145,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxNoAckRequestedCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24785,9 +24209,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxDataCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24851,9 +24273,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxDataPollCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24917,9 +24337,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxBeaconCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -24983,9 +24401,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxBeaconRequestCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25049,9 +24465,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxOtherCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25115,9 +24529,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxRetryCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25182,9 +24594,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxDirectMaxRetryExpiryCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25249,9 +24659,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxIndirectMaxRetryExpiryCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25315,9 +24723,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxErrCcaCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25381,9 +24787,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxErrAbortCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25447,9 +24851,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.TxErrBusyChannelCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25513,9 +24915,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxTotalCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25579,9 +24979,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxUnicastCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25645,9 +25043,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxBroadcastCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25711,9 +25107,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxDataCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25777,9 +25171,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxDataPollCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25843,9 +25235,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxBeaconCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25909,9 +25299,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxBeaconRequestCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -25975,9 +25363,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxOtherCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26041,9 +25427,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxAddressFilteredCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26108,9 +25492,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxDestAddrFilteredCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26174,9 +25556,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxDuplicatedCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26240,9 +25620,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxErrNoFrameCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26307,9 +25685,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxErrUnknownNeighborCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26374,9 +25750,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxErrInvalidSrcAddrCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26440,9 +25814,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxErrSecCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26506,9 +25878,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxErrFcsCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26572,9 +25942,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.RxErrOtherCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26638,9 +26006,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ActiveTimestamp response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26704,9 +26070,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.PendingTimestamp response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26770,9 +26134,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.Delay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26837,9 +26199,7 @@ public:
             }
             reportHandler:^(MTRThreadNetworkDiagnosticsClusterSecurityPolicy * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.SecurityPolicy response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26903,9 +26263,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ChannelMask response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -26971,9 +26329,7 @@ public:
             reportHandler:^(
                 MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.OperationalDatasetComponents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27037,9 +26393,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ActiveNetworkFaultsList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27103,9 +26457,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27169,9 +26521,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27235,9 +26585,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27301,9 +26649,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27367,9 +26713,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThreadNetworkDiagnostics.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27507,9 +26851,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.Bssid response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27573,9 +26915,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.SecurityType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27639,9 +26979,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.WiFiVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27705,9 +27043,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.ChannelNumber response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27771,9 +27107,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.Rssi response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27837,9 +27171,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.BeaconLostCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27903,9 +27235,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.BeaconRxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -27969,9 +27299,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.PacketMulticastRxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28035,9 +27363,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.PacketMulticastTxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28101,9 +27427,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.PacketUnicastRxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28167,9 +27491,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.PacketUnicastTxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28233,9 +27555,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.CurrentMaxRate response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28299,9 +27619,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.OverrunCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28365,9 +27683,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28431,9 +27747,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28497,9 +27811,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28563,9 +27875,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28629,9 +27939,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WiFiNetworkDiagnostics.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28762,9 +28070,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.PHYRate response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28828,9 +28134,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.FullDuplex response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28894,9 +28198,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.PacketRxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -28960,9 +28262,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.PacketTxCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29026,9 +28326,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.TxErrCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29092,9 +28390,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.CollisionCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29158,9 +28454,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.OverrunCount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29224,9 +28518,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.CarrierDetect response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29290,9 +28582,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.TimeSinceReset response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29356,9 +28646,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29422,9 +28710,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29488,9 +28774,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29554,9 +28838,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29620,9 +28902,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"EthernetNetworkDiagnostics.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29722,9 +29002,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.VendorName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29790,9 +29068,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.VendorID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29858,9 +29134,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.ProductName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -29968,9 +29242,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.NodeLabel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30036,9 +29308,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.HardwareVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30104,9 +29374,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.HardwareVersionString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30172,9 +29440,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.SoftwareVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30240,9 +29506,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.SoftwareVersionString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30308,9 +29572,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.ManufacturingDate response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30376,9 +29638,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.PartNumber response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30444,9 +29704,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.ProductURL response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30512,9 +29770,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.ProductLabel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30580,9 +29836,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.SerialNumber response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30648,9 +29902,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.Reachable response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30716,9 +29968,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.UniqueID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30784,9 +30034,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30852,9 +30100,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30920,9 +30166,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -30988,9 +30232,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31056,9 +30298,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BridgedDeviceBasic.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31149,9 +30389,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.NumberOfPositions response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31217,9 +30455,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.CurrentPosition response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31285,9 +30521,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.MultiPressMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31353,9 +30587,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31421,9 +30653,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31489,9 +30719,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31557,9 +30785,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31625,9 +30851,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Switch.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31852,9 +31076,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.WindowStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31918,9 +31140,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.AdminFabricIndex response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -31984,9 +31204,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.AdminVendorId response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32050,9 +31268,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32116,9 +31332,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32182,9 +31396,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32248,9 +31460,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32314,9 +31524,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AdministratorCommissioning.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32813,9 +32021,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.NOCs response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32882,9 +32088,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.Fabrics response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -32948,9 +32152,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.SupportedFabrics response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33014,9 +32216,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.CommissionedFabrics response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33080,9 +32280,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.TrustedRootCertificates response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33146,9 +32344,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.CurrentFabricIndex response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33212,9 +32408,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33278,9 +32472,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33344,9 +32536,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33410,9 +32600,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33476,9 +32664,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OperationalCredentials.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33863,9 +33049,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.GroupKeyMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -33934,9 +33118,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.GroupTable response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34002,9 +33184,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.MaxGroupsPerFabric response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34070,9 +33250,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.MaxGroupKeysPerFabric response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34138,9 +33316,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34206,9 +33382,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34274,9 +33448,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34342,9 +33514,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34410,9 +33580,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"GroupKeyManagement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34494,9 +33662,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FixedLabel.LabelList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34562,9 +33728,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FixedLabel.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34630,9 +33794,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FixedLabel.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34698,9 +33860,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FixedLabel.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34766,9 +33926,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FixedLabel.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34834,9 +33992,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FixedLabel.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -34975,9 +34131,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UserLabel.LabelList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35043,9 +34197,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UserLabel.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35111,9 +34263,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UserLabel.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35179,9 +34329,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UserLabel.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35247,9 +34395,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UserLabel.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35315,9 +34461,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"UserLabel.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35400,9 +34544,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.StateValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35468,9 +34610,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35536,9 +34676,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35604,9 +34742,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35672,9 +34808,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35740,9 +34874,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BooleanState.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35876,9 +35008,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.Description response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -35944,9 +35074,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.StandardNamespace response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36012,9 +35140,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.SupportedModes response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36080,9 +35206,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.CurrentMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36188,9 +35312,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.StartUpMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36296,9 +35418,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.OnMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36364,9 +35484,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36432,9 +35550,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36500,9 +35616,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36568,9 +35682,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -36636,9 +35748,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ModeSelect.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -37739,9 +36849,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.LockState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -37807,9 +36915,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.LockType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -37875,9 +36981,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.ActuatorEnabled response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -37943,9 +37047,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.DoorState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38051,9 +37153,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.DoorOpenEvents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38159,9 +37259,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.DoorClosedEvents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38267,9 +37365,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.OpenPeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38336,9 +37432,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfTotalUsersSupported response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38405,9 +37499,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfPINUsersSupported response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38474,9 +37566,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfRFIDUsersSupported response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38544,9 +37634,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfWeekDaySchedulesSupportedPerUser response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38614,9 +37702,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfYearDaySchedulesSupportedPerUser response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38683,9 +37769,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfHolidaySchedulesSupported response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38751,9 +37835,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.MaxPINCodeLength response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38819,9 +37901,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.MinPINCodeLength response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38887,9 +37967,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.MaxRFIDCodeLength response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -38955,9 +38033,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.MinRFIDCodeLength response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39023,9 +38099,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.CredentialRulesSupport response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39092,9 +38166,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.NumberOfCredentialsSupportedPerUser response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39202,9 +38274,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.Language response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39310,9 +38380,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.LEDSettings response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39418,9 +38486,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.AutoRelockTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39526,9 +38592,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.SoundVolume response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39634,9 +38698,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.OperatingMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39703,9 +38765,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.SupportedOperatingModes response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39772,9 +38832,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.DefaultConfigurationRegister response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39880,9 +38938,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.EnableLocalProgramming response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -39988,9 +39044,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.EnableOneTouchLocking response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40096,9 +39150,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.EnableInsideStatusLED response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40205,9 +39257,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.EnablePrivacyModeButton response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40314,9 +39364,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.LocalProgrammingFeatures response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40422,9 +39470,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.WrongCodeEntryLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40531,9 +39577,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.UserCodeTemporaryDisableTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40639,9 +39683,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.SendPINOverTheAir response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40748,9 +39790,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.RequirePINforRemoteOperation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40856,9 +39896,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.ExpiringUserTimeout response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40924,9 +39962,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -40992,9 +40028,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41060,9 +40094,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41128,9 +40160,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41196,9 +40226,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"DoorLock.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41621,9 +40649,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.Type response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41690,9 +40716,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.PhysicalClosedLimitLift response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41759,9 +40783,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.PhysicalClosedLimitTilt response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41827,9 +40849,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.CurrentPositionLift response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41895,9 +40915,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.CurrentPositionTilt response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -41963,9 +40981,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.NumberOfActuationsLift response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42031,9 +41047,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.NumberOfActuationsTilt response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42099,9 +41113,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.ConfigStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42168,9 +41180,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.CurrentPositionLiftPercentage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42237,9 +41247,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.CurrentPositionTiltPercentage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42305,9 +41313,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.OperationalStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42374,9 +41380,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.TargetPositionLiftPercent100ths response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42443,9 +41447,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.TargetPositionTiltPercent100ths response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42511,9 +41513,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.EndProductType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42580,9 +41580,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.CurrentPositionLiftPercent100ths response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42649,9 +41647,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.CurrentPositionTiltPercent100ths response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42717,9 +41713,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.InstalledOpenLimitLift response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42786,9 +41780,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.InstalledClosedLimitLift response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42854,9 +41846,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.InstalledOpenLimitTilt response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -42923,9 +41913,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.InstalledClosedLimitTilt response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43031,9 +42019,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.Mode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43099,9 +42085,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.SafetyStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43167,9 +42151,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43235,9 +42217,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43303,9 +42283,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43371,9 +42349,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43439,9 +42415,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WindowCovering.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43623,9 +42597,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierMovingState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43691,9 +42663,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierSafetyStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43759,9 +42729,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierCapabilities response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43867,9 +42835,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierOpenEvents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -43975,9 +42941,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierCloseEvents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44084,9 +43048,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierCommandOpenEvents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44193,9 +43155,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierCommandCloseEvents response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44301,9 +43261,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierOpenPeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44409,9 +43367,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierClosePeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44477,9 +43433,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.BarrierPosition response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44545,9 +43499,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44613,9 +43565,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44681,9 +43631,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44749,9 +43697,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44817,9 +43763,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BarrierControl.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -44938,9 +43882,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxPressure response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45004,9 +43946,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxSpeed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45070,9 +44010,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxFlow response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45136,9 +44074,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MinConstPressure response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45202,9 +44138,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxConstPressure response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45268,9 +44202,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MinCompPressure response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45334,9 +44266,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxCompPressure response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45400,9 +44330,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MinConstSpeed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45466,9 +44394,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxConstSpeed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45532,9 +44458,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MinConstFlow response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45598,9 +44522,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxConstFlow response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45664,9 +44586,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MinConstTemp response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45730,9 +44650,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.MaxConstTemp response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45796,9 +44714,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.PumpStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45862,9 +44778,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.EffectiveOperationMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45928,9 +44842,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.EffectiveControlMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -45994,9 +44906,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.Capacity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46060,9 +44970,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.Speed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46166,9 +45074,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.LifetimeRunningHours response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46232,9 +45138,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.Power response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46338,9 +45242,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.LifetimeEnergyConsumed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46443,9 +45345,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.OperationMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46548,9 +45448,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.ControlMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46614,9 +45512,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46680,9 +45576,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46746,9 +45640,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46812,9 +45704,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -46878,9 +45768,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PumpConfigurationAndControl.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47230,9 +46118,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.LocalTemperature response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47298,9 +46184,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.OutdoorTemperature response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47366,9 +46250,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.Occupancy response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47435,9 +46317,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.AbsMinHeatSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47504,9 +46384,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.AbsMaxHeatSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47573,9 +46451,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.AbsMinCoolSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47642,9 +46518,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.AbsMaxCoolSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47710,9 +46584,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.PICoolingDemand response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47778,9 +46650,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.PIHeatingDemand response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47887,9 +46757,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.HVACSystemTypeConfiguration response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -47996,9 +46864,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.LocalTemperatureCalibration response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48105,9 +46971,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.OccupiedCoolingSetpoint response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48214,9 +47078,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.OccupiedHeatingSetpoint response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48323,9 +47185,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.UnoccupiedCoolingSetpoint response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48432,9 +47292,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.UnoccupiedHeatingSetpoint response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48540,9 +47398,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.MinHeatSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48648,9 +47504,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.MaxHeatSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48756,9 +47610,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.MinCoolSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48864,9 +47716,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.MaxCoolSetpointLimit response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -48972,9 +47822,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.MinSetpointDeadBand response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49080,9 +47928,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.RemoteSensing response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49189,9 +48035,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ControlSequenceOfOperation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49297,9 +48141,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.SystemMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49365,9 +48207,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ThermostatRunningMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49433,9 +48273,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.StartOfWeek response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49502,9 +48340,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.NumberOfWeeklyTransitions response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49571,9 +48407,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.NumberOfDailyTransitions response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49680,9 +48514,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.TemperatureSetpointHold response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49790,9 +48622,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.TemperatureSetpointHoldDuration response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49901,9 +48731,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ThermostatProgrammingOperationMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -49969,9 +48797,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ThermostatRunningState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50037,9 +48863,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.SetpointChangeSource response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50105,9 +48929,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.SetpointChangeAmount response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50174,9 +48996,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.SetpointChangeSourceTimestamp response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50282,9 +49102,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.OccupiedSetback response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50350,9 +49168,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.OccupiedSetbackMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50418,9 +49234,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.OccupiedSetbackMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50526,9 +49340,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.UnoccupiedSetback response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50594,9 +49406,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.UnoccupiedSetbackMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50662,9 +49472,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.UnoccupiedSetbackMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50770,9 +49578,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.EmergencyHeatDelta response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50878,9 +49684,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -50986,9 +49790,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACCapacity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51094,9 +49896,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACRefrigerantType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51202,9 +50002,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACCompressorType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51310,9 +50108,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACErrorCode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51418,9 +50214,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACLouverPosition response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51486,9 +50280,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACCoilTemperature response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51594,9 +50386,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ACCapacityformat response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51662,9 +50452,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51730,9 +50518,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51798,9 +50584,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51866,9 +50650,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -51934,9 +50716,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Thermostat.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52068,9 +50848,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.FanMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52176,9 +50954,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.FanModeSequence response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52284,9 +51060,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.PercentSetting response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52352,9 +51126,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.PercentCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52420,9 +51192,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.SpeedMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52528,9 +51298,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.SpeedSetting response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52596,9 +51364,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.SpeedCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52664,9 +51430,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.RockSupport response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52772,9 +51536,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.RockSetting response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52840,9 +51602,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.WindSupport response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -52948,9 +51708,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.WindSetting response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53016,9 +51774,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53084,9 +51840,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53152,9 +51906,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53220,9 +51972,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53288,9 +52038,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FanControl.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53419,9 +52167,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.TemperatureDisplayMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53530,9 +52276,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.KeypadLockout response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53644,9 +52388,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.ScheduleProgrammingVisibility response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53714,9 +52456,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53784,9 +52524,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53854,9 +52592,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53924,9 +52660,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -53994,9 +52728,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ThermostatUserInterfaceConfiguration.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55166,9 +53898,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.CurrentHue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55234,9 +53964,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.CurrentSaturation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55302,9 +54030,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.RemainingTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55370,9 +54096,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.CurrentX response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55438,9 +54162,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.CurrentY response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55506,9 +54228,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.DriftCompensation response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55574,9 +54294,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.CompensationText response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55642,9 +54360,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorTemperature response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55710,9 +54426,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55818,9 +54532,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Options response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55886,9 +54598,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.NumberOfPrimaries response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -55954,9 +54664,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary1X response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56022,9 +54730,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary1Y response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56090,9 +54796,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary1Intensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56158,9 +54862,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary2X response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56226,9 +54928,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary2Y response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56294,9 +54994,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary2Intensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56362,9 +55060,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary3X response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56430,9 +55126,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary3Y response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56498,9 +55192,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary3Intensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56566,9 +55258,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary4X response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56634,9 +55324,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary4Y response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56702,9 +55390,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary4Intensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56770,9 +55456,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary5X response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56838,9 +55522,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary5Y response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56906,9 +55588,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary5Intensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -56974,9 +55654,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary6X response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57042,9 +55720,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary6Y response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57110,9 +55786,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.Primary6Intensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57218,9 +55892,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.WhitePointX response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57326,9 +55998,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.WhitePointY response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57434,9 +56104,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointRX response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57542,9 +56210,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointRY response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57650,9 +56316,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointRIntensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57758,9 +56422,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointGX response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57866,9 +56528,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointGY response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -57974,9 +56634,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointGIntensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58082,9 +56740,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointBX response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58190,9 +56846,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointBY response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58298,9 +56952,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorPointBIntensity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58366,9 +57018,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.EnhancedCurrentHue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58434,9 +57084,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.EnhancedColorMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58502,9 +57150,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorLoopActive response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58570,9 +57216,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorLoopDirection response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58638,9 +57282,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorLoopTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58707,9 +57349,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorLoopStartEnhancedHue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58776,9 +57416,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorLoopStoredEnhancedHue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58844,9 +57482,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorCapabilities response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58913,9 +57549,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorTempPhysicalMinMireds response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -58982,9 +57616,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ColorTempPhysicalMaxMireds response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59051,9 +57683,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.CoupleColorTempToLevelMinMireds response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59161,9 +57791,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.StartUpColorTemperatureMireds response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59229,9 +57857,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59297,9 +57923,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59365,9 +57989,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59433,9 +58055,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59501,9 +58121,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ColorControl.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59598,9 +58216,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.PhysicalMinLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59666,9 +58282,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.PhysicalMaxLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59734,9 +58348,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.BallastStatus response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59842,9 +58454,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.MinLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -59950,9 +58560,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.MaxLevel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60058,9 +58666,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.IntrinsicBalanceFactor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60167,9 +58773,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.BallastFactorAdjustment response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60235,9 +58839,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampQuantity response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60345,9 +58947,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60455,9 +59055,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampManufacturer response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60563,9 +59161,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampRatedHours response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60671,9 +59267,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampBurnHours response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60779,9 +59373,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampAlarmMode response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60887,9 +59479,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.LampBurnHoursTripPoint response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -60955,9 +59545,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61023,9 +59611,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61091,9 +59677,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61159,9 +59743,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61227,9 +59809,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"BallastConfiguration.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61313,9 +59893,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.MeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61379,9 +59957,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.MinMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61445,9 +60021,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.MaxMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61511,9 +60085,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.Tolerance response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61577,9 +60149,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.LightSensorType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61643,9 +60213,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61709,9 +60277,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61775,9 +60341,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61841,9 +60405,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61907,9 +60469,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"IlluminanceMeasurement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -61992,9 +60552,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.MeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62058,9 +60616,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.MinMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62124,9 +60680,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.MaxMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62190,9 +60744,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.Tolerance response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62256,9 +60808,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62322,9 +60872,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62388,9 +60936,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62454,9 +61000,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62520,9 +61064,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TemperatureMeasurement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62612,9 +61154,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.MeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62680,9 +61220,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.MinMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62748,9 +61286,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.MaxMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62816,9 +61352,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.Tolerance response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62884,9 +61418,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.ScaledValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -62952,9 +61484,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.MinScaledValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63020,9 +61550,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.MaxScaledValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63088,9 +61616,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.ScaledTolerance response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63156,9 +61682,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.Scale response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63224,9 +61748,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63292,9 +61814,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63360,9 +61880,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63428,9 +61946,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63496,9 +62012,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"PressureMeasurement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63583,9 +62097,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.MeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63651,9 +62163,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.MinMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63719,9 +62229,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.MaxMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63787,9 +62295,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.Tolerance response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63855,9 +62361,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63923,9 +62427,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -63991,9 +62493,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64059,9 +62559,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64127,9 +62625,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"FlowMeasurement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64212,9 +62708,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.MeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64278,9 +62772,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.MinMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64344,9 +62836,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.MaxMeasuredValue response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64410,9 +62900,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.Tolerance response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64476,9 +62964,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64542,9 +63028,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64608,9 +63092,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64674,9 +63156,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64740,9 +63220,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"RelativeHumidityMeasurement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64835,9 +63313,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.Occupancy response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64903,9 +63379,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.OccupancySensorType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -64972,9 +63446,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.OccupancySensorTypeBitmap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65082,9 +63554,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.PirOccupiedToUnoccupiedDelay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65192,9 +63662,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.PirUnoccupiedToOccupiedDelay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65303,9 +63771,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.PirUnoccupiedToOccupiedThreshold response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65415,9 +63881,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.UltrasonicOccupiedToUnoccupiedDelay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65527,9 +63991,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.UltrasonicUnoccupiedToOccupiedDelay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65640,9 +64102,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.UltrasonicUnoccupiedToOccupiedThreshold response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65753,9 +64213,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.PhysicalContactOccupiedToUnoccupiedDelay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65866,9 +64324,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.PhysicalContactUnoccupiedToOccupiedDelay response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -65980,9 +64436,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.PhysicalContactUnoccupiedToOccupiedThreshold response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66048,9 +64502,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66116,9 +64568,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66184,9 +64634,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66252,9 +64700,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66320,9 +64766,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"OccupancySensing.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66404,9 +64848,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WakeOnLan.MACAddress response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66472,9 +64914,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WakeOnLan.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66540,9 +64980,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WakeOnLan.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66608,9 +65046,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WakeOnLan.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66676,9 +65112,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WakeOnLan.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66744,9 +65178,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"WakeOnLan.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -66977,9 +65409,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.ChannelList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67046,9 +65476,7 @@ public:
             }
             reportHandler:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.Lineup response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67115,9 +65543,7 @@ public:
             }
             reportHandler:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.CurrentChannel response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67183,9 +65609,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67251,9 +65675,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67319,9 +65741,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67387,9 +65807,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67455,9 +65873,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67597,9 +66013,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.TargetList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67665,9 +66079,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.CurrentTarget response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67733,9 +66145,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67801,9 +66211,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67869,9 +66277,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -67937,9 +66343,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68005,9 +66409,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TargetNavigator.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68607,9 +67009,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.CurrentState response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68675,9 +67075,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.StartTime response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68743,9 +67141,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.Duration response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68812,9 +67208,7 @@ public:
             }
             reportHandler:^(MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.SampledPosition response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68880,9 +67274,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.PlaybackSpeed response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -68948,9 +67340,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.SeekRangeEnd response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69016,9 +67406,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.SeekRangeStart response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69084,9 +67472,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69152,9 +67538,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69220,9 +67604,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69288,9 +67670,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69356,9 +67736,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69627,9 +68005,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.InputList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69695,9 +68071,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.CurrentInput response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69763,9 +68137,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69831,9 +68203,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69899,9 +68269,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -69967,9 +68335,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70035,9 +68401,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaInput.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70162,9 +68526,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LowPower.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70230,9 +68592,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LowPower.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70298,9 +68658,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LowPower.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70366,9 +68724,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LowPower.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70434,9 +68790,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"LowPower.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70565,9 +68919,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"KeypadInput.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70633,9 +68985,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"KeypadInput.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70701,9 +69051,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"KeypadInput.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70769,9 +69117,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"KeypadInput.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -70837,9 +69183,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"KeypadInput.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71252,9 +69596,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.AcceptHeader response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71362,9 +69704,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.SupportedStreamingProtocols response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71430,9 +69770,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71498,9 +69836,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71566,9 +69902,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71634,9 +69968,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71702,9 +70034,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ContentLauncher.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71885,9 +70215,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.OutputList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -71953,9 +70281,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.CurrentOutput response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72021,9 +70347,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72089,9 +70413,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72157,9 +70479,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72225,9 +70545,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72293,9 +70611,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AudioOutput.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72549,9 +70865,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.CatalogList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72676,9 +70990,7 @@ public:
             }
             reportHandler:^(MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.CurrentApp response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72744,9 +71056,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72812,9 +71122,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72880,9 +71188,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -72948,9 +71254,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73016,9 +71320,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73107,9 +71409,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.VendorName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73175,9 +71475,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.VendorID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73243,9 +71541,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.ApplicationName response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73311,9 +71607,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.ProductID response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73380,9 +71674,7 @@ public:
             }
             reportHandler:^(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.Application response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73448,9 +71740,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.Status response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73516,9 +71806,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.ApplicationVersion response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73584,9 +71872,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.AllowedVendorList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73652,9 +71938,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73720,9 +72004,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73788,9 +72070,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73856,9 +72136,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -73924,9 +72202,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74155,9 +72431,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccountLogin.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74223,9 +72497,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccountLogin.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74291,9 +72563,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccountLogin.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74359,9 +72629,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccountLogin.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74427,9 +72695,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"AccountLogin.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74733,9 +72999,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasurementType response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74801,9 +73065,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74869,9 +73131,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcVoltageMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -74937,9 +73197,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcVoltageMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75005,9 +73263,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75073,9 +73329,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcCurrentMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75141,9 +73395,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcCurrentMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75209,9 +73461,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcPower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75277,9 +73527,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcPowerMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75345,9 +73593,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcPowerMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75413,9 +73659,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcVoltageMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75481,9 +73725,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcVoltageDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75549,9 +73791,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcCurrentMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75617,9 +73857,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcCurrentDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75685,9 +73923,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcPowerMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75753,9 +73989,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.DcPowerDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75821,9 +74055,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcFrequency response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75889,9 +74121,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcFrequencyMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -75957,9 +74187,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcFrequencyMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76025,9 +74253,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.NeutralCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76093,9 +74319,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.TotalActivePower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76161,9 +74385,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.TotalReactivePower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76229,9 +74451,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.TotalApparentPower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76298,9 +74518,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.Measured1stHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76367,9 +74585,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.Measured3rdHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76436,9 +74652,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.Measured5thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76505,9 +74719,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.Measured7thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76574,9 +74786,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.Measured9thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76643,9 +74853,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.Measured11thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76712,9 +74920,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasuredPhase1stHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76781,9 +74987,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasuredPhase3rdHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76850,9 +75054,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasuredPhase5thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76919,9 +75121,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasuredPhase7thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -76988,9 +75188,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasuredPhase9thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77057,9 +75255,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.MeasuredPhase11thHarmonicCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77125,9 +75321,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcFrequencyMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77193,9 +75387,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcFrequencyDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77261,9 +75453,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.PowerMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77329,9 +75519,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.PowerDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77398,9 +75586,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.HarmonicCurrentMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77467,9 +75653,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.PhaseHarmonicCurrentMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77535,9 +75719,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.InstantaneousVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77604,9 +75786,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.InstantaneousLineCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77673,9 +75853,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.InstantaneousActiveCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77742,9 +75920,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.InstantaneousReactiveCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77810,9 +75986,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.InstantaneousPower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77878,9 +76052,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -77946,9 +76118,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78014,9 +76184,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78082,9 +76250,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrent response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78150,9 +76316,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78218,9 +76382,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78286,9 +76448,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78354,9 +76514,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerMin response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78422,9 +76580,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerMax response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78490,9 +76646,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ReactivePower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78558,9 +76712,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ApparentPower response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78626,9 +76778,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.PowerFactor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78737,9 +76887,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsVoltageMeasurementPeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78848,9 +76996,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsUnderVoltageCounter response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -78959,9 +77105,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeOverVoltagePeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79070,9 +77214,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeUnderVoltagePeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79178,9 +77320,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSagPeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79286,9 +77426,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSwellPeriod response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79354,9 +77492,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcVoltageMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79422,9 +77558,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcVoltageDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79490,9 +77624,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcCurrentMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79558,9 +77690,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcCurrentDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79626,9 +77756,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcPowerMultiplier response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79694,9 +77822,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcPowerDivisor response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79802,9 +77928,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.OverloadAlarmsMask response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79870,9 +77994,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.VoltageOverload response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -79938,9 +78060,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.CurrentOverload response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80046,9 +78166,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcOverloadAlarmsMask response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80114,9 +78232,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcVoltageOverload response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80182,9 +78298,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcCurrentOverload response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80250,9 +78364,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcActivePowerOverload response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80319,9 +78431,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcReactivePowerOverload response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80387,9 +78497,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsOverVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80455,9 +78563,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsUnderVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80523,9 +78629,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeOverVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80591,9 +78695,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeUnderVoltage response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80659,9 +78761,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSag response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80727,9 +78827,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSwell response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80795,9 +78893,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.LineCurrentPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80863,9 +78959,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActiveCurrentPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80931,9 +79025,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ReactiveCurrentPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -80999,9 +79091,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltagePhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81067,9 +79157,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageMinPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81135,9 +79223,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageMaxPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81203,9 +79289,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81271,9 +79355,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentMinPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81339,9 +79421,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentMaxPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81407,9 +79487,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81475,9 +79553,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerMinPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81543,9 +79619,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerMaxPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81611,9 +79685,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ReactivePowerPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81679,9 +79751,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ApparentPowerPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81747,9 +79817,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.PowerFactorPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81817,9 +79885,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsVoltageMeasurementPeriodPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81886,9 +79952,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsOverVoltageCounterPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -81955,9 +80019,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsUnderVoltageCounterPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82024,9 +80086,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeOverVoltagePeriodPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82093,9 +80153,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeUnderVoltagePeriodPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82162,9 +80220,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSagPeriodPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82231,9 +80287,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSwellPeriodPhaseB response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82299,9 +80353,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.LineCurrentPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82367,9 +80419,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActiveCurrentPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82435,9 +80485,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ReactiveCurrentPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82503,9 +80551,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltagePhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82571,9 +80617,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageMinPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82639,9 +80683,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageMaxPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82707,9 +80749,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82775,9 +80815,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentMinPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82843,9 +80881,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsCurrentMaxPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82911,9 +80947,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -82979,9 +81013,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerMinPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83047,9 +81079,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ActivePowerMaxPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83115,9 +81145,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ReactivePowerPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83183,9 +81211,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ApparentPowerPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83251,9 +81277,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.PowerFactorPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83321,9 +81345,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsVoltageMeasurementPeriodPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83390,9 +81412,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsOverVoltageCounterPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83459,9 +81479,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AverageRmsUnderVoltageCounterPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83528,9 +81546,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeOverVoltagePeriodPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83597,9 +81613,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsExtremeUnderVoltagePeriodPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83666,9 +81680,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSagPeriodPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83735,9 +81747,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.RmsVoltageSwellPeriodPhaseC response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83803,9 +81813,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83871,9 +81879,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -83939,9 +81945,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -84007,9 +82011,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -84075,9 +82077,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ElectricalMeasurement.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -85868,9 +83868,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Boolean response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -85976,9 +83974,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Bitmap8 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86084,9 +84080,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Bitmap16 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86192,9 +84186,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Bitmap32 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86300,9 +84292,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Bitmap64 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86408,9 +84398,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int8u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86516,9 +84504,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int16u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86624,9 +84610,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int24u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86732,9 +84716,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int32u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86840,9 +84822,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int40u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -86948,9 +84928,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int48u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87056,9 +85034,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int56u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87164,9 +85140,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int64u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87272,9 +85246,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int8s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87380,9 +85352,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int16s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87488,9 +85458,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int24s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87596,9 +85564,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int32s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87704,9 +85670,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int40s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87812,9 +85776,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int48s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -87920,9 +85882,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int56s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88028,9 +85988,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Int64s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88136,9 +86094,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Enum8 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88244,9 +86200,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Enum16 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88352,9 +86306,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.FloatSingle response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88460,9 +86412,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.FloatDouble response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88568,9 +86518,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.OctetString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88687,9 +86635,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ListInt8u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88806,9 +86752,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ListOctetString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -88928,9 +86872,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ListStructOctetString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89036,9 +86978,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.LongOctetString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89146,9 +87086,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.CharString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89256,9 +87194,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.LongCharString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89364,9 +87300,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.EpochUs response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89472,9 +87406,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.EpochS response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89580,9 +87512,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.VendorId response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89854,9 +87784,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ListNullablesAndOptionalsStruct response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -89962,9 +87890,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.EnumAttr response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90082,9 +88008,7 @@ public:
             }
             reportHandler:^(MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.StructAttr response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90190,9 +88114,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.RangeRestrictedInt8u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90298,9 +88220,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.RangeRestrictedInt8s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90406,9 +88326,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.RangeRestrictedInt16u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90514,9 +88432,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.RangeRestrictedInt16s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90633,9 +88549,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ListLongOctetString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90805,9 +88719,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ListFabricScoped response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -90913,9 +88825,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.TimedWriteBoolean response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91021,9 +88931,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.GeneralErrorBoolean response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91129,9 +89037,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ClusterErrorBoolean response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91237,9 +89143,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.Unsupported response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91345,9 +89249,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableBoolean response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91453,9 +89355,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableBitmap8 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91561,9 +89461,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableBitmap16 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91669,9 +89567,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableBitmap32 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91777,9 +89673,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableBitmap64 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91885,9 +89779,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt8u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -91993,9 +89885,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt16u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92101,9 +89991,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt24u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92209,9 +90097,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt32u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92317,9 +90203,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt40u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92425,9 +90309,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt48u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92533,9 +90415,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt56u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92641,9 +90521,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt64u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92749,9 +90627,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt8s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92857,9 +90733,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt16s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -92965,9 +90839,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt24s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93073,9 +90945,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt32s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93181,9 +91051,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt40s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93289,9 +91157,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt48s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93397,9 +91263,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt56s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93505,9 +91369,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableInt64s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93613,9 +91475,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableEnum8 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93721,9 +91581,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableEnum16 response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93829,9 +91687,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableFloatSingle response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -93937,9 +91793,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableFloatDouble response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94045,9 +91899,7 @@ public:
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableOctetString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94155,9 +92007,7 @@ public:
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableCharString response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94263,9 +92113,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableEnumAttr response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94389,9 +92237,7 @@ public:
             }
             reportHandler:^(MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableStruct response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94499,9 +92345,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableRangeRestrictedInt8u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94609,9 +92453,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableRangeRestrictedInt8s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94719,9 +92561,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableRangeRestrictedInt16u response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94829,9 +92669,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.NullableRangeRestrictedInt16s response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94897,9 +92735,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.GeneratedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -94965,9 +92801,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.AcceptedCommandList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -95033,9 +92867,7 @@ public:
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.AttributeList response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -95101,9 +92933,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.FeatureMap response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
@@ -95169,9 +92999,7 @@ public:
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"TestCluster.ClusterRevision response %@", [value description]);
-                if (error || !mWait) {
-                    SetCommandExitStatus(error);
-                }
+                SetCommandExitStatus(error);
             }];
 
         return CHIP_NO_ERROR;
