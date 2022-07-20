@@ -4125,7 +4125,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("compensationText", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("compensationText", [value length], 254));
+            VerifyOrReturn(CheckConstraintMaxLength("compensationText", value, 254));
             NextTest();
         }];
 
@@ -35663,12 +35663,13 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("vendorName", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("vendorName", [value length], 32));
+            VerifyOrReturn(CheckConstraintMaxLength("vendorName", value, 32));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull vendorID;
 
     CHIP_ERROR TestReadsTheVendorIDAttribute_2()
     {
@@ -35684,6 +35685,10 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("vendorID", "", "vendor-id"));
+            {
+                vendorID = value;
+            }
+
             NextTest();
         }];
 
@@ -35704,7 +35709,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("applicationName", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("applicationName", [value length], 256));
+            VerifyOrReturn(CheckConstraintMaxLength("applicationName", value, 256));
             NextTest();
         }];
 
@@ -35791,7 +35796,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("applicationVersion", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("applicationVersion", [value length], 32));
+            VerifyOrReturn(CheckConstraintMaxLength("applicationVersion", value, 32));
             NextTest();
         }];
 
@@ -40706,6 +40711,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("activeWiredFaults", "", "list"));
+            VerifyOrReturn(CheckConstraintMaxLength("activeWiredFaults", value, 8));
             NextTest();
         }];
 
@@ -40754,6 +40760,8 @@ private:
             if (value != nil) {
 
                 VerifyOrReturn(CheckConstraintType("batPercentRemaining", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("batPercentRemaining", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("batPercentRemaining", [value unsignedCharValue], 200U));
             }
 
             NextTest();
@@ -40888,6 +40896,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("activeBatFaults", "", "list"));
+            VerifyOrReturn(CheckConstraintMaxLength("activeBatFaults", value, 8));
             NextTest();
         }];
 
@@ -40909,7 +40918,7 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("batReplacementDescription", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("batReplacementDescription", [value length], 60));
+                VerifyOrReturn(CheckConstraintMaxLength("batReplacementDescription", value, 60));
                 NextTest();
             }];
 
@@ -40953,7 +40962,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batANSIDesignation", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("batANSIDesignation", [value length], 20));
+            VerifyOrReturn(CheckConstraintMaxLength("batANSIDesignation", value, 20));
             NextTest();
         }];
 
@@ -40974,7 +40983,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("batIECDesignation", "", "string"));
-            VerifyOrReturn(CheckConstraintMaxLength("batIECDesignation", [value length], 20));
+            VerifyOrReturn(CheckConstraintMaxLength("batIECDesignation", value, 20));
             NextTest();
         }];
 
@@ -54169,6 +54178,8 @@ private:
                 VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"bedroom"));
             }
 
+            VerifyOrReturn(CheckConstraintType("labelList", "", "list"));
+            VerifyOrReturn(CheckConstraintMinLength("labelList", value, 4));
             NextTest();
         }];
 
@@ -83520,7 +83531,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinLength("charString", [value length], 5));
+            VerifyOrReturn(CheckConstraintMinLength("charString", value, 5));
             NextTest();
         }];
 
@@ -83540,7 +83551,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMaxLength("charString", [value length], 20));
+            VerifyOrReturn(CheckConstraintMaxLength("charString", value, 20));
             NextTest();
         }];
 
@@ -90529,6 +90540,9 @@ private:
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags count], static_cast<uint32_t>(1)));
             }
 
+            VerifyOrReturn(CheckConstraintType("supportedModes", "", "list"));
+            VerifyOrReturn(CheckConstraintMinLength("supportedModes", value, 3));
+            VerifyOrReturn(CheckConstraintMaxLength("supportedModes", value, 3));
             NextTest();
         }];
 

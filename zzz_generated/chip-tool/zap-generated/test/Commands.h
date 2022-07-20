@@ -2695,7 +2695,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 254));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 254));
             }
             break;
         case 8:
@@ -9991,7 +9991,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (VendorNameValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(VendorNameValueBuffer);
@@ -10040,7 +10040,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (ProductNameValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(ProductNameValueBuffer);
@@ -10089,7 +10089,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (NodeLabelValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(NodeLabelValueBuffer);
@@ -10117,7 +10117,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("location", value, CountryCode));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 16));
             }
             break;
         case 21:
@@ -10159,8 +10159,8 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMinLength("value", value.size(), 1));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 64));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 1));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
                 if (HardwareVersionStringValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(HardwareVersionStringValueBuffer);
@@ -10211,7 +10211,8 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinLength("value", value.size(), 1));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 1));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
                 if (SoftwareVersionStringValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(SoftwareVersionStringValueBuffer);
@@ -10238,8 +10239,8 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMinLength("value", value.size(), 8));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 16));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 8));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 16));
                 if (ManufacturingDateValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(ManufacturingDateValueBuffer);
@@ -10270,7 +10271,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (PartNumberValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(PartNumberValueBuffer);
@@ -10297,7 +10298,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 256));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 256));
                 if (ProductURLValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(ProductURLValueBuffer);
@@ -10328,7 +10329,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 64));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
                 if (ProductLabelValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(ProductLabelValueBuffer);
@@ -10359,7 +10360,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (SerialNumberValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(SerialNumberValueBuffer);
@@ -10418,7 +10419,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (UniqueIDValueBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(UniqueIDValueBuffer);
@@ -21923,6 +21924,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
+    uint16_t vendorID;
+
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
     //
@@ -21945,7 +21948,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 2:
@@ -21954,6 +21957,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "vendor-id"));
+                vendorID = value;
             }
             break;
         case 3:
@@ -21962,7 +21966,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 256));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 256));
             }
             break;
         case 4:
@@ -21998,7 +22002,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 8:
@@ -24629,6 +24633,7 @@ private:
                 chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::WiredFault> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 8));
             }
             break;
         case 12:
@@ -24647,6 +24652,8 @@ private:
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 200U));
             }
             break;
         case 14:
@@ -24701,6 +24708,7 @@ private:
                 chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatFault> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 8));
             }
             break;
         case 20:
@@ -24709,7 +24717,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 60));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 60));
             }
             break;
         case 21:
@@ -24728,7 +24736,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 20));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 20));
             }
             break;
         case 23:
@@ -24737,7 +24745,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 20));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 20));
             }
             break;
         case 24:
@@ -27349,10 +27357,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName, 16));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
                 if (deviceInstanceNameBeforeReboot1Buffer != nullptr)
                 {
                     chip::Platform::MemoryFree(deviceInstanceNameBeforeReboot1Buffer);
@@ -27368,10 +27376,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName, 12));
+                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName, 12));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.hostName", value.hostName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.hostName", value.hostName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName.size(), 12));
-                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName.size(), 12));
             }
             shouldContinue = true;
             break;
@@ -27380,10 +27388,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName, 16));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.hostName", value.hostName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.hostName", value.hostName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName.size(), 16));
-                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName.size(), 16));
             }
             shouldContinue = true;
             break;
@@ -27500,7 +27508,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName, 32));
             }
             shouldContinue = true;
             break;
@@ -27527,7 +27535,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction, 128));
             }
             shouldContinue = true;
             break;
@@ -27560,10 +27568,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName, 16));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
                 VerifyOrReturn(CheckConstraintNotValue("value.instanceName", value.instanceName, deviceInstanceNameBeforeReboot1));
             }
             shouldContinue = true;
@@ -27573,10 +27581,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName, 12));
+                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName, 12));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.hostName", value.hostName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.hostName", value.hostName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName.size(), 12));
-                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName.size(), 12));
             }
             shouldContinue = true;
             break;
@@ -27585,10 +27593,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName, 16));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.hostName", value.hostName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.hostName", value.hostName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.hostName", value.hostName.size(), 16));
-                VerifyOrReturn(CheckConstraintMaxLength("value.hostName", value.hostName.size(), 16));
             }
             shouldContinue = true;
             break;
@@ -27705,7 +27713,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName, 32));
             }
             shouldContinue = true;
             break;
@@ -27732,7 +27740,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction, 128));
             }
             shouldContinue = true;
             break;
@@ -33599,6 +33607,8 @@ private:
                     VerifyOrReturn(CheckValueAsString("labelList[3].value", iter_0.GetValue().value, chip::CharSpan("bedroom", 7)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("labelList", iter_0, 4));
                 }
+                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 4));
             }
             break;
         default:
@@ -48205,7 +48215,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinLength("value", value.size(), 5));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 5));
             }
             break;
         case 18:
@@ -48213,7 +48223,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 20));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 20));
             }
             break;
         case 19:
@@ -48240,8 +48250,8 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
                 VerifyOrReturn(CheckConstraintIsLowerCase("value", value, true));
+                VerifyOrReturn(CheckConstraintIsUpperCase("value", value, false));
             }
             break;
         case 23:
@@ -48995,10 +49005,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName, 16));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
                 if (deviceInstanceNameBeforeRebootBuffer != nullptr)
                 {
                     chip::Platform::MemoryFree(deviceInstanceNameBeforeRebootBuffer);
@@ -49116,7 +49126,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value.deviceName", value.deviceName, 32));
             }
             shouldContinue = true;
             break;
@@ -49143,7 +49153,7 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction.size(), 128));
+                VerifyOrReturn(CheckConstraintMaxLength("value.pairingInstruction", value.pairingInstruction, 128));
             }
             shouldContinue = true;
             break;
@@ -49176,10 +49186,10 @@ private:
             {
                 chip::app::Clusters::DiscoveryCommands::Commands::DiscoveryCommandResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName, 16));
+                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName, 16));
                 VerifyOrReturn(CheckConstraintIsUpperCase("value.instanceName", value.instanceName, true));
                 VerifyOrReturn(CheckConstraintIsHexString("value.instanceName", value.instanceName, true));
-                VerifyOrReturn(CheckConstraintMinLength("value.instanceName", value.instanceName.size(), 16));
-                VerifyOrReturn(CheckConstraintMaxLength("value.instanceName", value.instanceName.size(), 16));
                 VerifyOrReturn(CheckConstraintNotValue("value.instanceName", value.instanceName, deviceInstanceNameBeforeReboot));
             }
             shouldContinue = true;
@@ -52687,6 +52697,9 @@ private:
                     }
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("supportedModes", iter_0, 3));
                 }
+                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 3));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 3));
             }
             break;
         case 4:
@@ -75891,7 +75904,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 4:
@@ -75946,7 +75959,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest1", 9)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 10:
@@ -75959,7 +75972,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest2", 9)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 12:
@@ -76220,7 +76233,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 4:
@@ -76272,7 +76285,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 10:
@@ -76284,7 +76297,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "string"));
-                VerifyOrReturn(CheckConstraintMaxLength("value", value.size(), 32));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 12:
@@ -81993,6 +82006,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintNotValue("value", value, OccupancyValue));
             }
             break;
         default:
