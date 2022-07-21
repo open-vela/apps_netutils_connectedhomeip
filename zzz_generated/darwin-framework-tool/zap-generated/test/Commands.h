@@ -43889,50 +43889,50 @@ public:
             break;
         case 4:
             ChipLogProgress(
-                chipTool, " ***** Test Step 4 : Read the Feature dependent(TSTAT.S.F01(COOL)) attribute in AttributeList\n");
-            if (ShouldSkip("TSTAT.S.F01")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheFeatureDependentTSTATSF01COOLAttributeInAttributeList_4();
-            break;
-        case 5:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 5 : Read the Feature dependent(TSTAT.S.F02(OCC)) attribute in AttributeList\n");
-            if (ShouldSkip("TSTAT.S.F02")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheFeatureDependentTSTATSF02OCCAttributeInAttributeList_5();
-            break;
-        case 6:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 6 : Read the Feature dependent(TSTAT.S.F00(HEAT)) attribute in AttributeList\n");
+                chipTool, " ***** Test Step 4 : Read the Feature dependent(TSTAT.S.F00(HEAT)) attribute in AttributeList\n");
             if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheFeatureDependentTSTATSF00HEATAttributeInAttributeList_6();
+            err = TestReadTheFeatureDependentTSTATSF00HEATAttributeInAttributeList_4();
             break;
-        case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : Read the Feature dependent(TSTAT.S.F01(COOL) & TSTAT.S.F02(OCC)) attribute in "
-                "AttributeList\n");
-            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.F02")) {
+        case 5:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 5 : Read the Feature dependent(TSTAT.S.F01(COOL)) attribute in AttributeList\n");
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheFeatureDependentTSTATSF01COOLTstatsf02occAttributeInAttributeList_7();
+            err = TestReadTheFeatureDependentTSTATSF01COOLAttributeInAttributeList_5();
             break;
-        case 8:
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : Read the Feature dependent(TSTAT.S.F02(OCC)) attribute in AttributeList\n");
+            if (ShouldSkip("TSTAT.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentTSTATSF02OCCAttributeInAttributeList_6();
+            break;
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 8 : Read the Feature dependent(TSTAT.S.F00(HEAT) & TSTAT.S.F02(OCC)) attribute in "
+                " ***** Test Step 7 : Read the Feature dependent(TSTAT.S.F00(HEAT) & TSTAT.S.F02(OCC)) attribute in "
                 "AttributeList\n");
             if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheFeatureDependentTSTATSF00HEATTstatsf02occAttributeInAttributeList_8();
+            err = TestReadTheFeatureDependentTSTATSF00HEATTstatsf02occAttributeInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : Read the Feature dependent(TSTAT.S.F01(COOL) & TSTAT.S.F02(OCC)) attribute in "
+                "AttributeList\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheFeatureDependentTSTATSF01COOLTstatsf02occAttributeInAttributeList_8();
             break;
         case 9:
             ChipLogProgress(
@@ -43990,14 +43990,6 @@ public:
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Read the global attribute: GeneratedCommandList\n");
             err = TestReadTheGlobalAttributeGeneratedCommandList_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Read the global attribute: EventList\n");
-            if (ShouldSkip("PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheGlobalAttributeEventList_16();
             break;
         }
 
@@ -44058,9 +44050,6 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -44074,7 +44063,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 17;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -44127,7 +44116,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 1UL));
             VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 63UL));
 
             NextTest();
@@ -44165,51 +44154,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureDependentTSTATSF01COOLAttributeInAttributeList_4()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the Feature dependent(TSTAT.S.F01(COOL)) attribute in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheFeatureDependentTSTATSF02OCCAttributeInAttributeList_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the Feature dependent(TSTAT.S.F02(OCC)) attribute in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheFeatureDependentTSTATSF00HEATAttributeInAttributeList_6()
+    CHIP_ERROR TestReadTheFeatureDependentTSTATSF00HEATAttributeInAttributeList_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -44231,7 +44176,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureDependentTSTATSF01COOLTstatsf02occAttributeInAttributeList_7()
+    CHIP_ERROR TestReadTheFeatureDependentTSTATSF01COOLAttributeInAttributeList_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -44240,12 +44185,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the Feature dependent(TSTAT.S.F01(COOL) & TSTAT.S.F02(OCC)) attribute in AttributeList Error: %@", err);
+            NSLog(@"Read the Feature dependent(TSTAT.S.F01(COOL)) attribute in AttributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
 
             NextTest();
         }];
@@ -44253,7 +44198,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureDependentTSTATSF00HEATTstatsf02occAttributeInAttributeList_8()
+    CHIP_ERROR TestReadTheFeatureDependentTSTATSF02OCCAttributeInAttributeList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the Feature dependent(TSTAT.S.F02(OCC)) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheFeatureDependentTSTATSF00HEATTstatsf02occAttributeInAttributeList_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -44275,6 +44242,28 @@ private:
         return CHIP_NO_ERROR;
     }
 
+    CHIP_ERROR TestReadTheFeatureDependentTSTATSF01COOLTstatsf02occAttributeInAttributeList_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the Feature dependent(TSTAT.S.F01(COOL) & TSTAT.S.F02(OCC)) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
     CHIP_ERROR TestReadTheFeatureDependentTSTATSF05AUTOAttributeInAttributeList_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
@@ -44289,6 +44278,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("attributeList", "", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 18UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 25UL));
 
             NextTest();
@@ -44435,15 +44426,6 @@ private:
 
         return CHIP_NO_ERROR;
     }
-
-    CHIP_ERROR TestReadTheGlobalAttributeEventList_16()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
 };
 
 class Test_TC_TSTAT_2_1 : public TestCommandBridge {
@@ -44490,10 +44472,6 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Reads mandatory attributes from DUT: LocalTemperature\n");
-            if (ShouldSkip("TSTAT.S.A0000")) {
-                NextTest();
-                return;
-            }
             err = TestReadsMandatoryAttributesFromDutLocalTemperature_1();
             break;
         case 2:
@@ -44506,7 +44484,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Read Occupancy attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0002")) {
+            if (ShouldSkip("TSTAT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -44578,7 +44556,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads optional attributes from DUT: OccupiedCoolingSetpoint\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -44586,7 +44564,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Reads mandatory attributes from DUT: OccupiedHeatingSetpoint\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -44594,7 +44572,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Read UnoccupiedCoolingSetpoint attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.F02")) {
                 NextTest();
                 return;
             }
@@ -44602,27 +44580,27 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Read UnoccupiedHeatingSetpoint attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.F02")) {
                 NextTest();
                 return;
             }
             err = TestReadUnoccupiedHeatingSetpointAttributeFromTheDut_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Reads mandatory attributes from DUT: MinHeatSetpointLimit\n");
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Reads attribute from DUT: MinHeatSetpointLimit\n");
             if (ShouldSkip("TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMandatoryAttributesFromDutMinHeatSetpointLimit_16();
+            err = TestReadsAttributeFromDutMinHeatSetpointLimit_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads mandatory attributes from DUT: MaxHeatSetpointLimit\n");
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads attribute from DUT: MaxHeatSetpointLimit\n");
             if (ShouldSkip("TSTAT.S.A0016")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMandatoryAttributesFromDutMaxHeatSetpointLimit_17();
+            err = TestReadsAttributeFromDutMaxHeatSetpointLimit_17();
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Reads optional attributes from DUT: MinCoolSetpointLimit\n");
@@ -44642,7 +44620,7 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Reads optional attributes from DUT: MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
@@ -44658,237 +44636,219 @@ public:
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Reads mandatory attributes from DUT: ControlSequenceOfOperation\n");
-            if (ShouldSkip("TSTAT.S.A001b")) {
-                NextTest();
-                return;
-            }
             err = TestReadsMandatoryAttributesFromDutControlSequenceOfOperation_22();
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Reads mandatory attributes from DUT: SystemMode\n");
-            if (ShouldSkip("TSTAT.S.A001c")) {
-                NextTest();
-                return;
-            }
             err = TestReadsMandatoryAttributesFromDutSystemMode_23();
             break;
         case 24:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 24 : Read AlarmMask attribute from the DUT and Verify that the DUT responds with a map8 "
-                "value.The value has to be in the range of 0x00 to 0x07.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A001d")) {
-                NextTest();
-                return;
-            }
-            err = TestReadAlarmMaskAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Read ThermostatRunningMode attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Read ThermostatRunningMode attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A001e")) {
                 NextTest();
                 return;
             }
-            err = TestReadThermostatRunningModeAttributeFromTheDut_25();
+            err = TestReadThermostatRunningModeAttributeFromTheDut_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Reads constraints of optional attributes from DUT: StartOfWeek\n");
+            if (ShouldSkip("TSTAT.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Reads constraints of optional attributes from DUT: StartOfWeek\n");
-            if (ShouldSkip("TSTAT.S.A0020")) {
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Reads optional attributes from DUT: NumberOfWeeklyTransitions\n");
+            if (ShouldSkip("TSTAT.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_26();
+            err = TestReadsOptionalAttributesFromDutNumberOfWeeklyTransitions_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Reads optional attributes from DUT: NumberOfWeeklyTransitions\n");
-            if (ShouldSkip("TSTAT.S.A0021")) {
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Reads optional attributes from DUT: NumberOfDailyTransitions\n");
+            if (ShouldSkip("TSTAT.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestReadsOptionalAttributesFromDutNumberOfWeeklyTransitions_27();
+            err = TestReadsOptionalAttributesFromDutNumberOfDailyTransitions_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Reads optional attributes from DUT: NumberOfDailyTransitions\n");
-            if (ShouldSkip("TSTAT.S.A0022")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsOptionalAttributesFromDutNumberOfDailyTransitions_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Read TemperatureSetpointHold attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Read TemperatureSetpointHold attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0023")) {
                 NextTest();
                 return;
             }
-            err = TestReadTemperatureSetpointHoldAttributeFromTheDut_29();
+            err = TestReadTemperatureSetpointHoldAttributeFromTheDut_28();
             break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Read TemperatureSetpointHoldDuration attribute from the DUT\n");
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read TemperatureSetpointHoldDuration attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0024")) {
                 NextTest();
                 return;
             }
-            err = TestReadTemperatureSetpointHoldDurationAttributeFromTheDut_30();
+            err = TestReadTemperatureSetpointHoldDurationAttributeFromTheDut_29();
             break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Read ThermostatProgrammingOperationMode attribute from the DUT\n");
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Read ThermostatProgrammingOperationMode attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0025")) {
                 NextTest();
                 return;
             }
-            err = TestReadThermostatProgrammingOperationModeAttributeFromTheDut_31();
+            err = TestReadThermostatProgrammingOperationModeAttributeFromTheDut_30();
             break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Read ThermostatRunningState attribute from the DUT\n");
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Read ThermostatRunningState attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0029")) {
                 NextTest();
                 return;
             }
-            err = TestReadThermostatRunningStateAttributeFromTheDut_32();
+            err = TestReadThermostatRunningStateAttributeFromTheDut_31();
             break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Read SetpointChangeSource attribute from the DUT\n");
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Read SetpointChangeSource attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestReadSetpointChangeSourceAttributeFromTheDut_33();
+            err = TestReadSetpointChangeSourceAttributeFromTheDut_32();
             break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Read SetpointChangeAmount attribute from the DUT\n");
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read SetpointChangeAmount attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestReadSetpointChangeAmountAttributeFromTheDut_34();
+            err = TestReadSetpointChangeAmountAttributeFromTheDut_33();
             break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Read SetpointChangeSourceTimestamp attribute from the DUT\n");
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Read SetpointChangeSourceTimestamp attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0032")) {
                 NextTest();
                 return;
             }
-            err = TestReadSetpointChangeSourceTimestampAttributeFromTheDut_35();
+            err = TestReadSetpointChangeSourceTimestampAttributeFromTheDut_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read OccupiedSetback attribute from the DUT\n");
+            if (ShouldSkip("TSTAT.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOccupiedSetbackAttributeFromTheDut_35();
             break;
         case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : Read OccupiedSetback attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0034")) {
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Read OccupiedSetbackMin attribute from the DUT\n");
+            if (ShouldSkip("TSTAT.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestReadOccupiedSetbackAttributeFromTheDut_36();
+            err = TestReadOccupiedSetbackMinAttributeFromTheDut_36();
             break;
         case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : Read OccupiedSetbackMin attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0035")) {
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Read OccupiedSetbackMax attribute from the DUT\n");
+            if (ShouldSkip("TSTAT.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestReadOccupiedSetbackMinAttributeFromTheDut_37();
+            err = TestReadOccupiedSetbackMaxAttributeFromTheDut_37();
             break;
         case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : Read OccupiedSetbackMax attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0036")) {
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Read UnoccupiedSetback attribute from the DUT\n");
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F04")) {
                 NextTest();
                 return;
             }
-            err = TestReadOccupiedSetbackMaxAttributeFromTheDut_38();
+            err = TestReadUnoccupiedSetbackAttributeFromTheDut_38();
             break;
         case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : Read UnoccupiedSetback attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0037")) {
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Read UnoccupiedSetbackMin attribute from the DUT\n");
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F04")) {
                 NextTest();
                 return;
             }
-            err = TestReadUnoccupiedSetbackAttributeFromTheDut_39();
+            err = TestReadUnoccupiedSetbackMinAttributeFromTheDut_39();
             break;
         case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Read UnoccupiedSetbackMin attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0038")) {
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Read UnoccupiedSetbackMax attribute from the DUT\n");
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F04")) {
                 NextTest();
                 return;
             }
-            err = TestReadUnoccupiedSetbackMinAttributeFromTheDut_40();
+            err = TestReadUnoccupiedSetbackMaxAttributeFromTheDut_40();
             break;
         case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : Read UnoccupiedSetbackMax attribute from the DUT\n");
-            if (ShouldSkip("TSTAT.S.A0039")) {
-                NextTest();
-                return;
-            }
-            err = TestReadUnoccupiedSetbackMaxAttributeFromTheDut_41();
-            break;
-        case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : Read EmergencyHeatDelta attribute from the DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Read EmergencyHeatDelta attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A003a")) {
                 NextTest();
                 return;
             }
-            err = TestReadEmergencyHeatDeltaAttributeFromTheDut_42();
+            err = TestReadEmergencyHeatDeltaAttributeFromTheDut_41();
             break;
-        case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Read ACType attribute from the DUT\n");
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Read ACType attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0040")) {
                 NextTest();
                 return;
             }
-            err = TestReadACTypeAttributeFromTheDut_43();
+            err = TestReadACTypeAttributeFromTheDut_42();
             break;
-        case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Read ACCapacity attribute from the DUT\n");
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Read ACCapacity attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0041")) {
                 NextTest();
                 return;
             }
-            err = TestReadACCapacityAttributeFromTheDut_44();
+            err = TestReadACCapacityAttributeFromTheDut_43();
             break;
-        case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : Read ACRefrigerantType attribute from the DUT\n");
+        case 44:
+            ChipLogProgress(chipTool, " ***** Test Step 44 : Read ACRefrigerantType attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0042")) {
                 NextTest();
                 return;
             }
-            err = TestReadACRefrigerantTypeAttributeFromTheDut_45();
+            err = TestReadACRefrigerantTypeAttributeFromTheDut_44();
             break;
-        case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Read ACCompressorType attribute from the DUT\n");
+        case 45:
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Read ACCompressorType attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0043")) {
                 NextTest();
                 return;
             }
-            err = TestReadACCompressorTypeAttributeFromTheDut_46();
+            err = TestReadACCompressorTypeAttributeFromTheDut_45();
             break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Read ACErrorCode attribute from the DUT\n");
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Read ACErrorCode attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0044")) {
                 NextTest();
                 return;
             }
-            err = TestReadACErrorCodeAttributeFromTheDut_47();
+            err = TestReadACErrorCodeAttributeFromTheDut_46();
             break;
-        case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : Read ACLouverPosition attribute from the DUT\n");
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Read ACLouverPosition attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0045")) {
                 NextTest();
                 return;
             }
-            err = TestReadACLouverPositionAttributeFromTheDut_48();
+            err = TestReadACLouverPositionAttributeFromTheDut_47();
             break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Read ACCoilTemperature attribute from the DUT\n");
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Read ACCoilTemperature attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0046")) {
                 NextTest();
                 return;
             }
-            err = TestReadACCoilTemperatureAttributeFromTheDut_49();
+            err = TestReadACCoilTemperatureAttributeFromTheDut_48();
             break;
-        case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : Read ACCapacityFormat attribute from the DUT\n");
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Read ACCapacityFormat attribute from the DUT\n");
             if (ShouldSkip("TSTAT.S.A0047")) {
                 NextTest();
                 return;
             }
-            err = TestReadACCapacityFormatAttributeFromTheDut_50();
+            err = TestReadACCapacityFormatAttributeFromTheDut_49();
             break;
         }
 
@@ -45051,9 +45011,6 @@ public:
         case 49:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 50:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -45067,7 +45024,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 51;
+    const uint16_t mTestCount = 50;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -45356,8 +45313,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupiedCoolingSetpoint", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], -27315));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], 32767));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], 1600));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedCoolingSetpoint", [value shortValue], 3200));
 
             NextTest();
         }];
@@ -45379,8 +45336,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("occupiedHeatingSetpoint", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], -27315));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], 32767));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], 700));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("occupiedHeatingSetpoint", [value shortValue], 3000));
 
             NextTest();
         }];
@@ -45403,8 +45360,8 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedCoolingSetpoint", "", "int16"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], -27315));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 32767));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 1600));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 3200));
 
                 NextTest();
             }];
@@ -45427,8 +45384,8 @@ private:
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 VerifyOrReturn(CheckConstraintType("unoccupiedHeatingSetpoint", "", "int16"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], -27315));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 32767));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 700));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 3000));
 
                 NextTest();
             }];
@@ -45436,7 +45393,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutMinHeatSetpointLimit_16()
+    CHIP_ERROR TestReadsAttributeFromDutMinHeatSetpointLimit_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45445,13 +45402,13 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMinHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads mandatory attributes from DUT: MinHeatSetpointLimit Error: %@", err);
+            NSLog(@"Reads attribute from DUT: MinHeatSetpointLimit Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("minHeatSetpointLimit", "", "int16"));
-            VerifyOrReturn(CheckConstraintMinValue<int16_t>("minHeatSetpointLimit", [value shortValue], -27315));
-            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minHeatSetpointLimit", [value shortValue], 32767));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("minHeatSetpointLimit", [value shortValue], 700));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minHeatSetpointLimit", [value shortValue], 3000));
 
             NextTest();
         }];
@@ -45459,7 +45416,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMandatoryAttributesFromDutMaxHeatSetpointLimit_17()
+    CHIP_ERROR TestReadsAttributeFromDutMaxHeatSetpointLimit_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45468,7 +45425,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads mandatory attributes from DUT: MaxHeatSetpointLimit Error: %@", err);
+            NSLog(@"Reads attribute from DUT: MaxHeatSetpointLimit Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -45621,17 +45578,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestReadAlarmMaskAttributeFromTheDutAndVerifyThatTheDutRespondsWithAMap8ValueTheValueHasToBeInTheRangeOf0x00To0x07_24()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestReadThermostatRunningModeAttributeFromTheDut_25()
+    CHIP_ERROR TestReadThermostatRunningModeAttributeFromTheDut_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45646,7 +45593,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("thermostatRunningMode", "", "enum8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("thermostatRunningMode", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("thermostatRunningMode", [value unsignedCharValue], 4U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("thermostatRunningMode", [value unsignedCharValue], 9U));
 
             NextTest();
         }];
@@ -45654,7 +45601,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_26()
+    CHIP_ERROR TestReadsConstraintsOfOptionalAttributesFromDutStartOfWeek_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45677,7 +45624,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsOptionalAttributesFromDutNumberOfWeeklyTransitions_27()
+    CHIP_ERROR TestReadsOptionalAttributesFromDutNumberOfWeeklyTransitions_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45701,7 +45648,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsOptionalAttributesFromDutNumberOfDailyTransitions_28()
+    CHIP_ERROR TestReadsOptionalAttributesFromDutNumberOfDailyTransitions_27()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45724,7 +45671,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTemperatureSetpointHoldAttributeFromTheDut_29()
+    CHIP_ERROR TestReadTemperatureSetpointHoldAttributeFromTheDut_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45747,7 +45694,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTemperatureSetpointHoldDurationAttributeFromTheDut_30()
+    CHIP_ERROR TestReadTemperatureSetpointHoldDurationAttributeFromTheDut_29()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45776,7 +45723,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadThermostatProgrammingOperationModeAttributeFromTheDut_31()
+    CHIP_ERROR TestReadThermostatProgrammingOperationModeAttributeFromTheDut_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45800,7 +45747,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadThermostatRunningStateAttributeFromTheDut_32()
+    CHIP_ERROR TestReadThermostatRunningStateAttributeFromTheDut_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45823,7 +45770,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadSetpointChangeSourceAttributeFromTheDut_33()
+    CHIP_ERROR TestReadSetpointChangeSourceAttributeFromTheDut_32()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45846,7 +45793,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadSetpointChangeAmountAttributeFromTheDut_34()
+    CHIP_ERROR TestReadSetpointChangeAmountAttributeFromTheDut_33()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45872,7 +45819,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadSetpointChangeSourceTimestampAttributeFromTheDut_35()
+    CHIP_ERROR TestReadSetpointChangeSourceTimestampAttributeFromTheDut_34()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45893,7 +45840,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadOccupiedSetbackAttributeFromTheDut_36()
+    CHIP_ERROR TestReadOccupiedSetbackAttributeFromTheDut_35()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45919,7 +45866,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadOccupiedSetbackMinAttributeFromTheDut_37()
+    CHIP_ERROR TestReadOccupiedSetbackMinAttributeFromTheDut_36()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45945,7 +45892,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadOccupiedSetbackMaxAttributeFromTheDut_38()
+    CHIP_ERROR TestReadOccupiedSetbackMaxAttributeFromTheDut_37()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45971,7 +45918,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadUnoccupiedSetbackAttributeFromTheDut_39()
+    CHIP_ERROR TestReadUnoccupiedSetbackAttributeFromTheDut_38()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -45997,7 +45944,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadUnoccupiedSetbackMinAttributeFromTheDut_40()
+    CHIP_ERROR TestReadUnoccupiedSetbackMinAttributeFromTheDut_39()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46023,7 +45970,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadUnoccupiedSetbackMaxAttributeFromTheDut_41()
+    CHIP_ERROR TestReadUnoccupiedSetbackMaxAttributeFromTheDut_40()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46049,7 +45996,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadEmergencyHeatDeltaAttributeFromTheDut_42()
+    CHIP_ERROR TestReadEmergencyHeatDeltaAttributeFromTheDut_41()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46072,7 +46019,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACTypeAttributeFromTheDut_43()
+    CHIP_ERROR TestReadACTypeAttributeFromTheDut_42()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46095,7 +46042,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACCapacityAttributeFromTheDut_44()
+    CHIP_ERROR TestReadACCapacityAttributeFromTheDut_43()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46118,7 +46065,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACRefrigerantTypeAttributeFromTheDut_45()
+    CHIP_ERROR TestReadACRefrigerantTypeAttributeFromTheDut_44()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46141,7 +46088,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACCompressorTypeAttributeFromTheDut_46()
+    CHIP_ERROR TestReadACCompressorTypeAttributeFromTheDut_45()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46164,7 +46111,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACErrorCodeAttributeFromTheDut_47()
+    CHIP_ERROR TestReadACErrorCodeAttributeFromTheDut_46()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46184,7 +46131,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACLouverPositionAttributeFromTheDut_48()
+    CHIP_ERROR TestReadACLouverPositionAttributeFromTheDut_47()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46207,7 +46154,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACCoilTemperatureAttributeFromTheDut_49()
+    CHIP_ERROR TestReadACCoilTemperatureAttributeFromTheDut_48()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46233,7 +46180,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadACCapacityFormatAttributeFromTheDut_50()
+    CHIP_ERROR TestReadACCapacityFormatAttributeFromTheDut_49()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -46305,7 +46252,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 1 : Reads OccupiedCoolingSetpoint attribute from Server DUT and verifies that the value is "
                 "within range\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46314,7 +46261,7 @@ public:
         case 2:
             ChipLogProgress(chipTool,
                 " ***** Test Step 2 : Writes a value back that is different but valid for OccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46323,7 +46270,7 @@ public:
         case 3:
             ChipLogProgress(chipTool,
                 " ***** Test Step 3 : Reads it back again to confirm the successful write of OccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46331,17 +46278,17 @@ public:
             break;
         case 4:
             ChipLogProgress(
-                chipTool, " ***** Test Step 4 : Writes OccupiedCoolingSetpoint to value below the MinCoolSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+                chipTool, " ***** Test Step 4 : Writes OccupiedCoolingSetpoint to value below the ABSMinCoolSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestWritesOccupiedCoolingSetpointToValueBelowTheMinCoolSetpointLimit_4();
+            err = TestWritesOccupiedCoolingSetpointToValueBelowTheABSMinCoolSetpointLimit_4();
             break;
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : Writes OccupiedCoolingSetpoint to value above the MaxCoolSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46350,7 +46297,7 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
@@ -46368,7 +46315,7 @@ public:
         case 8:
             ChipLogProgress(
                 chipTool, " ***** Test Step 8 : Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46378,7 +46325,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 9 : Reads OccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is "
                 "within range\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46387,7 +46334,7 @@ public:
         case 10:
             ChipLogProgress(chipTool,
                 " ***** Test Step 10 : Writes a value back that is different but valid for OccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46396,7 +46343,7 @@ public:
         case 11:
             ChipLogProgress(chipTool,
                 " ***** Test Step 11 : Reads it back again to confirm the successful write of OccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46405,7 +46352,7 @@ public:
         case 12:
             ChipLogProgress(
                 chipTool, " ***** Test Step 12 : Writes OccupiedHeatingSetpoint to value below the MinHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46414,7 +46361,7 @@ public:
         case 13:
             ChipLogProgress(
                 chipTool, " ***** Test Step 13 : Writes OccupiedHeatingSetpoint to value above the MaxHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46423,7 +46370,7 @@ public:
         case 14:
             ChipLogProgress(
                 chipTool, " ***** Test Step 14 : Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46450,7 +46397,7 @@ public:
         case 17:
             ChipLogProgress(
                 chipTool, " ***** Test Step 17 : Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
@@ -46460,7 +46407,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 18 : Reads UnoccupiedCoolingSetpoint attribute from Server DUT and verifies that the value is "
                 "within range\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46469,7 +46416,7 @@ public:
         case 19:
             ChipLogProgress(chipTool,
                 " ***** Test Step 19 : Writes a value back that is different but valid for UnoccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46479,7 +46426,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 20 : Reads it back again to confirm the successful write of UnoccupiedCoolingSetpoint "
                 "attribute\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46487,26 +46434,26 @@ public:
             break;
         case 21:
             ChipLogProgress(
-                chipTool, " ***** Test Step 21 : Writes UnoccupiedCoolingSetpoint to value below the MinHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+                chipTool, " ***** Test Step 21 : Writes UnoccupiedCoolingSetpoint to value below the MinCoolSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestWritesUnoccupiedCoolingSetpointToValueBelowTheMinHeatSetpointLimit_21();
+            err = TestWritesUnoccupiedCoolingSetpointToValueBelowTheMinCoolSetpointLimit_21();
             break;
         case 22:
             ChipLogProgress(
-                chipTool, " ***** Test Step 22 : Writes UnoccupiedCoolingSetpoint to value above the MaxHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+                chipTool, " ***** Test Step 22 : Writes UnoccupiedCoolingSetpoint to value above the MaxCoolSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestWritesUnoccupiedCoolingSetpointToValueAboveTheMaxHeatSetpointLimit_22();
+            err = TestWritesUnoccupiedCoolingSetpointToValueAboveTheMaxCoolSetpointLimit_22();
             break;
         case 23:
             ChipLogProgress(chipTool,
                 " ***** Test Step 23 : Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46515,7 +46462,7 @@ public:
         case 24:
             ChipLogProgress(chipTool,
                 " ***** Test Step 24 : Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0013")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -46525,7 +46472,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 25 : Reads UnoccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is "
                 "within range\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46534,7 +46481,7 @@ public:
         case 26:
             ChipLogProgress(chipTool,
                 " ***** Test Step 26 : Writes a value back that is different but valid for UnoccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46544,7 +46491,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 27 : Reads it back again to confirm the successful write of UnoccupiedHeatingSetpoint "
                 "attribute\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46553,7 +46500,7 @@ public:
         case 28:
             ChipLogProgress(
                 chipTool, " ***** Test Step 28 : Writes UnoccupiedHeatingSetpoint to value below the MinHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46562,7 +46509,7 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : Writes UnoccupiedHeatingSetpoint to value above the MaxHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46571,7 +46518,7 @@ public:
         case 30:
             ChipLogProgress(chipTool,
                 " ***** Test Step 30 : Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46580,7 +46527,7 @@ public:
         case 31:
             ChipLogProgress(chipTool,
                 " ***** Test Step 31 : Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute\n");
-            if (ShouldSkip("TSTAT.S.A0014")) {
+            if (ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -46590,7 +46537,7 @@ public:
             ChipLogProgress(chipTool,
                 " ***** Test Step 32 : Reads MinHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
                 "range\n");
-            if (ShouldSkip("TSTAT.S.A0015")) {
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
@@ -46599,7 +46546,7 @@ public:
         case 33:
             ChipLogProgress(chipTool,
                 " ***** Test Step 33 : Writes a value back that is different but valid for MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0015")) {
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
@@ -46608,481 +46555,481 @@ public:
         case 34:
             ChipLogProgress(chipTool,
                 " ***** Test Step 34 : Reads it back again to confirm the successful write of MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0015")) {
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
             err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinHeatSetpointLimitAttribute_34();
             break;
         case 35:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 35 : Writes MinHeatSetpointLimit to value below the AbsMinHeatSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0015")) {
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Writes a value back that is different but violates the deadband\n");
+            if (ShouldSkip("TSTAT.S.A0015 && TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMinHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_35();
+            err = TestWritesAValueBackThatIsDifferentButViolatesTheDeadband_35();
             break;
         case 36:
             ChipLogProgress(
-                chipTool, " ***** Test Step 36 : Writes MinHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0015")) {
+                chipTool, " ***** Test Step 36 : Writes MinHeatSetpointLimit to value below the AbsMinHeatSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMinHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_36();
+            err = TestWritesMinHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_36();
             break;
         case 37:
             ChipLogProgress(
-                chipTool, " ***** Test Step 37 : Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0015")) {
+                chipTool, " ***** Test Step 37 : Writes MinHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_37();
+            err = TestWritesMinHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_37();
             break;
         case 38:
             ChipLogProgress(
-                chipTool, " ***** Test Step 38 : Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0015")) {
+                chipTool, " ***** Test Step 38 : Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_38();
+            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_38();
             break;
         case 39:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 39 : Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0016")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 39 : Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_39();
+            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_39();
             break;
         case 40:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 40 : Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.F00  && A_MINHEATSETPOINTLIMIT")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 40 : Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_40();
+            err = TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_40();
             break;
         case 41:
             ChipLogProgress(
-                chipTool, " ***** Test Step 41 : Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
-            if (ShouldSkip("A_MINHEATSETPOINTLIMIT && TSTAT.S.F05")) {
+                chipTool, " ***** Test Step 41 : Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_41();
+            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_41();
             break;
         case 42:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 42 : Writes a value back that is different but valid for MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0016")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 42 : Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.A0015 && TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_42();
+            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_42();
             break;
         case 43:
             ChipLogProgress(chipTool,
-                " ***** Test Step 43 : Reads it back again to confirm the successful write of MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0016")) {
+                " ***** Test Step 43 : Writes a value back that is different but valid for MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_43();
+            err = TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_43();
             break;
         case 44:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 44 : Writes MaxHeatSetpointLimit to value below the AbsMinHeatSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0016")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 44 : Reads it back again to confirm the successful write of MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMaxHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_44();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_44();
             break;
         case 45:
             ChipLogProgress(
-                chipTool, " ***** Test Step 45 : Writes MaxHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0016")) {
+                chipTool, " ***** Test Step 45 : Writes MaxHeatSetpointLimit to value below the AbsMinHeatSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMaxHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_45();
+            err = TestWritesMaxHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_45();
             break;
         case 46:
             ChipLogProgress(
-                chipTool, " ***** Test Step 46 : Writes the limit of AbsMinHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0016")) {
+                chipTool, " ***** Test Step 46 : Writes MaxHeatSetpointLimit to value above the AbsMaxHeatSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_46();
+            err = TestWritesMaxHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_46();
             break;
         case 47:
             ChipLogProgress(
-                chipTool, " ***** Test Step 47 : Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0016")) {
+                chipTool, " ***** Test Step 47 : Writes the limit of AbsMinHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_47();
+            err = TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_47();
             break;
         case 48:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 48 : Reads MinCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 48 : Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_48();
+            err = TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_48();
             break;
         case 49:
             ChipLogProgress(chipTool,
-                " ***** Test Step 49 : Writes a value back that is different but valid for MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+                " ***** Test Step 49 : Reads MinCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_49();
+            err = TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_49();
             break;
         case 50:
             ChipLogProgress(chipTool,
-                " ***** Test Step 50 : Reads it back again to confirm the successful write of MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+                " ***** Test Step 50 : Writes a value back that is different but valid for MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_50();
+            err = TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_50();
             break;
         case 51:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 51 : Writes MinCoolSetpointLimit to value below the AbsMinCoolSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 51 : Reads it back again to confirm the successful write of MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMinCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_51();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_51();
             break;
         case 52:
             ChipLogProgress(
-                chipTool, " ***** Test Step 52 : Writes MinCoolSetpointLimit to value above the MaxCoolSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+                chipTool, " ***** Test Step 52 : Writes MinCoolSetpointLimit to value below the AbsMinCoolSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMinCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_52();
+            err = TestWritesMinCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_52();
             break;
         case 53:
             ChipLogProgress(
-                chipTool, " ***** Test Step 53 : Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+                chipTool, " ***** Test Step 53 : Writes MinCoolSetpointLimit to value above the MaxCoolSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_53();
+            err = TestWritesMinCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_53();
             break;
         case 54:
             ChipLogProgress(
-                chipTool, " ***** Test Step 54 : Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+                chipTool, " ***** Test Step 54 : Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_54();
+            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_54();
             break;
         case 55:
             ChipLogProgress(
-                chipTool, " ***** Test Step 55 : Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.F01 && A_MINCOOLSETPOINTLIMIT")) {
+                chipTool, " ***** Test Step 55 : Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_55();
+            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_55();
             break;
         case 56:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 56 : Reads MaxCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("TSTAT.S.A0018")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 56 : Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_56();
+            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_56();
             break;
         case 57:
             ChipLogProgress(chipTool,
-                " ***** Test Step 57 : Writes a value back that is different but valid for MaxCoolSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0018")) {
+                " ***** Test Step 57 : Reads MaxCoolSetpointLimit attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_57();
+            err = TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_57();
             break;
         case 58:
             ChipLogProgress(chipTool,
-                " ***** Test Step 58 : Reads it back again to confirm the successful write of MaxCoolSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0018")) {
+                " ***** Test Step 58 : Writes a value back that is different but valid for MaxCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_58();
+            err = TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_58();
             break;
         case 59:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 59 : Writes MaxCoolSetpointLimit to value below the AbsMinCoolSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0018")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 59 : Reads it back again to confirm the successful write of MaxCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMaxCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_59();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_59();
             break;
         case 60:
             ChipLogProgress(
-                chipTool, " ***** Test Step 60 : Writes MaxCoolSetpointLimit to value above the MaxCoolSetpointLimit \n");
-            if (ShouldSkip("TSTAT.S.A0018")) {
+                chipTool, " ***** Test Step 60 : Writes MaxCoolSetpointLimit to value below the AbsMinCoolSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMaxCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_60();
+            err = TestWritesMaxCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_60();
             break;
         case 61:
             ChipLogProgress(
-                chipTool, " ***** Test Step 61 : Writes the limit of AbsMinCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0018")) {
+                chipTool, " ***** Test Step 61 : Writes MaxCoolSetpointLimit to value above the MaxCoolSetpointLimit \n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_61();
+            err = TestWritesMaxCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_61();
             break;
         case 62:
             ChipLogProgress(
-                chipTool, " ***** Test Step 62 : Writes the limit of MaxCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
-            if (ShouldSkip("TSTAT.S.A0018")) {
+                chipTool, " ***** Test Step 62 : Writes the limit of AbsMinCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_62();
+            err = TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_62();
             break;
         case 63:
-            ChipLogProgress(chipTool, " ***** Test Step 63 : Writes (sets back) default value of MinHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0015")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 63 : Writes the limit of MaxCoolSetpointLimit to MaxCoolSetpointLimit attribute\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackDefaultValueOfMinHeatSetpointLimit_63();
+            err = TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_63();
             break;
         case 64:
-            ChipLogProgress(chipTool, " ***** Test Step 64 : Writes (sets back)default value of MaxHeatSetpointLimit\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0016")) {
+            ChipLogProgress(chipTool, " ***** Test Step 64 : Writes (sets back) default value of MinHeatSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackdefaultValueOfMaxHeatSetpointLimit_64();
+            err = TestWritesSetsBackDefaultValueOfMinHeatSetpointLimit_64();
             break;
         case 65:
-            ChipLogProgress(chipTool, " ***** Test Step 65 : Writes MaxHeatSetpointLimit That meets the deadband of 2.5C\n");
-            if (ShouldSkip("TSTAT.S.F01 && A_MAXHEATSETPOINTLIMIT &&!TSTAT.S.F05")) {
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Writes (sets back)default value of MaxHeatSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0016 &&!TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMaxHeatSetpointLimitThatMeetsTheDeadbandOf25c_65();
+            err = TestWritesSetsBackdefaultValueOfMaxHeatSetpointLimit_65();
             break;
         case 66:
-            ChipLogProgress(chipTool, " ***** Test Step 66 : Writes (sets back) default value of MinCoolSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0017")) {
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Writes MaxHeatSetpointLimit That meets the deadband of 2.5C\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0016 &&!TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackDefaultValueOfMinCoolSetpointLimit_66();
+            err = TestWritesMaxHeatSetpointLimitThatMeetsTheDeadbandOf25c_66();
             break;
         case 67:
-            ChipLogProgress(chipTool, " ***** Test Step 67 : Writes (sets back) default value of MaxCoolSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.A0018")) {
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Writes (sets back) default value of MinCoolSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestWritesSetsBackDefaultValueOfMaxCoolSetpointLimit_67();
+            err = TestWritesSetsBackDefaultValueOfMinCoolSetpointLimit_67();
             break;
         case 68:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 68 : Reads MinSetpointDeadBand attribute from Server DUT and verifies that the value is within "
-                "range\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+            ChipLogProgress(chipTool, " ***** Test Step 68 : Writes (sets back) default value of MaxCoolSetpointLimit\n");
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018")) {
                 NextTest();
                 return;
             }
-            err = TestReadsMinSetpointDeadBandAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_68();
+            err = TestWritesSetsBackDefaultValueOfMaxCoolSetpointLimit_68();
             break;
         case 69:
             ChipLogProgress(chipTool,
-                " ***** Test Step 69 : Writes a value back that is different but valid for MinSetpointDeadBand attribute\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+                " ***** Test Step 69 : Reads MinSetpointDeadBand attribute from Server DUT and verifies that the value is within "
+                "range\n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesAValueBackThatIsDifferentButValidForMinSetpointDeadBandAttribute_69();
+            err = TestReadsMinSetpointDeadBandAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_69();
             break;
         case 70:
             ChipLogProgress(chipTool,
-                " ***** Test Step 70 : Reads it back again to confirm the successful write of MinSetpointDeadBand attribute\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+                " ***** Test Step 70 : Writes a value back that is different but valid for MinSetpointDeadBand attribute\n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinSetpointDeadBandAttribute_70();
+            err = TestWritesAValueBackThatIsDifferentButValidForMinSetpointDeadBandAttribute_70();
             break;
         case 71:
-            ChipLogProgress(chipTool, " ***** Test Step 71 : Writes the value below MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 71 : Reads it back again to confirm the successful write of MinSetpointDeadBand attribute\n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheValueBelowMinSetpointDeadBand_71();
+            err = TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinSetpointDeadBandAttribute_71();
             break;
         case 72:
-            ChipLogProgress(chipTool, " ***** Test Step 72 : Writes the value above MinSetpointDeadBand \n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+            ChipLogProgress(chipTool, " ***** Test Step 72 : Writes the value below MinSetpointDeadBand\n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheValueAboveMinSetpointDeadBand_72();
+            err = TestWritesTheValueBelowMinSetpointDeadBand_72();
             break;
         case 73:
-            ChipLogProgress(chipTool, " ***** Test Step 73 : Writes the min limit of MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+            ChipLogProgress(chipTool, " ***** Test Step 73 : Writes the value above MinSetpointDeadBand \n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheMinLimitOfMinSetpointDeadBand_73();
+            err = TestWritesTheValueAboveMinSetpointDeadBand_73();
             break;
         case 74:
-            ChipLogProgress(chipTool, " ***** Test Step 74 : Writes the max limit of MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.A0019")) {
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Writes the min limit of MinSetpointDeadBand\n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestWritesTheMaxLimitOfMinSetpointDeadBand_74();
+            err = TestWritesTheMinLimitOfMinSetpointDeadBand_74();
             break;
         case 75:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 75 : Reads ControlSequenceOfOperation from Server DUT and verifies that the value is valid\n");
-            if (ShouldSkip("TSTAT.S.A001b")) {
+            ChipLogProgress(chipTool, " ***** Test Step 75 : Writes the max limit of MinSetpointDeadBand\n");
+            if (ShouldSkip("TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
-            err = TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_75();
+            err = TestWritesTheMaxLimitOfMinSetpointDeadBand_75();
             break;
         case 76:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 76 : Write Attribute command for ControlSequenceOfOperation with a new valid value\n");
-            if (ShouldSkip("TSTAT.S.A001b")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 76 : Reads ControlSequenceOfOperation from Server DUT and verifies that the value is valid\n");
+            if (ShouldSkip("TSTAT.S.F00 || TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_76();
+            err = TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_76();
             break;
         case 77:
-            ChipLogProgress(chipTool, " ***** Test Step 77 : Read it back again to confirm the successful write\n");
-            if (ShouldSkip("TSTAT.S.A001b")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 77 : Write Attribute command for ControlSequenceOfOperation with a new valid value\n");
+            if (ShouldSkip("TSTAT.S.F00 || TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestReadItBackAgainToConfirmTheSuccessfulWrite_77();
+            err = TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_77();
             break;
         case 78:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 78 : Writes MaxHeatSetpointLimit attribute to default value of 2950 to meet deadband "
-                "constraint\n");
-            if (ShouldSkip("TSTAT.S.F00 && A_MINHEATSETPOINTLIMIT && TSTAT.S.F05")) {
+            ChipLogProgress(chipTool, " ***** Test Step 78 : Read it back again to confirm the successful write\n");
+            if (ShouldSkip("TSTAT.S.F00 || TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestWritesMaxHeatSetpointLimitAttributeToDefaultValueOf2950ToMeetDeadbandConstraint_78();
+            err = TestReadItBackAgainToConfirmTheSuccessfulWrite_78();
             break;
         case 79:
-            ChipLogProgress(chipTool, " ***** Test Step 79 : Sets OccupiedCoolingSetpoint to default value\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 79 : Writes MaxHeatSetpointLimit attribute to default value of 2950 to meet deadband "
+                "constraint\n");
+            if (ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015 && TSTAT.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestWritesMaxHeatSetpointLimitAttributeToDefaultValueOf2950ToMeetDeadbandConstraint_79();
+            break;
+        case 80:
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Sets OccupiedCoolingSetpoint to default value\n");
             if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedCoolingSetpointToDefaultValue_79();
-            break;
-        case 80:
-            ChipLogProgress(chipTool, " ***** Test Step 80 : Sets OccupiedHeatingSetpoint to default value\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0012")) {
-                NextTest();
-                return;
-            }
-            err = TestSetsOccupiedHeatingSetpointToDefaultValue_80();
+            err = TestSetsOccupiedCoolingSetpointToDefaultValue_80();
             break;
         case 81:
-            ChipLogProgress(chipTool, " ***** Test Step 81 : Sends SetpointRaise Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.C00.Rsp && TSTAT.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Sets OccupiedHeatingSetpoint to default value\n");
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestSendsSetpointRaiseCommand_81();
+            err = TestSetsOccupiedHeatingSetpointToDefaultValue_81();
             break;
         case 82:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 82 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0012")) {
+            ChipLogProgress(chipTool, " ***** Test Step 82 : Sends SetpointRaise Command Heat Only\n");
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_82();
+            err = TestSendsSetpointRaiseCommandHeatOnly_82();
             break;
         case 83:
-            ChipLogProgress(chipTool, " ***** Test Step 83 : Sets OccupiedHeatingSetpoint to default value\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0012")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 83 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedHeatingSetpointToDefaultValue_83();
+            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_83();
             break;
         case 84:
-            ChipLogProgress(chipTool, " ***** Test Step 84 : Sends SetpointRaise Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.C00.Rsp && TSTAT.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 84 : Sets OccupiedHeatingSetpoint to default value\n");
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestSendsSetpointRaiseCommand_84();
+            err = TestSetsOccupiedHeatingSetpointToDefaultValue_84();
             break;
         case 85:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 85 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0012")) {
+            ChipLogProgress(chipTool, " ***** Test Step 85 : Sends SetpointRaise Command Heat Only\n");
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_85();
+            err = TestSendsSetpointRaiseCommandHeatOnly_85();
             break;
         case 86:
-            ChipLogProgress(chipTool, " ***** Test Step 86 : Sets OccupiedCoolingSetpoint to default value\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 86 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestSetsOccupiedCoolingSetpointToDefaultValue_86();
+            err = TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_86();
             break;
         case 87:
-            ChipLogProgress(chipTool, " ***** Test Step 87 : Sends SetpointRaise Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.C00.Rsp && TSTAT.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 87 : Sends SetpointRaise Command Cool Only\n");
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestSendsSetpointRaiseCommand_87();
+            err = TestSendsSetpointRaiseCommandCoolOnly_87();
             break;
         case 88:
             ChipLogProgress(
                 chipTool, " ***** Test Step 88 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -47090,24 +47037,24 @@ public:
             break;
         case 89:
             ChipLogProgress(chipTool, " ***** Test Step 89 : Sets OccupiedCoolingSetpoint to default value\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
             err = TestSetsOccupiedCoolingSetpointToDefaultValue_89();
             break;
         case 90:
-            ChipLogProgress(chipTool, " ***** Test Step 90 : Sends SetpointRaise Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.C00.Rsp && TSTAT.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 90 : Sends SetpointRaise Command Cool Only\n");
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestSendsSetpointRaiseCommand_90();
+            err = TestSendsSetpointRaiseCommandCoolOnly_90();
             break;
         case 91:
             ChipLogProgress(
                 chipTool, " ***** Test Step 91 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -47115,7 +47062,7 @@ public:
             break;
         case 92:
             ChipLogProgress(chipTool, " ***** Test Step 92 : Sets OccupiedCoolingSetpoint to default value\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -47123,24 +47070,24 @@ public:
             break;
         case 93:
             ChipLogProgress(chipTool, " ***** Test Step 93 : Sets OccupiedHeatingSetpoint to default value\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
             err = TestSetsOccupiedHeatingSetpointToDefaultValue_93();
             break;
         case 94:
-            ChipLogProgress(chipTool, " ***** Test Step 94 : Sends SetpointRaise Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.C00.Rsp && TSTAT.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 94 : Sends SetpointRaise Command Heat & Cool\n");
+            if (ShouldSkip("TSTAT.S.F00 || TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestSendsSetpointRaiseCommand_94();
+            err = TestSendsSetpointRaiseCommandHeatCool_94();
             break;
         case 95:
             ChipLogProgress(
                 chipTool, " ***** Test Step 95 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -47149,7 +47096,7 @@ public:
         case 96:
             ChipLogProgress(
                 chipTool, " ***** Test Step 96 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -47157,7 +47104,7 @@ public:
             break;
         case 97:
             ChipLogProgress(chipTool, " ***** Test Step 97 : Sets OccupiedCoolingSetpoint to default value\n");
-            if (ShouldSkip("TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -47165,24 +47112,24 @@ public:
             break;
         case 98:
             ChipLogProgress(chipTool, " ***** Test Step 98 : Sets OccupiedHeatingSetpoint to default value\n");
-            if (ShouldSkip("PICS_USER_PROMPT && TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
             err = TestSetsOccupiedHeatingSetpointToDefaultValue_98();
             break;
         case 99:
-            ChipLogProgress(chipTool, " ***** Test Step 99 : Sends SetpointRaise Command\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.C00.Rsp && TSTAT.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 99 : Sends SetpointRaise Command Heat & Cool\n");
+            if (ShouldSkip("TSTAT.S.F00 || TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestSendsSetpointRaiseCommand_99();
+            err = TestSendsSetpointRaiseCommandHeatCool_99();
             break;
         case 100:
             ChipLogProgress(
                 chipTool, " ***** Test Step 100 : Reads back OccupiedCoolingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0011")) {
+            if (ShouldSkip("TSTAT.S.F01")) {
                 NextTest();
                 return;
             }
@@ -47191,7 +47138,7 @@ public:
         case 101:
             ChipLogProgress(
                 chipTool, " ***** Test Step 101 : Reads back OccupiedHeatingSetpoint to confirm the success of the write\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && TSTAT.S.A0012")) {
+            if (ShouldSkip("TSTAT.S.F00")) {
                 NextTest();
                 return;
             }
@@ -47260,7 +47207,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -47320,7 +47267,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 38:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -47332,22 +47279,22 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 42:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 43:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 45:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 47:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -47362,13 +47309,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 51:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 52:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 53:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 54:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -47386,13 +47333,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 59:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 60:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 61:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 62:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -47422,13 +47369,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 71:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 72:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 73:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 74:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -47613,7 +47560,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesOccupiedCoolingSetpointToValueBelowTheMinCoolSetpointLimit_4()
+    CHIP_ERROR TestWritesOccupiedCoolingSetpointToValueBelowTheABSMinCoolSetpointLimit_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -47625,8 +47572,8 @@ private:
         occupiedCoolingSetpointArgument = [NSNumber numberWithShort:30];
         [cluster writeAttributeOccupiedCoolingSetpointWithValue:occupiedCoolingSetpointArgument
                                               completionHandler:^(NSError * _Nullable err) {
-                                                  NSLog(@"Writes OccupiedCoolingSetpoint to value below the MinCoolSetpointLimit "
-                                                        @"Error: %@",
+                                                  NSLog(@"Writes OccupiedCoolingSetpoint to value below the "
+                                                        @"ABSMinCoolSetpointLimit Error: %@",
                                                       err);
 
                                                   VerifyOrReturn(CheckValue("status",
@@ -47671,11 +47618,26 @@ private:
 
     CHIP_ERROR TestWritesTheLimitOfMinCoolSetpointLimitToOccupiedCoolingSetpointAttribute_6()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedCoolingSetpointArgument;
+        occupiedCoolingSetpointArgument = [NSNumber numberWithShort:1600];
+        [cluster writeAttributeOccupiedCoolingSetpointWithValue:occupiedCoolingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint "
+                                                        @"attribute Error: %@",
+                                                      err);
+
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestWritesTheCoolingSetpointBelowTheHeatingSetpointWhenAutoIsEnabled_7()
@@ -47932,11 +47894,30 @@ private:
 
     CHIP_ERROR TestWritesTheLimitOfMaxHeatSetpointLimitToOccupiedHeatingSetpointAttribute_17()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:3000];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint "
+                                                        @"attribute Error: %@",
+                                                      err);
+
+                                                  VerifyOrReturn(CheckValue("status",
+                                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                              ? err.code
+                                                              : EMBER_ZCL_STATUS_FAILURE)
+                                                          : 0,
+                                                      EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestReadsUnoccupiedCoolingSetpointAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_18()
@@ -48019,7 +48000,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesUnoccupiedCoolingSetpointToValueBelowTheMinHeatSetpointLimit_21()
+    CHIP_ERROR TestWritesUnoccupiedCoolingSetpointToValueBelowTheMinCoolSetpointLimit_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48032,7 +48013,7 @@ private:
         [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
                                                 completionHandler:^(NSError * _Nullable err) {
                                                     NSLog(@"Writes UnoccupiedCoolingSetpoint to value below the "
-                                                          @"MinHeatSetpointLimit Error: %@",
+                                                          @"MinCoolSetpointLimit Error: %@",
                                                         err);
 
                                                     VerifyOrReturn(CheckValue("status",
@@ -48047,7 +48028,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesUnoccupiedCoolingSetpointToValueAboveTheMaxHeatSetpointLimit_22()
+    CHIP_ERROR TestWritesUnoccupiedCoolingSetpointToValueAboveTheMaxCoolSetpointLimit_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48060,7 +48041,7 @@ private:
         [cluster writeAttributeUnoccupiedCoolingSetpointWithValue:unoccupiedCoolingSetpointArgument
                                                 completionHandler:^(NSError * _Nullable err) {
                                                     NSLog(@"Writes UnoccupiedCoolingSetpoint to value above the "
-                                                          @"MaxHeatSetpointLimit Error: %@",
+                                                          @"MaxCoolSetpointLimit Error: %@",
                                                         err);
 
                                                     VerifyOrReturn(CheckValue("status",
@@ -48338,23 +48319,80 @@ private:
 
     CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinHeatSetpointLimitAttribute_33()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minHeatSetpointLimitArgument;
+        minHeatSetpointLimitArgument = [NSNumber numberWithShort:800];
+        [cluster writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
+                                           completionHandler:^(NSError * _Nullable err) {
+                                               NSLog(@"Writes a value back that is different but valid for MinHeatSetpointLimit "
+                                                     @"attribute Error: %@",
+                                                   err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
     }
 
     CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinHeatSetpointLimitAttribute_34()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMinHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads it back again to confirm the successful write of MinHeatSetpointLimit attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("MinHeatSetpointLimit", actualValue, 800));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMinHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_35()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButViolatesTheDeadband_35()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minHeatSetpointLimitArgument;
+        minHeatSetpointLimitArgument = [NSNumber numberWithShort:2000];
+        [cluster
+            writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
+                                      completionHandler:^(NSError * _Nullable err) {
+                                          NSLog(@"Writes a value back that is different but violates the deadband Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status",
+                                              err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                      ? err.code
+                                                      : EMBER_ZCL_STATUS_FAILURE)
+                                                  : 0,
+                                              EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWritesMinHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_36()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48383,7 +48421,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMinHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_36()
+    CHIP_ERROR TestWritesMinHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_37()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48412,7 +48450,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_37()
+    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_38()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48436,25 +48474,60 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_38()
+    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_39()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id minHeatSetpointLimitArgument;
+        minHeatSetpointLimitArgument = [NSNumber numberWithShort:3000];
+        [cluster writeAttributeMinHeatSetpointLimitWithValue:minHeatSetpointLimitArgument
+                                           completionHandler:^(NSError * _Nullable err) {
+                                               NSLog(@"Writes the limit of AbsMaxHeatSetpointLimit to MinHeatSetpointLimit "
+                                                     @"attribute Error: %@",
+                                                   err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_39()
+    CHIP_ERROR TestReadsMaxHeatSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_40()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxHeatSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within range Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("MaxHeatSetpointLimit", actualValue, 3000));
+            }
+
+            VerifyOrReturn(CheckConstraintType("maxHeatSetpointLimit", "", "int16"));
+            VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxHeatSetpointLimit", [value shortValue], 700));
+            VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxHeatSetpointLimit", [value shortValue], 3000));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_40()
+    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMinHeatSetpointLimitAttribute_41()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48478,7 +48551,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_41()
+    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMinHeatSetpointLimitAttribute_42()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48506,7 +48579,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_42()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxHeatSetpointLimitAttribute_43()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48530,7 +48603,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_43()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxHeatSetpointLimitAttribute_44()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48554,7 +48627,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMaxHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_44()
+    CHIP_ERROR TestWritesMaxHeatSetpointLimitToValueBelowTheAbsMinHeatSetpointLimit_45()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48583,7 +48656,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMaxHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_45()
+    CHIP_ERROR TestWritesMaxHeatSetpointLimitToValueAboveTheAbsMaxHeatSetpointLimit_46()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48612,7 +48685,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_46()
+    CHIP_ERROR TestWritesTheLimitOfAbsMinHeatSetpointLimitToMaxHeatSetpointLimitAttribute_47()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48636,16 +48709,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_47()
+    CHIP_ERROR TestWritesTheLimitOfAbsMaxHeatSetpointLimitToMaxHeatSetpointLimitAttribute_48()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxHeatSetpointLimitArgument;
+        maxHeatSetpointLimitArgument = [NSNumber numberWithShort:3000];
+        [cluster writeAttributeMaxHeatSetpointLimitWithValue:maxHeatSetpointLimitArgument
+                                           completionHandler:^(NSError * _Nullable err) {
+                                               NSLog(@"Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit "
+                                                     @"attribute Error: %@",
+                                                   err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_48()
+    CHIP_ERROR TestReadsMinCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_49()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48674,7 +48762,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_49()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinCoolSetpointLimitAttribute_50()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48698,7 +48786,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_50()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinCoolSetpointLimitAttribute_51()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48722,7 +48810,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMinCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_51()
+    CHIP_ERROR TestWritesMinCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_52()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48751,7 +48839,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMinCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_52()
+    CHIP_ERROR TestWritesMinCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_53()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48779,7 +48867,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_53()
+    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_54()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48803,7 +48891,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_54()
+    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMinCoolSetpointLimitAttribute_55()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48827,7 +48915,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_55()
+    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMinCoolSetpointLimitAttribute_56()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48851,7 +48939,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_56()
+    CHIP_ERROR TestReadsMaxCoolSetpointLimitAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_57()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48880,25 +48968,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_57()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMaxCoolSetpointLimitAttribute_58()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxCoolSetpointLimitArgument;
+        maxCoolSetpointLimitArgument = [NSNumber numberWithShort:2000];
+        [cluster writeAttributeMaxCoolSetpointLimitWithValue:maxCoolSetpointLimitArgument
+                                           completionHandler:^(NSError * _Nullable err) {
+                                               NSLog(@"Writes a value back that is different but valid for MaxCoolSetpointLimit "
+                                                     @"attribute Error: %@",
+                                                   err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_58()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMaxCoolSetpointLimitAttribute_59()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMaxCoolSetpointLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads it back again to confirm the successful write of MaxCoolSetpointLimit attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("MaxCoolSetpointLimit", actualValue, 2000));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMaxCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_59()
+    CHIP_ERROR TestWritesMaxCoolSetpointLimitToValueBelowTheAbsMinCoolSetpointLimit_60()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48927,7 +49045,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMaxCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_60()
+    CHIP_ERROR TestWritesMaxCoolSetpointLimitToValueAboveTheMaxCoolSetpointLimit_61()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48955,16 +49073,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_61()
+    CHIP_ERROR TestWritesTheLimitOfAbsMinCoolSetpointLimitToMaxCoolSetpointLimitAttribute_62()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxCoolSetpointLimitArgument;
+        maxCoolSetpointLimitArgument = [NSNumber numberWithShort:1600];
+        [cluster writeAttributeMaxCoolSetpointLimitWithValue:maxCoolSetpointLimitArgument
+                                           completionHandler:^(NSError * _Nullable err) {
+                                               NSLog(@"Writes the limit of AbsMinCoolSetpointLimit to MaxCoolSetpointLimit "
+                                                     @"attribute Error: %@",
+                                                   err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_62()
+    CHIP_ERROR TestWritesTheLimitOfMaxCoolSetpointLimitToMaxCoolSetpointLimitAttribute_63()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -48988,7 +49121,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackDefaultValueOfMinHeatSetpointLimit_63()
+    CHIP_ERROR TestWritesSetsBackDefaultValueOfMinHeatSetpointLimit_64()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49010,16 +49143,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackdefaultValueOfMaxHeatSetpointLimit_64()
+    CHIP_ERROR TestWritesSetsBackdefaultValueOfMaxHeatSetpointLimit_65()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id maxHeatSetpointLimitArgument;
+        maxHeatSetpointLimitArgument = [NSNumber numberWithShort:3000];
+        [cluster writeAttributeMaxHeatSetpointLimitWithValue:maxHeatSetpointLimitArgument
+                                           completionHandler:^(NSError * _Nullable err) {
+                                               NSLog(@"Writes (sets back)default value of MaxHeatSetpointLimit Error: %@", err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMaxHeatSetpointLimitThatMeetsTheDeadbandOf25c_65()
+    CHIP_ERROR TestWritesMaxHeatSetpointLimitThatMeetsTheDeadbandOf25c_66()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49041,7 +49187,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackDefaultValueOfMinCoolSetpointLimit_66()
+    CHIP_ERROR TestWritesSetsBackDefaultValueOfMinCoolSetpointLimit_67()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49063,7 +49209,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesSetsBackDefaultValueOfMaxCoolSetpointLimit_67()
+    CHIP_ERROR TestWritesSetsBackDefaultValueOfMaxCoolSetpointLimit_68()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49085,7 +49231,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsMinSetpointDeadBandAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_68()
+    CHIP_ERROR TestReadsMinSetpointDeadBandAttributeFromServerDutAndVerifiesThatTheValueIsWithinRange_69()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49114,7 +49260,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinSetpointDeadBandAttribute_69()
+    CHIP_ERROR TestWritesAValueBackThatIsDifferentButValidForMinSetpointDeadBandAttribute_70()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49138,7 +49284,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinSetpointDeadBandAttribute_70()
+    CHIP_ERROR TestReadsItBackAgainToConfirmTheSuccessfulWriteOfMinSetpointDeadBandAttribute_71()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49162,7 +49308,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheValueBelowMinSetpointDeadBand_71()
+    CHIP_ERROR TestWritesTheValueBelowMinSetpointDeadBand_72()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49188,7 +49334,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheValueAboveMinSetpointDeadBand_72()
+    CHIP_ERROR TestWritesTheValueAboveMinSetpointDeadBand_73()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49214,7 +49360,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheMinLimitOfMinSetpointDeadBand_73()
+    CHIP_ERROR TestWritesTheMinLimitOfMinSetpointDeadBand_74()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49236,7 +49382,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesTheMaxLimitOfMinSetpointDeadBand_74()
+    CHIP_ERROR TestWritesTheMaxLimitOfMinSetpointDeadBand_75()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49258,7 +49404,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_75()
+    CHIP_ERROR TestReadsControlSequenceOfOperationFromServerDutAndVerifiesThatTheValueIsValid_76()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49287,7 +49433,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_76()
+    CHIP_ERROR TestWriteAttributeCommandForControlSequenceOfOperationWithANewValidValue_77()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49311,7 +49457,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadItBackAgainToConfirmTheSuccessfulWrite_77()
+    CHIP_ERROR TestReadItBackAgainToConfirmTheSuccessfulWrite_78()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49336,7 +49482,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWritesMaxHeatSetpointLimitAttributeToDefaultValueOf2950ToMeetDeadbandConstraint_78()
+    CHIP_ERROR TestWritesMaxHeatSetpointLimitAttributeToDefaultValueOf2950ToMeetDeadbandConstraint_79()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49360,7 +49506,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_79()
+    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_80()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49382,16 +49528,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_80()
+    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_81()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:2000];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
+
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsSetpointRaiseCommand_81()
+    CHIP_ERROR TestSendsSetpointRaiseCommandHeatOnly_82()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49404,7 +49563,7 @@ private:
         params.amount = [NSNumber numberWithChar:-30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+                                NSLog(@"Sends SetpointRaise Command Heat Only Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -49414,7 +49573,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_82()
+    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_83()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49438,16 +49597,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_83()
+    CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_84()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:2000];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
+
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsSetpointRaiseCommand_84()
+    CHIP_ERROR TestSendsSetpointRaiseCommandHeatOnly_85()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49460,7 +49632,7 @@ private:
         params.amount = [NSNumber numberWithChar:30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+                                NSLog(@"Sends SetpointRaise Command Heat Only Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -49470,7 +49642,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_85()
+    CHIP_ERROR TestReadsBackOccupiedHeatingSetpointToConfirmTheSuccessOfTheWrite_86()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49485,7 +49657,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, 30));
+                VerifyOrReturn(CheckValue("OccupiedHeatingSetpoint", actualValue, 2300));
             }
 
             NextTest();
@@ -49494,29 +49666,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetsOccupiedCoolingSetpointToDefaultValue_86()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
-                                                                                     endpoint:1
-                                                                                        queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id occupiedCoolingSetpointArgument;
-        occupiedCoolingSetpointArgument = [NSNumber numberWithShort:2600];
-        [cluster writeAttributeOccupiedCoolingSetpointWithValue:occupiedCoolingSetpointArgument
-                                              completionHandler:^(NSError * _Nullable err) {
-                                                  NSLog(@"Sets OccupiedCoolingSetpoint to default value Error: %@", err);
-
-                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                                  NextTest();
-                                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendsSetpointRaiseCommand_87()
+    CHIP_ERROR TestSendsSetpointRaiseCommandCoolOnly_87()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49529,7 +49679,7 @@ private:
         params.amount = [NSNumber numberWithChar:-30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+                                NSLog(@"Sends SetpointRaise Command Cool Only Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -49585,7 +49735,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsSetpointRaiseCommand_90()
+    CHIP_ERROR TestSendsSetpointRaiseCommandCoolOnly_90()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49598,7 +49748,7 @@ private:
         params.amount = [NSNumber numberWithChar:30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+                                NSLog(@"Sends SetpointRaise Command Cool Only Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -49656,14 +49806,27 @@ private:
 
     CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_93()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:2000];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
+
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsSetpointRaiseCommand_94()
+    CHIP_ERROR TestSendsSetpointRaiseCommandHeatCool_94()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49676,7 +49839,7 @@ private:
         params.amount = [NSNumber numberWithChar:-30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+                                NSLog(@"Sends SetpointRaise Command Heat & Cool Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -49758,14 +49921,27 @@ private:
 
     CHIP_ERROR TestSetsOccupiedHeatingSetpointToDefaultValue_98()
     {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id occupiedHeatingSetpointArgument;
+        occupiedHeatingSetpointArgument = [NSNumber numberWithShort:2000];
+        [cluster writeAttributeOccupiedHeatingSetpointWithValue:occupiedHeatingSetpointArgument
+                                              completionHandler:^(NSError * _Nullable err) {
+                                                  NSLog(@"Sets OccupiedHeatingSetpoint to default value Error: %@", err);
+
+                                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                  NextTest();
+                                              }];
+
+        return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsSetpointRaiseCommand_99()
+    CHIP_ERROR TestSendsSetpointRaiseCommandHeatCool_99()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThermostat * cluster = [[MTRBaseClusterThermostat alloc] initWithDevice:device
@@ -49778,7 +49954,7 @@ private:
         params.amount = [NSNumber numberWithChar:30];
         [cluster setpointRaiseLowerWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Sends SetpointRaise Command Error: %@", err);
+                                NSLog(@"Sends SetpointRaise Command Heat & Cool Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
