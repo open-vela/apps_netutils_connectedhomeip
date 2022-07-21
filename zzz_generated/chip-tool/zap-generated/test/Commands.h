@@ -89457,7 +89457,7 @@ private:
 class Test_TC_LUNIT_3_1Suite : public TestCommand
 {
 public:
-    Test_TC_LUNIT_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LUNIT_3_1", 0, credsIssuerConfig)
+    Test_TC_LUNIT_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LUNIT_3_1", 9, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -89490,6 +89490,54 @@ private:
 
         switch (mTestIndex - 1)
         {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureUnit", value, 0U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureUnit", value, 1U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureUnit", value, 2U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -89505,6 +89553,73 @@ private:
         using namespace chip::app::Clusters;
         switch (testIndex)
         {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads TemperatureUnit attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH writes 0 (Fahrenheit) to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000.Fahrenheit"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(0);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH writes 1 (Celsius) to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000.Celsius"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(1);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH writes 2 (Kelvin) to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000.Kelvin"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH writes 5 to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.C.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(5);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
         }
         return CHIP_NO_ERROR;
     }
