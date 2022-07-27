@@ -38945,7 +38945,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("featureMap", "", "map32"));
             VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 7UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 15UL));
 
             NextTest();
         }];

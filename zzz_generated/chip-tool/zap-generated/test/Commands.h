@@ -23713,7 +23713,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "map32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7UL));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 15UL));
             }
             break;
         case 3:
