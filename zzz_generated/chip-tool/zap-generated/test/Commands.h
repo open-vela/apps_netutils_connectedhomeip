@@ -316,8 +316,6 @@ public:
         printf("Test_TC_CNET_4_4\n");
         printf("Test_TC_CNET_4_5\n");
         printf("Test_TC_CNET_4_6\n");
-        printf("Test_TC_CNET_4_7\n");
-        printf("Test_TC_CNET_4_8\n");
         printf("Test_TC_CNET_4_9\n");
         printf("Test_TC_CNET_4_10\n");
         printf("Test_TC_CNET_4_11\n");
@@ -342,7 +340,6 @@ public:
         printf("Test_TC_DGETH_3_1\n");
         printf("Test_TC_DGETH_3_2\n");
         printf("Test_TC_CGEN_2_2\n");
-        printf("Test_TC_CGEN_2_3\n");
         printf("Test_TC_CGEN_2_4\n");
         printf("Test_TC_DGGEN_2_2\n");
         printf("Test_TC_DGGEN_2_3\n");
@@ -71196,118 +71193,6 @@ private:
     }
 };
 
-class Test_TC_CNET_4_7Suite : public TestCommand
-{
-public:
-    Test_TC_CNET_4_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CNET_4_7", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_CNET_4_7Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_CNET_4_8Suite : public TestCommand
-{
-public:
-    Test_TC_CNET_4_8Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CNET_4_8", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_CNET_4_8Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_CNET_4_9Suite : public TestCommand
 {
 public:
@@ -72608,62 +72493,6 @@ public:
     }
 
     ~Test_TC_CGEN_2_2Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_CGEN_2_3Suite : public TestCommand
-{
-public:
-    Test_TC_CGEN_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CGEN_2_3", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_CGEN_2_3Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -93121,8 +92950,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_CNET_4_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_6Suite>(credsIssuerConfig),
-        make_unique<Test_TC_CNET_4_7Suite>(credsIssuerConfig),
-        make_unique<Test_TC_CNET_4_8Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_9Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_10Suite>(credsIssuerConfig),
         make_unique<Test_TC_CNET_4_11Suite>(credsIssuerConfig),
@@ -93147,7 +92974,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DGETH_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGETH_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_CGEN_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_CGEN_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_CGEN_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGGEN_2_3Suite>(credsIssuerConfig),
