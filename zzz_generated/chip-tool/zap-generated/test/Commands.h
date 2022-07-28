@@ -15002,7 +15002,7 @@ private:
 class Test_TC_LVL_5_1Suite : public TestCommand
 {
 public:
-    Test_TC_LVL_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LVL_5_1", 18, credsIssuerConfig)
+    Test_TC_LVL_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LVL_5_1", 23, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -15063,7 +15063,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 MinlevelValue = value;
             }
             break;
@@ -15081,7 +15081,7 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel", value, static_cast<uint8_t>(MinlevelValue + 1)));
                 VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentlevelValue = value;
             }
             break;
@@ -15093,7 +15093,7 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel", value, 2U));
                 VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
             break;
         case 9:
@@ -15101,26 +15101,40 @@ private:
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentLevel", value, 66U));
                 VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 60U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 68U));
             }
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentLevel", value, 66U));
+                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+            }
             break;
         case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -15128,7 +15142,15 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel", value, CurrentlevelValue));
             }
             break;
-        case 15:
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentLevel", value, CurrentlevelValue));
+            }
+            break;
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -15136,10 +15158,18 @@ private:
                 VerifyOrReturn(CheckValue("currentLevel", value, 2U));
             }
             break;
-        case 16:
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentLevel", value, 2U));
+            }
+            break;
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 17:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 bool value;
@@ -15250,21 +15280,43 @@ private:
             );
         }
         case 10: {
-            LogStep(10, "Wait 4000ms");
+            LogStep(10, "Sends step up command to DUT");
+            VerifyOrDo(!ShouldSkip("LVL.S.C02.Rsp && !LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 4000UL;
-            return WaitForMs(kIdentityAlpha, value);
+            chip::app::Clusters::LevelControl::Commands::Step::Type value;
+            value.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
+            value.stepSize       = 64U;
+            value.transitionTime = 20U;
+            value.optionMask     = 0U;
+            value.optionOverride = 0U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Step::Id, value,
+                               chip::NullOptional
+
+            );
         }
         case 11: {
-            LogStep(11, "Reads current level attribute from DUT");
+            LogStep(11, "Wait 2500ms");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+            value.ms = 2500UL;
+            return WaitForMs(kIdentityAlpha, value);
+        }
+        case 12: {
+            LogStep(12, "Reads current level attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "Sends a StepWithOnOff command");
+        case 13: {
+            LogStep(13, "Reads current level attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && !LVL.S.M.VarRate"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Sends a StepWithOnOff command");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::StepWithOnOff::Type value;
@@ -15276,29 +15328,56 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "Wait 4000ms");
+        case 15: {
+            LogStep(15, "Sends a StepWithOnOff command");
+            VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && !LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LevelControl::Commands::StepWithOnOff::Type value;
+            value.stepMode       = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
+            value.stepSize       = 64U;
+            value.transitionTime = 20U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::StepWithOnOff::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 16: {
+            LogStep(16, "Wait 2500ms");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-            value.ms = 4000UL;
+            value.ms = 2500UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 14: {
-            LogStep(14, "Reads current level attribute from DUT");
+        case 17: {
+            LogStep(17, "Reads current level attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "Reads current level attribute from DUT");
+        case 18: {
+            LogStep(18, "Reads current level attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.M.VarRate"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "Reads current level attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "Precondition send Off Command");
+        case 20: {
+            LogStep(20, "Reads current level attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && !LVL.S.M.VarRate"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
+                                 chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "Precondition send Off Command");
             VerifyOrDo(!ShouldSkip("OO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
@@ -15306,8 +15385,8 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "Check on/off attribute value is false after off command");
+        case 22: {
+            LogStep(22, "Check on/off attribute value is false after off command");
             VerifyOrDo(!ShouldSkip("OO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
         }
@@ -63224,27 +63303,19 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::GetWeekDayScheduleResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value.weekDayIndex", value.weekDayIndex, 1U));
-                VerifyOrReturn(
-                    CheckConstraintMaxValue("value.weekDayIndex", value.weekDayIndex, NumberOfWeekDaySchedulesSupportedPerUser));
-                VerifyOrReturn(CheckConstraintMinValue("value.userIndex", value.userIndex, 1U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.userIndex", value.userIndex, NumberOfTotalUsersSupported));
+                VerifyOrReturn(CheckValue("weekDayIndex", value.weekDayIndex, 1U));
+                VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckConstraintHasValue("value.daysMask", value.daysMask, true));
-                VerifyOrReturn(CheckConstraintMinValue("value.daysMask.Value()", value.daysMask.Value(), 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.daysMask.Value()", value.daysMask.Value(), 6U));
-                VerifyOrReturn(CheckConstraintHasValue("value.startHour", value.startHour, true));
-                VerifyOrReturn(CheckConstraintMinValue("value.startHour.Value()", value.startHour.Value(), 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.startHour.Value()", value.startHour.Value(), 23U));
-                VerifyOrReturn(CheckConstraintHasValue("value.startMinute", value.startMinute, true));
-                VerifyOrReturn(CheckConstraintMinValue("value.startMinute.Value()", value.startMinute.Value(), 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.startMinute.Value()", value.startMinute.Value(), 59U));
+                VerifyOrReturn(CheckValuePresent("daysMask", value.daysMask));
+                VerifyOrReturn(CheckValue("daysMask.Value()", value.daysMask.Value(), 2U));
+                VerifyOrReturn(CheckValuePresent("startHour", value.startHour));
+                VerifyOrReturn(CheckValue("startHour.Value()", value.startHour.Value(), 15U));
+                VerifyOrReturn(CheckValuePresent("startMinute", value.startMinute));
+                VerifyOrReturn(CheckValue("startMinute.Value()", value.startMinute.Value(), 45U));
                 VerifyOrReturn(CheckConstraintHasValue("value.endHour", value.endHour, true));
-                VerifyOrReturn(CheckConstraintMinValue("value.endHour.Value()", value.endHour.Value(), 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.endHour.Value()", value.endHour.Value(), 23U));
+                VerifyOrReturn(CheckConstraintMinValue("value.endHour.Value()", value.endHour.Value(), 16U));
                 VerifyOrReturn(CheckConstraintHasValue("value.endMinute", value.endMinute, true));
-                VerifyOrReturn(CheckConstraintMinValue("value.endMinute.Value()", value.endMinute.Value(), 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.endMinute.Value()", value.endMinute.Value(), 59U));
+                VerifyOrReturn(CheckConstraintMinValue("value.endMinute.Value()", value.endMinute.Value(), 55U));
             }
             break;
         case 7:
@@ -63273,7 +63344,7 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::GetWeekDayScheduleResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("weekDayIndex", value.weekDayIndex, 2U));
+                VerifyOrReturn(CheckValue("weekDayIndex", value.weekDayIndex, 1U));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValue("status", value.status, 139U));
                 VerifyOrReturn(CheckConstraintHasValue("value.daysMask", value.daysMask, false));
@@ -63340,19 +63411,19 @@ private:
             );
         }
         case 3: {
-            LogStep(3, "Get Max number of Week Day schedules for user");
+            LogStep(3, "TH reads NumberOfWeekDay SchedulesSupportedPerUser attribute");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.A0014"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::NumberOfWeekDaySchedulesSupportedPerUser::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Get number of supported users");
+            LogStep(4, "TH reads NumberOfTotalUsers Supported attribute");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::NumberOfTotalUsersSupported::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Send Set Week Day Schedule Command to DUT");
+            LogStep(5, "TH send Set Week Day Schedule Command");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
@@ -63369,7 +63440,7 @@ private:
             );
         }
         case 6: {
-            LogStep(6, "send GetWeekDay Schedule Command ");
+            LogStep(6, "TH send Get Week Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -63382,7 +63453,7 @@ private:
             );
         }
         case 7: {
-            LogStep(7, "Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response");
+            LogStep(7, "TH send Set Week Day Schedule Command");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
@@ -63399,7 +63470,7 @@ private:
             );
         }
         case 8: {
-            LogStep(8, "send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response");
+            LogStep(8, "TH send Get Week Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -63412,7 +63483,7 @@ private:
             );
         }
         case 9: {
-            LogStep(9, "Clear all week day schedules for the first user");
+            LogStep(9, "TH sends Clear Week Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0d.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearWeekDaySchedule::Type value;
@@ -63424,12 +63495,12 @@ private:
             );
         }
         case 10: {
-            LogStep(10, "send GetWeekDay Schedule Command ");
+            LogStep(10, "TH sends Get Week Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetWeekDaySchedule::Type value;
-            value.weekDayIndex = 2U;
+            value.weekDayIndex = 1U;
             value.userIndex    = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetWeekDaySchedule::Id, value,
                                chip::NullOptional
@@ -63454,7 +63525,7 @@ private:
 class Test_TC_DRLK_2_7Suite : public TestCommand
 {
 public:
-    Test_TC_DRLK_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_7", 16, credsIssuerConfig)
+    Test_TC_DRLK_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_7", 18, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -63549,16 +63620,17 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::GetYearDayScheduleResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value.yearDayIndex", value.yearDayIndex, 1U));
-                VerifyOrReturn(
-                    CheckConstraintMaxValue("value.yearDayIndex", value.yearDayIndex, NumberOfYearDaySchedulesSupportedPerUser));
-                VerifyOrReturn(CheckConstraintMinValue("value.userIndex", value.userIndex, 1U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.userIndex", value.userIndex, NumberOfTotalUsersSupported));
+                VerifyOrReturn(CheckValue("yearDayIndex", value.yearDayIndex, 1U));
+                VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckConstraintHasValue("value.localStartTime", value.localStartTime, true));
-                VerifyOrReturn(CheckConstraintType("value.localStartTime.Value()", "", "epoch-s"));
-                VerifyOrReturn(CheckConstraintHasValue("value.localEndTime", value.localEndTime, true));
-                VerifyOrReturn(CheckConstraintType("value.localEndTime.Value()", "", "epoch-s"));
+                VerifyOrReturn(CheckValuePresent("localStartTime", value.localStartTime));
+                VerifyOrReturn(CheckValue("localStartTime.Value()", value.localStartTime.Value(), 960UL));
+                VerifyOrReturn(CheckValuePresent("localEndTime", value.localEndTime));
+                VerifyOrReturn(CheckValue("localEndTime.Value()", value.localEndTime.Value(), 1980UL));
+                if (value.localEndTime.HasValue())
+                {
+                    VerifyOrReturn(CheckConstraintMinValue("value.localEndTime.Value()", value.localEndTime.Value(), 961UL));
+                }
             }
             break;
         case 7:
@@ -63578,6 +63650,9 @@ private:
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetYearDayScheduleResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -63588,10 +63663,10 @@ private:
                 VerifyOrReturn(CheckConstraintHasValue("value.localEndTime", value.localEndTime, false));
             }
             break;
-        case 10:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 11:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetYearDayScheduleResponse::DecodableType value;
@@ -63603,10 +63678,10 @@ private:
                 VerifyOrReturn(CheckConstraintHasValue("value.localEndTime", value.localEndTime, false));
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetYearDayScheduleResponse::DecodableType value;
@@ -63618,12 +63693,19 @@ private:
                 VerifyOrReturn(CheckValue("localStartTime.Value()", value.localStartTime.Value(), 1080UL));
                 VerifyOrReturn(CheckValuePresent("localEndTime", value.localEndTime));
                 VerifyOrReturn(CheckValue("localEndTime.Value()", value.localEndTime.Value(), 2100UL));
+                if (value.localEndTime.HasValue())
+                {
+                    VerifyOrReturn(CheckConstraintMinValue("value.localEndTime.Value()", value.localEndTime.Value(), 1081UL));
+                }
             }
             break;
-        case 14:
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -63680,19 +63762,19 @@ private:
             );
         }
         case 3: {
-            LogStep(3, "Get Max number of year Day schedules for user");
+            LogStep(3, "TH reads NumberOfYearDay SchedulesSupportedPerUser attribute");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::NumberOfYearDaySchedulesSupportedPerUser::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "Get number of supported users");
+            LogStep(4, "TH reads NumberOfTotalUsers Supported attribute");
             VerifyOrDo(!ShouldSkip("DRLK.C.F08 && DRLK.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::NumberOfTotalUsersSupported::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "Send Set Year Day Schedule Command to DUT");
+            LogStep(5, "TH sends Set Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0e.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetYearDaySchedule::Type value;
@@ -63706,7 +63788,7 @@ private:
             );
         }
         case 6: {
-            LogStep(6, "send Get Year Day Schedule Command");
+            LogStep(6, "TH sends Get Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -63719,7 +63801,7 @@ private:
             );
         }
         case 7: {
-            LogStep(7, "Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response");
+            LogStep(7, "TH send Set Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.C0e.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetYearDaySchedule::Type value;
@@ -63733,7 +63815,7 @@ private:
             );
         }
         case 8: {
-            LogStep(8, "send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response");
+            LogStep(8, "TH sends Get Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -63746,8 +63828,29 @@ private:
             );
         }
         case 9: {
-            LogStep(9, "send Get Year Day Schedule Command to DUT and verify FAILURE response");
-            VerifyOrDo(!ShouldSkip("PICS_SKIP_SAMPLE_APP && DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
+            LogStep(9, "Create a user with userIndex as 5");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.userIndex     = 5U;
+            value.userName.SetNonNull();
+            value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
+            value.userUniqueId.SetNonNull();
+            value.userUniqueId.Value() = 6452UL;
+            value.userStatus.SetNonNull();
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userType.SetNonNull();
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.credentialRule.SetNonNull();
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 10: {
+            LogStep(10, "TH sends Get Year Day Schedule Command to DUT");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type value;
@@ -63758,8 +63861,8 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "Clear a year day schedule for the first user");
+        case 11: {
+            LogStep(11, "TH sends Clear Year Day Schedule to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearYearDaySchedule::Type value;
@@ -63770,8 +63873,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11, "send Get Year Day Schedule Command to DUT and verify NOT_FOUND response");
+        case 12: {
+            LogStep(12, "TH sends Get Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx && DRLK.S.C10.Rsp"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -63783,8 +63886,8 @@ private:
 
             );
         }
-        case 12: {
-            LogStep(12, "Send Set Year Day Schedule Command to DUT ");
+        case 13: {
+            LogStep(13, "TH sends Set Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.C0e.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetYearDaySchedule::Type value;
@@ -63797,8 +63900,8 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "send Get Year Day Schedule Command");
+        case 14: {
+            LogStep(14, "TH sends Get Year Day Schedule Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -63810,8 +63913,20 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "Clear a year day schedule for the first user");
+        case 15: {
+            LogStep(15, "TH sends Clear Year Day Schedule to DUT");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::ClearYearDaySchedule::Type value;
+            value.yearDayIndex = 0U;
+            value.userIndex    = 0U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearYearDaySchedule::Id, value,
+                               chip::NullOptional
+
+            );
+        }
+        case 16: {
+            LogStep(16, "Clear a year day schedule for the first user");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04 && DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearYearDaySchedule::Type value;
@@ -63822,8 +63937,8 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "Cleanup the created user");
+        case 17: {
+            LogStep(17, "Cleanup the created user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
             value.userIndex = 1U;
@@ -63840,7 +63955,7 @@ private:
 class Test_TC_DRLK_2_9Suite : public TestCommand
 {
 public:
-    Test_TC_DRLK_2_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_9", 18, credsIssuerConfig)
+    Test_TC_DRLK_2_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_2_9", 24, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -63933,8 +64048,8 @@ private:
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value.credentialExists", "", "boolean"));
-                VerifyOrReturn(CheckConstraintMinValue("value.userIndex", value.userIndex, 1U));
-                VerifyOrReturn(CheckConstraintMaxValue("value.userIndex", value.userIndex, NumberOfTotalUsersSupported));
+                VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
                 VerifyOrReturn(CheckValue("creatorFabricIndex.Value()", value.creatorFabricIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", value.lastModifiedFabricIndex));
@@ -63977,6 +64092,10 @@ private:
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -63986,10 +64105,29 @@ private:
                 VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
             }
             break;
-        case 10:
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 2U));
+                VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
+                VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 11:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -64001,10 +64139,10 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 12:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 13:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::SetCredentialResponse::DecodableType value;
@@ -64012,16 +64150,20 @@ private:
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
                 VerifyOrReturn(CheckValueNull("userIndex", value.userIndex));
                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", value.nextCredentialIndex));
-                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 4U));
+                VerifyOrReturn(CheckValue("nextCredentialIndex.Value()", value.nextCredentialIndex.Value(), 2U));
             }
             break;
-        case 14:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 15:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
-        case 16:
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
@@ -64033,8 +64175,11 @@ private:
                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", value.nextCredentialIndex));
             }
             break;
-        case 17:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -64134,7 +64279,7 @@ private:
             );
         }
         case 6: {
-            LogStep(6, "TH sends Set Credential Command to DUT and  verify the INVALID_COMMAND if any of the fields are invalid");
+            LogStep(6, "TH sends Set Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64144,7 +64289,7 @@ private:
             value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
             value.credential.credentialIndex = 2U;
 
-            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("1234garbage: not in length on purpose"), 4);
+            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("4321garbage: not in length on purpose"), 4);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 2U;
             value.userStatus.SetNonNull();
@@ -64157,7 +64302,7 @@ private:
             );
         }
         case 7: {
-            LogStep(7, "TH sends Set Credential Command to DUT and verify response as DUPLICATE if CredentialData is repeated");
+            LogStep(7, "TH sends Set Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64180,7 +64325,7 @@ private:
             );
         }
         case 8: {
-            LogStep(8, "TH sends Set Credential Command to DUT and verify response as OCCUPIED if CredentialIndex is repeated");
+            LogStep(8, "TH sends Set Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64204,8 +64349,55 @@ private:
         }
         case 9: {
             LogStep(9,
-                    "TH sends Set Credential Command to DUT and verify the DUT response as OCCUPIED if the CredentialIndex is not "
-                    "associated with the UserIndex");
+                    "TH sends Set Credential Command to DUT and Verify that the DUT sends Set Credential Response command with "
+                    "response as OCCUPIED if the CredentialIndex is repeated");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 10: {
+            LogStep(10, "TH sends Set Credential Command to DUT");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialIndex = 3U;
+
+            value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.userIndex.SetNonNull();
+            value.userIndex.Value() = 3U;
+            value.userStatus.SetNonNull();
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
+            value.userType.SetNonNull();
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 11: {
+            LogStep(11,
+                    "TH sends Set Credential Command to DUT and Verify that the DUT sends Set Credential Response command with "
+                    "response as OCCUPIED if the CredentialIndex is repeated");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 12: {
+            LogStep(12, "TH sends Set Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64227,8 +64419,21 @@ private:
 
             );
         }
-        case 10: {
-            LogStep(10, "TH sends Clear Credential Command to DUT");
+        case 13: {
+            LogStep(13,
+                    "TH sends Set Credential Command to DUT and Verify that the DUT sends Set Credential Response command with "
+                    "response as OCCUPIED if the CredentialIndex is repeated");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 14: {
+            LogStep(14, "TH sends Clear Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
@@ -64242,10 +64447,8 @@ private:
 
             );
         }
-        case 11: {
-            LogStep(11,
-                    "TH sends Get Credential Status Command and verify that the CredentialType and  CredentialIndex for the "
-                    "provided value is cleared");
+        case 15: {
+            LogStep(15, "TH sends Get Credential Status Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64259,8 +64462,8 @@ private:
 
             );
         }
-        case 12: {
-            LogStep(12, "TH sends Set User Command to DUT");
+        case 16: {
+            LogStep(16, "TH sends Set User Command to DUT");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
@@ -64280,8 +64483,8 @@ private:
 
             );
         }
-        case 13: {
-            LogStep(13, "TH sends Set Credential Command to DUT");
+        case 17: {
+            LogStep(17, "TH sends Set Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64289,7 +64492,7 @@ private:
             value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
 
             value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
-            value.credential.credentialIndex = 3U;
+            value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
@@ -64303,8 +64506,8 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "TH sends Clear Credential Command to DUT");
+        case 18: {
+            LogStep(18, "TH sends Clear Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
@@ -64318,8 +64521,8 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "TH sends Get Credential Status Command");
+        case 19: {
+            LogStep(19, "TH sends Get Credential Status Command");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64333,8 +64536,21 @@ private:
 
             );
         }
-        case 16: {
-            LogStep(16, "TH sends Get Credential Status Command");
+        case 20: {
+            LogStep(20,
+                    "TH sends Get Credential command to DUT and Verify that the CredentialType for the provided value is cleared "
+                    "Verify that the CredentialIndex is cleared");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 21: {
+            LogStep(21, "TH sends Get Credential Status Command");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -64348,8 +64564,8 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "TH sends Clear Credential Command to DUT");
+        case 22: {
+            LogStep(22, "TH sends Clear Credential Command to DUT");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
@@ -64359,6 +64575,16 @@ private:
             value.credential.Value().credentialIndex = 2U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23, "Cleanup the created user");
+            ListFreer listFreer;
+            chip::app::Clusters::DoorLock::Commands::ClearUser::Type value;
+            value.userIndex = 1U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );

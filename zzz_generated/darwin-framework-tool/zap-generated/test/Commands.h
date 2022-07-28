@@ -24414,60 +24414,100 @@ public:
             err = TestSendsStepUpCommandToDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 4000ms\n");
-            err = TestWait4000ms_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Sends step up command to DUT\n");
+            if (ShouldSkip("LVL.S.C02.Rsp && !LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsStepUpCommandToDut_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 2500ms\n");
+            err = TestWait2500ms_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Reads current level attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_11();
+            err = TestReadsCurrentLevelAttributeFromDut_12();
             break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a StepWithOnOff command\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads current level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && !LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsCurrentLevelAttributeFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Sends a StepWithOnOff command\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestSendsAStepWithOnOffCommand_12();
+            err = TestSendsAStepWithOnOffCommand_14();
             break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 4000ms\n");
-            err = TestWait4000ms_13();
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Sends a StepWithOnOff command\n");
+            if (ShouldSkip("LVL.S.C06.Rsp && !LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsAStepWithOnOffCommand_15();
             break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads current level attribute from DUT\n");
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Wait 2500ms\n");
+            err = TestWait2500ms_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads current level attribute from DUT\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_14();
+            err = TestReadsCurrentLevelAttributeFromDut_17();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads current level attribute from DUT\n");
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Reads current level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsCurrentLevelAttributeFromDut_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Reads current level attribute from DUT\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_15();
+            err = TestReadsCurrentLevelAttributeFromDut_19();
             break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Precondition send Off Command\n");
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Reads current level attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && !LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsCurrentLevelAttributeFromDut_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Precondition send Off Command\n");
             if (ShouldSkip("OO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestPreconditionSendOffCommand_16();
+            err = TestPreconditionSendOffCommand_21();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Check on/off attribute value is false after off command\n");
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Check on/off attribute value is false after off command\n");
             if (ShouldSkip("OO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_17();
+            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_22();
             break;
         }
 
@@ -24534,6 +24574,21 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -24547,7 +24602,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 23;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -24638,7 +24693,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("minLevel", "", "uint8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 254U));
             {
                 MinlevelValue = value;
             }
@@ -24716,7 +24771,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
             {
                 CurrentlevelValue = value;
             }
@@ -24747,7 +24802,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -24781,14 +24836,40 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait4000ms_10()
+    CHIP_ERROR TestSendsStepUpCommandToDut_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRLevelControlClusterStepParams alloc] init];
+        params.stepMode = [NSNumber numberWithUnsignedChar:0U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:64U];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
+        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        [cluster stepWithParams:params
+              completionHandler:^(NSError * _Nullable err) {
+                  NSLog(@"Sends step up command to DUT Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  NextTest();
+              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWait2500ms_11()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 4000UL;
+        value.ms = 2500UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_11()
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -24801,17 +24882,44 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 60U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 68U));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current level", actualValue, 66U));
+            }
 
+            VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsAStepWithOnOffCommand_12()
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_13()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current level", actualValue, 66U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("currentLevel", "", "uint8"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSendsAStepWithOnOffCommand_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -24835,14 +24943,38 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait4000ms_13()
+    CHIP_ERROR TestSendsAStepWithOnOffCommand_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRLevelControlClusterStepWithOnOffParams alloc] init];
+        params.stepMode = [NSNumber numberWithUnsignedChar:1U];
+        params.stepSize = [NSNumber numberWithUnsignedChar:64U];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
+        [cluster stepWithOnOffWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Sends a StepWithOnOff command Error: %@", err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWait2500ms_16()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 4000UL;
+        value.ms = 2500UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_14()
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -24866,7 +24998,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_15()
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current level", actualValue, CurrentlevelValue));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -24890,7 +25046,31 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPreconditionSendOffCommand_16()
+    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_20()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("current level", actualValue, 2U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestPreconditionSendOffCommand_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -24907,7 +25087,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_17()
+    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110704,70 +110884,68 @@ public:
             err = TestReadTheUserBackAndVerifyItsFields_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Get Max number of Week Day schedules for user\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads NumberOfWeekDay SchedulesSupportedPerUser attribute\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.A0014")) {
                 NextTest();
                 return;
             }
-            err = TestGetMaxNumberOfWeekDaySchedulesForUser_3();
+            err = TestThReadsNumberOfWeekDaySchedulesSupportedPerUserAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Get number of supported users\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads NumberOfTotalUsers Supported attribute\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = TestGetNumberOfSupportedUsers_4();
+            err = TestThReadsNumberOfTotalUsersSupportedAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Week Day Schedule Command to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH send Set Week Day Schedule Command\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetWeekDayScheduleCommandToDut_5();
+            err = TestThSendSetWeekDayScheduleCommand_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : send GetWeekDay Schedule Command \n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH send Get Week Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetWeekDayScheduleCommand_6();
+            err = TestThSendGetWeekDayScheduleCommandToDut_6();
             break;
         case 7:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 7 : Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH send Set Week Day Schedule Command\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
+            err = TestThSendSetWeekDayScheduleCommand_7();
             break;
         case 8:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 8 : send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH send Get Week Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_8();
+            err = TestThSendGetWeekDayScheduleCommandToDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Clear all week day schedules for the first user\n");
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends Clear Week Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0d.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestClearAllWeekDaySchedulesForTheFirstUser_9();
+            err = TestThSendsClearWeekDayScheduleCommandToDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : send GetWeekDay Schedule Command \n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Get Week Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0c.Rsp && DRLK.S.C0c.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetWeekDayScheduleCommand_10();
+            err = TestThSendsGetWeekDayScheduleCommandToDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Cleanup the created user\n");
@@ -110951,7 +111129,7 @@ private:
     }
     NSNumber * _Nonnull NumberOfWeekDaySchedulesSupportedPerUser;
 
-    CHIP_ERROR TestGetMaxNumberOfWeekDaySchedulesForUser_3()
+    CHIP_ERROR TestThReadsNumberOfWeekDaySchedulesSupportedPerUserAttribute_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110959,7 +111137,7 @@ private:
 
         [cluster readAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletionHandler:^(
             NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Get Max number of Week Day schedules for user Error: %@", err);
+            NSLog(@"TH reads NumberOfWeekDay SchedulesSupportedPerUser attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -110978,7 +111156,7 @@ private:
     }
     NSNumber * _Nonnull NumberOfTotalUsersSupported;
 
-    CHIP_ERROR TestGetNumberOfSupportedUsers_4()
+    CHIP_ERROR TestThReadsNumberOfTotalUsersSupportedAttribute_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -110986,7 +111164,7 @@ private:
 
         [cluster readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(
             NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Get number of supported users Error: %@", err);
+            NSLog(@"TH reads NumberOfTotalUsers Supported attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111002,7 +111180,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDut_5()
+    CHIP_ERROR TestThSendSetWeekDayScheduleCommand_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111018,7 +111196,7 @@ private:
         params.endMinute = [NSNumber numberWithUnsignedChar:55U];
         [cluster setWeekDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Send Set Week Day Schedule Command to DUT Error: %@", err);
+                                NSLog(@"TH send Set Week Day Schedule Command Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111028,7 +111206,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetWeekDayScheduleCommand_6()
+    CHIP_ERROR TestThSendGetWeekDayScheduleCommandToDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111041,66 +111219,51 @@ private:
             getWeekDayScheduleWithParams:params
                        completionHandler:^(
                            MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                           NSLog(@"send GetWeekDay Schedule Command  Error: %@", err);
+                           NSLog(@"TH send Get Week Day Schedule Command to DUT Error: %@", err);
 
                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                           VerifyOrReturn(
-                               CheckConstraintMinValue<uint8_t>("weekDayIndex", [values.weekDayIndex unsignedCharValue], 1U));
-                           VerifyOrReturn(CheckConstraintMaxValue<uint8_t>(
-                               "weekDayIndex", [values.weekDayIndex unsignedCharValue], NumberOfWeekDaySchedulesSupportedPerUser));
+                           {
+                               id actualValue = values.weekDayIndex;
+                               VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                           }
 
-                           VerifyOrReturn(
-                               CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
-                           VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
-                               "userIndex", [values.userIndex unsignedShortValue], NumberOfTotalUsersSupported));
+                           {
+                               id actualValue = values.userIndex;
+                               VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                           }
 
                            {
                                id actualValue = values.status;
                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
                            }
 
-                           VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, true));
-                           if (values.daysMask != nil) {
-
-                               VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 0U));
-                               VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("daysMask", [values.daysMask unsignedCharValue], 6U));
+                           {
+                               id actualValue = values.daysMask;
+                               VerifyOrReturn(CheckValue("daysMask", actualValue, 2U));
                            }
 
-                           VerifyOrReturn(CheckConstraintHasValue("startHour", values.startHour, true));
-                           if (values.startHour != nil) {
-
-                               VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 0U));
-                               VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("startHour", [values.startHour unsignedCharValue], 23U));
+                           {
+                               id actualValue = values.startHour;
+                               VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
                            }
 
-                           VerifyOrReturn(CheckConstraintHasValue("startMinute", values.startMinute, true));
-                           if (values.startMinute != nil) {
-
-                               VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 0U));
-                               VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("startMinute", [values.startMinute unsignedCharValue], 59U));
+                           {
+                               id actualValue = values.startMinute;
+                               VerifyOrReturn(CheckValue("startMinute", actualValue, 45U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("endHour", values.endHour, true));
                            if (values.endHour != nil) {
 
-                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 0U));
-                               VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 23U));
+                               VerifyOrReturn(CheckConstraintMinValue<uint8_t>("endHour", [values.endHour unsignedCharValue], 16U));
                            }
 
                            VerifyOrReturn(CheckConstraintHasValue("endMinute", values.endMinute, true));
                            if (values.endMinute != nil) {
 
                                VerifyOrReturn(
-                                   CheckConstraintMinValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 0U));
-                               VerifyOrReturn(
-                                   CheckConstraintMaxValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 59U));
+                                   CheckConstraintMinValue<uint8_t>("endMinute", [values.endMinute unsignedCharValue], 55U));
                            }
 
                            NextTest();
@@ -111109,7 +111272,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7()
+    CHIP_ERROR TestThSendSetWeekDayScheduleCommand_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111126,7 +111289,7 @@ private:
         [cluster
             setWeekDayScheduleWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
-                           NSLog(@"Send Set Week Day Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
+                           NSLog(@"TH send Set Week Day Schedule Command Error: %@", err);
 
                            VerifyOrReturn(CheckValue("status",
                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
@@ -111138,7 +111301,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetWeekDayScheduleCommandToDutAndVerifyInvalidCommandResponse_8()
+    CHIP_ERROR TestThSendGetWeekDayScheduleCommandToDut_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111147,56 +111310,55 @@ private:
         __auto_type * params = [[MTRDoorLockClusterGetWeekDayScheduleParams alloc] init];
         params.weekDayIndex = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        [cluster
-            getWeekDayScheduleWithParams:params
-                       completionHandler:^(
-                           MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                           NSLog(@"send GetWeekDay Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
+        [cluster getWeekDayScheduleWithParams:params
+                            completionHandler:^(
+                                MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"TH send Get Week Day Schedule Command to DUT Error: %@", err);
 
-                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                           {
-                               id actualValue = values.weekDayIndex;
-                               VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0U));
-                           }
+                                {
+                                    id actualValue = values.weekDayIndex;
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0U));
+                                }
 
-                           {
-                               id actualValue = values.userIndex;
-                               VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
-                           }
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
 
-                           {
-                               id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 133U));
-                           }
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, false));
-                           if (values.daysMask != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, false));
+                                if (values.daysMask != nil) {
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("startHour", values.startHour, false));
-                           if (values.startHour != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("startHour", values.startHour, false));
+                                if (values.startHour != nil) {
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("startMinute", values.startMinute, false));
-                           if (values.startMinute != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("startMinute", values.startMinute, false));
+                                if (values.startMinute != nil) {
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("endHour", values.endHour, false));
-                           if (values.endHour != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("endHour", values.endHour, false));
+                                if (values.endHour != nil) {
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("endMinute", values.endMinute, false));
-                           if (values.endMinute != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("endMinute", values.endMinute, false));
+                                if (values.endMinute != nil) {
+                                }
 
-                           NextTest();
-                       }];
+                                NextTest();
+                            }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAllWeekDaySchedulesForTheFirstUser_9()
+    CHIP_ERROR TestThSendsClearWeekDayScheduleCommandToDut_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111207,7 +111369,7 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearWeekDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear all week day schedules for the first user Error: %@", err);
+                                  NSLog(@"TH sends Clear Week Day Schedule Command to DUT Error: %@", err);
 
                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111217,25 +111379,25 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetWeekDayScheduleCommand_10()
+    CHIP_ERROR TestThSendsGetWeekDayScheduleCommandToDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetWeekDayScheduleParams alloc] init];
-        params.weekDayIndex = [NSNumber numberWithUnsignedChar:2U];
+        params.weekDayIndex = [NSNumber numberWithUnsignedChar:1U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster getWeekDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetWeekDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send GetWeekDay Schedule Command  Error: %@", err);
+                                NSLog(@"TH sends Get Week Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                 {
                                     id actualValue = values.weekDayIndex;
-                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2U));
+                                    VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
                                 }
 
                                 {
@@ -111346,108 +111508,116 @@ public:
             err = TestReadTheUserBackAndVerifyItsFields_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Get Max number of year Day schedules for user\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads NumberOfYearDay SchedulesSupportedPerUser attribute\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestGetMaxNumberOfYearDaySchedulesForUser_3();
+            err = TestThReadsNumberOfYearDaySchedulesSupportedPerUserAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Get number of supported users\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads NumberOfTotalUsers Supported attribute\n");
             if (ShouldSkip("DRLK.C.F08 && DRLK.S.A0011")) {
                 NextTest();
                 return;
             }
-            err = TestGetNumberOfSupportedUsers_4();
+            err = TestThReadsNumberOfTotalUsersSupportedAttribute_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Send Set Year Day Schedule Command to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends Set Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0e.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetYearDayScheduleCommandToDut_5();
+            err = TestThSendsSetYearDayScheduleCommandToDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : send Get Year Day Schedule Command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Get Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommand_6();
+            err = TestThSendsGetYearDayScheduleCommandToDut_6();
             break;
         case 7:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 7 : Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH send Set Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.C0e.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetYearDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7();
+            err = TestThSendSetYearDayScheduleCommandToDut_7();
             break;
         case 8:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 8 : send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends Get Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommandToDutAndVerifyInvalidFieldResponse_8();
+            err = TestThSendsGetYearDayScheduleCommandToDut_8();
             break;
         case 9:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 9 : send Get Year Day Schedule Command to DUT and verify FAILURE response\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Create a user with userIndex as 5\n");
+            err = TestCreateAUserWithUserIndexAs5_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Get Year Day Schedule Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommandToDutAndVerifyFailureResponse_9();
+            err = TestThSendsGetYearDayScheduleCommandToDut_10();
             break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Clear a year day schedule for the first user\n");
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH sends Clear Year Day Schedule to DUT\n");
             if (ShouldSkip("DRLK.S.C10.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestClearAYearDayScheduleForTheFirstUser_10();
+            err = TestThSendsClearYearDayScheduleToDut_11();
             break;
-        case 11:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 11 : send Get Year Day Schedule Command to DUT and verify NOT_FOUND response\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Get Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx && DRLK.S.C10.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_11();
+            err = TestThSendsGetYearDayScheduleCommandToDut_12();
             break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Send Set Year Day Schedule Command to DUT \n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH sends Set Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.C0e.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendSetYearDayScheduleCommandToDut_12();
+            err = TestThSendsSetYearDayScheduleCommandToDut_13();
             break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : send Get Year Day Schedule Command\n");
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Get Year Day Schedule Command to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestSendGetYearDayScheduleCommand_13();
+            err = TestThSendsGetYearDayScheduleCommandToDut_14();
             break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Clear a year day schedule for the first user\n");
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Clear Year Day Schedule to DUT\n");
             if (ShouldSkip("DRLK.S.F04 && DRLK.S.C10.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestClearAYearDayScheduleForTheFirstUser_14();
+            err = TestThSendsClearYearDayScheduleToDut_15();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Cleanup the created user\n");
-            err = TestCleanupTheCreatedUser_15();
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Clear a year day schedule for the first user\n");
+            if (ShouldSkip("DRLK.S.F04 && DRLK.S.C10.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestClearAYearDayScheduleForTheFirstUser_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Cleanup the created user\n");
+            err = TestCleanupTheCreatedUser_17();
             break;
         }
 
@@ -111506,6 +111676,12 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -111521,7 +111697,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 16;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -111639,7 +111815,7 @@ private:
     }
     NSNumber * _Nonnull NumberOfYearDaySchedulesSupportedPerUser;
 
-    CHIP_ERROR TestGetMaxNumberOfYearDaySchedulesForUser_3()
+    CHIP_ERROR TestThReadsNumberOfYearDaySchedulesSupportedPerUserAttribute_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111647,7 +111823,7 @@ private:
 
         [cluster readAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletionHandler:^(
             NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Get Max number of year Day schedules for user Error: %@", err);
+            NSLog(@"TH reads NumberOfYearDay SchedulesSupportedPerUser attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111666,7 +111842,7 @@ private:
     }
     NSNumber * _Nonnull NumberOfTotalUsersSupported;
 
-    CHIP_ERROR TestGetNumberOfSupportedUsers_4()
+    CHIP_ERROR TestThReadsNumberOfTotalUsersSupportedAttribute_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111674,7 +111850,7 @@ private:
 
         [cluster readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(
             NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Get number of supported users Error: %@", err);
+            NSLog(@"TH reads NumberOfTotalUsers Supported attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111690,7 +111866,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetYearDayScheduleCommandToDut_5()
+    CHIP_ERROR TestThSendsSetYearDayScheduleCommandToDut_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111703,7 +111879,7 @@ private:
         params.localEndTime = [NSNumber numberWithUnsignedInt:1980UL];
         [cluster setYearDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Send Set Year Day Schedule Command to DUT Error: %@", err);
+                                NSLog(@"TH sends Set Year Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111713,7 +111889,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommand_6()
+    CHIP_ERROR TestThSendsGetYearDayScheduleCommandToDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111725,35 +111901,39 @@ private:
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command Error: %@", err);
+                                NSLog(@"TH sends Get Year Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                VerifyOrReturn(
-                                    CheckConstraintMinValue<uint8_t>("yearDayIndex", [values.yearDayIndex unsignedCharValue], 1U));
-                                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("yearDayIndex",
-                                    [values.yearDayIndex unsignedCharValue], NumberOfYearDaySchedulesSupportedPerUser));
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                }
 
-                                VerifyOrReturn(
-                                    CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
-                                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
-                                    "userIndex", [values.userIndex unsignedShortValue], NumberOfTotalUsersSupported));
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                }
 
                                 {
                                     id actualValue = values.status;
                                     VerifyOrReturn(CheckValue("status", actualValue, 0U));
                                 }
 
-                                VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, true));
-                                if (values.localStartTime != nil) {
-
-                                    VerifyOrReturn(CheckConstraintType("localStartTime", "", "epoch-s"));
+                                {
+                                    id actualValue = values.localStartTime;
+                                    VerifyOrReturn(CheckValue("localStartTime", actualValue, 960UL));
                                 }
 
-                                VerifyOrReturn(CheckConstraintHasValue("localEndTime", values.localEndTime, true));
+                                {
+                                    id actualValue = values.localEndTime;
+                                    VerifyOrReturn(CheckValue("localEndTime", actualValue, 1980UL));
+                                }
+
                                 if (values.localEndTime != nil) {
 
-                                    VerifyOrReturn(CheckConstraintType("localEndTime", "", "epoch-s"));
+                                    VerifyOrReturn(CheckConstraintMinValue<uint32_t>(
+                                        "localEndTime", [values.localEndTime unsignedIntValue], 961UL));
                                 }
 
                                 NextTest();
@@ -111762,7 +111942,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetYearDayScheduleCommandToDutAndVerifyInvalidCommandResponse_7()
+    CHIP_ERROR TestThSendSetYearDayScheduleCommandToDut_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111776,7 +111956,7 @@ private:
         [cluster
             setYearDayScheduleWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
-                           NSLog(@"Send Set Year Day Schedule Command to DUT and verify INVALID_COMMAND response Error: %@", err);
+                           NSLog(@"TH send Set Year Day Schedule Command to DUT Error: %@", err);
 
                            VerifyOrReturn(CheckValue("status",
                                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
@@ -111788,7 +111968,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyInvalidFieldResponse_8()
+    CHIP_ERROR TestThSendsGetYearDayScheduleCommandToDut_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111797,44 +111977,69 @@ private:
         __auto_type * params = [[MTRDoorLockClusterGetYearDayScheduleParams alloc] init];
         params.yearDayIndex = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:21U];
-        [cluster
-            getYearDayScheduleWithParams:params
-                       completionHandler:^(
-                           MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                           NSLog(@"send Get Year Day Schedule Command to DUT and Verify INVALID_FIELD response Error: %@", err);
+        [cluster getYearDayScheduleWithParams:params
+                            completionHandler:^(
+                                MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
+                                NSLog(@"TH sends Get Year Day Schedule Command to DUT Error: %@", err);
 
-                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                           {
-                               id actualValue = values.yearDayIndex;
-                               VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
-                           }
+                                {
+                                    id actualValue = values.yearDayIndex;
+                                    VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
+                                }
 
-                           {
-                               id actualValue = values.userIndex;
-                               VerifyOrReturn(CheckValue("userIndex", actualValue, 21U));
-                           }
+                                {
+                                    id actualValue = values.userIndex;
+                                    VerifyOrReturn(CheckValue("userIndex", actualValue, 21U));
+                                }
 
-                           {
-                               id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 133U));
-                           }
+                                {
+                                    id actualValue = values.status;
+                                    VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
-                           if (values.localStartTime != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
+                                if (values.localStartTime != nil) {
+                                }
 
-                           VerifyOrReturn(CheckConstraintHasValue("localEndTime", values.localEndTime, false));
-                           if (values.localEndTime != nil) {
-                           }
+                                VerifyOrReturn(CheckConstraintHasValue("localEndTime", values.localEndTime, false));
+                                if (values.localEndTime != nil) {
+                                }
 
-                           NextTest();
-                       }];
+                                NextTest();
+                            }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyFailureResponse_9()
+    CHIP_ERROR TestCreateAUserWithUserIndexAs5_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:5U];
+        params.userName = @"xxx";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create a user with userIndex as 5 Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsGetYearDayScheduleCommandToDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111846,7 +112051,7 @@ private:
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command to DUT and verify FAILURE response Error: %@", err);
+                                NSLog(@"TH sends Get Year Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111879,7 +112084,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAYearDayScheduleForTheFirstUser_10()
+    CHIP_ERROR TestThSendsClearYearDayScheduleToDut_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111890,7 +112095,7 @@ private:
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         [cluster clearYearDayScheduleWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"Clear a year day schedule for the first user Error: %@", err);
+                                  NSLog(@"TH sends Clear Year Day Schedule to DUT Error: %@", err);
 
                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111900,7 +112105,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommandToDutAndVerifyNotFoundResponse_11()
+    CHIP_ERROR TestThSendsGetYearDayScheduleCommandToDut_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111912,7 +112117,7 @@ private:
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command to DUT and verify NOT_FOUND response Error: %@", err);
+                                NSLog(@"TH sends Get Year Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111945,7 +112150,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendSetYearDayScheduleCommandToDut_12()
+    CHIP_ERROR TestThSendsSetYearDayScheduleCommandToDut_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111958,7 +112163,7 @@ private:
         params.localEndTime = [NSNumber numberWithUnsignedInt:2100UL];
         [cluster setYearDayScheduleWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"Send Set Year Day Schedule Command to DUT  Error: %@", err);
+                                NSLog(@"TH sends Set Year Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -111968,7 +112173,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendGetYearDayScheduleCommand_13()
+    CHIP_ERROR TestThSendsGetYearDayScheduleCommandToDut_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -111980,7 +112185,7 @@ private:
         [cluster getYearDayScheduleWithParams:params
                             completionHandler:^(
                                 MTRDoorLockClusterGetYearDayScheduleResponseParams * _Nullable values, NSError * _Nullable err) {
-                                NSLog(@"send Get Year Day Schedule Command Error: %@", err);
+                                NSLog(@"TH sends Get Year Day Schedule Command to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -112009,13 +112214,43 @@ private:
                                     VerifyOrReturn(CheckValue("localEndTime", actualValue, 2100UL));
                                 }
 
+                                if (values.localEndTime != nil) {
+
+                                    VerifyOrReturn(CheckConstraintMinValue<uint32_t>(
+                                        "localEndTime", [values.localEndTime unsignedIntValue], 1081UL));
+                                }
+
                                 NextTest();
                             }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestClearAYearDayScheduleForTheFirstUser_14()
+    CHIP_ERROR TestThSendsClearYearDayScheduleToDut_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearYearDayScheduleParams alloc] init];
+        params.yearDayIndex = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster clearYearDayScheduleWithParams:params
+                              completionHandler:^(NSError * _Nullable err) {
+                                  NSLog(@"TH sends Clear Year Day Schedule to DUT Error: %@", err);
+
+                                  VerifyOrReturn(CheckValue("status",
+                                      err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                    : EMBER_ZCL_STATUS_FAILURE)
+                                          : 0,
+                                      EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                  NextTest();
+                              }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAYearDayScheduleForTheFirstUser_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112036,7 +112271,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanupTheCreatedUser_15()
+    CHIP_ERROR TestCleanupTheCreatedUser_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112133,74 +112368,74 @@ public:
             err = TestThSendsGetCredentialStatusCommand_5();
             break;
         case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : TH sends Set Credential Command to DUT and  verify the INVALID_COMMAND if any of the fields "
-                "are invalid\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends Set Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsSetCredentialCommandToDutAndVerifyTheInvalidCommandIfAnyOfTheFieldsAreInvalid_6();
+            err = TestThSendsSetCredentialCommandToDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : TH sends Set Credential Command to DUT and verify response as DUPLICATE if CredentialData is "
-                "repeated\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends Set Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsSetCredentialCommandToDutAndVerifyResponseAsDuplicateIfCredentialDataIsRepeated_7();
+            err = TestThSendsSetCredentialCommandToDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 8 : TH sends Set Credential Command to DUT and verify response as OCCUPIED if CredentialIndex is "
-                "repeated\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends Set Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsSetCredentialCommandToDutAndVerifyResponseAsOccupiedIfCredentialIndexIsRepeated_8();
+            err = TestThSendsSetCredentialCommandToDut_8();
             break;
         case 9:
             ChipLogProgress(chipTool,
-                " ***** Test Step 9 : TH sends Set Credential Command to DUT and verify the DUT response as OCCUPIED if the "
-                "CredentialIndex is not associated with the UserIndex\n");
+                " ***** Test Step 9 : TH sends Set Credential Command to DUT and Verify that the DUT sends Set Credential Response "
+                "command with response as OCCUPIED if the CredentialIndex is repeated\n");
+            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsSetCredentialCommandToDutAndVerifyThatTheDutSendsSetCredentialResponseCommandWithResponseAsOccupiedIfTheCredentialIndexIsRepeated_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Set Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsSetCredentialCommandToDutAndVerifyTheDutResponseAsOccupiedIfTheCredentialIndexIsNotAssociatedWithTheUserIndex_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH sends Clear Credential Command to DUT\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsClearCredentialCommandToDut_10();
+            err = TestThSendsSetCredentialCommandToDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH sends Get Credential Status Command and verify that the CredentialType and  "
-                "CredentialIndex for the provided value is cleared\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                " ***** Test Step 11 : TH sends Set Credential Command to DUT and Verify that the DUT sends Set Credential "
+                "Response command with response as OCCUPIED if the CredentialIndex is repeated\n");
+            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsGetCredentialStatusCommandAndVerifyThatTheCredentialTypeAndCredentialIndexForTheProvidedValueIsCleared_11();
+            err = TestThSendsSetCredentialCommandToDutAndVerifyThatTheDutSendsSetCredentialResponseCommandWithResponseAsOccupiedIfTheCredentialIndexIsRepeated_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Set User Command to DUT\n");
-            err = TestThSendsSetUserCommandToDut_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH sends Set Credential Command to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH sends Set Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsSetCredentialCommandToDut_13();
+            err = TestThSendsSetCredentialCommandToDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : TH sends Set Credential Command to DUT and Verify that the DUT sends Set Credential "
+                "Response command with response as OCCUPIED if the CredentialIndex is repeated\n");
+            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsSetCredentialCommandToDutAndVerifyThatTheDutSendsSetCredentialResponseCommandWithResponseAsOccupiedIfTheCredentialIndexIsRepeated_13();
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : TH sends Clear Credential Command to DUT\n");
@@ -112211,28 +112446,70 @@ public:
             err = TestThSendsClearCredentialCommandToDut_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Get Credential Status Command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends Get Credential Status Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsGetCredentialStatusCommand_15();
+            err = TestThSendsGetCredentialStatusCommandToDut_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH sends Get Credential Status Command\n");
-            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH sends Set User Command to DUT\n");
+            err = TestThSendsSetUserCommandToDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH sends Set Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C22.Rsp && DRLK.S.C23.Tx")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsGetCredentialStatusCommand_16();
+            err = TestThSendsSetCredentialCommandToDut_17();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH sends Clear Credential Command to DUT\n");
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH sends Clear Credential Command to DUT\n");
             if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsClearCredentialCommandToDut_17();
+            err = TestThSendsClearCredentialCommandToDut_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH sends Get Credential Status Command\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsGetCredentialStatusCommand_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : TH sends Get Credential command to DUT and Verify that the CredentialType for the provided "
+                "value is cleared Verify that the CredentialIndex is cleared\n");
+            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsGetCredentialCommandToDutAndVerifyThatTheCredentialTypeForTheProvidedValueIsClearedVerifyThatTheCredentialIndexIsCleared_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TH sends Get Credential Status Command\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C24.Rsp && DRLK.S.C25.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsGetCredentialStatusCommand_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : TH sends Clear Credential Command to DUT\n");
+            if (ShouldSkip("DRLK.S.F08 && DRLK.S.C26.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsClearCredentialCommandToDut_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Cleanup the created user\n");
+            err = TestCleanupTheCreatedUser_23();
             break;
         }
 
@@ -112291,13 +112568,31 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
 
@@ -112312,7 +112607,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 24;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -112518,12 +112813,10 @@ private:
                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                                  VerifyOrReturn(CheckConstraintType("credentialExists", "", "boolean"));
-                                 if (values.userIndex != nil) {
-
-                                     VerifyOrReturn(
-                                         CheckConstraintMinValue<uint16_t>("userIndex", [values.userIndex unsignedShortValue], 1U));
-                                     VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
-                                         "userIndex", [values.userIndex unsignedShortValue], NumberOfTotalUsersSupported));
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
                                  }
 
                                  {
@@ -112549,7 +112842,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDutAndVerifyTheInvalidCommandIfAnyOfTheFieldsAreInvalid_6()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112561,16 +112854,14 @@ private:
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
-        params.credentialData = [[NSData alloc] initWithBytes:"1234" length:4];
+        params.credentialData = [[NSData alloc] initWithBytes:"4321" length:4];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userStatus = [NSNumber numberWithUnsignedChar:5U];
         params.userType = [NSNumber numberWithUnsignedChar:10U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT and  verify the INVALID_COMMAND if any of the fields are "
-                            @"invalid Error: %@",
-                          err);
+                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -112596,7 +112887,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDutAndVerifyResponseAsDuplicateIfCredentialDataIsRepeated_7()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112615,9 +112906,7 @@ private:
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT and verify response as DUPLICATE if CredentialData is "
-                            @"repeated Error: %@",
-                          err);
+                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -112643,7 +112932,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDutAndVerifyResponseAsOccupiedIfCredentialIndexIsRepeated_8()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112662,9 +112951,7 @@ private:
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT and verify response as OCCUPIED if CredentialIndex is "
-                            @"repeated Error: %@",
-                          err);
+                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -112691,28 +112978,35 @@ private:
     }
 
     CHIP_ERROR
-    TestThSendsSetCredentialCommandToDutAndVerifyTheDutResponseAsOccupiedIfTheCredentialIndexIsNotAssociatedWithTheUserIndex_9()
+    TestThSendsSetCredentialCommandToDutAndVerifyThatTheDutSendsSetCredentialResponseCommandWithResponseAsOccupiedIfTheCredentialIndexIsRepeated_9()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
-        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
-        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
         params.userStatus = [NSNumber numberWithUnsignedChar:0U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
-                      NSLog(@"TH sends Set Credential Command to DUT and verify the DUT response as OCCUPIED if the "
-                            @"CredentialIndex is not associated with the UserIndex Error: %@",
-                          err);
+                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
 
                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -112738,7 +113032,72 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_10()
+    CHIP_ERROR
+    TestThSendsSetCredentialCommandToDutAndVerifyThatTheDutSendsSetCredentialResponseCommandWithResponseAsOccupiedIfTheCredentialIndexIsRepeated_11()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"TH sends Set Credential Command to DUT Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestThSendsSetCredentialCommandToDutAndVerifyThatTheDutSendsSetCredentialResponseCommandWithResponseAsOccupiedIfTheCredentialIndexIsRepeated_13()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsClearCredentialCommandToDut_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112761,8 +113120,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR
-    TestThSendsGetCredentialStatusCommandAndVerifyThatTheCredentialTypeAndCredentialIndexForTheProvidedValueIsCleared_11()
+    CHIP_ERROR TestThSendsGetCredentialStatusCommandToDut_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112776,9 +113134,7 @@ private:
         [cluster getCredentialStatusWithParams:params
                              completionHandler:^(
                                  MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
-                                 NSLog(@"TH sends Get Credential Status Command and verify that the CredentialType and  "
-                                       @"CredentialIndex for the provided value is cleared Error: %@",
-                                     err);
+                                 NSLog(@"TH sends Get Credential Status Command to DUT Error: %@", err);
 
                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -112813,7 +113169,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetUserCommandToDut_12()
+    CHIP_ERROR TestThSendsSetUserCommandToDut_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112839,7 +113195,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsSetCredentialCommandToDut_13()
+    CHIP_ERROR TestThSendsSetCredentialCommandToDut_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112849,7 +113205,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
         ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
@@ -112875,7 +113231,7 @@ private:
                       {
                           id actualValue = values.nextCredentialIndex;
                           VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
                       }
 
                       NextTest();
@@ -112884,7 +113240,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_14()
+    CHIP_ERROR TestThSendsClearCredentialCommandToDut_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112907,7 +113263,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsGetCredentialStatusCommand_15()
+    CHIP_ERROR TestThSendsGetCredentialStatusCommand_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112934,7 +113290,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsGetCredentialStatusCommand_16()
+    CHIP_ERROR
+    TestThSendsGetCredentialCommandToDutAndVerifyThatTheCredentialTypeForTheProvidedValueIsClearedVerifyThatTheCredentialIndexIsCleared_20()
+    {
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestThSendsGetCredentialStatusCommand_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -112983,7 +113349,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsClearCredentialCommandToDut_17()
+    CHIP_ERROR TestThSendsClearCredentialCommandToDut_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -113005,6 +113371,26 @@ private:
                             EMBER_ZCL_STATUS_INVALID_COMMAND));
                         NextTest();
                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanupTheCreatedUser_23()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Cleanup the created user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
 
         return CHIP_NO_ERROR;
     }
