@@ -23344,6 +23344,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"sends a MoveToLevelWithOnOff command Error: %@", err);
@@ -23398,8 +23400,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:100U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"sends a Move to level command Error: %@", err);
@@ -23454,8 +23456,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:128U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:100U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"sends a Move to level command Error: %@", err);
@@ -23533,8 +23535,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:65535U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"sends a Move to level command Error: %@", err);
@@ -24014,6 +24016,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"sends a MoveToLevelWithOnOff command Error: %@", err);
@@ -24064,8 +24068,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedChar:32U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"sends a Move up command Error: %@", err);
@@ -24130,8 +24134,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:1U];
         params.rate = [NSNumber numberWithUnsignedChar:64U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"sends a Move command Error: %@", err);
@@ -24229,8 +24233,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedChar:255U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"sends a Move up command at default move rate Error: %@", err);
@@ -24715,6 +24719,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:[MinlevelValue unsignedCharValue] + 1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Sends MoveToLevelWithOnOff command to DUT Error: %@", err);
@@ -24738,6 +24744,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:2U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Sends MoveToLevelWithOnOff command to DUT Error: %@", err);
@@ -24822,8 +24830,8 @@ private:
         params.stepMode = [NSNumber numberWithUnsignedChar:0U];
         params.stepSize = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends step up command to DUT Error: %@", err);
@@ -24848,8 +24856,8 @@ private:
         params.stepMode = [NSNumber numberWithUnsignedChar:0U];
         params.stepSize = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends step up command to DUT Error: %@", err);
@@ -24931,6 +24939,8 @@ private:
         params.stepMode = [NSNumber numberWithUnsignedChar:1U];
         params.stepSize = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithOnOffWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"Sends a StepWithOnOff command Error: %@", err);
@@ -24955,6 +24965,8 @@ private:
         params.stepMode = [NSNumber numberWithUnsignedChar:1U];
         params.stepSize = [NSNumber numberWithUnsignedChar:64U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:20U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster stepWithOnOffWithParams:params
                        completionHandler:^(NSError * _Nullable err) {
                            NSLog(@"Sends a StepWithOnOff command Error: %@", err);
@@ -25482,6 +25494,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
                                   NSLog(@"Sends MoveToLevelWithOnOff command to DUT Error: %@", err);
@@ -25531,8 +25545,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedChar:5U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends a move up command to DUT Error: %@", err);
@@ -25561,8 +25575,8 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRLevelControlClusterStopParams alloc] init];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster stopWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends stop command to DUT Error: %@", err);
@@ -25618,8 +25632,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0U];
         params.rate = [NSNumber numberWithUnsignedChar:5U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
                   NSLog(@"Sends a move up command to DUT Error: %@", err);
@@ -25647,13 +25661,17 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster stopWithOnOffWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"Sends StopWithOnOff command to DUT Error: %@", err);
+        __auto_type * params = [[MTRLevelControlClusterStopWithOnOffParams alloc] init];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
+        [cluster stopWithOnOffWithParams:params
+                       completionHandler:^(NSError * _Nullable err) {
+                           NSLog(@"Sends StopWithOnOff command to DUT Error: %@", err);
 
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            NextTest();
-        }];
+                           NextTest();
+                       }];
 
         return CHIP_NO_ERROR;
     }
@@ -95019,8 +95037,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:1U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Sends a MoveToLevel command to set current level to min value Error: %@", err);
@@ -95346,8 +95364,8 @@ private:
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:127U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionMask = [NSNumber numberWithUnsignedChar:1U];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
                          NSLog(@"Sends a MoveToLevel command to set current level to a mid value Error: %@", err);
