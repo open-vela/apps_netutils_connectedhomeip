@@ -3769,8 +3769,8 @@ using namespace chip::app::Clusters;
     }
     request.level = params.level.unsignedCharValue;
     request.transitionTime = params.transitionTime.unsignedShortValue;
-    request.optionMask = params.optionMask.unsignedCharValue;
-    request.optionOverride = params.optionOverride.unsignedCharValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3797,8 +3797,8 @@ using namespace chip::app::Clusters;
     }
     request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
     request.rate = params.rate.unsignedCharValue;
-    request.optionMask = params.optionMask.unsignedCharValue;
-    request.optionOverride = params.optionOverride.unsignedCharValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3826,8 +3826,8 @@ using namespace chip::app::Clusters;
     request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
     request.stepSize = params.stepSize.unsignedCharValue;
     request.transitionTime = params.transitionTime.unsignedShortValue;
-    request.optionMask = params.optionMask.unsignedCharValue;
-    request.optionOverride = params.optionOverride.unsignedCharValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3852,8 +3852,8 @@ using namespace chip::app::Clusters;
             timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
         }
     }
-    request.optionMask = params.optionMask.unsignedCharValue;
-    request.optionOverride = params.optionOverride.unsignedCharValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3881,6 +3881,8 @@ using namespace chip::app::Clusters;
     }
     request.level = params.level.unsignedCharValue;
     request.transitionTime = params.transitionTime.unsignedShortValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3908,6 +3910,8 @@ using namespace chip::app::Clusters;
     }
     request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
     request.rate = params.rate.unsignedCharValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3936,6 +3940,8 @@ using namespace chip::app::Clusters;
     request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
     request.stepSize = params.stepSize.unsignedCharValue;
     request.transitionTime = params.transitionTime.unsignedShortValue;
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,
@@ -3950,11 +3956,7 @@ using namespace chip::app::Clusters;
         });
 }
 
-- (void)stopWithOnOffWithCompletionHandler:(StatusCompletion)completionHandler
-{
-    [self stopWithOnOffWithParams:nil completionHandler:completionHandler];
-}
-- (void)stopWithOnOffWithParams:(MTRLevelControlClusterStopWithOnOffParams * _Nullable)params
+- (void)stopWithOnOffWithParams:(MTRLevelControlClusterStopWithOnOffParams *)params
               completionHandler:(StatusCompletion)completionHandler
 {
     chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -3965,6 +3967,8 @@ using namespace chip::app::Clusters;
             timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
         }
     }
+    request.optionsMask = params.optionsMask.unsignedCharValue;
+    request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue,

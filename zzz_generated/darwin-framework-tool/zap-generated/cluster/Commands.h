@@ -4357,8 +4357,8 @@ public:
     {
         AddArgument("Level", 0, UINT8_MAX, &mRequest.level);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
-        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4375,8 +4375,8 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.level = [NSNumber numberWithUnsignedChar:mRequest.level];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
-        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4409,8 +4409,8 @@ public:
     {
         AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
         AddArgument("Rate", 0, UINT8_MAX, &mRequest.rate);
-        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4427,8 +4427,8 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
         params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
-        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4462,8 +4462,8 @@ public:
         AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
         AddArgument("StepSize", 0, UINT8_MAX, &mRequest.stepSize);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
-        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4481,8 +4481,8 @@ public:
         params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
         params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
-        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4513,8 +4513,8 @@ public:
     LevelControlStop()
         : ClusterCommand("stop")
     {
-        AddArgument("OptionMask", 0, UINT8_MAX, &mRequest.optionMask);
-        AddArgument("OptionOverride", 0, UINT8_MAX, &mRequest.optionOverride);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4529,8 +4529,8 @@ public:
         __auto_type * params = [[MTRLevelControlClusterStopParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.optionMask = [NSNumber numberWithUnsignedChar:mRequest.optionMask];
-        params.optionOverride = [NSNumber numberWithUnsignedChar:mRequest.optionOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4563,6 +4563,8 @@ public:
     {
         AddArgument("Level", 0, UINT8_MAX, &mRequest.level);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4579,6 +4581,8 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.level = [NSNumber numberWithUnsignedChar:mRequest.level];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4611,6 +4615,8 @@ public:
     {
         AddArgument("MoveMode", 0, UINT8_MAX, &mRequest.moveMode);
         AddArgument("Rate", 0, UINT8_MAX, &mRequest.rate);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4627,6 +4633,8 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
         params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4660,6 +4668,8 @@ public:
         AddArgument("StepMode", 0, UINT8_MAX, &mRequest.stepMode);
         AddArgument("StepSize", 0, UINT8_MAX, &mRequest.stepSize);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4677,6 +4687,8 @@ public:
         params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
         params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4707,6 +4719,8 @@ public:
     LevelControlStopWithOnOff()
         : ClusterCommand("stop-with-on-off")
     {
+        AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
+        AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
         ClusterCommand::AddArguments();
     }
 
@@ -4721,6 +4735,8 @@ public:
         __auto_type * params = [[MTRLevelControlClusterStopWithOnOffParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4740,6 +4756,7 @@ public:
     }
 
 private:
+    chip::app::Clusters::LevelControl::Commands::StopWithOnOff::Type mRequest;
 };
 
 /*
