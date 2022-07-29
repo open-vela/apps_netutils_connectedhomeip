@@ -92546,28 +92546,36 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Clear User Label List\n");
-            err = TestClearUserLabelList_1();
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Commit User Label List\n");
+            err = TestCommitUserLabelList_1();
             break;
         case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read User Label List\n");
-            err = TestReadUserLabelList_2();
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Verify committed User Label List\n");
+            err = TestVerifyCommittedUserLabelList_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Write User Label List\n");
-            err = TestWriteUserLabelList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Clear User Label List\n");
+            err = TestClearUserLabelList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reboot target device\n");
-            err = TestRebootTargetDevice_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read User Label List\n");
+            err = TestReadUserLabelList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Write User Label List\n");
+            err = TestWriteUserLabelList_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Verify\n");
-            err = TestVerify_6();
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reboot target device\n");
+            err = TestRebootTargetDevice_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Verify User Label List after reboot\n");
+            err = TestVerifyUserLabelListAfterReboot_8();
             break;
         }
 
@@ -92601,6 +92609,12 @@ public:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -92614,7 +92628,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 7;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -92628,7 +92642,79 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestClearUserLabelList_1()
+    CHIP_ERROR TestCommitUserLabelList_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id labelListArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRUserLabelClusterLabelStruct alloc] init];
+            ((MTRUserLabelClusterLabelStruct *) temp_0[0]).label = @"room";
+            ((MTRUserLabelClusterLabelStruct *) temp_0[0]).value = @"bedroom 1";
+
+            temp_0[1] = [[MTRUserLabelClusterLabelStruct alloc] init];
+            ((MTRUserLabelClusterLabelStruct *) temp_0[1]).label = @"orientation";
+            ((MTRUserLabelClusterLabelStruct *) temp_0[1]).value = @"South";
+
+            temp_0[2] = [[MTRUserLabelClusterLabelStruct alloc] init];
+            ((MTRUserLabelClusterLabelStruct *) temp_0[2]).label = @"floor";
+            ((MTRUserLabelClusterLabelStruct *) temp_0[2]).value = @"2";
+
+            temp_0[3] = [[MTRUserLabelClusterLabelStruct alloc] init];
+            ((MTRUserLabelClusterLabelStruct *) temp_0[3]).label = @"direction";
+            ((MTRUserLabelClusterLabelStruct *) temp_0[3]).value = @"down";
+
+            labelListArgument = temp_0;
+        }
+        [cluster writeAttributeLabelListWithValue:labelListArgument
+                                completionHandler:^(NSError * _Nullable err) {
+                                    NSLog(@"Commit User Label List Error: %@", err);
+
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                    NextTest();
+                                }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCommittedUserLabelList_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLabelListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Verify committed User Label List Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(4)));
+                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
+                VerifyOrReturn(
+                    CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 1"));
+                VerifyOrReturn(
+                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"orientation"));
+                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"South"));
+                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
+                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"2"));
+                VerifyOrReturn(
+                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"direction"));
+                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"down"));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearUserLabelList_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -92651,7 +92737,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadUserLabelList_2()
+    CHIP_ERROR TestReadUserLabelList_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -92673,7 +92759,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteUserLabelList_3()
+    CHIP_ERROR TestWriteUserLabelList_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
@@ -92712,27 +92798,27 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRebootTargetDevice_4()
+    CHIP_ERROR TestRebootTargetDevice_6()
     {
         chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
         return Reboot("alpha", value);
     }
 
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_5()
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_7()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestVerify_6()
+    CHIP_ERROR TestVerifyUserLabelListAfterReboot_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterUserLabel * cluster = [[MTRBaseClusterUserLabel alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeLabelListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Verify Error: %@", err);
+            NSLog(@"Verify User Label List after reboot Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 

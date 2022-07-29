@@ -53733,7 +53733,7 @@ class TestUserLabelClusterSuite : public TestCommand
 {
 public:
     TestUserLabelClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestUserLabelCluster", 7, credsIssuerConfig)
+        TestCommand("TestUserLabelCluster", 9, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -53780,7 +53780,22 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("labelList", iter_0, 0));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("labelList", iter_0, 0));
+                    VerifyOrReturn(CheckValueAsString("labelList[0].label", iter_0.GetValue().label, chip::CharSpan("room", 4)));
+                    VerifyOrReturn(
+                        CheckValueAsString("labelList[0].value", iter_0.GetValue().value, chip::CharSpan("bedroom 1", 9)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("labelList", iter_0, 1));
+                    VerifyOrReturn(
+                        CheckValueAsString("labelList[1].label", iter_0.GetValue().label, chip::CharSpan("orientation", 11)));
+                    VerifyOrReturn(CheckValueAsString("labelList[1].value", iter_0.GetValue().value, chip::CharSpan("South", 5)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("labelList", iter_0, 2));
+                    VerifyOrReturn(CheckValueAsString("labelList[2].label", iter_0.GetValue().label, chip::CharSpan("floor", 5)));
+                    VerifyOrReturn(CheckValueAsString("labelList[2].value", iter_0.GetValue().value, chip::CharSpan("2", 1)));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("labelList", iter_0, 3));
+                    VerifyOrReturn(
+                        CheckValueAsString("labelList[3].label", iter_0.GetValue().label, chip::CharSpan("direction", 9)));
+                    VerifyOrReturn(CheckValueAsString("labelList[3].value", iter_0.GetValue().value, chip::CharSpan("down", 4)));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("labelList", iter_0, 4));
                 }
             }
             break;
@@ -53789,13 +53804,27 @@ private:
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            {
+                chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("labelList", iter_0, 0));
+                }
+            }
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::UserLabel::Structs::LabelStruct::DecodableType> value;
@@ -53844,7 +53873,39 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "Clear User Label List");
+            LogStep(1, "Commit User Label List");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::UserLabel::Structs::LabelStruct::Type> value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::UserLabel::Structs::LabelStruct::Type>(4);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].label = chip::Span<const char>("roomgarbage: not in length on purpose", 4);
+                listHolder_0->mList[0].value = chip::Span<const char>("bedroom 1garbage: not in length on purpose", 9);
+
+                listHolder_0->mList[1].label = chip::Span<const char>("orientationgarbage: not in length on purpose", 11);
+                listHolder_0->mList[1].value = chip::Span<const char>("Southgarbage: not in length on purpose", 5);
+
+                listHolder_0->mList[2].label = chip::Span<const char>("floorgarbage: not in length on purpose", 5);
+                listHolder_0->mList[2].value = chip::Span<const char>("2garbage: not in length on purpose", 1);
+
+                listHolder_0->mList[3].label = chip::Span<const char>("directiongarbage: not in length on purpose", 9);
+                listHolder_0->mList[3].value = chip::Span<const char>("downgarbage: not in length on purpose", 4);
+
+                value =
+                    chip::app::DataModel::List<chip::app::Clusters::UserLabel::Structs::LabelStruct::Type>(listHolder_0->mList, 4);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UserLabel::Id, UserLabel::Attributes::LabelList::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Verify committed User Label List");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UserLabel::Id, UserLabel::Attributes::LabelList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Clear User Label List");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::UserLabel::Structs::LabelStruct::Type> value;
 
@@ -53852,13 +53913,13 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UserLabel::Id, UserLabel::Attributes::LabelList::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 2: {
-            LogStep(2, "Read User Label List");
+        case 4: {
+            LogStep(4, "Read User Label List");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UserLabel::Id, UserLabel::Attributes::LabelList::Id, true,
                                  chip::NullOptional);
         }
-        case 3: {
-            LogStep(3, "Write User Label List");
+        case 5: {
+            LogStep(5, "Write User Label List");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::UserLabel::Structs::LabelStruct::Type> value;
 
@@ -53884,21 +53945,21 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UserLabel::Id, UserLabel::Attributes::LabelList::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
-        case 4: {
-            LogStep(4, "Reboot target device");
+        case 6: {
+            LogStep(6, "Reboot target device");
             ListFreer listFreer;
             chip::app::Clusters::SystemCommands::Commands::Reboot::Type value;
             return Reboot(kIdentityAlpha, value);
         }
-        case 5: {
-            LogStep(5, "Wait for the commissioned device to be retrieved");
+        case 7: {
+            LogStep(7, "Wait for the commissioned device to be retrieved");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
             value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
             return WaitForCommissionee(kIdentityAlpha, value);
         }
-        case 6: {
-            LogStep(6, "Verify");
+        case 8: {
+            LogStep(8, "Verify User Label List after reboot");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UserLabel::Id, UserLabel::Attributes::LabelList::Id, true,
                                  chip::NullOptional);
         }
