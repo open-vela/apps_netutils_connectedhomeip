@@ -1917,7 +1917,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -1926,7 +1926,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -1934,7 +1934,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
@@ -1952,7 +1952,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -1964,7 +1964,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -2079,7 +2079,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         default:
@@ -2161,7 +2161,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -2170,7 +2170,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -2178,7 +2178,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
@@ -2188,7 +2188,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -2199,7 +2199,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 11));
             }
             break;
@@ -2212,7 +2212,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -2334,7 +2334,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -2342,7 +2342,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 31UL));
             }
@@ -2352,7 +2352,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 15UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16385UL));
@@ -2369,7 +2369,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -2381,7 +2381,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -2500,7 +2500,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -2510,7 +2510,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -2520,7 +2520,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -2530,7 +2530,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2540,7 +2540,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2550,7 +2550,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
             }
@@ -2560,7 +2560,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 254));
             }
             break;
@@ -2569,7 +2569,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2579,7 +2579,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
             }
@@ -2589,7 +2589,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bitmap8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
             }
@@ -2599,7 +2599,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -2609,7 +2609,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -2619,7 +2619,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -2629,7 +2629,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -2639,7 +2639,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -2649,7 +2649,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -2659,7 +2659,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -2678,7 +2678,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorCapabilities", value, FeatureMapValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "map16"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap16", "bitmap16"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 31U));
             }
@@ -2688,7 +2688,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2698,7 +2698,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2708,7 +2708,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2718,7 +2718,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2728,7 +2728,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 6U));
             }
@@ -2810,7 +2810,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2820,7 +2820,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2830,7 +2830,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2840,7 +2840,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2850,7 +2850,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -2860,7 +2860,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2870,7 +2870,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2880,7 +2880,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -2890,7 +2890,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2900,7 +2900,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -2910,7 +2910,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -3431,7 +3431,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3448,7 +3448,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3462,7 +3462,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3476,7 +3476,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3493,7 +3493,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentHueValue = value;
@@ -3523,7 +3523,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3537,7 +3537,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3551,7 +3551,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3568,7 +3568,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentHueValueAfterStopmode = value;
@@ -3910,7 +3910,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3927,7 +3927,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 5U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -3944,7 +3944,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 249U));
             }
@@ -4143,7 +4143,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4162,7 +4162,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentSaturation", value,
                                           mSaturationConfigValue.HasValue() ? mSaturationConfigValue.Value() : 90U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4336,7 +4336,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4353,7 +4353,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4367,7 +4367,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4381,7 +4381,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4398,7 +4398,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4412,7 +4412,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4426,7 +4426,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4443,7 +4443,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4460,7 +4460,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentSaturationStep4d = value;
@@ -4490,7 +4490,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentSaturationStep5b = value;
@@ -4505,7 +4505,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, CurrentSaturationStep5b));
             }
@@ -4522,7 +4522,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentSaturationStep5d = value;
@@ -4931,7 +4931,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4948,7 +4948,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -4965,7 +4965,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -5166,7 +5166,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -5176,7 +5176,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -5194,7 +5194,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentHue", value, mHueConfigValue.HasValue() ? mHueConfigValue.Value() : 40U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -5206,7 +5206,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentSaturation", value,
                                           mSaturationConfigValue.HasValue() ? mSaturationConfigValue.Value() : 160U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -5391,7 +5391,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5401,7 +5401,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5419,7 +5419,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentX", value, mColorXConfigValue.HasValue() ? mColorXConfigValue.Value() : 400U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5430,7 +5430,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentY", value, mColorYConfigValue.HasValue() ? mColorYConfigValue.Value() : 500U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5620,7 +5620,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentXValue = value;
@@ -5631,7 +5631,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentYValue = value;
@@ -5649,7 +5649,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, CurrentXValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentXBeforeStopCommand = value;
@@ -5660,7 +5660,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, CurrentYValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentYBeforeStopCommand = value;
@@ -5674,7 +5674,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, CurrentXBeforeStopCommand));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5684,7 +5684,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, CurrentYBeforeStopCommand));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5895,7 +5895,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentXValue = value;
@@ -5906,7 +5906,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentYValue = value;
@@ -5924,7 +5924,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, CurrentXValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -5934,7 +5934,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, CurrentYValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -6118,7 +6118,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTempPhysicalMinMiredsValue = value;
@@ -6129,7 +6129,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTempPhysicalMaxMiredsValue = value;
@@ -6140,7 +6140,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6158,7 +6158,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorTemperature", value, ColorTempPhysicalMaxMiredsValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6343,7 +6343,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTempPhysicalMinMiredsValue = value;
@@ -6354,7 +6354,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTempPhysicalMaxMiredsValue = value;
@@ -6365,7 +6365,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6382,7 +6382,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6396,7 +6396,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6410,7 +6410,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6427,7 +6427,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6441,7 +6441,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6455,7 +6455,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6475,7 +6475,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
                 ColorTemperatureValue = value;
@@ -6491,7 +6491,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6506,7 +6506,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6526,7 +6526,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
                 ColorTemperatureMoveModeStop = value;
@@ -6542,7 +6542,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureMoveModeStop));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6557,7 +6557,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -6965,7 +6965,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTempPhysicalMinMiredsValue = value;
@@ -6976,7 +6976,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTempPhysicalMaxMiredsValue = value;
@@ -6987,7 +6987,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
@@ -7004,7 +7004,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -7018,7 +7018,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -7032,7 +7032,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -7049,7 +7049,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -7063,7 +7063,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -7077,7 +7077,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -7347,7 +7347,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7364,7 +7364,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7378,7 +7378,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7392,7 +7392,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7405,7 +7405,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 EnhancedCurrentHueStep3b = value;
@@ -7421,7 +7421,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("enhancedCurrentHue", value, EnhancedCurrentHueStep3b));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7438,7 +7438,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7452,7 +7452,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7466,7 +7466,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7479,7 +7479,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 EnhancedCurrentHueStep5b = value;
@@ -7495,7 +7495,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("enhancedCurrentHue", value, EnhancedCurrentHueStep5b));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7810,7 +7810,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7827,7 +7827,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -7844,7 +7844,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -8045,7 +8045,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -8064,7 +8064,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("enhancedCurrentHue", value,
                                           mEnhancedHueConfigValue.HasValue() ? mEnhancedHueConfigValue.Value() : 1200U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -8253,7 +8253,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -8266,7 +8266,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentHueValue = value;
@@ -8282,7 +8282,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentHue", value, CurrentHueValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -8295,7 +8295,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -8308,7 +8308,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentSaturationValue = value;
@@ -8324,7 +8324,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentSaturation", value, CurrentSaturationValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -8341,7 +8341,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -8351,7 +8351,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -8364,7 +8364,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentXValue = value;
@@ -8375,7 +8375,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 CurrentYValue = value;
@@ -8391,7 +8391,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentX", value, CurrentXValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -8402,7 +8402,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentY", value, CurrentYValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -8419,7 +8419,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -8432,7 +8432,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
                 ColorTemperatureMiredsValue = value;
@@ -8448,7 +8448,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureMiredsValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65279U));
             }
@@ -8461,7 +8461,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -8474,7 +8474,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 EnhancedCurrentHueValue = value;
@@ -8490,7 +8490,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("enhancedCurrentHue", value, EnhancedCurrentHueValue));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -8992,7 +8992,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65534U));
                 DataModelRevisionValue = value;
@@ -9014,7 +9014,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (VendorNameValueBuffer != nullptr)
                 {
@@ -9041,7 +9041,7 @@ private:
             {
                 chip::VendorId value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "vendor_id", "vendor_id"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65521U));
                 VendorIDValue = value;
@@ -9063,7 +9063,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (ProductNameValueBuffer != nullptr)
                 {
@@ -9090,7 +9090,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65534U));
                 ProductIDValue = value;
@@ -9112,7 +9112,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (NodeLabelValueBuffer != nullptr)
                 {
@@ -9139,7 +9139,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 16));
             }
             break;
@@ -9163,7 +9163,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65534U));
                 HardwareVersionValue = value;
@@ -9185,7 +9185,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMinLength("value", value, 1));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
                 if (HardwareVersionStringValueBuffer != nullptr)
@@ -9265,7 +9265,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMinLength("value", value, 8));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 16));
                 if (ManufacturingDateValueBuffer != nullptr)
@@ -9297,7 +9297,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (PartNumberValueBuffer != nullptr)
                 {
@@ -9324,7 +9324,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "long_char_string", "long_char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 256));
                 if (ProductURLValueBuffer != nullptr)
                 {
@@ -9355,7 +9355,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 64));
                 if (ProductLabelValueBuffer != nullptr)
                 {
@@ -9386,7 +9386,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (SerialNumberValueBuffer != nullptr)
                 {
@@ -9414,7 +9414,7 @@ private:
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("localConfigDisabled", value, false));
-                VerifyOrReturn(CheckConstraintType("value", "", "boolean"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 56:
@@ -9434,7 +9434,7 @@ private:
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("reachable", value, true));
-                VerifyOrReturn(CheckConstraintType("value", "", "boolean"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 59:
@@ -9445,7 +9445,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
                 if (UniqueIDValueBuffer != nullptr)
                 {
@@ -10055,7 +10055,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -10064,7 +10064,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -10072,7 +10072,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -10093,7 +10093,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -10105,7 +10105,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -10220,7 +10220,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10230,7 +10230,7 @@ private:
             {
                 chip::app::DataModel::Nullable<bool> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 3:
@@ -10238,7 +10238,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 4:
@@ -10250,7 +10250,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 6:
@@ -10262,7 +10262,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 8:
@@ -10274,7 +10274,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 10:
@@ -10286,7 +10286,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 12:
@@ -10298,7 +10298,7 @@ private:
             {
                 chip::app::DataModel::Nullable<bool> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 14:
@@ -10310,7 +10310,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 16:
@@ -10527,7 +10527,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10537,7 +10537,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10547,7 +10547,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10557,7 +10557,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10567,7 +10567,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10577,7 +10577,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10587,7 +10587,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10597,7 +10597,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10607,7 +10607,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10617,7 +10617,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::EthernetNetworkDiagnostics::PHYRateType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -10908,7 +10908,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -10917,7 +10917,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -10925,7 +10925,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -10941,7 +10941,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -10954,7 +10954,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -10966,7 +10966,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -11087,7 +11087,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -11097,7 +11097,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -11107,7 +11107,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -11117,7 +11117,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2048U));
             }
@@ -11219,7 +11219,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -11228,7 +11228,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -11236,7 +11236,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -11254,7 +11254,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
@@ -11265,7 +11265,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
@@ -11383,7 +11383,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 2:
@@ -11427,7 +11427,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         default:
@@ -11550,7 +11550,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -11559,7 +11559,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -11567,7 +11567,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
@@ -11582,7 +11582,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -11595,7 +11595,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         default:
@@ -11697,7 +11697,7 @@ private:
                     chip::app::Clusters::GeneralDiagnostics::Structs::NetworkInterfaceType::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 2:
@@ -11705,7 +11705,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -11735,7 +11735,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 9:
@@ -11743,7 +11743,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967294UL));
             }
@@ -11983,7 +11983,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 4U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -11992,7 +11992,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -12001,7 +12001,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 1UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 4:
@@ -12009,7 +12009,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
@@ -12024,7 +12024,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -12033,7 +12033,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 64UL));
             }
             break;
@@ -12042,7 +12042,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -12055,7 +12055,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 9:
@@ -12069,7 +12069,7 @@ private:
                     VerifyOrReturn(CheckValue("generatedCommandList[0]", iter_0.GetValue(), 0UL));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 10:
@@ -12209,7 +12209,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -12219,7 +12219,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5U));
             }
@@ -12904,7 +12904,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -12913,7 +12913,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -12921,7 +12921,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -12937,7 +12937,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -12946,7 +12946,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
@@ -12959,7 +12959,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -12971,7 +12971,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 8:
@@ -13098,7 +13098,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65534U));
             }
@@ -13108,7 +13108,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65533U));
             }
@@ -13118,7 +13118,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 2U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65534U));
             }
@@ -13128,7 +13128,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2048U));
             }
@@ -13138,7 +13138,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -13246,7 +13246,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -13254,7 +13254,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 7UL));
             }
@@ -13264,7 +13264,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 15UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 17UL));
@@ -13275,7 +13275,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16384UL));
             }
@@ -13285,7 +13285,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
@@ -13296,7 +13296,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
@@ -13305,7 +13305,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -13314,7 +13314,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
             }
             break;
@@ -13323,7 +13323,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
             }
             break;
@@ -13332,7 +13332,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
             }
             break;
@@ -13341,7 +13341,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
@@ -13350,7 +13350,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -13366,7 +13366,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
@@ -13379,7 +13379,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 15:
@@ -13557,7 +13557,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 CurrentLevelValue = value;
@@ -13568,7 +13568,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -13579,7 +13579,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("minLevel", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 MinLevelValue = value;
             }
             break;
@@ -13588,7 +13588,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 MinLevelFeatureMapNotSupportedValue = value;
@@ -13600,7 +13600,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("maxLevel", value, 254U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelValue));
                 MaxLevelValue = value;
             }
@@ -13610,7 +13610,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelFeatureMapNotSupportedValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 MaxLevelFeatureMapNotSupportedValue = value;
@@ -13621,7 +13621,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxLevelValue));
             }
@@ -13631,7 +13631,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelFeatureMapNotSupportedValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxLevelFeatureMapNotSupportedValue));
             }
@@ -13641,7 +13641,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -13651,7 +13651,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 MinFrequencyValue = value;
@@ -13662,7 +13662,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 MaxFrequencyValue = value;
@@ -13673,7 +13673,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinFrequencyValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxFrequencyValue));
             }
@@ -13683,7 +13683,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -13693,7 +13693,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxLevelValue));
             }
@@ -13703,7 +13703,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelFeatureMapNotSupportedValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, MaxLevelFeatureMapNotSupportedValue));
             }
@@ -13713,7 +13713,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -13723,7 +13723,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -13733,7 +13733,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -13744,7 +13744,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("options", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
             break;
         case 20:
@@ -13752,7 +13752,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -13968,7 +13968,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 OnOffTransitionTimeValue = value;
@@ -13985,7 +13985,7 @@ private:
                 VerifyOrReturn(
                     CheckValue("onOffTransitionTime", value,
                                mOnOffTransitionTimeConfigValue.HasValue() ? mOnOffTransitionTimeConfigValue.Value() : 10U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, OnOffTransitionTimeValue));
             }
             break;
@@ -13994,7 +13994,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 OnLevelValue = value;
@@ -14011,7 +14011,7 @@ private:
                 VerifyOrReturn(CheckValueNonNull("onLevel", value));
                 VerifyOrReturn(CheckValue("onLevel.Value()", value.Value(),
                                           mOnLevelConfigValue.HasValue() ? mOnLevelConfigValue.Value() : 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, OnLevelValue));
             }
             break;
@@ -14020,7 +14020,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 OnTransitionTimeValue = value;
@@ -14037,7 +14037,7 @@ private:
                 VerifyOrReturn(CheckValueNonNull("onTransitionTime", value));
                 VerifyOrReturn(CheckValue("onTransitionTime.Value()", value.Value(),
                                           mOnTransitionTimeConfigValue.HasValue() ? mOnTransitionTimeConfigValue.Value() : 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, OnTransitionTimeValue));
             }
             break;
@@ -14046,7 +14046,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 OffTransitionTimeValue = value;
@@ -14063,7 +14063,7 @@ private:
                 VerifyOrReturn(CheckValueNonNull("offTransitionTime", value));
                 VerifyOrReturn(CheckValue("offTransitionTime.Value()", value.Value(),
                                           mOffTransitionTimeConfigValue.HasValue() ? mOffTransitionTimeConfigValue.Value() : 10U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, OffTransitionTimeValue));
             }
             break;
@@ -14072,7 +14072,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 DefaultMoveRatevalue = value;
@@ -14089,7 +14089,7 @@ private:
                 VerifyOrReturn(CheckValueNonNull("defaultMoveRate", value));
                 VerifyOrReturn(CheckValue("defaultMoveRate.Value()", value.Value(),
                                           mDefaultMoveRateConfigValue.HasValue() ? mDefaultMoveRateConfigValue.Value() : 111U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, DefaultMoveRatevalue));
             }
             break;
@@ -14098,7 +14098,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 StartUpCurrentLevelValue = value;
@@ -14116,7 +14116,7 @@ private:
                 VerifyOrReturn(
                     CheckValue("startUpCurrentLevel.Value()", value.Value(),
                                mStartUpCurrentLevelConfigValue.HasValue() ? mStartUpCurrentLevelConfigValue.Value() : 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, StartUpCurrentLevelValue));
             }
             break;
@@ -14349,7 +14349,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -14359,7 +14359,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -14414,7 +14414,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -14699,7 +14699,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 MinlevelValue = value;
@@ -14713,7 +14713,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 MaxlevelValue = value;
@@ -14764,7 +14764,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 DefaultMoveRateValue = value;
@@ -15062,7 +15062,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 MinlevelValue = value;
@@ -15080,7 +15080,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentLevel", value, static_cast<uint8_t>(MinlevelValue + 1)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
                 CurrentlevelValue = value;
@@ -15092,7 +15092,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentLevel", value, 2U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -15113,7 +15113,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentLevel", value, 66U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
         case 13:
@@ -15122,7 +15122,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentLevel", value, 66U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
         case 14:
@@ -15466,7 +15466,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
                 MinlevelValue = value;
@@ -15781,7 +15781,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -15790,7 +15790,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -15812,7 +15812,7 @@ private:
                     VerifyOrReturn(CheckValue("attributeList[4]", iter_0.GetValue(), 65533UL));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("attributeList", iter_0, 5));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 4:
@@ -15826,7 +15826,7 @@ private:
                     VerifyOrReturn(CheckValue("acceptedCommandList[0]", iter_0.GetValue(), 0UL));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -15838,7 +15838,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -15955,7 +15955,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -15963,7 +15963,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 7UL));
             }
@@ -15973,7 +15973,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -15986,7 +15986,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -15995,7 +15995,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -16115,7 +16115,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -16124,7 +16124,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 1UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -16133,7 +16133,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 4:
@@ -16141,7 +16141,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -16154,7 +16154,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -16163,7 +16163,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -16172,7 +16172,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -16183,7 +16183,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -16320,7 +16320,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -16328,7 +16328,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1UL));
             }
@@ -16338,7 +16338,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -16351,7 +16351,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -16360,7 +16360,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -16369,7 +16369,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -16385,7 +16385,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 8:
@@ -16514,7 +16514,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -16523,7 +16523,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -16531,7 +16531,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -16548,7 +16548,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -16560,7 +16560,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -16677,7 +16677,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -16685,7 +16685,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3UL));
             }
@@ -16695,7 +16695,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -16708,7 +16708,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -16717,7 +16717,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -16726,7 +16726,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
@@ -16735,7 +16735,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -16744,7 +16744,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
@@ -16753,7 +16753,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -16766,7 +16766,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 11:
@@ -16774,7 +16774,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -16931,7 +16931,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -16939,7 +16939,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3UL));
             }
@@ -16949,7 +16949,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
@@ -16963,7 +16963,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -16972,7 +16972,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
@@ -16981,7 +16981,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -16990,7 +16990,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
@@ -16999,7 +16999,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
             }
             break;
@@ -17008,7 +17008,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
@@ -17017,7 +17017,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -17028,7 +17028,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -17037,7 +17037,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
@@ -17046,7 +17046,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
             }
             break;
@@ -17055,7 +17055,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
@@ -17064,7 +17064,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
@@ -17073,7 +17073,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
@@ -17082,7 +17082,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
             }
             break;
@@ -17091,7 +17091,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 11UL));
             }
             break;
@@ -17100,7 +17100,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
@@ -17303,7 +17303,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -17311,7 +17311,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3UL));
             }
@@ -17321,7 +17321,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
@@ -17336,7 +17336,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -17351,7 +17351,7 @@ private:
                     VerifyOrReturn(CheckValue("generatedCommandList[0]", iter_0.GetValue(), 1UL));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -17363,7 +17363,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -17486,7 +17486,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -17495,7 +17495,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -17503,7 +17503,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
@@ -17517,7 +17517,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -17526,7 +17526,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -17535,7 +17535,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -17658,7 +17658,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -17667,7 +17667,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -17675,7 +17675,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
@@ -17693,7 +17693,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -17702,7 +17702,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -17711,7 +17711,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -17724,7 +17724,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 8:
@@ -17736,7 +17736,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 9:
@@ -17871,7 +17871,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -17879,7 +17879,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3UL));
             }
@@ -17889,7 +17889,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -17902,7 +17902,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -17911,7 +17911,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -17920,7 +17920,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -17929,7 +17929,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -17938,7 +17938,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
@@ -18076,7 +18076,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -18085,7 +18085,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -18093,7 +18093,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
@@ -18106,7 +18106,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
@@ -18117,7 +18117,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
@@ -19673,7 +19673,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 2:
@@ -19810,7 +19810,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 3:
@@ -19834,7 +19834,7 @@ private:
                 chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "ChannelInfo", "ChannelInfo"));
             }
             break;
         default:
@@ -21099,7 +21099,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::AudioOutput::Structs::OutputInfo::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "OutPutInfo"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 2:
@@ -21211,7 +21211,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::AudioOutput::Structs::OutputInfo::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "OutPutInfo"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 audioOutputListValues = value;
             }
             break;
@@ -21330,7 +21330,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -21340,7 +21340,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::TargetNavigator::Structs::TargetInfo::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 TargetListValues = value;
             }
             break;
@@ -21439,7 +21439,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    uint16_t vendorID;
+    chip::VendorId vendorID;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -21462,16 +21462,16 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint16_t value;
+                chip::VendorId value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "vendor-id"));
+                VerifyOrReturn(CheckConstraintType("value", "vendor_id", "vendor_id"));
                 vendorID = value;
             }
             break;
@@ -21480,7 +21480,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 256));
             }
             break;
@@ -21489,7 +21489,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -21499,7 +21499,7 @@ private:
             {
                 chip::app::Clusters::ApplicationBasic::Structs::ApplicationBasicApplication::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "struct"));
+                VerifyOrReturn(CheckConstraintType("value", "ApplicationBasicApplication", "ApplicationBasicApplication"));
             }
             break;
         case 6:
@@ -21516,7 +21516,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -21525,7 +21525,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::VendorId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         default:
@@ -21649,7 +21649,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CharSpan> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 2:
@@ -21657,7 +21657,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         default:
@@ -21745,7 +21745,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -21754,7 +21754,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 1UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -21763,7 +21763,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 4:
@@ -21771,7 +21771,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -21788,7 +21788,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
@@ -21797,7 +21797,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
             }
             break;
@@ -21806,7 +21806,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -21819,7 +21819,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 9:
@@ -22216,7 +22216,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -22225,7 +22225,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -22233,7 +22233,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -22253,7 +22253,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -22265,7 +22265,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -22380,7 +22380,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
             }
@@ -22390,7 +22390,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -22400,7 +22400,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 273U));
             }
@@ -22411,7 +22411,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("pirOccupiedToUnoccupiedDelay", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22422,7 +22422,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("pirUnoccupiedToOccupiedDelay", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22433,7 +22433,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("pirUnoccupiedToOccupiedThreshold", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -22444,7 +22444,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("ultrasonicOccupiedToUnoccupiedDelay", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22455,7 +22455,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("ultrasonicUnoccupiedToOccupiedDelay", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22466,7 +22466,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("ultrasonicUnoccupiedToOccupiedThreshold", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -22477,7 +22477,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("physicalContactOccupiedToUnoccupiedDelay", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22488,7 +22488,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("physicalContactUnoccupiedToOccupiedDelay", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22499,7 +22499,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("physicalContactUnoccupiedToOccupiedThreshold", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -22653,7 +22653,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 4U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -22662,7 +22662,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 1UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -22671,7 +22671,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 4:
@@ -22679,7 +22679,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
@@ -22693,7 +22693,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16384UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16385UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16386UL));
@@ -22705,7 +22705,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -22716,7 +22716,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 64UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 66UL));
@@ -22731,7 +22731,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 9:
@@ -22865,7 +22865,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 2:
@@ -22873,7 +22873,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 3:
@@ -22881,7 +22881,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22891,7 +22891,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -22901,7 +22901,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::OnOff::OnOffStartUpOnOff> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
         default:
@@ -23795,7 +23795,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -23803,7 +23803,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 15UL));
             }
@@ -23813,7 +23813,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -23829,7 +23829,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
             }
             break;
@@ -23838,7 +23838,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 14UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 15UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
@@ -23849,7 +23849,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 26UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 28UL));
             }
@@ -23859,7 +23859,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 25UL));
             }
@@ -23873,7 +23873,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 9:
@@ -23885,7 +23885,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 10:
@@ -24025,7 +24025,7 @@ private:
             {
                 chip::app::Clusters::PowerSource::PowerSourceStatus value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -24035,7 +24035,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -24045,7 +24045,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
             }
             break;
         case 4:
@@ -24053,7 +24053,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24063,7 +24063,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -24073,7 +24073,7 @@ private:
             {
                 chip::app::Clusters::PowerSource::WiredCurrentType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
             }
@@ -24083,7 +24083,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24093,7 +24093,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24103,7 +24103,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24113,7 +24113,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 11:
@@ -24121,7 +24121,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::WiredFault> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 8));
             }
             break;
@@ -24130,7 +24130,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24140,7 +24140,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 200U));
             }
@@ -24150,7 +24150,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24160,7 +24160,7 @@ private:
             {
                 chip::app::Clusters::PowerSource::BatChargeLevel value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
             }
@@ -24170,7 +24170,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 17:
@@ -24178,7 +24178,7 @@ private:
             {
                 chip::app::Clusters::PowerSource::BatReplaceability value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -24188,7 +24188,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 19:
@@ -24196,7 +24196,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatFault> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 8));
             }
             break;
@@ -24205,7 +24205,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 60));
             }
             break;
@@ -24214,7 +24214,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 80UL));
             }
@@ -24224,7 +24224,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 20));
             }
             break;
@@ -24233,7 +24233,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 20));
             }
             break;
@@ -24242,7 +24242,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32UL));
             }
@@ -24252,7 +24252,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24262,7 +24262,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -24272,7 +24272,7 @@ private:
             {
                 chip::app::Clusters::PowerSource::BatChargeState value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -24282,7 +24282,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24292,7 +24292,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         case 30:
@@ -24300,7 +24300,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -24310,7 +24310,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::PowerSource::BatChargeFault> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         default:
@@ -24572,7 +24572,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -24581,7 +24581,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 1UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -24590,7 +24590,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 4:
@@ -24598,7 +24598,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -24614,7 +24614,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
             }
             break;
@@ -24623,7 +24623,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 17UL));
             }
             break;
@@ -24632,7 +24632,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
             }
             break;
@@ -24641,7 +24641,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
@@ -24650,7 +24650,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -24659,7 +24659,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
             }
             break;
@@ -24672,7 +24672,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 12:
@@ -24684,7 +24684,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 13:
@@ -24842,7 +24842,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -24852,7 +24852,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -24862,7 +24862,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -24872,7 +24872,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2048U));
             }
@@ -24882,7 +24882,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -24892,7 +24892,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -24902,7 +24902,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -24912,7 +24912,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2048U));
             }
@@ -24922,7 +24922,7 @@ private:
             {
                 int8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8s", "int8s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -127));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 127));
             }
@@ -25054,7 +25054,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -25063,7 +25063,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -25071,7 +25071,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -25091,7 +25091,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -25100,7 +25100,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
@@ -25109,7 +25109,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
             }
             break;
@@ -25118,7 +25118,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
@@ -25127,7 +25127,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
@@ -25136,7 +25136,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
@@ -25145,7 +25145,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
             }
             break;
@@ -25154,7 +25154,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
@@ -25163,7 +25163,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 11UL));
             }
             break;
@@ -25172,7 +25172,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 12UL));
             }
             break;
@@ -25181,7 +25181,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
             }
             break;
@@ -25190,7 +25190,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
@@ -25199,7 +25199,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 21UL));
             }
             break;
@@ -25208,7 +25208,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 22UL));
             }
             break;
@@ -25217,7 +25217,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 23UL));
             }
             break;
@@ -25226,7 +25226,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 33UL));
             }
             break;
@@ -25239,7 +25239,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 21:
@@ -25251,7 +25251,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 22:
@@ -25461,7 +25461,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25471,7 +25471,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25481,7 +25481,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25491,7 +25491,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25501,7 +25501,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25511,7 +25511,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25521,7 +25521,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25531,7 +25531,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25541,7 +25541,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25551,7 +25551,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25561,7 +25561,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25571,7 +25571,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25581,7 +25581,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25591,7 +25591,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::PumpConfigurationAndControl::PumpStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map16"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap16", "bitmap16"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 8U));
             }
@@ -25601,7 +25601,7 @@ private:
             {
                 chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -25611,7 +25611,7 @@ private:
             {
                 chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
             }
@@ -25621,7 +25621,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -32768));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -25631,7 +25631,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -25641,7 +25641,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint24"));
+                VerifyOrReturn(CheckConstraintType("value", "int24u", "int24u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 16777215UL));
             }
@@ -25651,7 +25651,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint24"));
+                VerifyOrReturn(CheckConstraintType("value", "int24u", "int24u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 16777215UL));
             }
@@ -25661,7 +25661,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -25671,7 +25671,7 @@ private:
             {
                 chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -25681,7 +25681,7 @@ private:
             {
                 chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
             }
@@ -26571,7 +26571,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -26580,7 +26580,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -26588,7 +26588,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
@@ -26606,7 +26606,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -26618,7 +26618,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -26734,7 +26734,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -26743,7 +26743,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -26751,7 +26751,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -26771,7 +26771,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -26783,7 +26783,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -26898,7 +26898,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -26908,7 +26908,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -26918,7 +26918,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -26928,7 +26928,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2048U));
             }
@@ -27920,7 +27920,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -27936,7 +27936,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
@@ -27951,7 +27951,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 11:
@@ -27963,7 +27963,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 12:
@@ -28132,7 +28132,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("numberOfPositions", value, 2U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 2U));
             }
             break;
@@ -28142,7 +28142,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentPosition", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -28153,7 +28153,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("multiPressMax", value, 2U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 2U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -28247,7 +28247,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 4U));
-                VerifyOrReturn(CheckConstraintType("value", "", "unit16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -28256,7 +28256,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -28264,7 +28264,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -28280,7 +28280,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
@@ -28293,7 +28293,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -28305,7 +28305,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -28426,7 +28426,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28436,7 +28436,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28446,7 +28446,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27314));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28456,7 +28456,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2048U));
             }
@@ -28558,7 +28558,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -28566,7 +28566,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 63UL));
             }
@@ -28576,7 +28576,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 27UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 28UL));
@@ -28592,7 +28592,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
             }
             break;
@@ -28601,7 +28601,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 17UL));
             }
             break;
@@ -28610,7 +28610,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
             }
             break;
@@ -28619,7 +28619,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
@@ -28628,7 +28628,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
             }
             break;
@@ -28637,7 +28637,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 17UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 25UL));
@@ -28648,7 +28648,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 32UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 33UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 34UL));
@@ -28659,7 +28659,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 52UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 53UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 54UL));
@@ -28670,7 +28670,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 55UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 56UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 57UL));
@@ -28681,7 +28681,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -28693,7 +28693,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
             }
             break;
@@ -28702,7 +28702,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         default:
@@ -28865,7 +28865,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28875,7 +28875,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28885,7 +28885,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
             }
@@ -28895,7 +28895,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28905,7 +28905,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28915,7 +28915,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28925,7 +28925,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -28935,7 +28935,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -28945,7 +28945,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -28955,7 +28955,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 63U));
             }
@@ -28965,7 +28965,7 @@ private:
             {
                 int8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8s", "int8s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 25));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, -25));
             }
@@ -28975,7 +28975,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1600));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3200));
             }
@@ -28985,7 +28985,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -28995,7 +28995,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1600));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3200));
             }
@@ -29005,7 +29005,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -29015,7 +29015,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -29025,7 +29025,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -29035,7 +29035,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -29045,7 +29045,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -29055,7 +29055,7 @@ private:
             {
                 int8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8s", "int8s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 25));
             }
@@ -29065,7 +29065,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
             }
@@ -29075,7 +29075,7 @@ private:
             {
                 chip::app::Clusters::Thermostat::ThermostatControlSequence value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5U));
             }
@@ -29085,7 +29085,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -29095,7 +29095,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -29105,7 +29105,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 6U));
             }
@@ -29115,7 +29115,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29125,7 +29125,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29135,7 +29135,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
             }
@@ -29145,7 +29145,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1440U));
             }
@@ -29155,7 +29155,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
             }
@@ -29165,7 +29165,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map16"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap16", "bitmap16"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 127U));
             }
@@ -29175,7 +29175,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
             }
@@ -29185,7 +29185,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -29195,7 +29195,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "utc"));
+                VerifyOrReturn(CheckConstraintType("value", "utc", "utc"));
             }
             break;
         case 35:
@@ -29203,7 +29203,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29213,7 +29213,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29223,7 +29223,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29233,7 +29233,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29243,7 +29243,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29253,7 +29253,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29263,7 +29263,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -29273,7 +29273,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4U));
             }
@@ -29283,7 +29283,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -29293,7 +29293,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -29303,7 +29303,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
             }
@@ -29313,7 +29313,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 47:
@@ -29321,7 +29321,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5U));
             }
@@ -29331,7 +29331,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -29342,7 +29342,7 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("ACCapacityformat", value, 0U));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
         default:
@@ -29708,7 +29708,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1600));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3200));
             }
@@ -29744,7 +29744,7 @@ private:
             {
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -29789,7 +29789,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("unoccupiedCoolingSetpoint", value, 2600));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1600));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3200));
             }
@@ -29823,7 +29823,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("unoccupiedHeatingSetpoint", value, 2000));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -29857,7 +29857,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("minHeatSetpointLimit", value, 700));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -29894,7 +29894,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("maxHeatSetpointLimit", value, 3000));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 700));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3000));
             }
@@ -29934,7 +29934,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("minCoolSetpointLimit", value, 1600));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1600));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3200));
             }
@@ -29971,7 +29971,7 @@ private:
                 int16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("maxCoolSetpointLimit", value, 3200));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1600));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 3200));
             }
@@ -30020,7 +30020,7 @@ private:
                 int8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("minSetpointDeadBand", value, 25));
-                VerifyOrReturn(CheckConstraintType("value", "", "temp-s8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8s", "int8s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 25));
             }
@@ -30054,7 +30054,7 @@ private:
                 chip::app::Clusters::Thermostat::ThermostatControlSequence value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("controlSequenceOfOperation", value, 4U));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5U));
             }
@@ -31126,7 +31126,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 2U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -31135,7 +31135,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -31143,7 +31143,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -31163,7 +31163,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -31175,7 +31175,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -31292,7 +31292,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
             }
@@ -31302,7 +31302,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5U));
             }
@@ -31312,7 +31312,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 1U));
             }
@@ -31973,7 +31973,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -31983,7 +31983,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::ThreadNetworkDiagnostics::RoutingRole> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "RoutingRole"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 6U));
             }
@@ -31993,7 +31993,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::CharSpan> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
             }
             break;
         case 4:
@@ -32005,7 +32005,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32019,7 +32019,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint64_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 8:
@@ -32035,7 +32035,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 11:
@@ -32055,7 +32055,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
             }
             break;
         case 15:
@@ -32063,7 +32063,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -32073,7 +32073,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -32083,7 +32083,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -32093,7 +32093,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -32103,7 +32103,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32113,7 +32113,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32123,7 +32123,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32133,7 +32133,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32143,7 +32143,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32153,7 +32153,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32163,7 +32163,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32173,7 +32173,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -32183,7 +32183,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint64_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 28:
@@ -32191,7 +32191,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint64_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 29:
@@ -32199,7 +32199,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32213,7 +32213,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::ByteSpan> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "octstr"));
+                VerifyOrReturn(CheckConstraintType("value", "octet_string", "octet_string"));
             }
             break;
         case 32:
@@ -32225,7 +32225,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::app::Clusters::ThreadNetworkDiagnostics::NetworkFault> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         default:
@@ -32550,7 +32550,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32560,7 +32560,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32570,7 +32570,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32580,7 +32580,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32590,7 +32590,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32600,7 +32600,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32610,7 +32610,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32620,7 +32620,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32630,7 +32630,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32640,7 +32640,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32650,7 +32650,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32660,7 +32660,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32670,7 +32670,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32680,7 +32680,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32690,7 +32690,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32700,7 +32700,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32710,7 +32710,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32890,7 +32890,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32900,7 +32900,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32910,7 +32910,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32920,7 +32920,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32930,7 +32930,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32940,7 +32940,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32950,7 +32950,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32960,7 +32960,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32970,7 +32970,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32980,7 +32980,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -32990,7 +32990,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33000,7 +33000,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33010,7 +33010,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33024,7 +33024,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33034,7 +33034,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33044,7 +33044,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33323,7 +33323,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
         case 2:
@@ -33332,7 +33332,7 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "", "map32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
             }
             break;
         case 3:
@@ -33340,7 +33340,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
@@ -33358,7 +33358,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 5:
@@ -33370,7 +33370,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 6:
@@ -33508,7 +33508,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("labelList[3].value", iter_0.GetValue().value, chip::CharSpan("bedroom", 7)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("labelList", iter_0, 4));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMinLength("value", value, 4));
             }
             break;
@@ -33890,7 +33890,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::ByteSpan> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "octstr"));
+                VerifyOrReturn(CheckConstraintType("value", "octet_string", "octet_string"));
             }
             break;
         case 2:
@@ -33898,7 +33898,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::SecurityType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
         case 3:
@@ -33906,7 +33906,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::app::Clusters::WiFiNetworkDiagnostics::WiFiVersionType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 5U));
             }
@@ -33916,7 +33916,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -33926,7 +33926,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8s", "int8s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -120));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 0));
             }
@@ -33936,7 +33936,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33946,7 +33946,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33956,7 +33956,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33966,7 +33966,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33976,7 +33976,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33986,7 +33986,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -33996,7 +33996,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 13:
@@ -34004,7 +34004,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         default:
@@ -34160,7 +34160,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -34170,7 +34170,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -34180,7 +34180,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -34190,7 +34190,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -34200,7 +34200,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -34210,7 +34210,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 4294967295UL));
             }
@@ -34334,7 +34334,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("clusterRevision", value, 5U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 5U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 200U));
             }
@@ -34344,7 +34344,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint32"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32768UL));
             }
@@ -34354,7 +34354,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
@@ -34372,7 +34372,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 26UL));
             }
             break;
@@ -34381,7 +34381,7 @@ private:
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
                 VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
@@ -34396,7 +34396,7 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -34521,7 +34521,7 @@ private:
             {
                 chip::app::Clusters::WindowCovering::Type value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9U));
             }
@@ -34531,7 +34531,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::ConfigStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 63U));
             }
@@ -34541,7 +34541,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::OperationalStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 63U));
             }
@@ -34551,7 +34551,7 @@ private:
             {
                 chip::app::Clusters::WindowCovering::EndProductType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 23U));
             }
@@ -34561,7 +34561,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::Mode> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 15U));
             }
@@ -34574,7 +34574,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -34584,7 +34584,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -34594,7 +34594,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -34604,7 +34604,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "Percent100ths"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -34614,7 +34614,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34624,7 +34624,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34634,7 +34634,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34644,7 +34644,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34654,7 +34654,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::SafetyStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map16"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap16", "bitmap16"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 2047U));
             }
@@ -34664,7 +34664,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34674,7 +34674,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34684,7 +34684,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34694,7 +34694,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34704,7 +34704,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34714,7 +34714,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -34724,7 +34724,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "Percent"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -34734,7 +34734,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "Percent"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -35418,7 +35418,7 @@ private:
             {
                 chip::app::Clusters::WindowCovering::EndProductType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "enum8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 23U));
             }
@@ -35508,7 +35508,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -35518,7 +35518,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -35528,7 +35528,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -35538,7 +35538,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -35548,7 +35548,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::OperationalStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
             break;
         case 8:
@@ -35585,7 +35585,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::OperationalStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 5U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 21U));
             }
@@ -35600,7 +35600,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -35610,7 +35610,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 99U));
             }
@@ -35620,7 +35620,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -35630,7 +35630,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 99U));
             }
@@ -35659,7 +35659,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -35669,7 +35669,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -35914,7 +35914,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -35924,7 +35924,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 99U));
             }
@@ -35934,7 +35934,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -35944,7 +35944,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 99U));
             }
@@ -35954,7 +35954,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::OperationalStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
             break;
         case 8:
@@ -35991,7 +35991,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::OperationalStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 10U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 42U));
             }
@@ -36006,7 +36006,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -36016,7 +36016,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -36026,7 +36026,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -36036,7 +36036,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent", "Percent"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 100U));
             }
@@ -36065,7 +36065,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -36075,7 +36075,7 @@ private:
             {
                 chip::app::DataModel::Nullable<chip::Percent100ths> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "Percent100ths", "Percent100ths"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -36330,7 +36330,7 @@ private:
             {
                 chip::BitMask<chip::app::Clusters::WindowCovering::OperationalStatus> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "map8"));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
             break;
         case 6:
@@ -38915,7 +38915,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint16_t value;
+                chip::VendorId value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("vendorID", value, 1U));
             }
@@ -51609,7 +51609,7 @@ private:
     chip::Optional<chip::CharSpan> mPayload;
     chip::Optional<uint16_t> mTimeout;
 
-    chip::FabricIndex ourFabricIndex;
+    uint8_t ourFabricIndex;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -51633,15 +51633,15 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("commissionedFabrics", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::FabricIndex value;
+                uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 ourFabricIndex = value;
             }
@@ -51664,7 +51664,7 @@ private:
                     chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -51994,7 +51994,7 @@ private:
             {
                 bool value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "bool"));
+                VerifyOrReturn(CheckConstraintType("value", "boolean", "boolean"));
             }
             break;
         default:
@@ -52348,7 +52348,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    chip::FabricIndex ourFabricIndex;
+    uint8_t ourFabricIndex;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -52371,7 +52371,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 4U));
             }
             break;
@@ -52380,16 +52380,16 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
             }
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::FabricIndex value;
+                uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 ourFabricIndex = value;
             }
@@ -52620,7 +52620,7 @@ private:
                     }
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("supportedModes", iter_0, 3));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
                 VerifyOrReturn(CheckConstraintMinLength("value", value, 3));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 3));
             }
@@ -53035,7 +53035,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    chip::FabricIndex ourFabricIndex;
+    uint8_t ourFabricIndex;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -53059,15 +53059,15 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("commissionedFabrics", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::FabricIndex value;
+                uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 ourFabricIndex = value;
             }
@@ -54074,7 +54074,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 3:
@@ -55891,7 +55891,7 @@ private:
                 chip::app::DataModel::DecodableList<chip::app::Clusters::SoftwareDiagnostics::Structs::ThreadMetrics::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 2:
@@ -55899,7 +55899,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 3:
@@ -55907,7 +55907,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 4:
@@ -55915,7 +55915,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         default:
@@ -56101,7 +56101,7 @@ private:
                 chip::app::DataModel::DecodableList<chip::app::Clusters::SoftwareDiagnostics::Structs::ThreadMetrics::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 3:
@@ -56109,7 +56109,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         case 4:
@@ -56117,7 +56117,7 @@ private:
             {
                 uint64_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint64"));
+                VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
             break;
         default:
@@ -64060,7 +64060,7 @@ private:
             {
                 chip::app::Clusters::DoorLock::Commands::GetCredentialStatusResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value.credentialExists", "", "boolean"));
+                VerifyOrReturn(CheckConstraintType("value.credentialExists", "boolean", "boolean"));
                 VerifyOrReturn(CheckValueNonNull("userIndex", value.userIndex));
                 VerifyOrReturn(CheckValue("userIndex.Value()", value.userIndex.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", value.creatorFabricIndex));
@@ -76279,7 +76279,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -76304,7 +76304,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -76322,7 +76322,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 8:
@@ -76334,7 +76334,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest1", 9)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -76347,7 +76347,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest2", 9)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -76612,7 +76612,7 @@ private:
             {
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -76637,7 +76637,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 7:
@@ -76653,7 +76653,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 8:
@@ -76665,7 +76665,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -76678,7 +76678,7 @@ private:
                 chip::CharSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("nodeLabel", value, chip::CharSpan("chiptest", 8)));
-                VerifyOrReturn(CheckConstraintType("value", "", "string"));
+                VerifyOrReturn(CheckConstraintType("value", "char_string", "char_string"));
                 VerifyOrReturn(CheckConstraintMaxLength("value", value, 32));
             }
             break;
@@ -78301,7 +78301,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 10:
@@ -78331,7 +78331,7 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
                 }
-                VerifyOrReturn(CheckConstraintType("value", "", "list"));
+                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
         case 14:
@@ -82089,7 +82089,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 ValueBeforeChange = value;
@@ -82104,7 +82104,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, ValueBeforeChange));
@@ -83342,7 +83342,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83359,7 +83359,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83373,7 +83373,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83403,7 +83403,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83417,7 +83417,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83447,7 +83447,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83461,7 +83461,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83490,7 +83490,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83504,7 +83504,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
@@ -83885,7 +83885,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("enhancedCurrentHue", value,
                                           mEnhancedHueConfigValue.HasValue() ? mEnhancedHueConfigValue.Value() : 1025U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83902,7 +83902,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83916,7 +83916,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83933,7 +83933,7 @@ private:
                 VerifyOrReturn(CheckValue(
                     "enhancedCurrentHue", value,
                     mEnhancedHueShortestDistanceConfigValue.HasValue() ? mEnhancedHueShortestDistanceConfigValue.Value() : 1050U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83950,7 +83950,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83964,7 +83964,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83981,7 +83981,7 @@ private:
                 VerifyOrReturn(CheckValue(
                     "enhancedCurrentHue", value,
                     mEnhancedHueLongestDistanceConfigValue.HasValue() ? mEnhancedHueLongestDistanceConfigValue.Value() : 1200U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -83998,7 +83998,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84012,7 +84012,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84029,7 +84029,7 @@ private:
                 VerifyOrReturn(
                     CheckValue("enhancedCurrentHue", value,
                                mEnhancedHueDirectionUpConfigValue.HasValue() ? mEnhancedHueDirectionUpConfigValue.Value() : 1300U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84046,7 +84046,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84060,7 +84060,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84077,7 +84077,7 @@ private:
                 VerifyOrReturn(CheckValue(
                     "enhancedCurrentHue", value,
                     mEnhancedHueDirectionDownConfigValue.HasValue() ? mEnhancedHueDirectionDownConfigValue.Value() : 1100U));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84540,7 +84540,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep5d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84554,7 +84554,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep5d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84633,7 +84633,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep8d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84647,7 +84647,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep8d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84741,7 +84741,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep12d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84755,7 +84755,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep12d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84834,7 +84834,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep15d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -84848,7 +84848,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueStep15d));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -85719,7 +85719,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -85733,7 +85733,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -85766,7 +85766,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -85780,7 +85780,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -86245,7 +86245,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -86259,7 +86259,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorLoopStartEnhancedHueValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -86284,7 +86284,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -86298,7 +86298,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
             }
@@ -89402,7 +89402,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 9999U));
             }
@@ -89412,7 +89412,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
             }
@@ -89422,7 +89422,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 10000U));
                 ValueBeforeChange = value;
@@ -89437,7 +89437,7 @@ private:
             {
                 chip::app::DataModel::Nullable<uint16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, ValueBeforeChange));
             }
             break;
@@ -89773,7 +89773,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32766));
             }
@@ -89783,7 +89783,7 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "int16"));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, -27314));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
@@ -89793,9 +89793,9 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, -27314));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
                 valueBeforeChange = value;
             }
             break;
@@ -89808,9 +89808,9 @@ private:
             {
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint16"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535));
+                VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, -27314));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, valueBeforeChange));
             }
             break;
@@ -91159,7 +91159,7 @@ private:
             {
                 chip::app::Clusters::UnitLocalization::TempUnit value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "", "uint8"));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
             }
             break;
         case 2:
