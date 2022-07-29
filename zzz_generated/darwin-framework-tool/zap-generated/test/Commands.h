@@ -97496,7 +97496,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 1));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -98098,15 +98098,15 @@ private:
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
-        [cluster
-            setUserWithParams:params
-            completionHandler:^(NSError * _Nullable err) {
-                NSLog(@"Set user at the occupied index fails with appropriate response Error: %@", err);
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Set user at the occupied index fails with appropriate response Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status",
-                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0, 1));
-                NextTest();
-            }];
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_FAILURE));
+                     NextTest();
+                 }];
 
         return CHIP_NO_ERROR;
     }
