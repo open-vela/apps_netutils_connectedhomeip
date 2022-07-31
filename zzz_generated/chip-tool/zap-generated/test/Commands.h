@@ -210,6 +210,7 @@ public:
         printf("TestFanControl\n");
         printf("TestAccessControlConstraints\n");
         printf("TestLevelControlWithOnOffDependency\n");
+        printf("TestCommissioningWindow\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_2_1\n");
         printf("Test_TC_DGSW_2_2\n");
@@ -55598,6 +55599,454 @@ private:
     }
 };
 
+class TestCommissioningWindowSuite : public TestCommand
+{
+public:
+    TestCommissioningWindowSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestCommissioningWindow", 28, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("cluster", &mCluster);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("payload", &mPayload);
+        AddArgument("alphaIndex", 0, UINT8_MAX, &mAlphaIndex);
+        AddArgument("betaIndex", 0, UINT8_MAX, &mBetaIndex);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestCommissioningWindowSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint8_t> mAlphaIndex;
+    chip::Optional<uint8_t> mBetaIndex;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::app::DataModel::Nullable<uint16_t> adminVendorId;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentFabricIndex", value, mAlphaIndex.HasValue() ? mAlphaIndex.Value() : 1U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 0U));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::FabricIndex> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminFabricIndex", value));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminVendorId", value));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 2U));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::FabricIndex> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("adminFabricIndex", value));
+                VerifyOrReturn(
+                    CheckValue("adminFabricIndex.Value()", value.Value(), mAlphaIndex.HasValue() ? mAlphaIndex.Value() : 1U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("value", value));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 0U));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::FabricIndex> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminFabricIndex", value));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminVendorId", value));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 0U));
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::FabricIndex> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminFabricIndex", value));
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminVendorId", value));
+            }
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("currentFabricIndex", value, mBetaIndex.HasValue() ? mBetaIndex.Value() : 2U));
+            }
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 2U));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::FabricIndex> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("adminFabricIndex", value));
+                VerifyOrReturn(
+                    CheckValue("adminFabricIndex.Value()", value.Value(), mBetaIndex.HasValue() ? mBetaIndex.Value() : 2U));
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNonNull("value", value));
+                adminVendorId = value;
+            }
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("windowStatus", value, 2U));
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<chip::FabricIndex> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValueNull("adminFabricIndex", value));
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::Nullable<uint16_t> value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                if (adminVendorId.IsNull())
+                {
+                    VerifyOrReturn(CheckValueNull("adminVendorId", value));
+                }
+                else
+                {
+                    VerifyOrReturn(CheckValueNonNull("adminVendorId", value));
+                    VerifyOrReturn(CheckValue("adminVendorId.Value()", value.Value(), adminVendorId.Value()));
+                }
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved for alpha");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Get alpha's fabric index");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Check that commissioning window is not open");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Check that there is no AdminFabricIndex");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Check that there is no AdminVendorId");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Open Commissioning Window from alpha");
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 6: {
+            LogStep(6, "Check that commissioning window is open");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Check the AdminFabricIndex");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Check the AdminVendorId is not null");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Close Commissioning Window");
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::RevokeCommissioning::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::RevokeCommissioning::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 10: {
+            LogStep(10, "Check that commissioning window is again not open");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Check that again there is no AdminFabricIndex");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Check that again there is no AdminVendorId");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "Open Commissioning Window from alpha again");
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "Commission from beta");
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 15: {
+            LogStep(15, "Wait for the commissioned device to be retrieved for beta");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            return WaitForCommissionee(kIdentityBeta, value);
+        }
+        case 16: {
+            LogStep(16, "Check that commissioning window is not open for the third time");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "Check that there is no AdminFabricIndex for the third time");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "Check that there is no AdminVendorId for the third time");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        case 19: {
+            LogStep(19, "Get beta's fabric index");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "Open Commissioning Window from beta");
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 21: {
+            LogStep(21, "Check that commissioning window is open again");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "Check the AdminFabricIndex again");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Check the AdminVendorId is not null again");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "Remove beta fabric");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = mBetaIndex.HasValue() ? mBetaIndex.Value() : 2U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::NullOptional
+
+            );
+        }
+        case 25: {
+            LogStep(25, "Check that commissioning window is still open");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::WindowStatus::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "Check the AdminFabricIndex got reset");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Check the AdminVendorId did not get reset");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                                 AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class TestMultiAdminSuite : public TestCommand
 {
 public:
@@ -93071,6 +93520,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestFanControlSuite>(credsIssuerConfig),
         make_unique<TestAccessControlConstraintsSuite>(credsIssuerConfig),
         make_unique<TestLevelControlWithOnOffDependencySuite>(credsIssuerConfig),
+        make_unique<TestCommissioningWindowSuite>(credsIssuerConfig),
         make_unique<TestMultiAdminSuite>(credsIssuerConfig),
         make_unique<Test_TC_DGSW_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DGSW_2_2Suite>(credsIssuerConfig),
