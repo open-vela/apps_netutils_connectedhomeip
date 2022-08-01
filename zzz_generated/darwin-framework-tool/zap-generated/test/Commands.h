@@ -106192,88 +106192,134 @@ public:
             err = TestCreateNewPinCredentialAndLockUnlockUser_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Try to unlock the door with invalid PIN\n");
-            err = TestTryToUnlockTheDoorWithInvalidPin_6();
+            ChipLogProgress(chipTool,
+                " ***** Test Step 6 : Set the WrongCodeEntryLimit to big value so that we can test incorrect PIN entry\n");
+            err = TestSetTheWrongCodeEntryLimitToBigValueSoThatWeCanTestIncorrectPinEntry_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Verify that lock state attribute value is set to Locked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Try to unlock the door with invalid PIN\n");
+            err = TestTryToUnlockTheDoorWithInvalidPin_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Try to unlock the door with valid PIN\n");
-            err = TestTryToUnlockTheDoorWithValidPin_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Verify that lock state attribute value is set to Locked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Verify that lock state attribute value is set to Unlocked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Try to unlock the door with valid PIN\n");
+            err = TestTryToUnlockTheDoorWithValidPin_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Try to lock the door with invalid PIN\n");
-            err = TestTryToLockTheDoorWithInvalidPin_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Verify that lock state attribute value is set to Unlocked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Verify that lock state attribute value is set to Unlocked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Try to lock the door with invalid PIN\n");
+            err = TestTryToLockTheDoorWithInvalidPin_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Try to lock the door with valid PIN\n");
-            err = TestTryToLockTheDoorWithValidPin_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Verify that lock state attribute value is set to Unlocked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Verify that lock state attribute value is set to Locked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Try to lock the door with valid PIN\n");
+            err = TestTryToLockTheDoorWithValidPin_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Set OperatingMode to NoRemoteLockUnlock\n");
-            err = TestSetOperatingModeToNoRemoteLockUnlock_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Verify that lock state attribute value is set to Locked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Try to unlock the door when OperatingMode is NoRemoteLockUnlock\n");
-            err = TestTryToUnlockTheDoorWhenOperatingModeIsNoRemoteLockUnlock_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Set OperatingMode to NoRemoteLockUnlock\n");
+            err = TestSetOperatingModeToNoRemoteLockUnlock_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Set OperatingMode to Normal\n");
-            err = TestSetOperatingModeToNormal_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Try to unlock the door when OperatingMode is NoRemoteLockUnlock\n");
+            err = TestTryToUnlockTheDoorWhenOperatingModeIsNoRemoteLockUnlock_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Create a disabled user and credential\n");
-            err = TestCreateADisabledUserAndCredential_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Set OperatingMode to Normal\n");
+            err = TestSetOperatingModeToNormal_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Try to unlock the door with disabled user PIN\n");
-            err = TestTryToUnlockTheDoorWithDisabledUserPin_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Read the lockout timeout\n");
+            err = TestReadTheLockoutTimeout_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Verify that lock state attribute value is set to Locked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Set the WrongCodeEntryLimit to small value so we can test lockout\n");
+            err = TestSetTheWrongCodeEntryLimitToSmallValueSoWeCanTestLockout_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Unlock the door with enabled user PIN\n");
-            err = TestUnlockTheDoorWithEnabledUserPin_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Try to unlock the door with invalid PIN for the first time\n");
+            err = TestTryToUnlockTheDoorWithInvalidPinForTheFirstTime_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Verify that lock state attribute value is set to Unlocked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Try to unlock the door with invalid PIN for the second time\n");
+            err = TestTryToUnlockTheDoorWithInvalidPinForTheSecondTime_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Try to lock the door with disabled user PIN\n");
-            err = TestTryToLockTheDoorWithDisabledUserPin_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Try to unlock the door with invalid PIN for the third time\n");
+            err = TestTryToUnlockTheDoorWithInvalidPinForTheThirdTime_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Verify that lock state attribute value stays Unlocked\n");
-            err = TestVerifyThatLockStateAttributeValueStaysUnlocked_23();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : Try to unlock the door with valid PIN and make sure it fails due to lockout\n");
+            err = TestTryToUnlockTheDoorWithValidPinAndMakeSureItFailsDueToLockout_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Lock the door with enabled user PIN\n");
-            err = TestLockTheDoorWithEnabledUserPin_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Wait for the lockout to end\n");
+            err = TestWaitForTheLockoutToEnd_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Verify that lock state attribute value is set to Locked\n");
-            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Try to unlock the door with valid PIN and make sure it succeeds\n");
+            err = TestTryToUnlockTheDoorWithValidPinAndMakeSureItSucceeds_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Clean all the users and credentials\n");
-            err = TestCleanAllTheUsersAndCredentials_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Verify that lock state attribute value is set to Unlocked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Lock the door back prior to next tests\n");
+            err = TestLockTheDoorBackPriorToNextTests_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Create a disabled user and credential\n");
+            err = TestCreateADisabledUserAndCredential_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Try to unlock the door with disabled user PIN\n");
+            err = TestTryToUnlockTheDoorWithDisabledUserPin_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : Verify that lock state attribute value is set to Locked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : Unlock the door with enabled user PIN\n");
+            err = TestUnlockTheDoorWithEnabledUserPin_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Verify that lock state attribute value is set to Unlocked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToUnlocked_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Try to lock the door with disabled user PIN\n");
+            err = TestTryToLockTheDoorWithDisabledUserPin_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Verify that lock state attribute value stays Unlocked\n");
+            err = TestVerifyThatLockStateAttributeValueStaysUnlocked_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Lock the door with enabled user PIN\n");
+            err = TestLockTheDoorWithEnabledUserPin_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Verify that lock state attribute value is set to Locked\n");
+            err = TestVerifyThatLockStateAttributeValueIsSetToLocked_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Clean all the users and credentials\n");
+            err = TestCleanAllTheUsersAndCredentials_37();
             break;
         }
 
@@ -106305,10 +106351,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -106317,10 +106363,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -106332,31 +106378,31 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -106365,6 +106411,39 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 37:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -106380,7 +106459,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 27;
+    const uint16_t mTestCount = 38;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -106524,7 +106603,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToUnlockTheDoorWithInvalidPin_6()
+    CHIP_ERROR TestSetTheWrongCodeEntryLimitToBigValueSoThatWeCanTestIncorrectPinEntry_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id wrongCodeEntryLimitArgument;
+        wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:20U];
+        [cluster writeAttributeWrongCodeEntryLimitWithValue:wrongCodeEntryLimitArgument
+                                          completionHandler:^(NSError * _Nullable err) {
+                                              NSLog(@"Set the WrongCodeEntryLimit to big value so that we can test incorrect PIN "
+                                                    @"entry Error: %@",
+                                                  err);
+
+                                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                              NextTest();
+                                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWithInvalidPin_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106546,7 +106647,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_7()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106569,7 +106670,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToUnlockTheDoorWithValidPin_8()
+    CHIP_ERROR TestTryToUnlockTheDoorWithValidPin_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106589,7 +106690,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_9()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106612,7 +106713,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToLockTheDoorWithInvalidPin_10()
+    CHIP_ERROR TestTryToLockTheDoorWithInvalidPin_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106633,7 +106734,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_11()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106656,7 +106757,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToLockTheDoorWithValidPin_12()
+    CHIP_ERROR TestTryToLockTheDoorWithValidPin_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106676,7 +106777,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_13()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106699,7 +106800,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetOperatingModeToNoRemoteLockUnlock_14()
+    CHIP_ERROR TestSetOperatingModeToNoRemoteLockUnlock_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106719,27 +106820,28 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToUnlockTheDoorWhenOperatingModeIsNoRemoteLockUnlock_15()
+    CHIP_ERROR TestTryToUnlockTheDoorWhenOperatingModeIsNoRemoteLockUnlock_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
-        [cluster lockDoorWithParams:params
-                  completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"Try to unlock the door when OperatingMode is NoRemoteLockUnlock Error: %@", err);
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"Try to unlock the door when OperatingMode is NoRemoteLockUnlock Error: %@", err);
 
-                      VerifyOrReturn(CheckValue("status",
-                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
-                          EMBER_ZCL_STATUS_FAILURE));
-                      NextTest();
-                  }];
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSetOperatingModeToNormal_16()
+    CHIP_ERROR TestSetOperatingModeToNormal_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106759,7 +106861,209 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCreateADisabledUserAndCredential_17()
+    CHIP_ERROR TestReadTheLockoutTimeout_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeUserCodeTemporaryDisableTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Read the lockout timeout Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 10U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetTheWrongCodeEntryLimitToSmallValueSoWeCanTestLockout_19()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id wrongCodeEntryLimitArgument;
+        wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:3U];
+        [cluster
+            writeAttributeWrongCodeEntryLimitWithValue:wrongCodeEntryLimitArgument
+                                     completionHandler:^(NSError * _Nullable err) {
+                                         NSLog(@"Set the WrongCodeEntryLimit to small value so we can test lockout Error: %@", err);
+
+                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                         NextTest();
+                                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWithInvalidPinForTheFirstTime_20()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"000000" length:6];
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"Try to unlock the door with invalid PIN for the first time Error: %@", err);
+
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWithInvalidPinForTheSecondTime_21()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"000000" length:6];
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"Try to unlock the door with invalid PIN for the second time Error: %@", err);
+
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWithInvalidPinForTheThirdTime_22()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"000000" length:6];
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"Try to unlock the door with invalid PIN for the third time Error: %@", err);
+
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWithValidPinAndMakeSureItFailsDueToLockout_23()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"Try to unlock the door with valid PIN and make sure it fails due to lockout Error: %@", err);
+
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWaitForTheLockoutToEnd_24()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 10000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestTryToUnlockTheDoorWithValidPinAndMakeSureItSucceeds_25()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster unlockDoorWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Try to unlock the door with valid PIN and make sure it succeeds Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_26()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeLockStateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Verify that lock state attribute value is set to Unlocked Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("LockState", actualValue));
+                VerifyOrReturn(CheckValue("LockState", actualValue, 2U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestLockTheDoorBackPriorToNextTests_27()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster lockDoorWithParams:params
+                  completionHandler:^(NSError * _Nullable err) {
+                      NSLog(@"Lock the door back prior to next tests Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateADisabledUserAndCredential_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106805,7 +107109,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToUnlockTheDoorWithDisabledUserPin_18()
+    CHIP_ERROR TestTryToUnlockTheDoorWithDisabledUserPin_29()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106827,7 +107131,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_19()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106850,7 +107154,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestUnlockTheDoorWithEnabledUserPin_20()
+    CHIP_ERROR TestUnlockTheDoorWithEnabledUserPin_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106870,7 +107174,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_21()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToUnlocked_32()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106893,7 +107197,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTryToLockTheDoorWithDisabledUserPin_22()
+    CHIP_ERROR TestTryToLockTheDoorWithDisabledUserPin_33()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106914,7 +107218,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueStaysUnlocked_23()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueStaysUnlocked_34()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106937,7 +107241,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestLockTheDoorWithEnabledUserPin_24()
+    CHIP_ERROR TestLockTheDoorWithEnabledUserPin_35()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106957,7 +107261,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_25()
+    CHIP_ERROR TestVerifyThatLockStateAttributeValueIsSetToLocked_36()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -106980,7 +107284,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanAllTheUsersAndCredentials_26()
+    CHIP_ERROR TestCleanAllTheUsersAndCredentials_37()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
