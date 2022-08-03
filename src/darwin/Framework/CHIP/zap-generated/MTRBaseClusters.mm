@@ -57,7 +57,7 @@ using chip::SessionHandle;
 - (void)identifyWithParams:(MTRIdentifyClusterIdentifyParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -85,7 +85,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -134,7 +134,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -172,7 +172,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -241,7 +241,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -312,7 +312,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRIdentifyGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -384,7 +384,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRIdentifyAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -454,7 +454,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRIdentifyAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -524,7 +524,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -593,7 +593,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -662,7 +662,7 @@ using chip::SessionHandle;
              (void (^)(MTRGroupsClusterAddGroupResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsClusterAddGroupResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -688,7 +688,7 @@ using chip::SessionHandle;
               (void (^)(MTRGroupsClusterViewGroupResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsClusterViewGroupResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -713,7 +713,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsClusterGetGroupMembershipResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -759,7 +759,7 @@ using chip::SessionHandle;
                 (void (^)(MTRGroupsClusterRemoveGroupResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsClusterRemoveGroupResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -787,7 +787,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -814,7 +814,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -861,7 +861,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -932,7 +932,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1004,7 +1004,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1074,7 +1074,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1143,7 +1143,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1212,7 +1212,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1281,7 +1281,7 @@ using chip::SessionHandle;
              (void (^)(MTRScenesClusterAddSceneResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterAddSceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1382,7 +1382,7 @@ using chip::SessionHandle;
               (void (^)(MTRScenesClusterViewSceneResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterViewSceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1408,7 +1408,7 @@ using chip::SessionHandle;
                 (void (^)(MTRScenesClusterRemoveSceneResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterRemoveSceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1434,7 +1434,7 @@ using chip::SessionHandle;
                                       NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterRemoveAllScenesResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1459,7 +1459,7 @@ using chip::SessionHandle;
                (void (^)(MTRScenesClusterStoreSceneResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterStoreSceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1483,7 +1483,7 @@ using chip::SessionHandle;
 - (void)recallSceneWithParams:(MTRScenesClusterRecallSceneParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -1522,7 +1522,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterGetSceneMembershipResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1547,7 +1547,7 @@ using chip::SessionHandle;
                                        NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterEnhancedAddSceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1648,7 +1648,7 @@ using chip::SessionHandle;
                                         NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterEnhancedViewSceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1674,7 +1674,7 @@ using chip::SessionHandle;
               (void (^)(MTRScenesClusterCopySceneResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesClusterCopySceneResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -1720,7 +1720,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1788,7 +1788,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1857,7 +1857,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1926,7 +1926,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -1994,7 +1994,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2064,7 +2064,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2135,7 +2135,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2207,7 +2207,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2277,7 +2277,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRScenesAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2346,7 +2346,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2415,7 +2415,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2486,7 +2486,7 @@ using chip::SessionHandle;
 - (void)offWithParams:(MTROnOffClusterOffParams * _Nullable)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -2516,7 +2516,7 @@ using chip::SessionHandle;
 - (void)onWithParams:(MTROnOffClusterOnParams * _Nullable)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -2546,7 +2546,7 @@ using chip::SessionHandle;
 - (void)toggleWithParams:(MTROnOffClusterToggleParams * _Nullable)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -2572,7 +2572,7 @@ using chip::SessionHandle;
 - (void)offWithEffectWithParams:(MTROnOffClusterOffWithEffectParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -2606,7 +2606,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -2632,7 +2632,7 @@ using chip::SessionHandle;
 - (void)onWithTimedOffWithParams:(MTROnOffClusterOnWithTimedOffParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -2680,7 +2680,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2749,7 +2749,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2817,7 +2817,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -2855,7 +2855,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -2923,7 +2923,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -2961,7 +2961,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3030,7 +3030,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -3073,7 +3073,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableOnOffClusterOnOffStartUpOnOffAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3145,7 +3145,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROnOffGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3217,7 +3217,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROnOffAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3287,7 +3287,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROnOffAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3356,7 +3356,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3425,7 +3425,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3511,7 +3511,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3579,7 +3579,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -3618,7 +3618,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3690,7 +3690,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROnOffSwitchConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3764,7 +3764,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROnOffSwitchConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3835,7 +3835,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROnOffSwitchConfigurationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3905,7 +3905,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -3974,7 +3974,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4042,7 +4042,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4072,7 +4072,7 @@ using chip::SessionHandle;
 - (void)moveWithParams:(MTRLevelControlClusterMoveParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4102,7 +4102,7 @@ using chip::SessionHandle;
 - (void)stepWithParams:(MTRLevelControlClusterStepParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4133,7 +4133,7 @@ using chip::SessionHandle;
 - (void)stopWithParams:(MTRLevelControlClusterStopParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4162,7 +4162,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4193,7 +4193,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4224,7 +4224,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4256,7 +4256,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4285,7 +4285,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -4331,7 +4331,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4401,7 +4401,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4470,7 +4470,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4538,7 +4538,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4607,7 +4607,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4676,7 +4676,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4745,7 +4745,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4813,7 +4813,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -4851,7 +4851,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -4919,7 +4919,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -4959,7 +4959,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5027,7 +5027,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -5070,7 +5070,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5138,7 +5138,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -5182,7 +5182,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5251,7 +5251,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -5295,7 +5295,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5364,7 +5364,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -5408,7 +5408,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5477,7 +5477,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -5522,7 +5522,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5593,7 +5593,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLevelControlGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5665,7 +5665,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLevelControlAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5735,7 +5735,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLevelControlAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5805,7 +5805,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5874,7 +5874,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -5960,7 +5960,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -5998,7 +5998,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6066,7 +6066,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -6104,7 +6104,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6173,7 +6173,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -6211,7 +6211,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6280,7 +6280,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -6318,7 +6318,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6387,7 +6387,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6455,7 +6455,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -6493,7 +6493,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6562,7 +6562,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -6600,7 +6600,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6669,7 +6669,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6739,7 +6739,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6810,7 +6810,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBinaryInputBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6882,7 +6882,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBinaryInputBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -6952,7 +6952,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBinaryInputBasicAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7022,7 +7022,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7091,7 +7091,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7177,7 +7177,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorDeviceListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7245,7 +7245,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorServerListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7313,7 +7313,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorClientListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7381,7 +7381,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorPartsListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7451,7 +7451,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7523,7 +7523,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7593,7 +7593,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDescriptorAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7663,7 +7663,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7732,7 +7732,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7799,7 +7799,7 @@ using chip::SessionHandle;
 - (void)readAttributeBindingWithParams:(MTRReadParams * _Nullable)params
                      completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBindingBindingListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = Binding::Attributes::Binding::TypeInfo;
@@ -7820,7 +7820,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -7895,7 +7895,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBindingBindingListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -7965,7 +7965,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBindingGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8037,7 +8037,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBindingAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8107,7 +8107,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBindingAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8176,7 +8176,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8245,7 +8245,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8312,7 +8312,7 @@ using chip::SessionHandle;
 - (void)readAttributeAclWithParams:(MTRReadParams * _Nullable)params
                  completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlAclListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
@@ -8333,7 +8333,7 @@ using chip::SessionHandle;
                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -8469,7 +8469,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlAclListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8518,7 +8518,7 @@ using chip::SessionHandle;
 - (void)readAttributeExtensionWithParams:(MTRReadParams * _Nullable)params
                        completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlExtensionListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = AccessControl::Attributes::Extension::TypeInfo;
@@ -8539,7 +8539,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -8599,7 +8599,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlExtensionListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8670,7 +8670,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8741,7 +8741,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8812,7 +8812,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8883,7 +8883,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -8955,7 +8955,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9025,7 +9025,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccessControlAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9095,7 +9095,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9164,7 +9164,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9232,7 +9232,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9264,7 +9264,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9297,7 +9297,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9329,7 +9329,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9362,7 +9362,7 @@ using chip::SessionHandle;
            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9394,7 +9394,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9426,7 +9426,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9459,7 +9459,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9491,7 +9491,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9523,7 +9523,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9556,7 +9556,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9588,7 +9588,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -9639,7 +9639,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedActionsActionListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9708,7 +9708,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedActionsEndpointListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9778,7 +9778,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9848,7 +9848,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9920,7 +9920,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -9990,7 +9990,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedActionsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10060,7 +10060,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10129,7 +10129,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10201,7 +10201,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -10247,7 +10247,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10316,7 +10316,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10384,7 +10384,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRVendorIdAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10452,7 +10452,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10521,7 +10521,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10589,7 +10589,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -10627,7 +10627,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10695,7 +10695,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -10733,7 +10733,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10802,7 +10802,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10873,7 +10873,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -10943,7 +10943,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11014,7 +11014,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11084,7 +11084,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11153,7 +11153,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11221,7 +11221,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11289,7 +11289,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11358,7 +11358,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11427,7 +11427,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -11467,7 +11467,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11536,7 +11536,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11604,7 +11604,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11673,7 +11673,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBasicCapabilityMinimaStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11745,7 +11745,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11817,7 +11817,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11887,7 +11887,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBasicAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -11956,7 +11956,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12025,7 +12025,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12094,7 +12094,7 @@ using chip::SessionHandle;
                                  NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateProviderClusterQueryImageResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -12160,7 +12160,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -12185,7 +12185,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -12235,7 +12235,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12309,7 +12309,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12380,7 +12380,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12450,7 +12450,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12519,7 +12519,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12587,7 +12587,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -12622,7 +12622,7 @@ using chip::SessionHandle;
 - (void)readAttributeDefaultOtaProvidersWithParams:(MTRReadParams * _Nullable)params
                                  completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(self.callbackQueue, self.device,
         completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12644,7 +12644,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -12707,7 +12707,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12779,7 +12779,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12850,7 +12850,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12925,7 +12925,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -12997,7 +12997,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13071,7 +13071,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13142,7 +13142,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13212,7 +13212,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13281,7 +13281,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13367,7 +13367,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -13405,7 +13405,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13475,7 +13475,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLocalizationConfigurationSupportedLocalesListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13548,7 +13548,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLocalizationConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13622,7 +13622,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLocalizationConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13693,7 +13693,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLocalizationConfigurationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13763,7 +13763,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13832,7 +13832,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -13918,7 +13918,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -13956,7 +13956,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTimeFormatLocalizationClusterHourFormatAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14025,7 +14025,7 @@ using chip::SessionHandle;
                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -14064,7 +14064,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTimeFormatLocalizationClusterCalendarTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14137,7 +14137,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTimeFormatLocalizationSupportedCalendarTypesListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14210,7 +14210,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTimeFormatLocalizationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14282,7 +14282,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTimeFormatLocalizationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14352,7 +14352,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTimeFormatLocalizationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14422,7 +14422,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14491,7 +14491,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14577,7 +14577,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -14616,7 +14616,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUnitLocalizationClusterTempUnitAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14688,7 +14688,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUnitLocalizationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14760,7 +14760,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUnitLocalizationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14830,7 +14830,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUnitLocalizationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14900,7 +14900,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -14969,7 +14969,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15054,7 +15054,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceConfigurationSourcesListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15126,7 +15126,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15200,7 +15200,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15271,7 +15271,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceConfigurationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15341,7 +15341,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15410,7 +15410,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15495,7 +15495,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceClusterPowerSourceStatusAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15563,7 +15563,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15631,7 +15631,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15702,7 +15702,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15773,7 +15773,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15843,7 +15843,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceClusterWiredCurrentTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15915,7 +15915,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -15986,7 +15986,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16057,7 +16057,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16126,7 +16126,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16196,7 +16196,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceActiveWiredFaultsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16266,7 +16266,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16336,7 +16336,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16406,7 +16406,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16476,7 +16476,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceClusterBatChargeLevelAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16548,7 +16548,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16618,7 +16618,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceClusterBatReplaceabilityAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16688,7 +16688,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16757,7 +16757,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceActiveBatFaultsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16829,7 +16829,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16900,7 +16900,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -16970,7 +16970,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17040,7 +17040,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17111,7 +17111,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17180,7 +17180,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17249,7 +17249,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17319,7 +17319,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceClusterBatChargeStateAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17391,7 +17391,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17462,7 +17462,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17532,7 +17532,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17603,7 +17603,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceActiveBatChargeFaultsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17675,7 +17675,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17747,7 +17747,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17817,7 +17817,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPowerSourceAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17887,7 +17887,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -17956,7 +17956,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18025,7 +18025,7 @@ using chip::SessionHandle;
                                   NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningClusterArmFailSafeResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -18051,7 +18051,7 @@ using chip::SessionHandle;
                                           NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningClusterSetRegulatoryConfigResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -18086,7 +18086,7 @@ using chip::SessionHandle;
                               NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningClusterCommissioningCompleteResponseCallbackBridge(self.callbackQueue, self.device,
         completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18129,7 +18129,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -18167,7 +18167,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18239,7 +18239,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningBasicCommissioningInfoStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18313,7 +18313,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18386,7 +18386,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningClusterRegulatoryLocationTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18459,7 +18459,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18530,7 +18530,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18602,7 +18602,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18672,7 +18672,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralCommissioningAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18742,7 +18742,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18811,7 +18811,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -18880,7 +18880,7 @@ using chip::SessionHandle;
                                    NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningClusterScanNetworksResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -18919,7 +18919,7 @@ using chip::SessionHandle;
                                              NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -18949,7 +18949,7 @@ using chip::SessionHandle;
                                                NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -18978,7 +18978,7 @@ using chip::SessionHandle;
                                     NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -19007,7 +19007,7 @@ using chip::SessionHandle;
                                      NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningClusterConnectNetworkResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -19036,7 +19036,7 @@ using chip::SessionHandle;
                                      NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -19083,7 +19083,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19151,7 +19151,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningNetworksListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19221,7 +19221,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19292,7 +19292,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19361,7 +19361,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -19400,7 +19400,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19473,7 +19473,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableNetworkCommissioningClusterNetworkCommissioningStatusAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19547,7 +19547,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableOctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19618,7 +19618,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19689,7 +19689,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19761,7 +19761,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19831,7 +19831,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNetworkCommissioningAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19901,7 +19901,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -19970,7 +19970,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20039,7 +20039,7 @@ using chip::SessionHandle;
                                           NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDiagnosticLogsClusterRetrieveLogsResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -20086,7 +20086,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDiagnosticLogsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20158,7 +20158,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDiagnosticLogsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20228,7 +20228,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDiagnosticLogsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20298,7 +20298,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20367,7 +20367,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20435,7 +20435,7 @@ using chip::SessionHandle;
                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -20483,7 +20483,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsNetworkInterfacesListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20553,7 +20553,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20621,7 +20621,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20691,7 +20691,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20760,7 +20760,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20831,7 +20831,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsActiveHardwareFaultsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20902,7 +20902,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsActiveRadioFaultsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -20974,7 +20974,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsActiveNetworkFaultsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21046,7 +21046,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21117,7 +21117,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21189,7 +21189,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21259,7 +21259,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGeneralDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21329,7 +21329,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21398,7 +21398,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21470,7 +21470,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -21515,7 +21515,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSoftwareDiagnosticsThreadMetricsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21586,7 +21586,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21656,7 +21656,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21727,7 +21727,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21798,7 +21798,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSoftwareDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21870,7 +21870,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSoftwareDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -21940,7 +21940,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSoftwareDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22010,7 +22010,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22079,7 +22079,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22151,7 +22151,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -22195,7 +22195,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22264,7 +22264,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableThreadNetworkDiagnosticsClusterRoutingRoleAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22335,7 +22335,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22403,7 +22403,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22472,7 +22472,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22542,7 +22542,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableOctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22611,7 +22611,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22681,7 +22681,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsNeighborTableListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22752,7 +22752,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsRouteTableListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22822,7 +22822,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22891,7 +22891,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -22959,7 +22959,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23029,7 +23029,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23099,7 +23099,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23169,7 +23169,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23239,7 +23239,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23309,7 +23309,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23379,7 +23379,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23449,7 +23449,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23520,7 +23520,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23591,7 +23591,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23661,7 +23661,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23730,7 +23730,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23800,7 +23800,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23870,7 +23870,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -23941,7 +23941,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24010,7 +24010,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24081,7 +24081,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24150,7 +24150,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24220,7 +24220,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24290,7 +24290,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24361,7 +24361,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24430,7 +24430,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24499,7 +24499,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24570,7 +24570,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24641,7 +24641,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24711,7 +24711,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24781,7 +24781,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24852,7 +24852,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24921,7 +24921,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -24991,7 +24991,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25061,7 +25061,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25130,7 +25130,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25200,7 +25200,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25270,7 +25270,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25341,7 +25341,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25410,7 +25410,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25481,7 +25481,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25552,7 +25552,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25622,7 +25622,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25692,7 +25692,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25763,7 +25763,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25834,7 +25834,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25904,7 +25904,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -25974,7 +25974,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26044,7 +26044,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26114,7 +26114,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26184,7 +26184,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26252,7 +26252,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26322,7 +26322,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsSecurityPolicyStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26392,7 +26392,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableOctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26468,7 +26468,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsOperationalDatasetComponentsStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26549,7 +26549,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsActiveNetworkFaultsListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26625,7 +26625,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26699,7 +26699,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26770,7 +26770,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThreadNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26840,7 +26840,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26909,7 +26909,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -26981,7 +26981,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -27025,7 +27025,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableOctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27094,7 +27094,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableWiFiNetworkDiagnosticsClusterSecurityTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27167,7 +27167,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableWiFiNetworkDiagnosticsClusterWiFiVersionTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27241,7 +27241,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27309,7 +27309,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27378,7 +27378,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27448,7 +27448,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27519,7 +27519,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27590,7 +27590,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27661,7 +27661,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27732,7 +27732,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27802,7 +27802,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27871,7 +27871,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -27942,7 +27942,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWiFiNetworkDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28014,7 +28014,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWiFiNetworkDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28084,7 +28084,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWiFiNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28154,7 +28154,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28223,7 +28223,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28295,7 +28295,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -28341,7 +28341,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableEthernetNetworkDiagnosticsClusterPHYRateTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28413,7 +28413,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28482,7 +28482,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28552,7 +28552,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28621,7 +28621,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28690,7 +28690,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28759,7 +28759,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28829,7 +28829,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28899,7 +28899,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -28971,7 +28971,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTREthernetNetworkDiagnosticsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29045,7 +29045,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTREthernetNetworkDiagnosticsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29116,7 +29116,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTREthernetNetworkDiagnosticsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29186,7 +29186,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29255,7 +29255,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29341,7 +29341,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29409,7 +29409,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRVendorIdAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29477,7 +29477,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29546,7 +29546,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -29584,7 +29584,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29653,7 +29653,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29724,7 +29724,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29794,7 +29794,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29865,7 +29865,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -29935,7 +29935,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30004,7 +30004,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30072,7 +30072,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30140,7 +30140,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30209,7 +30209,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30278,7 +30278,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30346,7 +30346,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30416,7 +30416,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedDeviceBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30488,7 +30488,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedDeviceBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30558,7 +30558,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBridgedDeviceBasicAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30628,7 +30628,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30697,7 +30697,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30784,7 +30784,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30854,7 +30854,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30924,7 +30924,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -30995,7 +30995,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSwitchGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31067,7 +31067,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSwitchAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31137,7 +31137,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRSwitchAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31206,7 +31206,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31275,7 +31275,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31343,7 +31343,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -31378,7 +31378,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -31413,7 +31413,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -31461,7 +31461,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31531,7 +31531,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31601,7 +31601,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31673,7 +31673,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAdministratorCommissioningGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31747,7 +31747,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAdministratorCommissioningAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31818,7 +31818,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAdministratorCommissioningAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31888,7 +31888,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -31957,7 +31957,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32026,7 +32026,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterAttestationResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32051,7 +32051,7 @@ using chip::SessionHandle;
                                               NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterCertificateChainResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32076,7 +32076,7 @@ using chip::SessionHandle;
                                  NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterCSRResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32105,7 +32105,7 @@ using chip::SessionHandle;
                              NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32138,7 +32138,7 @@ using chip::SessionHandle;
                                 NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32167,7 +32167,7 @@ using chip::SessionHandle;
                                         NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32192,7 +32192,7 @@ using chip::SessionHandle;
                                    NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsClusterNOCResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -32216,7 +32216,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -32243,7 +32243,7 @@ using chip::SessionHandle;
 - (void)readAttributeNOCsWithParams:(MTRReadParams * _Nullable)params
                   completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsNOCsListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OperationalCredentials::Attributes::NOCs::TypeInfo;
@@ -32264,7 +32264,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsNOCsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32314,7 +32314,7 @@ using chip::SessionHandle;
 - (void)readAttributeFabricsWithParams:(MTRReadParams * _Nullable)params
                      completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsFabricsListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OperationalCredentials::Attributes::Fabrics::TypeInfo;
@@ -32335,7 +32335,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsFabricsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32405,7 +32405,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32476,7 +32476,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32548,7 +32548,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsTrustedRootCertificatesListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32620,7 +32620,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32691,7 +32691,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32763,7 +32763,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32833,7 +32833,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROperationalCredentialsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32903,7 +32903,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -32972,7 +32972,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33040,7 +33040,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -33108,7 +33108,7 @@ using chip::SessionHandle;
                                  NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementClusterKeySetReadResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -33132,7 +33132,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -33161,7 +33161,7 @@ using chip::SessionHandle;
                                            NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -33205,7 +33205,7 @@ using chip::SessionHandle;
 - (void)readAttributeGroupKeyMapWithParams:(MTRReadParams * _Nullable)params
                          completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementGroupKeyMapListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = GroupKeyManagement::Attributes::GroupKeyMap::TypeInfo;
@@ -33226,7 +33226,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -33287,7 +33287,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementGroupKeyMapListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33337,7 +33337,7 @@ using chip::SessionHandle;
 - (void)readAttributeGroupTableWithParams:(MTRReadParams * _Nullable)params
                         completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementGroupTableListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = GroupKeyManagement::Attributes::GroupTable::TypeInfo;
@@ -33358,7 +33358,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementGroupTableListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33428,7 +33428,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33499,7 +33499,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33570,7 +33570,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33642,7 +33642,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33712,7 +33712,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRGroupKeyManagementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33782,7 +33782,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33851,7 +33851,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -33937,7 +33937,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFixedLabelLabelListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34007,7 +34007,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFixedLabelGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34079,7 +34079,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFixedLabelAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34149,7 +34149,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFixedLabelAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34219,7 +34219,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34288,7 +34288,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34374,7 +34374,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -34434,7 +34434,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUserLabelLabelListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34504,7 +34504,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUserLabelGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34576,7 +34576,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUserLabelAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34646,7 +34646,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRUserLabelAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34716,7 +34716,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34785,7 +34785,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34871,7 +34871,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -34941,7 +34941,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanStateGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35013,7 +35013,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanStateAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35083,7 +35083,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanStateAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35153,7 +35153,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35222,7 +35222,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35290,7 +35290,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -35336,7 +35336,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35406,7 +35406,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35476,7 +35476,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRModeSelectSupportedModesListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35546,7 +35546,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35615,7 +35615,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -35658,7 +35658,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35726,7 +35726,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -35769,7 +35769,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35839,7 +35839,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRModeSelectGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35911,7 +35911,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRModeSelectAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -35981,7 +35981,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRModeSelectAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -36051,7 +36051,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -36120,7 +36120,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -36188,7 +36188,7 @@ using chip::SessionHandle;
          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36224,7 +36224,7 @@ using chip::SessionHandle;
            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36260,7 +36260,7 @@ using chip::SessionHandle;
                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36295,7 +36295,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36330,7 +36330,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterGetWeekDayScheduleResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -36355,7 +36355,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36384,7 +36384,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36416,7 +36416,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterGetYearDayScheduleResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -36441,7 +36441,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36470,7 +36470,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36503,7 +36503,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterGetHolidayScheduleResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -36527,7 +36527,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36554,7 +36554,7 @@ using chip::SessionHandle;
 - (void)setUserWithParams:(MTRDoorLockClusterSetUserParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36620,7 +36620,7 @@ using chip::SessionHandle;
             (void (^)(MTRDoorLockClusterGetUserResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterGetUserResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -36643,7 +36643,7 @@ using chip::SessionHandle;
 - (void)clearUserWithParams:(MTRDoorLockClusterClearUserParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36675,7 +36675,7 @@ using chip::SessionHandle;
                                     NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterSetCredentialResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -36727,7 +36727,7 @@ using chip::SessionHandle;
                                           NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterGetCredentialStatusResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -36753,7 +36753,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -36809,7 +36809,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableDoorLockClusterDlLockStateAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -36878,7 +36878,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterDlLockTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -36948,7 +36948,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37017,7 +37017,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableDoorLockClusterDlDoorStateAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37086,7 +37086,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -37125,7 +37125,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37194,7 +37194,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -37233,7 +37233,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37302,7 +37302,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -37340,7 +37340,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37410,7 +37410,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37481,7 +37481,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37552,7 +37552,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37623,7 +37623,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37695,7 +37695,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37767,7 +37767,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37837,7 +37837,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37907,7 +37907,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -37977,7 +37977,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38047,7 +38047,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38118,7 +38118,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockCredentialRulesSupportAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38190,7 +38190,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38259,7 +38259,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -38297,7 +38297,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38365,7 +38365,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -38403,7 +38403,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38472,7 +38472,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -38511,7 +38511,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38580,7 +38580,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -38618,7 +38618,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38687,7 +38687,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -38726,7 +38726,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockClusterDlOperatingModeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38798,7 +38798,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockSupportedOperatingModesAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38870,7 +38870,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockDefaultConfigurationRegisterAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -38941,7 +38941,7 @@ using chip::SessionHandle;
                                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -38981,7 +38981,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39051,7 +39051,7 @@ using chip::SessionHandle;
                                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39091,7 +39091,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39161,7 +39161,7 @@ using chip::SessionHandle;
                                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39201,7 +39201,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39273,7 +39273,7 @@ using chip::SessionHandle;
                                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39313,7 +39313,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39385,7 +39385,7 @@ using chip::SessionHandle;
                                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39425,7 +39425,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockLocalProgrammingFeaturesAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39495,7 +39495,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39535,7 +39535,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39607,7 +39607,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39647,7 +39647,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39716,7 +39716,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39755,7 +39755,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39827,7 +39827,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39867,7 +39867,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -39936,7 +39936,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -39976,7 +39976,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40047,7 +40047,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40119,7 +40119,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40189,7 +40189,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoorLockAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40259,7 +40259,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40328,7 +40328,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40400,7 +40400,7 @@ using chip::SessionHandle;
          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40431,7 +40431,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40462,7 +40462,7 @@ using chip::SessionHandle;
            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40489,7 +40489,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40517,7 +40517,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40545,7 +40545,7 @@ using chip::SessionHandle;
               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40573,7 +40573,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -40618,7 +40618,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringClusterTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40689,7 +40689,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40760,7 +40760,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40831,7 +40831,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40902,7 +40902,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -40973,7 +40973,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41044,7 +41044,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41113,7 +41113,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringConfigStatusAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41185,7 +41185,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41256,7 +41256,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41326,7 +41326,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringOperationalStatusAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41398,7 +41398,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41469,7 +41469,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41539,7 +41539,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringClusterEndProductTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41611,7 +41611,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41682,7 +41682,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41753,7 +41753,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41824,7 +41824,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41895,7 +41895,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -41966,7 +41966,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42034,7 +42034,7 @@ using chip::SessionHandle;
                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -42072,7 +42072,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringModeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42140,7 +42140,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringSafetyStatusAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42212,7 +42212,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42284,7 +42284,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42354,7 +42354,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWindowCoveringAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42424,7 +42424,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42493,7 +42493,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42561,7 +42561,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -42593,7 +42593,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -42639,7 +42639,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42710,7 +42710,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42781,7 +42781,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42850,7 +42850,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -42889,7 +42889,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -42958,7 +42958,7 @@ using chip::SessionHandle;
                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -42997,7 +42997,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43069,7 +43069,7 @@ using chip::SessionHandle;
                                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -43109,7 +43109,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43181,7 +43181,7 @@ using chip::SessionHandle;
                                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -43221,7 +43221,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43290,7 +43290,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -43329,7 +43329,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43398,7 +43398,7 @@ using chip::SessionHandle;
                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -43437,7 +43437,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43507,7 +43507,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43578,7 +43578,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBarrierControlGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43650,7 +43650,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBarrierControlAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43720,7 +43720,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBarrierControlAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43790,7 +43790,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43859,7 +43859,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -43945,7 +43945,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44014,7 +44014,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44081,7 +44081,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44150,7 +44150,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44220,7 +44220,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44290,7 +44290,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44360,7 +44360,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44430,7 +44430,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44500,7 +44500,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44569,7 +44569,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44638,7 +44638,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44707,7 +44707,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44776,7 +44776,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44845,7 +44845,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlPumpStatusAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44918,7 +44918,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -44994,7 +44994,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45065,7 +45065,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45132,7 +45132,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45201,7 +45201,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -45246,7 +45246,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45314,7 +45314,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45385,7 +45385,7 @@ using chip::SessionHandle;
                                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -45430,7 +45430,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45501,7 +45501,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -45540,7 +45540,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlClusterPumpOperationModeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45614,7 +45614,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -45652,7 +45652,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlClusterPumpControlModeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45727,7 +45727,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45803,7 +45803,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45874,7 +45874,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPumpConfigurationAndControlAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -45944,7 +45944,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46013,7 +46013,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46081,7 +46081,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -46110,7 +46110,7 @@ using chip::SessionHandle;
                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -46177,7 +46177,7 @@ using chip::SessionHandle;
                                         NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatClusterGetWeeklyScheduleResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -46208,7 +46208,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -46254,7 +46254,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46324,7 +46324,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46393,7 +46393,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46463,7 +46463,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46534,7 +46534,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46605,7 +46605,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46676,7 +46676,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46746,7 +46746,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46816,7 +46816,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -46888,7 +46888,7 @@ using chip::SessionHandle;
                                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -46928,7 +46928,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47000,7 +47000,7 @@ using chip::SessionHandle;
                                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47040,7 +47040,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47112,7 +47112,7 @@ using chip::SessionHandle;
                                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47152,7 +47152,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47224,7 +47224,7 @@ using chip::SessionHandle;
                                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47264,7 +47264,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47336,7 +47336,7 @@ using chip::SessionHandle;
                                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47376,7 +47376,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47448,7 +47448,7 @@ using chip::SessionHandle;
                                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47488,7 +47488,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47557,7 +47557,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47597,7 +47597,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47666,7 +47666,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47706,7 +47706,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47775,7 +47775,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47815,7 +47815,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47884,7 +47884,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -47924,7 +47924,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -47993,7 +47993,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48033,7 +48033,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48102,7 +48102,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48141,7 +48141,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48213,7 +48213,7 @@ using chip::SessionHandle;
                                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48253,7 +48253,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatClusterThermostatControlSequenceAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48323,7 +48323,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48361,7 +48361,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48431,7 +48431,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48500,7 +48500,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48571,7 +48571,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48642,7 +48642,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48714,7 +48714,7 @@ using chip::SessionHandle;
                                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48754,7 +48754,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48826,7 +48826,7 @@ using chip::SessionHandle;
                                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48871,7 +48871,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -48943,7 +48943,7 @@ using chip::SessionHandle;
                                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -48983,7 +48983,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49054,7 +49054,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49125,7 +49125,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49196,7 +49196,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49267,7 +49267,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49336,7 +49336,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -49380,7 +49380,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49450,7 +49450,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49520,7 +49520,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49589,7 +49589,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -49633,7 +49633,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49704,7 +49704,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49775,7 +49775,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49844,7 +49844,7 @@ using chip::SessionHandle;
                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -49883,7 +49883,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -49951,7 +49951,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -49989,7 +49989,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50057,7 +50057,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -50095,7 +50095,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50163,7 +50163,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -50202,7 +50202,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50271,7 +50271,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -50310,7 +50310,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50379,7 +50379,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -50417,7 +50417,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50486,7 +50486,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -50525,7 +50525,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50595,7 +50595,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50664,7 +50664,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -50703,7 +50703,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50774,7 +50774,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50846,7 +50846,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50916,7 +50916,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -50986,7 +50986,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51055,7 +51055,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51140,7 +51140,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -51178,7 +51178,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFanControlClusterFanModeTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51247,7 +51247,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -51286,7 +51286,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFanControlClusterFanModeSequenceTypeAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51356,7 +51356,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -51400,7 +51400,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51470,7 +51470,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51539,7 +51539,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51607,7 +51607,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -51650,7 +51650,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51719,7 +51719,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51788,7 +51788,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51857,7 +51857,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -51895,7 +51895,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -51964,7 +51964,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52033,7 +52033,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -52071,7 +52071,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52142,7 +52142,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFanControlGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52214,7 +52214,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFanControlAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52284,7 +52284,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFanControlAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52354,7 +52354,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52423,7 +52423,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52510,7 +52510,7 @@ using chip::SessionHandle;
                                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -52550,7 +52550,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52619,7 +52619,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -52658,7 +52658,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52730,7 +52730,7 @@ using chip::SessionHandle;
                                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -52770,7 +52770,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52843,7 +52843,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatUserInterfaceConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52921,7 +52921,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatUserInterfaceConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -52997,7 +52997,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRThermostatUserInterfaceConfigurationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -53070,7 +53070,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -53139,7 +53139,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -53206,7 +53206,7 @@ using chip::SessionHandle;
 - (void)moveToHueWithParams:(MTRColorControlClusterMoveToHueParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53238,7 +53238,7 @@ using chip::SessionHandle;
 - (void)moveHueWithParams:(MTRColorControlClusterMoveHueParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53268,7 +53268,7 @@ using chip::SessionHandle;
 - (void)stepHueWithParams:(MTRColorControlClusterStepHueParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53300,7 +53300,7 @@ using chip::SessionHandle;
                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53331,7 +53331,7 @@ using chip::SessionHandle;
                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53362,7 +53362,7 @@ using chip::SessionHandle;
                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53394,7 +53394,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53426,7 +53426,7 @@ using chip::SessionHandle;
             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53457,7 +53457,7 @@ using chip::SessionHandle;
 - (void)moveColorWithParams:(MTRColorControlClusterMoveColorParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53487,7 +53487,7 @@ using chip::SessionHandle;
 - (void)stepColorWithParams:(MTRColorControlClusterStepColorParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53519,7 +53519,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53550,7 +53550,7 @@ using chip::SessionHandle;
                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53583,7 +53583,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53614,7 +53614,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53646,7 +53646,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53678,7 +53678,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53714,7 +53714,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53743,7 +53743,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53776,7 +53776,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -53828,7 +53828,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -53897,7 +53897,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -53967,7 +53967,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54036,7 +54036,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54104,7 +54104,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54173,7 +54173,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54243,7 +54243,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54313,7 +54313,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54382,7 +54382,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54449,7 +54449,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -54487,7 +54487,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54556,7 +54556,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54625,7 +54625,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54693,7 +54693,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54762,7 +54762,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54831,7 +54831,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54899,7 +54899,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -54968,7 +54968,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55037,7 +55037,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55105,7 +55105,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55174,7 +55174,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55243,7 +55243,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55311,7 +55311,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55380,7 +55380,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55449,7 +55449,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55517,7 +55517,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55586,7 +55586,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55655,7 +55655,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55723,7 +55723,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55792,7 +55792,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55861,7 +55861,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -55899,7 +55899,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -55968,7 +55968,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56006,7 +56006,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56075,7 +56075,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56113,7 +56113,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56182,7 +56182,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56220,7 +56220,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56290,7 +56290,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56335,7 +56335,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56404,7 +56404,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56442,7 +56442,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56511,7 +56511,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56549,7 +56549,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56619,7 +56619,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56664,7 +56664,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56733,7 +56733,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56771,7 +56771,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56840,7 +56840,7 @@ using chip::SessionHandle;
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56878,7 +56878,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -56948,7 +56948,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -56993,7 +56993,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57063,7 +57063,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57133,7 +57133,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57203,7 +57203,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57273,7 +57273,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57343,7 +57343,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57414,7 +57414,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57485,7 +57485,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57555,7 +57555,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57626,7 +57626,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57697,7 +57697,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57768,7 +57768,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57840,7 +57840,7 @@ using chip::SessionHandle;
                                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -57880,7 +57880,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -57951,7 +57951,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRColorControlGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58023,7 +58023,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRColorControlAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58093,7 +58093,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRColorControlAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58163,7 +58163,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58232,7 +58232,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58319,7 +58319,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58389,7 +58389,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58459,7 +58459,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58528,7 +58528,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -58566,7 +58566,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58634,7 +58634,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -58672,7 +58672,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58743,7 +58743,7 @@ using chip::SessionHandle;
                                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -58788,7 +58788,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58860,7 +58860,7 @@ using chip::SessionHandle;
                                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -58905,7 +58905,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -58974,7 +58974,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59043,7 +59043,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -59081,7 +59081,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59149,7 +59149,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -59188,7 +59188,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59257,7 +59257,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -59301,7 +59301,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59370,7 +59370,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -59414,7 +59414,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59483,7 +59483,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -59522,7 +59522,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59594,7 +59594,7 @@ using chip::SessionHandle;
                                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -59639,7 +59639,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59710,7 +59710,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBallastConfigurationGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59782,7 +59782,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBallastConfigurationAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59852,7 +59852,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBallastConfigurationAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59922,7 +59922,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -59991,7 +59991,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60078,7 +60078,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60148,7 +60148,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60218,7 +60218,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60287,7 +60287,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60356,7 +60356,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60427,7 +60427,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRIlluminanceMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60499,7 +60499,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRIlluminanceMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60569,7 +60569,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRIlluminanceMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60639,7 +60639,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60708,7 +60708,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60795,7 +60795,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60865,7 +60865,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -60935,7 +60935,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61004,7 +61004,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61074,7 +61074,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTemperatureMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61146,7 +61146,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTemperatureMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61216,7 +61216,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTemperatureMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61286,7 +61286,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61355,7 +61355,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61442,7 +61442,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61512,7 +61512,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61582,7 +61582,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61651,7 +61651,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61719,7 +61719,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61789,7 +61789,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61859,7 +61859,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61929,7 +61929,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -61997,7 +61997,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62067,7 +62067,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPressureMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62139,7 +62139,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPressureMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62209,7 +62209,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRPressureMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62279,7 +62279,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62348,7 +62348,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62435,7 +62435,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62505,7 +62505,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62575,7 +62575,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62644,7 +62644,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62714,7 +62714,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFlowMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62786,7 +62786,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFlowMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62856,7 +62856,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFlowMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62926,7 +62926,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -62995,7 +62995,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63082,7 +63082,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63152,7 +63152,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63222,7 +63222,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63291,7 +63291,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63363,7 +63363,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRRelativeHumidityMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63439,7 +63439,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRRelativeHumidityMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63510,7 +63510,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRRelativeHumidityMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63580,7 +63580,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63649,7 +63649,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63735,7 +63735,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63805,7 +63805,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63876,7 +63876,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -63948,7 +63948,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -63988,7 +63988,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64060,7 +64060,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64100,7 +64100,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64172,7 +64172,7 @@ using chip::SessionHandle;
                                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64212,7 +64212,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64284,7 +64284,7 @@ using chip::SessionHandle;
                                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64324,7 +64324,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64396,7 +64396,7 @@ using chip::SessionHandle;
                                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64436,7 +64436,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64508,7 +64508,7 @@ using chip::SessionHandle;
                                                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64548,7 +64548,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64620,7 +64620,7 @@ using chip::SessionHandle;
                                                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64660,7 +64660,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64733,7 +64733,7 @@ using chip::SessionHandle;
                                                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64773,7 +64773,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64846,7 +64846,7 @@ using chip::SessionHandle;
                                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -64886,7 +64886,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -64958,7 +64958,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROccupancySensingGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65030,7 +65030,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROccupancySensingAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65100,7 +65100,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROccupancySensingAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65170,7 +65170,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65239,7 +65239,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65325,7 +65325,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65395,7 +65395,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWakeOnLanGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65467,7 +65467,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWakeOnLanAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65537,7 +65537,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRWakeOnLanAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65607,7 +65607,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65676,7 +65676,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65745,7 +65745,7 @@ using chip::SessionHandle;
                                     NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelClusterChangeChannelResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -65769,7 +65769,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -65797,7 +65797,7 @@ using chip::SessionHandle;
 - (void)skipChannelWithParams:(MTRChannelClusterSkipChannelParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -65843,7 +65843,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelChannelListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65912,7 +65912,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelLineupStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -65982,7 +65982,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelCurrentChannelStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66054,7 +66054,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66126,7 +66126,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66196,7 +66196,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRChannelAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66265,7 +66265,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66334,7 +66334,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66403,7 +66403,7 @@ using chip::SessionHandle;
                                      NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTargetNavigatorClusterNavigateTargetResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -66449,7 +66449,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTargetNavigatorTargetListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66519,7 +66519,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66590,7 +66590,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTargetNavigatorGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66662,7 +66662,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTargetNavigatorAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66732,7 +66732,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTargetNavigatorAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66802,7 +66802,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66871,7 +66871,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -66945,7 +66945,7 @@ using chip::SessionHandle;
          (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -66974,7 +66974,7 @@ using chip::SessionHandle;
           (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67003,7 +67003,7 @@ using chip::SessionHandle;
                                    NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67032,7 +67032,7 @@ using chip::SessionHandle;
               (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67061,7 +67061,7 @@ using chip::SessionHandle;
              (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67090,7 +67090,7 @@ using chip::SessionHandle;
          (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67119,7 +67119,7 @@ using chip::SessionHandle;
            (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67148,7 +67148,7 @@ using chip::SessionHandle;
                                   NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67172,7 +67172,7 @@ using chip::SessionHandle;
                                   NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67197,7 +67197,7 @@ using chip::SessionHandle;
                                    NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67222,7 +67222,7 @@ using chip::SessionHandle;
          (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -67264,7 +67264,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackClusterPlaybackStateEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67334,7 +67334,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67402,7 +67402,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67471,7 +67471,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackSampledPositionStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67542,7 +67542,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFloatAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67611,7 +67611,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67681,7 +67681,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67752,7 +67752,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67824,7 +67824,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67894,7 +67894,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaPlaybackAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -67964,7 +67964,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68033,7 +68033,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68100,7 +68100,7 @@ using chip::SessionHandle;
 - (void)selectInputWithParams:(MTRMediaInputClusterSelectInputParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -68132,7 +68132,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -68163,7 +68163,7 @@ using chip::SessionHandle;
                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -68189,7 +68189,7 @@ using chip::SessionHandle;
 - (void)renameInputWithParams:(MTRMediaInputClusterRenameInputParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -68236,7 +68236,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaInputInputListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68304,7 +68304,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68375,7 +68375,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaInputGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68447,7 +68447,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaInputAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68517,7 +68517,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRMediaInputAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68587,7 +68587,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68656,7 +68656,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68727,7 +68727,7 @@ using chip::SessionHandle;
 - (void)sleepWithParams:(MTRLowPowerClusterSleepParams * _Nullable)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -68774,7 +68774,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLowPowerGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68846,7 +68846,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLowPowerAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68916,7 +68916,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRLowPowerAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -68986,7 +68986,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69055,7 +69055,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69124,7 +69124,7 @@ using chip::SessionHandle;
             (void (^)(MTRKeypadInputClusterSendKeyResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRKeypadInputClusterSendKeyResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -69168,7 +69168,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRKeypadInputGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69240,7 +69240,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRKeypadInputAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69310,7 +69310,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRKeypadInputAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69380,7 +69380,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69449,7 +69449,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69518,7 +69518,7 @@ using chip::SessionHandle;
                                     NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRContentLauncherClusterLaunchResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -69599,7 +69599,7 @@ using chip::SessionHandle;
               (void (^)(MTRContentLauncherClusterLaunchResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRContentLauncherClusterLaunchResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -69739,7 +69739,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRContentLauncherAcceptHeaderListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69812,7 +69812,7 @@ using chip::SessionHandle;
                                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -69852,7 +69852,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69923,7 +69923,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRContentLauncherGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -69995,7 +69995,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRContentLauncherAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70065,7 +70065,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRContentLauncherAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70135,7 +70135,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70204,7 +70204,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70272,7 +70272,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -70300,7 +70300,7 @@ using chip::SessionHandle;
              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -70347,7 +70347,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAudioOutputOutputListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70417,7 +70417,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70488,7 +70488,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAudioOutputGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70560,7 +70560,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAudioOutputAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70630,7 +70630,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAudioOutputAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70700,7 +70700,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70769,7 +70769,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -70838,7 +70838,7 @@ using chip::SessionHandle;
                                 NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -70868,7 +70868,7 @@ using chip::SessionHandle;
                               NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -70894,7 +70894,7 @@ using chip::SessionHandle;
                               NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -70937,7 +70937,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherCatalogListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71009,7 +71009,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -71058,7 +71058,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherCurrentAppStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71130,7 +71130,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71202,7 +71202,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71272,7 +71272,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationLauncherAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71342,7 +71342,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71411,7 +71411,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71497,7 +71497,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71565,7 +71565,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRVendorIdAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71634,7 +71634,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71703,7 +71703,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71773,7 +71773,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationBasicApplicationStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71843,7 +71843,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationBasicClusterApplicationStatusEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71913,7 +71913,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -71983,7 +71983,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationBasicAllowedVendorListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72055,7 +72055,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72127,7 +72127,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72197,7 +72197,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRApplicationBasicAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72267,7 +72267,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72336,7 +72336,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72405,7 +72405,7 @@ using chip::SessionHandle;
                                   NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccountLoginClusterGetSetupPINResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -72431,7 +72431,7 @@ using chip::SessionHandle;
 - (void)loginWithParams:(MTRAccountLoginClusterLoginParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -72467,7 +72467,7 @@ using chip::SessionHandle;
        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -72517,7 +72517,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccountLoginGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72589,7 +72589,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccountLoginAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72659,7 +72659,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRAccountLoginAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72729,7 +72729,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72798,7 +72798,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -72870,7 +72870,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -72897,7 +72897,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -72946,7 +72946,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73015,7 +73015,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73083,7 +73083,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73152,7 +73152,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73221,7 +73221,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73289,7 +73289,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73358,7 +73358,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73426,7 +73426,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73494,7 +73494,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73562,7 +73562,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73632,7 +73632,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73702,7 +73702,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73773,7 +73773,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73843,7 +73843,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73913,7 +73913,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -73983,7 +73983,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74052,7 +74052,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74122,7 +74122,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74192,7 +74192,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74262,7 +74262,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74332,7 +74332,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74402,7 +74402,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74472,7 +74472,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74543,7 +74543,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74614,7 +74614,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74685,7 +74685,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74756,7 +74756,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74827,7 +74827,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74898,7 +74898,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -74969,7 +74969,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75040,7 +75040,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75111,7 +75111,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75182,7 +75182,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75253,7 +75253,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75324,7 +75324,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75395,7 +75395,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75465,7 +75465,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75535,7 +75535,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75604,7 +75604,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75675,7 +75675,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75746,7 +75746,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75817,7 +75817,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75888,7 +75888,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -75959,7 +75959,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76030,7 +76030,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76100,7 +76100,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76169,7 +76169,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76238,7 +76238,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76308,7 +76308,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76377,7 +76377,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76446,7 +76446,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76516,7 +76516,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76585,7 +76585,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76655,7 +76655,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76725,7 +76725,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76795,7 +76795,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76865,7 +76865,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -76934,7 +76934,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77006,7 +77006,7 @@ using chip::SessionHandle;
                                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -77046,7 +77046,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77118,7 +77118,7 @@ using chip::SessionHandle;
                                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -77158,7 +77158,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77230,7 +77230,7 @@ using chip::SessionHandle;
                                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -77270,7 +77270,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77342,7 +77342,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -77382,7 +77382,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77451,7 +77451,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -77491,7 +77491,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77561,7 +77561,7 @@ using chip::SessionHandle;
                                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -77601,7 +77601,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77672,7 +77672,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77742,7 +77742,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77813,7 +77813,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77883,7 +77883,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -77953,7 +77953,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78023,7 +78023,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78092,7 +78092,7 @@ using chip::SessionHandle;
                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -78131,7 +78131,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78201,7 +78201,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78271,7 +78271,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78340,7 +78340,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -78380,7 +78380,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78450,7 +78450,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78520,7 +78520,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78591,7 +78591,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78662,7 +78662,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78733,7 +78733,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78804,7 +78804,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78875,7 +78875,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -78946,7 +78946,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79016,7 +79016,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79086,7 +79086,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79156,7 +79156,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79227,7 +79227,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79298,7 +79298,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79368,7 +79368,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79439,7 +79439,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79510,7 +79510,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79580,7 +79580,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79651,7 +79651,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79722,7 +79722,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79792,7 +79792,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79863,7 +79863,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -79934,7 +79934,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80005,7 +80005,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80076,7 +80076,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80146,7 +80146,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80217,7 +80217,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80289,7 +80289,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80360,7 +80360,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80431,7 +80431,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80502,7 +80502,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80573,7 +80573,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80644,7 +80644,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80714,7 +80714,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80785,7 +80785,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80856,7 +80856,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80926,7 +80926,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -80997,7 +80997,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81068,7 +81068,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81138,7 +81138,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81209,7 +81209,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81280,7 +81280,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81350,7 +81350,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81421,7 +81421,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81492,7 +81492,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81563,7 +81563,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81634,7 +81634,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81704,7 +81704,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81775,7 +81775,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81847,7 +81847,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81918,7 +81918,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -81989,7 +81989,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82060,7 +82060,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82131,7 +82131,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82202,7 +82202,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82273,7 +82273,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRElectricalMeasurementGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82345,7 +82345,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRElectricalMeasurementAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82415,7 +82415,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRElectricalMeasurementAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82485,7 +82485,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82554,7 +82554,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -82625,7 +82625,7 @@ using chip::SessionHandle;
 - (void)testWithParams:(MTRTestClusterClusterTestParams * _Nullable)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -82656,7 +82656,7 @@ using chip::SessionHandle;
                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -82689,7 +82689,7 @@ using chip::SessionHandle;
                                    NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestSpecificResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -82716,7 +82716,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -82744,7 +82744,7 @@ using chip::SessionHandle;
                                        NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestAddArgumentsResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -82770,7 +82770,7 @@ using chip::SessionHandle;
                                                 NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestSimpleArgumentResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -82796,7 +82796,7 @@ using chip::SessionHandle;
                                        NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestStructArrayArgumentResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83030,7 +83030,7 @@ using chip::SessionHandle;
                                                 NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83062,7 +83062,7 @@ using chip::SessionHandle;
                                                       NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83096,7 +83096,7 @@ using chip::SessionHandle;
                                                     NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83151,7 +83151,7 @@ using chip::SessionHandle;
                                                    NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83197,7 +83197,7 @@ using chip::SessionHandle;
                                                           NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83329,7 +83329,7 @@ using chip::SessionHandle;
                                                               NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83485,7 +83485,7 @@ using chip::SessionHandle;
                                                   NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestListInt8UReverseResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83531,7 +83531,7 @@ using chip::SessionHandle;
                                        NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestEnumsResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83557,7 +83557,7 @@ using chip::SessionHandle;
                                                   NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestNullableOptionalResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83593,7 +83593,7 @@ using chip::SessionHandle;
                                            NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestComplexNullableOptionalResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83786,7 +83786,7 @@ using chip::SessionHandle;
                                               NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterSimpleStructResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83821,7 +83821,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -83851,7 +83851,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCommandSuccessCallbackBridge(
         self.callbackQueue, self.device,
         ^(id _Nullable value, NSError * _Nullable error) {
@@ -83885,7 +83885,7 @@ using chip::SessionHandle;
                                                NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestEmitTestEventResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83914,7 +83914,7 @@ using chip::SessionHandle;
                                              NSError * _Nullable error))completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterTestEmitTestFabricScopedEventResponseCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
@@ -83955,7 +83955,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -83993,7 +83993,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84060,7 +84060,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84098,7 +84098,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterBitmap8AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84166,7 +84166,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84204,7 +84204,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterBitmap16AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84272,7 +84272,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84310,7 +84310,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterBitmap32AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84378,7 +84378,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84416,7 +84416,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterBitmap64AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84483,7 +84483,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84521,7 +84521,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84588,7 +84588,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84626,7 +84626,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84693,7 +84693,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84731,7 +84731,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84798,7 +84798,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84836,7 +84836,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -84903,7 +84903,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -84941,7 +84941,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85008,7 +85008,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85046,7 +85046,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85113,7 +85113,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85151,7 +85151,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85218,7 +85218,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85256,7 +85256,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85323,7 +85323,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85361,7 +85361,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85428,7 +85428,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85466,7 +85466,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85533,7 +85533,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85571,7 +85571,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85638,7 +85638,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85676,7 +85676,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85743,7 +85743,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85781,7 +85781,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85848,7 +85848,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85886,7 +85886,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -85953,7 +85953,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -85991,7 +85991,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86058,7 +86058,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86096,7 +86096,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86163,7 +86163,7 @@ using chip::SessionHandle;
                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86201,7 +86201,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86268,7 +86268,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86306,7 +86306,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86374,7 +86374,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86412,7 +86412,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRFloatAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86481,7 +86481,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86519,7 +86519,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRDoubleAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86588,7 +86588,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86626,7 +86626,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86694,7 +86694,7 @@ using chip::SessionHandle;
                        completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86753,7 +86753,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListInt8uListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86821,7 +86821,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -86881,7 +86881,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListOctetStringListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -86951,7 +86951,7 @@ using chip::SessionHandle;
                                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87013,7 +87013,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListStructOctetStringListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87083,7 +87083,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87122,7 +87122,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTROctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87191,7 +87191,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87229,7 +87229,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87297,7 +87297,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87336,7 +87336,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87404,7 +87404,7 @@ using chip::SessionHandle;
                      completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87442,7 +87442,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87509,7 +87509,7 @@ using chip::SessionHandle;
                     completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87547,7 +87547,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87615,7 +87615,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87653,7 +87653,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRVendorIdAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -87724,7 +87724,7 @@ using chip::SessionHandle;
                                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -87957,7 +87957,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88027,7 +88027,7 @@ using chip::SessionHandle;
                       completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88065,7 +88065,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88137,7 +88137,7 @@ using chip::SessionHandle;
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88183,7 +88183,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterStructAttrStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88253,7 +88253,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88293,7 +88293,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88362,7 +88362,7 @@ using chip::SessionHandle;
                                   completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88402,7 +88402,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88472,7 +88472,7 @@ using chip::SessionHandle;
                                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88512,7 +88512,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88582,7 +88582,7 @@ using chip::SessionHandle;
                                    completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88622,7 +88622,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88691,7 +88691,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88752,7 +88752,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListLongOctetStringListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -88803,7 +88803,7 @@ using chip::SessionHandle;
 - (void)readAttributeListFabricScopedWithParams:(MTRReadParams * _Nullable)params
                               completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 { // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListFabricScopedListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = TestCluster::Attributes::ListFabricScoped::TypeInfo;
@@ -88824,7 +88824,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -88940,7 +88940,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterListFabricScopedListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89010,7 +89010,7 @@ using chip::SessionHandle;
                                completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89049,7 +89049,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89118,7 +89118,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89158,7 +89158,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89227,7 +89227,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89267,7 +89267,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89336,7 +89336,7 @@ using chip::SessionHandle;
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89374,7 +89374,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89443,7 +89443,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89487,7 +89487,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableBooleanAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89556,7 +89556,7 @@ using chip::SessionHandle;
                              completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89600,7 +89600,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterNullableBitmap8AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89670,7 +89670,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89714,7 +89714,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterNullableBitmap16AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89784,7 +89784,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89828,7 +89828,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterNullableBitmap32AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -89898,7 +89898,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -89942,7 +89942,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterNullableBitmap64AttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90012,7 +90012,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90056,7 +90056,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90125,7 +90125,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90169,7 +90169,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90238,7 +90238,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90282,7 +90282,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90351,7 +90351,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90395,7 +90395,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90464,7 +90464,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90508,7 +90508,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90577,7 +90577,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90621,7 +90621,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90690,7 +90690,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90734,7 +90734,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90803,7 +90803,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90847,7 +90847,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -90916,7 +90916,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -90960,7 +90960,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91029,7 +91029,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91073,7 +91073,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91142,7 +91142,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91186,7 +91186,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91255,7 +91255,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91299,7 +91299,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt32sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91368,7 +91368,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91412,7 +91412,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91481,7 +91481,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91525,7 +91525,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91594,7 +91594,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91638,7 +91638,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91707,7 +91707,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91751,7 +91751,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt64sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91820,7 +91820,7 @@ using chip::SessionHandle;
                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91864,7 +91864,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -91933,7 +91933,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -91977,7 +91977,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92046,7 +92046,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92091,7 +92091,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableFloatAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92160,7 +92160,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92205,7 +92205,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableDoubleAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92274,7 +92274,7 @@ using chip::SessionHandle;
                                  completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92319,7 +92319,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableOctetStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92388,7 +92388,7 @@ using chip::SessionHandle;
                                 completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92432,7 +92432,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableCharStringAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92501,7 +92501,7 @@ using chip::SessionHandle;
                               completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92545,7 +92545,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92618,7 +92618,7 @@ using chip::SessionHandle;
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92669,7 +92669,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterNullableStructStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92742,7 +92742,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92787,7 +92787,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92859,7 +92859,7 @@ using chip::SessionHandle;
                                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -92904,7 +92904,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt8sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -92976,7 +92976,7 @@ using chip::SessionHandle;
                                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -93021,7 +93021,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -93093,7 +93093,7 @@ using chip::SessionHandle;
                                            completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     value = [value copy];
 
     new MTRDefaultSuccessCallbackBridge(
@@ -93138,7 +93138,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRNullableInt16sAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -93209,7 +93209,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -93281,7 +93281,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -93351,7 +93351,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRTestClusterAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -93421,7 +93421,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
@@ -93490,7 +93490,7 @@ using chip::SessionHandle;
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
-    params = (params == nil) ? nil : [params copy];
+    params = [params copy];
     new MTRInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
