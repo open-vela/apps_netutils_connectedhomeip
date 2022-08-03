@@ -14135,7 +14135,7 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    uint8_t CurrentLevelValue;
+    chip::app::DataModel::Nullable<uint8_t> CurrentLevelValue;
     uint8_t MinLevelValue;
     uint8_t MinLevelFeatureMapNotSupportedValue;
     uint8_t MaxLevelValue;
@@ -14162,7 +14162,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
@@ -14226,7 +14226,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelValue));
@@ -14236,7 +14236,7 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, MinLevelFeatureMapNotSupportedValue));
@@ -14981,9 +14981,10 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 64U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 64U));
             }
             break;
         case 9:
@@ -14996,9 +14997,10 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 100U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
         case 12:
@@ -15011,9 +15013,10 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 128U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 128U));
             }
             break;
         case 15:
@@ -15036,9 +15039,10 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 64U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 64U));
             }
             break;
         case 19:
@@ -15065,9 +15069,10 @@ private:
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 100U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
         case 25:
@@ -15083,9 +15088,10 @@ private:
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 100U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
         case 29:
@@ -15098,9 +15104,10 @@ private:
         case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 100U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
         case 32:
@@ -15113,9 +15120,10 @@ private:
         case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 160U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 160U));
             }
             break;
         case 35:
@@ -15142,9 +15150,10 @@ private:
         case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 100U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 100U));
             }
             break;
         case 41:
@@ -15160,9 +15169,10 @@ private:
         case 44:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 120U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 120U));
             }
             break;
         case 45:
@@ -15175,9 +15185,10 @@ private:
         case 47:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 120U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 120U));
             }
             break;
         case 48:
@@ -15190,9 +15201,10 @@ private:
         case 50:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 160U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 160U));
             }
             break;
         case 51:
@@ -15268,10 +15280,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level           = 64U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 64U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
                                value, chip::NullOptional
 
@@ -15295,10 +15308,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 100U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 100U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15322,10 +15336,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 128U;
-            value.transitionTime  = 100U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 128U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 100U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15356,8 +15371,8 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 64U;
-            value.transitionTime  = 65535U;
+            value.level = 64U;
+            value.transitionTime.SetNull();
             value.optionsMask     = 0U;
             value.optionsOverride = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
@@ -15407,10 +15422,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 100U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 100U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15443,10 +15459,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 120U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 120U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15470,10 +15487,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 140U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 0U;
+            value.level = 140U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15497,10 +15515,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 160U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 1U;
+            value.level = 160U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15548,10 +15567,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 100U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 100U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15584,10 +15604,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 120U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 120U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15611,10 +15632,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 140U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 0U;
+            value.level = 140U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15638,10 +15660,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 160U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 1U;
+            value.level = 160U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -15703,8 +15726,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
 
-    uint8_t MinlevelValue;
-    uint8_t MaxlevelValue;
+    uint8_t MinimumLevelValue;
+    uint8_t MaximumLevelValue;
     chip::app::DataModel::Nullable<uint8_t> DefaultMoveRateValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
@@ -15745,7 +15768,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
-                MinlevelValue = value;
+                MinimumLevelValue = value;
             }
             break;
         case 5:
@@ -15759,7 +15782,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
-                MaxlevelValue = value;
+                MaximumLevelValue = value;
             }
             break;
         case 7:
@@ -15776,9 +15799,12 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, MaxlevelValue));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), MaximumLevelValue));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
             break;
         case 11:
@@ -15795,9 +15821,10 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, MinlevelValue));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), MinimumLevelValue));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
@@ -15891,17 +15918,18 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level           = 1U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 1U;
+            value.level = 1U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
                                value, chip::NullOptional
 
             );
         }
         case 6: {
-            LogStep(6, "reads max level attribute from DUT");
+            LogStep(6, "reads MaxLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::MaxLevel::Id, true,
                                  chip::NullOptional);
@@ -15911,8 +15939,9 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Move::Type value;
-            value.moveMode        = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
-            value.rate            = 32U;
+            value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
+            value.rate.SetNonNull();
+            value.rate.Value()    = 32U;
             value.optionsMask     = 1U;
             value.optionsOverride = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
@@ -15950,8 +15979,9 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C05.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Move::Type value;
-            value.moveMode        = static_cast<chip::app::Clusters::LevelControl::MoveMode>(1);
-            value.rate            = 64U;
+            value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(1);
+            value.rate.SetNonNull();
+            value.rate.Value()    = 64U;
             value.optionsMask     = 1U;
             value.optionsOverride = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
@@ -15985,18 +16015,18 @@ private:
                                  chip::NullOptional);
         }
         case 15: {
-            LogStep(15, "reads default move rate attribute from DUT");
+            LogStep(15, "reads DefaultMoveRate attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0014"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::DefaultMoveRate::Id,
                                  true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "sends a Move up command at default move rate");
+            LogStep(16, "sends a Move up command at DefaultMoveRate");
             VerifyOrDo(!ShouldSkip("LVL.S.C05.Rsp && LVL.S.A0014"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Move::Type value;
-            value.moveMode        = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
-            value.rate            = 255U;
+            value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
+            value.rate.SetNull();
             value.optionsMask     = 1U;
             value.optionsOverride = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
@@ -16068,7 +16098,7 @@ private:
     chip::Optional<uint16_t> mTimeout;
 
     uint8_t MinlevelValue;
-    uint8_t CurrentlevelValue;
+    chip::app::DataModel::Nullable<uint8_t> CurrentlevelValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -16120,9 +16150,10 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, static_cast<uint8_t>(MinlevelValue + 1)));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), static_cast<uint8_t>(MinlevelValue + 1)));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
@@ -16132,9 +16163,10 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 2U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 2U));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
@@ -16153,18 +16185,20 @@ private:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 66U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 66U));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 66U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 66U));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
             }
             break;
@@ -16181,33 +16215,51 @@ private:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, CurrentlevelValue));
+                if (CurrentlevelValue.IsNull())
+                {
+                    VerifyOrReturn(CheckValueNull("currentLevel", value));
+                }
+                else
+                {
+                    VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                    VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), CurrentlevelValue.Value()));
+                }
             }
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, CurrentlevelValue));
+                if (CurrentlevelValue.IsNull())
+                {
+                    VerifyOrReturn(CheckValueNull("currentLevel", value));
+                }
+                else
+                {
+                    VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                    VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), CurrentlevelValue.Value()));
+                }
             }
             break;
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 2U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 2U));
             }
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 2U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 2U));
             }
             break;
         case 21:
@@ -16277,10 +16329,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp && LVL.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level           = static_cast<uint8_t>(MinlevelValue + 1);
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = static_cast<uint8_t>(MinlevelValue + 1);
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
                                value, chip::NullOptional
 
@@ -16291,23 +16344,24 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp && !LVL.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level           = 2U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.level = 2U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
                                value, chip::NullOptional
 
             );
         }
         case 7: {
-            LogStep(7, "Reads current level attribute from DUT");
+            LogStep(7, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0000 && LVL.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "Reads current level attribute from DUT");
+            LogStep(8, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0000 && !LVL.S.A0002 && LVL.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
@@ -16317,11 +16371,12 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C02.Rsp && LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Step::Type value;
-            value.stepMode        = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
-            value.stepSize        = 64U;
-            value.transitionTime  = 20U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.stepMode = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
+            value.stepSize = 64U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 20U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Step::Id, value,
                                chip::NullOptional
 
@@ -16332,11 +16387,12 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C02.Rsp && !LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Step::Type value;
-            value.stepMode        = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
-            value.stepSize        = 64U;
-            value.transitionTime  = 20U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.stepMode = static_cast<chip::app::Clusters::LevelControl::StepMode>(0);
+            value.stepSize = 64U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 20U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Step::Id, value,
                                chip::NullOptional
 
@@ -16350,14 +16406,14 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 12: {
-            LogStep(12, "Reads current level attribute from DUT");
+            LogStep(12, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "Reads current level attribute from DUT");
+            LogStep(13, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && !LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
@@ -16368,11 +16424,12 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::StepWithOnOff::Type value;
-            value.stepMode        = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
-            value.stepSize        = 64U;
-            value.transitionTime  = 20U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.stepMode = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
+            value.stepSize = 64U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 20U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::StepWithOnOff::Id, value,
                                chip::NullOptional
 
@@ -16383,11 +16440,12 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && !LVL.S.M.VarRate"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::StepWithOnOff::Type value;
-            value.stepMode        = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
-            value.stepSize        = 64U;
-            value.transitionTime  = 20U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.stepMode = static_cast<chip::app::Clusters::LevelControl::StepMode>(1);
+            value.stepSize = 64U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 20U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::StepWithOnOff::Id, value,
                                chip::NullOptional
 
@@ -16401,28 +16459,28 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 17: {
-            LogStep(17, "Reads current level attribute from DUT");
+            LogStep(17, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
         case 18: {
-            LogStep(18, "Reads current level attribute from DUT");
+            LogStep(18, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
-            LogStep(19, "Reads current level attribute from DUT");
+            LogStep(19, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
-            LogStep(20, "Reads current level attribute from DUT");
+            LogStep(20, "Reads CurrentLevel attribute from DUT");
             VerifyOrDo(!ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && !LVL.S.M.VarRate"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::CurrentLevel::Id, true,
@@ -16472,7 +16530,7 @@ private:
     chip::Optional<uint16_t> mTimeout;
 
     uint8_t MinlevelValue;
-    uint8_t CurrentLevelValue;
+    chip::app::DataModel::Nullable<uint8_t> CurrentLevelValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -16521,7 +16579,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
@@ -16545,7 +16603,7 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 21U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 29U));
@@ -16569,7 +16627,7 @@ private:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 43U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 57U));
@@ -16643,10 +16701,11 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C04.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevelWithOnOff::Type value;
-            value.level           = 1U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 1U;
+            value.level = 1U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
                                value, chip::NullOptional
 
@@ -16663,8 +16722,9 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Move::Type value;
-            value.moveMode        = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
-            value.rate            = 5U;
+            value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
+            value.rate.SetNonNull();
+            value.rate.Value()    = 5U;
             value.optionsMask     = 1U;
             value.optionsOverride = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
@@ -16713,8 +16773,9 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Move::Type value;
-            value.moveMode        = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
-            value.rate            = 5U;
+            value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
+            value.rate.SetNonNull();
+            value.rate.Value()    = 5U;
             value.optionsMask     = 1U;
             value.optionsOverride = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
@@ -56236,9 +56297,10 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 1U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 1U));
             }
             break;
         case 4:
@@ -56298,9 +56360,10 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 254U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 254U));
             }
             break;
         case 15:
@@ -56321,9 +56384,10 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 1U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 1U));
             }
             break;
         case 19:
@@ -56336,9 +56400,10 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 127U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 127U));
             }
             break;
         case 22:
@@ -56374,9 +56439,10 @@ private:
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 127U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 127U));
             }
             break;
         case 29:
@@ -56397,9 +56463,10 @@ private:
         case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::DataModel::Nullable<uint8_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentLevel", value, 127U));
+                VerifyOrReturn(CheckValueNonNull("currentLevel", value));
+                VerifyOrReturn(CheckValue("currentLevel.Value()", value.Value(), 127U));
             }
             break;
         default:
@@ -56425,13 +56492,14 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "Sends a MoveToLevel command to set current level to min value");
+            LogStep(1, "Sends a MoveToLevel command to set CurrentLevel to min value");
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 1U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 1U;
+            value.level = 1U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -56544,13 +56612,14 @@ private:
                                  chip::NullOptional);
         }
         case 19: {
-            LogStep(19, "Sends a MoveToLevel command to set current level to a mid value");
+            LogStep(19, "Sends a MoveToLevel command to set CurrentLevel to a mid value");
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::MoveToLevel::Type value;
-            value.level           = 127U;
-            value.transitionTime  = 0U;
-            value.optionsMask     = 1U;
-            value.optionsOverride = 1U;
+            value.level = 127U;
+            value.transitionTime.SetNonNull();
+            value.transitionTime.Value() = 0U;
+            value.optionsMask            = 1U;
+            value.optionsOverride        = 1U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 

@@ -4058,7 +4058,12 @@ using chip::SessionHandle;
                 }
             }
             request.level = params.level.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
+            if (params.transitionTime == nil) {
+                request.transitionTime.SetNull();
+            } else {
+                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
+                nonNullValue_0 = params.transitionTime.unsignedShortValue;
+            }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
@@ -4088,7 +4093,12 @@ using chip::SessionHandle;
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            request.rate = params.rate.unsignedCharValue;
+            if (params.rate == nil) {
+                request.rate.SetNull();
+            } else {
+                auto & nonNullValue_0 = request.rate.SetNonNull();
+                nonNullValue_0 = params.rate.unsignedCharValue;
+            }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
@@ -4119,7 +4129,12 @@ using chip::SessionHandle;
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
             request.stepSize = params.stepSize.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
+            if (params.transitionTime == nil) {
+                request.transitionTime.SetNull();
+            } else {
+                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
+                nonNullValue_0 = params.transitionTime.unsignedShortValue;
+            }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
@@ -4178,7 +4193,12 @@ using chip::SessionHandle;
                 }
             }
             request.level = params.level.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
+            if (params.transitionTime == nil) {
+                request.transitionTime.SetNull();
+            } else {
+                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
+                nonNullValue_0 = params.transitionTime.unsignedShortValue;
+            }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
@@ -4209,7 +4229,12 @@ using chip::SessionHandle;
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
-            request.rate = params.rate.unsignedCharValue;
+            if (params.rate == nil) {
+                request.rate.SetNull();
+            } else {
+                auto & nonNullValue_0 = request.rate.SetNonNull();
+                nonNullValue_0 = params.rate.unsignedCharValue;
+            }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
@@ -4241,7 +4266,12 @@ using chip::SessionHandle;
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
             request.stepSize = params.stepSize.unsignedCharValue;
-            request.transitionTime = params.transitionTime.unsignedShortValue;
+            if (params.transitionTime == nil) {
+                request.transitionTime.SetNull();
+            } else {
+                auto & nonNullValue_0 = request.transitionTime.SetNonNull();
+                nonNullValue_0 = params.transitionTime.unsignedShortValue;
+            }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
@@ -4312,10 +4342,10 @@ using chip::SessionHandle;
 - (void)readAttributeCurrentLevelWithCompletionHandler:(void (^)(
                                                            NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt8uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt8uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = LevelControl::Attributes::CurrentLevel::TypeInfo;
-            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt8uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -4332,7 +4362,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt8uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt8uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -4340,13 +4370,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = LevelControl::Attributes::CurrentLevel::TypeInfo;
-            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt8uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -4359,7 +4389,7 @@ using chip::SessionHandle;
                                   completionHandler:
                                       (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt8uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt8uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = LevelControl::Attributes::CurrentLevel::TypeInfo;
@@ -4368,7 +4398,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt8uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }

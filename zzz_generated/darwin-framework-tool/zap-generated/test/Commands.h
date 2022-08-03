@@ -22984,7 +22984,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
-    NSNumber * _Nonnull CurrentLevelValue;
+    NSNumber * _Nullable CurrentLevelValue;
 
     CHIP_ERROR TestReadsTheCurrentLevelAttribute_1()
     {
@@ -22999,9 +22999,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            }
             {
                 CurrentLevelValue = value;
             }
@@ -23051,7 +23054,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min level", actualValue, 1U));
+                VerifyOrReturn(CheckValue("MinLevel", actualValue, 1U));
             }
 
             VerifyOrReturn(CheckConstraintType("minLevel", "int8u", "int8u"));
@@ -23108,7 +23111,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("max level", actualValue, 254U));
+                VerifyOrReturn(CheckValue("MaxLevel", actualValue, 254U));
             }
 
             VerifyOrReturn(CheckConstraintType("maxLevel", "int8u", "int8u"));
@@ -23164,9 +23167,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], MinLevelValue));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], MaxLevelValue));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], MinLevelValue));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], MaxLevelValue));
+            }
 
             NextTest();
         }];
@@ -23187,11 +23193,14 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], MinLevelFeatureMapNotSupportedValue));
-            VerifyOrReturn(
-                CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], MaxLevelFeatureMapNotSupportedValue));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>(
+                    "currentLevel", [value unsignedCharValue], MinLevelFeatureMapNotSupportedValue));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>(
+                    "currentLevel", [value unsignedCharValue], MaxLevelFeatureMapNotSupportedValue));
+            }
 
             NextTest();
         }];
@@ -23469,7 +23478,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("options", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Options", actualValue, 0U));
             }
 
             VerifyOrReturn(CheckConstraintType("options", "bitmap8", "bitmap8"));
@@ -23876,7 +23885,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("on off transition time", actualValue,
+                VerifyOrReturn(CheckValue("OnOffTransitionTime", actualValue,
                     mOnOffTransitionTimeConfigValue.HasValue() ? mOnOffTransitionTimeConfigValue.Value() : 10U));
             }
 
@@ -23957,9 +23966,9 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("on level", actualValue));
+                VerifyOrReturn(CheckValueNonNull("OnLevel", actualValue));
                 VerifyOrReturn(
-                    CheckValue("on level", actualValue, mOnLevelConfigValue.HasValue() ? mOnLevelConfigValue.Value() : 5U));
+                    CheckValue("OnLevel", actualValue, mOnLevelConfigValue.HasValue() ? mOnLevelConfigValue.Value() : 5U));
             }
             if (value != nil) {
 
@@ -24042,8 +24051,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("on transition time", actualValue));
-                VerifyOrReturn(CheckValue("on transition time", actualValue,
+                VerifyOrReturn(CheckValueNonNull("OnTransitionTime", actualValue));
+                VerifyOrReturn(CheckValue("OnTransitionTime", actualValue,
                     mOnTransitionTimeConfigValue.HasValue() ? mOnTransitionTimeConfigValue.Value() : 5U));
             }
             if (value != nil) {
@@ -24127,8 +24136,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("off transition time", actualValue));
-                VerifyOrReturn(CheckValue("off transition time", actualValue,
+                VerifyOrReturn(CheckValueNonNull("OffTransitionTime", actualValue));
+                VerifyOrReturn(CheckValue("OffTransitionTime", actualValue,
                     mOffTransitionTimeConfigValue.HasValue() ? mOffTransitionTimeConfigValue.Value() : 10U));
             }
             if (value != nil) {
@@ -24212,8 +24221,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("default move rate", actualValue));
-                VerifyOrReturn(CheckValue("default move rate", actualValue,
+                VerifyOrReturn(CheckValueNonNull("DefaultMoveRate", actualValue));
+                VerifyOrReturn(CheckValue("DefaultMoveRate", actualValue,
                     mDefaultMoveRateConfigValue.HasValue() ? mDefaultMoveRateConfigValue.Value() : 111U));
             }
             if (value != nil) {
@@ -24297,8 +24306,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("start up current level", actualValue));
-                VerifyOrReturn(CheckValue("start up current level", actualValue,
+                VerifyOrReturn(CheckValueNonNull("StartUpCurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("StartUpCurrentLevel", actualValue,
                     mStartUpCurrentLevelConfigValue.HasValue() ? mStartUpCurrentLevelConfigValue.Value() : 5U));
             }
             if (value != nil) {
@@ -25097,7 +25106,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 64U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 64U));
             }
 
             NextTest();
@@ -25153,7 +25163,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 100U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
             }
 
             NextTest();
@@ -25209,7 +25220,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 128U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 128U));
             }
 
             NextTest();
@@ -25251,7 +25263,7 @@ private:
 
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
         params.level = [NSNumber numberWithUnsignedChar:64U];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:65535U];
+        params.transitionTime = nil;
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithParams:params
@@ -25288,7 +25300,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 64U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 64U));
             }
 
             NextTest();
@@ -25334,7 +25347,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("options", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Options", actualValue, 0U));
             }
 
             NextTest();
@@ -25407,7 +25420,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 100U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
             }
 
             NextTest();
@@ -25480,7 +25494,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 100U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
             }
 
             NextTest();
@@ -25536,7 +25551,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 100U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
             }
 
             NextTest();
@@ -25592,7 +25608,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 160U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 160U));
             }
 
             NextTest();
@@ -25638,7 +25655,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("options", actualValue, 1U));
+                VerifyOrReturn(CheckValue("Options", actualValue, 1U));
             }
 
             NextTest();
@@ -25711,7 +25728,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 100U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
             }
 
             NextTest();
@@ -25784,7 +25802,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 120U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 120U));
             }
 
             NextTest();
@@ -25840,7 +25859,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 120U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 120U));
             }
 
             NextTest();
@@ -25896,7 +25916,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 160U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 160U));
             }
 
             NextTest();
@@ -26028,7 +26049,7 @@ public:
             err = TestSendsAMoveToLevelWithOnOffCommand_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : reads max level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : reads MaxLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0003")) {
                 NextTest();
                 return;
@@ -26096,7 +26117,7 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : reads default move rate attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 15 : reads DefaultMoveRate attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0014")) {
                 NextTest();
                 return;
@@ -26104,7 +26125,7 @@ public:
             err = TestReadsDefaultMoveRateAttributeFromDut_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : sends a Move up command at default move rate\n");
+            ChipLogProgress(chipTool, " ***** Test Step 16 : sends a Move up command at DefaultMoveRate\n");
             if (ShouldSkip("LVL.S.C05.Rsp && LVL.S.A0014")) {
                 NextTest();
                 return;
@@ -26302,7 +26323,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull MinlevelValue;
+    NSNumber * _Nonnull MinimumLevelValue;
 
     CHIP_ERROR TestReadsMinlevelAttributeFromDut_4()
     {
@@ -26321,7 +26342,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
             {
-                MinlevelValue = value;
+                MinimumLevelValue = value;
             }
 
             NextTest();
@@ -26354,7 +26375,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull MaxlevelValue;
+    NSNumber * _Nonnull MaximumLevelValue;
 
     CHIP_ERROR TestReadsMaxLevelAttributeFromDut_6()
     {
@@ -26365,7 +26386,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeMaxLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"reads max level attribute from DUT Error: %@", err);
+            NSLog(@"reads MaxLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26373,7 +26394,7 @@ private:
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("maxLevel", [value unsignedCharValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("maxLevel", [value unsignedCharValue], 255U));
             {
-                MaxlevelValue = value;
+                MaximumLevelValue = value;
             }
 
             NextTest();
@@ -26439,7 +26460,17 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, MaxlevelValue));
+                if (MaximumLevelValue == nil) {
+                    VerifyOrReturn(CheckValueNull("CurrentLevel", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                    VerifyOrReturn(CheckValue("CurrentLevel", actualValue, MaximumLevelValue));
+                }
+            }
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
             }
 
             NextTest();
@@ -26505,11 +26536,18 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, MinlevelValue));
+                if (MinimumLevelValue == nil) {
+                    VerifyOrReturn(CheckValueNull("CurrentLevel", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                    VerifyOrReturn(CheckValue("CurrentLevel", actualValue, MinimumLevelValue));
+                }
             }
+            if (value != nil) {
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            }
 
             NextTest();
         }];
@@ -26527,7 +26565,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeDefaultMoveRateWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"reads default move rate attribute from DUT Error: %@", err);
+            NSLog(@"reads DefaultMoveRate attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26557,12 +26595,12 @@ private:
 
         __auto_type * params = [[MTRLevelControlClusterMoveParams alloc] init];
         params.moveMode = [NSNumber numberWithUnsignedChar:0U];
-        params.rate = [NSNumber numberWithUnsignedChar:255U];
+        params.rate = nil;
         params.optionsMask = [NSNumber numberWithUnsignedChar:1U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveWithParams:params
               completionHandler:^(NSError * _Nullable err) {
-                  NSLog(@"sends a Move up command at default move rate Error: %@", err);
+                  NSLog(@"sends a Move up command at DefaultMoveRate Error: %@", err);
 
                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26719,7 +26757,7 @@ public:
             err = TestSendsMoveToLevelWithOnOffCommandToDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0000 && LVL.S.C04.Rsp")) {
                 NextTest();
                 return;
@@ -26727,7 +26765,7 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0000 && !LVL.S.A0002 && LVL.S.C04.Rsp")) {
                 NextTest();
                 return;
@@ -26755,7 +26793,7 @@ public:
             err = TestWait2500ms_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
@@ -26763,7 +26801,7 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.A0000 && LVL.S.C02.Rsp && !LVL.S.M.VarRate")) {
                 NextTest();
                 return;
@@ -26791,7 +26829,7 @@ public:
             err = TestWait2500ms_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
@@ -26799,7 +26837,7 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.M.VarRate")) {
                 NextTest();
                 return;
@@ -26807,7 +26845,7 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
@@ -26815,7 +26853,7 @@ public:
             err = TestReadsCurrentLevelAttributeFromDut_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Reads current level attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C06.Rsp && LVL.S.A0000 && !LVL.S.A0002 && !LVL.S.M.VarRate")) {
                 NextTest();
                 return;
@@ -27082,7 +27120,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull CurrentlevelValue;
+    NSNumber * _Nullable CurrentlevelValue;
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_7()
     {
@@ -27093,18 +27131,21 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, [MinlevelValue unsignedCharValue] + 1U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, [MinlevelValue unsignedCharValue] + 1U));
             }
+            if (value != nil) {
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
+            }
             {
                 CurrentlevelValue = value;
             }
@@ -27124,18 +27165,21 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 2U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 2U));
             }
+            if (value != nil) {
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
+            }
 
             NextTest();
         }];
@@ -27211,16 +27255,20 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 66U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 66U));
+            }
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
             }
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
             NextTest();
         }];
 
@@ -27236,16 +27284,20 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 66U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 66U));
+            }
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
             }
 
-            VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
             NextTest();
         }];
 
@@ -27320,13 +27372,18 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, CurrentlevelValue));
+                if (CurrentlevelValue == nil) {
+                    VerifyOrReturn(CheckValueNull("CurrentLevel", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                    VerifyOrReturn(CheckValue("CurrentLevel", actualValue, CurrentlevelValue));
+                }
             }
 
             NextTest();
@@ -27344,13 +27401,18 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, CurrentlevelValue));
+                if (CurrentlevelValue == nil) {
+                    VerifyOrReturn(CheckValueNull("CurrentLevel", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                    VerifyOrReturn(CheckValue("CurrentLevel", actualValue, CurrentlevelValue));
+                }
             }
 
             NextTest();
@@ -27368,13 +27430,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 2U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 2U));
             }
 
             NextTest();
@@ -27392,13 +27455,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads current level attribute from DUT Error: %@", err);
+            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 2U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 2U));
             }
 
             NextTest();
@@ -27832,7 +27896,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
-    NSNumber * _Nonnull CurrentLevelValue;
+    NSNumber * _Nullable CurrentLevelValue;
 
     CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_6()
     {
@@ -27847,8 +27911,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+            }
             {
                 CurrentLevelValue = value;
             }
@@ -27936,8 +28003,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 21U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 29U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 21U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 29U));
+            }
             VerifyOrReturn(CheckConstraintNotValue("currentLevel", value, CurrentLevelValue));
 
             NextTest();
@@ -28023,8 +28093,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 43U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 57U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 43U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 57U));
+            }
             VerifyOrReturn(CheckConstraintNotValue("currentLevel", value, CurrentLevelValue));
 
             NextTest();
@@ -96984,7 +97057,7 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Sends a MoveToLevel command to set current level to min value\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Sends a MoveToLevel command to set CurrentLevel to min value\n");
             err = TestSendsAMoveToLevelCommandToSetCurrentLevelToMinValue_1();
             break;
         case 2:
@@ -97056,7 +97129,7 @@ public:
             err = TestIfOnLevelIsDefinedCheckCurrentLevelIsMinValue_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Sends a MoveToLevel command to set current level to a mid value\n");
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Sends a MoveToLevel command to set CurrentLevel to a mid value\n");
             err = TestSendsAMoveToLevelCommandToSetCurrentLevelToAMidValue_19();
             break;
         case 20:
@@ -97263,7 +97336,7 @@ private:
         params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"Sends a MoveToLevel command to set current level to min value Error: %@", err);
+                         NSLog(@"Sends a MoveToLevel command to set CurrentLevel to min value Error: %@", err);
 
                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -97295,7 +97368,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 1U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 1U));
             }
 
             NextTest();
@@ -97348,7 +97422,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("on off transition time", actualValue, 0U));
+                VerifyOrReturn(CheckValue("OnOffTransitionTime", actualValue, 0U));
             }
 
             NextTest();
@@ -97401,8 +97475,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("on level", actualValue));
-                VerifyOrReturn(CheckValue("on level", actualValue, 254U));
+                VerifyOrReturn(CheckValueNonNull("OnLevel", actualValue));
+                VerifyOrReturn(CheckValue("OnLevel", actualValue, 254U));
             }
 
             NextTest();
@@ -97426,7 +97500,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("min level", actualValue, 1U));
+                VerifyOrReturn(CheckValue("MinLevel", actualValue, 1U));
             }
 
             NextTest();
@@ -97496,7 +97570,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 254U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 254U));
             }
 
             NextTest();
@@ -97566,7 +97641,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 1U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 1U));
             }
 
             NextTest();
@@ -97590,7 +97666,7 @@ private:
         params.optionsOverride = [NSNumber numberWithUnsignedChar:1U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"Sends a MoveToLevel command to set current level to a mid value Error: %@", err);
+                         NSLog(@"Sends a MoveToLevel command to set CurrentLevel to a mid value Error: %@", err);
 
                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -97622,7 +97698,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 127U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 127U));
             }
 
             NextTest();
@@ -97675,7 +97752,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNull("on level", actualValue));
+                VerifyOrReturn(CheckValueNull("OnLevel", actualValue));
             }
 
             NextTest();
@@ -97745,7 +97822,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 127U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 127U));
             }
 
             NextTest();
@@ -97815,7 +97893,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("current level", actualValue, 127U));
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 127U));
             }
 
             NextTest();

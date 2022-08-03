@@ -4374,7 +4374,11 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.level = [NSNumber numberWithUnsignedChar:mRequest.level];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        if (mRequest.transitionTime.IsNull()) {
+            params.transitionTime = nil;
+        } else {
+            params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
+        }
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -4426,7 +4430,11 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
-        params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
+        if (mRequest.rate.IsNull()) {
+            params.rate = nil;
+        } else {
+            params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate.Value()];
+        }
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -4480,7 +4488,11 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
         params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        if (mRequest.transitionTime.IsNull()) {
+            params.transitionTime = nil;
+        } else {
+            params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
+        }
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -4580,7 +4592,11 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.level = [NSNumber numberWithUnsignedChar:mRequest.level];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        if (mRequest.transitionTime.IsNull()) {
+            params.transitionTime = nil;
+        } else {
+            params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
+        }
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -4632,7 +4648,11 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.moveMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.moveMode)];
-        params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate];
+        if (mRequest.rate.IsNull()) {
+            params.rate = nil;
+        } else {
+            params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate.Value()];
+        }
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -4686,7 +4706,11 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.stepMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.stepMode)];
         params.stepSize = [NSNumber numberWithUnsignedChar:mRequest.stepSize];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
+        if (mRequest.transitionTime.IsNull()) {
+            params.transitionTime = nil;
+        } else {
+            params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
+        }
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
