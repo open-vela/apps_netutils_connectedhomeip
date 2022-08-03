@@ -293,6 +293,7 @@ public:
         printf("Test_TC_BR_1\n");
         printf("Test_TC_BR_2\n");
         printf("Test_TC_BR_3\n");
+        printf("Test_TC_BR_4\n");
         printf("Test_TC_DA_1_1\n");
         printf("Test_TC_DA_1_2\n");
         printf("Test_TC_DA_1_3\n");
@@ -451,6 +452,7 @@ public:
         printf("Test_TC_SC_3_2\n");
         printf("Test_TC_SC_3_3\n");
         printf("Test_TC_SC_3_4\n");
+        printf("Test_TC_SC_3_6\n");
         printf("Test_TC_SC_4_1\n");
         printf("Test_TC_SC_4_3\n");
         printf("Test_TC_SC_4_4\n");
@@ -68160,6 +68162,62 @@ private:
     }
 };
 
+class Test_TC_BR_4Suite : public TestCommand
+{
+public:
+    Test_TC_BR_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_BR_4", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_BR_4Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_DA_1_1Suite : public TestCommand
 {
 public:
@@ -79178,6 +79236,62 @@ public:
     }
 
     ~Test_TC_SC_3_4Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SC_3_6Suite : public TestCommand
+{
+public:
+    Test_TC_SC_3_6Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_3_6", 0, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_SC_3_6Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -91379,6 +91493,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_BR_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BR_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BR_3Suite>(credsIssuerConfig),
+        make_unique<Test_TC_BR_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_DA_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_DA_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DA_1_3Suite>(credsIssuerConfig),
@@ -91537,6 +91652,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_SC_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_3_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_3_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_SC_3_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_4_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_4_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_SC_4_4Suite>(credsIssuerConfig),
