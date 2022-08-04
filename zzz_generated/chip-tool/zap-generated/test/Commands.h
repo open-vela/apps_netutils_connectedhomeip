@@ -9452,7 +9452,7 @@ private:
 class Test_TC_BINFO_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_BINFO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_BINFO_1_1", 6, credsIssuerConfig)
+    Test_TC_BINFO_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_BINFO_1_1", 0, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -9485,77 +9485,6 @@ private:
 
         switch (mTestIndex - 1)
         {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint16_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 1U));
-                VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint32_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("featureMap", value, 0UL));
-                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-            }
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::AttributeId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-                VerifyOrReturn(CheckConstraintContains("value", value, 0UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 2UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65528UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65529UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65531UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65532UL));
-                VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
-            }
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::CommandId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acceptedCommandList", iter_0, 0));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<chip::CommandId> value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                {
-                    auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("generatedCommandList", iter_0, 0));
-                }
-                VerifyOrReturn(CheckConstraintType("value", "list", "list"));
-            }
-            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -9571,38 +9500,6 @@ private:
         using namespace chip::app::Clusters;
         switch (testIndex)
         {
-        case 0: {
-            LogStep(0, "Commission DUT to TH");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH reads the ClusterRevision from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ClusterRevision::Id, true,
-                                 chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "TH reads the FeatureMap from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::FeatureMap::Id, true,
-                                 chip::NullOptional);
-        }
-        case 3: {
-            LogStep(3, "TH reads AttributeList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
-        }
-        case 4: {
-            LogStep(4, "TH reads AcceptedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AcceptedCommandList::Id, true,
-                                 chip::NullOptional);
-        }
-        case 5: {
-            LogStep(5, "TH reads GeneratedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::GeneratedCommandList::Id, true,
-                                 chip::NullOptional);
-        }
         }
         return CHIP_NO_ERROR;
     }
