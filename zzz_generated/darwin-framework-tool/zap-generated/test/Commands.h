@@ -16577,30 +16577,6 @@ public:
         // but before our function call returns, we won't end up with an
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Commission DUT to TH\n");
-            err = TestCommissionDutToTh_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
-            err = TestThReadsTheClusterRevisionFromDut_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
-            err = TestThReadsTheFeatureMapFromDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
-            err = TestThReadsAttributeListFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AcceptedCommandList from DUT\n");
-            err = TestThReadsAcceptedCommandListFromDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads GeneratedCommandList from DUT\n");
-            err = TestThReadsGeneratedCommandListFromDut_5();
-            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -16612,24 +16588,6 @@ public:
     void OnStatusUpdate(const chip::app::StatusIB & status) override
     {
         switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -16643,147 +16601,12 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 0;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestCommissionDutToTh_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
-            }
-
-            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
-            }
-
-            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsAttributeListFromDut_3()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_4()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
-            }
-
-            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads GeneratedCommandList from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
-            }
-
-            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
 };
 
 class Test_TC_DESC_1_1 : public TestCommandBridge {
