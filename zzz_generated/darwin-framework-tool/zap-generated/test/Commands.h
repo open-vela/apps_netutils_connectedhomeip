@@ -57688,9 +57688,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("beaconLostCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("beaconLostCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -57710,9 +57713,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("beaconRxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("beaconRxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -57732,9 +57738,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetMulticastRxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetMulticastRxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -57754,9 +57763,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetMulticastTxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetMulticastTxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -57776,9 +57788,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetUnicastRxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetUnicastRxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -57798,9 +57813,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetUnicastTxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetUnicastTxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -57820,7 +57838,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("currentMaxRate", "int64u", "int64u"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("currentMaxRate", "int64u", "int64u"));
+            }
+
             NextTest();
         }];
 
@@ -57839,7 +57861,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("overrunCount", "int64u", "int64u"));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("overrunCount", "int64u", "int64u"));
+            }
+
             NextTest();
         }];
 
@@ -58037,9 +58063,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("beaconLostCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("beaconLostCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconLostCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -58059,9 +58088,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("beaconRxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("beaconRxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("beaconRxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -58081,9 +58113,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetMulticastRxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetMulticastRxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastRxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -58103,9 +58138,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetMulticastTxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetMulticastTxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetMulticastTxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -58125,9 +58163,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetUnicastRxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetUnicastRxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastRxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];
@@ -58147,9 +58188,12 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("packetUnicastTxCount", "int32u", "int32u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 4294967295UL));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("packetUnicastTxCount", "int32u", "int32u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 0UL));
+                VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("packetUnicastTxCount", [value unsignedIntValue], 4294967295UL));
+            }
 
             NextTest();
         }];

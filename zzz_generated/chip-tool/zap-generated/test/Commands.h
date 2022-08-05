@@ -35128,7 +35128,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35138,7 +35138,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35148,7 +35148,7 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35158,7 +35158,7 @@ private:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35168,7 +35168,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35178,7 +35178,7 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35188,7 +35188,7 @@ private:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint64_t value;
+                chip::app::DataModel::Nullable<uint64_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
@@ -35196,7 +35196,7 @@ private:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint64_t value;
+                chip::app::DataModel::Nullable<uint64_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int64u", "int64u"));
             }
@@ -35352,7 +35352,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35362,7 +35362,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35372,7 +35372,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35382,7 +35382,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35392,7 +35392,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
@@ -35402,7 +35402,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint32_t value;
+                chip::app::DataModel::Nullable<uint32_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int32u", "int32u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0UL));
