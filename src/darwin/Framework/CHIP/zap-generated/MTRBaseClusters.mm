@@ -27388,10 +27388,10 @@ using chip::SessionHandle;
 - (void)readAttributeBeaconLostCountWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                               NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::BeaconLostCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27409,7 +27409,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt32uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27417,13 +27417,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::BeaconLostCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27436,7 +27436,7 @@ using chip::SessionHandle;
                                      completionHandler:
                                          (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::BeaconLostCount::TypeInfo;
@@ -27445,7 +27445,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27458,10 +27458,10 @@ using chip::SessionHandle;
 - (void)readAttributeBeaconRxCountWithCompletionHandler:(void (^)(
                                                             NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::BeaconRxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27479,7 +27479,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt32uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27487,13 +27487,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::BeaconRxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27506,7 +27506,7 @@ using chip::SessionHandle;
                                    completionHandler:
                                        (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::BeaconRxCount::TypeInfo;
@@ -27515,7 +27515,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27528,10 +27528,10 @@ using chip::SessionHandle;
 - (void)readAttributePacketMulticastRxCountWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                      NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketMulticastRxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27550,7 +27550,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt32uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27558,13 +27558,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketMulticastRxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27577,7 +27577,7 @@ using chip::SessionHandle;
                                             completionHandler:
                                                 (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketMulticastRxCount::TypeInfo;
@@ -27586,7 +27586,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27599,10 +27599,10 @@ using chip::SessionHandle;
 - (void)readAttributePacketMulticastTxCountWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                      NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketMulticastTxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27621,7 +27621,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt32uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27629,13 +27629,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketMulticastTxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27648,7 +27648,7 @@ using chip::SessionHandle;
                                             completionHandler:
                                                 (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketMulticastTxCount::TypeInfo;
@@ -27657,7 +27657,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27670,10 +27670,10 @@ using chip::SessionHandle;
 - (void)readAttributePacketUnicastRxCountWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                    NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketUnicastRxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27692,7 +27692,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt32uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27700,13 +27700,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketUnicastRxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27719,7 +27719,7 @@ using chip::SessionHandle;
                                           completionHandler:
                                               (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketUnicastRxCount::TypeInfo;
@@ -27728,7 +27728,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27741,10 +27741,10 @@ using chip::SessionHandle;
 - (void)readAttributePacketUnicastTxCountWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                    NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketUnicastTxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27763,7 +27763,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt32uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt32uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27771,13 +27771,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketUnicastTxCount::TypeInfo;
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27790,7 +27790,7 @@ using chip::SessionHandle;
                                           completionHandler:
                                               (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::PacketUnicastTxCount::TypeInfo;
@@ -27799,7 +27799,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt32uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27812,10 +27812,10 @@ using chip::SessionHandle;
 - (void)readAttributeCurrentMaxRateWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                              NSError * _Nullable error))completionHandler
 {
-    new MTRInt64uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt64uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::CurrentMaxRate::TypeInfo;
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27833,7 +27833,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt64uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27841,13 +27841,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::CurrentMaxRate::TypeInfo;
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27860,7 +27860,7 @@ using chip::SessionHandle;
                                     completionHandler:
                                         (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::CurrentMaxRate::TypeInfo;
@@ -27869,7 +27869,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -27882,10 +27882,10 @@ using chip::SessionHandle;
 - (void)readAttributeOverrunCountWithCompletionHandler:(void (^)(
                                                            NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt64uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt64uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::OverrunCount::TypeInfo;
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -27902,7 +27902,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt64uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt64uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -27910,13 +27910,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::OverrunCount::TypeInfo;
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -27929,7 +27929,7 @@ using chip::SessionHandle;
                                   completionHandler:
                                       (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt64uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WiFiNetworkDiagnostics::Attributes::OverrunCount::TypeInfo;
@@ -27938,7 +27938,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int64uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt64uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
