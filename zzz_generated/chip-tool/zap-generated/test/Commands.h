@@ -37052,7 +37052,7 @@ private:
             LogStep(7, "2: Subscribe to DUT reports on OperationalStatus attribute");
             return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                       WindowCovering::Attributes::OperationalStatus::Id, 4, 5, true, chip::NullOptional,
-                                      chip::NullOptional);
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 8: {
             LogStep(8, "2a: TH sends UpOrOpen command to DUT");
@@ -37458,7 +37458,7 @@ private:
             LogStep(7, "2: Subscribe to DUT reports on OperationalStatus attribute");
             return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                       WindowCovering::Attributes::OperationalStatus::Id, 4, 5, true, chip::NullOptional,
-                                      chip::NullOptional);
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 8: {
             LogStep(8, "2a: TH sends DownOrClose command to DUT");
@@ -37786,7 +37786,7 @@ private:
             LogStep(5, "2: Subscribe to DUT reports on OperationalStatus attribute");
             return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                       WindowCovering::Attributes::OperationalStatus::Id, 4, 5, true, chip::NullOptional,
-                                      chip::NullOptional);
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 6: {
             LogStep(6, "2a: TH sends a StopMotion command to DUT");
@@ -48104,7 +48104,7 @@ private:
         case 375: {
             LogStep(375, "Subscribe to list attribute");
             return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, 2, 5,
-                                      true, chip::NullOptional, chip::NullOptional);
+                                      true, chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 376: {
             LogStep(376, "Write subscribed-to list attribute");
@@ -50137,7 +50137,7 @@ private:
             LogStep(9, "Subscribe to the event");
             mTestSubStepCount = 2;
             return SubscribeEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, 3, 5, false,
-                                  chip::NullOptional, chip::NullOptional);
+                                  chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Generate a third event on the accessory");
@@ -53047,7 +53047,7 @@ private:
             LogStep(6, "Subscribe Fabrics Attribute from beta");
             return SubscribeAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
                                       OperationalCredentials::Attributes::Fabrics::Id, 2, 5, true, chip::NullOptional,
-                                      chip::NullOptional);
+                                      chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 7: {
             LogStep(7, "Remove single own fabric");
@@ -58112,7 +58112,7 @@ private:
         case 2: {
             LogStep(2, "Subscribe OnOff Attribute");
             return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, 2, 5, true,
-                                      chip::NullOptional, chip::NullOptional);
+                                      chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 3: {
             LogStep(3, "Turn On the light to see attribute change");
