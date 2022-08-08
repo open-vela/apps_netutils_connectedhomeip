@@ -22345,7 +22345,7 @@ public:
 | * PendingTimestamp                                                  | 0x0039 |
 | * Delay                                                             | 0x003A |
 | * SecurityPolicy                                                    | 0x003B |
-| * ChannelMask                                                       | 0x003C |
+| * ChannelPage0Mask                                                  | 0x003C |
 | * OperationalDatasetComponents                                      | 0x003D |
 | * ActiveNetworkFaultsList                                           | 0x003E |
 | * GeneratedCommandList                                              | 0xFFF8 |
@@ -26249,16 +26249,16 @@ public:
 };
 
 /*
- * Attribute ChannelMask
+ * Attribute ChannelPage0Mask
  */
-class ReadThreadNetworkDiagnosticsChannelMask : public ReadAttribute {
+class ReadThreadNetworkDiagnosticsChannelPage0Mask : public ReadAttribute {
 public:
-    ReadThreadNetworkDiagnosticsChannelMask()
-        : ReadAttribute("channel-mask")
+    ReadThreadNetworkDiagnosticsChannelPage0Mask()
+        : ReadAttribute("channel-page0mask")
     {
     }
 
-    ~ReadThreadNetworkDiagnosticsChannelMask() {}
+    ~ReadThreadNetworkDiagnosticsChannelPage0Mask() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -26267,10 +26267,10 @@ public:
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         MTRBaseClusterThreadNetworkDiagnostics * cluster =
             [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:endpointId queue:callbackQueue];
-        [cluster readAttributeChannelMaskWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ThreadNetworkDiagnostics.ChannelMask response %@", [value description]);
+        [cluster readAttributeChannelPage0MaskWithCompletionHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.ChannelPage0Mask response %@", [value description]);
             if (error != nil) {
-                LogNSError("ThreadNetworkDiagnostics ChannelMask read Error", error);
+                LogNSError("ThreadNetworkDiagnostics ChannelPage0Mask read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -26278,14 +26278,14 @@ public:
     }
 };
 
-class SubscribeAttributeThreadNetworkDiagnosticsChannelMask : public SubscribeAttribute {
+class SubscribeAttributeThreadNetworkDiagnosticsChannelPage0Mask : public SubscribeAttribute {
 public:
-    SubscribeAttributeThreadNetworkDiagnosticsChannelMask()
-        : SubscribeAttribute("channel-mask")
+    SubscribeAttributeThreadNetworkDiagnosticsChannelPage0Mask()
+        : SubscribeAttribute("channel-page0mask")
     {
     }
 
-    ~SubscribeAttributeThreadNetworkDiagnosticsChannelMask() {}
+    ~SubscribeAttributeThreadNetworkDiagnosticsChannelPage0Mask() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -26297,14 +26297,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeChannelMaskWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeChannelPage0MaskWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.ChannelMask response %@", [value description]);
+                NSLog(@"ThreadNetworkDiagnostics.ChannelPage0Mask response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94156,8 +94156,8 @@ void registerClusterThreadNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsDelay>(), //
         make_unique<ReadThreadNetworkDiagnosticsSecurityPolicy>(), //
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsSecurityPolicy>(), //
-        make_unique<ReadThreadNetworkDiagnosticsChannelMask>(), //
-        make_unique<SubscribeAttributeThreadNetworkDiagnosticsChannelMask>(), //
+        make_unique<ReadThreadNetworkDiagnosticsChannelPage0Mask>(), //
+        make_unique<SubscribeAttributeThreadNetworkDiagnosticsChannelPage0Mask>(), //
         make_unique<ReadThreadNetworkDiagnosticsOperationalDatasetComponents>(), //
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsOperationalDatasetComponents>(), //
         make_unique<ReadThreadNetworkDiagnosticsActiveNetworkFaultsList>(), //

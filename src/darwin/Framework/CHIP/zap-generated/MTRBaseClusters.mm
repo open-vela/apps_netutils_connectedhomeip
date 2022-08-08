@@ -26400,12 +26400,12 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeChannelMaskWithCompletionHandler:(void (^)(
-                                                          NSData * _Nullable value, NSError * _Nullable error))completionHandler
+- (void)readAttributeChannelPage0MaskWithCompletionHandler:(void (^)(NSData * _Nullable value,
+                                                               NSError * _Nullable error))completionHandler
 {
     new MTRNullableOctetStringAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ChannelMask::TypeInfo;
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ChannelPage0Mask::TypeInfo;
             auto successFn = Callback<NullableOctetStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::ThreadNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
@@ -26413,11 +26413,12 @@ using chip::SessionHandle;
         });
 }
 
-- (void)subscribeAttributeChannelMaskWithMinInterval:(NSNumber * _Nonnull)minInterval
-                                         maxInterval:(NSNumber * _Nonnull)maxInterval
-                                              params:(MTRSubscribeParams * _Nullable)params
-                             subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
-                                       reportHandler:(void (^)(NSData * _Nullable value, NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeChannelPage0MaskWithMinInterval:(NSNumber * _Nonnull)minInterval
+                                              maxInterval:(NSNumber * _Nonnull)maxInterval
+                                                   params:(MTRSubscribeParams * _Nullable)params
+                                  subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
+                                            reportHandler:
+                                                (void (^)(NSData * _Nullable value, NSError * _Nullable error))reportHandler
 {
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
@@ -26430,7 +26431,7 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ChannelMask::TypeInfo;
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ChannelPage0Mask::TypeInfo;
             auto successFn = Callback<NullableOctetStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
@@ -26444,15 +26445,16 @@ using chip::SessionHandle;
         subscriptionEstablishedHandler);
 }
 
-+ (void)readAttributeChannelMaskWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
-                                          endpoint:(NSNumber *)endpoint
-                                             queue:(dispatch_queue_t)queue
-                                 completionHandler:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completionHandler
++ (void)readAttributeChannelPage0MaskWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
+                                               endpoint:(NSNumber *)endpoint
+                                                  queue:(dispatch_queue_t)queue
+                                      completionHandler:
+                                          (void (^)(NSData * _Nullable value, NSError * _Nullable error))completionHandler
 {
     new MTRNullableOctetStringAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ChannelMask::TypeInfo;
+            using TypeInfo = ThreadNetworkDiagnostics::Attributes::ChannelPage0Mask::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
