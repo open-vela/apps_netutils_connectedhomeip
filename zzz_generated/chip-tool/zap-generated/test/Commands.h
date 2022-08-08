@@ -76504,7 +76504,7 @@ private:
 class Test_TC_CADMIN_1_9Suite : public TestCommand
 {
 public:
-    Test_TC_CADMIN_1_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_9", 24, credsIssuerConfig)
+    Test_TC_CADMIN_1_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CADMIN_1_9", 29, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -76513,8 +76513,8 @@ public:
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("payload2", &mPayload2);
+        AddArgument("correctPayload", &mCorrectPayload);
+        AddArgument("incorrectSetupCodePayload", &mIncorrectSetupCodePayload);
     }
 
     ~Test_TC_CADMIN_1_9Suite() {}
@@ -76529,8 +76529,10 @@ private:
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::CharSpan> mPayload2;
+    chip::Optional<chip::CharSpan> mCorrectPayload;
+    chip::Optional<chip::CharSpan> mIncorrectSetupCodePayload;
+
+    uint8_t tempFabricIndex;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -76552,24 +76554,30 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                tempFabricIndex = value;
+            }
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -76639,6 +76647,26 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
             break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -76663,7 +76691,9 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "TH_CR1 opens a new commissioning window on DUT_CE");
+            LogStep(1,
+                    "Open commissioning window exactly like we plan to later to verify that `correctPayload` can in fact commision "
+                    "the device.");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
@@ -76684,49 +76714,60 @@ private:
             );
         }
         case 2: {
-            LogStep(2, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Temporarily commission device with `correctPayload` just like we will try to later");
+            VerifyOrDo(!ShouldSkip("CADMIN.S && CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload =
+                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00I31506010", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 3: {
-            LogStep(3, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            LogStep(3, "Wait for a CASE session");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            return WaitForCommissionee(kIdentityBeta, value);
         }
         case 4: {
-            LogStep(4, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            LogStep(4, "Read FabricIndex of beta so we can delete the temp fabric");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Remove the temp fabric");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = tempFabricIndex;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::NullOptional
+
+            );
         }
         case 6: {
-            LogStep(6, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "TH_CR1 opens a new commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
+            value.commissioningTimeout = 900U;
+            value.PAKEVerifier         = chip::ByteSpan(
+                chip::Uint8::from_const_char("\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
+                                             "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
+                                             "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357"
+                                             "\326\360,D4\362\275\322z\244\371\316\247\015s\216Lgarbage: not in length on purpose"),
+                97);
+            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations    = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
         }
         case 7: {
             LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
@@ -76734,7 +76775,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 8: {
@@ -76743,7 +76785,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 9: {
@@ -76752,7 +76795,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 10: {
@@ -76761,7 +76805,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 11: {
@@ -76770,7 +76815,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 12: {
@@ -76779,7 +76825,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 13: {
@@ -76788,7 +76835,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 14: {
@@ -76797,7 +76845,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 15: {
@@ -76806,7 +76855,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 16: {
@@ -76815,7 +76865,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 17: {
@@ -76824,7 +76875,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 18: {
@@ -76833,7 +76885,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 19: {
@@ -76842,7 +76895,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 20: {
@@ -76851,7 +76905,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 21: {
@@ -76860,25 +76915,78 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 22: {
-            LogStep(22, "TH_CR2 starts a commissioning process with DUT_CE using valid setup code");
+            LogStep(22, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 23: {
-            LogStep(23, "TH_CR3 starts a commissioning process with DUT_CE");
+            LogStep(23, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 24: {
+            LogStep(24, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 25: {
+            LogStep(25, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 26: {
+            LogStep(26, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 27: {
+            LogStep(27, "TH_CR2 starts a commissioning process with DUT_CE using valid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload =
+                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00I31506010", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 28: {
+            LogStep(28, "TH_CR3 starts a commissioning process with DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId = mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL;
+            value.payload =
+                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00I31506010", 22);
             return PairWithCode(kIdentityGamma, value);
         }
         }
@@ -76890,7 +76998,7 @@ class Test_TC_CADMIN_1_10Suite : public TestCommand
 {
 public:
     Test_TC_CADMIN_1_10Suite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("Test_TC_CADMIN_1_10", 23, credsIssuerConfig)
+        TestCommand("Test_TC_CADMIN_1_10", 28, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -76899,8 +77007,8 @@ public:
         AddArgument("nodeId3", 0, UINT64_MAX, &mNodeId3);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
-        AddArgument("payload", &mPayload);
-        AddArgument("payload2", &mPayload2);
+        AddArgument("correctPayload", &mCorrectPayload);
+        AddArgument("incorrectSetupCodePayload", &mIncorrectSetupCodePayload);
     }
 
     ~Test_TC_CADMIN_1_10Suite() {}
@@ -76915,8 +77023,10 @@ private:
     chip::Optional<chip::NodeId> mNodeId3;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mDiscriminator;
-    chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<chip::CharSpan> mPayload2;
+    chip::Optional<chip::CharSpan> mCorrectPayload;
+    chip::Optional<chip::CharSpan> mIncorrectSetupCodePayload;
+
+    uint8_t tempFabricIndex;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -76938,24 +77048,30 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             shouldContinue = true;
             break;
         case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                tempFabricIndex = value;
+            }
             break;
         case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -77021,6 +77137,26 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             shouldContinue = true;
             break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            shouldContinue = true;
+            break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
         }
@@ -77045,7 +77181,9 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "TH_CR1 opens a commissioning window on DUT_CE");
+            LogStep(1,
+                    "Open commissioning window exactly like we plan to later to verify that `correctPayload` can in fact commision "
+                    "the device.");
             VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
@@ -77057,49 +77195,51 @@ private:
             );
         }
         case 2: {
-            LogStep(2, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(2, "Temporarily commission device with `correctPayload` just like we will try to later");
+            VerifyOrDo(!ShouldSkip("CADMIN.S && CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload =
+                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 3: {
-            LogStep(3, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            LogStep(3, "Wait for a CASE session");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            return WaitForCommissionee(kIdentityBeta, value);
         }
         case 4: {
-            LogStep(4, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            LogStep(4, "Read FabricIndex of beta so we can delete the temp fabric");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Remove the temp fabric");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            chip::app::Clusters::OperationalCredentials::Commands::RemoveFabric::Type value;
+            value.fabricIndex = tempFabricIndex;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::RemoveFabric::Id, value, chip::NullOptional
+
+            );
         }
         case 6: {
-            LogStep(6, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "TH_CR1 opens a commissioning window on DUT_CE");
+            VerifyOrDo(!ShouldSkip("CADMIN.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
-            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
-            return PairWithCode(kIdentityBeta, value);
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            value.commissioningTimeout = 900U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
         }
         case 7: {
             LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
@@ -77107,7 +77247,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 8: {
@@ -77116,7 +77257,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 9: {
@@ -77125,7 +77267,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 10: {
@@ -77134,15 +77277,18 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 11: {
             LogStep(11, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 12: {
@@ -77151,7 +77297,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 13: {
@@ -77160,7 +77307,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 14: {
@@ -77169,7 +77317,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 15: {
@@ -77178,16 +77327,17 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 16: {
             LogStep(16, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
-            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 17: {
@@ -77196,7 +77346,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 18: {
@@ -77205,7 +77356,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 19: {
@@ -77214,7 +77366,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 20: {
@@ -77223,7 +77376,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 21: {
@@ -77232,16 +77386,68 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload2.HasValue() ? mPayload2.Value() : chip::Span<const char>("MT:0000000000I.0648G00", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         case 22: {
-            LogStep(22, "TH_CR2 attempts to do PASE to DUT_CE using the correct onboarding payload");
+            LogStep(22, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
             VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
             value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
-            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:0000000000I31506010", 22);
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 23: {
+            LogStep(23, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 24: {
+            LogStep(24, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 25: {
+            LogStep(25, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 26: {
+            LogStep(26, "TH_CR2 starts a commissioning process with DUT_CE using Invalid setup code");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mIncorrectSetupCodePayload.HasValue() ? mIncorrectSetupCodePayload.Value()
+                                                                  : chip::Span<const char>("MT:-24J0AFN00I.0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 27: {
+            LogStep(27, "TH_CR2 attempts to do PASE to DUT_CE using the correct onboarding payload");
+            VerifyOrDo(!ShouldSkip("CADMIN.S"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload =
+                mCorrectPayload.HasValue() ? mCorrectPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
             return PairWithCode(kIdentityBeta, value);
         }
         }
