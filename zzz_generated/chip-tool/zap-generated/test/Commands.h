@@ -33610,7 +33610,7 @@ private:
             LogStep(31, "TH reads ChannelPage0Mask attribute value from DUT");
             VerifyOrDo(!ShouldSkip("DGTHREAD.S.A003c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), ThreadNetworkDiagnostics::Id,
-                                 ThreadNetworkDiagnostics::Attributes::ChannelMask::Id, true, chip::NullOptional);
+                                 ThreadNetworkDiagnostics::Attributes::ChannelPage0Mask::Id, true, chip::NullOptional);
         }
         case 32: {
             LogStep(32, "Read OperationalDatasetComponents struct attribute from DUT and Verify the each field");
