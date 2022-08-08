@@ -9243,7 +9243,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterBridgedActions
+@implementation MTRBaseClusterActions
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(uint16_t)endpoint queue:(dispatch_queue_t)queue
 {
@@ -9258,8 +9258,7 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)instantActionWithParams:(MTRBridgedActionsClusterInstantActionParams *)params
-              completionHandler:(StatusCompletion)completionHandler
+- (void)instantActionWithParams:(MTRActionsClusterInstantActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9271,7 +9270,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::InstantAction::Type request;
+            Actions::Commands::InstantAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9285,12 +9284,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)instantActionWithTransitionWithParams:(MTRBridgedActionsClusterInstantActionWithTransitionParams *)params
+- (void)instantActionWithTransitionWithParams:(MTRActionsClusterInstantActionWithTransitionParams *)params
                             completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
@@ -9303,7 +9302,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::InstantActionWithTransition::Type request;
+            Actions::Commands::InstantActionWithTransition::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9318,13 +9317,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)startActionWithParams:(MTRBridgedActionsClusterStartActionParams *)params
-            completionHandler:(StatusCompletion)completionHandler
+- (void)startActionWithParams:(MTRActionsClusterStartActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9336,7 +9334,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::StartAction::Type request;
+            Actions::Commands::StartAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9350,12 +9348,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)startActionWithDurationWithParams:(MTRBridgedActionsClusterStartActionWithDurationParams *)params
+- (void)startActionWithDurationWithParams:(MTRActionsClusterStartActionWithDurationParams *)params
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
@@ -9368,7 +9366,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::StartActionWithDuration::Type request;
+            Actions::Commands::StartActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9383,13 +9381,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)stopActionWithParams:(MTRBridgedActionsClusterStopActionParams *)params
-           completionHandler:(StatusCompletion)completionHandler
+- (void)stopActionWithParams:(MTRActionsClusterStopActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9401,7 +9398,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::StopAction::Type request;
+            Actions::Commands::StopAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9415,13 +9412,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)pauseActionWithParams:(MTRBridgedActionsClusterPauseActionParams *)params
-            completionHandler:(StatusCompletion)completionHandler
+- (void)pauseActionWithParams:(MTRActionsClusterPauseActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9433,7 +9429,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::PauseAction::Type request;
+            Actions::Commands::PauseAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9447,12 +9443,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)pauseActionWithDurationWithParams:(MTRBridgedActionsClusterPauseActionWithDurationParams *)params
+- (void)pauseActionWithDurationWithParams:(MTRActionsClusterPauseActionWithDurationParams *)params
                         completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
@@ -9465,7 +9461,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::PauseActionWithDuration::Type request;
+            Actions::Commands::PauseActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9480,13 +9476,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)resumeActionWithParams:(MTRBridgedActionsClusterResumeActionParams *)params
-             completionHandler:(StatusCompletion)completionHandler
+- (void)resumeActionWithParams:(MTRActionsClusterResumeActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9498,7 +9493,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::ResumeAction::Type request;
+            Actions::Commands::ResumeAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9512,13 +9507,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)enableActionWithParams:(MTRBridgedActionsClusterEnableActionParams *)params
-             completionHandler:(StatusCompletion)completionHandler
+- (void)enableActionWithParams:(MTRActionsClusterEnableActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9530,7 +9524,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::EnableAction::Type request;
+            Actions::Commands::EnableAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9544,12 +9538,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)enableActionWithDurationWithParams:(MTRBridgedActionsClusterEnableActionWithDurationParams *)params
+- (void)enableActionWithDurationWithParams:(MTRActionsClusterEnableActionWithDurationParams *)params
                          completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
@@ -9562,7 +9556,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::EnableActionWithDuration::Type request;
+            Actions::Commands::EnableActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9577,13 +9571,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)disableActionWithParams:(MTRBridgedActionsClusterDisableActionParams *)params
-              completionHandler:(StatusCompletion)completionHandler
+- (void)disableActionWithParams:(MTRActionsClusterDisableActionParams *)params completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -9595,7 +9588,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::DisableAction::Type request;
+            Actions::Commands::DisableAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9609,12 +9602,12 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)disableActionWithDurationWithParams:(MTRBridgedActionsClusterDisableActionWithDurationParams *)params
+- (void)disableActionWithDurationWithParams:(MTRActionsClusterDisableActionWithDurationParams *)params
                           completionHandler:(StatusCompletion)completionHandler
 {
     // Make a copy of params before we go async.
@@ -9627,7 +9620,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            BridgedActions::Commands::DisableActionWithDuration::Type request;
+            Actions::Commands::DisableActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -9642,7 +9635,7 @@ using chip::SessionHandle;
 
             auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
@@ -9650,12 +9643,12 @@ using chip::SessionHandle;
 - (void)readAttributeActionListWithCompletionHandler:(void (^)(
                                                          NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsActionListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRActionsActionListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::ActionList::TypeInfo;
-            auto successFn = Callback<BridgedActionsActionListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::ActionList::TypeInfo;
+            auto successFn = Callback<ActionsActionListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
@@ -9670,21 +9663,21 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRBridgedActionsActionListListAttributeCallbackSubscriptionBridge(
+    new MTRActionsActionListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::ActionList::TypeInfo;
-            auto successFn = Callback<BridgedActionsActionListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::ActionList::TypeInfo;
+            auto successFn = Callback<ActionsActionListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRBridgedActionsActionListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRActionsActionListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9696,110 +9689,108 @@ using chip::SessionHandle;
                                             queue:(dispatch_queue_t)queue
                                 completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsActionListListAttributeCallbackBridge(
-        queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-            if (attributeCacheContainer.cppAttributeCache) {
-                chip::app::ConcreteAttributePath path;
-                using TypeInfo = BridgedActions::Attributes::ActionList::TypeInfo;
-                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
-                path.mClusterId = TypeInfo::GetClusterId();
-                path.mAttributeId = TypeInfo::GetAttributeId();
-                TypeInfo::DecodableType value;
-                CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<BridgedActionsActionListListAttributeCallback>::FromCancelable(success);
-                if (err == CHIP_NO_ERROR) {
-                    successFn->mCall(successFn->mContext, value);
-                }
-                return err;
+    new MTRActionsActionListListAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+        if (attributeCacheContainer.cppAttributeCache) {
+            chip::app::ConcreteAttributePath path;
+            using TypeInfo = Actions::Attributes::ActionList::TypeInfo;
+            path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+            path.mClusterId = TypeInfo::GetClusterId();
+            path.mAttributeId = TypeInfo::GetAttributeId();
+            TypeInfo::DecodableType value;
+            CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
+            auto successFn = Callback<ActionsActionListListAttributeCallback>::FromCancelable(success);
+            if (err == CHIP_NO_ERROR) {
+                successFn->mCall(successFn->mContext, value);
             }
-            return CHIP_ERROR_NOT_FOUND;
-        });
+            return err;
+        }
+        return CHIP_ERROR_NOT_FOUND;
+    });
 }
 
-- (void)readAttributeEndpointListWithCompletionHandler:(void (^)(
-                                                           NSArray * _Nullable value, NSError * _Nullable error))completionHandler
+- (void)readAttributeEndpointListsWithCompletionHandler:(void (^)(
+                                                            NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsEndpointListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRActionsEndpointListsListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::EndpointList::TypeInfo;
-            auto successFn = Callback<BridgedActionsEndpointListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::EndpointLists::TypeInfo;
+            auto successFn = Callback<ActionsEndpointListsListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
 
-- (void)subscribeAttributeEndpointListWithMinInterval:(NSNumber * _Nonnull)minInterval
-                                          maxInterval:(NSNumber * _Nonnull)maxInterval
-                                               params:(MTRSubscribeParams * _Nullable)params
-                              subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
-                                        reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeEndpointListsWithMinInterval:(NSNumber * _Nonnull)minInterval
+                                           maxInterval:(NSNumber * _Nonnull)maxInterval
+                                                params:(MTRSubscribeParams * _Nullable)params
+                               subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
+                                         reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRBridgedActionsEndpointListListAttributeCallbackSubscriptionBridge(
+    new MTRActionsEndpointListsListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::EndpointList::TypeInfo;
-            auto successFn = Callback<BridgedActionsEndpointListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::EndpointLists::TypeInfo;
+            auto successFn = Callback<ActionsEndpointListsListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRBridgedActionsEndpointListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRActionsEndpointListsListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
         subscriptionEstablishedHandler);
 }
 
-+ (void)readAttributeEndpointListWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
-                                           endpoint:(NSNumber *)endpoint
-                                              queue:(dispatch_queue_t)queue
-                                  completionHandler:
-                                      (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
++ (void)readAttributeEndpointListsWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                   completionHandler:
+                                       (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsEndpointListListAttributeCallbackBridge(
-        queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-            if (attributeCacheContainer.cppAttributeCache) {
-                chip::app::ConcreteAttributePath path;
-                using TypeInfo = BridgedActions::Attributes::EndpointList::TypeInfo;
-                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
-                path.mClusterId = TypeInfo::GetClusterId();
-                path.mAttributeId = TypeInfo::GetAttributeId();
-                TypeInfo::DecodableType value;
-                CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<BridgedActionsEndpointListListAttributeCallback>::FromCancelable(success);
-                if (err == CHIP_NO_ERROR) {
-                    successFn->mCall(successFn->mContext, value);
-                }
-                return err;
+    new MTRActionsEndpointListsListAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+        if (attributeCacheContainer.cppAttributeCache) {
+            chip::app::ConcreteAttributePath path;
+            using TypeInfo = Actions::Attributes::EndpointLists::TypeInfo;
+            path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+            path.mClusterId = TypeInfo::GetClusterId();
+            path.mAttributeId = TypeInfo::GetAttributeId();
+            TypeInfo::DecodableType value;
+            CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
+            auto successFn = Callback<ActionsEndpointListsListAttributeCallback>::FromCancelable(success);
+            if (err == CHIP_NO_ERROR) {
+                successFn->mCall(successFn->mContext, value);
             }
-            return CHIP_ERROR_NOT_FOUND;
-        });
+            return err;
+        }
+        return CHIP_ERROR_NOT_FOUND;
+    });
 }
 
-- (void)readAttributeSetupUrlWithCompletionHandler:(void (^)(
+- (void)readAttributeSetupURLWithCompletionHandler:(void (^)(
                                                        NSString * _Nullable value, NSError * _Nullable error))completionHandler
 {
     new MTRCharStringAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::SetupUrl::TypeInfo;
+            using TypeInfo = Actions::Attributes::SetupURL::TypeInfo;
             auto successFn = Callback<CharStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
 
-- (void)subscribeAttributeSetupUrlWithMinInterval:(NSNumber * _Nonnull)minInterval
+- (void)subscribeAttributeSetupURLWithMinInterval:(NSNumber * _Nonnull)minInterval
                                       maxInterval:(NSNumber * _Nonnull)maxInterval
                                            params:(MTRSubscribeParams * _Nullable)params
                           subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
@@ -9816,11 +9807,11 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::SetupUrl::TypeInfo;
+            using TypeInfo = Actions::Attributes::SetupURL::TypeInfo;
             auto successFn = Callback<CharStringAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 MTRCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
@@ -9830,7 +9821,7 @@ using chip::SessionHandle;
         subscriptionEstablishedHandler);
 }
 
-+ (void)readAttributeSetupUrlWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
++ (void)readAttributeSetupURLWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                        endpoint:(NSNumber *)endpoint
                                           queue:(dispatch_queue_t)queue
                               completionHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completionHandler
@@ -9838,7 +9829,7 @@ using chip::SessionHandle;
     new MTRCharStringAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = BridgedActions::Attributes::SetupUrl::TypeInfo;
+            using TypeInfo = Actions::Attributes::SetupURL::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -9857,12 +9848,12 @@ using chip::SessionHandle;
 - (void)readAttributeGeneratedCommandListWithCompletionHandler:(void (^)(NSArray * _Nullable value,
                                                                    NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRActionsGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<BridgedActionsGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::GeneratedCommandList::TypeInfo;
+            auto successFn = Callback<ActionsGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
@@ -9879,21 +9870,21 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRBridgedActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTRActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<BridgedActionsGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::GeneratedCommandList::TypeInfo;
+            auto successFn = Callback<ActionsGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRBridgedActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRActionsGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9906,17 +9897,17 @@ using chip::SessionHandle;
                                           completionHandler:
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsGeneratedCommandListListAttributeCallbackBridge(
+    new MTRActionsGeneratedCommandListListAttributeCallbackBridge(
         queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = BridgedActions::Attributes::GeneratedCommandList::TypeInfo;
+                using TypeInfo = Actions::Attributes::GeneratedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<BridgedActionsGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+                auto successFn = Callback<ActionsGeneratedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -9929,12 +9920,12 @@ using chip::SessionHandle;
 - (void)readAttributeAcceptedCommandListWithCompletionHandler:(void (^)(NSArray * _Nullable value,
                                                                   NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRActionsAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<BridgedActionsAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::AcceptedCommandList::TypeInfo;
+            auto successFn = Callback<ActionsAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
@@ -9951,21 +9942,21 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRBridgedActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTRActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<BridgedActionsAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::AcceptedCommandList::TypeInfo;
+            auto successFn = Callback<ActionsAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRBridgedActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRActionsAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -9978,17 +9969,17 @@ using chip::SessionHandle;
                                          completionHandler:
                                              (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsAcceptedCommandListListAttributeCallbackBridge(
+    new MTRActionsAcceptedCommandListListAttributeCallbackBridge(
         queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = BridgedActions::Attributes::AcceptedCommandList::TypeInfo;
+                using TypeInfo = Actions::Attributes::AcceptedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<BridgedActionsAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+                auto successFn = Callback<ActionsAcceptedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -10001,12 +9992,12 @@ using chip::SessionHandle;
 - (void)readAttributeAttributeListWithCompletionHandler:(void (^)(
                                                             NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRActionsAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<BridgedActionsAttributeListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::AttributeList::TypeInfo;
+            auto successFn = Callback<ActionsAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
@@ -10021,21 +10012,21 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRBridgedActionsAttributeListListAttributeCallbackSubscriptionBridge(
+    new MTRActionsAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<BridgedActionsAttributeListListAttributeCallback>::FromCancelable(success);
+            using TypeInfo = Actions::Attributes::AttributeList::TypeInfo;
+            auto successFn = Callback<ActionsAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRBridgedActionsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRActionsAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -10048,24 +10039,23 @@ using chip::SessionHandle;
                                    completionHandler:
                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    new MTRBridgedActionsAttributeListListAttributeCallbackBridge(
-        queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
-            if (attributeCacheContainer.cppAttributeCache) {
-                chip::app::ConcreteAttributePath path;
-                using TypeInfo = BridgedActions::Attributes::AttributeList::TypeInfo;
-                path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
-                path.mClusterId = TypeInfo::GetClusterId();
-                path.mAttributeId = TypeInfo::GetAttributeId();
-                TypeInfo::DecodableType value;
-                CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<BridgedActionsAttributeListListAttributeCallback>::FromCancelable(success);
-                if (err == CHIP_NO_ERROR) {
-                    successFn->mCall(successFn->mContext, value);
-                }
-                return err;
+    new MTRActionsAttributeListListAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+        if (attributeCacheContainer.cppAttributeCache) {
+            chip::app::ConcreteAttributePath path;
+            using TypeInfo = Actions::Attributes::AttributeList::TypeInfo;
+            path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+            path.mClusterId = TypeInfo::GetClusterId();
+            path.mAttributeId = TypeInfo::GetAttributeId();
+            TypeInfo::DecodableType value;
+            CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
+            auto successFn = Callback<ActionsAttributeListListAttributeCallback>::FromCancelable(success);
+            if (err == CHIP_NO_ERROR) {
+                successFn->mCall(successFn->mContext, value);
             }
-            return CHIP_ERROR_NOT_FOUND;
-        });
+            return err;
+        }
+        return CHIP_ERROR_NOT_FOUND;
+    });
 }
 
 - (void)readAttributeFeatureMapWithCompletionHandler:(void (^)(
@@ -10073,10 +10063,10 @@ using chip::SessionHandle;
 {
     new MTRInt32uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::FeatureMap::TypeInfo;
+            using TypeInfo = Actions::Attributes::FeatureMap::TypeInfo;
             auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
@@ -10098,11 +10088,11 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::FeatureMap::TypeInfo;
+            using TypeInfo = Actions::Attributes::FeatureMap::TypeInfo;
             auto successFn = Callback<Int32uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
@@ -10120,7 +10110,7 @@ using chip::SessionHandle;
     new MTRInt32uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = BridgedActions::Attributes::FeatureMap::TypeInfo;
+            using TypeInfo = Actions::Attributes::FeatureMap::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -10141,10 +10131,10 @@ using chip::SessionHandle;
 {
     new MTRInt16uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = BridgedActions::Attributes::ClusterRevision::TypeInfo;
+            using TypeInfo = Actions::Attributes::ClusterRevision::TypeInfo;
             auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
@@ -10167,11 +10157,11 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = BridgedActions::Attributes::ClusterRevision::TypeInfo;
+            using TypeInfo = Actions::Attributes::ClusterRevision::TypeInfo;
             auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
-            chip::Controller::BridgedActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
                 MTRInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
@@ -10190,7 +10180,7 @@ using chip::SessionHandle;
     new MTRInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = BridgedActions::Attributes::ClusterRevision::TypeInfo;
+            using TypeInfo = Actions::Attributes::ClusterRevision::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();

@@ -2616,9 +2616,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:1
-                                                                                                queue:mCallbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
@@ -2641,9 +2639,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:1
-                                                                                                queue:mCallbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
@@ -2666,9 +2662,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:1
-                                                                                                queue:mCallbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -2689,9 +2683,7 @@ private:
     CHIP_ERROR TestReadTheOptionalAttributeSetupURLInAttributeList_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:1
-                                                                                                queue:mCallbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -2713,9 +2705,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:1
-                                                                                                queue:mCallbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -2734,9 +2724,7 @@ private:
     CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:1
-                                                                                                queue:mCallbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
