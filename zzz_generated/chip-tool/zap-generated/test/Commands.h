@@ -2248,34 +2248,34 @@ private:
         }
         case 1: {
             LogStep(1, "Read the global attribute: ClusterRevision");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BridgedActions::Id,
-                                 BridgedActions::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Actions::Id, Actions::Attributes::ClusterRevision::Id, true,
+                                 chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Read the global attribute: FeatureMap");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BridgedActions::Id, BridgedActions::Attributes::FeatureMap::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Actions::Id, Actions::Attributes::FeatureMap::Id, true,
+                                 chip::NullOptional);
         }
         case 3: {
             LogStep(3, "Read the global attribute: AttributeList");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BridgedActions::Id, BridgedActions::Attributes::AttributeList::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Actions::Id, Actions::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
         }
         case 4: {
             LogStep(4, "Read the optional attribute(SetupURL) in AttributeList");
             VerifyOrDo(!ShouldSkip("ACT.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BridgedActions::Id, BridgedActions::Attributes::AttributeList::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Actions::Id, Actions::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Read the global attribute: AcceptedCommandList");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BridgedActions::Id,
-                                 BridgedActions::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Actions::Id, Actions::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
         }
         case 6: {
             LogStep(6, "Read the global attribute: GeneratedCommandList");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), BridgedActions::Id,
-                                 BridgedActions::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Actions::Id, Actions::Attributes::GeneratedCommandList::Id, true,
+                                 chip::NullOptional);
         }
         case 7: {
             LogStep(7,

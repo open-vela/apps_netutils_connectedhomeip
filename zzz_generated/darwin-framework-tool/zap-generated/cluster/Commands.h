@@ -46,7 +46,7 @@
 | Descriptor                                                          | 0x001D |
 | Binding                                                             | 0x001E |
 | AccessControl                                                       | 0x001F |
-| BridgedActions                                                      | 0x0025 |
+| Actions                                                             | 0x0025 |
 | Basic                                                               | 0x0028 |
 | OtaSoftwareUpdateProvider                                           | 0x0029 |
 | OtaSoftwareUpdateRequestor                                          | 0x002A |
@@ -9499,7 +9499,7 @@ public:
 };
 
 /*----------------------------------------------------------------------------*\
-| Cluster BridgedActions                                              | 0x0025 |
+| Cluster Actions                                                     | 0x0025 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * InstantAction                                                     |   0x00 |
@@ -9517,8 +9517,8 @@ public:
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * ActionList                                                        | 0x0000 |
-| * EndpointList                                                      | 0x0001 |
-| * SetupUrl                                                          | 0x0002 |
+| * EndpointLists                                                     | 0x0001 |
+| * SetupURL                                                          | 0x0002 |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * AttributeList                                                     | 0xFFFB |
@@ -9533,9 +9533,9 @@ public:
 /*
  * Command InstantAction
  */
-class BridgedActionsInstantAction : public ClusterCommand {
+class ActionsInstantAction : public ClusterCommand {
 public:
-    BridgedActionsInstantAction()
+    ActionsInstantAction()
         : ClusterCommand("instant-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9548,10 +9548,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterInstantActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterInstantActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9579,15 +9579,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::InstantAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::InstantAction::Type mRequest;
 };
 
 /*
  * Command InstantActionWithTransition
  */
-class BridgedActionsInstantActionWithTransition : public ClusterCommand {
+class ActionsInstantActionWithTransition : public ClusterCommand {
 public:
-    BridgedActionsInstantActionWithTransition()
+    ActionsInstantActionWithTransition()
         : ClusterCommand("instant-action-with-transition")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9601,10 +9601,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterInstantActionWithTransitionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterInstantActionWithTransitionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9633,15 +9633,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::InstantActionWithTransition::Type mRequest;
+    chip::app::Clusters::Actions::Commands::InstantActionWithTransition::Type mRequest;
 };
 
 /*
  * Command StartAction
  */
-class BridgedActionsStartAction : public ClusterCommand {
+class ActionsStartAction : public ClusterCommand {
 public:
-    BridgedActionsStartAction()
+    ActionsStartAction()
         : ClusterCommand("start-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9654,10 +9654,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterStartActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterStartActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9685,15 +9685,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::StartAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::StartAction::Type mRequest;
 };
 
 /*
  * Command StartActionWithDuration
  */
-class BridgedActionsStartActionWithDuration : public ClusterCommand {
+class ActionsStartActionWithDuration : public ClusterCommand {
 public:
-    BridgedActionsStartActionWithDuration()
+    ActionsStartActionWithDuration()
         : ClusterCommand("start-action-with-duration")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9707,10 +9707,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterStartActionWithDurationParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterStartActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9739,15 +9739,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::StartActionWithDuration::Type mRequest;
+    chip::app::Clusters::Actions::Commands::StartActionWithDuration::Type mRequest;
 };
 
 /*
  * Command StopAction
  */
-class BridgedActionsStopAction : public ClusterCommand {
+class ActionsStopAction : public ClusterCommand {
 public:
-    BridgedActionsStopAction()
+    ActionsStopAction()
         : ClusterCommand("stop-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9760,10 +9760,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterStopActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterStopActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9791,15 +9791,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::StopAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::StopAction::Type mRequest;
 };
 
 /*
  * Command PauseAction
  */
-class BridgedActionsPauseAction : public ClusterCommand {
+class ActionsPauseAction : public ClusterCommand {
 public:
-    BridgedActionsPauseAction()
+    ActionsPauseAction()
         : ClusterCommand("pause-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9812,10 +9812,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterPauseActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterPauseActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9843,15 +9843,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::PauseAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::PauseAction::Type mRequest;
 };
 
 /*
  * Command PauseActionWithDuration
  */
-class BridgedActionsPauseActionWithDuration : public ClusterCommand {
+class ActionsPauseActionWithDuration : public ClusterCommand {
 public:
-    BridgedActionsPauseActionWithDuration()
+    ActionsPauseActionWithDuration()
         : ClusterCommand("pause-action-with-duration")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9865,10 +9865,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterPauseActionWithDurationParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterPauseActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9897,15 +9897,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::PauseActionWithDuration::Type mRequest;
+    chip::app::Clusters::Actions::Commands::PauseActionWithDuration::Type mRequest;
 };
 
 /*
  * Command ResumeAction
  */
-class BridgedActionsResumeAction : public ClusterCommand {
+class ActionsResumeAction : public ClusterCommand {
 public:
-    BridgedActionsResumeAction()
+    ActionsResumeAction()
         : ClusterCommand("resume-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9918,10 +9918,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterResumeActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterResumeActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -9949,15 +9949,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::ResumeAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::ResumeAction::Type mRequest;
 };
 
 /*
  * Command EnableAction
  */
-class BridgedActionsEnableAction : public ClusterCommand {
+class ActionsEnableAction : public ClusterCommand {
 public:
-    BridgedActionsEnableAction()
+    ActionsEnableAction()
         : ClusterCommand("enable-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -9970,10 +9970,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterEnableActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterEnableActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -10001,15 +10001,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::EnableAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::EnableAction::Type mRequest;
 };
 
 /*
  * Command EnableActionWithDuration
  */
-class BridgedActionsEnableActionWithDuration : public ClusterCommand {
+class ActionsEnableActionWithDuration : public ClusterCommand {
 public:
-    BridgedActionsEnableActionWithDuration()
+    ActionsEnableActionWithDuration()
         : ClusterCommand("enable-action-with-duration")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -10023,10 +10023,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x00000009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterEnableActionWithDurationParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterEnableActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -10055,15 +10055,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::EnableActionWithDuration::Type mRequest;
+    chip::app::Clusters::Actions::Commands::EnableActionWithDuration::Type mRequest;
 };
 
 /*
  * Command DisableAction
  */
-class BridgedActionsDisableAction : public ClusterCommand {
+class ActionsDisableAction : public ClusterCommand {
 public:
-    BridgedActionsDisableAction()
+    ActionsDisableAction()
         : ClusterCommand("disable-action")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -10076,10 +10076,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x0000000A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterDisableActionParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterDisableActionParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -10107,15 +10107,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::DisableAction::Type mRequest;
+    chip::app::Clusters::Actions::Commands::DisableAction::Type mRequest;
 };
 
 /*
  * Command DisableActionWithDuration
  */
-class BridgedActionsDisableActionWithDuration : public ClusterCommand {
+class ActionsDisableActionWithDuration : public ClusterCommand {
 public:
-    BridgedActionsDisableActionWithDuration()
+    ActionsDisableActionWithDuration()
         : ClusterCommand("disable-action-with-duration")
     {
         AddArgument("ActionID", 0, UINT16_MAX, &mRequest.actionID);
@@ -10129,10 +10129,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) command (0x0000000B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        __auto_type * params = [[MTRBridgedActionsClusterDisableActionWithDurationParams alloc] init];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        __auto_type * params = [[MTRActionsClusterDisableActionWithDurationParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.actionID = [NSNumber numberWithUnsignedShort:mRequest.actionID];
@@ -10161,33 +10161,33 @@ public:
     }
 
 private:
-    chip::app::Clusters::BridgedActions::Commands::DisableActionWithDuration::Type mRequest;
+    chip::app::Clusters::Actions::Commands::DisableActionWithDuration::Type mRequest;
 };
 
 /*
  * Attribute ActionList
  */
-class ReadBridgedActionsActionList : public ReadAttribute {
+class ReadActionsActionList : public ReadAttribute {
 public:
-    ReadBridgedActionsActionList()
+    ReadActionsActionList()
         : ReadAttribute("action-list")
     {
     }
 
-    ~ReadBridgedActionsActionList() {}
+    ~ReadActionsActionList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         [cluster readAttributeActionListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.ActionList response %@", [value description]);
+            NSLog(@"Actions.ActionList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions ActionList read Error", error);
+                LogNSError("Actions ActionList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10195,22 +10195,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsActionList : public SubscribeAttribute {
+class SubscribeAttributeActionsActionList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsActionList()
+    SubscribeAttributeActionsActionList()
         : SubscribeAttribute("action-list")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsActionList() {}
+    ~SubscribeAttributeActionsActionList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
@@ -10222,7 +10222,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.ActionList response %@", [value description]);
+                NSLog(@"Actions.ActionList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10231,29 +10231,29 @@ public:
 };
 
 /*
- * Attribute EndpointList
+ * Attribute EndpointLists
  */
-class ReadBridgedActionsEndpointList : public ReadAttribute {
+class ReadActionsEndpointLists : public ReadAttribute {
 public:
-    ReadBridgedActionsEndpointList()
-        : ReadAttribute("endpoint-list")
+    ReadActionsEndpointLists()
+        : ReadAttribute("endpoint-lists")
     {
     }
 
-    ~ReadBridgedActionsEndpointList() {}
+    ~ReadActionsEndpointLists() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        [cluster readAttributeEndpointListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.EndpointList response %@", [value description]);
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeEndpointListsWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Actions.EndpointLists response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions EndpointList read Error", error);
+                LogNSError("Actions EndpointLists read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10261,34 +10261,34 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsEndpointList : public SubscribeAttribute {
+class SubscribeAttributeActionsEndpointLists : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsEndpointList()
-        : SubscribeAttribute("endpoint-list")
+    SubscribeAttributeActionsEndpointLists()
+        : SubscribeAttribute("endpoint-lists")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsEndpointList() {}
+    ~SubscribeAttributeActionsEndpointLists() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeEndpointListWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeEndpointListsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.EndpointList response %@", [value description]);
+                NSLog(@"Actions.EndpointLists response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10297,29 +10297,29 @@ public:
 };
 
 /*
- * Attribute SetupUrl
+ * Attribute SetupURL
  */
-class ReadBridgedActionsSetupUrl : public ReadAttribute {
+class ReadActionsSetupURL : public ReadAttribute {
 public:
-    ReadBridgedActionsSetupUrl()
+    ReadActionsSetupURL()
         : ReadAttribute("setup-url")
     {
     }
 
-    ~ReadBridgedActionsSetupUrl() {}
+    ~ReadActionsSetupURL() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
-        [cluster readAttributeSetupUrlWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.SetupUrl response %@", [value description]);
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
+        [cluster readAttributeSetupURLWithCompletionHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Actions.SetupURL response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions SetupUrl read Error", error);
+                LogNSError("Actions SetupURL read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10327,34 +10327,34 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsSetupUrl : public SubscribeAttribute {
+class SubscribeAttributeActionsSetupURL : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsSetupUrl()
+    SubscribeAttributeActionsSetupURL()
         : SubscribeAttribute("setup-url")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsSetupUrl() {}
+    ~SubscribeAttributeActionsSetupURL() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x00000002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeSetupUrlWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeSetupURLWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.SetupUrl response %@", [value description]);
+                NSLog(@"Actions.SetupURL response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10365,27 +10365,27 @@ public:
 /*
  * Attribute GeneratedCommandList
  */
-class ReadBridgedActionsGeneratedCommandList : public ReadAttribute {
+class ReadActionsGeneratedCommandList : public ReadAttribute {
 public:
-    ReadBridgedActionsGeneratedCommandList()
+    ReadActionsGeneratedCommandList()
         : ReadAttribute("generated-command-list")
     {
     }
 
-    ~ReadBridgedActionsGeneratedCommandList() {}
+    ~ReadActionsGeneratedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.GeneratedCommandList response %@", [value description]);
+            NSLog(@"Actions.GeneratedCommandList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions GeneratedCommandList read Error", error);
+                LogNSError("Actions GeneratedCommandList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10393,22 +10393,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsGeneratedCommandList : public SubscribeAttribute {
+class SubscribeAttributeActionsGeneratedCommandList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsGeneratedCommandList()
+    SubscribeAttributeActionsGeneratedCommandList()
         : SubscribeAttribute("generated-command-list")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsGeneratedCommandList() {}
+    ~SubscribeAttributeActionsGeneratedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
@@ -10420,7 +10420,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.GeneratedCommandList response %@", [value description]);
+                NSLog(@"Actions.GeneratedCommandList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10431,27 +10431,27 @@ public:
 /*
  * Attribute AcceptedCommandList
  */
-class ReadBridgedActionsAcceptedCommandList : public ReadAttribute {
+class ReadActionsAcceptedCommandList : public ReadAttribute {
 public:
-    ReadBridgedActionsAcceptedCommandList()
+    ReadActionsAcceptedCommandList()
         : ReadAttribute("accepted-command-list")
     {
     }
 
-    ~ReadBridgedActionsAcceptedCommandList() {}
+    ~ReadActionsAcceptedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.AcceptedCommandList response %@", [value description]);
+            NSLog(@"Actions.AcceptedCommandList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions AcceptedCommandList read Error", error);
+                LogNSError("Actions AcceptedCommandList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10459,22 +10459,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsAcceptedCommandList : public SubscribeAttribute {
+class SubscribeAttributeActionsAcceptedCommandList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsAcceptedCommandList()
+    SubscribeAttributeActionsAcceptedCommandList()
         : SubscribeAttribute("accepted-command-list")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsAcceptedCommandList() {}
+    ~SubscribeAttributeActionsAcceptedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
@@ -10486,7 +10486,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.AcceptedCommandList response %@", [value description]);
+                NSLog(@"Actions.AcceptedCommandList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10497,27 +10497,27 @@ public:
 /*
  * Attribute AttributeList
  */
-class ReadBridgedActionsAttributeList : public ReadAttribute {
+class ReadActionsAttributeList : public ReadAttribute {
 public:
-    ReadBridgedActionsAttributeList()
+    ReadActionsAttributeList()
         : ReadAttribute("attribute-list")
     {
     }
 
-    ~ReadBridgedActionsAttributeList() {}
+    ~ReadActionsAttributeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.AttributeList response %@", [value description]);
+            NSLog(@"Actions.AttributeList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions AttributeList read Error", error);
+                LogNSError("Actions AttributeList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10525,22 +10525,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsAttributeList : public SubscribeAttribute {
+class SubscribeAttributeActionsAttributeList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsAttributeList()
+    SubscribeAttributeActionsAttributeList()
         : SubscribeAttribute("attribute-list")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsAttributeList() {}
+    ~SubscribeAttributeActionsAttributeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
@@ -10552,7 +10552,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.AttributeList response %@", [value description]);
+                NSLog(@"Actions.AttributeList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10563,27 +10563,27 @@ public:
 /*
  * Attribute FeatureMap
  */
-class ReadBridgedActionsFeatureMap : public ReadAttribute {
+class ReadActionsFeatureMap : public ReadAttribute {
 public:
-    ReadBridgedActionsFeatureMap()
+    ReadActionsFeatureMap()
         : ReadAttribute("feature-map")
     {
     }
 
-    ~ReadBridgedActionsFeatureMap() {}
+    ~ReadActionsFeatureMap() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.FeatureMap response %@", [value description]);
+            NSLog(@"Actions.FeatureMap response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions FeatureMap read Error", error);
+                LogNSError("Actions FeatureMap read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10591,22 +10591,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsFeatureMap : public SubscribeAttribute {
+class SubscribeAttributeActionsFeatureMap : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsFeatureMap()
+    SubscribeAttributeActionsFeatureMap()
         : SubscribeAttribute("feature-map")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsFeatureMap() {}
+    ~SubscribeAttributeActionsFeatureMap() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
@@ -10618,7 +10618,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.FeatureMap response %@", [value description]);
+                NSLog(@"Actions.FeatureMap response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -10629,27 +10629,27 @@ public:
 /*
  * Attribute ClusterRevision
  */
-class ReadBridgedActionsClusterRevision : public ReadAttribute {
+class ReadActionsClusterRevision : public ReadAttribute {
 public:
-    ReadBridgedActionsClusterRevision()
+    ReadActionsClusterRevision()
         : ReadAttribute("cluster-revision")
     {
     }
 
-    ~ReadBridgedActionsClusterRevision() {}
+    ~ReadActionsClusterRevision() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedActions.ClusterRevision response %@", [value description]);
+            NSLog(@"Actions.ClusterRevision response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedActions ClusterRevision read Error", error);
+                LogNSError("Actions ClusterRevision read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -10657,22 +10657,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedActionsClusterRevision : public SubscribeAttribute {
+class SubscribeAttributeActionsClusterRevision : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedActionsClusterRevision()
+    SubscribeAttributeActionsClusterRevision()
         : SubscribeAttribute("cluster-revision")
     {
     }
 
-    ~SubscribeAttributeBridgedActionsClusterRevision() {}
+    ~SubscribeAttributeActionsClusterRevision() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000025) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterBridgedActions * cluster = [[MTRBaseClusterBridgedActions alloc] initWithDevice:device
-                                                                                             endpoint:endpointId
-                                                                                                queue:callbackQueue];
+        MTRBaseClusterActions * cluster = [[MTRBaseClusterActions alloc] initWithDevice:device
+                                                                               endpoint:endpointId
+                                                                                  queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
@@ -10684,7 +10684,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedActions.ClusterRevision response %@", [value description]);
+                NSLog(@"Actions.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93453,45 +93453,45 @@ void registerClusterAccessControl(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
-void registerClusterBridgedActions(Commands & commands)
+void registerClusterActions(Commands & commands)
 {
-    using namespace chip::app::Clusters::BridgedActions;
+    using namespace chip::app::Clusters::Actions;
 
-    const char * clusterName = "BridgedActions";
+    const char * clusterName = "Actions";
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
-        make_unique<BridgedActionsInstantAction>(), //
-        make_unique<BridgedActionsInstantActionWithTransition>(), //
-        make_unique<BridgedActionsStartAction>(), //
-        make_unique<BridgedActionsStartActionWithDuration>(), //
-        make_unique<BridgedActionsStopAction>(), //
-        make_unique<BridgedActionsPauseAction>(), //
-        make_unique<BridgedActionsPauseActionWithDuration>(), //
-        make_unique<BridgedActionsResumeAction>(), //
-        make_unique<BridgedActionsEnableAction>(), //
-        make_unique<BridgedActionsEnableActionWithDuration>(), //
-        make_unique<BridgedActionsDisableAction>(), //
-        make_unique<BridgedActionsDisableActionWithDuration>(), //
+        make_unique<ActionsInstantAction>(), //
+        make_unique<ActionsInstantActionWithTransition>(), //
+        make_unique<ActionsStartAction>(), //
+        make_unique<ActionsStartActionWithDuration>(), //
+        make_unique<ActionsStopAction>(), //
+        make_unique<ActionsPauseAction>(), //
+        make_unique<ActionsPauseActionWithDuration>(), //
+        make_unique<ActionsResumeAction>(), //
+        make_unique<ActionsEnableAction>(), //
+        make_unique<ActionsEnableActionWithDuration>(), //
+        make_unique<ActionsDisableAction>(), //
+        make_unique<ActionsDisableActionWithDuration>(), //
         make_unique<ReadAttribute>(Id), //
-        make_unique<ReadBridgedActionsActionList>(), //
+        make_unique<ReadActionsActionList>(), //
         make_unique<WriteAttribute>(Id), //
         make_unique<SubscribeAttribute>(Id), //
-        make_unique<SubscribeAttributeBridgedActionsActionList>(), //
-        make_unique<ReadBridgedActionsEndpointList>(), //
-        make_unique<SubscribeAttributeBridgedActionsEndpointList>(), //
-        make_unique<ReadBridgedActionsSetupUrl>(), //
-        make_unique<SubscribeAttributeBridgedActionsSetupUrl>(), //
-        make_unique<ReadBridgedActionsGeneratedCommandList>(), //
-        make_unique<SubscribeAttributeBridgedActionsGeneratedCommandList>(), //
-        make_unique<ReadBridgedActionsAcceptedCommandList>(), //
-        make_unique<SubscribeAttributeBridgedActionsAcceptedCommandList>(), //
-        make_unique<ReadBridgedActionsAttributeList>(), //
-        make_unique<SubscribeAttributeBridgedActionsAttributeList>(), //
-        make_unique<ReadBridgedActionsFeatureMap>(), //
-        make_unique<SubscribeAttributeBridgedActionsFeatureMap>(), //
-        make_unique<ReadBridgedActionsClusterRevision>(), //
-        make_unique<SubscribeAttributeBridgedActionsClusterRevision>(), //
+        make_unique<SubscribeAttributeActionsActionList>(), //
+        make_unique<ReadActionsEndpointLists>(), //
+        make_unique<SubscribeAttributeActionsEndpointLists>(), //
+        make_unique<ReadActionsSetupURL>(), //
+        make_unique<SubscribeAttributeActionsSetupURL>(), //
+        make_unique<ReadActionsGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeActionsGeneratedCommandList>(), //
+        make_unique<ReadActionsAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeActionsAcceptedCommandList>(), //
+        make_unique<ReadActionsAttributeList>(), //
+        make_unique<SubscribeAttributeActionsAttributeList>(), //
+        make_unique<ReadActionsFeatureMap>(), //
+        make_unique<SubscribeAttributeActionsFeatureMap>(), //
+        make_unique<ReadActionsClusterRevision>(), //
+        make_unique<SubscribeAttributeActionsClusterRevision>(), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -96637,7 +96637,7 @@ void registerClusters(Commands & commands)
     registerClusterDescriptor(commands);
     registerClusterBinding(commands);
     registerClusterAccessControl(commands);
-    registerClusterBridgedActions(commands);
+    registerClusterActions(commands);
     registerClusterBasic(commands);
     registerClusterOtaSoftwareUpdateProvider(commands);
     registerClusterOtaSoftwareUpdateRequestor(commands);
