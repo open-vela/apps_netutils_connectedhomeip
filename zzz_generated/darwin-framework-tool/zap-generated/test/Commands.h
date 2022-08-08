@@ -23145,7 +23145,7 @@ private:
 
                 VerifyOrReturn(CheckConstraintType("currentLevel", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 255U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
             }
             {
                 CurrentLevelValue = value;
@@ -23226,7 +23226,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("minLevel", "int8u", "int8u"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 254U));
             {
                 MinLevelFeatureMapNotSupportedValue = value;
             }
@@ -24058,7 +24058,7 @@ private:
 
                 VerifyOrReturn(CheckConstraintType("onLevel", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue<uint8_t>("onLevel", [value unsignedCharValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("onLevel", [value unsignedCharValue], 255U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("onLevel", [value unsignedCharValue], 254U));
             }
             {
                 OnLevelValue = value;
@@ -24554,180 +24554,193 @@ public:
             err = TestThWrites0ToTheOptionsAttribute_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the MinLevel attribute\n");
-            if (ShouldSkip("LVL.S.A0002")) {
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends Off command to DUT\n");
+            if (ShouldSkip("LVL.S.C04.Rsp && OO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadsTheMinLevelAttribute_4();
+            err = TestThSendsOffCommandToDut_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the MaxLevel attribute\n");
-            if (ShouldSkip("LVL.S.A0003")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : TH sends a MoveToLevelWithOnOff command to DUT, with Level =50 and TransitionTime =0 "
+                "(immediate)\n");
+            if (ShouldSkip("LVL.S.C04.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestReadsTheMaxLevelAttribute_5();
+            err = TestThSendsAMoveToLevelWithOnOffCommandToDutWithLevel50AndTransitionTime0Immediate_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : sends a MoveToLevelWithOnOff command\n");
-            if (ShouldSkip("LVL.S.C00.Rsp")) {
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads OnOff attribute (On/Off cluster) from DUT\n");
+            if (ShouldSkip("OO.S.A0000 && LVL.S.C04.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendsAMoveToLevelWithOnOffCommand_6();
+            err = TestThReadsOnOffAttributeOnOffClusterFromDut_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait 100ms\n");
-            err = TestWait100ms_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C04.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_8();
+            err = TestThReadsCurrentLevelAttributeFromDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends On command to DUT\n");
+            if (ShouldSkip("LVL.S.C04.Rsp && OO.S.C01.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsOnCommandToDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : sends a Move to level command\n");
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH sends a MoveToLevel command to DUT, with Level =50 and TransitionTime =0 (immediate)\n");
             if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendsAMoveToLevelCommand_9();
+            err = TestThSendsAMoveToLevelCommandToDutWithLevel50AndTransitionTime0Immediate_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 100 ms\n");
-            err = TestWait100Ms_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_11();
+            err = TestThReadsCurrentLevelAttributeFromDut_10();
             break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : sends a Move to level command\n");
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH sends a MoveToLevel command to the DUT with Level = 200 and TransitionTime = 300 (30 s). "
+                "This means the level should increase by 150 units in 30s, so 5 units/s\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestSendsAMoveToLevelCommand_12();
+            err = TestThSendsAMoveToLevelCommandToTheDutWithLevel200AndTransitionTime30030SThisMeansTheLevelShouldIncreaseBy150UnitsIn30sSo5UnitsS_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 10000ms\n");
+            err = TestWait10000ms_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 11000ms\n");
-            err = TestWait11000ms_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_14();
+            err = TestThReadsCurrentLevelAttributeFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 10000ms\n");
+            err = TestWait10000ms_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the OnOffTransitionTime attribute from the DUT\n");
-            if (ShouldSkip("LVL.S.A0010")) {
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestReadsTheOnOffTransitionTimeAttributeFromTheDut_15();
+            err = TestThReadsCurrentLevelAttributeFromDut_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : sends a Move to level command\n");
-            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0010")) {
-                NextTest();
-                return;
-            }
-            err = TestSendsAMoveToLevelCommand_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Wait 10000ms\n");
+            err = TestWait10000ms_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 1000ms\n");
-            err = TestWait1000ms_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentLevelAttributeFromDut_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Reads CurrentLevel attribute from DUT\n");
-            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0010 && LVL.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsCurrentLevelAttributeFromDut_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Wait 5000ms\n");
+            err = TestWait5000ms_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH writes 0 to the Options attribute\n");
-            if (ShouldSkip("LVL.S.A000f")) {
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && LVL.S.M.VarRate")) {
                 NextTest();
                 return;
             }
-            err = TestThWrites0ToTheOptionsAttribute_19();
+            err = TestThReadsCurrentLevelAttributeFromDut_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads Options attribute\n");
+            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000 && !LVL.S.M.VarRate")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentLevelAttributeFromDut_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TH writes 0 to the Options attribute\n");
             if (ShouldSkip("LVL.S.A000f")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionsAttribute_20();
+            err = TestThWrites0ToTheOptionsAttribute_21();
             break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH sends On command to DUT\n");
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : TH reads Options attribute\n");
+            if (ShouldSkip("LVL.S.A000f")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionsAttribute_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : TH sends On command to DUT\n");
             if (ShouldSkip("OO.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsOnCommandToDut_21();
+            err = TestThSendsOnCommandToDut_23();
             break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : TH sends a MoveToLevel command to the DUT with\n");
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : TH sends a MoveToLevel command to the DUT with\n");
             if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_22();
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_24();
             break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : Wait 100 ms\n");
-            err = TestWait100Ms_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Reads CurrentLevel attribute from DUT\n");
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_24();
+            err = TestThReadsCurrentLevelAttributeFromDut_25();
             break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : TH sends Off command to DUT\n");
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : TH sends Off command to DUT\n");
             if (ShouldSkip("OO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsOffCommandToDut_25();
+            err = TestThSendsOffCommandToDut_26();
             break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : TH sends a MoveToLevel command to the DUT with\n");
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : TH sends a MoveToLevel command to the DUT with\n");
             if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Wait 100 ms\n");
-            err = TestWait100Ms_27();
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 28 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_28();
+            err = TestThReadsCurrentLevelAttributeFromDut_28();
             break;
         case 29:
             ChipLogProgress(chipTool, " ***** Test Step 29 : TH sends a MoveToLevel command to the DUT with\n");
@@ -24738,164 +24751,140 @@ public:
             err = TestThSendsAMoveToLevelCommandToTheDutWith_29();
             break;
         case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : Wait 100 ms\n");
-            err = TestWait100Ms_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 30 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_31();
+            err = TestThReadsCurrentLevelAttributeFromDut_30();
             break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : TH sends a MoveToLevel command to the DUT with\n");
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : TH sends a MoveToLevel command to the DUT with\n");
             if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_32();
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_31();
             break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : Wait 100 ms\n");
-            err = TestWait100Ms_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Reads CurrentLevel attribute from DUT\n");
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_34();
+            err = TestThReadsCurrentLevelAttributeFromDut_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : TH writes 1 to the Options attribute\n");
+            if (ShouldSkip("LVL.S.A000f")) {
+                NextTest();
+                return;
+            }
+            err = TestThWrites1ToTheOptionsAttribute_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : TH reads Options attribute\n");
+            if (ShouldSkip("LVL.S.A000f")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionsAttribute_34();
             break;
         case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : TH writes 1 to the Options attribute\n");
-            if (ShouldSkip("LVL.S.A000f")) {
-                NextTest();
-                return;
-            }
-            err = TestThWrites1ToTheOptionsAttribute_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : TH reads Options attribute\n");
-            if (ShouldSkip("LVL.S.A000f")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionsAttribute_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : TH sends On command to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 35 : TH sends On command to DUT\n");
             if (ShouldSkip("OO.S.C01.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsOnCommandToDut_37();
+            err = TestThSendsOnCommandToDut_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : TH sends a MoveToLevel command to the DUT with\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : TH reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentLevelAttributeFromDut_37();
             break;
         case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : TH sends a MoveToLevel command to the DUT with\n");
-            if (ShouldSkip("LVL.S.C00.Rsp")) {
+            ChipLogProgress(chipTool, " ***** Test Step 38 : TH sends Off command to DUT\n");
+            if (ShouldSkip("OO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_38();
+            err = TestThSendsOffCommandToDut_38();
             break;
         case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : Wait 100 ms\n");
-            err = TestWait100Ms_39();
+            ChipLogProgress(chipTool, " ***** Test Step 39 : TH sends a MoveToLevel command to the DUT with\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_39();
             break;
         case 40:
-            ChipLogProgress(chipTool, " ***** Test Step 40 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 40 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_40();
+            err = TestThReadsCurrentLevelAttributeFromDut_40();
             break;
         case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : TH sends Off command to DUT\n");
-            if (ShouldSkip("OO.S.C00.Rsp")) {
+            ChipLogProgress(chipTool, " ***** Test Step 41 : TH sends a MoveToLevel command to the DUT with\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsOffCommandToDut_41();
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_41();
             break;
         case 42:
-            ChipLogProgress(chipTool, " ***** Test Step 42 : TH sends a MoveToLevel command to the DUT with\n");
-            if (ShouldSkip("LVL.S.C00.Rsp")) {
+            ChipLogProgress(chipTool, " ***** Test Step 42 : TH reads CurrentLevel attribute from DUT\n");
+            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_42();
+            err = TestThReadsCurrentLevelAttributeFromDut_42();
             break;
         case 43:
-            ChipLogProgress(chipTool, " ***** Test Step 43 : Wait 100 ms\n");
-            err = TestWait100Ms_43();
+            ChipLogProgress(chipTool, " ***** Test Step 43 : TH sends a MoveToLevel command to the DUT with\n");
+            if (ShouldSkip("LVL.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsAMoveToLevelCommandToTheDutWith_43();
             break;
         case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : Reads CurrentLevel attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 44 : TH reads CurrentLevel attribute from DUT\n");
             if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadsCurrentLevelAttributeFromDut_44();
+            err = TestThReadsCurrentLevelAttributeFromDut_44();
             break;
         case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : TH sends a MoveToLevel command to the DUT with\n");
-            if (ShouldSkip("LVL.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_45();
-            break;
-        case 46:
-            ChipLogProgress(chipTool, " ***** Test Step 46 : Wait 100 ms\n");
-            err = TestWait100Ms_46();
-            break;
-        case 47:
-            ChipLogProgress(chipTool, " ***** Test Step 47 : Reads CurrentLevel attribute from DUT\n");
-            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsCurrentLevelAttributeFromDut_47();
-            break;
-        case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : TH sends a MoveToLevel command to the DUT with\n");
-            if (ShouldSkip("LVL.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsAMoveToLevelCommandToTheDutWith_48();
-            break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : Wait 100 ms\n");
-            err = TestWait100Ms_49();
-            break;
-        case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : Reads CurrentLevel attribute from DUT\n");
-            if (ShouldSkip("LVL.S.C00.Rsp && LVL.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsCurrentLevelAttributeFromDut_50();
-            break;
-        case 51:
-            ChipLogProgress(chipTool, " ***** Test Step 51 : Precondition send Off Command\n");
+            ChipLogProgress(chipTool, " ***** Test Step 45 : Precondition send Off Command\n");
             if (ShouldSkip("OO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestPreconditionSendOffCommand_51();
+            err = TestPreconditionSendOffCommand_45();
             break;
-        case 52:
-            ChipLogProgress(chipTool, " ***** Test Step 52 : Check on/off attribute value is false after off command\n");
+        case 46:
+            ChipLogProgress(chipTool, " ***** Test Step 46 : Check on/off attribute value is false after off command\n");
             if (ShouldSkip("OO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_52();
+            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_46();
             break;
         }
 
@@ -25049,24 +25038,6 @@ public:
         case 46:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 50:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 51:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 52:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -25080,7 +25051,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 53;
+    const uint16_t mTestCount = 47;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -25155,22 +25126,16 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheMinLevelAttribute_4()
+    CHIP_ERROR TestThSendsOffCommandToDut_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
+        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeMinLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the MinLevel attribute Error: %@", err);
+        [cluster offWithCompletionHandler:^(NSError * _Nullable err) {
+            NSLog(@"TH sends Off command to DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("minLevel", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("minLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("minLevel", [value unsignedCharValue], 255U));
 
             NextTest();
         }];
@@ -25178,30 +25143,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheMaxLevelAttribute_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMaxLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the MaxLevel attribute Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("maxLevel", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("maxLevel", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("maxLevel", [value unsignedCharValue], 255U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendsAMoveToLevelWithOnOffCommand_6()
+    CHIP_ERROR TestThSendsAMoveToLevelWithOnOffCommandToDutWithLevel50AndTransitionTime0Immediate_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25210,13 +25152,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelWithOnOffParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:64U];
+        params.level = [NSNumber numberWithUnsignedChar:50U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithOnOffWithParams:params
                               completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"sends a MoveToLevelWithOnOff command Error: %@", err);
+                                  NSLog(@"TH sends a MoveToLevelWithOnOff command to DUT, with Level =50 and TransitionTime =0 "
+                                        @"(immediate) Error: %@",
+                                      err);
 
                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25226,30 +25170,20 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100ms_7()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_8()
+    CHIP_ERROR TestThReadsOnOffAttributeOnOffClusterFromDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
+        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+        [cluster readAttributeOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads OnOff attribute (On/Off cluster) from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
-                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 64U));
+                VerifyOrReturn(CheckValue("OnOff", actualValue, 1));
             }
 
             NextTest();
@@ -25258,7 +25192,49 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsAMoveToLevelCommand_9()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 50U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsOnCommandToDut_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster onWithCompletionHandler:^(NSError * _Nullable err) {
+            NSLog(@"TH sends On command to DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToDutWithLevel50AndTransitionTime0Immediate_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25267,13 +25243,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:100U];
+        params.level = [NSNumber numberWithUnsignedChar:50U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"sends a Move to level command Error: %@", err);
+                         NSLog(@"TH sends a MoveToLevel command to DUT, with Level =50 and TransitionTime =0 (immediate) Error: %@",
+                             err);
 
                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25283,14 +25260,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_10()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_11()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25299,14 +25269,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
-                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 100U));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 50U));
             }
 
             NextTest();
@@ -25315,7 +25285,8 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsAMoveToLevelCommand_12()
+    CHIP_ERROR
+    TestThSendsAMoveToLevelCommandToTheDutWithLevel200AndTransitionTime30030SThisMeansTheLevelShouldIncreaseBy150UnitsIn30sSo5UnitsS_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25324,13 +25295,15 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:128U];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:100U];
+        params.level = [NSNumber numberWithUnsignedChar:200U];
+        params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToLevelWithParams:params
                      completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"sends a Move to level command Error: %@", err);
+                         NSLog(@"TH sends a MoveToLevel command to the DUT with Level = 200 and TransitionTime = 300 (30 s). This "
+                               @"means the level should increase by 150 units in 30s, so 5 units/s Error: %@",
+                             err);
 
                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25340,14 +25313,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait11000ms_13()
+    CHIP_ERROR TestWait10000ms_12()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 11000UL;
+        value.ms = 10000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_14()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25356,14 +25329,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
-                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 128U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 85U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 115U));
             }
 
             NextTest();
@@ -25372,62 +25345,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheOnOffTransitionTimeAttributeFromTheDut_15()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOnOffTransitionTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads the OnOffTransitionTime attribute from the DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("onOffTransitionTime", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("onOffTransitionTime", [value unsignedShortValue], 65535U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestSendsAMoveToLevelCommand_16()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRLevelControlClusterMoveToLevelParams alloc] init];
-        params.level = [NSNumber numberWithUnsignedChar:64U];
-        params.transitionTime = nil;
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster moveToLevelWithParams:params
-                     completionHandler:^(NSError * _Nullable err) {
-                         NSLog(@"sends a Move to level command Error: %@", err);
-
-                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                         NextTest();
-                     }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait1000ms_17()
+    CHIP_ERROR TestWait10000ms_14()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 1000UL;
+        value.ms = 10000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_18()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25436,14 +25361,14 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
-                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 64U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 127U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 173U));
             }
 
             NextTest();
@@ -25452,7 +25377,96 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWrites0ToTheOptionsAttribute_19()
+    CHIP_ERROR TestWait10000ms_16()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 10000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_17()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 170U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 200U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWait5000ms_18()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
+        value.ms = 5000UL;
+        return WaitForMs("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_19()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 200U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_20()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 200U));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWrites0ToTheOptionsAttribute_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25474,7 +25488,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionsAttribute_20()
+    CHIP_ERROR TestThReadsOptionsAttribute_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25498,7 +25512,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsOnCommandToDut_21()
+    CHIP_ERROR TestThSendsOnCommandToDut_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -25515,7 +25529,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_22()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25540,14 +25554,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_23()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_24()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25556,7 +25563,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25572,7 +25579,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsOffCommandToDut_25()
+    CHIP_ERROR TestThSendsOffCommandToDut_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -25589,7 +25596,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_26()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_27()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25614,14 +25621,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_27()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_28()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25630,7 +25630,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25671,14 +25671,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_30()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_31()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25687,7 +25680,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25703,7 +25696,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_32()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25728,14 +25721,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_33()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_34()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_32()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25744,7 +25730,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25760,7 +25746,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWrites1ToTheOptionsAttribute_35()
+    CHIP_ERROR TestThWrites1ToTheOptionsAttribute_33()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25782,7 +25768,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionsAttribute_36()
+    CHIP_ERROR TestThReadsOptionsAttribute_34()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25806,7 +25792,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsOnCommandToDut_37()
+    CHIP_ERROR TestThSendsOnCommandToDut_35()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -25823,7 +25809,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_38()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_36()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25848,14 +25834,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_39()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_40()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_37()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25864,7 +25843,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25880,7 +25859,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsOffCommandToDut_41()
+    CHIP_ERROR TestThSendsOffCommandToDut_38()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -25897,7 +25876,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_42()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_39()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25922,14 +25901,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_43()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_44()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_40()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25938,7 +25910,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -25954,7 +25926,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_45()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_41()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25979,14 +25951,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_46()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_47()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_42()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25995,7 +25960,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26011,7 +25976,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_48()
+    CHIP_ERROR TestThSendsAMoveToLevelCommandToTheDutWith_43()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -26036,14 +26001,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait100Ms_49()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestReadsCurrentLevelAttributeFromDut_50()
+    CHIP_ERROR TestThReadsCurrentLevelAttributeFromDut_44()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -26052,7 +26010,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentLevelWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Reads CurrentLevel attribute from DUT Error: %@", err);
+            NSLog(@"TH reads CurrentLevel attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26068,7 +26026,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestPreconditionSendOffCommand_51()
+    CHIP_ERROR TestPreconditionSendOffCommand_45()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -26085,7 +26043,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_52()
+    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_46()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -64425,12 +64383,12 @@ public:
             err = Test3dIfPaTlThReadsCurrentPositionTiltPercentageOptionalAttributeFromDut_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : 4a: TH sends GoToTiltPercentage command with 60.20 percent to DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 11 : 4a: TH sends GoToTiltPercentage command with 60.05 percent to DUT\n");
             if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.C08.Rsp")) {
                 NextTest();
                 return;
             }
-            err = Test4aThSendsGoToTiltPercentageCommandWith6020PercentToDut_11();
+            err = Test4aThSendsGoToTiltPercentageCommandWith6005PercentToDut_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : 4b: DUT updates its attributes\n");
@@ -64756,7 +64714,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR Test4aThSendsGoToTiltPercentageCommandWith6020PercentToDut_11()
+    CHIP_ERROR Test4aThSendsGoToTiltPercentageCommandWith6005PercentToDut_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWindowCovering * cluster = [[MTRBaseClusterWindowCovering alloc] initWithDevice:device
@@ -64768,7 +64726,7 @@ private:
         params.tiltPercent100thsValue = [NSNumber numberWithUnsignedShort:6005U];
         [cluster goToTiltPercentageWithParams:params
                             completionHandler:^(NSError * _Nullable err) {
-                                NSLog(@"4a: TH sends GoToTiltPercentage command with 60.20 percent to DUT Error: %@", err);
+                                NSLog(@"4a: TH sends GoToTiltPercentage command with 60.05 percent to DUT Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
