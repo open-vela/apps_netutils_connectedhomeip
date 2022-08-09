@@ -117397,8 +117397,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -117535,8 +117535,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -117580,8 +117580,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -117635,8 +117635,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:3U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -117690,8 +117690,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -117843,8 +117843,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
