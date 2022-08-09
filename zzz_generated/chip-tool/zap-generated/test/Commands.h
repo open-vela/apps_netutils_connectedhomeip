@@ -23524,7 +23524,6 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("pirOccupiedToUnoccupiedDelay", value, 0U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
@@ -23535,7 +23534,6 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("pirUnoccupiedToOccupiedDelay", value, 0U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
@@ -23546,7 +23544,6 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("pirUnoccupiedToOccupiedThreshold", value, 1U));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
@@ -23557,7 +23554,6 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("ultrasonicOccupiedToUnoccupiedDelay", value, 0U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
@@ -23568,7 +23564,6 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("ultrasonicUnoccupiedToOccupiedDelay", value, 0U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
@@ -23579,7 +23574,6 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("ultrasonicUnoccupiedToOccupiedThreshold", value, 1U));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
@@ -23590,7 +23584,6 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("physicalContactOccupiedToUnoccupiedDelay", value, 0U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
@@ -23601,7 +23594,6 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("physicalContactUnoccupiedToOccupiedDelay", value, 0U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 65535U));
@@ -23612,7 +23604,6 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("physicalContactUnoccupiedToOccupiedThreshold", value, 1U));
                 VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
