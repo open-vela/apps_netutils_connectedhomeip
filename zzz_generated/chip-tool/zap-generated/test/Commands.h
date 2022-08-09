@@ -66558,10 +66558,8 @@ private:
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 1U;
-            value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
-            value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userStatus.SetNull();
+            value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -66619,10 +66617,8 @@ private:
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 2U;
-            value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
-            value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userStatus.SetNull();
+            value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -66642,10 +66638,8 @@ private:
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 2U;
-            value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
-            value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userStatus.SetNull();
+            value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -66678,10 +66672,8 @@ private:
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 3U;
-            value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
-            value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userStatus.SetNull();
+            value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -66714,10 +66706,8 @@ private:
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 2U;
-            value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
-            value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userStatus.SetNull();
+            value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -66801,10 +66791,8 @@ private:
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             value.userIndex.SetNonNull();
             value.userIndex.Value() = 2U;
-            value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
-            value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userStatus.SetNull();
+            value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
