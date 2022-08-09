@@ -39030,11 +39030,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("PIR occupied to unoccupied delay", actualValue, 0U));
-            }
-
             VerifyOrReturn(CheckConstraintType("pirOccupiedToUnoccupiedDelay", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pirOccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("pirOccupiedToUnoccupiedDelay", [value unsignedShortValue], 65535U));
@@ -39058,11 +39053,6 @@ private:
             NSLog(@"Reads optional attribute constrains: PIRUnoccupiedToOccupiedDelay Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("PIR unoccupied to occupied delay", actualValue, 0U));
-            }
 
             VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedDelay", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pirUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
@@ -39088,11 +39078,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("PIR unoccupied to occupied threshold", actualValue, 1U));
-            }
-
             VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedThreshold", "int8u", "int8u"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254U));
@@ -39116,11 +39101,6 @@ private:
             NSLog(@"Read optional attribute: UltrasonicOccupiedToUnoccupiedDelay Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ultrasonic occupied to unoccupied delay", actualValue, 0U));
-            }
 
             VerifyOrReturn(CheckConstraintType("ultrasonicOccupiedToUnoccupiedDelay", "int16u", "int16u"));
             VerifyOrReturn(
@@ -39148,11 +39128,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied delay", actualValue, 0U));
-            }
-
             VerifyOrReturn(CheckConstraintType("ultrasonicUnoccupiedToOccupiedDelay", "int16u", "int16u"));
             VerifyOrReturn(
                 CheckConstraintMinValue<uint16_t>("ultrasonicUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
@@ -39178,11 +39153,6 @@ private:
             NSLog(@"Read attribute: UltrasonicUnoccupiedToOccupiedThreshold Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("ultrasonic unoccupied to occupied threshold", actualValue, 1U));
-            }
 
             VerifyOrReturn(CheckConstraintType("ultrasonicUnoccupiedToOccupiedThreshold", "int8u", "int8u"));
             VerifyOrReturn(
@@ -39210,11 +39180,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("physical contact occupied to unoccupied delay", actualValue, 0U));
-            }
-
             VerifyOrReturn(CheckConstraintType("physicalContactOccupiedToUnoccupiedDelay", "int16u", "int16u"));
             VerifyOrReturn(
                 CheckConstraintMinValue<uint16_t>("physicalContactOccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
@@ -39241,11 +39206,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied delay", actualValue, 0U));
-            }
-
             VerifyOrReturn(CheckConstraintType("physicalContactUnoccupiedToOccupiedDelay", "int16u", "int16u"));
             VerifyOrReturn(
                 CheckConstraintMinValue<uint16_t>("physicalContactUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
@@ -39271,11 +39231,6 @@ private:
             NSLog(@"Reads optional attribute constrains: PhysicalContactUnoccupiedToOccupiedThreshold Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("physical contact unoccupied to occupied threshold", actualValue, 1U));
-            }
 
             VerifyOrReturn(CheckConstraintType("physicalContactUnoccupiedToOccupiedThreshold", "int8u", "int8u"));
             VerifyOrReturn(
