@@ -204,6 +204,7 @@ public:
         printf("Test_TC_DGSW_2_2\n");
         printf("Test_TC_DGSW_2_3\n");
         printf("TestSubscribe_OnOff\n");
+        printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
         printf("Test_TC_DRLK_2_2\n");
@@ -100377,6 +100378,6699 @@ private:
     }
 };
 
+class DL_UsersAndCredentials : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    DL_UsersAndCredentials()
+        : TestCommandBridge("DL_UsersAndCredentials")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~DL_UsersAndCredentials() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: DL_UsersAndCredentials\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: DL_UsersAndCredentials\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read available user slot and verify response fields\n");
+            err = TestReadAvailableUserSlotAndVerifyResponseFields_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Get number of supported users and verify default value\n");
+            err = TestGetNumberOfSupportedUsersAndVerifyDefaultValue_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read fails for user with index 0\n");
+            err = TestReadFailsForUserWithIndex0_3();
+            break;
+        case 4:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 4 : Read fails for user with index greater than Number Of Users Supported\n");
+            err = TestReadFailsForUserWithIndexGreaterThanNumberOfUsersSupported_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Create new user with default parameters\n");
+            err = TestCreateNewUserWithDefaultParameters_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the user back and verify its fields\n");
+            err = TestReadTheUserBackAndVerifyItsFields_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Set user at the occupied index fails with appropriate response\n");
+            err = TestSetUserAtTheOccupiedIndexFailsWithAppropriateResponse_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Modify userName for existing user\n");
+            err = TestModifyUserNameForExistingUser_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Modify userUniqueId for existing user\n");
+            err = TestModifyUserUniqueIdForExistingUser_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Modify userStatus for existing user\n");
+            err = TestModifyUserStatusForExistingUser_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Modify userType for existing user\n");
+            err = TestModifyUserTypeForExistingUser_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Modify credentialRule for existing user\n");
+            err = TestModifyCredentialRuleForExistingUser_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Modify all fields for existing user\n");
+            err = TestModifyAllFieldsForExistingUser_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read the modified user back and verify its fields\n");
+            err = TestReadTheModifiedUserBackAndVerifyItsFields_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Add another user with non-default fields\n");
+            err = TestAddAnotherUserWithNonDefaultFields_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Read the new user back and verify its fields\n");
+            err = TestReadTheNewUserBackAndVerifyItsFields_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Try to add a user with userStatus 0\n");
+            err = TestTryToAddAUserWithUserStatus0_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : Make sure the user did not get created\n");
+            err = TestMakeSureTheUserDidNotGetCreated_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Try to add a user with userStatus 2\n");
+            err = TestTryToAddAUserWithUserStatus2_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Make sure the user did not get created\n");
+            err = TestMakeSureTheUserDidNotGetCreated_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Try to add a user with userStatus 3\n");
+            err = TestTryToAddAUserWithUserStatus3_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Read the new third user back and verify its fields\n");
+            err = TestReadTheNewThirdUserBackAndVerifyItsFields_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : Create user in the last slot\n");
+            err = TestCreateUserInTheLastSlot_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Read the last user back and verify its fields\n");
+            err = TestReadTheLastUserBackAndVerifyItsFields_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : User creation in the 0 slot fails\n");
+            err = TestUserCreationInThe0SlotFails_30();
+            break;
+        case 31:
+            ChipLogProgress(chipTool, " ***** Test Step 31 : User creation in the out-of-bounds slot fails\n");
+            err = TestUserCreationInTheOutOfBoundsSlotFails_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool, " ***** Test Step 32 : Clear first user\n");
+            err = TestClearFirstUser_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : Read cleared user and verify it is available\n");
+            err = TestReadClearedUserAndVerifyItIsAvailable_33();
+            break;
+        case 34:
+            ChipLogProgress(chipTool, " ***** Test Step 34 : Create new user in the cleared slot\n");
+            err = TestCreateNewUserInTheClearedSlot_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : Read the user in the previously cleared slot and verify its fields\n");
+            err = TestReadTheUserInThePreviouslyClearedSlotAndVerifyItsFields_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : Clear user with index 0 fails\n");
+            err = TestClearUserWithIndex0Fails_36();
+            break;
+        case 37:
+            ChipLogProgress(chipTool, " ***** Test Step 37 : Clear user with out-of-bounds index fails\n");
+            err = TestClearUserWithOutOfBoundsIndexFails_37();
+            break;
+        case 38:
+            ChipLogProgress(chipTool, " ***** Test Step 38 : Clear all users\n");
+            err = TestClearAllUsers_38();
+            break;
+        case 39:
+            ChipLogProgress(chipTool, " ***** Test Step 39 : Read first cleared user and verify it is available\n");
+            err = TestReadFirstClearedUserAndVerifyItIsAvailable_39();
+            break;
+        case 40:
+            ChipLogProgress(chipTool, " ***** Test Step 40 : Read last cleared user and verify it is available\n");
+            err = TestReadLastClearedUserAndVerifyItIsAvailable_40();
+            break;
+        case 41:
+            ChipLogProgress(chipTool, " ***** Test Step 41 : Get number of supported PIN credentials and verify default value\n");
+            err = TestGetNumberOfSupportedPinCredentialsAndVerifyDefaultValue_41();
+            break;
+        case 42:
+            ChipLogProgress(chipTool, " ***** Test Step 42 : Check that PIN credential does not exist\n");
+            err = TestCheckThatPinCredentialDoesNotExist_42();
+            break;
+        case 43:
+            ChipLogProgress(chipTool, " ***** Test Step 43 : Reading PIN credential with index 0 returns no credential\n");
+            err = TestReadingPinCredentialWithIndex0ReturnsNoCredential_43();
+            break;
+        case 44:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 44 : Reading PIN credential with out-of-bounds index returns no credential\n");
+            err = TestReadingPinCredentialWithOutOfBoundsIndexReturnsNoCredential_44();
+            break;
+        case 45:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 45 : Verify that a user with UserStatus = 0 cannot be added via SetCredential\n");
+            err = TestVerifyThatAUserWithUserStatus0CannotBeAddedViaSetCredential_45();
+            break;
+        case 46:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 46 : Verify that a user with UserStatus = 2 cannot be added via SetCredential\n");
+            err = TestVerifyThatAUserWithUserStatus2CannotBeAddedViaSetCredential_46();
+            break;
+        case 47:
+            ChipLogProgress(chipTool, " ***** Test Step 47 : Create new PIN credential and user\n");
+            err = TestCreateNewPinCredentialAndUser_47();
+            break;
+        case 48:
+            ChipLogProgress(chipTool, " ***** Test Step 48 : Verify created user\n");
+            err = TestVerifyCreatedUser_48();
+            break;
+        case 49:
+            ChipLogProgress(chipTool, " ***** Test Step 49 : Verify created PIN credential\n");
+            err = TestVerifyCreatedPinCredential_49();
+            break;
+        case 50:
+            ChipLogProgress(chipTool, " ***** Test Step 50 : Create new PIN credential and user with index 0 fails\n");
+            err = TestCreateNewPinCredentialAndUserWithIndex0Fails_50();
+            break;
+        case 51:
+            ChipLogProgress(chipTool, " ***** Test Step 51 : Create new PIN credential and user with out-of-bounds index fails\n");
+            err = TestCreateNewPinCredentialAndUserWithOutOfBoundsIndexFails_51();
+            break;
+        case 52:
+            ChipLogProgress(chipTool, " ***** Test Step 52 : Get number of supported RFID credentials and verify default value\n");
+            err = TestGetNumberOfSupportedRfidCredentialsAndVerifyDefaultValue_52();
+            break;
+        case 53:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 53 : Reading RFID credential with index 0 returns no credential duplicate with bug workaround\n");
+            err = TestReadingRfidCredentialWithIndex0ReturnsNoCredentialDuplicateWithBugWorkaround_53();
+            break;
+        case 54:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 54 : Reading RFID credential with out-of-bounds index returns no credential\n");
+            err = TestReadingRfidCredentialWithOutOfBoundsIndexReturnsNoCredential_54();
+            break;
+        case 55:
+            ChipLogProgress(chipTool, " ***** Test Step 55 : Check that RFID credential does not exist\n");
+            err = TestCheckThatRfidCredentialDoesNotExist_55();
+            break;
+        case 56:
+            ChipLogProgress(chipTool, " ***** Test Step 56 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_56();
+            break;
+        case 57:
+            ChipLogProgress(chipTool, " ***** Test Step 57 : Verify modified user\n");
+            err = TestVerifyModifiedUser_57();
+            break;
+        case 58:
+            ChipLogProgress(chipTool, " ***** Test Step 58 : Verify created credential\n");
+            err = TestVerifyCreatedCredential_58();
+            break;
+        case 59:
+            ChipLogProgress(chipTool, " ***** Test Step 59 : Create new RFID credential and user with index 0 fails\n");
+            err = TestCreateNewRfidCredentialAndUserWithIndex0Fails_59();
+            break;
+        case 60:
+            ChipLogProgress(chipTool, " ***** Test Step 60 : Create new RFID credential and user with out-of-bounds index fails\n");
+            err = TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_60();
+            break;
+        case 61:
+            ChipLogProgress(chipTool, " ***** Test Step 61 : Create new credential and try to add it to 0 user\n");
+            err = TestCreateNewCredentialAndTryToAddItTo0User_61();
+            break;
+        case 62:
+            ChipLogProgress(chipTool, " ***** Test Step 62 : Create new credential and try to add it to out-of-bounds user\n");
+            err = TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_62();
+            break;
+        case 63:
+            ChipLogProgress(chipTool, " ***** Test Step 63 : Create new PIN with too short data\n");
+            err = TestCreateNewPinWithTooShortData_63();
+            break;
+        case 64:
+            ChipLogProgress(chipTool, " ***** Test Step 64 : Create new PIN with too long data\n");
+            err = TestCreateNewPinWithTooLongData_64();
+            break;
+        case 65:
+            ChipLogProgress(chipTool, " ***** Test Step 65 : Create new RFID with too short data\n");
+            err = TestCreateNewRfidWithTooShortData_65();
+            break;
+        case 66:
+            ChipLogProgress(chipTool, " ***** Test Step 66 : Create new PIN with Programming user type fails\n");
+            err = TestCreateNewPinWithProgrammingUserTypeFails_66();
+            break;
+        case 67:
+            ChipLogProgress(chipTool, " ***** Test Step 67 : Create new RFID with too short data\n");
+            err = TestCreateNewRfidWithTooShortData_67();
+            break;
+        case 68:
+            ChipLogProgress(chipTool, " ***** Test Step 68 : Create new PIN credential with data the would cause duplicate\n");
+            err = TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_68();
+            break;
+        case 69:
+            ChipLogProgress(chipTool, " ***** Test Step 69 : Create new RFID credential with data the would cause duplicate\n");
+            err = TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_69();
+            break;
+        case 70:
+            ChipLogProgress(chipTool, " ***** Test Step 70 : Modify credentialData of existing PIN credential\n");
+            err = TestModifyCredentialDataOfExistingPinCredential_70();
+            break;
+        case 71:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 71 : Verify that credential was changed by creating new credential with old data\n");
+            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_71();
+            break;
+        case 72:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 72 : Verify that credential was changed by creating new credential with new data\n");
+            err = TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_72();
+            break;
+        case 73:
+            ChipLogProgress(chipTool, " ***** Test Step 73 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_73();
+            break;
+        case 74:
+            ChipLogProgress(chipTool, " ***** Test Step 74 : Verify modified user\n");
+            err = TestVerifyModifiedUser_74();
+            break;
+        case 75:
+            ChipLogProgress(chipTool, " ***** Test Step 75 : Create new RFID credential and add it to existing user\n");
+            err = TestCreateNewRfidCredentialAndAddItToExistingUser_75();
+            break;
+        case 76:
+            ChipLogProgress(chipTool, " ***** Test Step 76 : Verify modified user\n");
+            err = TestVerifyModifiedUser_76();
+            break;
+        case 77:
+            ChipLogProgress(chipTool, " ***** Test Step 77 : Clear first PIN credential\n");
+            err = TestClearFirstPinCredential_77();
+            break;
+        case 78:
+            ChipLogProgress(chipTool, " ***** Test Step 78 : Read back the credential and make sure it is deleted\n");
+            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_78();
+            break;
+        case 79:
+            ChipLogProgress(chipTool, " ***** Test Step 79 : Read the user back and make sure PIN credential is deleted\n");
+            err = TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_79();
+            break;
+        case 80:
+            ChipLogProgress(chipTool, " ***** Test Step 80 : Clear the second PIN credential\n");
+            err = TestClearTheSecondPinCredential_80();
+            break;
+        case 81:
+            ChipLogProgress(chipTool, " ***** Test Step 81 : Read back the credential and make sure it is deleted\n");
+            err = TestReadBackTheCredentialAndMakeSureItIsDeleted_81();
+            break;
+        case 82:
+            ChipLogProgress(chipTool, " ***** Test Step 82 : Read the user back and make sure related user is deleted\n");
+            err = TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_82();
+            break;
+        case 83:
+            ChipLogProgress(chipTool, " ***** Test Step 83 : Create new RFID credential with user\n");
+            err = TestCreateNewRfidCredentialWithUser_83();
+            break;
+        case 84:
+            ChipLogProgress(chipTool, " ***** Test Step 84 : Clear all the RFID credentials\n");
+            err = TestClearAllTheRfidCredentials_84();
+            break;
+        case 85:
+            ChipLogProgress(chipTool, " ***** Test Step 85 : Read back the fist RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_85();
+            break;
+        case 86:
+            ChipLogProgress(chipTool, " ***** Test Step 86 : Read back the second RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_86();
+            break;
+        case 87:
+            ChipLogProgress(chipTool, " ***** Test Step 87 : Read back the third RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheThirdRfidCredentialAndMakeSureItIsDeleted_87();
+            break;
+        case 88:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 88 : Read the user related with first RFID back and make sure it has only PIN credential\n");
+            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItHasOnlyPinCredential_88();
+            break;
+        case 89:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 89 : Read the user related with second RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_89();
+            break;
+        case 90:
+            ChipLogProgress(chipTool, " ***** Test Step 90 : Create new PIN credential with user\n");
+            err = TestCreateNewPinCredentialWithUser_90();
+            break;
+        case 91:
+            ChipLogProgress(chipTool, " ***** Test Step 91 : Create new RFID credential with user\n");
+            err = TestCreateNewRfidCredentialWithUser_91();
+            break;
+        case 92:
+            ChipLogProgress(chipTool, " ***** Test Step 92 : Create another RFID credential with user\n");
+            err = TestCreateAnotherRfidCredentialWithUser_92();
+            break;
+        case 93:
+            ChipLogProgress(chipTool, " ***** Test Step 93 : Clear all the credentials\n");
+            err = TestClearAllTheCredentials_93();
+            break;
+        case 94:
+            ChipLogProgress(chipTool, " ***** Test Step 94 : Read back the first PIN credential and make sure it is deleted\n");
+            err = TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_94();
+            break;
+        case 95:
+            ChipLogProgress(chipTool, " ***** Test Step 95 : Read back the first RFID credential and make sure it is deleted\n");
+            err = TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_95();
+            break;
+        case 96:
+            ChipLogProgress(chipTool, " ***** Test Step 96 : Read back the second PIN credential and make sure it is deleted\n");
+            err = TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_96();
+            break;
+        case 97:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 97 : Read the user related with first PIN back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_97();
+            break;
+        case 98:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 98 : Read the user related with first RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_98();
+            break;
+        case 99:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 99 : Read the user related with second PIN back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_99();
+            break;
+        case 100:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 100 : Read the user related with last RFID back and make sure it is deleted\n");
+            err = TestReadTheUserRelatedWithLastRfidBackAndMakeSureItIsDeleted_100();
+            break;
+        case 101:
+            ChipLogProgress(chipTool, " ***** Test Step 101 : Create new Programming PIN credential with invalid index\n");
+            err = TestCreateNewProgrammingPinCredentialWithInvalidIndex_101();
+            break;
+        case 102:
+            ChipLogProgress(chipTool, " ***** Test Step 102 : Create new Programming PIN credential with valid index\n");
+            err = TestCreateNewProgrammingPinCredentialWithValidIndex_102();
+            break;
+        case 103:
+            ChipLogProgress(chipTool, " ***** Test Step 103 : Verify created user\n");
+            err = TestVerifyCreatedUser_103();
+            break;
+        case 104:
+            ChipLogProgress(chipTool, " ***** Test Step 104 : Verify created programming PIN credential\n");
+            err = TestVerifyCreatedProgrammingPinCredential_104();
+            break;
+        case 105:
+            ChipLogProgress(chipTool, " ***** Test Step 105 : Modify the Programming PIN credential\n");
+            err = TestModifyTheProgrammingPinCredential_105();
+            break;
+        case 106:
+            ChipLogProgress(chipTool, " ***** Test Step 106 : Clearing Programming PIN fails\n");
+            err = TestClearingProgrammingPinFails_106();
+            break;
+        case 107:
+            ChipLogProgress(chipTool, " ***** Test Step 107 : Clearing Programming PIN with invalid index fails\n");
+            err = TestClearingProgrammingPinWithInvalidIndexFails_107();
+            break;
+        case 108:
+            ChipLogProgress(chipTool, " ***** Test Step 108 : Clearing PIN credential with zero index fails\n");
+            err = TestClearingPinCredentialWithZeroIndexFails_108();
+            break;
+        case 109:
+            ChipLogProgress(chipTool, " ***** Test Step 109 : Clearing PIN credential with out-of-bound index fails\n");
+            err = TestClearingPinCredentialWithOutOfBoundIndexFails_109();
+            break;
+        case 110:
+            ChipLogProgress(chipTool, " ***** Test Step 110 : Clearing RFID credential with zero index fails\n");
+            err = TestClearingRfidCredentialWithZeroIndexFails_110();
+            break;
+        case 111:
+            ChipLogProgress(chipTool, " ***** Test Step 111 : Clearing RFID credential with out-of-bound index fails\n");
+            err = TestClearingRfidCredentialWithOutOfBoundIndexFails_111();
+            break;
+        case 112:
+            ChipLogProgress(chipTool, " ***** Test Step 112 : Clear the Programming PIN user\n");
+            err = TestClearTheProgrammingPinUser_112();
+            break;
+        case 113:
+            ChipLogProgress(chipTool, " ***** Test Step 113 : Make sure Programming PIN user is deleted\n");
+            err = TestMakeSureProgrammingPinUserIsDeleted_113();
+            break;
+        case 114:
+            ChipLogProgress(chipTool, " ***** Test Step 114 : Make sure programming PIN credential is deleted\n");
+            err = TestMakeSureProgrammingPinCredentialIsDeleted_114();
+            break;
+        case 115:
+            ChipLogProgress(chipTool, " ***** Test Step 115 : Create new PIN credential and user\n");
+            err = TestCreateNewPinCredentialAndUser_115();
+            break;
+        case 116:
+            ChipLogProgress(chipTool, " ***** Test Step 116 : Create second PIN credential and add it to existing user\n");
+            err = TestCreateSecondPinCredentialAndAddItToExistingUser_116();
+            break;
+        case 117:
+            ChipLogProgress(chipTool, " ***** Test Step 117 : Create third PIN credential and add it to existing user\n");
+            err = TestCreateThirdPinCredentialAndAddItToExistingUser_117();
+            break;
+        case 118:
+            ChipLogProgress(chipTool, " ***** Test Step 118 : Create fourth PIN credential and add it to existing user\n");
+            err = TestCreateFourthPinCredentialAndAddItToExistingUser_118();
+            break;
+        case 119:
+            ChipLogProgress(chipTool, " ***** Test Step 119 : Create fifth PIN credential and add it to existing user\n");
+            err = TestCreateFifthPinCredentialAndAddItToExistingUser_119();
+            break;
+        case 120:
+            ChipLogProgress(chipTool, " ***** Test Step 120 : Try to create sixth PIN credential and make sure it fails\n");
+            err = TestTryToCreateSixthPinCredentialAndMakeSureItFails_120();
+            break;
+        case 121:
+            ChipLogProgress(chipTool, " ***** Test Step 121 : Final clean-up\n");
+            err = TestFinalCleanUp_121();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 44:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 45:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 46:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 47:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 48:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 49:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 50:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 51:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 52:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 53:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 54:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 55:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 56:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 57:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 58:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 59:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 60:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 61:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 62:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 63:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 64:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 65:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 66:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 67:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 68:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 69:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 70:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 71:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 72:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 73:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 74:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 75:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 76:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 77:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 78:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 79:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 80:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 81:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 82:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 83:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 84:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 85:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 86:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 87:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 88:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 89:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 90:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 91:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 92:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 93:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 94:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 95:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 96:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 97:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 98:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 99:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 100:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 101:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 102:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 103:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 104:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 105:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 106:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 107:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 108:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 109:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 110:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 111:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 112:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 113:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 114:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 115:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 116:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 117:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 118:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 119:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 120:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 121:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 122;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadAvailableUserSlotAndVerifyResponseFields_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read available user slot and verify response fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfTotalUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedUsersAndVerifyDefaultValue_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfTotalUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported users and verify default value Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfTotalUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfTotalUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFailsForUserWithIndex0_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read fails for user with index 0 Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFailsForUserWithIndexGreaterThanNumberOfUsersSupported_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read fails for user with index greater than Number Of Users Supported Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewUserWithDefaultParameters_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user with default parameters Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndVerifyItsFields_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSetUserAtTheOccupiedIndexFailsWithAppropriateResponse_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Set user at the occupied index fails with appropriate response Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_FAILURE));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserNameForExistingUser_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"new_user";
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userName for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserUniqueIdForExistingUser_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:305441741UL];
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userUniqueId for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserStatusForExistingUser_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = [NSNumber numberWithUnsignedChar:3U];
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userStatus for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_13()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyUserTypeForExistingUser_14()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = [NSNumber numberWithUnsignedChar:6U];
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify userType for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 6U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialRuleForExistingUser_16()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = [NSNumber numberWithUnsignedChar:2U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify credentialRule for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_17()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 6U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyAllFieldsForExistingUser_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = @"test_user";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:466460832UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:1U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Modify all fields for existing user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheModifiedUserBackAndVerifyItsFields_19()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the modified user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 466460832UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddAnotherUserWithNonDefaultFields_20()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.userName = @"test_user2";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:12648430UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:1U];
+        params.userType = [NSNumber numberWithUnsignedChar:1U];
+        params.credentialRule = [NSNumber numberWithUnsignedChar:2U];
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Add another user with non-default fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheNewUserBackAndVerifyItsFields_21()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the new user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user2"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 12648430UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToAddAUserWithUserStatus0_22()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.userName = @"test_user3";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:47802UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Try to add a user with userStatus 0 Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureTheUserDidNotGetCreated_23()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Make sure the user did not get created Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToAddAUserWithUserStatus2_24()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.userName = @"test_user3";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:47802UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:2U];
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Try to add a user with userStatus 2 Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureTheUserDidNotGetCreated_25()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Make sure the user did not get created Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToAddAUserWithUserStatus3_26()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.userName = @"test_user3";
+        params.userUniqueId = [NSNumber numberWithUnsignedInt:47802UL];
+        params.userStatus = [NSNumber numberWithUnsignedChar:3U];
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Try to add a user with userStatus 3 Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheNewThirdUserBackAndVerifyItsFields_27()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the new third user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user3"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
+                         VerifyOrReturn(CheckValue("userUniqueId", actualValue, 47802UL));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateUserInTheLastSlot_28()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NumberOfTotalUsersSupported copy];
+        params.userName = @"last_user";
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create user in the last slot Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheLastUserBackAndVerifyItsFields_29()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NumberOfTotalUsersSupported copy];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the last user back and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, NumberOfTotalUsersSupported));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @"last_user"));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUserCreationInThe0SlotFails_30()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"User creation in the 0 slot fails Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUserCreationInTheOutOfBoundsSlotFails_31()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"User creation in the out-of-bounds slot fails Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status",
+                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                         EMBER_ZCL_STATUS_INVALID_COMMAND));
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearFirstUser_32()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear first user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadClearedUserAndVerifyItIsAvailable_33()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read cleared user and verify it is available Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewUserInTheClearedSlot_34()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetUserParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userName = nil;
+        params.userUniqueId = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        params.credentialRule = nil;
+        [cluster setUserWithParams:params
+                 completionHandler:^(NSError * _Nullable err) {
+                     NSLog(@"Create new user in the cleared slot Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserInThePreviouslyClearedSlotAndVerifyItsFields_35()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user in the previously cleared slot and verify its fields Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                         VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearUserWithIndex0Fails_36()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear user with index 0 fails Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status",
+                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                           EMBER_ZCL_STATUS_INVALID_COMMAND));
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearUserWithOutOfBoundsIndexFails_37()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear user with out-of-bounds index fails Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status",
+                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                           EMBER_ZCL_STATUS_INVALID_COMMAND));
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllUsers_38()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:65534U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear all users Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadFirstClearedUserAndVerifyItIsAvailable_39()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read first cleared user and verify it is available Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadLastClearedUserAndVerifyItIsAvailable_40()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NumberOfTotalUsersSupported copy];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read last cleared user and verify it is available Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, NumberOfTotalUsersSupported));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfPINUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedPinCredentialsAndVerifyDefaultValue_41()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfPINUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported PIN credentials and verify default value Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfPINUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfPINUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatPinCredentialDoesNotExist_42()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Check that PIN credential does not exist Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingPinCredentialWithIndex0ReturnsNoCredential_43()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading PIN credential with index 0 returns no credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingPinCredentialWithOutOfBoundsIndexReturnsNoCredential_44()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading PIN credential with out-of-bounds index returns no credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatAUserWithUserStatus0CannotBeAddedViaSetCredential_45()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Verify that a user with UserStatus = 0 cannot be added via SetCredential Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatAUserWithUserStatus2CannotBeAddedViaSetCredential_46()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = [NSNumber numberWithUnsignedChar:2U];
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Verify that a user with UserStatus = 2 cannot be added via SetCredential Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUser_47()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedUser_48()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Verify created user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedPinCredential_49()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created PIN credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUserWithIndex0Fails_50()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user with index 0 fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUserWithOutOfBoundsIndexFails_51()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user with out-of-bounds index fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSNumber * _Nonnull NumberOfRFIDUsersSupported;
+
+    CHIP_ERROR TestGetNumberOfSupportedRfidCredentialsAndVerifyDefaultValue_52()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeNumberOfRFIDUsersSupportedWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Get number of supported RFID credentials and verify default value Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = value;
+                    VerifyOrReturn(CheckValue("NumberOfRFIDUsersSupported", actualValue, 10U));
+                }
+                {
+                    NumberOfRFIDUsersSupported = value;
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingRfidCredentialWithIndex0ReturnsNoCredentialDuplicateWithBugWorkaround_53()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading RFID credential with index 0 returns no credential duplicate with bug workaround "
+                                       @"Error: %@",
+                                     err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingRfidCredentialWithOutOfBoundsIndexReturnsNoCredential_54()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Reading RFID credential with out-of-bounds index returns no credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckThatRfidCredentialDoesNotExist_55()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Check that RFID credential does not exist Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_56()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyModifiedUser_57()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Verify modified user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(2)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedCredential_58()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithIndex0Fails_59()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and user with index 0 fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndUserWithOutOfBoundsIndexFails_60()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and user with out-of-bounds index fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewCredentialAndTryToAddItTo0User_61()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new credential and try to add it to 0 user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewCredentialAndTryToAddItToOutOfBoundsUser_62()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new credential and try to add it to out-of-bounds user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinWithTooShortData_63()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"12345" length:5];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN with too short data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinWithTooLongData_64()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456789" length:9];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN with too long data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidWithTooShortData_65()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data" length:9];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID with too short data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinWithProgrammingUserTypeFails_66()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = [NSNumber numberWithUnsignedChar:3U];
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN with Programming user type fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidWithTooShortData_67()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"very_long_rfid_data_to_test_boundaries" length:38];
+        params.userIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID with too short data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialWithDataTheWouldCauseDuplicate_68()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential with data the would cause duplicate Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialWithDataTheWouldCauseDuplicate_69()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential with data the would cause duplicate Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyCredentialDataOfExistingPinCredential_70()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Modify credentialData of existing PIN credential Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithOldData_71()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Verify that credential was changed by creating new credential with old data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyThatCredentialWasChangedByCreatingNewCredentialWithNewData_72()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Verify that credential was changed by creating new credential with new data Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_73()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_7890" length:14];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyModifiedUser_74()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster
+            getUserWithParams:params
+            completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                NSLog(@"Verify modified user Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = values.userIndex;
+                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.userName;
+                    VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                    VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                }
+
+                {
+                    id actualValue = values.userUniqueId;
+                    VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                }
+
+                {
+                    id actualValue = values.userStatus;
+                    VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.userType;
+                    VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                    VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                }
+
+                {
+                    id actualValue = values.credentialRule;
+                    VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                }
+
+                {
+                    id actualValue = values.credentials;
+                    VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                    VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(3)));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 4U));
+                }
+
+                {
+                    id actualValue = values.creatorFabricIndex;
+                    VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.lastModifiedFabricIndex;
+                    VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.nextUserIndex;
+                    VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialAndAddItToExistingUser_75()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"789012" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyModifiedUser_76()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster
+            getUserWithParams:params
+            completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                NSLog(@"Verify modified user Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = values.userIndex;
+                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.userName;
+                    VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                    VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                }
+
+                {
+                    id actualValue = values.userUniqueId;
+                    VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                }
+
+                {
+                    id actualValue = values.userStatus;
+                    VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.userType;
+                    VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                    VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                }
+
+                {
+                    id actualValue = values.credentialRule;
+                    VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                }
+
+                {
+                    id actualValue = values.credentials;
+                    VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                    VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(4)));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 4U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[3]).credentialType, 1U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[3]).credentialIndex, 5U));
+                }
+
+                {
+                    id actualValue = values.creatorFabricIndex;
+                    VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.lastModifiedFabricIndex;
+                    VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.nextUserIndex;
+                    VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearFirstPinCredential_77()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear first PIN credential Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_78()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndMakeSurePinCredentialIsDeleted_79()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster
+            getUserWithParams:params
+            completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                NSLog(@"Read the user back and make sure PIN credential is deleted Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                {
+                    id actualValue = values.userIndex;
+                    VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.userName;
+                    VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                    VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                }
+
+                {
+                    id actualValue = values.userUniqueId;
+                    VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                }
+
+                {
+                    id actualValue = values.userStatus;
+                    VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                    VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.userType;
+                    VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                    VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                }
+
+                {
+                    id actualValue = values.credentialRule;
+                    VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                    VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                }
+
+                {
+                    id actualValue = values.credentials;
+                    VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                    VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(3)));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 4U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialType, 1U));
+                    VerifyOrReturn(
+                        CheckValue("CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 5U));
+                }
+
+                {
+                    id actualValue = values.creatorFabricIndex;
+                    VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.lastModifiedFabricIndex;
+                    VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                }
+
+                {
+                    id actualValue = values.nextUserIndex;
+                    VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
+                    VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                }
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearTheSecondPinCredential_80()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear the second PIN credential Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheCredentialAndMakeSureItIsDeleted_81()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserBackAndMakeSureRelatedUserIsDeleted_82()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user back and make sure related user is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialWithUser_83()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_12345" length:15];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllTheRfidCredentials_84()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
+
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear all the RFID credentials Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheFistRfidCredentialAndMakeSureItIsDeleted_85()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the fist RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheSecondRfidCredentialAndMakeSureItIsDeleted_86()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the second RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheThirdRfidCredentialAndMakeSureItIsDeleted_87()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the third RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItHasOnlyPinCredential_88()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with first RFID back and make sure it has only PIN credential Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 5U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithSecondRfidBackAndMakeSureItIsDeleted_89()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with second RFID back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialWithUser_90()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewRfidCredentialWithUser_91()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_1234" length:14];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new RFID credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateAnotherRfidCredentialWithUser_92()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_9876" length:14];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create another RFID credential with user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 4U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearAllTheCredentials_93()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = nil;
+        [cluster clearCredentialWithParams:params
+                         completionHandler:^(NSError * _Nullable err) {
+                             NSLog(@"Clear all the credentials Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheFirstPinCredentialAndMakeSureItIsDeleted_94()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the first PIN credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheFirstRfidCredentialAndMakeSureItIsDeleted_95()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the first RFID credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadBackTheSecondPinCredentialAndMakeSureItIsDeleted_96()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Read back the second PIN credential and make sure it is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithFirstPinBackAndMakeSureItIsDeleted_97()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with first PIN back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithFirstRfidBackAndMakeSureItIsDeleted_98()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:2U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with first RFID back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithSecondPinBackAndMakeSureItIsDeleted_99()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:3U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with second PIN back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheUserRelatedWithLastRfidBackAndMakeSureItIsDeleted_100()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:4U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Read the user related with last RFID back and make sure it is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 4U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithInvalidIndex_101()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new Programming PIN credential with invalid index Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewProgrammingPinCredentialWithValidIndex_102()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new Programming PIN credential with valid index Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedUser_103()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Verify created user Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNonNull("userName", actualValue));
+                         VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
+                         VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNonNull("userType", actualValue));
+                         VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
+                         VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
+                         VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                         VerifyOrReturn(
+                             CheckValue("CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 0U));
+                         VerifyOrReturn(CheckValue(
+                             "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 0U));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                         VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyCreatedProgrammingPinCredential_104()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Verify created programming PIN credential Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
+                                     VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestModifyTheProgrammingPinCredential_105()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:2U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"654321" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Modify the Programming PIN credential Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingProgrammingPinFails_106()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing Programming PIN fails Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingProgrammingPinWithInvalidIndexFails_107()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing Programming PIN with invalid index fails Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingPinCredentialWithZeroIndexFails_108()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing PIN credential with zero index fails Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingPinCredentialWithOutOfBoundIndexFails_109()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
+
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing PIN credential with out-of-bound index fails Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingRfidCredentialWithZeroIndexFails_110()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing RFID credential with zero index fails Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearingRfidCredentialWithOutOfBoundIndexFails_111()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+            [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
+
+        [cluster
+            clearCredentialWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"Clearing RFID credential with out-of-bound index fails Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status",
+                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE)
+                                : 0,
+                            EMBER_ZCL_STATUS_INVALID_COMMAND));
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearTheProgrammingPinUser_112()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Clear the Programming PIN user Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureProgrammingPinUserIsDeleted_113()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster getUserWithParams:params
+                 completionHandler:^(MTRDoorLockClusterGetUserResponseParams * _Nullable values, NSError * _Nullable err) {
+                     NSLog(@"Make sure Programming PIN user is deleted Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     {
+                         id actualValue = values.userIndex;
+                         VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                     }
+
+                     {
+                         id actualValue = values.userName;
+                         VerifyOrReturn(CheckValueNull("userName", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userUniqueId;
+                         VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userStatus;
+                         VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.userType;
+                         VerifyOrReturn(CheckValueNull("userType", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentialRule;
+                         VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.credentials;
+                         VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.creatorFabricIndex;
+                         VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.lastModifiedFabricIndex;
+                         VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                     }
+
+                     {
+                         id actualValue = values.nextUserIndex;
+                         VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                     }
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureProgrammingPinCredentialIsDeleted_114()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+
+        [cluster getCredentialStatusWithParams:params
+                             completionHandler:^(
+                                 MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"Make sure programming PIN credential is deleted Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 {
+                                     id actualValue = values.credentialExists;
+                                     VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                 }
+
+                                 {
+                                     id actualValue = values.userIndex;
+                                     VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.creatorFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.lastModifiedFabricIndex;
+                                     VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                 }
+
+                                 {
+                                     id actualValue = values.nextCredentialIndex;
+                                     VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 }
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateNewPinCredentialAndUser_115()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
+        params.userIndex = nil;
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create new PIN credential and user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
+                          VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateSecondPinCredentialAndAddItToExistingUser_116()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000001" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create second PIN credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateThirdPinCredentialAndAddItToExistingUser_117()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000002" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create third PIN credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateFourthPinCredentialAndAddItToExistingUser_118()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000003" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create fourth PIN credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateFifthPinCredentialAndAddItToExistingUser_119()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000004" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Create fifth PIN credential and add it to existing user Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTryToCreateSixthPinCredentialAndMakeSureItFails_120()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
+        params.operationType = [NSNumber numberWithUnsignedChar:0U];
+        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+
+        params.credentialData = [[NSData alloc] initWithBytes:"000005" length:6];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.userStatus = nil;
+        params.userType = nil;
+        [cluster
+            setCredentialWithParams:params
+                  completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
+                      NSLog(@"Try to create sixth PIN credential and make sure it fails Error: %@", err);
+
+                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                      {
+                          id actualValue = values.status;
+                          VerifyOrReturn(CheckValue("status", actualValue, 137U));
+                      }
+
+                      {
+                          id actualValue = values.userIndex;
+                          VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                      }
+
+                      {
+                          id actualValue = values.nextCredentialIndex;
+                          VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
+                          VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                      }
+
+                      NextTest();
+                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestFinalCleanUp_121()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"Final clean-up Error: %@", err);
+
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                       NextTest();
+                   }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class DL_LockUnlock : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -107377,8 +114071,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -108246,8 +114940,8 @@ private:
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
-        params.userStatus = [NSNumber numberWithUnsignedChar:0U];
-        params.userType = [NSNumber numberWithUnsignedChar:0U];
+        params.userStatus = nil;
+        params.userType = nil;
         [cluster
             setCredentialWithParams:params
                   completionHandler:^(MTRDoorLockClusterSetCredentialResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -113515,6 +120209,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_DGSW_2_2>(),
         make_unique<Test_TC_DGSW_2_3>(),
         make_unique<TestSubscribe_OnOff>(),
+        make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
         make_unique<DL_Schedules>(),
         make_unique<Test_TC_DRLK_2_2>(),
