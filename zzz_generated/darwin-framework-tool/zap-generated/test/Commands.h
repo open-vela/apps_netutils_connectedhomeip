@@ -88,6 +88,7 @@ public:
         printf("Test_TC_MEDIAPLAYBACK_1_7\n");
         printf("Test_TC_AUDIOOUTPUT_1_8\n");
         printf("Test_TC_TGTNAV_1_9\n");
+        printf("Test_TC_TGTNAV_8_2\n");
         printf("Test_TC_APBSC_1_10\n");
         printf("Test_TC_CONTENTLAUNCHER_1_11\n");
         printf("Test_TC_ALOGIN_1_12\n");
@@ -34807,6 +34808,76 @@ private:
 
         return CHIP_NO_ERROR;
     }
+};
+
+class Test_TC_TGTNAV_8_2 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_TGTNAV_8_2()
+        : TestCommandBridge("Test_TC_TGTNAV_8_2")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_TGTNAV_8_2() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_TGTNAV_8_2\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_TGTNAV_8_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 0;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
 };
 
 class Test_TC_APBSC_1_10 : public TestCommandBridge {
@@ -123085,6 +123156,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MEDIAPLAYBACK_1_7>(),
         make_unique<Test_TC_AUDIOOUTPUT_1_8>(),
         make_unique<Test_TC_TGTNAV_1_9>(),
+        make_unique<Test_TC_TGTNAV_8_2>(),
         make_unique<Test_TC_APBSC_1_10>(),
         make_unique<Test_TC_CONTENTLAUNCHER_1_11>(),
         make_unique<Test_TC_ALOGIN_1_12>(),
