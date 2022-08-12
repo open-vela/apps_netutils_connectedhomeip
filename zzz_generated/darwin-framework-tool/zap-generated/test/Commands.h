@@ -48991,13 +48991,12 @@ public:
             err = TestReadTheGlobalAttributeFeatureMap_1();
             break;
         case 2:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 2 : Read the FeatureMap value and verify LS is set to 1; MS, MSR, MSL, MSM are all set to 0\n");
-            if (ShouldSkip("SWTCH.S.F00")) {
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Check values of flags in this FeatureMap\n");
+            if (ShouldSkip("PICS_USER_PROMPT && SWTCH.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheFeatureMapValueAndVerifyLsIsSetTo1MsMsrMslMsmAreAllSetTo0_2();
+            err = TestCheckValuesOfFlagsInThisFeatureMap_2();
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Check values of flags in this FeatureMap\n");
@@ -49155,26 +49154,13 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureMapValueAndVerifyLsIsSetTo1MsMsrMslMsmAreAllSetTo0_2()
+    CHIP_ERROR TestCheckValuesOfFlagsInThisFeatureMap_2()
     {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterSwitch * cluster = [[MTRBaseClusterSwitch alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the FeatureMap value and verify LS is set to 1; MS, MSR, MSL, MSM are all set to 0 Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, FeatureMapValue));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
     CHIP_ERROR TestCheckValuesOfFlagsInThisFeatureMap_3()
