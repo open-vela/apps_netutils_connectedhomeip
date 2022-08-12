@@ -30098,11 +30098,7 @@ private:
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint32_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("featureMap", value, FeatureMapValue));
-            }
+            shouldContinue = true;
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -30207,10 +30203,14 @@ private:
                                  chip::NullOptional);
         }
         case 2: {
-            LogStep(2, "Read the FeatureMap value and verify LS is set to 1; MS, MSR, MSL, MSM are all set to 0");
-            VerifyOrDo(!ShouldSkip("SWTCH.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Switch::Id, Switch::Attributes::FeatureMap::Id, true,
-                                 chip::NullOptional);
+            LogStep(2, "Check values of flags in this FeatureMap");
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && SWTCH.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
         }
         case 3: {
             LogStep(3, "Check values of flags in this FeatureMap");
