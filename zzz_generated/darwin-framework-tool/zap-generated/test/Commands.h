@@ -34,9 +34,13 @@ public:
     CHIP_ERROR Run() override
     {
         printf("TestAccessControlCluster\n");
+        printf("Test_TC_ACL_1_1\n");
+        printf("Test_TC_ACL_2_1\n");
+        printf("Test_TC_ACL_2_2\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
         printf("Test_TC_ACT_1_1\n");
+        printf("Test_TC_BIND_1_1\n");
         printf("Test_TC_CC_1_1\n");
         printf("Test_TC_CC_2_1\n");
         printf("Test_TC_CC_3_2\n");
@@ -49,14 +53,12 @@ public:
         printf("Test_TC_CC_5_2\n");
         printf("Test_TC_CC_5_3\n");
         printf("Test_TC_CC_6_1\n");
-        printf("Test_TC_CC_6_2\n");
-        printf("Test_TC_CC_6_3\n");
         printf("Test_TC_CC_7_3\n");
         printf("Test_TC_CC_7_4\n");
-        printf("Test_TC_CC_8_1\n");
         printf("Test_TC_BINFO_1_1\n");
         printf("Test_TC_CNET_1_3\n");
         printf("Test_TC_DESC_1_1\n");
+        printf("Test_TC_DGETH_1_1\n");
         printf("Test_TC_DGETH_2_1\n");
         printf("Test_TC_DGETH_2_2\n");
         printf("Test_TC_FLW_1_1\n");
@@ -141,6 +143,7 @@ public:
         printf("Test_TC_TSUIC_1_1\n");
         printf("Test_TC_TSUIC_2_1\n");
         printf("Test_TC_TSUIC_2_2\n");
+        printf("Test_TC_DGTHREAD_1_1\n");
         printf("Test_TC_ULABEL_1_1\n");
         printf("Test_TC_ULABEL_2_2\n");
         printf("Test_TC_ULABEL_2_3\n");
@@ -200,6 +203,7 @@ public:
         printf("TestLevelControlWithOnOffDependency\n");
         printf("TestCommissioningWindow\n");
         printf("TestMultiAdmin\n");
+        printf("Test_TC_DGSW_1_1\n");
         printf("Test_TC_DGSW_2_1\n");
         printf("Test_TC_DGSW_2_2\n");
         printf("Test_TC_DGSW_2_3\n");
@@ -207,6 +211,7 @@ public:
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
+        printf("Test_TC_DRLK_1_1\n");
         printf("Test_TC_DRLK_2_2\n");
         printf("Test_TC_DRLK_2_3\n");
         printf("Test_TC_DRLK_2_4\n");
@@ -2089,6 +2094,589 @@ private:
     }
 };
 
+class Test_TC_ACL_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACL_1_1()
+        : TestCommandBridge("Test_TC_ACL_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACL_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACL_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACL_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads ClusterRevision attribute from DUT\n");
+            err = TestThReadsClusterRevisionAttributeFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads FeatureMap attribute from DUT\n");
+            err = TestThReadsFeatureMapAttributeFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList attribute from DUT\n");
+            err = TestThReadsAttributeListAttributeFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestThReadsAcceptedCommandListAttributeFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestThReadsGeneratedCommandListAttributeFromDut_5();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 6;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsClusterRevisionAttributeFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads ClusterRevision attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureMapAttributeFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads FeatureMap attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListAttributeFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListAttributeFromDut_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGeneratedCommandListAttributeFromDut_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads GeneratedCommandList attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACL_2_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACL_2_1()
+        : TestCommandBridge("Test_TC_ACL_2_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACL_2_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACL_2_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACL_2_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads SubjectsPerAccessControlEntry attribute from DUT\n");
+            if (ShouldSkip("ACL.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsSubjectsPerAccessControlEntryAttributeFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads TargetsPerAccessControlEntry attribute from DUT\n");
+            if (ShouldSkip("ACL.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTargetsPerAccessControlEntryAttributeFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AccessControlEntriesPerFabric attribute from DUT\n");
+            if (ShouldSkip("ACL.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAccessControlEntriesPerFabricAttributeFromDut_3();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 4;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsSubjectsPerAccessControlEntryAttributeFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeSubjectsPerAccessControlEntryWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads SubjectsPerAccessControlEntry attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("subjectsPerAccessControlEntry", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("subjectsPerAccessControlEntry", [value unsignedShortValue], 4U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("subjectsPerAccessControlEntry", [value unsignedShortValue], 65535U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTargetsPerAccessControlEntryAttributeFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeTargetsPerAccessControlEntryWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads TargetsPerAccessControlEntry attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("targetsPerAccessControlEntry", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("targetsPerAccessControlEntry", [value unsignedShortValue], 3U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("targetsPerAccessControlEntry", [value unsignedShortValue], 65535U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAccessControlEntriesPerFabricAttributeFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAccessControlEntriesPerFabricWithCompletionHandler:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AccessControlEntriesPerFabric attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("accessControlEntriesPerFabric", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("accessControlEntriesPerFabric", [value unsignedShortValue], 3U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("accessControlEntriesPerFabric", [value unsignedShortValue], 65535U));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACL_2_2 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACL_2_2()
+        : TestCommandBridge("Test_TC_ACL_2_2")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACL_2_2() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACL_2_2\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACL_2_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : TH1 reads DUT Descriptor cluster ServerList attribute from Endpoint 0\n");
+            err = TestTh1ReadsDutDescriptorClusterServerListAttributeFromEndpoint0_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : TH1 reads DUT Descriptor cluster ServerList attribute from every Endpoint except 0\n");
+            err = TestTh1ReadsDutDescriptorClusterServerListAttributeFromEveryEndpointExcept0_2();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 3;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestTh1ReadsDutDescriptorClusterServerListAttributeFromEndpoint0_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDescriptor * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device
+                                                                                     endpoint:0
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeServerListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads DUT Descriptor cluster ServerList attribute from Endpoint 0 Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("serverList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("serverList", value, 31UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutDescriptorClusterServerListAttributeFromEveryEndpointExcept0_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDescriptor * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device
+                                                                                     endpoint:1
+                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeServerListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads DUT Descriptor cluster ServerList attribute from every Endpoint except 0 Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("serverList", "list", "list"));
+            VerifyOrReturn(CheckConstraintExcludes("serverList", value, 31UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_BOOL_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -2695,6 +3283,242 @@ private:
 
         [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_BIND_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_BIND_1_1()
+        : TestCommandBridge("Test_TC_BIND_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_BIND_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_BIND_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_BIND_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AcceptedCommandList from DUT\n");
+            err = TestThReadsAcceptedCommandListFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_5();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 6;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBinding * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBinding * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBinding * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBinding * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBinding * cluster = [[MTRBaseClusterBinding alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -14004,7 +14828,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads ColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
+            if (ShouldSkip("CC.S.F04 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -14012,7 +14836,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
+            if (ShouldSkip("CC.S.F04 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -14496,1205 +15320,6 @@ private:
     }
 
     CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_20()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Check on/off attribute value is false after off command Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_CC_6_2 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_CC_6_2()
-        : TestCommandBridge("Test_TC_CC_6_2")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_CC_6_2() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CC_6_2\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CC_6_2\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH writes 0 to the Options attribute\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A000f")) {
-                NextTest();
-                return;
-            }
-            err = TestThWrites0ToTheOptionsAttribute_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends On command to DUT\n");
-            if (ShouldSkip("OO.S.C01.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsOnCommandToDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads ColorTempPhysicalMinMireds attribute from DUT\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A400b")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTempPhysicalMinMiredsAttributeFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads ColorTempPhysicalMaxMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A400c")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTempPhysicalMaxMiredsAttributeFromDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTemperatureMiredsAttributeFromDut_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : TH sends MoveToColorTemperature command to DUT with "
-                "ColorTemperatureMireds=(ColorTempPhysicalMinMireds + ColorTempPhysicalMaxMireds)/2 and TransitionTime=0 "
-                "(immediately).\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveToColorTemperatureCommandToDutWithColorTemperatureMiredsColorTempPhysicalMinMiredsColorTempPhysicalMaxMireds2AndTransitionTime0Immediately_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : TH sends MoveColorTemperature command to DUT with MoveMode = 0x01 (up), Rate = "
-                "(ColorTempPhysicalMaxMireds - ColorTempPhysicalMinMireds)/40\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C4b.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x01UpRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds40_7();
-            break;
-        case 8:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 8 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_8();
-            break;
-        case 9:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 9 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_9();
-            break;
-        case 10:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 10 : After another 5 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH sends MoveColorTemperature command to DUT with MoveMode = 0x03(down), Rate = "
-                "(ColorTempPhysicalMaxMireds - ColorTempPhysicalMinMireds)/20\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C4b.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x03downRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds20_11();
-            break;
-        case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_12();
-            break;
-        case 13:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 13 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_13();
-            break;
-        case 14:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 14 : After another 5 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : TH sends MoveColorTemperature command to DUT with MoveMode = 0x01(up), Rate = "
-                "(ColorTempPhysicalMaxMireds - ColorTempPhysicalMinMireds)/20\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C4b.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x01upRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds20_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : After 10 seconds, TH sends MoveColorTemperature command to DUT with MoveMode = 0x00(stop), "
-                "Rate = (ColorTempPhysicalMaxMireds - ColorTempPhysicalMinMireds)/20\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C4b.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThSendsMoveColorTemperatureCommandToDutWithMoveMode0x00stopRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds20_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTemperatureMiredsAttributeFromDut_17();
-            break;
-        case 18:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 18 : After another 2 seconds, TH reads ColorTemperatureMireds attribute from DUT\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfterAnother2SecondsThReadsColorTemperatureMiredsAttributeFromDut_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads ColorMode attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0008 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorModeAttributeFromDut_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads EnhancedColorMode attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A4001 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsEnhancedColorModeAttributeFromDut_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : Turn off light that we turned on\n");
-            if (ShouldSkip("OO.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestTurnOffLightThatWeTurnedOn_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Check on/off attribute value is false after off command\n");
-            if (ShouldSkip("OO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_22();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 23;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThWrites0ToTheOptionsAttribute_1()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id optionsArgument;
-        optionsArgument = [NSNumber numberWithUnsignedChar:0U];
-        [cluster writeAttributeOptionsWithValue:optionsArgument
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"TH writes 0 to the Options attribute Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsOnCommandToDut_2()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster onWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"TH sends On command to DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull ColorTempPhysicalMinMiredsValue;
-
-    CHIP_ERROR TestThReadsColorTempPhysicalMinMiredsAttributeFromDut_3()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads ColorTempPhysicalMinMireds attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                VerifyOrReturn(CheckConstraintType("colorTempPhysicalMinMireds", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 65279U));
-                {
-                    ColorTempPhysicalMinMiredsValue = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull ColorTempPhysicalMaxMiredsValue;
-
-    CHIP_ERROR TestThReadsColorTempPhysicalMaxMiredsAttributeFromDut_4()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads ColorTempPhysicalMaxMireds attribute from DUT. Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                VerifyOrReturn(CheckConstraintType("colorTempPhysicalMaxMireds", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 65279U));
-                {
-                    ColorTempPhysicalMaxMiredsValue = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsColorTemperatureMiredsAttributeFromDut_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("colorTemperature", "int16u", "int16u"));
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], ColorTempPhysicalMinMiredsValue));
-            VerifyOrReturn(
-                CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], ColorTempPhysicalMaxMiredsValue));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsMoveToColorTemperatureCommandToDutWithColorTemperatureMiredsColorTempPhysicalMinMiredsColorTempPhysicalMaxMireds2AndTransitionTime0Immediately_6()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x01UpRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds40_7()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_8()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_9()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_10()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x03downRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds20_11()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_12()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_13()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_14()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x01upRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds20_15()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestAfter10SecondsThSendsMoveColorTemperatureCommandToDutWithMoveMode0x00stopRateColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds20_16()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsColorTemperatureMiredsAttributeFromDut_17()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfterAnother2SecondsThReadsColorTemperatureMiredsAttributeFromDut_18()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsColorModeAttributeFromDut_19()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsEnhancedColorModeAttributeFromDut_20()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestTurnOffLightThatWeTurnedOn_21()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster offWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"Turn off light that we turned on Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_22()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Check on/off attribute value is false after off command Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_CC_6_3 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_CC_6_3()
-        : TestCommandBridge("Test_TC_CC_6_3")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_CC_6_3() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CC_6_3\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CC_6_3\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH writes 0 to the Options attribute\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A000f")) {
-                NextTest();
-                return;
-            }
-            err = TestThWrites0ToTheOptionsAttribute_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends On command to DUT\n");
-            if (ShouldSkip("OO.S.C01.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsOnCommandToDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads ColorTempPhysicalMinMireds attribute from DUT\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A400b")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTempPhysicalMinMiredsAttributeFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads ColorTempPhysicalMaxMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A400c")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTempPhysicalMaxMiredsAttributeFromDut_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTemperatureMiredsAttributeFromDut_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 6 : TH sends MoveToColorTemperature command to DUT with "
-                "ColorTemperatureMireds=(ColorTempPhysicalMinMireds + ColorTempPhysicalMaxMireds)/2 and TransitionTime=0 "
-                "(immediately).\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveToColorTemperatureCommandToDutWithColorTemperatureMiredsColorTempPhysicalMinMiredsColorTempPhysicalMaxMireds2AndTransitionTime0Immediately_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 7 : TH sends StepColorTemperature command to DUT with StepMode = 0x01 (up), StepSize = "
-                "(ColorTempPhysicalMaxMireds - ColorTempPhysicalMinMireds)/2 and TransitionTime = 200 (20s).\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C4c.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsStepColorTemperatureCommandToDutWithStepMode0x01UpStepSizeColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds2AndTransitionTime20020s_7();
-            break;
-        case 8:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 8 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_8();
-            break;
-        case 9:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 9 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_9();
-            break;
-        case 10:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 10 : After another 5 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH sends StepColorTemperature command to DUT with StepMode = 0x03 (down), StepSize = "
-                "(ColorTempPhysicalMaxMireds - ColorTempPhysicalMinMireds) and TransitionTime = 200 (20s).\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C4c.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsStepColorTemperatureCommandToDutWithStepMode0x03DownStepSizeColorTempPhysicalMaxMiredsColorTempPhysicalMinMiredsAndTransitionTime20020s_11();
-            break;
-        case 12:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 12 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_12();
-            break;
-        case 13:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 13 : After 10 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_13();
-            break;
-        case 14:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 14 : After another 5 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads ColorMode attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0008 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorModeAttributeFromDut_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads EnhancedColorMode attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A4001 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsEnhancedColorModeAttributeFromDut_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Turn Off light that we turned on\n");
-            if (ShouldSkip("OO.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestTurnOffLightThatWeTurnedOn_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Check on/off attribute value is false after off command\n");
-            if (ShouldSkip("OO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_18();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 19;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThWrites0ToTheOptionsAttribute_1()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id optionsArgument;
-        optionsArgument = [NSNumber numberWithUnsignedChar:0U];
-        [cluster writeAttributeOptionsWithValue:optionsArgument
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"TH writes 0 to the Options attribute Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsOnCommandToDut_2()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster onWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"TH sends On command to DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull ColorTempPhysicalMinMiredsValue;
-
-    CHIP_ERROR TestThReadsColorTempPhysicalMinMiredsAttributeFromDut_3()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads ColorTempPhysicalMinMireds attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                VerifyOrReturn(CheckConstraintType("colorTempPhysicalMinMireds", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 65279U));
-                {
-                    ColorTempPhysicalMinMiredsValue = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull ColorTempPhysicalMaxMiredsValue;
-
-    CHIP_ERROR TestThReadsColorTempPhysicalMaxMiredsAttributeFromDut_4()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads ColorTempPhysicalMaxMireds attribute from DUT. Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                VerifyOrReturn(CheckConstraintType("colorTempPhysicalMaxMireds", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 65279U));
-                {
-                    ColorTempPhysicalMaxMiredsValue = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsColorTemperatureMiredsAttributeFromDut_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("colorTemperature", "int16u", "int16u"));
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], ColorTempPhysicalMinMiredsValue));
-            VerifyOrReturn(
-                CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], ColorTempPhysicalMaxMiredsValue));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsMoveToColorTemperatureCommandToDutWithColorTemperatureMiredsColorTempPhysicalMinMiredsColorTempPhysicalMaxMireds2AndTransitionTime0Immediately_6()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThSendsStepColorTemperatureCommandToDutWithStepMode0x01UpStepSizeColorTempPhysicalMaxMiredsColorTempPhysicalMinMireds2AndTransitionTime20020s_7()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_8()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_9()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_10()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThSendsStepColorTemperatureCommandToDutWithStepMode0x03DownStepSizeColorTempPhysicalMaxMiredsColorTempPhysicalMinMiredsAndTransitionTime20020s_11()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_12()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThReadsColorTemperatureMiredsAttributeFromDut_13()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfterAnother5SecondsThReadsColorTemperatureMiredsAttributeFromDut_14()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsColorModeAttributeFromDut_15()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsEnhancedColorModeAttributeFromDut_16()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestTurnOffLightThatWeTurnedOn_17()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster offWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"Turn Off light that we turned on Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -17248,1069 +16873,6 @@ private:
     }
 };
 
-class Test_TC_CC_8_1 : public TestCommandBridge {
-public:
-    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
-    Test_TC_CC_8_1()
-        : TestCommandBridge("Test_TC_CC_8_1")
-        , mTestIndex(0)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
-
-    ~Test_TC_CC_8_1() {}
-
-    /////////// TestCommand Interface /////////
-    void NextTest() override
-    {
-        CHIP_ERROR err = CHIP_NO_ERROR;
-
-        if (0 == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Start: Test_TC_CC_8_1\n");
-        }
-
-        if (mTestCount == mTestIndex) {
-            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_CC_8_1\n");
-            SetCommandExitStatus(CHIP_NO_ERROR);
-            return;
-        }
-
-        Wait();
-
-        // Ensure we increment mTestIndex before we start running the relevant
-        // command.  That way if we lose the timeslice after we send the message
-        // but before our function call returns, we won't end up with an
-        // incorrect mTestIndex value observed when we get the response.
-        switch (mTestIndex++) {
-        case 0:
-            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
-            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
-            break;
-        case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : TH writes 0 to the Options attribute\n");
-            if (ShouldSkip("CC.S.A000f")) {
-                NextTest();
-                return;
-            }
-            err = TestThWrites0ToTheOptionsAttribute_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends On command to DUT\n");
-            if (ShouldSkip("OO.S.C01.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsOnCommandToDut_2();
-            break;
-        case 3:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 3 : TH sends MoveToHue command to DUT with Hue=200, Direction=0x00 (shortest distance) and "
-                "TransitionTime=0 (immediately).\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveToHueCommandToDutWithHue200Direction0x00ShortestDistanceAndTransitionTime0Immediately_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
-            err = TestWait100ms_4();
-            break;
-        case 5:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 5 : TH sends MoveHue command to DUT with MoveMode=0x01 (up) and Rate=5 (units/s)\n");
-            if (ShouldSkip("CC.S.C01.Rsp && CC.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveHueCommandToDutWithMoveMode0x01UpAndRate5UnitsS_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
-            err = TestWait10s_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends StopMoveStep command to DUT\n");
-            if (ShouldSkip("CC.S.C47.Rsp && CC.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsStopMoveStepCommandToDut_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads CurrentHue attribute from DUT\n");
-            if (ShouldSkip("CC.S.A0000 && CC.S.C01.Rsp && CC.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentHueAttributeFromDut_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 2s\n");
-            err = TestWait2s_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads CurrentHue attribute from DUT\n");
-            if (ShouldSkip("CC.S.A0000 && CC.S.C01.Rsp && CC.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentHueAttributeFromDut_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH sends MoveToSaturation command to DUT with Saturation=150 and TransitionTime=0 "
-                "(immediately)\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.C03.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveToSaturationCommandToDutWithSaturation150AndTransitionTime0Immediately_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 100ms\n");
-            err = TestWait100ms_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 13 : TH sends MoveSaturation command to DUT with MoveMode=0x01 (up) and Rate=5 (units/s)\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.C04.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveSaturationCommandToDutWithMoveMode0x01UpAndRate5UnitsS_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 10s\n");
-            err = TestWait10s_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH sends StopMoveStep command to DUT\n");
-            if (ShouldSkip("CC.S.C47.Rsp && CC.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsStopMoveStepCommandToDut_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads CurrentSaturation attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentSaturationAttributeFromDut_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 2s\n");
-            err = TestWait2s_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads CurrentSaturation attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentSaturationAttributeFromDut_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads ColorTempPhysicalMinMireds attribute from DUT\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A400b")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTempPhysicalMinMiredsAttributeFromDut_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads ColorTempPhysicalMaxMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A400c")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTempPhysicalMaxMiredsAttributeFromDut_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 21 : TH sends MoveToColorTemperature command to DUT with ColorTemperatureMireds= "
-                "ColorTempPhysicalMaxMireds / 2 and TransitionTime=0 (immediately).\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveToColorTemperatureCommandToDutWithColorTemperatureMiredsColorTempPhysicalMaxMireds2AndTransitionTime0Immediately_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 22 : TH sends MoveColorTemperature command to DUT with MoveMode = 0x01 (up), Rate = "
-                "ColorTempPhysicalMaxMireds / 40\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x01UpRateColorTempPhysicalMaxMireds40_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : After 10 seconds, TH sends StopMoveStep command to DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.C47.Rsp && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfter10SecondsThSendsStopMoveStepCommandToDut_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsColorTemperatureMiredsAttributeFromDut_24();
-            break;
-        case 25:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 25 : After another 2 seconds, TH reads ColorTemperatureMireds attribute from DUT.\n");
-            if (ShouldSkip("CC.S.F04 && CC.S.A0007 && PICS_USER_PROMPT")) {
-                NextTest();
-                return;
-            }
-            err = TestAfterAnother2SecondsThReadsColorTemperatureMiredsAttributeFromDut_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 26 : TH sends EnhancedMoveToHue command to DUT with EnhancedHue=20000, Direction=0x00 (shortest "
-                "distance) and TransitionTime=0 (immediately).\n");
-            if (ShouldSkip("CC.S.F01 && CC.S.C40.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsEnhancedMoveToHueCommandToDutWithEnhancedHue20000Direction0x00ShortestDistanceAndTransitionTime0Immediately_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Wait 100ms\n");
-            err = TestWait100ms_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 28 : TH sends EnhancedMoveHue command to DUT with MoveMode=0x01 (up) and Rate=500 (units/s)\n");
-            if (ShouldSkip("CC.S.F01 && CC.S.C41.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsEnhancedMoveHueCommandToDutWithMoveMode0x01UpAndRate500UnitsS_28();
-            break;
-        case 29:
-            ChipLogProgress(chipTool, " ***** Test Step 29 : Wait 10s\n");
-            err = TestWait10s_29();
-            break;
-        case 30:
-            ChipLogProgress(chipTool, " ***** Test Step 30 : TH sends StopMoveStep command to DUT\n");
-            if (ShouldSkip("CC.S.C47.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsStopMoveStepCommandToDut_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : TH reads EnhancedCurrentHue attribute from DUT\n");
-            if (ShouldSkip("CC.S.A4000 && CC.S.C47.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsEnhancedCurrentHueAttributeFromDut_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : Wait 10s\n");
-            err = TestWait10s_32();
-            break;
-        case 33:
-            ChipLogProgress(chipTool, " ***** Test Step 33 : TH reads EnhancedCurrentHue attribute from DUT\n");
-            if (ShouldSkip("CC.S.A4000 && CC.S.C47.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsEnhancedCurrentHueAttributeFromDut_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : Turn Off light that we turned on\n");
-            if (ShouldSkip("OO.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestTurnOffLightThatWeTurnedOn_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : Check on/off attribute value is false after off command\n");
-            if (ShouldSkip("OO.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_35();
-            break;
-        }
-
-        if (CHIP_NO_ERROR != err) {
-            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
-            SetCommandExitStatus(err);
-        }
-    }
-
-    void OnStatusUpdate(const chip::app::StatusIB & status) override
-    {
-        switch (mTestIndex - 1) {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 10:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        }
-
-        // Go on to the next test.
-        ContinueOnChipMainThread(CHIP_NO_ERROR);
-    }
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 36;
-
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-        return WaitForCommissionee("alpha", value);
-    }
-
-    CHIP_ERROR TestThWrites0ToTheOptionsAttribute_1()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        id optionsArgument;
-        optionsArgument = [NSNumber numberWithUnsignedChar:0U];
-        [cluster writeAttributeOptionsWithValue:optionsArgument
-                              completionHandler:^(NSError * _Nullable err) {
-                                  NSLog(@"TH writes 0 to the Options attribute Error: %@", err);
-
-                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                                  NextTest();
-                              }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsOnCommandToDut_2()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster onWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"TH sends On command to DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsMoveToHueCommandToDutWithHue200Direction0x00ShortestDistanceAndTransitionTime0Immediately_3()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterMoveToHueParams alloc] init];
-        params.hue = [NSNumber numberWithUnsignedChar:200U];
-        params.direction = [NSNumber numberWithUnsignedChar:0U];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster moveToHueWithParams:params
-                   completionHandler:^(NSError * _Nullable err) {
-                       NSLog(@"TH sends MoveToHue command to DUT with Hue=200, Direction=0x00 (shortest distance) and "
-                             @"TransitionTime=0 (immediately). Error: %@",
-                           err);
-
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                       NextTest();
-                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait100ms_4()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsMoveHueCommandToDutWithMoveMode0x01UpAndRate5UnitsS_5()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
-        params.rate = [NSNumber numberWithUnsignedChar:5U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster moveHueWithParams:params
-                 completionHandler:^(NSError * _Nullable err) {
-                     NSLog(@"TH sends MoveHue command to DUT with MoveMode=0x01 (up) and Rate=5 (units/s) Error: %@", err);
-
-                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                     NextTest();
-                 }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait10s_6()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsStopMoveStepCommandToDut_7()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster stopMoveStepWithParams:params
-                      completionHandler:^(NSError * _Nullable err) {
-                          NSLog(@"TH sends StopMoveStep command to DUT Error: %@", err);
-
-                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                          NextTest();
-                      }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_8()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads CurrentHue attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 235U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait2s_9()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 2000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_10()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads CurrentHue attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 240U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsMoveToSaturationCommandToDutWithSaturation150AndTransitionTime0Immediately_11()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterMoveToSaturationParams alloc] init];
-        params.saturation = [NSNumber numberWithUnsignedChar:150U];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster moveToSaturationWithParams:params
-                          completionHandler:^(NSError * _Nullable err) {
-                              NSLog(@"TH sends MoveToSaturation command to DUT with Saturation=150 and TransitionTime=0 "
-                                    @"(immediately) Error: %@",
-                                  err);
-
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                              NextTest();
-                          }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait100ms_12()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsMoveSaturationCommandToDutWithMoveMode0x01UpAndRate5UnitsS_13()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterMoveSaturationParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
-        params.rate = [NSNumber numberWithUnsignedChar:5U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            moveSaturationWithParams:params
-                   completionHandler:^(NSError * _Nullable err) {
-                       NSLog(@"TH sends MoveSaturation command to DUT with MoveMode=0x01 (up) and Rate=5 (units/s) Error: %@", err);
-
-                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                       NextTest();
-                   }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait10s_14()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsStopMoveStepCommandToDut_15()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster stopMoveStepWithParams:params
-                      completionHandler:^(NSError * _Nullable err) {
-                          NSLog(@"TH sends StopMoveStep command to DUT Error: %@", err);
-
-                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                          NextTest();
-                      }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull CurrentSaturationValue;
-
-    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_16()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentSaturationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads CurrentSaturation attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 170U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 230U));
-            {
-                CurrentSaturationValue = value;
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait2s_17()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 2000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_18()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeCurrentSaturationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads CurrentSaturation attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], CurrentSaturationValue));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 230U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull ColorTempPhysicalMinMireds;
-
-    CHIP_ERROR TestThReadsColorTempPhysicalMinMiredsAttributeFromDut_19()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorTempPhysicalMinMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads ColorTempPhysicalMinMireds attribute from DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                VerifyOrReturn(CheckConstraintType("colorTempPhysicalMinMireds", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMinMireds", [value unsignedShortValue], 65279U));
-                {
-                    ColorTempPhysicalMinMireds = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull ColorTempPhysicalMaxMireds;
-
-    CHIP_ERROR TestThReadsColorTempPhysicalMaxMiredsAttributeFromDut_20()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeColorTempPhysicalMaxMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads ColorTempPhysicalMaxMireds attribute from DUT. Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                VerifyOrReturn(CheckConstraintType("colorTempPhysicalMaxMireds", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 0U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTempPhysicalMaxMireds", [value unsignedShortValue], 65279U));
-                {
-                    ColorTempPhysicalMaxMireds = value;
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThSendsMoveToColorTemperatureCommandToDutWithColorTemperatureMiredsColorTempPhysicalMaxMireds2AndTransitionTime0Immediately_21()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsMoveColorTemperatureCommandToDutWithMoveMode0x01UpRateColorTempPhysicalMaxMireds40_22()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfter10SecondsThSendsStopMoveStepCommandToDut_23()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsColorTemperatureMiredsAttributeFromDut_24()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestAfterAnother2SecondsThReadsColorTemperatureMiredsAttributeFromDut_25()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR
-    TestThSendsEnhancedMoveToHueCommandToDutWithEnhancedHue20000Direction0x00ShortestDistanceAndTransitionTime0Immediately_26()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterEnhancedMoveToHueParams alloc] init];
-        params.enhancedHue = [NSNumber numberWithUnsignedShort:20000U];
-        params.direction = [NSNumber numberWithUnsignedChar:0U];
-        params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster enhancedMoveToHueWithParams:params
-                           completionHandler:^(NSError * _Nullable err) {
-                               NSLog(@"TH sends EnhancedMoveToHue command to DUT with EnhancedHue=20000, Direction=0x00 (shortest "
-                                     @"distance) and TransitionTime=0 (immediately). Error: %@",
-                                   err);
-
-                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                               NextTest();
-                           }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait100ms_27()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 100UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsEnhancedMoveHueCommandToDutWithMoveMode0x01UpAndRate500UnitsS_28()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterEnhancedMoveHueParams alloc] init];
-        params.moveMode = [NSNumber numberWithUnsignedChar:1U];
-        params.rate = [NSNumber numberWithUnsignedShort:500U];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            enhancedMoveHueWithParams:params
-                    completionHandler:^(NSError * _Nullable err) {
-                        NSLog(@"TH sends EnhancedMoveHue command to DUT with MoveMode=0x01 (up) and Rate=500 (units/s) Error: %@",
-                            err);
-
-                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                        NextTest();
-                    }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait10s_29()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsStopMoveStepCommandToDut_30()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRColorControlClusterStopMoveStepParams alloc] init];
-        params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster stopMoveStepWithParams:params
-                      completionHandler:^(NSError * _Nullable err) {
-                          NSLog(@"TH sends StopMoveStep command to DUT Error: %@", err);
-
-                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                          NextTest();
-                      }];
-
-        return CHIP_NO_ERROR;
-    }
-    NSNumber * _Nonnull EnhancedCurrentHueValue;
-
-    CHIP_ERROR TestThReadsEnhancedCurrentHueAttributeFromDut_31()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEnhancedCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads EnhancedCurrentHue attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 23500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 26500U));
-            {
-                EnhancedCurrentHueValue = value;
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestWait10s_32()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 10000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThReadsEnhancedCurrentHueAttributeFromDut_33()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
-                                                                                         endpoint:1
-                                                                                            queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeEnhancedCurrentHueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads EnhancedCurrentHue attribute from DUT Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], EnhancedCurrentHueValue));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 26500U));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestTurnOffLightThatWeTurnedOn_34()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster offWithCompletionHandler:^(NSError * _Nullable err) {
-            NSLog(@"Turn Off light that we turned on Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_35()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeOnOffWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Check on/off attribute value is false after off command Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("OnOff", actualValue, 0));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_BINFO_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -18349,6 +16911,94 @@ public:
         // but before our function call returns, we won't end up with an
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads optional attribute(ManufacturingDate) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A000b")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeManufacturingDateInAttributeList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads optional attribute(PartNumber) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A000c")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePartNumberInAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads optional attribute(ProductURL) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A000d")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeProductURLInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads optional attribute(ProductLabel) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A000e")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeProductLabelInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads optional attribute(SerialNumber) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A000f")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeSerialNumberInAttributeList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads optional attribute(LocalConfigDisabled) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A0010")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeLocalConfigDisabledInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads optional attribute(Reachable) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A0011")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeReachableInAttributeList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads optional attribute(UniqueID) in attributeList\n");
+            if (ShouldSkip("BINFO.S.A0012")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeUniqueIDInAttributeList_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH1 reads AcceptedCommandList from DUT\n");
+            err = TestTh1ReadsAcceptedCommandListFromDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH1 reads GeneratedCommandList from DUT\n");
+            err = TestTh1ReadsGeneratedCommandListFromDut_13();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -18360,6 +17010,48 @@ public:
     void OnStatusUpdate(const chip::app::StatusIB & status) override
     {
         switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -18373,12 +17065,307 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeManufacturingDateInAttributeList_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ManufacturingDate) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 11UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePartNumberInAttributeList_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(PartNumber) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 12UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeProductURLInAttributeList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ProductURL) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 13UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeProductLabelInAttributeList_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ProductLabel) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 14UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeSerialNumberInAttributeList_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(SerialNumber) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 15UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeLocalConfigDisabledInAttributeList_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(LocalConfigDisabled) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 16UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeReachableInAttributeList_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(Reachable) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeUniqueIDInAttributeList_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(UniqueID) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 18UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsAcceptedCommandListFromDut_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsGeneratedCommandListFromDut_13()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterBasic * cluster = [[MTRBaseClusterBasic alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads GeneratedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
 };
 
 class Test_TC_CNET_1_3 : public TestCommandBridge {
@@ -18684,6 +17671,280 @@ private:
 
         [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_DGETH_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DGETH_1_1()
+        : TestCommandBridge("Test_TC_DGETH_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DGETH_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGETH_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGETH_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip("DGETH.S.F00 || DGETH.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAcceptedCommandListFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip(" !DGETH.S.F00 && !DGETH.S.F01 ")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAcceptedCommandListFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_6();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 7;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads GeneratedCommandList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -57587,6 +56848,262 @@ private:
 
                 NextTest();
             }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_DGTHREAD_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DGTHREAD_1_1()
+        : TestCommandBridge("Test_TC_DGTHREAD_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DGTHREAD_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGTHREAD_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGTHREAD_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            if (ShouldSkip("DGTHREAD.S.F00 || DGTHREAD.S.F01 || DGTHREAD.S.F02 || DGTHREAD.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AcceptedCommandList from DUT\n");
+            err = TestThReadsAcceptedCommandListFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_5();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 6;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 31UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 11UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 12UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 13UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 59UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 60UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 61UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 62UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads GeneratedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -100729,6 +100246,419 @@ private:
     }
 };
 
+class Test_TC_DGSW_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DGSW_1_1()
+        : TestCommandBridge("Test_TC_DGSW_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DGSW_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DGSW_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DGSW_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads optional attribute(ThreadMetrics) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeThreadMetricsInAttributeList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads optional attribute(CurrentHeapFree) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeCurrentHeapFreeInAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads optional attribute(CurrentHeapUsed) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeCurrentHeapUsedInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 7 : TH reads Feature dependent attribute(CurrentHeapHighWatermark) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.F00 || DGSW.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip("DGSW.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAcceptedCommandListFromDut_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip(" !DGSW.S.F00 ")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAcceptedCommandListFromDut_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeThreadMetricsInAttributeList_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ThreadMetrics) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeCurrentHeapFreeInAttributeList_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(CurrentHeapFree) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeCurrentHeapUsedInAttributeList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(CurrentHeapUsed) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent attribute(CurrentHeapHighWatermark) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:0
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads GeneratedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_DGSW_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -114732,6 +114662,1089 @@ private:
     }
 };
 
+class Test_TC_DRLK_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DRLK_1_1()
+        : TestCommandBridge("Test_TC_DRLK_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DRLK_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            if (ShouldSkip("DRLK.S.F00 || DRLK.S.F01 || DRLK.S.F02 || DRLK.S.F04 || DRLK.S.F05 || DRLK.S.F06 || DRLK.S.F07 || "
+                           "DRLK.S.F08 || DRLK.S.F10 || DRLK.S.F11")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads Feature dependent(DRLK.S.F08) attributes in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F08")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF08AttributesInAttributeList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads Feature dependent(DRLK.S.F00) attributes in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF00AttributesInAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads Feature dependent(DRLK.S.F01) attributes in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF01AttributesInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads Feature dependent(DRLK.S.F04) attribute in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF04AttributeInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads Feature dependent(DRLK.S.F10) attribute in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F10")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF10AttributeInAttributeList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads Feature dependent(DRLK.S.F11) attribute in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F11")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF11AttributeInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : TH reads Feature dependent(DRLK.S.F00 or DRLK.S.F01) attributes in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F00 || DRLK.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF00OrDrlksf01AttributesInAttributeList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH reads Feature dependent(DRLK.S.F07 or DRLK.S.F00) attribute in AttributeList\n");
+            if (ShouldSkip("DRLK.S.F07 || DRLK.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDRLKSF07OrDrlksf00AttributeInAttributeList_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads optional attribute(Language) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0021")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeLanguageInAttributeList_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads optional attribute(LEDSettings) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0022")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeLEDSettingsInAttributeList_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads optional attribute(AutoRelockTime) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0023")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeAutoRelockTimeInAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads optional attribute(SoundVolume) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0024")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeSoundVolumeInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 16 : TH reads optional attribute(DefaultConfigurationRegister) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0027")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeDefaultConfigurationRegisterInAttributeList_16();
+            break;
+        case 17:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 17 : TH reads optional attribute(EnableLocalProgramming) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0028")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeEnableLocalProgrammingInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : TH reads optional attribute(EnableOneTouchLocking) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A0029")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeEnableOneTouchLockingInAttributeList_18();
+            break;
+        case 19:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : TH reads optional attribute(EnableInsideStatusLED) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A002a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeEnableInsideStatusLEDInAttributeList_19();
+            break;
+        case 20:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : TH reads optional attribute(EnablePrivacyModeButton) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A002b")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeEnablePrivacyModeButtonInAttributeList_20();
+            break;
+        case 21:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 21 : TH reads optional attribute(LocalProgrammingFeatures) in AttributeList\n");
+            if (ShouldSkip("DRLK.S.A002c")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeLocalProgrammingFeaturesInAttributeList_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : TH reads AcceptedCommandList from DUT\n");
+            err = TestThReadsAcceptedCommandListFromDut_22();
+            break;
+        case 23:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 23 : TH reads Feature dependent commands(DRLK.S.F04) in AcceptedCommandList\n");
+            if (ShouldSkip("DRLK.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandsDRLKSF04InAcceptedCommandList_23();
+            break;
+        case 24:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 24 : TH reads Feature dependent commands(DRLK.S.F10) in AcceptedCommandList\n");
+            if (ShouldSkip("DRLK.S.F10")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandsDRLKSF10InAcceptedCommandList_24();
+            break;
+        case 25:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 25 : TH reads Feature dependent commands(DRLK.S.F11) in AcceptedCommandList\n");
+            if (ShouldSkip("DRLK.S.F11")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandsDRLKSF11InAcceptedCommandList_25();
+            break;
+        case 26:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 26 : TH reads Feature dependent commands(DRLK.S.F08) in AcceptedCommandList\n");
+            if (ShouldSkip("DRLK.S.F08")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandsDRLKSF08InAcceptedCommandList_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : TH reads optional commands(DRLK.S.C03.Rsp) in AcceptedCommandList\n");
+            if (ShouldSkip("DRLK.S.C03.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalCommandsDRLKSC03RspInAcceptedCommandList_27();
+            break;
+        case 28:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 28 : TH reads Feature dependent command(DRLK.S.F04) in GeneratedCommandList\n");
+            if (ShouldSkip("DRLK.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandDRLKSF04InGeneratedCommandList_28();
+            break;
+        case 29:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 29 : TH reads Feature dependent command(DRLK.S.F10) in GeneratedCommandList\n");
+            if (ShouldSkip("DRLK.S.F10")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandDRLKSF10InGeneratedCommandList_29();
+            break;
+        case 30:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 30 : TH reads Feature dependent command(DRLK.S.F11) in GeneratedCommandList\n");
+            if (ShouldSkip("DRLK.S.F11")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandDRLKSF11InGeneratedCommandList_30();
+            break;
+        case 31:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 31 : TH reads Feature dependent command(DRLK.S.F08) in GeneratedCommandList\n");
+            if (ShouldSkip("DRLK.S.F08")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentCommandDRLKSF08InGeneratedCommandList_31();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 32;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 6U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
+            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 4095UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 37UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 38UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF08AttributesInAttributeList_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F08) attributes in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 27UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 28UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF00AttributesInAttributeList_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F00) attributes in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 18UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 23UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 24UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF01AttributesInAttributeList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F01) attributes in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 25UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 26UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF04AttributeInAttributeList_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F04) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 20UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF10AttributeInAttributeList_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F10) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 21UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF11AttributeInAttributeList_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F11) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 22UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF00OrDrlksf01AttributesInAttributeList_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F00 or DRLK.S.F01) attributes in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 48UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 49UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentDRLKSF07OrDrlksf00AttributeInAttributeList_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent(DRLK.S.F07 or DRLK.S.F00) attribute in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 51UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeLanguageInAttributeList_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(Language) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 33UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeLEDSettingsInAttributeList_13()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(LEDSettings) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 34UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeAutoRelockTimeInAttributeList_14()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(AutoRelockTime) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 35UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeSoundVolumeInAttributeList_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(SoundVolume) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 36UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeDefaultConfigurationRegisterInAttributeList_16()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(DefaultConfigurationRegister) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 39UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeEnableLocalProgrammingInAttributeList_17()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(EnableLocalProgramming) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 40UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeEnableOneTouchLockingInAttributeList_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(EnableOneTouchLocking) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 41UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeEnableInsideStatusLEDInAttributeList_19()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(EnableInsideStatusLED) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 42UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeEnablePrivacyModeButtonInAttributeList_20()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(EnablePrivacyModeButton) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 43UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeLocalProgrammingFeaturesInAttributeList_21()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(LocalProgrammingFeatures) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 44UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_22()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF04InAcceptedCommandList_23()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent commands(DRLK.S.F04) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 11UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 12UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 13UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF10InAcceptedCommandList_24()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent commands(DRLK.S.F10) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 14UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 15UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 16UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF11InAcceptedCommandList_25()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent commands(DRLK.S.F11) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 17UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 18UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 19UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandsDRLKSF08InAcceptedCommandList_26()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent commands(DRLK.S.F08) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 26UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 27UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 29UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 34UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 36UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 38UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalCommandsDRLKSC03RspInAcceptedCommandList_27()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional commands(DRLK.S.C03.Rsp) in AcceptedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF04InGeneratedCommandList_28()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent command(DRLK.S.F04) in GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 12UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF10InGeneratedCommandList_29()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent command(DRLK.S.F10) in GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 15UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF11InGeneratedCommandList_30()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent command(DRLK.S.F11) in GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 18UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsFeatureDependentCommandDRLKSF08InGeneratedCommandList_31()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent command(DRLK.S.F08) in GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 28UL));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 35UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_DRLK_2_2 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -121195,9 +122208,13 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestList>(),
         make_unique<ManualTestList>(),
         make_unique<TestAccessControlCluster>(),
+        make_unique<Test_TC_ACL_1_1>(),
+        make_unique<Test_TC_ACL_2_1>(),
+        make_unique<Test_TC_ACL_2_2>(),
         make_unique<Test_TC_BOOL_1_1>(),
         make_unique<Test_TC_BOOL_2_1>(),
         make_unique<Test_TC_ACT_1_1>(),
+        make_unique<Test_TC_BIND_1_1>(),
         make_unique<Test_TC_CC_1_1>(),
         make_unique<Test_TC_CC_2_1>(),
         make_unique<Test_TC_CC_3_2>(),
@@ -121210,14 +122227,12 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_CC_5_2>(),
         make_unique<Test_TC_CC_5_3>(),
         make_unique<Test_TC_CC_6_1>(),
-        make_unique<Test_TC_CC_6_2>(),
-        make_unique<Test_TC_CC_6_3>(),
         make_unique<Test_TC_CC_7_3>(),
         make_unique<Test_TC_CC_7_4>(),
-        make_unique<Test_TC_CC_8_1>(),
         make_unique<Test_TC_BINFO_1_1>(),
         make_unique<Test_TC_CNET_1_3>(),
         make_unique<Test_TC_DESC_1_1>(),
+        make_unique<Test_TC_DGETH_1_1>(),
         make_unique<Test_TC_DGETH_2_1>(),
         make_unique<Test_TC_DGETH_2_2>(),
         make_unique<Test_TC_FLW_1_1>(),
@@ -121302,6 +122317,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_TSUIC_1_1>(),
         make_unique<Test_TC_TSUIC_2_1>(),
         make_unique<Test_TC_TSUIC_2_2>(),
+        make_unique<Test_TC_DGTHREAD_1_1>(),
         make_unique<Test_TC_ULABEL_1_1>(),
         make_unique<Test_TC_ULABEL_2_2>(),
         make_unique<Test_TC_ULABEL_2_3>(),
@@ -121361,6 +122377,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestLevelControlWithOnOffDependency>(),
         make_unique<TestCommissioningWindow>(),
         make_unique<TestMultiAdmin>(),
+        make_unique<Test_TC_DGSW_1_1>(),
         make_unique<Test_TC_DGSW_2_1>(),
         make_unique<Test_TC_DGSW_2_2>(),
         make_unique<Test_TC_DGSW_2_3>(),
@@ -121368,6 +122385,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
         make_unique<DL_Schedules>(),
+        make_unique<Test_TC_DRLK_1_1>(),
         make_unique<Test_TC_DRLK_2_2>(),
         make_unique<Test_TC_DRLK_2_3>(),
         make_unique<Test_TC_DRLK_2_4>(),
