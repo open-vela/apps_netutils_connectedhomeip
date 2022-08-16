@@ -99923,8 +99923,6 @@ public:
             break;
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
-            VerifyOrReturn(CheckValue("clusterStatus present", status.mClusterStatus.HasValue(), true));
-            VerifyOrReturn(CheckValue("clusterStatus value", status.mClusterStatus.Value(), 9));
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
