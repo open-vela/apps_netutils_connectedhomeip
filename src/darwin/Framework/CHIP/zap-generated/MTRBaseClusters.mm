@@ -93615,6 +93615,36 @@ using chip::SessionHandle;
         });
 }
 
+- (void)failRandomlyAtFaultWithParams:(MTRFaultInjectionClusterFailRandomlyAtFaultParams *)params
+                    completionHandler:(StatusCompletion)completionHandler
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    new MTRCommandSuccessCallbackBridge(
+        self.callbackQueue, self.device,
+        ^(id _Nullable value, NSError * _Nullable error) {
+            completionHandler(error);
+        },
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
+            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            ListFreer listFreer;
+            FaultInjection::Commands::FailRandomlyAtFault::Type request;
+            if (params != nil) {
+                if (params.timedInvokeTimeoutMs != nil) {
+                    timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+            }
+            request.type = static_cast<std::remove_reference_t<decltype(request.type)>>(params.type.unsignedCharValue);
+            request.id = params.id.unsignedIntValue;
+            request.percentage = params.percentage.unsignedCharValue;
+
+            auto successFn = Callback<CommandSuccessCallbackType>::FromCancelable(success);
+            auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
+            chip::Controller::FaultInjectionCluster cppCluster(exchangeManager, session, self->_endpoint);
+            return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
+        });
+}
+
 - (void)readAttributeGeneratedCommandListWithCompletionHandler:(void (^)(NSArray * _Nullable value,
                                                                    NSError * _Nullable error))completionHandler
 {
