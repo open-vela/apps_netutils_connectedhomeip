@@ -56238,7 +56238,9 @@ private:
                     VerifyOrReturn(CheckValue("serverList[24]", iter_0.GetValue(), 65UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 25));
                     VerifyOrReturn(CheckValue("serverList[25]", iter_0.GetValue(), 1029UL));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 26));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 26));
+                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 4294048774UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 27));
                 }
             }
             break;
