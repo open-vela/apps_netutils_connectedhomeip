@@ -93054,6 +93054,7 @@ public:
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * FailAtFault                                                       |   0x00 |
+| * FailRandomlyAtFault                                               |   0x01 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
 | * GeneratedCommandList                                              | 0xFFF8 |
@@ -93117,6 +93118,56 @@ public:
 
 private:
     chip::app::Clusters::FaultInjection::Commands::FailAtFault::Type mRequest;
+};
+
+/*
+ * Command FailRandomlyAtFault
+ */
+class FaultInjectionFailRandomlyAtFault : public ClusterCommand {
+public:
+    FaultInjectionFailRandomlyAtFault()
+        : ClusterCommand("fail-randomly-at-fault")
+    {
+        AddArgument("Type", 0, UINT8_MAX, &mRequest.type);
+        AddArgument("Id", 0, UINT32_MAX, &mRequest.id);
+        AddArgument("Percentage", 0, UINT8_MAX, &mRequest.percentage);
+        ClusterCommand::AddArguments();
+    }
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC06) command (0x00000001) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        MTRBaseClusterFaultInjection * cluster = [[MTRBaseClusterFaultInjection alloc] initWithDevice:device
+                                                                                             endpoint:endpointId
+                                                                                                queue:callbackQueue];
+        __auto_type * params = [[MTRFaultInjectionClusterFailRandomlyAtFaultParams alloc] init];
+        params.timedInvokeTimeoutMs
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.type = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.type)];
+        params.id = [NSNumber numberWithUnsignedInt:mRequest.id];
+        params.percentage = [NSNumber numberWithUnsignedChar:mRequest.percentage];
+        uint16_t repeatCount = mRepeatCount.ValueOr(1);
+        uint16_t __block responsesNeeded = repeatCount;
+        while (repeatCount--) {
+            [cluster failRandomlyAtFaultWithParams:params
+                                 completionHandler:^(NSError * _Nullable error) {
+                                     responsesNeeded--;
+                                     if (error != nil) {
+                                         mError = error;
+                                         LogNSError("Error", error);
+                                     }
+                                     if (responsesNeeded == 0) {
+                                         SetCommandExitStatus(mError);
+                                     }
+                                 }];
+        }
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    chip::app::Clusters::FaultInjection::Commands::FailRandomlyAtFault::Type mRequest;
 };
 
 /*
@@ -97018,6 +97069,7 @@ void registerClusterFaultInjection(Commands & commands)
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
         make_unique<FaultInjectionFailAtFault>(), //
+        make_unique<FaultInjectionFailRandomlyAtFault>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadFaultInjectionGeneratedCommandList>(), //
         make_unique<WriteAttribute>(Id), //
