@@ -57847,24 +57847,24 @@ using chip::SessionHandle;
 - (void)readAttributeStartUpColorTemperatureMiredsWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                             NSError * _Nullable error))completionHandler
 {
-    new MTRInt16uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
+    new MTRNullableInt16uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = ColorControl::Attributes::StartUpColorTemperatureMireds::TypeInfo;
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
         });
 }
 
-- (void)writeAttributeStartUpColorTemperatureMiredsWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributeStartUpColorTemperatureMiredsWithValue:(NSNumber * _Nullable)value
                                            completionHandler:(StatusCompletion)completionHandler
 {
-    [self writeAttributeStartUpColorTemperatureMiredsWithValue:(NSNumber * _Nonnull) value
+    [self writeAttributeStartUpColorTemperatureMiredsWithValue:(NSNumber * _Nullable) value
                                                         params:nil
                                              completionHandler:completionHandler];
 }
-- (void)writeAttributeStartUpColorTemperatureMiredsWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributeStartUpColorTemperatureMiredsWithValue:(NSNumber * _Nullable)value
                                                       params:(MTRWriteParams * _Nullable)params
                                            completionHandler:(StatusCompletion)completionHandler
 {
@@ -57888,7 +57888,12 @@ using chip::SessionHandle;
             ListFreer listFreer;
             using TypeInfo = ColorControl::Attributes::StartUpColorTemperatureMireds::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = value.unsignedShortValue;
+            if (value == nil) {
+                cppValue.SetNull();
+            } else {
+                auto & nonNullValue_0 = cppValue.SetNonNull();
+                nonNullValue_0 = value.unsignedShortValue;
+            }
             auto successFn = Callback<DefaultSuccessCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
@@ -57910,7 +57915,7 @@ using chip::SessionHandle;
     minInterval = [minInterval copy];
     maxInterval = [maxInterval copy];
     params = [params copy];
-    new MTRInt16uAttributeCallbackSubscriptionBridge(
+    new MTRNullableInt16uAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (params != nil && params.autoResubscribe != nil && ![params.autoResubscribe boolValue]) {
@@ -57918,13 +57923,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = ColorControl::Attributes::StartUpColorTemperatureMireds::TypeInfo;
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [minInterval unsignedShortValue], [maxInterval unsignedShortValue],
-                MTRInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params == nil || params.fabricFiltered == nil || [params.fabricFiltered boolValue],
                 params != nil && params.keepPreviousSubscriptions != nil && [params.keepPreviousSubscriptions boolValue]);
         },
@@ -57937,7 +57942,7 @@ using chip::SessionHandle;
                                                    completionHandler:(void (^)(NSNumber * _Nullable value,
                                                                          NSError * _Nullable error))completionHandler
 {
-    new MTRInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
+    new MTRNullableInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = ColorControl::Attributes::StartUpColorTemperatureMireds::TypeInfo;
@@ -57946,7 +57951,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = attributeCacheContainer.cppAttributeCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<NullableInt16uAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }

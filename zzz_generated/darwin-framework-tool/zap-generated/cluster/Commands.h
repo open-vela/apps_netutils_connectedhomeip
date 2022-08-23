@@ -57788,7 +57788,7 @@ public:
         params.timedWriteTimeout
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedShort:mValue];
+        NSNumber * _Nullable value = [NSNumber numberWithUnsignedShort:mValue];
 
         [cluster
             writeAttributeStartUpColorTemperatureMiredsWithValue:value

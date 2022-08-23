@@ -6267,9 +6267,13 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("startUpColorTemperatureMireds", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("startUpColorTemperatureMireds", [value unsignedShortValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("startUpColorTemperatureMireds", [value unsignedShortValue], 65279U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("startUpColorTemperatureMireds", "int16u", "int16u"));
+                VerifyOrReturn(CheckConstraintMinValue<uint16_t>("startUpColorTemperatureMireds", [value unsignedShortValue], 0U));
+                VerifyOrReturn(
+                    CheckConstraintMaxValue<uint16_t>("startUpColorTemperatureMireds", [value unsignedShortValue], 65279U));
+            }
 
             NextTest();
         }];
