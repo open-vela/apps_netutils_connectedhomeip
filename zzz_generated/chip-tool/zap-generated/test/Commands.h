@@ -82017,9 +82017,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -82057,9 +82058,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -82097,9 +82099,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -82122,9 +82125,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -82555,9 +82559,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -82595,9 +82600,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -82678,9 +82684,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -83583,9 +83590,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -83619,9 +83627,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -83851,9 +83860,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -83948,9 +83958,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -83984,9 +83995,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -84508,9 +84520,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -84547,9 +84560,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -84615,10 +84629,10 @@ private:
             value.PAKEVerifier         = mIncorrectPakeVerifier.HasValue()
                 ? mIncorrectPakeVerifier.Value()
                 : chip::ByteSpan(chip::Uint8::from_const_char(
-                                     "\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
-                                     "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
-                                     "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326\360,"
-                                     "D4\362\275\322z"),
+                                     "\x06\xc7\x56\xdf\xfc\xd7\x22\x65\x34\x52\xa1\x2d\xcd\x94\x5d\x8c\x54\xda\x2b\x0f\x3c\xbd\x1b"
+                                     "\x4d\xc3\xf1\xad\xb2\x23\xae\xb2\x6b\x04\x7c\xd2\x4c\x96\x86\x6f\x97\x9b\x1d\x83\xec\x50\xe2"
+                                     "\xb4\xae\x30\xcd\xf2\xfd\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19"
+                                     "\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a"),
                                  89);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -84639,9 +84653,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -84662,9 +84677,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -85236,12 +85252,13 @@ private:
             value.commissioningTimeout = 900U;
             value.PAKEVerifier         = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
-                : chip::ByteSpan(chip::Uint8::from_const_char(
-                                     "\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
-                                     "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
-                                     "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326\360,"
-                                     "D4\362\275\322z\244\371\316\247\015s\216L"),
-                                 97);
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\x06\xc7\x56\xdf\xfc\xd7\x22\x65\x34\x52\xa1\x2d\xcd\x94\x5d\x8c\x54\xda\x2b\x0f\x3c\xbd\x1b\x4d\xc3\xf1"
+                          "\xad\xb2\x23\xae\xb2\x6b\x04\x7c\xd2\x4c\x96\x86\x6f\x97\x9b\x1d\x83\xec\x50\xe2\xb4\xae\x30\xcd\xf2\xfd"
+                          "\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30"
+                          "\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a\xa4\xf9\xce\xa7\x0d\x73\x8e\x4c"),
+                      97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
@@ -85294,12 +85311,13 @@ private:
             value.commissioningTimeout = 900U;
             value.PAKEVerifier         = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
-                : chip::ByteSpan(chip::Uint8::from_const_char(
-                                     "\006\307V\337\374\327\042e4R\241-\315\224]\214T\332+\017<\275\033M\303\361\255\262#"
-                                     "\256\262k\004|\322L\226\206o\227\233\035\203\354P\342\264\2560\315\362\375\263+"
-                                     "\330\242\021\2707\334\224\355\315V\364\321Cw\031\020v\277\305\235\231\267\3350S\357\326\360,"
-                                     "D4\362\275\322z\244\371\316\247\015s\216L"),
-                                 97);
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\x06\xc7\x56\xdf\xfc\xd7\x22\x65\x34\x52\xa1\x2d\xcd\x94\x5d\x8c\x54\xda\x2b\x0f\x3c\xbd\x1b\x4d\xc3\xf1"
+                          "\xad\xb2\x23\xae\xb2\x6b\x04\x7c\xd2\x4c\x96\x86\x6f\x97\x9b\x1d\x83\xec\x50\xe2\xb4\xae\x30\xcd\xf2\xfd"
+                          "\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30"
+                          "\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a\xa4\xf9\xce\xa7\x0d\x73\x8e\x4c"),
+                      97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
@@ -86361,9 +86379,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -86397,9 +86416,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -86426,9 +86446,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -86462,9 +86483,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -86485,9 +86507,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -86814,9 +86837,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
@@ -86850,9 +86874,10 @@ private:
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
-                          "\271ap\252\350\0034h\204rO\351\243\262\207\303\0030\302\246`7]\027\273 "
-                          "Z\214\361\256\3135\004W\370\253y\356%:\266\250\344k\260\236T:\344\042sm\345\001\343\3337\324A\3764I "
-                          "\320\225H\344\301\202@c\014O\364\221<SQ89\267\300\177\314\006'\241\270W:\024\237\315\037\244f\317"),
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
             value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
             value.iterations    = 1000UL;
