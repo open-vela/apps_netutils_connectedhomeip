@@ -28096,7 +28096,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Precondition: write default value of OnOffTransitionTime attribute\n");
-            if (ShouldSkip("LVL.S.A0013")) {
+            if (ShouldSkip("LVL.S.A0010")) {
                 NextTest();
                 return;
             }
@@ -28931,7 +28931,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Precondition: write default value of OnOffTransitionTime attribute\n");
-            if (ShouldSkip("LVL.S.A0013")) {
+            if (ShouldSkip("LVL.S.A0010")) {
                 NextTest();
                 return;
             }
@@ -29687,7 +29687,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : Precondition: write default value of OnOffTransitionTime attribute\n");
-            if (ShouldSkip("LVL.S.A0013")) {
+            if (ShouldSkip("LVL.S.A0010")) {
                 NextTest();
                 return;
             }
