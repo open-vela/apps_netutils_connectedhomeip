@@ -75328,18 +75328,18 @@ private:
             break;
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValue("groupId", value.groupId, 257U));
-            }
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupId", value.groupId, 257U));
+            }
             break;
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -75367,17 +75367,7 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "Add Group 1 - endpoint 1");
-            ListFreer listFreer;
-            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
-            value.groupId   = 257U;
-            value.groupName = chip::Span<const char>("Group #1garbage: not in length on purpose", 8);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
-
-            );
-        }
-        case 2: {
-            LogStep(2, "KeySet Write 1");
+            LogStep(1, "KeySet Write 1 (endpoint 0)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -75411,8 +75401,8 @@ private:
 
             );
         }
-        case 3: {
-            LogStep(3, "Map Group Key Set to group ID on a given fabric");
+        case 2: {
+            LogStep(2, "Write Group Keys (endpoint 0)");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -75422,7 +75412,7 @@ private:
 
                 listHolder_0->mList[0].groupId       = 257U;
                 listHolder_0->mList[0].groupKeySetID = 417U;
-                listHolder_0->mList[0].fabricIndex   = 1U;
+                listHolder_0->mList[0].fabricIndex   = 0U;
 
                 value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
                     listHolder_0->mList, 1);
@@ -75430,8 +75420,18 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
+        case 3: {
+            LogStep(3, "Add Group 1 (endpoint 1)");
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupId   = 257U;
+            value.groupName = chip::Span<const char>("Group #1garbage: not in length on purpose", 8);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
         case 4: {
-            LogStep(4, "Install ACLs for test");
+            LogStep(4, "Install ACLs");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
 
