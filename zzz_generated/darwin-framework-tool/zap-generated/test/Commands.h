@@ -2161,12 +2161,20 @@ public:
             err = TestThReadsAttributeListAttributeFromDut_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AcceptedCommandList attribute from DUT\n");
-            err = TestThReadsAcceptedCommandListAttributeFromDut_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads optional attribute (Extension) in AttributeList\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeExtensionInAttributeList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads GeneratedCommandList attribute from DUT\n");
-            err = TestThReadsGeneratedCommandListAttributeFromDut_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AcceptedCommandList attribute from DUT\n");
+            err = TestThReadsAcceptedCommandListAttributeFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads GeneratedCommandList attribute from DUT\n");
+            err = TestThReadsGeneratedCommandListAttributeFromDut_6();
             break;
         }
 
@@ -2197,6 +2205,9 @@ public:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -2210,7 +2221,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 7;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -2289,7 +2300,6 @@ private:
 
             VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
-            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
@@ -2305,7 +2315,29 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListAttributeFromDut_4()
+    CHIP_ERROR TestThReadsOptionalAttributeExtensionInAttributeList_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
+                                                                                           endpoint:0
+                                                                                              queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute (Extension) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListAttributeFromDut_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
@@ -2330,7 +2362,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGeneratedCommandListAttributeFromDut_5()
+    CHIP_ERROR TestThReadsGeneratedCommandListAttributeFromDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterAccessControl * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device
@@ -26613,10 +26645,6 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 10000ms\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait10000ms_13();
             break;
         case 14:
@@ -26629,10 +26657,6 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Wait 10000ms\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait10000ms_15();
             break;
         case 16:
@@ -26645,10 +26669,6 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 10000ms\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait10000ms_17();
             break;
         case 18:
@@ -26661,10 +26681,6 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Wait 5000ms\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait5000ms_19();
             break;
         case 20:
@@ -29008,10 +29024,6 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 10s\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait10s_12();
             break;
         case 13:
@@ -29024,10 +29036,6 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 10s\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait10s_14();
             break;
         case 15:
@@ -29040,10 +29048,6 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Wait 10s\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait10s_16();
             break;
         case 17:
@@ -29056,10 +29060,6 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Wait 5000ms\n");
-            if (ShouldSkip("LVL.S.M.VarRate")) {
-                NextTest();
-                return;
-            }
             err = TestWait5000ms_18();
             break;
         case 19:
@@ -103733,7 +103733,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads a list of ThreadMetrics struct attribute from DUT.\n");
-            if (ShouldSkip("DGSW.S.A0001")) {
+            if (ShouldSkip("DGSW.S.A0000")) {
                 NextTest();
                 return;
             }
@@ -118591,22 +118591,22 @@ public:
             break;
         case 10:
             ChipLogProgress(
-                chipTool, " ***** Test Step 10 : TH writes the RequirePINforRemoteOperation attribute value as True on the DUT\n");
+                chipTool, " ***** Test Step 10 : TH writes the RequirePINforRemoteOperation attribute value as False on the DUT\n");
             if (ShouldSkip("DRLK.S.A0033")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_10();
+            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_10();
             break;
         case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH writes the RequirePINforRemoteOperation attribute value as True on the DUT and Verify "
+                " ***** Test Step 11 : TH writes the RequirePINforRemoteOperation attribute value as False on the DUT and Verify "
                 "DUT responds with UNSUPPORTED_WRITE\n");
             if (ShouldSkip("!DRLK.S.A0033")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDutAndVerifyDutRespondsWithUnsupportedWrite_11();
+            err = TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDutAndVerifyDutRespondsWithUnsupportedWrite_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads the RequirePINforRemoteOperation attribute from the DUT\n");
@@ -118641,108 +118641,88 @@ public:
             err = TestThSendsLockDoorCommandToTheDutWithoutAnyArgumentPINCode_15();
             break;
         case 16:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 16 : TH writes WrongCodeEntryLimit attribute value as 3 on the DUT and Verify that the DUT sends "
-                "Success response\n");
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads the WrongCodeEntryLimit attribute from the DUT\n");
             if (ShouldSkip("DRLK.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDutAndVerifyThatTheDutSendsSuccessResponse_16();
+            err = TestThReadsTheWrongCodeEntryLimitAttributeFromTheDut_16();
             break;
         case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH sends the unlock Door command to the DUT with invalid PINCode\n");
+            if (ShouldSkip("DRLK.S.A0030")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsTheUnlockDoorCommandToTheDutWithInvalidPINCode_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH sends the unlock Door command to the DUT with valid PINCode\n");
+            if (ShouldSkip("DRLK.S.A0030")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_18();
+            break;
+        case 19:
             ChipLogProgress(chipTool,
-                " ***** Test Step 17 : TH writes WrongCodeEntryLimit attribute value as 3 on the DUT and verify DUT responds with "
-                "UNSUPPORTED_WRITE\n");
+                " ***** Test Step 19 : TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the DUT and Verify "
+                "that the DUT sends Success response\n");
+            if (ShouldSkip("DRLK.S.A0030")) {
+                NextTest();
+                return;
+            }
+            err = TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 20 : TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the DUT and verify "
+                "DUT responds with UNSUPPORTED_WRITE\n");
             if (ShouldSkip("!DRLK.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_17();
+            err = TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_20();
             break;
-        case 18:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 18 : TH writes UserCodeTemporaryDisableTime attribute value as 15 seconds on the DUT and Verify "
-                "that the DUT send the Success response\n");
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TH reads the UserCodeTemporaryDisableTime attribute from the DUT\n");
             if (ShouldSkip("DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs15SecondsOnTheDutAndVerifyThatTheDutSendTheSuccessResponse_18();
+            err = TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_21();
             break;
-        case 19:
+        case 22:
             ChipLogProgress(chipTool,
-                " ***** Test Step 19 : TH writes UserCodeTemporaryDisableTime attribute value as 15 seconds on the DUT and Verify "
-                "DUT responds with UNSUPPORTED_WRITE\n");
+                " ***** Test Step 22 : TH writes UserCodeTemporaryDisableTime attribute value as between 1 and 255 on the DUT and "
+                "Verify that the DUT sends Success response\n");
+            if (ShouldSkip("DRLK.S.A0031")) {
+                NextTest();
+                return;
+            }
+            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 23 : TH writes UserCodeTemporaryDisableTime attribute value as between 1 and 255 on the DUT and "
+                "verify DUT responds with UNSUPPORTED_WRITE\n");
             if (ShouldSkip("!DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs15SecondsOnTheDutAndVerifyDutRespondsWithUnsupportedWrite_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_21();
-            break;
-        case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH sends Lock Door Command to the DUT with invalid PINCode\n");
-            if (ShouldSkip("DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_23();
+            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_23();
             break;
         case 24:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 24 : TH reads UserCodeTemporaryDisableTime attribute from DUT and After sending 3 failure "
-                "responses verify that UserCodeTemporaryDisableTime attribute is triggered\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.A0031")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsUserCodeTemporaryDisableTimeAttributeFromDutAndAfterSending3FailureResponsesVerifyThatUserCodeTemporaryDisableTimeAttributeIsTriggered_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Clean the created user\n");
+            err = TestCleanTheCreatedUser_24();
             break;
         case 25:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 25 : TH sends Lock Command to the DUT with valid PINCode before UserCodeTemporaryDisableTime "
-                "attribute time expires\n");
-            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsLockCommandToTheDutWithValidPINCodeBeforeUserCodeTemporaryDisableTimeAttributeTimeExpires_25();
-            break;
-        case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : Clean the created user\n");
-            err = TestCleanTheCreatedUser_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Cleanup the created credential\n");
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Cleanup the created credential\n");
             if (ShouldSkip("DRLK.S.C26.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestCleanupTheCreatedCredential_27();
+            err = TestCleanupTheCreatedCredential_25();
             break;
         }
 
@@ -118807,36 +118787,30 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
             break;
         case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -118852,7 +118826,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 28;
+    const uint16_t mTestCount = 26;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -119176,7 +119150,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDut_10()
+    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119186,7 +119160,7 @@ private:
         requirePINforRemoteOperationArgument = [NSNumber numberWithBool:true];
         [cluster writeAttributeRequirePINforRemoteOperationWithValue:requirePINforRemoteOperationArgument
                                                    completionHandler:^(NSError * _Nullable err) {
-                                                       NSLog(@"TH writes the RequirePINforRemoteOperation attribute value as True "
+                                                       NSLog(@"TH writes the RequirePINforRemoteOperation attribute value as False "
                                                              @"on the DUT Error: %@",
                                                            err);
 
@@ -119198,7 +119172,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsTrueOnTheDutAndVerifyDutRespondsWithUnsupportedWrite_11()
+    CHIP_ERROR TestThWritesTheRequirePINforRemoteOperationAttributeValueAsFalseOnTheDutAndVerifyDutRespondsWithUnsupportedWrite_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119208,7 +119182,7 @@ private:
         requirePINforRemoteOperationArgument = [NSNumber numberWithBool:true];
         [cluster writeAttributeRequirePINforRemoteOperationWithValue:requirePINforRemoteOperationArgument
                                                    completionHandler:^(NSError * _Nullable err) {
-                                                       NSLog(@"TH writes the RequirePINforRemoteOperation attribute value as True "
+                                                       NSLog(@"TH writes the RequirePINforRemoteOperation attribute value as False "
                                                              @"on the DUT and Verify DUT responds with UNSUPPORTED_WRITE Error: %@",
                                                            err);
 
@@ -119308,7 +119282,66 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDutAndVerifyThatTheDutSendsSuccessResponse_16()
+    CHIP_ERROR TestThReadsTheWrongCodeEntryLimitAttributeFromTheDut_16()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeWrongCodeEntryLimitWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the WrongCodeEntryLimit attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsTheUnlockDoorCommandToTheDutWithInvalidPINCode_17()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"1234568" length:7];
+        [cluster
+            unlockDoorWithParams:params
+               completionHandler:^(NSError * _Nullable err) {
+                   NSLog(@"TH sends the unlock Door command to the DUT with invalid PINCode Error: %@", err);
+
+                   VerifyOrReturn(CheckValue("status",
+                       err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                       EMBER_ZCL_STATUS_FAILURE));
+                   NextTest();
+               }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
+        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
+        [cluster unlockDoorWithParams:params
+                    completionHandler:^(NSError * _Nullable err) {
+                        NSLog(@"TH sends the unlock Door command to the DUT with valid PINCode Error: %@", err);
+
+                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                        NextTest();
+                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119318,8 +119351,8 @@ private:
         wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeWrongCodeEntryLimitWithValue:wrongCodeEntryLimitArgument
                                           completionHandler:^(NSError * _Nullable err) {
-                                              NSLog(@"TH writes WrongCodeEntryLimit attribute value as 3 on the DUT and Verify "
-                                                    @"that the DUT sends Success response Error: %@",
+                                              NSLog(@"TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the "
+                                                    @"DUT and Verify that the DUT sends Success response Error: %@",
                                                   err);
 
                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -119330,7 +119363,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAs3OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_17()
+    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119340,8 +119373,8 @@ private:
         wrongCodeEntryLimitArgument = [NSNumber numberWithUnsignedChar:3U];
         [cluster writeAttributeWrongCodeEntryLimitWithValue:wrongCodeEntryLimitArgument
                                           completionHandler:^(NSError * _Nullable err) {
-                                              NSLog(@"TH writes WrongCodeEntryLimit attribute value as 3 on the DUT and verify DUT "
-                                                    @"responds with UNSUPPORTED_WRITE Error: %@",
+                                              NSLog(@"TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the "
+                                                    @"DUT and verify DUT responds with UNSUPPORTED_WRITE Error: %@",
                                                   err);
 
                                               VerifyOrReturn(CheckValue("status",
@@ -119356,8 +119389,26 @@ private:
         return CHIP_NO_ERROR;
     }
 
+    CHIP_ERROR TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_21()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster
+            readAttributeUserCodeTemporaryDisableTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"TH reads the UserCodeTemporaryDisableTime attribute from the DUT Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                NextTest();
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
     CHIP_ERROR
-    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs15SecondsOnTheDutAndVerifyThatTheDutSendTheSuccessResponse_18()
+    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119368,8 +119419,8 @@ private:
         [cluster
             writeAttributeUserCodeTemporaryDisableTimeWithValue:userCodeTemporaryDisableTimeArgument
                                               completionHandler:^(NSError * _Nullable err) {
-                                                  NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as 15 seconds on "
-                                                        @"the DUT and Verify that the DUT send the Success response Error: %@",
+                                                  NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as between 1 and "
+                                                        @"255 on the DUT and Verify that the DUT sends Success response Error: %@",
                                                       err);
 
                                                   VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -119381,7 +119432,7 @@ private:
     }
 
     CHIP_ERROR
-    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAs15SecondsOnTheDutAndVerifyDutRespondsWithUnsupportedWrite_19()
+    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119392,8 +119443,8 @@ private:
         [cluster
             writeAttributeUserCodeTemporaryDisableTimeWithValue:userCodeTemporaryDisableTimeArgument
                                               completionHandler:^(NSError * _Nullable err) {
-                                                  NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as 15 seconds on "
-                                                        @"the DUT and Verify DUT responds with UNSUPPORTED_WRITE Error: %@",
+                                                  NSLog(@"TH writes UserCodeTemporaryDisableTime attribute value as between 1 and "
+                                                        @"255 on the DUT and verify DUT responds with UNSUPPORTED_WRITE Error: %@",
                                                       err);
 
                                                   VerifyOrReturn(CheckValue("status",
@@ -119408,110 +119459,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_20()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
-        params.pinCode = [[NSData alloc] initWithBytes:"123458" length:6];
-        [cluster lockDoorWithParams:params
-                  completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status",
-                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
-                          EMBER_ZCL_STATUS_FAILURE));
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_21()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
-        params.pinCode = [[NSData alloc] initWithBytes:"123458" length:6];
-        [cluster lockDoorWithParams:params
-                  completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status",
-                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
-                          EMBER_ZCL_STATUS_FAILURE));
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_22()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
-        params.pinCode = [[NSData alloc] initWithBytes:"123458" length:6];
-        [cluster lockDoorWithParams:params
-                  completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status",
-                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
-                          EMBER_ZCL_STATUS_FAILURE));
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThSendsLockDoorCommandToTheDutWithInvalidPINCode_23()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
-        params.pinCode = [[NSData alloc] initWithBytes:"123458" length:6];
-        [cluster lockDoorWithParams:params
-                  completionHandler:^(NSError * _Nullable err) {
-                      NSLog(@"TH sends Lock Door Command to the DUT with invalid PINCode Error: %@", err);
-
-                      VerifyOrReturn(CheckValue("status",
-                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
-                          EMBER_ZCL_STATUS_FAILURE));
-                      NextTest();
-                  }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR
-    TestThReadsUserCodeTemporaryDisableTimeAttributeFromDutAndAfterSending3FailureResponsesVerifyThatUserCodeTemporaryDisableTimeAttributeIsTriggered_24()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsLockCommandToTheDutWithValidPINCodeBeforeUserCodeTemporaryDisableTimeAttributeTimeExpires_25()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestCleanTheCreatedUser_26()
+    CHIP_ERROR TestCleanTheCreatedUser_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -119531,7 +119479,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanupTheCreatedCredential_27()
+    CHIP_ERROR TestCleanupTheCreatedCredential_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
