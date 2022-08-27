@@ -4490,7 +4490,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 245U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 215U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
             break;
@@ -4974,8 +4974,8 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 215U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 245U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 210U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 250U));
             }
             break;
         case 8:
@@ -5035,7 +5035,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 245U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 210U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
             break;
@@ -5400,7 +5400,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 110U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 102U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 120U));
             }
             break;
@@ -5683,7 +5683,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 235U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 215U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
             break;
@@ -6190,8 +6190,8 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 210U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 230U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 205U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 235U));
             }
             break;
         case 8:
@@ -6203,7 +6203,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 230U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 205U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 240U));
             }
             break;
@@ -6608,7 +6608,7 @@ private:
 class Test_TC_CC_4_4Suite : public TestCommand
 {
 public:
-    Test_TC_CC_4_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CC_4_4", 20, credsIssuerConfig)
+    Test_TC_CC_4_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_CC_4_4", 21, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -6664,64 +6664,69 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("currentHue", value, 200U));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
             break;
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 175U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 185U));
+                VerifyOrReturn(CheckValue("currentSaturation", value, 50U));
             }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 60U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 70U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 165U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 195U));
             }
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 160U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 170U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 55U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 75U));
             }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 70U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 80U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 160U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 185U));
             }
             break;
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "int8u", "int8u"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 68U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 80U));
+            }
             break;
         case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
@@ -6729,21 +6734,12 @@ private:
                 VerifyOrReturn(CheckValue("currentHue", value, 160U));
             }
             break;
-        case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("currentSaturation", value, 80U));
-            }
-            break;
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
+                VerifyOrReturn(CheckValue("currentSaturation", value, 80U));
             }
             break;
         case 17:
@@ -6752,13 +6748,22 @@ private:
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 2U));
             }
             break;
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
+            }
             break;
         case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 bool value;
@@ -6836,7 +6841,13 @@ private:
                                  chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "TH sends MoveToHueAndSaturation command to DUT with Hue=160, Saturation=80 and TransitionTime=200 (20s)");
+            LogStep(6, "TH reads CurrentSaturation attribute from DUT");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentSaturation::Id,
+                                 true, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH sends MoveToHueAndSaturation command to DUT with Hue=160, Saturation=80 and TransitionTime=200 (20s)");
             VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.C06.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToHueAndSaturation::Type value;
@@ -6850,77 +6861,77 @@ private:
 
             );
         }
-        case 7: {
-            LogStep(7, "Wait 10s");
+        case 8: {
+            LogStep(8, "Wait 10s");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
             return WaitForMs(kIdentityAlpha, value);
-        }
-        case 8: {
-            LogStep(8, "TH reads CurrentHue attribute from DUT");
-            VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
-                                 chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "TH reads CurrentSaturation attribute from DUT");
+            LogStep(9, "TH reads CurrentHue attribute from DUT");
+            VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH reads CurrentSaturation attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentSaturation::Id,
                                  true, chip::NullOptional);
         }
-        case 10: {
-            LogStep(10, "Wait 10s");
+        case 11: {
+            LogStep(11, "Wait 10s");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 11: {
-            LogStep(11, "TH reads CurrentHue attribute from DUT");
+        case 12: {
+            LogStep(12, "TH reads CurrentHue attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
                                  chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH reads CurrentSaturation attribute from DUT");
+        case 13: {
+            LogStep(13, "TH reads CurrentSaturation attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentSaturation::Id,
                                  true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "Wait 5s");
+        case 14: {
+            LogStep(14, "Wait 5s");
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
             return WaitForMs(kIdentityAlpha, value);
         }
-        case 14: {
-            LogStep(14, "TH reads CurrentHue attribute from DUT");
+        case 15: {
+            LogStep(15, "TH reads CurrentHue attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentHue::Id, true,
                                  chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH reads CurrentSaturation attribute from DUT");
+        case 16: {
+            LogStep(16, "TH reads CurrentSaturation attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::CurrentSaturation::Id,
                                  true, chip::NullOptional);
         }
-        case 16: {
-            LogStep(16, "TH reads ColorMode attribute from DUT");
+        case 17: {
+            LogStep(17, "TH reads ColorMode attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorMode::Id, true,
                                  chip::NullOptional);
         }
-        case 17: {
-            LogStep(17, "TH reads EnhancedColorMode attribute from DUT");
+        case 18: {
+            LogStep(18, "TH reads EnhancedColorMode attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.F00 && CC.S.A4001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorMode::Id, true,
                                  chip::NullOptional);
         }
-        case 18: {
-            LogStep(18, "Turn off light that we turned on");
+        case 19: {
+            LogStep(19, "Turn off light that we turned on");
             VerifyOrDo(!ShouldSkip("OO.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::Off::Type value;
@@ -6928,8 +6939,8 @@ private:
 
             );
         }
-        case 19: {
-            LogStep(19, "Check on/off attribute value is false after off command");
+        case 20: {
+            LogStep(20, "Check on/off attribute value is false after off command");
             VerifyOrDo(!ShouldSkip("OO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Attributes::OnOff::Id, true, chip::NullOptional);
         }
@@ -7019,8 +7030,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 13107U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 32768U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 19500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 26400U));
             }
             break;
         case 10:
@@ -7028,8 +7039,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 13107U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 19660U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 13900U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 18900U));
             }
             break;
         case 11:
@@ -8261,8 +8272,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 13000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 33000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 19500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 26500U));
             }
             break;
         case 8:
@@ -8270,8 +8281,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 14000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 20000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 14500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 19500U));
             }
             break;
         case 9:
@@ -8284,7 +8295,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 13000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 14000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 15000U));
             }
             break;
         case 11:
@@ -8293,7 +8304,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 14000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 15000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 16000U));
             }
             break;
         case 12:
@@ -8408,7 +8419,7 @@ private:
             return WaitForMs(kIdentityAlpha, value);
         }
         case 5: {
-            LogStep(5, "TH sends StepColor command to DUT, with StepX = -2000, StepY = -6000, TransitionTime = 200 (20s)");
+            LogStep(5, "TH sends StepColor command to DUT, with StepX = -20000, StepY = -6000, TransitionTime = 200 (20s)");
             VerifyOrDo(!ShouldSkip("CC.S.F03 && CC.S.C09.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::StepColor::Type value;
@@ -8610,8 +8621,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 280U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 300U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 275U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 305U));
             }
             break;
         case 11:
@@ -8623,8 +8634,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 260U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 280U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 255U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 285U));
             }
             break;
         case 13:
@@ -8637,7 +8648,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 250U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 260U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 280U));
             }
             break;
         case 15:
@@ -9895,8 +9906,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 22500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 27500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 21250U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 28750U));
             }
             break;
         case 8:
@@ -9908,8 +9919,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 27500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 32500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 25500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 34500U));
             }
             break;
         case 10:
@@ -9924,8 +9935,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 34000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 36500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 30000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 40250U));
             }
             break;
         case 13:
@@ -9937,8 +9948,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 34500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 36500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 30000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 40250U));
             }
             break;
         case 15:
@@ -9960,8 +9971,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 17500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 22500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 17000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 23000U));
             }
             break;
         case 20:
@@ -9973,8 +9984,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 12500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 17500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 12750U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 17250U));
             }
             break;
         case 22:
@@ -9989,8 +10000,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 12500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 25:
@@ -10002,8 +10013,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 12500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 27:
@@ -10379,8 +10390,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 6800U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9200U));
             }
             break;
         case 8:
@@ -10392,8 +10403,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 9000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 10:
@@ -10405,7 +10416,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 11000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 9350U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 12000U));
             }
             break;
@@ -10440,8 +10451,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 9000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 19:
@@ -10453,8 +10464,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 6800U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9200U));
             }
             break;
         case 21:
@@ -10849,8 +10860,8 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 17000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 19000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 16000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 20000U));
             }
             break;
         case 10:
@@ -10873,7 +10884,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 16000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 17000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 18400U));
             }
             break;
         case 13:
@@ -11189,7 +11200,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 235U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 215U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
             break;
@@ -11202,7 +11213,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 240U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 215U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 254U));
             }
             break;
@@ -11330,8 +11341,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 23500U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 26500U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 21250U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 28750U));
                 EnhancedCurrentHueValue = value;
             }
             break;
@@ -11345,7 +11356,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, EnhancedCurrentHueValue));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 26500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 28750U));
             }
             break;
         case 37:
@@ -92701,8 +92712,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 6800U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9200U));
             }
             break;
         case 8:
@@ -92714,8 +92725,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 9000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 10:
@@ -92728,7 +92739,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 11000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 12000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 12700U));
             }
             break;
         case 12:
@@ -92823,8 +92834,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 6800U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9200U));
             }
             break;
         case 30:
@@ -92836,8 +92847,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 9000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 32:
@@ -92850,7 +92861,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 11000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 12000U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 12700U));
             }
             break;
         case 34:
@@ -92884,8 +92895,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 9000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 8500U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 11500U));
             }
             break;
         case 41:
@@ -92897,8 +92908,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 7000U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9000U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 6800U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 9200U));
             }
             break;
         case 43:
