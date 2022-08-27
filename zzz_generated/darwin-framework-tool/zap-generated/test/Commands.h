@@ -7282,7 +7282,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 245U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 215U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 255U));
 
             NextTest();
@@ -8146,8 +8146,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 215U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 245U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 210U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 250U));
 
             NextTest();
         }];
@@ -8327,7 +8327,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 245U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 210U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 255U));
 
             NextTest();
@@ -8885,7 +8885,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 110U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 102U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 120U));
 
             NextTest();
@@ -9569,7 +9569,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 235U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 215U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
@@ -10520,8 +10520,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 210U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 230U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 205U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 235U));
 
             NextTest();
         }];
@@ -10549,7 +10549,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 230U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 205U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 240U));
 
             NextTest();
@@ -11023,106 +11023,114 @@ public:
             err = TestThReadsCurrentHueAttributeFromDut_5();
             break;
         case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads CurrentSaturation attribute from DUT\n");
+            if (ShouldSkip("CC.S.F01 && CC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentSaturationAttributeFromDut_6();
+            break;
+        case 7:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : TH sends MoveToHueAndSaturation command to DUT with Hue=160, Saturation=80 and "
+                " ***** Test Step 7 : TH sends MoveToHueAndSaturation command to DUT with Hue=160, Saturation=80 and "
                 "TransitionTime=200 (20s)\n");
             if (ShouldSkip("CC.S.F01 && CC.S.C06.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsMoveToHueAndSaturationCommandToDutWithHue160Saturation80AndTransitionTime20020s_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Wait 10s\n");
-            err = TestWait10s_7();
+            err = TestThSendsMoveToHueAndSaturationCommandToDutWithHue160Saturation80AndTransitionTime20020s_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads CurrentHue attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentHueAttributeFromDut_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            err = TestWait10s_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads CurrentSaturation attribute from DUT\n");
-            if (ShouldSkip("CC.S.F01 && CC.S.A0001")) {
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.F00 && CC.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsCurrentSaturationAttributeFromDut_9();
+            err = TestThReadsCurrentHueAttributeFromDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 10s\n");
-            err = TestWait10s_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads CurrentSaturation attribute from DUT\n");
+            if (ShouldSkip("CC.S.F01 && CC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentSaturationAttributeFromDut_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads CurrentHue attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentHueAttributeFromDut_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 10s\n");
+            err = TestWait10s_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads CurrentSaturation attribute from DUT\n");
-            if (ShouldSkip("CC.S.F01 && CC.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsCurrentSaturationAttributeFromDut_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 5s\n");
-            err = TestWait5s_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads CurrentHue attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads CurrentHue attribute from DUT\n");
             if (ShouldSkip("CC.S.F00 && CC.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsCurrentHueAttributeFromDut_14();
+            err = TestThReadsCurrentHueAttributeFromDut_12();
             break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads CurrentSaturation attribute from DUT\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads CurrentSaturation attribute from DUT\n");
             if (ShouldSkip("CC.S.F01 && CC.S.A0001")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsCurrentSaturationAttributeFromDut_15();
+            err = TestThReadsCurrentSaturationAttributeFromDut_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 5s\n");
+            err = TestWait5s_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads CurrentHue attribute from DUT\n");
+            if (ShouldSkip("CC.S.F00 && CC.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentHueAttributeFromDut_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads ColorMode attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads CurrentSaturation attribute from DUT\n");
+            if (ShouldSkip("CC.S.F01 && CC.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsCurrentSaturationAttributeFromDut_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads ColorMode attribute from DUT\n");
             if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsColorModeAttributeFromDut_16();
+            err = TestThReadsColorModeAttributeFromDut_17();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads EnhancedColorMode attribute from DUT\n");
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads EnhancedColorMode attribute from DUT\n");
             if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsEnhancedColorModeAttributeFromDut_17();
+            err = TestThReadsEnhancedColorModeAttributeFromDut_18();
             break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Turn off light that we turned on\n");
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Turn off light that we turned on\n");
             if (ShouldSkip("OO.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestTurnOffLightThatWeTurnedOn_18();
+            err = TestTurnOffLightThatWeTurnedOn_19();
             break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Check on/off attribute value is false after off command\n");
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Check on/off attribute value is false after off command\n");
             if (ShouldSkip("OO.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_19();
+            err = TestCheckOnOffAttributeValueIsFalseAfterOffCommand_20();
             break;
         }
 
@@ -11195,6 +11203,9 @@ public:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -11208,7 +11219,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 20;
+    const uint16_t mTestCount = 21;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -11314,9 +11325,29 @@ private:
                 VerifyOrReturn(CheckValue("CurrentHue", actualValue, 200U));
             }
 
-            VerifyOrReturn(CheckConstraintType("currentHue", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
+                                                                                         endpoint:1
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentSaturationWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads CurrentSaturation attribute from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("CurrentSaturation", actualValue, 50U));
+            }
 
             NextTest();
         }];
@@ -11324,7 +11355,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsMoveToHueAndSaturationCommandToDutWithHue160Saturation80AndTransitionTime20020s_6()
+    CHIP_ERROR TestThSendsMoveToHueAndSaturationCommandToDutWithHue160Saturation80AndTransitionTime20020s_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11352,14 +11383,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait10s_7()
+    CHIP_ERROR TestWait10s_8()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_8()
+    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11372,8 +11403,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 175U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 185U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 165U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 195U));
 
             NextTest();
         }];
@@ -11381,7 +11412,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_9()
+    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11394,8 +11425,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 60U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 70U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 55U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 75U));
 
             NextTest();
         }];
@@ -11403,14 +11434,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait10s_10()
+    CHIP_ERROR TestWait10s_11()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 10000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_11()
+    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11424,7 +11455,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 160U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 170U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 185U));
 
             NextTest();
         }];
@@ -11432,7 +11463,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_12()
+    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11446,7 +11477,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 70U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 68U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 80U));
 
             NextTest();
@@ -11455,14 +11486,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait5s_13()
+    CHIP_ERROR TestWait5s_14()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 5000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_14()
+    CHIP_ERROR TestThReadsCurrentHueAttributeFromDut_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11486,7 +11517,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_15()
+    CHIP_ERROR TestThReadsCurrentSaturationAttributeFromDut_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11510,7 +11541,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsColorModeAttributeFromDut_16()
+    CHIP_ERROR TestThReadsColorModeAttributeFromDut_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11532,7 +11563,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsEnhancedColorModeAttributeFromDut_17()
+    CHIP_ERROR TestThReadsEnhancedColorModeAttributeFromDut_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -11554,7 +11585,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestTurnOffLightThatWeTurnedOn_18()
+    CHIP_ERROR TestTurnOffLightThatWeTurnedOn_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -11571,7 +11602,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_19()
+    CHIP_ERROR TestCheckOnOffAttributeValueIsFalseAfterOffCommand_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterOnOff * cluster = [[MTRBaseClusterOnOff alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -12457,8 +12488,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 13107U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 32768U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 19500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 26400U));
 
             NextTest();
         }];
@@ -12479,8 +12510,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 13107U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 19660U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 13900U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 18900U));
 
             NextTest();
         }];
@@ -14248,13 +14279,13 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool,
-                " ***** Test Step 5 : TH sends StepColor command to DUT, with StepX = -2000, StepY = -6000, TransitionTime = 200 "
+                " ***** Test Step 5 : TH sends StepColor command to DUT, with StepX = -20000, StepY = -6000, TransitionTime = 200 "
                 "(20s)\n");
             if (ShouldSkip("CC.S.F03 && CC.S.C09.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsStepColorCommandToDutWithStepX2000StepY6000TransitionTime20020s_5();
+            err = TestThSendsStepColorCommandToDutWithStepX20000StepY6000TransitionTime20020s_5();
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
@@ -14517,7 +14548,7 @@ private:
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestThSendsStepColorCommandToDutWithStepX2000StepY6000TransitionTime20020s_5()
+    CHIP_ERROR TestThSendsStepColorCommandToDutWithStepX20000StepY6000TransitionTime20020s_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
@@ -14531,17 +14562,16 @@ private:
         params.transitionTime = [NSNumber numberWithUnsignedShort:200U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
-        [cluster
-            stepColorWithParams:params
-              completionHandler:^(NSError * _Nullable err) {
-                  NSLog(
-                      @"TH sends StepColor command to DUT, with StepX = -2000, StepY = -6000, TransitionTime = 200 (20s) Error: %@",
-                      err);
+        [cluster stepColorWithParams:params
+                   completionHandler:^(NSError * _Nullable err) {
+                       NSLog(@"TH sends StepColor command to DUT, with StepX = -20000, StepY = -6000, TransitionTime = 200 (20s) "
+                             @"Error: %@",
+                           err);
 
-                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                  NextTest();
-              }];
+                       NextTest();
+                   }];
 
         return CHIP_NO_ERROR;
     }
@@ -14566,8 +14596,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 13000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 33000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 19500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 26500U));
 
             NextTest();
         }];
@@ -14588,8 +14618,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 14000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 20000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 14500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 19500U));
 
             NextTest();
         }];
@@ -14618,7 +14648,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 13000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 14000U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 15000U));
 
             NextTest();
         }];
@@ -14640,7 +14670,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 14000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 15000U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 16000U));
 
             NextTest();
         }];
@@ -15275,8 +15305,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 280U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 300U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 275U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 305U));
 
             NextTest();
         }];
@@ -15304,8 +15334,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 260U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 280U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 255U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 285U));
 
             NextTest();
         }];
@@ -15334,7 +15364,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 250U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 260U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 280U));
 
             NextTest();
         }];
@@ -15939,8 +15969,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 7000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 6800U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9200U));
 
             NextTest();
         }];
@@ -15968,8 +15998,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 11000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 8500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 11500U));
 
             NextTest();
         }];
@@ -15997,7 +16027,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 11000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9350U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 12000U));
 
             NextTest();
@@ -16121,8 +16151,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 11000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 8500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 11500U));
 
             NextTest();
         }];
@@ -16150,8 +16180,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 7000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 6800U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9200U));
 
             NextTest();
         }];
@@ -16766,8 +16796,8 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 17000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 19000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 16000U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 20000U));
 
             NextTest();
         }];
@@ -16819,7 +16849,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "int16u", "int16u"));
             VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 16000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 17000U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 18400U));
 
             NextTest();
         }];
