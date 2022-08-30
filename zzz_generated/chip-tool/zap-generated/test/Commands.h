@@ -67998,7 +67998,7 @@ private:
 class Test_TC_DRLK_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_DRLK_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_1_1", 33, credsIssuerConfig)
+    Test_TC_DRLK_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_DRLK_1_1", 42, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -68059,11 +68059,91 @@ private:
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 1UL));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 4095UL));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
             }
             break;
         case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 64UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 128UL));
+            }
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 256UL));
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1024UL));
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2048UL));
+            }
+            break;
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68081,7 +68161,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 5:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68092,7 +68172,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 28UL));
             }
             break;
-        case 6:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68103,7 +68183,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 24UL));
             }
             break;
-        case 7:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68114,7 +68194,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 26UL));
             }
             break;
-        case 8:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68123,7 +68203,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
-        case 9:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68132,7 +68212,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 21UL));
             }
             break;
-        case 10:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68141,7 +68221,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 22UL));
             }
             break;
-        case 11:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68151,7 +68231,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 49UL));
             }
             break;
-        case 12:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68160,7 +68240,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 51UL));
             }
             break;
-        case 13:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68169,7 +68249,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 33UL));
             }
             break;
-        case 14:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68178,7 +68258,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 34UL));
             }
             break;
-        case 15:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68187,7 +68267,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 35UL));
             }
             break;
-        case 16:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68196,7 +68276,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 36UL));
             }
             break;
-        case 17:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68205,7 +68285,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 39UL));
             }
             break;
-        case 18:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68214,7 +68294,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 40UL));
             }
             break;
-        case 19:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68223,7 +68303,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 41UL));
             }
             break;
-        case 20:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68232,7 +68312,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 42UL));
             }
             break;
-        case 21:
+        case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68241,7 +68321,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 43UL));
             }
             break;
-        case 22:
+        case 31:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -68250,7 +68330,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 44UL));
             }
             break;
-        case 23:
+        case 32:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68260,7 +68340,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 1UL));
             }
             break;
-        case 24:
+        case 33:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68271,7 +68351,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 13UL));
             }
             break;
-        case 25:
+        case 34:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68282,7 +68362,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
             }
             break;
-        case 26:
+        case 35:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68293,7 +68373,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 19UL));
             }
             break;
-        case 27:
+        case 36:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68307,7 +68387,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 38UL));
             }
             break;
-        case 28:
+        case 37:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68316,7 +68396,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
-        case 29:
+        case 38:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68325,7 +68405,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 12UL));
             }
             break;
-        case 30:
+        case 39:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68334,7 +68414,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 15UL));
             }
             break;
-        case 31:
+        case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68343,7 +68423,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 18UL));
             }
             break;
-        case 32:
+        case 41:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -68383,187 +68463,239 @@ private:
         case 2: {
             LogStep(2, "TH reads the FeatureMap from DUT");
             VerifyOrDo(!ShouldSkip(" !DRLK.S.F00 && !DRLK.S.F01 && !DRLK.S.F02 && !DRLK.S.F04 && !DRLK.S.F05 && !DRLK.S.F06 && "
-                                   "!DRLK.S.F07 && !DRLK.S.F08 && !DRLK.S.F10 && !DRLK.S.F11 "),
+                                   "!DRLK.S.F07 && !DRLK.S.F08 && !DRLK.S.F0a && !DRLK.S.F0b "),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "TH reads the FeatureMap from DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F00 || DRLK.S.F01 || DRLK.S.F02 || DRLK.S.F04 || DRLK.S.F05 || DRLK.S.F06 || DRLK.S.F07 "
-                                   "|| DRLK.S.F08 || DRLK.S.F10 || DRLK.S.F11"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(3, "Given DRLK.S.F00(PIN) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "TH reads AttributeList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(4, "Given DRLK.S.F01(RID) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "TH reads Feature dependent(DRLK.S.F08) attributes in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(5, "Given DRLK.S.F02(FGP) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "TH reads Feature dependent(DRLK.S.F00) attributes in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(6, "Given DRLK.S.F04(WDSCH) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "TH reads Feature dependent(DRLK.S.F01) attributes in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(7, "Given DRLK.S.F05(DPS) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "TH reads Feature dependent(DRLK.S.F04) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(8, "Given DRLK.S.F06(FACE) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F06"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "TH reads Feature dependent(DRLK.S.F10) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(9, "Given DRLK.S.F07(COTA) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "TH reads Feature dependent(DRLK.S.F11) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F11"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(10, "Given DRLK.S.F08(USR) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "TH reads Feature dependent(DRLK.S.F00 or DRLK.S.F01) attributes in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F00 || DRLK.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(11, "Given DRLK.S.F0a(YDSCH) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "TH reads Feature dependent(DRLK.S.F07 or DRLK.S.F00) attribute in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F07 || DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+            LogStep(12, "Given DRLK.S.F0b(HDSCH) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::FeatureMap::Id, true,
                                  chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "TH reads optional attribute(Language) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "TH reads AttributeList from DUT");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "TH reads optional attribute(LEDSettings) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0022"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "TH reads Feature dependent(DRLK.S.F08) attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 15: {
-            LogStep(15, "TH reads optional attribute(AutoRelockTime) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0023"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(15, "TH reads Feature dependent(DRLK.S.F00) attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "TH reads optional attribute(SoundVolume) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0024"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "TH reads Feature dependent(DRLK.S.F01) attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 17: {
-            LogStep(17, "TH reads optional attribute(DefaultConfigurationRegister) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0027"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "TH reads Feature dependent(DRLK.S.F04) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 18: {
-            LogStep(18, "TH reads optional attribute(EnableLocalProgramming) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0028"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(18, "TH reads Feature dependent(DRLK.S.F0a) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
-            LogStep(19, "TH reads optional attribute(EnableOneTouchLocking) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A0029"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(19, "TH reads Feature dependent(DRLK.S.F0b) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
-            LogStep(20, "TH reads optional attribute(EnableInsideStatusLED) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A002a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(20, "TH reads Feature dependent(DRLK.S.F00 or DRLK.S.F01) attributes in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F00 || DRLK.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 21: {
-            LogStep(21, "TH reads optional attribute(EnablePrivacyModeButton) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A002b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(21, "TH reads Feature dependent(DRLK.S.F07 or DRLK.S.F00) attribute in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F07 || DRLK.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 22: {
-            LogStep(22, "TH reads optional attribute(LocalProgrammingFeatures) in AttributeList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.A002c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(22, "TH reads optional attribute(Language) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 23: {
-            LogStep(23, "TH reads AcceptedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
+            LogStep(23, "TH reads optional attribute(LEDSettings) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0022"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
                                  chip::NullOptional);
         }
         case 24: {
-            LogStep(24, "TH reads Feature dependent commands(DRLK.S.F04) in AcceptedCommandList");
+            LogStep(24, "TH reads optional attribute(AutoRelockTime) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0023"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "TH reads optional attribute(SoundVolume) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0024"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "TH reads optional attribute(DefaultConfigurationRegister) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0027"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "TH reads optional attribute(EnableLocalProgramming) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0028"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28, "TH reads optional attribute(EnableOneTouchLocking) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A0029"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "TH reads optional attribute(EnableInsideStatusLED) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A002a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30, "TH reads optional attribute(EnablePrivacyModeButton) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A002b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31, "TH reads optional attribute(LocalProgrammingFeatures) in AttributeList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.A002c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AttributeList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "TH reads AcceptedCommandList from DUT");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
+                                 chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33, "TH reads Feature dependent commands(DRLK.S.F04) in AcceptedCommandList");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 25: {
-            LogStep(25, "TH reads Feature dependent commands(DRLK.S.F10) in AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 34: {
+            LogStep(34, "TH reads Feature dependent commands(DRLK.S.F0a) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 26: {
-            LogStep(26, "TH reads Feature dependent commands(DRLK.S.F11) in AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F11"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 35: {
+            LogStep(35, "TH reads Feature dependent commands(DRLK.S.F0b) in AcceptedCommandList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "TH reads Feature dependent commands(DRLK.S.F08) in AcceptedCommandList");
+        case 36: {
+            LogStep(36, "TH reads Feature dependent commands(DRLK.S.F08) in AcceptedCommandList");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 28: {
-            LogStep(28, "TH reads optional commands(DRLK.S.C03.Rsp) in AcceptedCommandList");
+        case 37: {
+            LogStep(37, "TH reads optional commands(DRLK.S.C03.Rsp) in AcceptedCommandList");
             VerifyOrDo(!ShouldSkip("DRLK.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 29: {
-            LogStep(29, "TH reads Feature dependent command(DRLK.S.F04) in GeneratedCommandList");
+        case 38: {
+            LogStep(38, "TH reads Feature dependent command(DRLK.S.F04) in GeneratedCommandList");
             VerifyOrDo(!ShouldSkip("DRLK.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 30: {
-            LogStep(30, "TH reads Feature dependent command(DRLK.S.F10) in GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 39: {
+            LogStep(39, "TH reads Feature dependent command(DRLK.S.F0a) in GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 31: {
-            LogStep(31, "TH reads Feature dependent command(DRLK.S.F11) in GeneratedCommandList");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F11"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+        case 40: {
+            LogStep(40, "TH reads Feature dependent command(DRLK.S.F0b) in GeneratedCommandList");
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
         }
-        case 32: {
-            LogStep(32, "TH reads Feature dependent command(DRLK.S.F08) in GeneratedCommandList");
+        case 41: {
+            LogStep(41, "TH reads Feature dependent command(DRLK.S.F08) in GeneratedCommandList");
             VerifyOrDo(!ShouldSkip("DRLK.S.F08"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::GeneratedCommandList::Id, true,
                                  chip::NullOptional);
@@ -70619,7 +70751,7 @@ private:
         }
         case 3: {
             LogStep(3, "TH reads NumberOfYearDay SchedulesSupportedPerUser attribute");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id,
                                  DoorLock::Attributes::NumberOfYearDaySchedulesSupportedPerUser::Id, true, chip::NullOptional);
         }
@@ -70631,7 +70763,7 @@ private:
         }
         case 5: {
             LogStep(5, "TH sends Set Year Day Schedule Command to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C0e.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C0e.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetYearDaySchedule::Type value;
             value.yearDayIndex   = 1U;
@@ -70645,7 +70777,7 @@ private:
         }
         case 6: {
             LogStep(6, "TH sends Get Year Day Schedule Command to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type value;
@@ -70672,7 +70804,7 @@ private:
         }
         case 8: {
             LogStep(8, "TH sends Get Year Day Schedule Command to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type value;
@@ -70706,7 +70838,7 @@ private:
         }
         case 10: {
             LogStep(10, "TH sends Get Year Day Schedule Command to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type value;
@@ -70731,7 +70863,7 @@ private:
         }
         case 12: {
             LogStep(12, "TH sends Get Year Day Schedule Command to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx && DRLK.S.C10.Rsp"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx && DRLK.S.C10.Rsp"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type value;
@@ -70758,7 +70890,7 @@ private:
         }
         case 14: {
             LogStep(14, "TH sends Get Year Day Schedule Command to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C0f.Rsp && DRLK.S.C0f.Tx"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetYearDaySchedule::Type value;
@@ -70771,7 +70903,7 @@ private:
         }
         case 15: {
             LogStep(15, "TH sends Clear Year Day Schedule to DUT");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearYearDaySchedule::Type value;
             value.yearDayIndex = 0U;
@@ -70783,7 +70915,7 @@ private:
         }
         case 16: {
             LogStep(16, "Clear a year day schedule for the first user");
-            VerifyOrDo(!ShouldSkip("DRLK.S.F10 && DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("DRLK.S.F0a && DRLK.S.C10.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::ClearYearDaySchedule::Type value;
             value.yearDayIndex = 1U;
