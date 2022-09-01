@@ -127214,60 +127214,64 @@ public:
             err = TestWriteGroupKeysInvalid_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Write Group Keys\n");
-            err = TestWriteGroupKeys_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Write Group Keys (too many)\n");
+            err = TestWriteGroupKeysTooMany_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Read Group Keys\n");
-            err = TestReadGroupKeys_8();
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Write Group Keys\n");
+            err = TestWriteGroupKeys_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Add Group 1\n");
-            err = TestAddGroup1_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read Group Keys\n");
+            err = TestReadGroupKeys_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Add Group 2\n");
-            err = TestAddGroup2_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Add Group 1\n");
+            err = TestAddGroup1_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Read GroupTable\n");
-            err = TestReadGroupTable_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Add Group 2\n");
+            err = TestAddGroup2_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : KeySet Remove 1\n");
-            err = TestKeySetRemove1_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read GroupTable\n");
+            err = TestReadGroupTable_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : KeySet Read (removed)\n");
-            err = TestKeySetReadRemoved_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : KeySet Remove 1\n");
+            err = TestKeySetRemove1_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : KeySet Read (not removed)\n");
-            err = TestKeySetReadNotRemoved_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : KeySet Read (removed)\n");
+            err = TestKeySetReadRemoved_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Remove Group 1\n");
-            err = TestRemoveGroup1_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : KeySet Read (not removed)\n");
+            err = TestKeySetReadNotRemoved_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Read GroupTable 2\n");
-            err = TestReadGroupTable2_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Remove Group 1\n");
+            err = TestRemoveGroup1_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Remove All\n");
-            err = TestRemoveAll_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Read GroupTable 2\n");
+            err = TestReadGroupTable2_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Read GroupTable 3\n");
-            err = TestReadGroupTable3_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove All\n");
+            err = TestRemoveAll_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read GroupTable 3\n");
+            err = TestReadGroupTable3_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_21();
             break;
         }
 
@@ -127302,7 +127306,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -127320,10 +127324,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -127341,6 +127345,9 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         }
@@ -127356,7 +127363,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 21;
+    const uint16_t mTestCount = 22;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -127404,10 +127411,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("MaxGroupKeysPerFabric", actualValue, 2U));
-            }
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxGroupKeysPerFabric", [value unsignedShortValue], 3U));
 
             NextTest();
         }];
@@ -127576,7 +127580,55 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWriteGroupKeys_7()
+    CHIP_ERROR TestWriteGroupKeysTooMany_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                                                     endpoint:0
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id groupKeyMapArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:257U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:257U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[2] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[3] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            groupKeyMapArgument = temp_0;
+        }
+        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
+                                  completionHandler:^(NSError * _Nullable err) {
+                                      NSLog(@"Write Group Keys (too many) Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_FAILURE));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestWriteGroupKeys_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127594,8 +127646,13 @@ private:
 
             temp_0[1] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:258U];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[2] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             groupKeyMapArgument = temp_0;
         }
@@ -127611,7 +127668,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupKeys_8()
+    CHIP_ERROR TestReadGroupKeys_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127630,7 +127687,7 @@ private:
 
                                  {
                                      id actualValue = value;
-                                     VerifyOrReturn(CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(2)));
+                                     VerifyOrReturn(CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(3)));
                                      VerifyOrReturn(CheckValue("GroupId",
                                          ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 257U));
                                      VerifyOrReturn(CheckValue("GroupKeySetID",
@@ -127640,9 +127697,15 @@ private:
                                      VerifyOrReturn(CheckValue("GroupId",
                                          ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupId, 258U));
                                      VerifyOrReturn(CheckValue("GroupKeySetID",
-                                         ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID, 418U));
+                                         ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID, 417U));
                                      VerifyOrReturn(CheckValue("FabricIndex",
                                          ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex, 1U));
+                                     VerifyOrReturn(CheckValue("GroupId",
+                                         ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupId, 258U));
+                                     VerifyOrReturn(CheckValue("GroupKeySetID",
+                                         ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupKeySetID, 418U));
+                                     VerifyOrReturn(CheckValue("FabricIndex",
+                                         ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).fabricIndex, 1U));
                                  }
 
                                  NextTest();
@@ -127651,7 +127714,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup1_9()
+    CHIP_ERROR TestAddGroup1_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -127682,7 +127745,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestAddGroup2_10()
+    CHIP_ERROR TestAddGroup2_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -127713,7 +127776,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable_11()
+    CHIP_ERROR TestReadGroupTable_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127754,7 +127817,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove1_12()
+    CHIP_ERROR TestKeySetRemove1_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127776,7 +127839,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadRemoved_13()
+    CHIP_ERROR TestKeySetReadRemoved_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127801,7 +127864,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemoved_14()
+    CHIP_ERROR TestKeySetReadNotRemoved_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127851,7 +127914,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup1_15()
+    CHIP_ERROR TestRemoveGroup1_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -127881,7 +127944,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable2_16()
+    CHIP_ERROR TestReadGroupTable2_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127915,7 +127978,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_17()
+    CHIP_ERROR TestRemoveAll_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -127932,7 +127995,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable3_18()
+    CHIP_ERROR TestReadGroupTable3_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127959,7 +128022,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove2_19()
+    CHIP_ERROR TestKeySetRemove2_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
@@ -127981,7 +128044,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_20()
+    CHIP_ERROR TestKeySetReadAlsoRemoved_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroupKeyManagement * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
