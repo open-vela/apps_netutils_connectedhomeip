@@ -6057,14 +6057,14 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads ColorTemperatureMireds attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorTemperature", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 65279U));
+            VerifyOrReturn(CheckConstraintType("colorTemperatureMireds", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 65279U));
 
             NextTest();
         }];
@@ -15418,16 +15418,16 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("colorTemperature", "int16u", "int16u"));
-            VerifyOrReturn(
-                CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], ColorTempPhysicalMinMiredsValue));
-            VerifyOrReturn(
-                CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], ColorTempPhysicalMaxMiredsValue));
+            VerifyOrReturn(CheckConstraintType("colorTemperatureMireds", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>(
+                "colorTemperatureMireds", [value unsignedShortValue], ColorTempPhysicalMinMiredsValue));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>(
+                "colorTemperatureMireds", [value unsignedShortValue], ColorTempPhysicalMaxMiredsValue));
 
             NextTest();
         }];
@@ -15511,13 +15511,13 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 275U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 305U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 275U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 305U));
 
             NextTest();
         }];
@@ -15540,13 +15540,13 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 255U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 285U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 255U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 285U));
 
             NextTest();
         }];
@@ -15569,13 +15569,13 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperature", [value unsignedShortValue], 250U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperature", [value unsignedShortValue], 280U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 250U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 280U));
 
             NextTest();
         }];
@@ -15598,14 +15598,14 @@ private:
                                                                                             queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads ColorTemperatureMireds attribute from DUT. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ColorTemperature", actualValue, 250U));
+                VerifyOrReturn(CheckValue("ColorTemperatureMireds", actualValue, 250U));
             }
 
             NextTest();

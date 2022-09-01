@@ -54319,12 +54319,12 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributeColorTemperatureWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
-                                                               NSError * _Nullable error))completionHandler
+- (void)readAttributeColorTemperatureMiredsWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
+                                                                     NSError * _Nullable error))completionHandler
 {
     new MTRInt16uAttributeCallbackBridge(self.callbackQueue, self.device, completionHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
-            using TypeInfo = ColorControl::Attributes::ColorTemperature::TypeInfo;
+            using TypeInfo = ColorControl::Attributes::ColorTemperatureMireds::TypeInfo;
             auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
@@ -54332,12 +54332,13 @@ using chip::SessionHandle;
         });
 }
 
-- (void)subscribeAttributeColorTemperatureWithMinInterval:(NSNumber * _Nonnull)minInterval
-                                              maxInterval:(NSNumber * _Nonnull)maxInterval
-                                                   params:(MTRSubscribeParams * _Nullable)params
-                                  subscriptionEstablished:(SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
-                                            reportHandler:
-                                                (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeColorTemperatureMiredsWithMinInterval:(NSNumber * _Nonnull)minInterval
+                                                    maxInterval:(NSNumber * _Nonnull)maxInterval
+                                                         params:(MTRSubscribeParams * _Nullable)params
+                                        subscriptionEstablished:
+                                            (SubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
+                                                  reportHandler:
+                                                      (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     // Make a copy of params before we go async.
     minInterval = [minInterval copy];
@@ -54350,7 +54351,7 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = ColorControl::Attributes::ColorTemperature::TypeInfo;
+            using TypeInfo = ColorControl::Attributes::ColorTemperatureMireds::TypeInfo;
             auto successFn = Callback<Int16uAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
@@ -54364,16 +54365,16 @@ using chip::SessionHandle;
         subscriptionEstablishedHandler);
 }
 
-+ (void)readAttributeColorTemperatureWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
-                                               endpoint:(NSNumber *)endpoint
-                                                  queue:(dispatch_queue_t)queue
-                                      completionHandler:
-                                          (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
++ (void)readAttributeColorTemperatureMiredsWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
+                                                     endpoint:(NSNumber *)endpoint
+                                                        queue:(dispatch_queue_t)queue
+                                            completionHandler:
+                                                (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
     new MTRInt16uAttributeCallbackBridge(queue, completionHandler, ^(Cancelable * success, Cancelable * failure) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = ColorControl::Attributes::ColorTemperature::TypeInfo;
+            using TypeInfo = ColorControl::Attributes::ColorTemperatureMireds::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();

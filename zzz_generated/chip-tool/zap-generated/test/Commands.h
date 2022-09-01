@@ -4095,8 +4095,8 @@ private:
         case 8: {
             LogStep(8, "TH reads ColorTemperatureMireds attribute from DUT");
             VerifyOrDo(!ShouldSkip("CC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "TH reads ColorMode attribute from DUT");
@@ -8736,7 +8736,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("colorTemperature", value, 250U));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, 250U));
             }
             break;
         case 17:
@@ -8825,8 +8825,8 @@ private:
         case 5: {
             LogStep(5, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6,
@@ -8876,8 +8876,8 @@ private:
         case 10: {
             LogStep(10, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Wait 10s");
@@ -8889,8 +8889,8 @@ private:
         case 12: {
             LogStep(12, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Wait 10s");
@@ -8902,8 +8902,8 @@ private:
         case 14: {
             LogStep(14, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Wait 5s");
@@ -8915,8 +8915,8 @@ private:
         case 16: {
             LogStep(16, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "TH reads ColorMode attribute from DUT");
@@ -9161,7 +9161,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureMiredsStep4c));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTemperatureMiredsStep4c));
             }
             break;
         case 28:
@@ -9250,8 +9250,8 @@ private:
         case 5: {
             LogStep(5, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6,
@@ -9304,8 +9304,8 @@ private:
         case 10: {
             LogStep(10, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Wait 10s");
@@ -9317,8 +9317,8 @@ private:
         case 12: {
             LogStep(12, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Wait 5s");
@@ -9330,8 +9330,8 @@ private:
         case 14: {
             LogStep(14, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15,
@@ -9361,8 +9361,8 @@ private:
         case 17: {
             LogStep(17, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "Wait 10s");
@@ -9374,8 +9374,8 @@ private:
         case 19: {
             LogStep(19, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "Wait 5s");
@@ -9387,8 +9387,8 @@ private:
         case 21: {
             LogStep(21, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22,
@@ -9436,8 +9436,8 @@ private:
         case 25: {
             LogStep(25, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 26: {
             LogStep(26, "Wait 2s");
@@ -9449,8 +9449,8 @@ private:
         case 27: {
             LogStep(27, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "TH reads ColorMode attribute from DUT");
@@ -9750,8 +9750,8 @@ private:
         case 5: {
             LogStep(5, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6,
@@ -9805,8 +9805,8 @@ private:
         case 10: {
             LogStep(10, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Wait 10s");
@@ -9818,8 +9818,8 @@ private:
         case 12: {
             LogStep(12, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Wait 5s");
@@ -9831,8 +9831,8 @@ private:
         case 14: {
             LogStep(14, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15,
@@ -9863,8 +9863,8 @@ private:
         case 17: {
             LogStep(17, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "Wait 10s");
@@ -9876,8 +9876,8 @@ private:
         case 19: {
             LogStep(19, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "Wait 5s");
@@ -9889,8 +9889,8 @@ private:
         case 21: {
             LogStep(21, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22, "TH reads ColorMode attribute from DUT");
@@ -11404,7 +11404,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("colorTemperature", value, ColorTemperatureMiredsStep4f));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTemperatureMiredsStep4f));
             }
             break;
         case 29:
@@ -11722,8 +11722,8 @@ private:
         case 26: {
             LogStep(26, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.A0007 && CC.S.C4b.Rsp && CC.S.C47.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 27: {
             LogStep(27, "Wait 2s");
@@ -11735,8 +11735,8 @@ private:
         case 28: {
             LogStep(28, "TH reads ColorTemperatureMireds attribute from DUT.");
             VerifyOrDo(!ShouldSkip("CC.S.A0007 && CC.S.C4b.Rsp && CC.S.C47.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Attributes::ColorTemperature::Id,
-                                 true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
+                                 ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
         case 29: {
             LogStep(29,

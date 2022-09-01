@@ -52810,7 +52810,7 @@ public:
 | * CurrentY                                                          | 0x0004 |
 | * DriftCompensation                                                 | 0x0005 |
 | * CompensationText                                                  | 0x0006 |
-| * ColorTemperature                                                  | 0x0007 |
+| * ColorTemperatureMireds                                            | 0x0007 |
 | * ColorMode                                                         | 0x0008 |
 | * Options                                                           | 0x000F |
 | * NumberOfPrimaries                                                 | 0x0010 |
@@ -54345,16 +54345,16 @@ public:
 };
 
 /*
- * Attribute ColorTemperature
+ * Attribute ColorTemperatureMireds
  */
-class ReadColorControlColorTemperature : public ReadAttribute {
+class ReadColorControlColorTemperatureMireds : public ReadAttribute {
 public:
-    ReadColorControlColorTemperature()
-        : ReadAttribute("color-temperature")
+    ReadColorControlColorTemperatureMireds()
+        : ReadAttribute("color-temperature-mireds")
     {
     }
 
-    ~ReadColorControlColorTemperature() {}
+    ~ReadColorControlColorTemperatureMireds() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -54364,10 +54364,10 @@ public:
         MTRBaseClusterColorControl * cluster = [[MTRBaseClusterColorControl alloc] initWithDevice:device
                                                                                          endpoint:endpointId
                                                                                             queue:callbackQueue];
-        [cluster readAttributeColorTemperatureWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ColorControl.ColorTemperature response %@", [value description]);
+        [cluster readAttributeColorTemperatureMiredsWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ColorControl.ColorTemperatureMireds response %@", [value description]);
             if (error != nil) {
-                LogNSError("ColorControl ColorTemperature read Error", error);
+                LogNSError("ColorControl ColorTemperatureMireds read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -54375,14 +54375,14 @@ public:
     }
 };
 
-class SubscribeAttributeColorControlColorTemperature : public SubscribeAttribute {
+class SubscribeAttributeColorControlColorTemperatureMireds : public SubscribeAttribute {
 public:
-    SubscribeAttributeColorControlColorTemperature()
-        : SubscribeAttribute("color-temperature")
+    SubscribeAttributeColorControlColorTemperatureMireds()
+        : SubscribeAttribute("color-temperature-mireds")
     {
     }
 
-    ~SubscribeAttributeColorControlColorTemperature() {}
+    ~SubscribeAttributeColorControlColorTemperatureMireds() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -54395,14 +54395,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeColorTemperatureWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeColorTemperatureMiredsWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ColorControl.ColorTemperature response %@", [value description]);
+                NSLog(@"ColorControl.ColorTemperatureMireds response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95222,8 +95222,8 @@ void registerClusterColorControl(Commands & commands)
         make_unique<SubscribeAttributeColorControlDriftCompensation>(), //
         make_unique<ReadColorControlCompensationText>(), //
         make_unique<SubscribeAttributeColorControlCompensationText>(), //
-        make_unique<ReadColorControlColorTemperature>(), //
-        make_unique<SubscribeAttributeColorControlColorTemperature>(), //
+        make_unique<ReadColorControlColorTemperatureMireds>(), //
+        make_unique<SubscribeAttributeColorControlColorTemperatureMireds>(), //
         make_unique<ReadColorControlColorMode>(), //
         make_unique<SubscribeAttributeColorControlColorMode>(), //
         make_unique<ReadColorControlOptions>(), //
