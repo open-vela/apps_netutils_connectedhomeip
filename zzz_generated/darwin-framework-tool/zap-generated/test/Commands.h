@@ -22335,7 +22335,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional command(TriggerEffect) in AcceptedCommandList\n");
-            if (ShouldSkip("I.C.C40.Tx")) {
+            if (ShouldSkip("I.S.C40.Rsp")) {
                 NextTest();
                 return;
             }
@@ -52072,28 +52072,28 @@ public:
             err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
             break;
         case 1:
-            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute: MeasuredValue\n");
-            if (ShouldSkip("TMP.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestReadTheMandatoryAttributeMeasuredValue_1();
-            break;
-        case 2:
-            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MinMeasuredValue\n");
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the mandatory attribute: MinMeasuredValue\n");
             if (ShouldSkip("TMP.S.A0001")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributeMinMeasuredValue_2();
+            err = TestReadTheMandatoryAttributeMinMeasuredValue_1();
             break;
-        case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MaxMeasuredValue\n");
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the mandatory attribute: MaxMeasuredValue\n");
             if (ShouldSkip("TMP.S.A0002")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheMandatoryAttributeMaxMeasuredValue_3();
+            err = TestReadTheMandatoryAttributeMaxMeasuredValue_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the mandatory attribute: MeasuredValue\n");
+            if (ShouldSkip("TMP.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheMandatoryAttributeMeasuredValue_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute: Tolerance\n");
@@ -52156,32 +52156,7 @@ private:
         return WaitForCommissionee("alpha", value);
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_1()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTemperatureMeasurement * cluster =
-            [[MTRBaseClusterTemperatureMeasurement alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the mandatory attribute: MeasuredValue Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            if (value != nil) {
-
-                VerifyOrReturn(CheckConstraintType("measuredValue", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], -27315));
-                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], 32767));
-            }
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_2()
+    CHIP_ERROR TestReadTheMandatoryAttributeMinMeasuredValue_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTemperatureMeasurement * cluster =
@@ -52206,7 +52181,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_3()
+    CHIP_ERROR TestReadTheMandatoryAttributeMaxMeasuredValue_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterTemperatureMeasurement * cluster =
@@ -52223,6 +52198,31 @@ private:
                 VerifyOrReturn(CheckConstraintType("maxMeasuredValue", "int16s", "int16s"));
                 VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxMeasuredValue", [value shortValue], -27314));
                 VerifyOrReturn(CheckConstraintMaxValue<int16_t>("maxMeasuredValue", [value shortValue], 32767));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheMandatoryAttributeMeasuredValue_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterTemperatureMeasurement * cluster =
+            [[MTRBaseClusterTemperatureMeasurement alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMeasuredValueWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the mandatory attribute: MeasuredValue Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintType("measuredValue", "int16s", "int16s"));
+                VerifyOrReturn(CheckConstraintMinValue<int16_t>("measuredValue", [value shortValue], -27315));
+                VerifyOrReturn(CheckConstraintMaxValue<int16_t>("measuredValue", [value shortValue], 32767));
             }
 
             NextTest();
