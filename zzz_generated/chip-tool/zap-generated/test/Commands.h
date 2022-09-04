@@ -8975,10 +8975,6 @@ private:
 
     uint16_t ColorTempPhysicalMinMiredsValue;
     uint16_t ColorTempPhysicalMaxMiredsValue;
-    uint16_t ColorTemperatureMiredsStep2c;
-    uint16_t ColorTemperatureMiredsStep2d;
-    uint16_t ColorTemperatureMiredsStep3b;
-    uint16_t ColorTemperatureMiredsStep3c;
     uint16_t ColorTemperatureMiredsStep4c;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
@@ -9054,10 +9050,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value,
-                                                       (ColorTempPhysicalMinMiredsValue + ColorTempPhysicalMaxMiredsValue) / 2));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
-                ColorTemperatureMiredsStep2c = value;
             }
             break;
         case 11:
@@ -9069,9 +9063,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTemperatureMiredsStep2c));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
-                ColorTemperatureMiredsStep2d = value;
             }
             break;
         case 13:
@@ -9083,7 +9076,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTemperatureMiredsStep2d));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTempPhysicalMaxMiredsValue));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
@@ -9101,7 +9095,6 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
-                ColorTemperatureMiredsStep3b = value;
             }
             break;
         case 18:
@@ -9114,8 +9107,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTemperatureMiredsStep3b));
-                ColorTemperatureMiredsStep3c = value;
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
         case 20:
@@ -9127,8 +9119,9 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTemperatureMiredsStep3c));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
         case 22:
@@ -9146,8 +9139,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value,
-                                                       (ColorTempPhysicalMaxMiredsValue - ColorTempPhysicalMinMiredsValue) / 20));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
                 ColorTemperatureMiredsStep4c = value;
             }
@@ -9509,10 +9501,6 @@ private:
 
     uint16_t ColorTempPhysicalMinMiredsValue;
     uint16_t ColorTempPhysicalMaxMiredsValue;
-    uint16_t ColorTemperatureMiredsStep2c;
-    uint16_t ColorTemperatureMiredsStep2d;
-    uint16_t ColorTemperatureMiredsStep3b;
-    uint16_t ColorTemperatureMiredsStep3c;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -9587,10 +9575,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value,
-                                                       (ColorTempPhysicalMinMiredsValue + ColorTempPhysicalMaxMiredsValue) / 2));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
-                ColorTemperatureMiredsStep2c = value;
             }
             break;
         case 11:
@@ -9602,9 +9588,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTemperatureMiredsStep2c));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
-                ColorTemperatureMiredsStep2d = value;
             }
             break;
         case 13:
@@ -9616,7 +9601,8 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTemperatureMiredsStep2d));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTempPhysicalMaxMiredsValue));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
@@ -9634,7 +9620,6 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
-                ColorTemperatureMiredsStep3b = value;
             }
             break;
         case 18:
@@ -9647,8 +9632,7 @@ private:
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTemperatureMiredsStep3b));
-                ColorTemperatureMiredsStep3c = value;
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
         case 20:
@@ -9660,8 +9644,9 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("colorTemperatureMireds", value, ColorTempPhysicalMinMiredsValue));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, ColorTempPhysicalMinMiredsValue));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTemperatureMiredsStep3c));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, ColorTempPhysicalMaxMiredsValue));
             }
             break;
         case 22:
@@ -9830,7 +9815,8 @@ private:
         }
         case 14: {
             LogStep(14, "TH reads ColorTemperatureMireds attribute from DUT.");
-            VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.A0007 && CC.S.C4c.Rsp && PICS_SKIP_SAMPLE_APP"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), ColorControl::Id,
                                  ColorControl::Attributes::ColorTemperatureMireds::Id, true, chip::NullOptional);
         }
@@ -13243,7 +13229,7 @@ private:
         }
         case 42: {
             LogStep(42, "TH reads PartNumber from the DUT");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A000c && PART_NUM"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("BINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::PartNumber::Id, true,
                                  chip::NullOptional);
         }
@@ -13258,7 +13244,7 @@ private:
         }
         case 44: {
             LogStep(44, "TH reads PartNumber from the DUT");
-            VerifyOrDo(!ShouldSkip("BINFO.S.A000c && PART_NUM"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("BINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::PartNumber::Id, true,
                                  chip::NullOptional);
         }
@@ -16162,7 +16148,7 @@ private:
         }
         case 5: {
             LogStep(5, "Read the optional command(TriggerEffect) in AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("I.C.C40.Tx"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("I.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), Identify::Id, Identify::Attributes::AcceptedCommandList::Id, true,
                                  chip::NullOptional);
         }
@@ -32842,7 +32828,7 @@ private:
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, -27314));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
             break;
@@ -32852,7 +32838,7 @@ private:
                 chip::app::DataModel::Nullable<int16_t> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "int16s", "int16s"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, -27314));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, -27315));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 32767));
             }
             break;
@@ -32889,22 +32875,22 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "Read the mandatory attribute: MeasuredValue");
-            VerifyOrDo(!ShouldSkip("TMP.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureMeasurement::Id,
-                                 TemperatureMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "Read the mandatory attribute: MinMeasuredValue");
+            LogStep(1, "Read the mandatory attribute: MinMeasuredValue");
             VerifyOrDo(!ShouldSkip("TMP.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureMeasurement::Id,
                                  TemperatureMeasurement::Attributes::MinMeasuredValue::Id, true, chip::NullOptional);
         }
-        case 3: {
-            LogStep(3, "Read the mandatory attribute: MaxMeasuredValue");
+        case 2: {
+            LogStep(2, "Read the mandatory attribute: MaxMeasuredValue");
             VerifyOrDo(!ShouldSkip("TMP.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureMeasurement::Id,
                                  TemperatureMeasurement::Attributes::MaxMeasuredValue::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Read the mandatory attribute: MeasuredValue");
+            VerifyOrDo(!ShouldSkip("TMP.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TemperatureMeasurement::Id,
+                                 TemperatureMeasurement::Attributes::MeasuredValue::Id, true, chip::NullOptional);
         }
         case 4: {
             LogStep(4, "Read the optional attribute: Tolerance");
