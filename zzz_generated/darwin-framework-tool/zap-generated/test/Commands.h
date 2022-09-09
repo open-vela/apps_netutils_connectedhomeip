@@ -7432,8 +7432,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 35U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 55U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 38U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 52U));
 
             NextTest();
         }];
@@ -7639,8 +7639,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 180U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 240U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 183U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 247U));
 
             NextTest();
         }];
@@ -7695,7 +7695,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 140U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 180U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 190U));
             {
                 CurrentHueValueStep3f = value;
             }
@@ -8277,8 +8277,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 210U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 250U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 195U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -8458,7 +8458,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 210U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 208U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 255U));
 
             NextTest();
@@ -9027,7 +9027,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 102U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 120U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 138U));
 
             NextTest();
         }];
@@ -9720,7 +9720,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 215U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 212U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
@@ -9841,8 +9841,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 60U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 80U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 59U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 81U));
 
             NextTest();
         }];
@@ -10681,8 +10681,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 205U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 235U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 187U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 253U));
 
             NextTest();
         }];
@@ -10710,8 +10710,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 205U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 240U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 204U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 254U));
 
             NextTest();
         }];
@@ -10920,7 +10920,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 10U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 5U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 15U));
 
             NextTest();
@@ -11574,8 +11574,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 165U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 195U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 160U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 200U));
 
             NextTest();
         }];
@@ -11596,8 +11596,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 55U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 75U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 50U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 80U));
 
             NextTest();
         }];
@@ -11625,7 +11625,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 160U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentHue", [value unsignedCharValue], 135U));
             VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentHue", [value unsignedCharValue], 185U));
 
             NextTest();
@@ -11649,7 +11649,7 @@ private:
 
             VerifyOrReturn(CheckConstraintType("currentSaturation", "int8u", "int8u"));
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 68U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 80U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 92U));
 
             NextTest();
         }];
@@ -12669,8 +12669,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 19500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 26400U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 13107U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 32768U));
 
             NextTest();
         }];
@@ -12691,8 +12691,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 13900U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 18900U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 13107U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 19660U));
 
             NextTest();
         }];
@@ -12720,7 +12720,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 13107U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 11141U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 15073U));
 
             NextTest();
@@ -12742,7 +12742,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 13107U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 11141U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 15073U));
 
             NextTest();
@@ -14104,8 +14104,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 31500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 32500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 27200U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 36800U));
 
             NextTest();
         }];
@@ -14126,8 +14126,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 26500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 27500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 22900U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 31100U));
 
             NextTest();
         }];
@@ -14155,8 +14155,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 30500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 31500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 26350U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 35650U));
 
             NextTest();
         }];
@@ -14177,8 +14177,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 27500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 28500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 23800U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 32200U));
 
             NextTest();
         }];
@@ -14207,8 +14207,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 29500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 30500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 25500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 34500U));
             {
                 CurrentXValue = value;
             }
@@ -14233,8 +14233,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 28500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 29500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 24650U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 33350U));
             {
                 CurrentYValue = value;
             }
@@ -14281,8 +14281,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 29500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 30500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentX", [value unsignedShortValue], 25500U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentX", [value unsignedShortValue], 34500U));
 
             NextTest();
         }];
@@ -14303,8 +14303,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 28500U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 29500U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("currentY", [value unsignedShortValue], 24650U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("currentY", [value unsignedShortValue], 33350U));
 
             NextTest();
         }];
@@ -15516,8 +15516,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 275U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 305U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 246U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 334U));
 
             NextTest();
         }];
@@ -15545,8 +15545,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 255U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 285U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 230U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 310U));
 
             NextTest();
         }];
@@ -15574,8 +15574,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 250U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 280U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 212U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("colorTemperatureMireds", [value unsignedShortValue], 288U));
 
             NextTest();
         }];
@@ -16248,8 +16248,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 9350U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 12000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 10200U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 13800U));
 
             NextTest();
         }];
@@ -16430,8 +16430,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 6000U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 7000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 5100U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 6900U));
 
             NextTest();
         }];
@@ -17049,8 +17049,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 56U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 74U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 50U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 80U));
 
             NextTest();
         }];
@@ -17079,7 +17079,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("enhancedCurrentHue", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 16000U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 13600U));
             VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("enhancedCurrentHue", [value unsignedShortValue], 18400U));
 
             NextTest();
@@ -17102,7 +17102,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentSaturation", [value unsignedCharValue], 68U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 80U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentSaturation", [value unsignedCharValue], 92U));
 
             NextTest();
         }];
@@ -42817,7 +42817,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
             }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
@@ -60266,7 +60266,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
-            if (ShouldSkip(" !DGTHREAD.S.F00 && !DGTHREAD.S.F00 && !DGTHREAD.S.F00 && !DGTHREAD.S.F00 ")) {
+            if (ShouldSkip(" !DGTHREAD.S.F00 && !DGTHREAD.S.F01 && !DGTHREAD.S.F02 && !DGTHREAD.S.F03 ")) {
                 NextTest();
                 return;
             }
@@ -60275,7 +60275,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : Given DGTHREAD.S.F00(PKTCNT) ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("DGETH.S.F00")) {
+            if (ShouldSkip("DGTHREAD.S.F00")) {
                 NextTest();
                 return;
             }
@@ -60284,7 +60284,7 @@ public:
         case 4:
             ChipLogProgress(
                 chipTool, " ***** Test Step 4 : Given DGTHREAD.S.F01(ERRCNT) ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("DGETH.S.F01")) {
+            if (ShouldSkip("DGTHREAD.S.F01")) {
                 NextTest();
                 return;
             }
@@ -60293,7 +60293,7 @@ public:
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : Given DGTHREAD.S.F02(MLECNT) ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("DGETH.S.F00")) {
+            if (ShouldSkip("DGTHREAD.S.F02")) {
                 NextTest();
                 return;
             }
@@ -60302,23 +60302,56 @@ public:
         case 6:
             ChipLogProgress(
                 chipTool, " ***** Test Step 6 : Given DGTHREAD.S.F03(MACCNT) ensure featuremap has the correct bit set\n");
-            if (ShouldSkip("DGETH.S.F01")) {
+            if (ShouldSkip("DGTHREAD.S.F03")) {
                 NextTest();
                 return;
             }
             err = TestGivenDgthreadsf03maccntEnsureFeaturemapHasTheCorrectBitSet_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads AttributeList from DUT\n");
-            err = TestThReadsAttributeListFromDut_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads mandatory attributes in AttributeList from DUT\n");
+            err = TestThReadsMandatoryAttributesInAttributeListFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads AcceptedCommandList from DUT\n");
-            err = TestThReadsAcceptedCommandListFromDut_8();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH reads Feature dependent attribute(DGTHREAD.S.F01(ERRCNT)) in attributeList\n");
+            if (ShouldSkip("DGTHREAD.C.A0006 && DGTHREAD.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentAttributeDGTHREADSF01ERRCNTInAttributeList_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads GeneratedCommandList from DUT\n");
-            err = TestThReadsGeneratedCommandListFromDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read the optional attribute(ActiveTimestamp) in AttributeList\n");
+            if (ShouldSkip("DGTHREAD.S.A0039")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeActiveTimestampInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the optional attribute(PendingTimestamp) in AttributeList\n");
+            if (ShouldSkip("DGTHREAD.S.A003A")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributePendingTimestampInAttributeList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the optional attribute(Delay) in AttributeList\n");
+            if (ShouldSkip("DGTHREAD.S.A003B")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeDelayInAttributeList_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads AcceptedCommandList from DUT\n");
+            err = TestThReadsAcceptedCommandListFromDut_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_13();
             break;
         }
 
@@ -60361,6 +60394,18 @@ public:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -60374,7 +60419,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -60512,7 +60557,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAttributeListFromDut_7()
+    CHIP_ERROR TestThReadsMandatoryAttributesInAttributeListFromDut_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThreadNetworkDiagnostics * cluster =
@@ -60520,7 +60565,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+            NSLog(@"TH reads mandatory attributes in AttributeList from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -60554,7 +60599,91 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_8()
+    CHIP_ERROR TestThReadsFeatureDependentAttributeDGTHREADSF01ERRCNTInAttributeList_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads Feature dependent attribute(DGTHREAD.S.F01(ERRCNT)) in attributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeActiveTimestampInAttributeList_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ActiveTimestamp) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 56UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributePendingTimestampInAttributeList_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(PendingTimestamp) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 57UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeDelayInAttributeList_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterThreadNetworkDiagnostics * cluster =
+            [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(Delay) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 58UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThreadNetworkDiagnostics * cluster =
@@ -60575,7 +60704,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_9()
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterThreadNetworkDiagnostics * cluster =
@@ -61587,64 +61716,74 @@ public:
             err = TestThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads the FeatureMap from DUT\n");
-            if (ShouldSkip("DGWIFI.S.F00 || DGWIFI.S.F01")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsTheFeatureMapFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AttributeList from DUT\n");
-            err = TestThReadsAttributeListFromDut_4();
-            break;
-        case 5:
             ChipLogProgress(
-                chipTool, " ***** Test Step 5 : TH reads Feature dependent(DGWIFI.S.F00) attributes in attributeList from DUT\n");
+                chipTool, " ***** Test Step 3 : Given DGWIFI.S.F00(PacketCounts) ensure featuremap has the correct bit set\n");
             if (ShouldSkip("DGWIFI.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDGWIFISF00AttributesInAttributeListFromDut_5();
+            err = TestGivenDGWIFISF00PacketCountsEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
-        case 6:
+        case 4:
             ChipLogProgress(
-                chipTool, " ***** Test Step 6 : TH reads Feature dependent(DGWIFI.S.F01) attributes in attributeList from DUT\n");
+                chipTool, " ***** Test Step 4 : Given DGWIFI.S.F01(ErrorCounts) ensure featuremap has the correct bit set\n");
             if (ShouldSkip("DGWIFI.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDGWIFISF01AttributesInAttributeListFromDut_6();
+            err = TestGivenDGWIFISF01ErrorCountsEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_5();
+            break;
+        case 6:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 6 : TH reads Feature dependent(DGWIFI.S.F00) attributes in attributeList from DUT\n");
+            if (ShouldSkip("DGWIFI.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDGWIFISF00AttributesInAttributeListFromDut_6();
             break;
         case 7:
             ChipLogProgress(
-                chipTool, " ***** Test Step 7 : TH reads optional attribute (CurrentMaxRate) in AttributeList from DUT\n");
+                chipTool, " ***** Test Step 7 : TH reads Feature dependent(DGWIFI.S.F01) attributes in attributeList from DUT\n");
+            if (ShouldSkip("DGWIFI.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentDGWIFISF01AttributesInAttributeListFromDut_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH reads optional attribute (CurrentMaxRate) in AttributeList from DUT\n");
             if (ShouldSkip("DGWIFI.S.A000b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeCurrentMaxRateInAttributeListFromDut_7();
+            err = TestThReadsOptionalAttributeCurrentMaxRateInAttributeListFromDut_8();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads AcceptedCommandList from DUT\n");
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip(" !DGWIFI.S.F01 ")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsAcceptedCommandListFromDut_8();
+            err = TestThReadsAcceptedCommandListFromDut_9();
             break;
-        case 9:
+        case 10:
             ChipLogProgress(chipTool,
-                " ***** Test Step 9 : TH reads Feature dependent(DGWIFI.S.F01) command in AcceptedCommandList from DUT\n");
+                " ***** Test Step 10 : TH reads Feature dependent(DGWIFI.S.F01) command in AcceptedCommandList from DUT\n");
             if (ShouldSkip("DGWIFI.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_9();
+            err = TestThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_10();
             break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads GeneratedCommandList from DUT\n");
-            err = TestThReadsGeneratedCommandListFromDut_10();
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_11();
             break;
         }
 
@@ -61690,6 +61829,9 @@ public:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -61703,7 +61845,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -61765,7 +61907,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheFeatureMapFromDut_3()
+    CHIP_ERROR TestGivenDGWIFISF00PacketCountsEnsureFeaturemapHasTheCorrectBitSet_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61773,21 +61915,37 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+            NSLog(@"Given DGWIFI.S.F00(PacketCounts) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 1UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 3UL));
-
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAttributeListFromDut_4()
+    CHIP_ERROR TestGivenDGWIFISF01ErrorCountsEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterWiFiNetworkDiagnostics * cluster =
+            [[MTRBaseClusterWiFiNetworkDiagnostics alloc] initWithDevice:device endpoint:0 queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given DGWIFI.S.F01(ErrorCounts) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61817,7 +61975,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDGWIFISF00AttributesInAttributeListFromDut_5()
+    CHIP_ERROR TestThReadsFeatureDependentDGWIFISF00AttributesInAttributeListFromDut_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61842,7 +62000,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDGWIFISF01AttributesInAttributeListFromDut_6()
+    CHIP_ERROR TestThReadsFeatureDependentDGWIFISF01AttributesInAttributeListFromDut_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61864,7 +62022,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeCurrentMaxRateInAttributeListFromDut_7()
+    CHIP_ERROR TestThReadsOptionalAttributeCurrentMaxRateInAttributeListFromDut_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61885,7 +62043,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_8()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61909,7 +62067,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_9()
+    CHIP_ERROR TestThReadsFeatureDependentDGWIFISF01CommandInAcceptedCommandListFromDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -61930,7 +62088,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_10()
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterWiFiNetworkDiagnostics * cluster =
@@ -120695,84 +120853,74 @@ public:
             err = TestThSendsAnUnlockDoorCommandFromUser1ToTheDutWithTheValidPINCodeAndVerifyTheDutResponse_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads the UserCodeTemporaryDisableTime attribute from the DUT\n");
-            if (ShouldSkip("DRLK.S.A0031")) {
+            ChipLogProgress(chipTool,
+                " ***** Test Step 19 : Wait for PIXIT.DRLK.UserCodeTemporaryDisableTime.TH then sends an Unlock Door Command from "
+                "User1 to the DUT with the valid PINCode.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && DRLK.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_19();
+            err = TestWaitForPIXITDRLKUserCodeTemporaryDisableTimeTHThenSendsAnUnlockDoorCommandFromUser1ToTheDutWithTheValidPINCode_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : Wait 15000ms\n");
-            err = TestWait15000ms_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH sends the unlock Door command to the DUT with valid PINCode\n");
-            if (ShouldSkip("DRLK.S.A0030")) {
-                NextTest();
-                return;
-            }
-            err = TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_21();
-            break;
-        case 22:
             ChipLogProgress(chipTool,
-                " ***** Test Step 22 : TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the DUT and Verify "
+                " ***** Test Step 20 : TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the DUT and Verify "
                 "that the DUT sends Success response\n");
             if (ShouldSkip("DRLK.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_22();
+            err = TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_20();
             break;
-        case 23:
+        case 21:
             ChipLogProgress(chipTool,
-                " ***** Test Step 23 : TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the DUT and verify "
+                " ***** Test Step 21 : TH writes WrongCodeEntryLimit attribute value as between 1 and 255 on the DUT and verify "
                 "DUT responds with UNSUPPORTED_WRITE\n");
             if (ShouldSkip("!DRLK.S.A0030")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_23();
+            err = TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_21();
             break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads the UserCodeTemporaryDisableTime attribute from the DUT\n");
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : TH reads the UserCodeTemporaryDisableTime attribute from the DUT\n");
             if (ShouldSkip("DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_24();
+            err = TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_22();
             break;
-        case 25:
+        case 23:
             ChipLogProgress(chipTool,
-                " ***** Test Step 25 : TH writes UserCodeTemporaryDisableTime attribute value as between 1 and 255 on the DUT and "
+                " ***** Test Step 23 : TH writes UserCodeTemporaryDisableTime attribute value as between 1 and 255 on the DUT and "
                 "Verify that the DUT sends Success response\n");
             if (ShouldSkip("DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_25();
+            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_23();
             break;
-        case 26:
+        case 24:
             ChipLogProgress(chipTool,
-                " ***** Test Step 26 : TH writes UserCodeTemporaryDisableTime attribute value as between 1 and 255 on the DUT and "
+                " ***** Test Step 24 : TH writes UserCodeTemporaryDisableTime attribute value as between 1 and 255 on the DUT and "
                 "verify DUT responds with UNSUPPORTED_WRITE\n");
             if (ShouldSkip("!DRLK.S.A0031")) {
                 NextTest();
                 return;
             }
-            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_26();
+            err = TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_24();
             break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Clean the created user\n");
-            err = TestCleanTheCreatedUser_27();
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Clean the created user\n");
+            err = TestCleanTheCreatedUser_25();
             break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : Cleanup the created credential\n");
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Cleanup the created credential\n");
             if (ShouldSkip("DRLK.S.C26.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestCleanupTheCreatedCredential_28();
+            err = TestCleanupTheCreatedCredential_26();
             break;
         }
 
@@ -120849,27 +120997,21 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
             break;
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_WRITE));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         }
@@ -120885,7 +121027,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 29;
+    const uint16_t mTestCount = 27;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -121377,57 +121519,17 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_19()
+    CHIP_ERROR
+    TestWaitForPIXITDRLKUserCodeTemporaryDisableTimeTHThenSendsAnUnlockDoorCommandFromUser1ToTheDutWithTheValidPINCode_19()
     {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster
-            readAttributeUserCodeTemporaryDisableTimeWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"TH reads the UserCodeTemporaryDisableTime attribute from the DUT Error: %@", err);
-
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValue("UserCodeTemporaryDisableTime", actualValue, 10U));
-                }
-
-                NextTest();
-            }];
-
-        return CHIP_NO_ERROR;
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestWait15000ms_20()
-    {
-        chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 15000UL;
-        return WaitForMs("alpha", value);
-    }
-
-    CHIP_ERROR TestThSendsTheUnlockDoorCommandToTheDutWithValidPINCode_21()
-    {
-        MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
-        params.pinCode = [[NSData alloc] initWithBytes:"123456" length:6];
-        [cluster unlockDoorWithParams:params
-                    completionHandler:^(NSError * _Nullable err) {
-                        NSLog(@"TH sends the unlock Door command to the DUT with valid PINCode Error: %@", err);
-
-                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-                        NextTest();
-                    }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_22()
+    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -121449,7 +121551,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_23()
+    CHIP_ERROR TestThWritesWrongCodeEntryLimitAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -121475,7 +121577,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_24()
+    CHIP_ERROR TestThReadsTheUserCodeTemporaryDisableTimeAttributeFromTheDut_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -121494,7 +121596,7 @@ private:
     }
 
     CHIP_ERROR
-    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_25()
+    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyThatTheDutSendsSuccessResponse_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -121518,7 +121620,7 @@ private:
     }
 
     CHIP_ERROR
-    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_26()
+    TestThWritesUserCodeTemporaryDisableTimeAttributeValueAsBetween1And255OnTheDutAndVerifyDutRespondsWithUnsupportedWrite_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -121545,7 +121647,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanTheCreatedUser_27()
+    CHIP_ERROR TestCleanTheCreatedUser_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
@@ -121565,7 +121667,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestCleanupTheCreatedCredential_28()
+    CHIP_ERROR TestCleanupTheCreatedCredential_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterDoorLock * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpoint:1 queue:mCallbackQueue];
