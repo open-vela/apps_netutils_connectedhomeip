@@ -7564,7 +7564,7 @@ public:
 | Commands:                                                           |        |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
-| * DeviceList                                                        | 0x0000 |
+| * DeviceTypeList                                                    | 0x0000 |
 | * ServerList                                                        | 0x0001 |
 | * ClientList                                                        | 0x0002 |
 | * PartsList                                                         | 0x0003 |
@@ -7578,16 +7578,16 @@ public:
 \*----------------------------------------------------------------------------*/
 
 /*
- * Attribute DeviceList
+ * Attribute DeviceTypeList
  */
-class ReadDescriptorDeviceList : public ReadAttribute {
+class ReadDescriptorDeviceTypeList : public ReadAttribute {
 public:
-    ReadDescriptorDeviceList()
-        : ReadAttribute("device-list")
+    ReadDescriptorDeviceTypeList()
+        : ReadAttribute("device-type-list")
     {
     }
 
-    ~ReadDescriptorDeviceList() {}
+    ~ReadDescriptorDeviceTypeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -7597,10 +7597,10 @@ public:
         MTRBaseClusterDescriptor * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device
                                                                                      endpoint:endpointId
                                                                                         queue:callbackQueue];
-        [cluster readAttributeDeviceListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Descriptor.DeviceList response %@", [value description]);
+        [cluster readAttributeDeviceTypeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Descriptor.DeviceTypeList response %@", [value description]);
             if (error != nil) {
-                LogNSError("Descriptor DeviceList read Error", error);
+                LogNSError("Descriptor DeviceTypeList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -7608,14 +7608,14 @@ public:
     }
 };
 
-class SubscribeAttributeDescriptorDeviceList : public SubscribeAttribute {
+class SubscribeAttributeDescriptorDeviceTypeList : public SubscribeAttribute {
 public:
-    SubscribeAttributeDescriptorDeviceList()
-        : SubscribeAttribute("device-list")
+    SubscribeAttributeDescriptorDeviceTypeList()
+        : SubscribeAttribute("device-type-list")
     {
     }
 
-    ~SubscribeAttributeDescriptorDeviceList() {}
+    ~SubscribeAttributeDescriptorDeviceTypeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -7628,14 +7628,14 @@ public:
         params.keepPreviousSubscriptions
             = mKeepSubscriptions.HasValue() ? [NSNumber numberWithBool:mKeepSubscriptions.Value()] : nil;
         params.fabricFiltered = mFabricFiltered.HasValue() ? [NSNumber numberWithBool:mFabricFiltered.Value()] : nil;
-        [cluster subscribeAttributeDeviceListWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
+        [cluster subscribeAttributeDeviceTypeListWithMinInterval:[NSNumber numberWithUnsignedInt:mMinInterval]
             maxInterval:[NSNumber numberWithUnsignedInt:mMaxInterval]
             params:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"Descriptor.DeviceList response %@", [value description]);
+                NSLog(@"Descriptor.DeviceTypeList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93365,10 +93365,10 @@ void registerClusterDescriptor(Commands & commands)
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
         make_unique<ReadAttribute>(Id), //
-        make_unique<ReadDescriptorDeviceList>(), //
+        make_unique<ReadDescriptorDeviceTypeList>(), //
         make_unique<WriteAttribute>(Id), //
         make_unique<SubscribeAttribute>(Id), //
-        make_unique<SubscribeAttributeDescriptorDeviceList>(), //
+        make_unique<SubscribeAttributeDescriptorDeviceTypeList>(), //
         make_unique<ReadDescriptorServerList>(), //
         make_unique<SubscribeAttributeDescriptorServerList>(), //
         make_unique<ReadDescriptorClientList>(), //
