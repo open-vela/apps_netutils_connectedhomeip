@@ -18645,24 +18645,106 @@ public:
             err = TestThReadsAttributeListFromDut_5();
             break;
         case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads AcceptedCommandList from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads optional attribute(PHYRate) in AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePHYRateInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads optional attribute(FullDuplex) in AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeFullDuplexInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 8 : TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F00(PKTCNT)) in "
+                "AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF00PKTCNTInAttributeList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F00(PKTCNT)) in "
+                "AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF00PKTCNTInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F01(ERRCNT)) in "
+                "AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF01ERRCNTInAttributeList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F01(ERRCNT)) in "
+                "AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF01ERRCNTInAttributeList_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 12 : TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F01(ERRCNT)) in "
+                "AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF01ERRCNTInAttributeList_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads optional attribute(CarrierDetect) in AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeCarrierDetectInAttributeList_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads optional attribute(TimeSinceReset) in AttributeList\n");
+            if (ShouldSkip("DGETH.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeTimeSinceResetInAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip("DGETH.S.F00 || DGETH.S.F01")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsAcceptedCommandListFromDut_6();
+            err = TestThReadsAcceptedCommandListFromDut_15();
             break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads AcceptedCommandList from DUT\n");
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads AcceptedCommandList from DUT\n");
             if (ShouldSkip(" !DGETH.S.F00 && !DGETH.S.F01 ")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsAcceptedCommandListFromDut_7();
+            err = TestThReadsAcceptedCommandListFromDut_16();
             break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads GeneratedCommandList from DUT\n");
-            err = TestThReadsGeneratedCommandListFromDut_8();
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_17();
             break;
         }
 
@@ -18702,6 +18784,33 @@ public:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -18715,7 +18824,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 9;
+    const uint16_t mTestCount = 18;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -18840,7 +18949,206 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_6()
+    CHIP_ERROR TestThReadsOptionalAttributePHYRateInAttributeList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(PHYRate) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeFullDuplexInAttributeList_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(FullDuplex) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF00PKTCNTInAttributeList_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F00(PKTCNT)) in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF00PKTCNTInAttributeList_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F00(PKTCNT)) in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF01ERRCNTInAttributeList_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F01(ERRCNT)) in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF01ERRCNTInAttributeList_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F01(ERRCNT)) in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePacketRxCountAndFeatureDependentDGETHSF01ERRCNTInAttributeList_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(
+                @"TH reads optional attribute(PacketRxCount) and Feature dependent(DGETH.S.F01(ERRCNT)) in AttributeList Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeCarrierDetectInAttributeList_13()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(CarrierDetect) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeTimeSinceResetInAttributeList_14()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterEthernetNetworkDiagnostics * cluster =
+            [[MTRBaseClusterEthernetNetworkDiagnostics alloc] initWithDevice:device endpoint:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(TimeSinceReset) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterEthernetNetworkDiagnostics * cluster =
@@ -18861,7 +19169,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_7()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterEthernetNetworkDiagnostics * cluster =
@@ -18885,7 +19193,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_8()
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterEthernetNetworkDiagnostics * cluster =
@@ -21612,12 +21920,60 @@ public:
             err = TestReadTheGlobalAttributeAttributeList_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_4();
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read optional attribute(UpTime) in AttributeList\n");
+            if (ShouldSkip("DGGEN.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOptionalAttributeUpTimeInAttributeList_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_5();
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read optional attribute(TotalOperationalHours) in AttributeList\n");
+            if (ShouldSkip("DGGEN.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOptionalAttributeTotalOperationalHoursInAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read optional attribute(BootReason) in AttributeList\n");
+            if (ShouldSkip("DGGEN.S.A0004")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOptionalAttributeBootReasonInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read optional attribute(ActiveHardwareFaults) in AttributeList\n");
+            if (ShouldSkip("DGGEN.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOptionalAttributeActiveHardwareFaultsInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read optional attribute(ActiveRadioFaults) in AttributeList\n");
+            if (ShouldSkip("DGGEN.S.A0006")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOptionalAttributeActiveRadioFaultsInAttributeList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Read optional attribute(ActiveNetworkFaults) in AttributeList\n");
+            if (ShouldSkip("DGGEN.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestReadOptionalAttributeActiveNetworkFaultsInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_11();
             break;
         }
 
@@ -21648,6 +22004,24 @@ public:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -21661,7 +22035,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 6;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -21754,7 +22128,139 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_4()
+    CHIP_ERROR TestReadOptionalAttributeUpTimeInAttributeList_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:@(0)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute(UpTime) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeTotalOperationalHoursInAttributeList_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:@(0)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute(TotalOperationalHours) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeBootReasonInAttributeList_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:@(0)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute(BootReason) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeActiveHardwareFaultsInAttributeList_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:@(0)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute(ActiveHardwareFaults) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeActiveRadioFaultsInAttributeList_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:@(0)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute(ActiveRadioFaults) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadOptionalAttributeActiveNetworkFaultsInAttributeList_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                                                     endpoint:@(0)
+                                                                                                        queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read optional attribute(ActiveNetworkFaults) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
@@ -21776,7 +22282,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_5()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGeneralDiagnostics * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
@@ -22796,32 +23302,24 @@ public:
             err = TestThReadsImmediatelyIdentifyTimeAttributeFromDut_7();
             break;
         case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends IdentifyQuery command to DUT \n");
-            if (ShouldSkip("PICS_USER_PROMPT && I.S.C01.Rsp && I.S.C00.Tx")) {
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH writes a value of 0x000f (15s) to IdentifyTime attribute of DUT\n");
+            if (ShouldSkip("I.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsIdentifyQueryCommandToDut_8();
+            err = TestThWritesAValueOf0x000f15sToIdentifyTimeAttributeOfDut_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH writes a value of 0x000f (15s) to IdentifyTime attribute of DUT\n");
-            if (ShouldSkip("I.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThWritesAValueOf0x000f15sToIdentifyTimeAttributeOfDut_9();
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 5000ms\n");
+            err = TestWait5000ms_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 5000ms\n");
-            err = TestWait5000ms_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : After 5 seconds, the TH reads IdentifyTime attribute from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 10 : After 5 seconds, the TH reads IdentifyTime attribute from DUT\n");
             if (ShouldSkip("I.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_11();
+            err = TestAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_10();
             break;
         }
 
@@ -22867,9 +23365,6 @@ public:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -22883,7 +23378,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 12;
+    const uint16_t mTestCount = 11;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -22961,8 +23456,8 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("identifyTime", [value unsignedShortValue], 43U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("identifyTime", [value unsignedShortValue], 57U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("identifyTime", [value unsignedShortValue], 42U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("identifyTime", [value unsignedShortValue], 58U));
 
             NextTest();
         }];
@@ -23029,16 +23524,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsIdentifyQueryCommandToDut_8()
-    {
-        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
-        value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
-        value.expectedValue.Emplace();
-        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
-        return UserPrompt("alpha", value);
-    }
-
-    CHIP_ERROR TestThWritesAValueOf0x000f15sToIdentifyTimeAttributeOfDut_9()
+    CHIP_ERROR TestThWritesAValueOf0x000f15sToIdentifyTimeAttributeOfDut_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterIdentify * cluster = [[MTRBaseClusterIdentify alloc] initWithDevice:device
@@ -23060,14 +23546,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait5000ms_10()
+    CHIP_ERROR TestWait5000ms_9()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
         value.ms = 5000UL;
         return WaitForMs("alpha", value);
     }
 
-    CHIP_ERROR TestAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_11()
+    CHIP_ERROR TestAfter5SecondsTheThReadsIdentifyTimeAttributeFromDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterIdentify * cluster = [[MTRBaseClusterIdentify alloc] initWithDevice:device
@@ -24785,12 +25271,12 @@ public:
             break;
         case 16:
             ChipLogProgress(
-                chipTool, " ***** Test Step 16 : Read the Feature-dependent(LVL.S.F02) attribute in AcceptedCommandList\n");
+                chipTool, " ***** Test Step 16 : Read the Feature-dependent(LVL.S.F02) command in AcceptedCommandList\n");
             if (ShouldSkip("LVL.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheFeatureDependentLVLSF02AttributeInAcceptedCommandList_16();
+            err = TestReadTheFeatureDependentLVLSF02CommandInAcceptedCommandList_16();
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Read the global attribute: GeneratedCommandList\n");
@@ -25235,7 +25721,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheFeatureDependentLVLSF02AttributeInAcceptedCommandList_16()
+    CHIP_ERROR TestReadTheFeatureDependentLVLSF02CommandInAcceptedCommandList_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterLevelControl * cluster = [[MTRBaseClusterLevelControl alloc] initWithDevice:device
@@ -25244,7 +25730,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Read the Feature-dependent(LVL.S.F02) attribute in AcceptedCommandList Error: %@", err);
+            NSLog(@"Read the Feature-dependent(LVL.S.F02) command in AcceptedCommandList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -26076,11 +26562,6 @@ private:
             NSLog(@"Reads the Options attribute  Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("Options", actualValue, 0U));
-            }
 
             VerifyOrReturn(CheckConstraintType("options", "bitmap8", "bitmap8"));
             NextTest();
@@ -29281,10 +29762,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
-                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 254U));
+            if (value != nil) {
+
+                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 216U));
+                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
             }
 
             NextTest();
@@ -30992,12 +31473,12 @@ public:
             err = TestThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads the FeatureMap from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given LUNIT.S.F00(TEMP) ensure featuremap has the correct bit set\n");
             if (ShouldSkip("LUNIT.S.Afffc && LUNIT.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsTheFeatureMapFromDut_3();
+            err = TestGivenLunitsf00tempEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AttributeList from DUT\n");
@@ -31143,7 +31624,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheFeatureMapFromDut_3()
+    CHIP_ERROR TestGivenLunitsf00tempEnsureFeaturemapHasTheCorrectBitSet_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterUnitLocalization * cluster = [[MTRBaseClusterUnitLocalization alloc] initWithDevice:device
@@ -31152,14 +31633,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+            NSLog(@"Given LUNIT.S.F00(TEMP) ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
-            }
 
             VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
@@ -33167,7 +33643,7 @@ public:
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Given CHANNEL.S.CL) ensure featuremap has the correct bit set\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given CHANNEL.S.CL ensure featuremap has the correct bit set\n");
             if (ShouldSkip("CHANNEL.S.CL")) {
                 NextTest();
                 return;
@@ -33175,7 +33651,7 @@ public:
             err = TestGivenChannelsclEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Given CHANNEL.S.LI) ensure featuremap has the correct bit set\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given CHANNEL.S.LI ensure featuremap has the correct bit set\n");
             if (ShouldSkip("CHANNEL.S.LI")) {
                 NextTest();
                 return;
@@ -33237,11 +33713,19 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Read the global attribute: GeneratedCommandList\n");
-            if (ShouldSkip("CHANNEL.S.CL || CHANNEL.S.LI")) {
+            if (ShouldSkip("( !CHANNEL.S.CL && !CHANNEL.S.LI )")) {
                 NextTest();
                 return;
             }
             err = TestReadTheGlobalAttributeGeneratedCommandList_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read the global attribute: GeneratedCommandList\n");
+            if (ShouldSkip("CHANNEL.S.CL || CHANNEL.S.LI")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeGeneratedCommandList_13();
             break;
         }
 
@@ -33293,6 +33777,9 @@ public:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -33306,7 +33793,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 13;
+    const uint16_t mTestCount = 14;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -33373,7 +33860,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given CHANNEL.S.CL) ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given CHANNEL.S.CL ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -33391,7 +33878,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"Given CHANNEL.S.LI) ensure featuremap has the correct bit set Error: %@", err);
+            NSLog(@"Given CHANNEL.S.LI ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -33547,6 +34034,29 @@ private:
     }
 
     CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterChannel * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpoint:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: GeneratedCommandList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterChannel * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpoint:@(1) queue:mCallbackQueue];
@@ -36124,7 +36634,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH sends CEC Settings Keys(0x0A) to DUT\n");
-            if (ShouldSkip("KEYPADINPUT.S.LK")) {
+            if (ShouldSkip("KEYPADINPUT.S.LK && KEYPADINPUT.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -36132,7 +36642,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends CEC Home Keys(0x09) to DUT\n");
-            if (ShouldSkip("KEYPADINPUT.S.LK")) {
+            if (ShouldSkip("KEYPADINPUT.S.LK && KEYPADINPUT.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -62811,7 +63321,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads BeaconLostCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp && DGWIFI.S.A0005")) {
                 NextTest();
                 return;
             }
@@ -62819,7 +63329,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads BeaconRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp && DGWIFI.S.A0006")) {
                 NextTest();
                 return;
             }
@@ -62827,7 +63337,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads PacketMulticastRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp && DGWIFI.S.A0007")) {
                 NextTest();
                 return;
             }
@@ -62835,7 +63345,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Reads PacketMulticastTxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp && DGWIFI.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -62843,7 +63353,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads PacketUnicastRxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp && DGWIFI.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -62851,7 +63361,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Reads PacketUnicastTxCount attribute from DUT\n");
-            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp")) {
+            if (ShouldSkip("PICS_SKIP_SAMPLE_APP && DGWIFI.S.C00.Rsp && DGWIFI.S.A000a")) {
                 NextTest();
                 return;
             }
@@ -105053,64 +105563,77 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            if (ShouldSkip(" !DGSW.S.F00 ")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
-            err = TestThReadsAttributeListFromDut_3();
-            break;
-        case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads optional attribute(ThreadMetrics) in AttributeList\n");
-            if (ShouldSkip("DGSW.S.A0000")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeThreadMetricsInAttributeList_4();
-            break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads optional attribute(CurrentHeapFree) in AttributeList\n");
-            if (ShouldSkip("DGSW.S.A0001")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeCurrentHeapFreeInAttributeList_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads optional attribute(CurrentHeapUsed) in AttributeList\n");
-            if (ShouldSkip("DGSW.S.A0002")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeCurrentHeapUsedInAttributeList_6();
-            break;
-        case 7:
             ChipLogProgress(
-                chipTool, " ***** Test Step 7 : TH reads Feature dependent attribute(CurrentHeapHighWatermark) in AttributeList\n");
-            if (ShouldSkip("DGSW.S.F00 || DGSW.S.A0003")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads AcceptedCommandList from DUT\n");
+                chipTool, " ***** Test Step 3 : Given DGSW.S.F00(Watermarks) ensure featuremap has the correct bit set\n");
             if (ShouldSkip("DGSW.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsAcceptedCommandListFromDut_8();
+            err = TestGivenDGSWSF00WatermarksEnsureFeaturemapHasTheCorrectBitSet_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads optional attribute(ThreadMetrics) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeThreadMetricsInAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads optional attribute(CurrentHeapFree) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeCurrentHeapFreeInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads optional attribute(CurrentHeapUsed) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeCurrentHeapUsedInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 8 : TH reads Feature dependent attribute(CurrentHeapHighWatermark) in AttributeList\n");
+            if (ShouldSkip("DGSW.S.F00 || DGSW.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_8();
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads AcceptedCommandList from DUT\n");
-            if (ShouldSkip(" !DGSW.S.F00 ")) {
+            if (ShouldSkip("DGSW.S.F00")) {
                 NextTest();
                 return;
             }
             err = TestThReadsAcceptedCommandListFromDut_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads GeneratedCommandList from DUT\n");
-            err = TestThReadsGeneratedCommandListFromDut_10();
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads AcceptedCommandList from DUT\n");
+            if (ShouldSkip(" !DGSW.S.F00 ")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsAcceptedCommandListFromDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_11();
             break;
         }
 
@@ -105156,6 +105679,9 @@ public:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -105169,7 +105695,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 11;
+    const uint16_t mTestCount = 12;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -105221,17 +105747,39 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 1UL));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
 
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    CHIP_ERROR TestGivenDGSWSF00WatermarksEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
+                                                                                                       endpoint:@(0)
+                                                                                                          queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given DGSW.S.F00(Watermarks) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105257,7 +105805,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeThreadMetricsInAttributeList_4()
+    CHIP_ERROR TestThReadsOptionalAttributeThreadMetricsInAttributeList_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105279,7 +105827,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeCurrentHeapFreeInAttributeList_5()
+    CHIP_ERROR TestThReadsOptionalAttributeCurrentHeapFreeInAttributeList_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105301,7 +105849,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeCurrentHeapUsedInAttributeList_6()
+    CHIP_ERROR TestThReadsOptionalAttributeCurrentHeapUsedInAttributeList_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105323,7 +105871,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_7()
+    CHIP_ERROR TestThReadsFeatureDependentAttributeCurrentHeapHighWatermarkInAttributeList_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105345,7 +105893,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_8()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105367,7 +105915,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_9()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105392,7 +105940,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_10()
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterSoftwareDiagnostics * cluster = [[MTRBaseClusterSoftwareDiagnostics alloc] initWithDevice:device
@@ -105784,7 +106332,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Reads a list of ThreadMetrics struct attribute from DUT.\n");
-            if (ShouldSkip("DGSW.S.A0000")) {
+            if (ShouldSkip("DGSW.S.A0000 && DGSW.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -105792,7 +106340,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Reads CurrentHeapUsed attribute value from DUT\n");
-            if (ShouldSkip("DGSW.S.A0002")) {
+            if (ShouldSkip("DGSW.S.A0002 && DGSW.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -105800,7 +106348,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads CurrentHeapHighWaterMark attribute value from DUT\n");
-            if (ShouldSkip("DGSW.S.A0003")) {
+            if (ShouldSkip("DGSW.S.A0003 && DGSW.S.C00.Rsp")) {
                 NextTest();
                 return;
             }
@@ -129227,12 +129775,12 @@ public:
             err = TestThReadsTheFeatureMapFromDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads the FeatureMap(G.S.F00) from DUT\n");
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given G.S.F00 ensure featuremap has the correct bit set\n");
             if (ShouldSkip("G.S.F00")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsTheFeatureMapGSF00FromDut_3();
+            err = TestGivenGsf00EnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads AttributeList from DUT\n");
@@ -129351,14 +129899,14 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheFeatureMapGSF00FromDut_3()
+    CHIP_ERROR TestGivenGsf00EnsureFeaturemapHasTheCorrectBitSet_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
         MTRBaseClusterGroups * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpoint:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads the FeatureMap(G.S.F00) from DUT Error: %@", err);
+            NSLog(@"Given G.S.F00 ensure featuremap has the correct bit set Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
