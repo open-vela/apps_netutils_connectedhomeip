@@ -56506,14 +56506,15 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::Descriptor::Structs::DeviceType::DecodableType> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::Descriptor::Structs::DeviceTypeStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
-                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("deviceList", iter_0, 0));
-                    VerifyOrReturn(CheckValue("deviceList[0].type", iter_0.GetValue().type, 22UL));
-                    VerifyOrReturn(CheckValue("deviceList[0].revision", iter_0.GetValue().revision, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("deviceList", iter_0, 1));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("deviceTypeList", iter_0, 0));
+                    VerifyOrReturn(CheckValue("deviceTypeList[0].type", iter_0.GetValue().type, 22UL));
+                    VerifyOrReturn(CheckValue("deviceTypeList[0].revision", iter_0.GetValue().revision, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("deviceTypeList", iter_0, 1));
                 }
             }
             break;
@@ -56634,7 +56635,7 @@ private:
         }
         case 1: {
             LogStep(1, "Read attribute Device list");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::DeviceList::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Descriptor::Id, Descriptor::Attributes::DeviceTypeList::Id, true,
                                  chip::NullOptional);
         }
         case 2: {

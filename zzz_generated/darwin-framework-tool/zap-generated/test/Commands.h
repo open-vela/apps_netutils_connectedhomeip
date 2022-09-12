@@ -96018,16 +96018,16 @@ private:
                                                                                         queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeDeviceListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeDeviceTypeListWithCompletionHandler:^(NSArray * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute Device list Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("device list", [actualValue count], static_cast<uint32_t>(1)));
-                VerifyOrReturn(CheckValue("type", ((MTRDescriptorClusterDeviceType *) actualValue[0]).type, 22UL));
-                VerifyOrReturn(CheckValue("revision", ((MTRDescriptorClusterDeviceType *) actualValue[0]).revision, 1U));
+                VerifyOrReturn(CheckValue("DeviceTypeList", [actualValue count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("type", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).type, 22UL));
+                VerifyOrReturn(CheckValue("revision", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).revision, 1U));
             }
 
             NextTest();
@@ -96051,7 +96051,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("server list", [actualValue count], static_cast<uint32_t>(27)));
+                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(27)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 3UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 29UL));
@@ -96102,7 +96102,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("client list", [actualValue count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("ClientList", [actualValue count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 41UL));
             }
 
@@ -96127,7 +96127,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("parts list", [actualValue count], static_cast<uint32_t>(2)));
+                VerifyOrReturn(CheckValue("PartsList", [actualValue count], static_cast<uint32_t>(2)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 1U));
                 VerifyOrReturn(CheckValue("", actualValue[1], 2U));
             }
