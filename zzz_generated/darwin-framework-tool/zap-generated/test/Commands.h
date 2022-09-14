@@ -613,7 +613,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -953,7 +953,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1042,7 +1042,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1121,7 +1121,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1204,7 +1204,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1291,7 +1291,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1393,7 +1393,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1575,7 +1575,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -1761,7 +1761,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -2088,7 +2088,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeAclWithParams:params
                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                      NSLog(@"Verify Error: %@", err);
@@ -66806,10 +66806,9 @@ private:
 
         uint16_t minIntervalArgument = 4U;
         uint16_t maxIntervalArgument = 5U;
-        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
-        [cluster subscribeAttributeOperationalStatusWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
-            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
-            params:params
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
                     testSendClusterTest_TC_WNCV_3_1_7_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
@@ -67809,10 +67808,9 @@ private:
 
         uint16_t minIntervalArgument = 4U;
         uint16_t maxIntervalArgument = 5U;
-        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
-        [cluster subscribeAttributeOperationalStatusWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
-            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
-            params:params
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
                     testSendClusterTest_TC_WNCV_3_2_7_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
@@ -68615,10 +68613,9 @@ private:
 
         uint16_t minIntervalArgument = 4U;
         uint16_t maxIntervalArgument = 5U;
-        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
-        [cluster subscribeAttributeOperationalStatusWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
-            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
-            params:params
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
                     testSendClusterTest_TC_WNCV_3_3_7_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
@@ -88764,10 +88761,9 @@ private:
 
         uint16_t minIntervalArgument = 2U;
         uint16_t maxIntervalArgument = 5U;
-        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
-        [cluster subscribeAttributeListInt8uWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
-            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
-            params:params
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        [cluster subscribeAttributeListInt8uWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
                     testSendClusterTestCluster_375_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
@@ -97597,10 +97593,9 @@ private:
 
         uint16_t minIntervalArgument = 2U;
         uint16_t maxIntervalArgument = 5U;
-        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
-        [cluster subscribeAttributeFabricsWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
-            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
-            params:params
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        [cluster subscribeAttributeFabricsWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(testSendClusterTestFabricRemovalWhileSubscribed_6_WaitForReport_Fulfilled,
                     SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
@@ -98956,7 +98951,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeFabricsWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Read fabric list before setting label Error: %@", err);
@@ -99019,7 +99014,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeFabricsWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Read fabric list after setting label Error: %@", err);
@@ -100765,7 +100760,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeBindingWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Read empty binding table Error: %@", err);
@@ -100865,7 +100860,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeBindingWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Read binding table (endpoint 1) Error: %@", err);
@@ -100936,7 +100931,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeBindingWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Read binding table (endpoint 0) Error: %@", err);
@@ -100967,7 +100962,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeBindingWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Verify endpoint 1 not changed Error: %@", err);
@@ -101673,7 +101668,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster readAttributeFabricsWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Query fabrics list Error: %@", err);
@@ -105369,7 +105364,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:false];
+        params.fabricFiltered = false;
         [cluster readAttributeFabricsWithParams:params
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
                                          NSLog(@"Check that we just have the one fabric and did not add a new one Error: %@", err);
@@ -106717,10 +106712,9 @@ private:
 
         uint16_t minIntervalArgument = 2U;
         uint16_t maxIntervalArgument = 5U;
-        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] init];
-        [cluster subscribeAttributeOnOffWithMinInterval:[NSNumber numberWithUnsignedInt:minIntervalArgument]
-            maxInterval:[NSNumber numberWithUnsignedInt:maxIntervalArgument]
-            params:params
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        [cluster subscribeAttributeOnOffWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
                     testSendClusterTestSubscribe_OnOff_2_WaitForReport_Fulfilled, SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
@@ -129436,7 +129430,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster
             readAttributeGroupKeyMapWithParams:params
                                     completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -129551,7 +129545,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster
             readAttributeGroupTableWithParams:params
                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -129723,7 +129717,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster
             readAttributeGroupTableWithParams:params
                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -129776,7 +129770,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         MTRReadParams * params = [[MTRReadParams alloc] init];
-        params.fabricFiltered = [NSNumber numberWithBool:true];
+        params.fabricFiltered = true;
         [cluster
             readAttributeGroupTableWithParams:params
                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
