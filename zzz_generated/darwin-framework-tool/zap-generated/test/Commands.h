@@ -66428,7 +66428,7 @@ public:
         case 20:
             ChipLogProgress(
                 chipTool, " ***** Test Step 20 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -66437,7 +66437,7 @@ public:
         case 21:
             ChipLogProgress(chipTool,
                 " ***** Test Step 21 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008 && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -66446,7 +66446,7 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -66455,7 +66455,7 @@ public:
         case 23:
             ChipLogProgress(chipTool,
                 " ***** Test Step 23 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009 && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -66490,7 +66490,7 @@ public:
         case 28:
             ChipLogProgress(
                 chipTool, " ***** Test Step 28 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -66499,7 +66499,7 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }
@@ -67430,7 +67430,7 @@ public:
         case 20:
             ChipLogProgress(
                 chipTool, " ***** Test Step 20 : 3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e")) {
                 NextTest();
                 return;
             }
@@ -67439,7 +67439,7 @@ public:
         case 21:
             ChipLogProgress(chipTool,
                 " ***** Test Step 21 : 3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008 && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -67448,7 +67448,7 @@ public:
         case 22:
             ChipLogProgress(
                 chipTool, " ***** Test Step 22 : 3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f")) {
                 NextTest();
                 return;
             }
@@ -67457,7 +67457,7 @@ public:
         case 23:
             ChipLogProgress(chipTool,
                 " ***** Test Step 23 : 3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009 && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009")) {
                 NextTest();
                 return;
             }
@@ -67492,7 +67492,7 @@ public:
         case 28:
             ChipLogProgress(
                 chipTool, " ***** Test Step 28 : 5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b")) {
                 NextTest();
                 return;
             }
@@ -67501,7 +67501,7 @@ public:
         case 29:
             ChipLogProgress(
                 chipTool, " ***** Test Step 29 : 5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT\n");
-            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c && PICS_SKIP_SAMPLE_APP")) {
+            if (ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c")) {
                 NextTest();
                 return;
             }

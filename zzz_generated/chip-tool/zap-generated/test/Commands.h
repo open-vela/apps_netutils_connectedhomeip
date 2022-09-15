@@ -41325,29 +41325,25 @@ private:
         }
         case 19: {
             LogStep(19, "3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionLiftPercent100ths::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008 && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionLiftPercentage::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21, "3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionTiltPercent100ths::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22, "3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009 && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionTiltPercentage::Id, true, chip::NullOptional);
         }
@@ -41383,15 +41379,13 @@ private:
         }
         case 27: {
             LogStep(27, "5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::TargetPositionLiftPercent100ths::Id, true, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::TargetPositionTiltPercent100ths::Id, true, chip::NullOptional);
         }
@@ -41801,29 +41795,25 @@ private:
         }
         case 19: {
             LogStep(19, "3b: If (PA & LF) TH reads CurrentPositionLiftPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionLiftPercent100ths::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "3c: If (PA & LF) TH reads CurrentPositionLiftPercentage optional attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008 && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionLiftPercentage::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21, "3d: If (PA & TL) TH reads CurrentPositionTiltPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionTiltPercent100ths::Id, true, chip::NullOptional);
         }
         case 22: {
             LogStep(22, "3e: If (PA & LF) TH reads CurrentPositionTiltPercentage optional attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009 && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::CurrentPositionTiltPercentage::Id, true, chip::NullOptional);
         }
@@ -41859,15 +41849,13 @@ private:
         }
         case 27: {
             LogStep(27, "5b: If (PA & LF) TH reads TargetPositionLiftPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F00 && WNCV.S.F02 && WNCV.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::TargetPositionLiftPercent100ths::Id, true, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "5c: If (PA & TL) TH reads TargetPositionTiltPercent100ths attribute from DUT");
-            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c && PICS_SKIP_SAMPLE_APP"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("WNCV.S.F01 && WNCV.S.F04 && WNCV.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), WindowCovering::Id,
                                  WindowCovering::Attributes::TargetPositionTiltPercent100ths::Id, true, chip::NullOptional);
         }
