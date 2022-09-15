@@ -17,11 +17,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MTRAttributeCacheContainer.h"
+#import "MTRClusterStateCacheContainer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTRAttributeCacheContainer (XPC)
+@interface MTRClusterStateCacheContainer (XPC)
 - (void)setXPCConnection:(MTRDeviceControllerXPCConnection *)xpcConnection
             controllerID:(id<NSCopying>)controllerID
                 deviceID:(NSNumber *)deviceID;
