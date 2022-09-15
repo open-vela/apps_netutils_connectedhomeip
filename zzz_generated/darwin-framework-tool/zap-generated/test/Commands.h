@@ -29249,8 +29249,8 @@ public:
             err = TestThReadsCurrentLevelAttributeFromDut_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : Wait 13s\n");
-            err = TestWait13s_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Wait 19s\n");
+            err = TestWait19s_22();
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : TH reads CurrentLevel attribute from DUT\n");
@@ -29818,10 +29818,10 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestWait13s_22()
+    CHIP_ERROR TestWait19s_22()
     {
         chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
-        value.ms = 13000UL;
+        value.ms = 19000UL;
         return WaitForMs("alpha", value);
     }
 
@@ -29838,10 +29838,10 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            if (value != nil) {
-
-                VerifyOrReturn(CheckConstraintMinValue<uint8_t>("currentLevel", [value unsignedCharValue], 216U));
-                VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("currentLevel", [value unsignedCharValue], 254U));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentLevel", actualValue));
+                VerifyOrReturn(CheckValue("CurrentLevel", actualValue, 254U));
             }
 
             NextTest();
