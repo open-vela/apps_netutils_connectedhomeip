@@ -85853,6 +85853,106 @@ using chip::SessionHandle;
     });
 }
 
+- (void)readAttributeWriteOnlyInt8uWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    new MTRInt8uAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
+            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
+            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
+        });
+}
+
+- (void)writeAttributeWriteOnlyInt8uWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
+{
+    [self writeAttributeWriteOnlyInt8uWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+}
+- (void)writeAttributeWriteOnlyInt8uWithValue:(NSNumber * _Nonnull)value
+                                       params:(MTRWriteParams * _Nullable)params
+                                   completion:(MTRStatusCompletion)completion
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    value = [value copy];
+
+    new MTRDefaultSuccessCallbackBridge(
+        self.callbackQueue, self.device,
+        ^(id _Nullable ignored, NSError * _Nullable error) {
+            completion(error);
+        },
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
+            chip::Optional<uint16_t> timedWriteTimeout;
+            if (params != nil) {
+                if (params.timedWriteTimeout != nil) {
+                    timedWriteTimeout.SetValue(params.timedWriteTimeout.unsignedShortValue);
+                }
+            }
+
+            ListFreer listFreer;
+            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            TypeInfo::Type cppValue;
+            cppValue = value.unsignedCharValue;
+            auto successFn = Callback<DefaultSuccessCallbackType>::FromCancelable(success);
+            auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
+
+            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            return cppCluster.WriteAttribute<TypeInfo>(
+                cppValue, successFn->mContext, successFn->mCall, failureFn->mCall, timedWriteTimeout);
+        });
+}
+
+- (void)subscribeAttributeWriteOnlyInt8uWithParams:(MTRSubscribeParams * _Nonnull)params
+                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+{
+    // Make a copy of params before we go async.
+    params = [params copy];
+    new MTRInt8uAttributeCallbackSubscriptionBridge(
+        self.callbackQueue, self.device, reportHandler,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
+            if (!params.autoResubscribe) {
+                // We don't support disabling auto-resubscribe.
+                return CHIP_ERROR_INVALID_ARGUMENT;
+            }
+            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
+
+            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
+                [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
+                MTRInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.fabricFiltered,
+                params.keepPreviousSubscriptions);
+        },
+        subscriptionEstablished);
+}
+
++ (void)readAttributeWriteOnlyInt8uWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                                endpoint:(NSNumber *)endpoint
+                                                   queue:(dispatch_queue_t)queue
+                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+{
+    new MTRInt8uAttributeCallbackBridge(queue, completion, ^(Cancelable * success, Cancelable * failure) {
+        if (clusterStateCacheContainer.cppClusterStateCache) {
+            chip::app::ConcreteAttributePath path;
+            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
+            path.mClusterId = TypeInfo::GetClusterId();
+            path.mAttributeId = TypeInfo::GetAttributeId();
+            TypeInfo::DecodableType value;
+            CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
+            auto successFn = Callback<Int8uAttributeCallback>::FromCancelable(success);
+            if (err == CHIP_NO_ERROR) {
+                successFn->mCall(successFn->mContext, value);
+            }
+            return err;
+        }
+        return CHIP_ERROR_NOT_FOUND;
+    });
+}
+
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     new MTRTestClusterGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
