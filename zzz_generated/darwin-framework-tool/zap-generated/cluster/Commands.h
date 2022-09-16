@@ -82544,6 +82544,7 @@ public:
 | * NullableRangeRestrictedInt8s                                      | 0x4027 |
 | * NullableRangeRestrictedInt16u                                     | 0x4028 |
 | * NullableRangeRestrictedInt16s                                     | 0x4029 |
+| * WriteOnlyInt8u                                                    | 0x402A |
 | * GeneratedCommandList                                              | 0xFFF8 |
 | * AcceptedCommandList                                               | 0xFFF9 |
 | * AttributeList                                                     | 0xFFFB |
@@ -93111,6 +93112,113 @@ public:
 };
 
 /*
+ * Attribute WriteOnlyInt8u
+ */
+class ReadTestClusterWriteOnlyInt8u : public ReadAttribute {
+public:
+    ReadTestClusterWriteOnlyInt8u()
+        : ReadAttribute("write-only-int8u")
+    {
+    }
+
+    ~ReadTestClusterWriteOnlyInt8u() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000402A) on endpoint %u", endpointId);
+
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                         endpoint:@(endpointId)
+                                                                            queue:callbackQueue];
+        [cluster readAttributeWriteOnlyInt8uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"TestCluster.WriteOnlyInt8u response %@", [value description]);
+            if (error != nil) {
+                LogNSError("TestCluster WriteOnlyInt8u read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
+        return CHIP_NO_ERROR;
+    }
+};
+
+class WriteTestClusterWriteOnlyInt8u : public WriteAttribute {
+public:
+    WriteTestClusterWriteOnlyInt8u()
+        : WriteAttribute("write-only-int8u")
+    {
+        AddArgument("attr-name", "write-only-int8u");
+        AddArgument("attr-value", 0, UINT8_MAX, &mValue);
+        WriteAttribute::AddArguments();
+    }
+
+    ~WriteTestClusterWriteOnlyInt8u() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000402A) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                         endpoint:@(endpointId)
+                                                                            queue:callbackQueue];
+        __auto_type * params = [[MTRWriteParams alloc] init];
+        params.timedWriteTimeout
+            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
+        params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
+        NSNumber * _Nonnull value = [NSNumber numberWithUnsignedChar:mValue];
+
+        [cluster writeAttributeWriteOnlyInt8uWithValue:value
+                                                params:params
+                                            completion:^(NSError * _Nullable error) {
+                                                if (error != nil) {
+                                                    LogNSError("TestCluster WriteOnlyInt8u write Error", error);
+                                                }
+                                                SetCommandExitStatus(error);
+                                            }];
+        return CHIP_NO_ERROR;
+    }
+
+private:
+    uint8_t mValue;
+};
+
+class SubscribeAttributeTestClusterWriteOnlyInt8u : public SubscribeAttribute {
+public:
+    SubscribeAttributeTestClusterWriteOnlyInt8u()
+        : SubscribeAttribute("write-only-int8u")
+    {
+    }
+
+    ~SubscribeAttributeTestClusterWriteOnlyInt8u() {}
+
+    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
+    {
+        ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000402A) on endpoint %u", endpointId);
+        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
+        __auto_type * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+                                                                         endpoint:@(endpointId)
+                                                                            queue:callbackQueue];
+        __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
+        if (mKeepSubscriptions.HasValue()) {
+            params.keepPreviousSubscriptions = mKeepSubscriptions.Value();
+        }
+        if (mFabricFiltered.HasValue()) {
+            params.fabricFiltered = mFabricFiltered.Value();
+        }
+        [cluster subscribeAttributeWriteOnlyInt8uWithParams:params
+            subscriptionEstablished:^() {
+                mSubscriptionEstablished = YES;
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"TestCluster.WriteOnlyInt8u response %@", [value description]);
+                SetCommandExitStatus(error);
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+/*
  * Attribute GeneratedCommandList
  */
 class ReadTestClusterGeneratedCommandList : public ReadAttribute {
@@ -96991,6 +97099,9 @@ void registerClusterTestCluster(Commands & commands)
         make_unique<ReadTestClusterNullableRangeRestrictedInt16s>(), //
         make_unique<WriteTestClusterNullableRangeRestrictedInt16s>(), //
         make_unique<SubscribeAttributeTestClusterNullableRangeRestrictedInt16s>(), //
+        make_unique<ReadTestClusterWriteOnlyInt8u>(), //
+        make_unique<WriteTestClusterWriteOnlyInt8u>(), //
+        make_unique<SubscribeAttributeTestClusterWriteOnlyInt8u>(), //
         make_unique<ReadTestClusterGeneratedCommandList>(), //
         make_unique<SubscribeAttributeTestClusterGeneratedCommandList>(), //
         make_unique<ReadTestClusterAcceptedCommandList>(), //
