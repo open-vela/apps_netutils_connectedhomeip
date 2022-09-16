@@ -7722,14 +7722,14 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)readAttributeAclWithParams:(MTRReadParams * _Nullable)params
+- (void)readAttributeACLWithParams:(MTRReadParams * _Nullable)params
                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 { // Make a copy of params before we go async.
     params = [params copy];
-    new MTRAccessControlAclListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTRAccessControlACLListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
-            auto successFn = Callback<AccessControlAclListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<AccessControlACLListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::AccessControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(
@@ -7737,11 +7737,11 @@ using chip::SessionHandle;
         });
 }
 
-- (void)writeAttributeAclWithValue:(NSArray * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributeACLWithValue:(NSArray * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeAclWithValue:(NSArray * _Nonnull) value params:nil completion:completion];
+    [self writeAttributeACLWithValue:(NSArray * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributeAclWithValue:(NSArray * _Nonnull)value
+- (void)writeAttributeACLWithValue:(NSArray * _Nonnull)value
                             params:(MTRWriteParams * _Nullable)params
                         completion:(MTRStatusCompletion)completion
 {
@@ -7873,13 +7873,13 @@ using chip::SessionHandle;
         });
 }
 
-- (void)subscribeAttributeAclWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributeACLWithParams:(MTRSubscribeParams * _Nonnull)params
                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                           reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTRAccessControlAclListAttributeCallbackSubscriptionBridge(
+    new MTRAccessControlACLListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -7887,24 +7887,24 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
-            auto successFn = Callback<AccessControlAclListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<AccessControlACLListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::AccessControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRAccessControlAclListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.fabricFiltered,
+                MTRAccessControlACLListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.fabricFiltered,
                 params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
 }
 
-+ (void)readAttributeAclWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributeACLWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                      endpoint:(NSNumber *)endpoint
                                         queue:(dispatch_queue_t)queue
                                    completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRAccessControlAclListAttributeCallbackBridge(queue, completion, ^(Cancelable * success, Cancelable * failure) {
+    new MTRAccessControlACLListAttributeCallbackBridge(queue, completion, ^(Cancelable * success, Cancelable * failure) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
@@ -7913,7 +7913,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<AccessControlAclListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<AccessControlACLListAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
@@ -11195,7 +11195,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterOtaSoftwareUpdateProvider
+@implementation MTRBaseClusterOTASoftwareUpdateProvider
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(NSNumber *)endpoint queue:(dispatch_queue_t)queue
 {
@@ -11210,13 +11210,13 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)queryImageWithParams:(MTROtaSoftwareUpdateProviderClusterQueryImageParams *)params
-                  completion:(void (^)(MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data,
+- (void)queryImageWithParams:(MTROTASoftwareUpdateProviderClusterQueryImageParams *)params
+                  completion:(void (^)(MTROTASoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data,
                                  NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateProviderClusterQueryImageResponseCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateProviderClusterQueryImageResponseCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
@@ -11269,20 +11269,20 @@ using chip::SessionHandle;
                 definedValue_0 = [self asByteSpan:params.metadataForProvider];
             }
 
-            auto successFn = Callback<OtaSoftwareUpdateProviderClusterQueryImageResponseCallbackType>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderClusterQueryImageResponseCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)applyUpdateRequestWithParams:(MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams *)params
-                          completion:(void (^)(MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data,
+- (void)applyUpdateRequestWithParams:(MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams *)params
+                          completion:(void (^)(MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data,
                                          NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
@@ -11295,14 +11295,14 @@ using chip::SessionHandle;
             request.updateToken = [self asByteSpan:params.updateToken];
             request.newVersion = params.newVersion.unsignedIntValue;
 
-            auto successFn = Callback<OtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackType>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackType>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, successFn->mContext, successFn->mCall, failureFn->mCall, timedInvokeTimeoutMs);
         });
 }
 
-- (void)notifyUpdateAppliedWithParams:(MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams *)params
+- (void)notifyUpdateAppliedWithParams:(MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams *)params
                            completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -11333,10 +11333,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateProvider::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -11350,7 +11350,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -11358,13 +11358,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateProvider::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 nil, params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -11376,7 +11376,7 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -11387,7 +11387,7 @@ using chip::SessionHandle;
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
                 auto successFn
-                    = Callback<OtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+                    = Callback<OTASoftwareUpdateProviderGeneratedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -11399,10 +11399,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -11416,7 +11416,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -11424,13 +11424,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 nil, params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -11442,7 +11442,7 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -11453,7 +11453,7 @@ using chip::SessionHandle;
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
                 auto successFn
-                    = Callback<OtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+                    = Callback<OTASoftwareUpdateProviderAcceptedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -11465,10 +11465,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateProviderAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -11481,7 +11481,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -11489,13 +11489,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateProviderAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateProviderAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -11506,7 +11506,7 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -11516,7 +11516,7 @@ using chip::SessionHandle;
                 path.mAttributeId = TypeInfo::GetAttributeId();
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<OtaSoftwareUpdateProviderAttributeListListAttributeCallback>::FromCancelable(success);
+                auto successFn = Callback<OTASoftwareUpdateProviderAttributeListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -11653,7 +11653,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterOtaSoftwareUpdateRequestor
+@implementation MTRBaseClusterOTASoftwareUpdateRequestor
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(NSNumber *)endpoint queue:(dispatch_queue_t)queue
 {
@@ -11668,7 +11668,7 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)announceOtaProviderWithParams:(MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params
+- (void)announceOtaProviderWithParams:(MTROTASoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params
                            completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -11708,10 +11708,10 @@ using chip::SessionHandle;
                                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 { // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(
@@ -11757,11 +11757,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTROtaSoftwareUpdateRequestorClusterProviderLocation class]]) {
+                        if (![value[i_0] isKindOfClass:[MTROTASoftwareUpdateRequestorClusterProviderLocation class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTROtaSoftwareUpdateRequestorClusterProviderLocation *) value[i_0];
+                        auto element_0 = (MTROTASoftwareUpdateRequestorClusterProviderLocation *) value[i_0];
                         listHolder_0->mList[i_0].providerNodeID = element_0.providerNodeID.unsignedLongLongValue;
                         listHolder_0->mList[i_0].endpoint = element_0.endpoint.unsignedShortValue;
                         listHolder_0->mList[i_0].fabricIndex = element_0.fabricIndex.unsignedCharValue;
@@ -11787,7 +11787,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -11795,13 +11795,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 nil, params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -11813,7 +11813,7 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -11824,7 +11824,7 @@ using chip::SessionHandle;
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
                 auto successFn
-                    = Callback<OtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback>::FromCancelable(success);
+                    = Callback<OTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -11898,11 +11898,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeUpdateStateWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
             auto successFn
-                = Callback<OtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback>::FromCancelable(success);
+                = Callback<OTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -11915,7 +11915,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -11924,13 +11924,13 @@ using chip::SessionHandle;
             }
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
             auto successFn
-                = Callback<OtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback>::FromCancelable(success);
+                = Callback<OTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge::
+                MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge::
                     OnSubscriptionEstablished,
                 nil, params.fabricFiltered, params.keepPreviousSubscriptions);
         },
@@ -11942,7 +11942,7 @@ using chip::SessionHandle;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(
+    new MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -11953,7 +11953,7 @@ using chip::SessionHandle;
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
                 auto successFn
-                    = Callback<OtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback>::FromCancelable(success);
+                    = Callback<OTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -12029,10 +12029,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -12046,7 +12046,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -12054,13 +12054,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 nil, params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -12072,7 +12072,7 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -12083,7 +12083,7 @@ using chip::SessionHandle;
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
                 auto successFn
-                    = Callback<OtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+                    = Callback<OTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -12095,10 +12095,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -12112,7 +12112,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -12120,13 +12120,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 nil, params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -12138,7 +12138,7 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -12149,7 +12149,7 @@ using chip::SessionHandle;
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
                 auto successFn
-                    = Callback<OtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+                    = Callback<OTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -12161,10 +12161,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -12177,7 +12177,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge(
+    new MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -12185,13 +12185,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<OtaSoftwareUpdateRequestorAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<OTASoftwareUpdateRequestorAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -12202,7 +12202,7 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackBridge(
+    new MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -12212,7 +12212,7 @@ using chip::SessionHandle;
                 path.mAttributeId = TypeInfo::GetAttributeId();
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<OtaSoftwareUpdateRequestorAttributeListListAttributeCallback>::FromCancelable(success);
+                auto successFn = Callback<OTASoftwareUpdateRequestorAttributeListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -58704,7 +58704,7 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributePirOccupiedToUnoccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
+- (void)readAttributePIROccupiedToUnoccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
                                                                     NSError * _Nullable error))completion
 {
     new MTRInt16uAttributeCallbackBridge(self.callbackQueue, self.device, completion,
@@ -58717,11 +58717,11 @@ using chip::SessionHandle;
         });
 }
 
-- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+    [self writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                                      params:(MTRWriteParams * _Nullable)params
                                                  completion:(MTRStatusCompletion)completion
 {
@@ -58755,7 +58755,7 @@ using chip::SessionHandle;
         });
 }
 
-- (void)subscribeAttributePirOccupiedToUnoccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributePIROccupiedToUnoccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
                                          subscriptionEstablished:
                                              (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                                    reportHandler:(void (^)(NSNumber * _Nullable value,
@@ -58783,7 +58783,7 @@ using chip::SessionHandle;
         subscriptionEstablished);
 }
 
-+ (void)readAttributePirOccupiedToUnoccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributePIROccupiedToUnoccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                               endpoint:(NSNumber *)endpoint
                                                                  queue:(dispatch_queue_t)queue
                                                             completion:(void (^)(NSNumber * _Nullable value,
@@ -58808,7 +58808,7 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributePirUnoccupiedToOccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
+- (void)readAttributePIRUnoccupiedToOccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
                                                                     NSError * _Nullable error))completion
 {
     new MTRInt16uAttributeCallbackBridge(self.callbackQueue, self.device, completion,
@@ -58821,11 +58821,11 @@ using chip::SessionHandle;
         });
 }
 
-- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributePIRUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+    [self writeAttributePIRUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIRUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                                      params:(MTRWriteParams * _Nullable)params
                                                  completion:(MTRStatusCompletion)completion
 {
@@ -58859,7 +58859,7 @@ using chip::SessionHandle;
         });
 }
 
-- (void)subscribeAttributePirUnoccupiedToOccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributePIRUnoccupiedToOccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
                                          subscriptionEstablished:
                                              (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                                    reportHandler:(void (^)(NSNumber * _Nullable value,
@@ -58887,7 +58887,7 @@ using chip::SessionHandle;
         subscriptionEstablished);
 }
 
-+ (void)readAttributePirUnoccupiedToOccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributePIRUnoccupiedToOccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                               endpoint:(NSNumber *)endpoint
                                                                  queue:(dispatch_queue_t)queue
                                                             completion:(void (^)(NSNumber * _Nullable value,
@@ -58912,7 +58912,7 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributePirUnoccupiedToOccupiedThresholdWithCompletion:(void (^)(NSNumber * _Nullable value,
+- (void)readAttributePIRUnoccupiedToOccupiedThresholdWithCompletion:(void (^)(NSNumber * _Nullable value,
                                                                         NSError * _Nullable error))completion
 {
     new MTRInt8uAttributeCallbackBridge(self.callbackQueue, self.device, completion,
@@ -58925,12 +58925,12 @@ using chip::SessionHandle;
         });
 }
 
-- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
                                                      completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+    [self writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
                                                          params:(MTRWriteParams * _Nullable)params
                                                      completion:(MTRStatusCompletion)completion
 {
@@ -58964,7 +58964,7 @@ using chip::SessionHandle;
         });
 }
 
-- (void)subscribeAttributePirUnoccupiedToOccupiedThresholdWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributePIRUnoccupiedToOccupiedThresholdWithParams:(MTRSubscribeParams * _Nonnull)params
                                              subscriptionEstablished:
                                                  (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                                        reportHandler:(void (^)(NSNumber * _Nullable value,
@@ -58992,7 +58992,7 @@ using chip::SessionHandle;
         subscriptionEstablished);
 }
 
-+ (void)readAttributePirUnoccupiedToOccupiedThresholdWithClusterStateCache:
++ (void)readAttributePIRUnoccupiedToOccupiedThresholdWithClusterStateCache:
             (MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                                   endpoint:(NSNumber *)endpoint
                                                                      queue:(dispatch_queue_t)queue
@@ -59982,7 +59982,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterWakeOnLan
+@implementation MTRBaseClusterWakeOnLAN
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpoint:(NSNumber *)endpoint queue:(dispatch_queue_t)queue
 {
@@ -60061,10 +60061,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRWakeOnLanGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTRWakeOnLANGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WakeOnLan::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<WakeOnLanGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WakeOnLanCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -60078,7 +60078,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTRWakeOnLanGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTRWakeOnLANGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -60086,13 +60086,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WakeOnLan::Attributes::GeneratedCommandList::TypeInfo;
-            auto successFn = Callback<WakeOnLanGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANGeneratedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WakeOnLanCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRWakeOnLanGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRWakeOnLANGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -60104,7 +60104,7 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRWakeOnLanGeneratedCommandListListAttributeCallbackBridge(
+    new MTRWakeOnLANGeneratedCommandListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -60114,7 +60114,7 @@ using chip::SessionHandle;
                 path.mAttributeId = TypeInfo::GetAttributeId();
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<WakeOnLanGeneratedCommandListListAttributeCallback>::FromCancelable(success);
+                auto successFn = Callback<WakeOnLANGeneratedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -60126,10 +60126,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRWakeOnLanAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTRWakeOnLANAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WakeOnLan::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<WakeOnLanAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WakeOnLanCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -60143,7 +60143,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTRWakeOnLanAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+    new MTRWakeOnLANAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -60151,13 +60151,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WakeOnLan::Attributes::AcceptedCommandList::TypeInfo;
-            auto successFn = Callback<WakeOnLanAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANAcceptedCommandListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WakeOnLanCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRWakeOnLanAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRWakeOnLANAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -60169,7 +60169,7 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRWakeOnLanAcceptedCommandListListAttributeCallbackBridge(
+    new MTRWakeOnLANAcceptedCommandListListAttributeCallbackBridge(
         queue, completion, ^(Cancelable * success, Cancelable * failure) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
@@ -60179,7 +60179,7 @@ using chip::SessionHandle;
                 path.mAttributeId = TypeInfo::GetAttributeId();
                 TypeInfo::DecodableType value;
                 CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-                auto successFn = Callback<WakeOnLanAcceptedCommandListListAttributeCallback>::FromCancelable(success);
+                auto successFn = Callback<WakeOnLANAcceptedCommandListListAttributeCallback>::FromCancelable(success);
                 if (err == CHIP_NO_ERROR) {
                     successFn->mCall(successFn->mContext, value);
                 }
@@ -60191,10 +60191,10 @@ using chip::SessionHandle;
 
 - (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRWakeOnLanAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
+    new MTRWakeOnLANAttributeListListAttributeCallbackBridge(self.callbackQueue, self.device, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             using TypeInfo = WakeOnLan::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<WakeOnLanAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
             chip::Controller::WakeOnLanCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall);
@@ -60207,7 +60207,7 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    new MTRWakeOnLanAttributeListListAttributeCallbackSubscriptionBridge(
+    new MTRWakeOnLANAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, self.device, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Cancelable * success, Cancelable * failure) {
             if (!params.autoResubscribe) {
@@ -60215,13 +60215,13 @@ using chip::SessionHandle;
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
             using TypeInfo = WakeOnLan::Attributes::AttributeList::TypeInfo;
-            auto successFn = Callback<WakeOnLanAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANAttributeListListAttributeCallback>::FromCancelable(success);
             auto failureFn = Callback<DefaultFailureCallbackType>::FromCancelable(failure);
 
             chip::Controller::WakeOnLanCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.SubscribeAttribute<TypeInfo>(successFn->mContext, successFn->mCall, failureFn->mCall,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRWakeOnLanAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRWakeOnLANAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.fabricFiltered, params.keepPreviousSubscriptions);
         },
         subscriptionEstablished);
@@ -60232,7 +60232,7 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    new MTRWakeOnLanAttributeListListAttributeCallbackBridge(queue, completion, ^(Cancelable * success, Cancelable * failure) {
+    new MTRWakeOnLANAttributeListListAttributeCallbackBridge(queue, completion, ^(Cancelable * success, Cancelable * failure) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WakeOnLan::Attributes::AttributeList::TypeInfo;
@@ -60241,7 +60241,7 @@ using chip::SessionHandle;
             path.mAttributeId = TypeInfo::GetAttributeId();
             TypeInfo::DecodableType value;
             CHIP_ERROR err = clusterStateCacheContainer.cppClusterStateCache->Get<TypeInfo>(path, value);
-            auto successFn = Callback<WakeOnLanAttributeListListAttributeCallback>::FromCancelable(success);
+            auto successFn = Callback<WakeOnLANAttributeListListAttributeCallback>::FromCancelable(success);
             if (err == CHIP_NO_ERROR) {
                 successFn->mCall(successFn->mContext, value);
             }
