@@ -5376,8 +5376,9 @@ public:
             err = TestThReadsColorLoopStoredEnhancedHueAttributeFromDut_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads FeatureMap attribute from DUT\n");
-            err = TestThReadsFeatureMapAttributeFromDut_18();
+            ChipLogProgress(
+                chipTool, " ***** Test Step 18 : Saving for comparision in step 19 reads FeatureMap attribute from DUT\n");
+            err = TestSavingForComparisionInStep19ReadsFeatureMapAttributeFromDut_18();
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads ColorCapabilities attribute from DUT\n");
@@ -6269,7 +6270,7 @@ private:
     }
     NSNumber * _Nonnull FeatureMapValue;
 
-    CHIP_ERROR TestThReadsFeatureMapAttributeFromDut_18()
+    CHIP_ERROR TestSavingForComparisionInStep19ReadsFeatureMapAttributeFromDut_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -6277,7 +6278,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads FeatureMap attribute from DUT Error: %@", err);
+            NSLog(@"Saving for comparision in step 19 reads FeatureMap attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
@@ -9197,13 +9198,13 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool,
-                " ***** Test Step 3 : TH sends MoveToSaturation command to DUT with Saturation=60 and TransitionTime=0 "
+                " ***** Test Step 3 : TH sends MoveToSaturation command to DUT with Saturation=150 and TransitionTime=0 "
                 "(immediately)\n");
             if (ShouldSkip("CC.S.F00 && CC.S.C03.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestThSendsMoveToSaturationCommandToDutWithSaturation60AndTransitionTime0Immediately_3();
+            err = TestThSendsMoveToSaturationCommandToDutWithSaturation150AndTransitionTime0Immediately_3();
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
@@ -9589,7 +9590,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThSendsMoveToSaturationCommandToDutWithSaturation60AndTransitionTime0Immediately_3()
+    CHIP_ERROR TestThSendsMoveToSaturationCommandToDutWithSaturation150AndTransitionTime0Immediately_3()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -9603,7 +9604,7 @@ private:
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
         [cluster moveToSaturationWithParams:params
                                  completion:^(NSError * _Nullable err) {
-                                     NSLog(@"TH sends MoveToSaturation command to DUT with Saturation=60 and TransitionTime=0 "
+                                     NSLog(@"TH sends MoveToSaturation command to DUT with Saturation=150 and TransitionTime=0 "
                                            @"(immediately) Error: %@",
                                          err);
 
@@ -12239,7 +12240,7 @@ public:
             break;
         case 57:
             ChipLogProgress(chipTool, " ***** Test Step 57 : TH reads ColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
+            if (ShouldSkip("CC.S.F03 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -12247,7 +12248,7 @@ public:
             break;
         case 58:
             ChipLogProgress(chipTool, " ***** Test Step 58 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
+            if (ShouldSkip("CC.S.F03 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -13797,7 +13798,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads ColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
+            if (ShouldSkip("CC.S.F03 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -13805,7 +13806,7 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
+            if (ShouldSkip("CC.S.F03 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -14490,7 +14491,7 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads ColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
+            if (ShouldSkip("CC.S.F03 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -14498,7 +14499,7 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
+            if (ShouldSkip("CC.S.F03 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -15844,7 +15845,7 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads ColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
+            if (ShouldSkip("CC.S.F01 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -15852,7 +15853,7 @@ public:
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
+            if (ShouldSkip("CC.S.F01 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -16655,7 +16656,7 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads ColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A0008")) {
+            if (ShouldSkip("CC.S.F01 && CC.S.A0008")) {
                 NextTest();
                 return;
             }
@@ -16663,7 +16664,7 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads EnhancedColorMode attribute from DUT\n");
-            if (ShouldSkip("CC.S.F00 && CC.S.A4001")) {
+            if (ShouldSkip("CC.S.F01 && CC.S.A4001")) {
                 NextTest();
                 return;
             }
@@ -33091,35 +33092,47 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip(" !MEDIAINPUT.S.NU ")) {
+                NextTest();
+                return;
+            }
             err = TestReadTheGlobalAttributeFeatureMap_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: AttributeList\n");
-            err = TestReadTheGlobalAttributeAttributeList_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given MEDIAINPUT.S.NU ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("MEDIAINPUT.S.NU")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenMediainputsnuEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
-            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the optional attribute(InputList) in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute(InputList) in AttributeList\n");
             if (ShouldSkip("MEDIAINPUT.S.A0000")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeInputListInAttributeList_4();
+            err = TestReadTheOptionalAttributeInputListInAttributeList_5();
             break;
-        case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the optional attribute(CurrentInput) in AttributeList\n");
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the optional attribute(CurrentInput) in AttributeList\n");
             if (ShouldSkip("MEDIAINPUT.S.A0001")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeCurrentInputInAttributeList_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AcceptedCommandList\n");
-            err = TestReadTheGlobalAttributeAcceptedCommandList_6();
+            err = TestReadTheOptionalAttributeCurrentInputInAttributeList_6();
             break;
         case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: GeneratedCommandList\n");
-            err = TestReadTheGlobalAttributeGeneratedCommandList_7();
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Read the global attribute: AcceptedCommandList\n");
+            err = TestReadTheGlobalAttributeAcceptedCommandList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the global attribute: GeneratedCommandList\n");
+            err = TestReadTheGlobalAttributeGeneratedCommandList_8();
             break;
         }
 
@@ -33156,6 +33169,9 @@ public:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -33169,7 +33185,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 8;
+    const uint16_t mTestCount = 9;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -33220,17 +33236,38 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
-            VerifyOrReturn(CheckConstraintMinValue<uint32_t>("featureMap", [value unsignedIntValue], 0UL));
-            VerifyOrReturn(CheckConstraintMaxValue<uint32_t>("featureMap", [value unsignedIntValue], 1UL));
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
 
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
             NextTest();
         }];
 
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_3()
+    CHIP_ERROR TestGivenMediainputsnuEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterMediaInput alloc] initWithDevice:device endpoint:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given MEDIAINPUT.S.NU ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_4()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -33255,7 +33292,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeInputListInAttributeList_4()
+    CHIP_ERROR TestReadTheOptionalAttributeInputListInAttributeList_5()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -33276,7 +33313,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeCurrentInputInAttributeList_5()
+    CHIP_ERROR TestReadTheOptionalAttributeCurrentInputInAttributeList_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -33297,7 +33334,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_6()
+    CHIP_ERROR TestReadTheGlobalAttributeAcceptedCommandList_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -33321,7 +33358,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_7()
+    CHIP_ERROR TestReadTheGlobalAttributeGeneratedCommandList_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -39827,6 +39864,14 @@ public:
             }
             err = TestSendsASeekCommandPositionValueBeyondTheFurthestValidPosition_9();
             break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : verify that the media has not moved.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0B.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaHasNotMoved_10();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -39868,6 +39913,9 @@ public:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -39881,7 +39929,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 10;
+    const uint16_t mTestCount = 11;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -40047,6 +40095,16 @@ private:
 
         return CHIP_NO_ERROR;
     }
+
+    CHIP_ERROR TestVerifyThatTheMediaHasNotMoved_10()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media has not movedgarbage: not in length on purpose", 39);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
 };
 
 class Test_TC_MEDIAPLAYBACK_6_4 : public TestCommandBridge {
@@ -40125,108 +40183,150 @@ public:
             err = TestSendsAFastForwardCommand_4();
             break;
         case 5:
-            ChipLogProgress(chipTool, " ***** Test Step 5 : Reads the CurrentState attribute\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0000 && MEDIAPLAYBACK.S.C07.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsTheCurrentStateAttribute_5();
-            break;
-        case 6:
-            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C07.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsThePlaybackSpeedAttributeFromTheDut_6();
-            break;
-        case 7:
-            ChipLogProgress(chipTool, " ***** Test Step 7 : Sends a FastForward command\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C07.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestSendsAFastForwardCommand_7();
-            break;
-        case 8:
-            ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C07.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsThePlaybackSpeedAttributeFromTheDut_8();
-            break;
-        case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : Sends a Rewind command to the DUT\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestSendsARewindCommandToTheDut_9();
-            break;
-        case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the CurrentState attribute\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0000 && MEDIAPLAYBACK.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsTheCurrentStateAttribute_10();
-            break;
-        case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsThePlaybackSpeedAttributeFromTheDut_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Sends a Rewind command to the DUT\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestSendsARewindCommandToTheDut_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsThePlaybackSpeedAttributeFromTheDut_13();
-            break;
-        case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : Sends a Play command\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestSendsAPlayCommand_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : Reads the PlaybackSpeed attribute from the DUT\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C00.Rsp")) {
-                NextTest();
-                return;
-            }
-            err = TestReadsThePlaybackSpeedAttributeFromTheDut_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Sends consecutive FastForward commands\n");
+            ChipLogProgress(chipTool, " ***** Test Step 5 : verify that the media state is playing\n");
             if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C07.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendsConsecutiveFastForwardCommands_16();
+            err = TestVerifyThatTheMediaStateIsPlaying_5();
             break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Sends consecutive Rewind commands\n");
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the CurrentState attribute\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000 && MEDIAPLAYBACK.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheCurrentStateAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Sends a FastForward command\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsAFastForwardCommand_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : verify that the media play speed has increased.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaPlaySpeedHasIncreased_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Sends a Rewind command to the DUT\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsARewindCommandToTheDut_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : verify that the media play has reversed direction.\n");
             if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C06.Rsp")) {
                 NextTest();
                 return;
             }
-            err = TestSendsConsecutiveRewindCommands_17();
+            err = TestVerifyThatTheMediaPlayHasReversedDirection_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Reads the CurrentState attribute\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0000 && MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsTheCurrentStateAttribute_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Sends a Rewind command to the DUT\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsARewindCommandToTheDut_15();
+            break;
+        case 16:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 16 : verify that the media play speed has increased in the reverse direction.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaPlaySpeedHasIncreasedInTheReverseDirection_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Sends a Play command\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsAPlayCommand_18();
+            break;
+        case 19:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 19 : verify that the media is has resumed playing forward at the default speed.\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestVerifyThatTheMediaIsHasResumedPlayingForwardAtTheDefaultSpeed_19();
+            break;
+        case 20:
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Reads the PlaybackSpeed attribute from the DUT\n");
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0004 && MEDIAPLAYBACK.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestReadsThePlaybackSpeedAttributeFromTheDut_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Sends consecutive FastForward commands\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C07.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsConsecutiveFastForwardCommands_21();
+            break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : Sends consecutive Rewind commands\n");
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C06.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestSendsConsecutiveRewindCommands_22();
             break;
         }
 
@@ -40293,6 +40393,21 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -40306,7 +40421,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 23;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -40414,7 +40529,17 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheCurrentStateAttribute_5()
+    CHIP_ERROR TestVerifyThatTheMediaStateIsPlaying_5()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' if media state is playinggarbage: not in length on purpose", 42);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttribute_6()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40437,7 +40562,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_6()
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_7()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40460,7 +40585,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsAFastForwardCommand_7()
+    CHIP_ERROR TestSendsAFastForwardCommand_8()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40484,7 +40609,18 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_8()
+    CHIP_ERROR TestVerifyThatTheMediaPlaySpeedHasIncreased_9()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please enter 'y' if media play speed has increased.garbage: not in length on purpose", 51);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40507,7 +40643,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsARewindCommandToTheDut_9()
+    CHIP_ERROR TestSendsARewindCommandToTheDut_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40530,7 +40666,18 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsTheCurrentStateAttribute_10()
+    CHIP_ERROR TestVerifyThatTheMediaPlayHasReversedDirection_12()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message
+            = chip::Span<const char>("Please enter 'y' if media play has reversed directiongarbage: not in length on purpose", 53);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsTheCurrentStateAttribute_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40553,7 +40700,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_11()
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_14()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -40564,7 +40711,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestSendsARewindCommandToTheDut_12()
+    CHIP_ERROR TestSendsARewindCommandToTheDut_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40587,7 +40734,18 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_13()
+    CHIP_ERROR TestVerifyThatTheMediaPlaySpeedHasIncreasedInTheReverseDirection_16()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if media play speed has increased in the reverse directiongarbage: not in length on purpose", 75);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_17()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -40598,7 +40756,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestSendsAPlayCommand_14()
+    CHIP_ERROR TestSendsAPlayCommand_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40621,7 +40779,18 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_15()
+    CHIP_ERROR TestVerifyThatTheMediaIsHasResumedPlayingForwardAtTheDefaultSpeed_19()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>(
+            "Please enter 'y' if media is has resumed playing forward at the default speedgarbage: not in length on purpose", 77);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+
+    CHIP_ERROR TestReadsThePlaybackSpeedAttributeFromTheDut_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -40644,7 +40813,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestSendsConsecutiveFastForwardCommands_16()
+    CHIP_ERROR TestSendsConsecutiveFastForwardCommands_21()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -40654,7 +40823,7 @@ private:
         return UserPrompt("alpha", value);
     }
 
-    CHIP_ERROR TestSendsConsecutiveRewindCommands_17()
+    CHIP_ERROR TestSendsConsecutiveRewindCommands_22()
     {
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
@@ -40675,6 +40844,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("Index", 0, UINT8_MAX, &mIndex);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -40772,6 +40942,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint8_t> mIndex;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -40809,7 +40980,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRAudioOutputClusterSelectOutputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1U];
+        params.index = mIndex.HasValue() ? [NSNumber numberWithUnsignedChar:mIndex.Value()] : [NSNumber numberWithUnsignedChar:1U];
         [cluster selectOutputWithParams:params
                              completion:^(NSError * _Nullable err) {
                                  NSLog(@"Sends a SelectAudioOutput command Error: %@", err);
@@ -40836,7 +41007,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, 1U));
+                VerifyOrReturn(CheckValue("CurrentOutput", actualValue, mIndex.HasValue() ? mIndex.Value() : 1U));
             }
 
             NextTest();
@@ -40856,6 +41027,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("Index", 0, UINT8_MAX, &mIndex);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -40955,6 +41127,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint8_t> mIndex;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -40997,7 +41170,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRAudioOutputClusterRenameOutputParams alloc] init];
-        params.index = [NSNumber numberWithUnsignedChar:1U];
+        params.index = mIndex.HasValue() ? [NSNumber numberWithUnsignedChar:mIndex.Value()] : [NSNumber numberWithUnsignedChar:1U];
         params.name = @"CertTest";
         [cluster renameOutputWithParams:params
                              completion:^(NSError * _Nullable err) {
@@ -56182,7 +56355,7 @@ public:
             break;
         case 65:
             ChipLogProgress(chipTool, " ***** Test Step 65 : Writes (sets back)default value of MaxHeatSetpointLimit\n");
-            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0016 &&!TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0016 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
@@ -56190,7 +56363,7 @@ public:
             break;
         case 66:
             ChipLogProgress(chipTool, " ***** Test Step 66 : Writes MaxHeatSetpointLimit That meets the deadband of 2.5C\n");
-            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0016 &&!TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0016 && !TSTAT.S.F05")) {
                 NextTest();
                 return;
             }
@@ -56225,7 +56398,7 @@ public:
         case 70:
             ChipLogProgress(chipTool,
                 " ***** Test Step 70 : Writes a value back that is different but valid for MinSetpointDeadBand attribute\n");
-            if (ShouldSkip("TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F05 && TSTAT.S.M.MinSetpointDeadBandWritable")) {
                 NextTest();
                 return;
             }
@@ -56234,7 +56407,7 @@ public:
         case 71:
             ChipLogProgress(chipTool,
                 " ***** Test Step 71 : Reads it back again to confirm the successful write of MinSetpointDeadBand attribute\n");
-            if (ShouldSkip("TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F05 && TSTAT.S.M.MinSetpointDeadBandWritable")) {
                 NextTest();
                 return;
             }
@@ -56242,7 +56415,7 @@ public:
             break;
         case 72:
             ChipLogProgress(chipTool, " ***** Test Step 72 : Writes the value below MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F05 && TSTAT.S.M.MinSetpointDeadBandWritable")) {
                 NextTest();
                 return;
             }
@@ -56250,7 +56423,7 @@ public:
             break;
         case 73:
             ChipLogProgress(chipTool, " ***** Test Step 73 : Writes the value above MinSetpointDeadBand \n");
-            if (ShouldSkip("TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F05 && TSTAT.S.M.MinSetpointDeadBandWritable")) {
                 NextTest();
                 return;
             }
@@ -56258,7 +56431,7 @@ public:
             break;
         case 74:
             ChipLogProgress(chipTool, " ***** Test Step 74 : Writes the min limit of MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F05 && TSTAT.S.M.MinSetpointDeadBandWritable")) {
                 NextTest();
                 return;
             }
@@ -56266,7 +56439,7 @@ public:
             break;
         case 75:
             ChipLogProgress(chipTool, " ***** Test Step 75 : Writes the max limit of MinSetpointDeadBand\n");
-            if (ShouldSkip("TSTAT.S.F05")) {
+            if (ShouldSkip("TSTAT.S.F05 && TSTAT.S.M.MinSetpointDeadBandWritable")) {
                 NextTest();
                 return;
             }
@@ -57266,11 +57439,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("UnoccupiedCoolingSetpoint", actualValue, 2600));
-            }
-
             VerifyOrReturn(CheckConstraintType("unoccupiedCoolingSetpoint", "int16s", "int16s"));
             VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 1600));
             VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedCoolingSetpoint", [value shortValue], 3200));
@@ -57441,11 +57609,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("UnoccupiedHeatingSetpoint", actualValue, 2000));
-            }
-
             VerifyOrReturn(CheckConstraintType("unoccupiedHeatingSetpoint", "int16s", "int16s"));
             VerifyOrReturn(CheckConstraintMinValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 700));
             VerifyOrReturn(CheckConstraintMaxValue<int16_t>("unoccupiedHeatingSetpoint", [value shortValue], 3000));
@@ -57614,11 +57777,6 @@ private:
                 @"Reads MinHeatSetpointLimit attribute from Server DUT and verifies that the value is within range Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("MinHeatSetpointLimit", actualValue, 700));
-            }
 
             VerifyOrReturn(CheckConstraintType("minHeatSetpointLimit", "int16s", "int16s"));
             VerifyOrReturn(CheckConstraintMinValue<int16_t>("minHeatSetpointLimit", [value shortValue], 700));
@@ -57815,11 +57973,6 @@ private:
                 @"Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within range Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("MaxHeatSetpointLimit", actualValue, 3000));
-            }
 
             VerifyOrReturn(CheckConstraintType("maxHeatSetpointLimit", "int16s", "int16s"));
             VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxHeatSetpointLimit", [value shortValue], 700));
@@ -58040,11 +58193,6 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("MinCoolSetpointLimit", actualValue, 1600));
-            }
-
             VerifyOrReturn(CheckConstraintType("minCoolSetpointLimit", "int16s", "int16s"));
             VerifyOrReturn(CheckConstraintMinValue<int16_t>("minCoolSetpointLimit", [value shortValue], 1600));
             VerifyOrReturn(CheckConstraintMaxValue<int16_t>("minCoolSetpointLimit", [value shortValue], 3200));
@@ -58236,11 +58384,6 @@ private:
                 @"Reads MaxCoolSetpointLimit attribute from Server DUT and verifies that the value is within range Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("MaxCoolSetpointLimit", actualValue, 3200));
-            }
 
             VerifyOrReturn(CheckConstraintType("maxCoolSetpointLimit", "int16s", "int16s"));
             VerifyOrReturn(CheckConstraintMinValue<int16_t>("maxCoolSetpointLimit", [value shortValue], 1600));
@@ -58521,11 +58664,6 @@ private:
                 @"Reads MinSetpointDeadBand attribute from Server DUT and verifies that the value is within range Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("MinSetpointDeadBand", actualValue, 25));
-            }
 
             VerifyOrReturn(CheckConstraintType("minSetpointDeadBand", "int8s", "int8s"));
             VerifyOrReturn(CheckConstraintMinValue<int8_t>("minSetpointDeadBand", [value charValue], 0));
