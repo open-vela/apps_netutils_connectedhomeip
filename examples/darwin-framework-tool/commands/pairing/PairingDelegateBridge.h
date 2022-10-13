@@ -20,15 +20,14 @@
 
 #import <Matter/Matter.h>
 
-@class MTRDeviceController;
-
-@interface CHIPToolDeviceControllerDelegate : NSObject <MTRDeviceControllerDelegate>
+@interface CHIPToolPairingDelegate : NSObject <MTRDevicePairingDelegate>
 @property PairingCommandBridge * commandBridge;
 @property chip::NodeId deviceID;
 @property MTRDeviceController * commissioner;
 @property MTRCommissioningParameters * params;
 
-- (void)controller:(MTRDeviceController *)controller commissioningSessionEstablishmentDone:(NSError *)error;
-- (void)controller:(MTRDeviceController *)controller commissioningComplete:(NSError *)error;
+- (void)onPairingComplete:(NSError *)error;
+- (void)onPairingDeleted:(NSError *)error;
+- (void)onCommissioningComplete:(NSError *)error;
 
 @end

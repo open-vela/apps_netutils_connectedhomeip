@@ -17,19 +17,19 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MTRClusterStateCacheContainer.h"
+#import "MTRAttributeCacheContainer.h"
 #import "MTRDeviceControllerOverXPC.h"
 
 #include <app/ClusterStateCache.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTRClusterStateCacheContainer ()
+@interface MTRAttributeCacheContainer ()
 
-@property (atomic, readwrite, nullable) chip::app::ClusterStateCache * cppClusterStateCache;
-@property (nonatomic, readwrite, copy) NSNumber * deviceID;
+@property (atomic, readwrite, nullable) chip::app::ClusterStateCache * cppAttributeCache;
+@property (nonatomic, readwrite) uint64_t deviceId;
 @property (nonatomic, readwrite, weak, nullable) MTRDeviceControllerXPCConnection * xpcConnection;
-@property (nonatomic, readwrite, strong, nullable) id<NSCopying> xpcControllerID;
+@property (nonatomic, readwrite, strong, nullable) id<NSCopying> xpcControllerId;
 @property (atomic, readwrite) BOOL shouldUseXPC;
 
 @end

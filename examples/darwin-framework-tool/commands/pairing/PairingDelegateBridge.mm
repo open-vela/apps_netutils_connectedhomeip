@@ -16,35 +16,35 @@
  *
  */
 
-#include "DeviceControllerDelegateBridge.h"
+#include "PairingDelegateBridge.h"
 #import <Matter/Matter.h>
 
-@interface CHIPToolDeviceControllerDelegate ()
+@interface CHIPToolPairingDelegate ()
 @end
 
-@implementation CHIPToolDeviceControllerDelegate
-- (void)onStatusUpdate:(MTRCommissioningStatus)status
+@implementation CHIPToolPairingDelegate
+- (void)onStatusUpdate:(MTRPairingStatus)status
 {
     NSLog(@"Pairing Status Update: %tu", status);
     switch (status) {
-    case MTRCommissioningStatusSuccess:
+    case MTRPairingStatusSuccess:
         ChipLogProgress(chipTool, "Secure Pairing Success");
         ChipLogProgress(chipTool, "CASE establishment successful");
         break;
-    case MTRCommissioningStatusFailed:
+    case MTRPairingStatusFailed:
         ChipLogError(chipTool, "Secure Pairing Failed");
         _commandBridge->SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE);
         break;
-    case MTRCommissioningStatusDiscoveringMoreDevices:
+    case MTRPairingStatusDiscoveringMoreDevices:
         ChipLogProgress(chipTool, "Secure Pairing Discovering More Devices");
         break;
-    case MTRCommissioningStatusUnknown:
+    case MTRPairingStatusUnknown:
         ChipLogError(chipTool, "Uknown Pairing Status");
         break;
     }
 }
 
-- (void)controller:(MTRDeviceController *)controller commissioningSessionEstablishmentDone:(NSError *)error
+- (void)onPairingComplete:(NSError *)error
 {
     if (error != nil) {
         ChipLogProgress(chipTool, "PASE establishment failed");
@@ -54,14 +54,19 @@
     ChipLogProgress(chipTool, "Pairing Success");
     ChipLogProgress(chipTool, "PASE establishment successful");
     NSError * commissionError;
-    [_commissioner commissionNodeWithID:@(_deviceID) commissioningParams:_params error:&commissionError];
+    [_commissioner commissionDevice:_deviceID commissioningParams:_params error:&commissionError];
     if (commissionError != nil) {
         _commandBridge->SetCommandExitStatus(commissionError);
         return;
     }
 }
 
-- (void)controller:(MTRDeviceController *)controller commissioningComplete:(NSError *)error
+- (void)onPairingDeleted:(NSError *)error
+{
+    _commandBridge->SetCommandExitStatus(error, "Pairing Delete");
+}
+
+- (void)onCommissioningComplete:(NSError *)error
 {
     _commandBridge->SetCommandExitStatus(error, "Pairing Commissioning Complete");
 }

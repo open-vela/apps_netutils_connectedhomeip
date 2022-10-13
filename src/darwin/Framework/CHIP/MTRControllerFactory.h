@@ -24,20 +24,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MTRStorage;
+@protocol MTRPersistentStorageDelegate;
 @protocol MTROTAProviderDelegate;
 @protocol MTRKeypair;
 
 @class MTRDeviceController;
 @class MTRDeviceControllerStartupParams;
 
-@interface MTRDeviceControllerFactoryParams : NSObject
+@interface MTRControllerFactoryParams : NSObject
 /*
  * Storage delegate must be provided for correct functioning of Matter
  * controllers.  It is used to store persistent information for the fabrics the
  * controllers ends up interacting with.
  */
-@property (nonatomic, strong, readonly) id<MTRStorage> storage;
+@property (nonatomic, strong, readonly) id<MTRPersistentStorageDelegate> storageDelegate;
 
 /*
  * OTA Provider delegate to be called when an OTA Requestor is requesting a software update.
@@ -66,47 +66,44 @@ NS_ASSUME_NONNULL_BEGIN
  * Whether to run a server capable of accepting incoming CASE
  * connections.  Defaults to NO.
  */
-@property (nonatomic, assign) BOOL shouldStartServer;
+@property (nonatomic, assign) BOOL startServer;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithStorage:(id<MTRStorage>)storage;
+- (instancetype)initWithStorage:(id<MTRPersistentStorageDelegate>)storageDelegate;
 @end
 
-@interface MTRDeviceControllerFactory : NSObject
+@interface MTRControllerFactory : NSObject
+
+@property (readonly, nonatomic) BOOL isRunning;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 /**
- * If true, the factory is in a state where it can create controllers:
- * startControllerFactory has been called, but stopControllerFactory has not been called
- * since then.
- */
-@property (readonly, nonatomic, getter=isRunning) BOOL running;
-
-/**
- * Return the single MTRDeviceControllerFactory we support existing.  It starts off
+ * Return the single MTRControllerFactory we support existing.  It starts off
  * in a "not started" state.
  */
 + (instancetype)sharedInstance;
 
 /**
- * Start the controller factory. Repeated calls to startControllerFactory
- * without calls to stopControllerFactory in between are NO-OPs. Use the
- * isRunning property to check whether the controller factory needs to be
- * started up.
+ * Start the controller factory. Repeated calls to startup without calls to
+ * shutdown in between are NO-OPs. Use the isRunning property to check whether
+ * the controller factory needs to be started up.
  *
  * @param[in] startupParams data needed to start up the controller factory.
  *
  * @return Whether startup succeded.
  */
-- (BOOL)startControllerFactory:(MTRDeviceControllerFactoryParams *)startupParams error:(NSError * __autoreleasing *)error;
+- (BOOL)startup:(MTRControllerFactoryParams *)startupParams;
 
 /**
- * Stop the controller factory. This will shut down any outstanding
- * controllers as part of the factory stopping.
+ * Shut down the controller factory. This will shut down any outstanding
+ * controllers as part of the factory shutdown.
  *
- * Repeated calls to stopControllerFactory without calls to
- * startControllerFactory in between are NO-OPs.
+ * Repeated calls to shutdown without calls to startup in between are
+ * NO-OPs.
  */
-- (void)stopControllerFactory;
+- (void)shutdown;
 
 /**
  * Create a MTRDeviceController on an existing fabric.  Returns nil on failure.
@@ -117,8 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The fabric is identified by the root public key and fabric id in
  * the startupParams.
  */
-- (MTRDeviceController * _Nullable)createControllerOnExistingFabric:(MTRDeviceControllerStartupParams *)startupParams
-                                                              error:(NSError * __autoreleasing *)error;
+- (MTRDeviceController * _Nullable)startControllerOnExistingFabric:(MTRDeviceControllerStartupParams *)startupParams;
 
 /**
  * Create a MTRDeviceController on a new fabric.  Returns nil on failure.
@@ -128,11 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The fabric is identified by the root public key and fabric id in
  * the startupParams.
  */
-- (MTRDeviceController * _Nullable)createControllerOnNewFabric:(MTRDeviceControllerStartupParams *)startupParams
-                                                         error:(NSError * __autoreleasing *)error;
-
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (MTRDeviceController * _Nullable)startControllerOnNewFabric:(MTRDeviceControllerStartupParams *)startupParams;
 
 @end
 

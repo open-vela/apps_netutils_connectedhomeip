@@ -15,13 +15,13 @@
  */
 
 /**
- * Parts of MTRDeviceControllerFactory that are not part of the framework API.
+ * Parts of MTRControllerFactory that are not part of the framework API.
  * Mostly for use from MTRDeviceController.
  */
 
 #import <Foundation/Foundation.h>
 
-#import "MTRDeviceControllerFactory.h"
+#import "MTRControllerFactory.h"
 
 #include <lib/core/DataModelTypes.h>
 
@@ -38,7 +38,7 @@ namespace Credentials {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTRDeviceControllerFactory (InternalMethods)
+@interface MTRControllerFactory (InternalMethods)
 
 - (void)controllerShuttingDown:(MTRDeviceController *)controller;
 

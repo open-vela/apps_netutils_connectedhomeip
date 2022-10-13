@@ -15,7 +15,7 @@
  *    limitations under the License.
  */
 
-#import "MTROTAHeader.h"
+#import "MTROTAHeaderParser.h"
 
 #import "MTRError.h"
 #import "MTRError_Internal.h"
@@ -25,16 +25,17 @@
 #include <lib/core/OTAImageHeader.h>
 
 @implementation MTROTAHeader
-+ (MTROTAHeader * _Nullable)headerFromData:(NSData *)data error:(NSError * __autoreleasing *)error
+@end
+
+@implementation MTROTAHeaderParser
++ (nullable MTROTAHeader *)headerFromData:(NSData *)data error:(NSError * __autoreleasing *)error
 {
     chip::OTAImageHeaderParser parser;
 
     parser.Init();
 
     if (!parser.IsInitialized()) {
-        if (error != nil) {
-            *error = [NSError errorWithDomain:MTRErrorDomain code:MTRErrorCodeGeneralError userInfo:nil];
-        }
+        *error = [NSError errorWithDomain:MTRErrorDomain code:MTRErrorCodeGeneralError userInfo:nil];
         return nil;
     }
 
@@ -42,9 +43,7 @@
     chip::OTAImageHeader header;
     CHIP_ERROR err = parser.AccumulateAndDecode(buffer, header);
     if (err != CHIP_NO_ERROR) {
-        if (error != nil) {
-            *error = [MTRError errorForCHIPErrorCode:err];
-        }
+        *error = [MTRError errorForCHIPErrorCode:err];
         parser.Clear();
         return nil;
     }
