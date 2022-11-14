@@ -315,6 +315,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeIdentifyTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -381,6 +384,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeIdentifyTypeWithParams:params
             subscriptionEstablished:^() {
@@ -449,6 +455,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -515,6 +524,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -583,6 +595,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -650,6 +665,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -716,6 +734,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -1103,6 +1124,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNameSupportWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -1169,6 +1193,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -1237,6 +1264,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -1303,6 +1333,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -1371,6 +1404,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -1437,6 +1473,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -2129,6 +2168,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSceneCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -2195,6 +2237,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentSceneWithParams:params
             subscriptionEstablished:^() {
@@ -2263,6 +2308,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentGroupWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -2329,6 +2377,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSceneValidWithParams:params
             subscriptionEstablished:^() {
@@ -2397,6 +2448,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNameSupportWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -2463,6 +2517,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLastConfiguredByWithParams:params
             subscriptionEstablished:^() {
@@ -2531,6 +2588,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -2597,6 +2657,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -2665,6 +2728,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -2732,6 +2798,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -2798,6 +2867,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -3162,6 +3234,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOnOffWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -3228,6 +3303,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGlobalSceneControlWithParams:params
             subscriptionEstablished:^() {
@@ -3336,6 +3414,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOnTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -3442,6 +3523,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOffWaitTimeWithParams:params
             subscriptionEstablished:^() {
@@ -3550,6 +3634,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStartUpOnOffWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -3616,6 +3703,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -3684,6 +3774,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -3750,6 +3843,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -3818,6 +3914,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -3884,6 +3983,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -3966,6 +4068,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSwitchTypeWithParams:params
             subscriptionEstablished:^() {
@@ -4071,6 +4176,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSwitchActionsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -4135,6 +4243,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -4201,6 +4312,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -4265,6 +4379,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -4331,6 +4448,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -4395,6 +4515,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -4983,6 +5106,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -5049,6 +5175,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRemainingTimeWithParams:params
             subscriptionEstablished:^() {
@@ -5117,6 +5246,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMinLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -5183,6 +5315,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxLevelWithParams:params
             subscriptionEstablished:^() {
@@ -5251,6 +5386,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentFrequencyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -5318,6 +5456,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMinFrequencyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -5384,6 +5525,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxFrequencyWithParams:params
             subscriptionEstablished:^() {
@@ -5492,6 +5636,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOptionsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -5598,6 +5745,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOnOffTransitionTimeWithParams:params
             subscriptionEstablished:^() {
@@ -5706,6 +5856,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOnLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -5812,6 +5965,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOnTransitionTimeWithParams:params
             subscriptionEstablished:^() {
@@ -5920,6 +6076,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOffTransitionTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6026,6 +6185,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDefaultMoveRateWithParams:params
             subscriptionEstablished:^() {
@@ -6134,6 +6296,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStartUpCurrentLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6200,6 +6365,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -6268,6 +6436,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6334,6 +6505,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -6402,6 +6576,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6468,6 +6645,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -6602,6 +6782,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveTextWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6710,6 +6893,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDescriptionWithParams:params
             subscriptionEstablished:^() {
@@ -6820,6 +7006,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInactiveTextWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6927,6 +7116,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOutOfServiceWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -6993,6 +7185,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePolarityWithParams:params
             subscriptionEstablished:^() {
@@ -7101,6 +7296,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePresentValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7208,6 +7406,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeReliabilityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7274,6 +7475,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeStatusFlagsWithParams:params
             subscriptionEstablished:^() {
@@ -7342,6 +7546,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApplicationTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7408,6 +7615,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -7476,6 +7686,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7542,6 +7755,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -7610,6 +7826,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7676,6 +7895,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -7763,6 +7985,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDeviceTypeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7829,6 +8054,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeServerListWithParams:params
             subscriptionEstablished:^() {
@@ -7897,6 +8125,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeClientListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -7963,6 +8194,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePartsListWithParams:params
             subscriptionEstablished:^() {
@@ -8031,6 +8265,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -8097,6 +8334,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -8165,6 +8405,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -8232,6 +8475,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -8298,6 +8544,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -8459,6 +8708,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBindingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -8525,6 +8777,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -8593,6 +8848,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -8659,6 +8917,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -8727,6 +8988,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -8793,6 +9057,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -8984,6 +9251,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAclWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -9110,6 +9380,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeExtensionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -9176,6 +9449,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSubjectsPerAccessControlEntryWithParams:params
             subscriptionEstablished:^() {
@@ -9244,6 +9520,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTargetsPerAccessControlEntryWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -9310,6 +9589,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAccessControlEntriesPerFabricWithParams:params
             subscriptionEstablished:^() {
@@ -9378,6 +9660,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -9444,6 +9729,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -9512,6 +9800,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -9579,6 +9870,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -9645,6 +9939,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -10379,6 +10676,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActionListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -10445,6 +10745,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEndpointListsWithParams:params
             subscriptionEstablished:^() {
@@ -10513,6 +10816,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSetupURLWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -10579,6 +10885,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -10647,6 +10956,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -10713,6 +11025,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -10781,6 +11096,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -10847,6 +11165,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -10998,6 +11319,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDataModelRevisionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11064,6 +11388,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeVendorNameWithParams:params
             subscriptionEstablished:^() {
@@ -11132,6 +11459,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeVendorIDWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11199,6 +11529,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeProductNameWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11265,6 +11598,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeProductIDWithParams:params
             subscriptionEstablished:^() {
@@ -11375,6 +11711,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNodeLabelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11484,6 +11823,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLocationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11550,6 +11892,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeHardwareVersionWithParams:params
             subscriptionEstablished:^() {
@@ -11618,6 +11963,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeHardwareVersionStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11684,6 +12032,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSoftwareVersionWithParams:params
             subscriptionEstablished:^() {
@@ -11752,6 +12103,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSoftwareVersionStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11818,6 +12172,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeManufacturingDateWithParams:params
             subscriptionEstablished:^() {
@@ -11886,6 +12243,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePartNumberWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -11952,6 +12312,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeProductURLWithParams:params
             subscriptionEstablished:^() {
@@ -12020,6 +12383,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeProductLabelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -12086,6 +12452,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSerialNumberWithParams:params
             subscriptionEstablished:^() {
@@ -12194,6 +12563,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLocalConfigDisabledWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -12261,6 +12633,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeReachableWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -12327,6 +12702,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeUniqueIDWithParams:params
             subscriptionEstablished:^() {
@@ -12396,6 +12774,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCapabilityMinimaWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -12462,6 +12843,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -12530,6 +12914,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -12596,6 +12983,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -12664,6 +13054,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -12730,6 +13123,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -13001,6 +13397,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13065,6 +13464,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -13131,6 +13533,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13196,6 +13601,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13260,6 +13668,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -13470,6 +13881,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDefaultOtaProvidersWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13534,6 +13948,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeUpdatePossibleWithParams:params
             subscriptionEstablished:^() {
@@ -13600,6 +14017,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUpdateStateWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13664,6 +14084,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeUpdateStateProgressWithParams:params
             subscriptionEstablished:^() {
@@ -13730,6 +14153,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13794,6 +14220,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -13860,6 +14289,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13925,6 +14357,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -13989,6 +14424,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -14113,6 +14551,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveLocaleWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14177,6 +14618,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSupportedLocalesWithParams:params
             subscriptionEstablished:^() {
@@ -14243,6 +14687,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14307,6 +14754,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -14373,6 +14823,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14438,6 +14891,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14502,6 +14958,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -14625,6 +15084,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeHourFormatWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14729,6 +15191,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveCalendarTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14793,6 +15258,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSupportedCalendarTypesWithParams:params
             subscriptionEstablished:^() {
@@ -14859,6 +15327,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -14923,6 +15394,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -14989,6 +15463,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15054,6 +15531,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15118,6 +15598,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -15242,6 +15725,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTemperatureUnitWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15308,6 +15794,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -15376,6 +15865,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15442,6 +15934,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -15510,6 +16005,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15576,6 +16074,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -15658,6 +16159,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSourcesWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15722,6 +16226,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -15788,6 +16295,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15852,6 +16362,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -15918,6 +16431,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -15982,6 +16498,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -16096,6 +16615,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStatusWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16162,6 +16684,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOrderWithParams:params
             subscriptionEstablished:^() {
@@ -16230,6 +16755,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDescriptionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16296,6 +16824,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWiredAssessedInputVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -16364,6 +16895,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWiredAssessedInputFrequencyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16430,6 +16964,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWiredCurrentTypeWithParams:params
             subscriptionEstablished:^() {
@@ -16498,6 +17035,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWiredAssessedCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16564,6 +17104,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWiredNominalVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -16632,6 +17175,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWiredMaximumCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16698,6 +17244,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWiredPresentWithParams:params
             subscriptionEstablished:^() {
@@ -16766,6 +17315,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveWiredFaultsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16832,6 +17384,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -16900,6 +17455,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatPercentRemainingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -16966,6 +17524,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatTimeRemainingWithParams:params
             subscriptionEstablished:^() {
@@ -17034,6 +17595,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatChargeLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17100,6 +17664,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatReplacementNeededWithParams:params
             subscriptionEstablished:^() {
@@ -17168,6 +17735,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatReplaceabilityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17234,6 +17804,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatPresentWithParams:params
             subscriptionEstablished:^() {
@@ -17302,6 +17875,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveBatFaultsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17368,6 +17944,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatReplacementDescriptionWithParams:params
             subscriptionEstablished:^() {
@@ -17436,6 +18015,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatCommonDesignationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17502,6 +18084,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatANSIDesignationWithParams:params
             subscriptionEstablished:^() {
@@ -17570,6 +18155,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatIECDesignationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17636,6 +18224,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatApprovedChemistryWithParams:params
             subscriptionEstablished:^() {
@@ -17704,6 +18295,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatCapacityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17770,6 +18364,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatQuantityWithParams:params
             subscriptionEstablished:^() {
@@ -17838,6 +18435,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatChargeStateWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -17904,6 +18504,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatTimeToFullChargeWithParams:params
             subscriptionEstablished:^() {
@@ -17972,6 +18575,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBatFunctionalWhileChargingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18038,6 +18644,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBatChargingCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -18106,6 +18715,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveBatChargeFaultsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18172,6 +18784,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -18240,6 +18855,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18306,6 +18924,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -18374,6 +18995,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18440,6 +19064,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -18722,6 +19349,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBreadcrumbWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18790,6 +19420,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBasicCommissioningInfoWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18856,6 +19489,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRegulatoryConfigWithParams:params
             subscriptionEstablished:^() {
@@ -18924,6 +19560,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLocationCapabilityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -18990,6 +19629,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSupportsConcurrentConnectionWithParams:params
             subscriptionEstablished:^() {
@@ -19058,6 +19700,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -19124,6 +19769,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -19192,6 +19840,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -19259,6 +19910,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -19325,6 +19979,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -19762,6 +20419,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxNetworksWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -19828,6 +20488,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNetworksWithParams:params
             subscriptionEstablished:^() {
@@ -19896,6 +20559,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeScanMaxTimeSecondsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -19962,6 +20628,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeConnectMaxTimeSecondsWithParams:params
             subscriptionEstablished:^() {
@@ -20070,6 +20739,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInterfaceEnabledWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20136,6 +20808,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLastNetworkingStatusWithParams:params
             subscriptionEstablished:^() {
@@ -20204,6 +20879,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLastNetworkIDWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20270,6 +20948,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLastConnectErrorValueWithParams:params
             subscriptionEstablished:^() {
@@ -20338,6 +21019,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20404,6 +21088,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -20472,6 +21159,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20539,6 +21229,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20605,6 +21298,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -20742,6 +21438,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20808,6 +21507,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -20876,6 +21578,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -20943,6 +21648,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21009,6 +21717,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -21154,6 +21865,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNetworkInterfacesWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21220,6 +21934,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRebootCountWithParams:params
             subscriptionEstablished:^() {
@@ -21288,6 +22005,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUpTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21354,6 +22074,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTotalOperationalHoursWithParams:params
             subscriptionEstablished:^() {
@@ -21422,6 +22145,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBootReasonsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21488,6 +22214,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeActiveHardwareFaultsWithParams:params
             subscriptionEstablished:^() {
@@ -21556,6 +22285,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveRadioFaultsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21622,6 +22354,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeActiveNetworkFaultsWithParams:params
             subscriptionEstablished:^() {
@@ -21690,6 +22425,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTestEventTriggersEnabledWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21756,6 +22494,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -21824,6 +22565,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -21890,6 +22634,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -21958,6 +22705,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22024,6 +22774,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -22156,6 +22909,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeThreadMetricsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22222,6 +22978,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentHeapFreeWithParams:params
             subscriptionEstablished:^() {
@@ -22290,6 +23049,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentHeapUsedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22356,6 +23118,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentHeapHighWatermarkWithParams:params
             subscriptionEstablished:^() {
@@ -22424,6 +23189,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22490,6 +23258,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -22558,6 +23329,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22625,6 +23399,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22691,6 +23468,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -22880,6 +23660,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeChannelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -22944,6 +23727,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRoutingRoleWithParams:params
             subscriptionEstablished:^() {
@@ -23010,6 +23796,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNetworkNameWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23074,6 +23863,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePanIdWithParams:params
             subscriptionEstablished:^() {
@@ -23140,6 +23932,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeExtendedPanIdWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23204,6 +23999,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMeshLocalPrefixWithParams:params
             subscriptionEstablished:^() {
@@ -23270,6 +24068,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOverrunCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23334,6 +24135,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNeighborTableListWithParams:params
             subscriptionEstablished:^() {
@@ -23400,6 +24204,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRouteTableListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23464,6 +24271,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePartitionIdWithParams:params
             subscriptionEstablished:^() {
@@ -23530,6 +24340,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWeightingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23594,6 +24407,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDataVersionWithParams:params
             subscriptionEstablished:^() {
@@ -23660,6 +24476,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStableDataVersionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23724,6 +24543,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLeaderRouterIdWithParams:params
             subscriptionEstablished:^() {
@@ -23790,6 +24612,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDetachedRoleCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23854,6 +24679,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeChildRoleCountWithParams:params
             subscriptionEstablished:^() {
@@ -23920,6 +24748,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRouterRoleCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -23984,6 +24815,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLeaderRoleCountWithParams:params
             subscriptionEstablished:^() {
@@ -24050,6 +24884,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttachAttemptCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24114,6 +24951,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePartitionIdChangeCountWithParams:params
             subscriptionEstablished:^() {
@@ -24181,6 +25021,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBetterPartitionAttachAttemptCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24245,6 +25088,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeParentChangeCountWithParams:params
             subscriptionEstablished:^() {
@@ -24311,6 +25157,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxTotalCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24375,6 +25224,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxUnicastCountWithParams:params
             subscriptionEstablished:^() {
@@ -24441,6 +25293,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxBroadcastCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24505,6 +25360,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxAckRequestedCountWithParams:params
             subscriptionEstablished:^() {
@@ -24571,6 +25429,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxAckedCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24635,6 +25496,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxNoAckRequestedCountWithParams:params
             subscriptionEstablished:^() {
@@ -24701,6 +25565,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxDataCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24765,6 +25632,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxDataPollCountWithParams:params
             subscriptionEstablished:^() {
@@ -24831,6 +25701,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxBeaconCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -24895,6 +25768,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxBeaconRequestCountWithParams:params
             subscriptionEstablished:^() {
@@ -24961,6 +25837,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxOtherCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25025,6 +25904,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxRetryCountWithParams:params
             subscriptionEstablished:^() {
@@ -25091,6 +25973,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxDirectMaxRetryExpiryCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25155,6 +26040,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxIndirectMaxRetryExpiryCountWithParams:params
             subscriptionEstablished:^() {
@@ -25221,6 +26109,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxErrCcaCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25285,6 +26176,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTxErrAbortCountWithParams:params
             subscriptionEstablished:^() {
@@ -25351,6 +26245,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxErrBusyChannelCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25415,6 +26312,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxTotalCountWithParams:params
             subscriptionEstablished:^() {
@@ -25481,6 +26381,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxUnicastCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25545,6 +26448,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxBroadcastCountWithParams:params
             subscriptionEstablished:^() {
@@ -25611,6 +26517,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxDataCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25675,6 +26584,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxDataPollCountWithParams:params
             subscriptionEstablished:^() {
@@ -25741,6 +26653,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxBeaconCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25805,6 +26720,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxBeaconRequestCountWithParams:params
             subscriptionEstablished:^() {
@@ -25871,6 +26789,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxOtherCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -25935,6 +26856,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxAddressFilteredCountWithParams:params
             subscriptionEstablished:^() {
@@ -26001,6 +26925,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxDestAddrFilteredCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26065,6 +26992,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxDuplicatedCountWithParams:params
             subscriptionEstablished:^() {
@@ -26131,6 +27061,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxErrNoFrameCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26195,6 +27128,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxErrUnknownNeighborCountWithParams:params
             subscriptionEstablished:^() {
@@ -26261,6 +27197,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxErrInvalidSrcAddrCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26325,6 +27264,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxErrSecCountWithParams:params
             subscriptionEstablished:^() {
@@ -26391,6 +27333,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRxErrFcsCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26455,6 +27400,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRxErrOtherCountWithParams:params
             subscriptionEstablished:^() {
@@ -26521,6 +27469,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveTimestampWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26586,6 +27537,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePendingTimestampWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26650,6 +27604,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDelayWithParams:params
             subscriptionEstablished:^() {
@@ -26717,6 +27674,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSecurityPolicyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26781,6 +27741,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeChannelPage0MaskWithParams:params
             subscriptionEstablished:^() {
@@ -26848,6 +27811,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOperationalDatasetComponentsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26914,6 +27880,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveNetworkFaultsListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -26978,6 +27947,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -27044,6 +28016,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27108,6 +28083,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -27174,6 +28152,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27238,6 +28219,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -27378,6 +28362,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBssidWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27442,6 +28429,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSecurityTypeWithParams:params
             subscriptionEstablished:^() {
@@ -27508,6 +28498,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWiFiVersionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27572,6 +28565,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeChannelNumberWithParams:params
             subscriptionEstablished:^() {
@@ -27638,6 +28634,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRssiWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27702,6 +28701,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBeaconLostCountWithParams:params
             subscriptionEstablished:^() {
@@ -27768,6 +28770,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBeaconRxCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27832,6 +28837,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePacketMulticastRxCountWithParams:params
             subscriptionEstablished:^() {
@@ -27898,6 +28906,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePacketMulticastTxCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -27962,6 +28973,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePacketUnicastRxCountWithParams:params
             subscriptionEstablished:^() {
@@ -28028,6 +29042,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePacketUnicastTxCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28092,6 +29109,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentMaxRateWithParams:params
             subscriptionEstablished:^() {
@@ -28158,6 +29178,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOverrunCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28222,6 +29245,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -28288,6 +29314,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28352,6 +29381,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -28418,6 +29450,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28482,6 +29517,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -28615,6 +29653,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePHYRateWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28679,6 +29720,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeFullDuplexWithParams:params
             subscriptionEstablished:^() {
@@ -28745,6 +29789,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePacketRxCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28809,6 +29856,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePacketTxCountWithParams:params
             subscriptionEstablished:^() {
@@ -28875,6 +29925,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTxErrCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -28939,6 +29992,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCollisionCountWithParams:params
             subscriptionEstablished:^() {
@@ -29005,6 +30061,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOverrunCountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29069,6 +30128,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCarrierDetectWithParams:params
             subscriptionEstablished:^() {
@@ -29135,6 +30197,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTimeSinceResetWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29199,6 +30264,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -29265,6 +30333,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29329,6 +30400,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -29395,6 +30469,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29459,6 +30536,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -29561,6 +30641,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeVendorNameWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29628,6 +30711,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeVendorIDWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29694,6 +30780,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeProductNameWithParams:params
             subscriptionEstablished:^() {
@@ -29804,6 +30893,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNodeLabelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -29870,6 +30962,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeHardwareVersionWithParams:params
             subscriptionEstablished:^() {
@@ -29938,6 +31033,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeHardwareVersionStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30004,6 +31102,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSoftwareVersionWithParams:params
             subscriptionEstablished:^() {
@@ -30072,6 +31173,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSoftwareVersionStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30138,6 +31242,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeManufacturingDateWithParams:params
             subscriptionEstablished:^() {
@@ -30206,6 +31313,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePartNumberWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30272,6 +31382,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeProductURLWithParams:params
             subscriptionEstablished:^() {
@@ -30340,6 +31453,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeProductLabelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30406,6 +31522,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSerialNumberWithParams:params
             subscriptionEstablished:^() {
@@ -30474,6 +31593,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeReachableWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30540,6 +31662,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeUniqueIDWithParams:params
             subscriptionEstablished:^() {
@@ -30608,6 +31733,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30674,6 +31802,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -30742,6 +31873,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30809,6 +31943,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -30875,6 +32012,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -30968,6 +32108,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNumberOfPositionsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31034,6 +32177,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentPositionWithParams:params
             subscriptionEstablished:^() {
@@ -31102,6 +32248,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMultiPressMaxWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31168,6 +32317,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -31236,6 +32388,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31302,6 +32457,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -31370,6 +32528,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31436,6 +32597,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -31663,6 +32827,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWindowStatusWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31727,6 +32894,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAdminFabricIndexWithParams:params
             subscriptionEstablished:^() {
@@ -31793,6 +32963,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAdminVendorIdWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31857,6 +33030,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -31923,6 +33099,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -31987,6 +33166,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -32053,6 +33235,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -32117,6 +33302,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -32618,6 +33806,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNOCsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -32688,6 +33879,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFabricsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -32752,6 +33946,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSupportedFabricsWithParams:params
             subscriptionEstablished:^() {
@@ -32818,6 +34015,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCommissionedFabricsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -32882,6 +34082,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTrustedRootCertificatesWithParams:params
             subscriptionEstablished:^() {
@@ -32948,6 +34151,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentFabricIndexWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -33012,6 +34218,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -33078,6 +34287,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -33142,6 +34354,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -33208,6 +34423,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -33272,6 +34490,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -33661,6 +34882,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGroupKeyMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -33733,6 +34957,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGroupTableWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -33799,6 +35026,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxGroupsPerFabricWithParams:params
             subscriptionEstablished:^() {
@@ -33867,6 +35097,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxGroupKeysPerFabricWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -33933,6 +35166,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -34001,6 +35237,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34067,6 +35306,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -34135,6 +35377,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34201,6 +35446,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -34285,6 +35533,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLabelListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34351,6 +35602,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -34419,6 +35673,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34485,6 +35742,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -34553,6 +35813,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34619,6 +35882,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -34760,6 +36026,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLabelListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34826,6 +36095,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -34894,6 +36166,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -34960,6 +36235,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -35028,6 +36306,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -35094,6 +36375,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -35179,6 +36463,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStateValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -35245,6 +36532,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -35313,6 +36603,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -35379,6 +36672,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -35447,6 +36743,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -35513,6 +36812,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -35649,6 +36951,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDescriptionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -35715,6 +37020,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeStandardNamespaceWithParams:params
             subscriptionEstablished:^() {
@@ -35783,6 +37091,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSupportedModesWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -35849,6 +37160,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentModeWithParams:params
             subscriptionEstablished:^() {
@@ -35957,6 +37271,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStartUpModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -36064,6 +37381,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOnModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -36130,6 +37450,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -36198,6 +37521,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -36264,6 +37590,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -36332,6 +37661,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -36398,6 +37730,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -37501,6 +38836,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLockStateWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -37567,6 +38905,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLockTypeWithParams:params
             subscriptionEstablished:^() {
@@ -37635,6 +38976,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActuatorEnabledWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -37701,6 +39045,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDoorStateWithParams:params
             subscriptionEstablished:^() {
@@ -37809,6 +39156,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDoorOpenEventsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -37915,6 +39265,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDoorClosedEventsWithParams:params
             subscriptionEstablished:^() {
@@ -38023,6 +39376,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOpenPeriodWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -38089,6 +39445,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfTotalUsersSupportedWithParams:params
             subscriptionEstablished:^() {
@@ -38157,6 +39516,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNumberOfPINUsersSupportedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -38223,6 +39585,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfRFIDUsersSupportedWithParams:params
             subscriptionEstablished:^() {
@@ -38292,6 +39657,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -38359,6 +39727,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams:params
             subscriptionEstablished:^() {
@@ -38428,6 +39799,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNumberOfHolidaySchedulesSupportedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -38494,6 +39868,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxPINCodeLengthWithParams:params
             subscriptionEstablished:^() {
@@ -38562,6 +39939,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMinPINCodeLengthWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -38628,6 +40008,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxRFIDCodeLengthWithParams:params
             subscriptionEstablished:^() {
@@ -38696,6 +40079,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMinRFIDCodeLengthWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -38762,6 +40148,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCredentialRulesSupportWithParams:params
             subscriptionEstablished:^() {
@@ -38830,6 +40219,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfCredentialsSupportedPerUserWithParams:params
             subscriptionEstablished:^() {
@@ -38940,6 +40332,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLanguageWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -39046,6 +40441,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLEDSettingsWithParams:params
             subscriptionEstablished:^() {
@@ -39154,6 +40552,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAutoRelockTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -39260,6 +40661,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSoundVolumeWithParams:params
             subscriptionEstablished:^() {
@@ -39368,6 +40772,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOperatingModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -39435,6 +40842,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSupportedOperatingModesWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -39501,6 +40911,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDefaultConfigurationRegisterWithParams:params
             subscriptionEstablished:^() {
@@ -39609,6 +41022,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEnableLocalProgrammingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -39715,6 +41131,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEnableOneTouchLockingWithParams:params
             subscriptionEstablished:^() {
@@ -39823,6 +41242,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEnableInsideStatusLEDWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -39929,6 +41351,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEnablePrivacyModeButtonWithParams:params
             subscriptionEstablished:^() {
@@ -40037,6 +41462,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLocalProgrammingFeaturesWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -40143,6 +41571,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWrongCodeEntryLimitWithParams:params
             subscriptionEstablished:^() {
@@ -40252,6 +41683,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUserCodeTemporaryDisableTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -40358,6 +41792,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSendPINOverTheAirWithParams:params
             subscriptionEstablished:^() {
@@ -40467,6 +41904,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRequirePINforRemoteOperationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -40574,6 +42014,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeExpiringUserTimeoutWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -40640,6 +42083,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -40708,6 +42154,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -40774,6 +42223,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -40842,6 +42294,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -40908,6 +42363,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -41333,6 +42791,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -41399,6 +42860,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePhysicalClosedLimitLiftWithParams:params
             subscriptionEstablished:^() {
@@ -41467,6 +42931,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePhysicalClosedLimitTiltWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -41533,6 +43000,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentPositionLiftWithParams:params
             subscriptionEstablished:^() {
@@ -41601,6 +43071,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentPositionTiltWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -41667,6 +43140,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfActuationsLiftWithParams:params
             subscriptionEstablished:^() {
@@ -41735,6 +43211,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNumberOfActuationsTiltWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -41801,6 +43280,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeConfigStatusWithParams:params
             subscriptionEstablished:^() {
@@ -41869,6 +43351,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentPositionLiftPercentageWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -41936,6 +43421,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentPositionTiltPercentageWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42002,6 +43490,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^() {
@@ -42071,6 +43562,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTargetPositionLiftPercent100thsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42139,6 +43633,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTargetPositionTiltPercent100thsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42205,6 +43702,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEndProductTypeWithParams:params
             subscriptionEstablished:^() {
@@ -42274,6 +43774,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentPositionLiftPercent100thsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42342,6 +43845,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentPositionTiltPercent100thsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42408,6 +43914,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInstalledOpenLimitLiftWithParams:params
             subscriptionEstablished:^() {
@@ -42476,6 +43985,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInstalledClosedLimitLiftWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42543,6 +44055,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInstalledOpenLimitTiltWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42609,6 +44124,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInstalledClosedLimitTiltWithParams:params
             subscriptionEstablished:^() {
@@ -42717,6 +44235,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42783,6 +44304,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSafetyStatusWithParams:params
             subscriptionEstablished:^() {
@@ -42851,6 +44375,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -42917,6 +44444,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -42985,6 +44515,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43052,6 +44585,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43118,6 +44654,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -43302,6 +44841,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBarrierMovingStateWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43369,6 +44911,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBarrierSafetyStatusWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43435,6 +44980,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBarrierCapabilitiesWithParams:params
             subscriptionEstablished:^() {
@@ -43543,6 +45091,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBarrierOpenEventsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43649,6 +45200,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBarrierCloseEventsWithParams:params
             subscriptionEstablished:^() {
@@ -43758,6 +45312,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBarrierCommandOpenEventsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43866,6 +45423,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBarrierCommandCloseEventsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -43972,6 +45532,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBarrierOpenPeriodWithParams:params
             subscriptionEstablished:^() {
@@ -44080,6 +45643,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBarrierClosePeriodWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44146,6 +45712,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBarrierPositionWithParams:params
             subscriptionEstablished:^() {
@@ -44214,6 +45783,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44280,6 +45852,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -44348,6 +45923,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44415,6 +45993,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44481,6 +46062,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -44602,6 +46186,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxPressureWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44666,6 +46253,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxSpeedWithParams:params
             subscriptionEstablished:^() {
@@ -44732,6 +46322,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxFlowWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44796,6 +46389,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinConstPressureWithParams:params
             subscriptionEstablished:^() {
@@ -44862,6 +46458,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxConstPressureWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -44926,6 +46525,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinCompPressureWithParams:params
             subscriptionEstablished:^() {
@@ -44992,6 +46594,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxCompPressureWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45056,6 +46661,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinConstSpeedWithParams:params
             subscriptionEstablished:^() {
@@ -45122,6 +46730,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxConstSpeedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45186,6 +46797,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinConstFlowWithParams:params
             subscriptionEstablished:^() {
@@ -45252,6 +46866,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxConstFlowWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45316,6 +46933,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinConstTempWithParams:params
             subscriptionEstablished:^() {
@@ -45382,6 +47002,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxConstTempWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45446,6 +47069,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePumpStatusWithParams:params
             subscriptionEstablished:^() {
@@ -45512,6 +47138,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEffectiveOperationModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45576,6 +47205,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEffectiveControlModeWithParams:params
             subscriptionEstablished:^() {
@@ -45642,6 +47274,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCapacityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45706,6 +47341,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSpeedWithParams:params
             subscriptionEstablished:^() {
@@ -45812,6 +47450,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLifetimeRunningHoursWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -45876,6 +47517,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePowerWithParams:params
             subscriptionEstablished:^() {
@@ -45983,6 +47627,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLifetimeEnergyConsumedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -46086,6 +47733,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOperationModeWithParams:params
             subscriptionEstablished:^() {
@@ -46191,6 +47841,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeControlModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -46255,6 +47908,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -46321,6 +47977,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -46385,6 +48044,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -46451,6 +48113,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -46515,6 +48180,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -46867,6 +48535,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLocalTemperatureWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -46933,6 +48604,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOutdoorTemperatureWithParams:params
             subscriptionEstablished:^() {
@@ -47001,6 +48675,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOccupancyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47067,6 +48744,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAbsMinHeatSetpointLimitWithParams:params
             subscriptionEstablished:^() {
@@ -47135,6 +48815,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAbsMaxHeatSetpointLimitWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47201,6 +48884,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAbsMinCoolSetpointLimitWithParams:params
             subscriptionEstablished:^() {
@@ -47269,6 +48955,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAbsMaxCoolSetpointLimitWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47336,6 +49025,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePICoolingDemandWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47402,6 +49094,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePIHeatingDemandWithParams:params
             subscriptionEstablished:^() {
@@ -47511,6 +49206,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeHVACSystemTypeConfigurationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47619,6 +49317,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLocalTemperatureCalibrationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47726,6 +49427,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOccupiedCoolingSetpointWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -47832,6 +49536,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOccupiedHeatingSetpointWithParams:params
             subscriptionEstablished:^() {
@@ -47941,6 +49648,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUnoccupiedCoolingSetpointWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48049,6 +49759,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUnoccupiedHeatingSetpointWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48155,6 +49868,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinHeatSetpointLimitWithParams:params
             subscriptionEstablished:^() {
@@ -48263,6 +49979,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxHeatSetpointLimitWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48369,6 +50088,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinCoolSetpointLimitWithParams:params
             subscriptionEstablished:^() {
@@ -48477,6 +50199,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxCoolSetpointLimitWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48584,6 +50309,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMinSetpointDeadBandWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48690,6 +50418,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRemoteSensingWithParams:params
             subscriptionEstablished:^() {
@@ -48799,6 +50530,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeControlSequenceOfOperationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48906,6 +50640,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSystemModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -48972,6 +50709,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeThermostatRunningModeWithParams:params
             subscriptionEstablished:^() {
@@ -49040,6 +50780,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStartOfWeekWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -49107,6 +50850,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNumberOfWeeklyTransitionsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -49173,6 +50919,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfDailyTransitionsWithParams:params
             subscriptionEstablished:^() {
@@ -49280,6 +51029,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTemperatureSetpointHoldWithParams:params
             subscriptionEstablished:^() {
@@ -49390,6 +51142,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTemperatureSetpointHoldDurationWithParams:params
             subscriptionEstablished:^() {
@@ -49502,6 +51257,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeThermostatProgrammingOperationModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -49568,6 +51326,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeThermostatRunningStateWithParams:params
             subscriptionEstablished:^() {
@@ -49636,6 +51397,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSetpointChangeSourceWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -49703,6 +51467,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSetpointChangeAmountWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -49769,6 +51536,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSetpointChangeSourceTimestampWithParams:params
             subscriptionEstablished:^() {
@@ -49877,6 +51647,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOccupiedSetbackWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -49944,6 +51717,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOccupiedSetbackMinWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -50010,6 +51786,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOccupiedSetbackMaxWithParams:params
             subscriptionEstablished:^() {
@@ -50118,6 +51897,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUnoccupiedSetbackWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -50185,6 +51967,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUnoccupiedSetbackMinWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -50251,6 +52036,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeUnoccupiedSetbackMaxWithParams:params
             subscriptionEstablished:^() {
@@ -50359,6 +52147,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEmergencyHeatDeltaWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -50465,6 +52256,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeACTypeWithParams:params
             subscriptionEstablished:^() {
@@ -50573,6 +52367,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeACCapacityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -50679,6 +52476,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeACRefrigerantTypeWithParams:params
             subscriptionEstablished:^() {
@@ -50787,6 +52587,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeACCompressorTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -50893,6 +52696,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeACErrorCodeWithParams:params
             subscriptionEstablished:^() {
@@ -51001,6 +52807,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeACLouverPositionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51067,6 +52876,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeACCoilTemperatureWithParams:params
             subscriptionEstablished:^() {
@@ -51175,6 +52987,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeACCapacityformatWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51241,6 +53056,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -51309,6 +53127,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51375,6 +53196,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -51443,6 +53267,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51509,6 +53336,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -51643,6 +53473,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFanModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51749,6 +53582,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeFanModeSequenceWithParams:params
             subscriptionEstablished:^() {
@@ -51857,6 +53693,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePercentSettingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51924,6 +53763,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePercentCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -51990,6 +53832,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSpeedMaxWithParams:params
             subscriptionEstablished:^() {
@@ -52098,6 +53943,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSpeedSettingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -52165,6 +54013,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSpeedCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -52231,6 +54082,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRockSupportWithParams:params
             subscriptionEstablished:^() {
@@ -52339,6 +54193,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRockSettingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -52405,6 +54262,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWindSupportWithParams:params
             subscriptionEstablished:^() {
@@ -52513,6 +54373,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWindSettingWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -52579,6 +54442,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -52647,6 +54513,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -52713,6 +54582,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -52781,6 +54653,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -52847,6 +54722,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -52978,6 +54856,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTemperatureDisplayModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -53088,6 +54969,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeKeypadLockoutWithParams:params
             subscriptionEstablished:^() {
@@ -53201,6 +55085,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeScheduleProgrammingVisibilityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -53269,6 +55156,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -53339,6 +55229,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -53407,6 +55300,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -53477,6 +55373,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -53545,6 +55444,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -54717,6 +56619,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentHueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -54783,6 +56688,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentSaturationWithParams:params
             subscriptionEstablished:^() {
@@ -54851,6 +56759,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRemainingTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -54917,6 +56828,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentXWithParams:params
             subscriptionEstablished:^() {
@@ -54985,6 +56899,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentYWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55051,6 +56968,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDriftCompensationWithParams:params
             subscriptionEstablished:^() {
@@ -55119,6 +57039,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCompensationTextWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55186,6 +57109,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorTemperatureMiredsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55252,6 +57178,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorModeWithParams:params
             subscriptionEstablished:^() {
@@ -55360,6 +57289,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOptionsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55426,6 +57358,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNumberOfPrimariesWithParams:params
             subscriptionEstablished:^() {
@@ -55494,6 +57429,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary1XWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55560,6 +57498,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary1YWithParams:params
             subscriptionEstablished:^() {
@@ -55628,6 +57569,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary1IntensityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55694,6 +57638,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary2XWithParams:params
             subscriptionEstablished:^() {
@@ -55762,6 +57709,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary2YWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55828,6 +57778,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary2IntensityWithParams:params
             subscriptionEstablished:^() {
@@ -55896,6 +57849,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary3XWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -55962,6 +57918,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary3YWithParams:params
             subscriptionEstablished:^() {
@@ -56030,6 +57989,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary3IntensityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -56096,6 +58058,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary4XWithParams:params
             subscriptionEstablished:^() {
@@ -56164,6 +58129,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary4YWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -56230,6 +58198,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary4IntensityWithParams:params
             subscriptionEstablished:^() {
@@ -56298,6 +58269,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary5XWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -56364,6 +58338,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary5YWithParams:params
             subscriptionEstablished:^() {
@@ -56432,6 +58409,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary5IntensityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -56498,6 +58478,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary6XWithParams:params
             subscriptionEstablished:^() {
@@ -56566,6 +58549,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePrimary6YWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -56632,6 +58618,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePrimary6IntensityWithParams:params
             subscriptionEstablished:^() {
@@ -56740,6 +58729,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWhitePointXWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -56846,6 +58838,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeWhitePointYWithParams:params
             subscriptionEstablished:^() {
@@ -56954,6 +58949,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorPointRXWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -57060,6 +59058,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorPointRYWithParams:params
             subscriptionEstablished:^() {
@@ -57168,6 +59169,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorPointRIntensityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -57274,6 +59278,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorPointGXWithParams:params
             subscriptionEstablished:^() {
@@ -57382,6 +59389,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorPointGYWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -57488,6 +59498,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorPointGIntensityWithParams:params
             subscriptionEstablished:^() {
@@ -57596,6 +59609,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorPointBXWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -57702,6 +59718,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorPointBYWithParams:params
             subscriptionEstablished:^() {
@@ -57810,6 +59829,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorPointBIntensityWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -57876,6 +59898,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEnhancedCurrentHueWithParams:params
             subscriptionEstablished:^() {
@@ -57944,6 +59969,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEnhancedColorModeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58010,6 +60038,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorLoopActiveWithParams:params
             subscriptionEstablished:^() {
@@ -58078,6 +60109,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorLoopDirectionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58144,6 +60178,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorLoopTimeWithParams:params
             subscriptionEstablished:^() {
@@ -58212,6 +60249,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorLoopStartEnhancedHueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58278,6 +60318,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorLoopStoredEnhancedHueWithParams:params
             subscriptionEstablished:^() {
@@ -58346,6 +60389,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorCapabilitiesWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58412,6 +60458,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeColorTempPhysicalMinMiredsWithParams:params
             subscriptionEstablished:^() {
@@ -58480,6 +60529,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeColorTempPhysicalMaxMiredsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58547,6 +60599,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCoupleColorTempToLevelMinMiredsWithParams:params
             subscriptionEstablished:^() {
@@ -58657,6 +60712,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStartUpColorTemperatureMiredsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58723,6 +60781,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -58791,6 +60852,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58857,6 +60921,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -58925,6 +60992,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -58991,6 +61061,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -59088,6 +61161,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePhysicalMinLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -59155,6 +61231,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePhysicalMaxLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -59221,6 +61300,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBallastStatusWithParams:params
             subscriptionEstablished:^() {
@@ -59329,6 +61411,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMinLevelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -59435,6 +61520,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMaxLevelWithParams:params
             subscriptionEstablished:^() {
@@ -59544,6 +61632,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeIntrinsicBalanceFactorWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -59652,6 +61743,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBallastFactorAdjustmentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -59718,6 +61812,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLampQuantityWithParams:params
             subscriptionEstablished:^() {
@@ -59828,6 +61925,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLampTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -59937,6 +62037,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLampManufacturerWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60043,6 +62146,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLampRatedHoursWithParams:params
             subscriptionEstablished:^() {
@@ -60151,6 +62257,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLampBurnHoursWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60257,6 +62366,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLampAlarmModeWithParams:params
             subscriptionEstablished:^() {
@@ -60366,6 +62478,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLampBurnHoursTripPointWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60432,6 +62547,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -60500,6 +62618,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60566,6 +62687,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -60634,6 +62758,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60700,6 +62827,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -60786,6 +62916,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60850,6 +62983,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinMeasuredValueWithParams:params
             subscriptionEstablished:^() {
@@ -60916,6 +63052,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -60980,6 +63119,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeToleranceWithParams:params
             subscriptionEstablished:^() {
@@ -61046,6 +63188,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLightSensorTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61110,6 +63255,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -61176,6 +63324,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61240,6 +63391,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -61306,6 +63460,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61370,6 +63527,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -61455,6 +63615,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61519,6 +63682,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinMeasuredValueWithParams:params
             subscriptionEstablished:^() {
@@ -61585,6 +63751,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61649,6 +63818,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeToleranceWithParams:params
             subscriptionEstablished:^() {
@@ -61715,6 +63887,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61779,6 +63954,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -61845,6 +64023,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61910,6 +64091,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -61974,6 +64158,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -62066,6 +64253,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62132,6 +64322,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinMeasuredValueWithParams:params
             subscriptionEstablished:^() {
@@ -62200,6 +64393,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62266,6 +64462,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeToleranceWithParams:params
             subscriptionEstablished:^() {
@@ -62334,6 +64533,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeScaledValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62400,6 +64602,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinScaledValueWithParams:params
             subscriptionEstablished:^() {
@@ -62468,6 +64673,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxScaledValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62534,6 +64742,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeScaledToleranceWithParams:params
             subscriptionEstablished:^() {
@@ -62602,6 +64813,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeScaleWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62668,6 +64882,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -62736,6 +64953,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62802,6 +65022,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -62870,6 +65093,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -62936,6 +65162,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -63023,6 +65252,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63089,6 +65321,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinMeasuredValueWithParams:params
             subscriptionEstablished:^() {
@@ -63157,6 +65392,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63223,6 +65461,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeToleranceWithParams:params
             subscriptionEstablished:^() {
@@ -63291,6 +65532,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63357,6 +65601,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -63425,6 +65672,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63492,6 +65742,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63558,6 +65811,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -63643,6 +65899,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63707,6 +65966,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMinMeasuredValueWithParams:params
             subscriptionEstablished:^() {
@@ -63773,6 +66035,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMaxMeasuredValueWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63837,6 +66102,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeToleranceWithParams:params
             subscriptionEstablished:^() {
@@ -63903,6 +66171,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -63967,6 +66238,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -64033,6 +66307,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -64098,6 +66375,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -64162,6 +66442,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -64257,6 +66540,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOccupancyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -64324,6 +66610,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOccupancySensorTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -64390,6 +66679,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOccupancySensorTypeBitmapWithParams:params
             subscriptionEstablished:^() {
@@ -64500,6 +66792,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePirOccupiedToUnoccupiedDelayWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -64608,6 +66903,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePirUnoccupiedToOccupiedDelayWithParams:params
             subscriptionEstablished:^() {
@@ -64718,6 +67016,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePirUnoccupiedToOccupiedThresholdWithParams:params
             subscriptionEstablished:^() {
@@ -64830,6 +67131,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -64940,6 +67244,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParams:params
             subscriptionEstablished:^() {
@@ -65053,6 +67360,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -65164,6 +67474,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParams:params
             subscriptionEstablished:^() {
@@ -65277,6 +67590,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -65388,6 +67704,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -65454,6 +67773,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -65522,6 +67844,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -65588,6 +67913,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -65656,6 +67984,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -65722,6 +68053,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -65806,6 +68140,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMACAddressWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -65872,6 +68209,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -65940,6 +68280,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -66006,6 +68349,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -66074,6 +68420,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -66140,6 +68489,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -66373,6 +68725,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeChannelListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -66439,6 +68794,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLineupWithParams:params
             subscriptionEstablished:^() {
@@ -66508,6 +68866,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentChannelWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -66574,6 +68935,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -66642,6 +69006,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -66708,6 +69075,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -66776,6 +69146,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -66842,6 +69215,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -66984,6 +69360,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTargetListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -67050,6 +69429,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentTargetWithParams:params
             subscriptionEstablished:^() {
@@ -67118,6 +69500,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -67184,6 +69569,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -67252,6 +69640,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -67319,6 +69710,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -67385,6 +69779,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -67987,6 +70384,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentStateWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68054,6 +70454,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStartTimeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68120,6 +70523,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDurationWithParams:params
             subscriptionEstablished:^() {
@@ -68189,6 +70595,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSampledPositionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68255,6 +70664,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePlaybackSpeedWithParams:params
             subscriptionEstablished:^() {
@@ -68323,6 +70735,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSeekRangeEndWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68389,6 +70804,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeSeekRangeStartWithParams:params
             subscriptionEstablished:^() {
@@ -68457,6 +70875,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68523,6 +70944,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -68591,6 +71015,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68658,6 +71085,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -68724,6 +71154,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -68995,6 +71428,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInputListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69061,6 +71497,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentInputWithParams:params
             subscriptionEstablished:^() {
@@ -69129,6 +71568,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69195,6 +71637,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -69263,6 +71708,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69330,6 +71778,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69396,6 +71847,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -69523,6 +71977,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69589,6 +72046,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -69657,6 +72117,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69724,6 +72187,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69790,6 +72256,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -69921,6 +72390,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -69987,6 +72459,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -70055,6 +72530,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -70122,6 +72600,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -70188,6 +72669,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -70603,6 +73087,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptHeaderWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -70712,6 +73199,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeSupportedStreamingProtocolsWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -70778,6 +73268,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -70846,6 +73339,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -70912,6 +73408,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -70980,6 +73479,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -71046,6 +73548,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -71229,6 +73734,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOutputListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -71295,6 +73803,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentOutputWithParams:params
             subscriptionEstablished:^() {
@@ -71363,6 +73874,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -71429,6 +73943,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -71497,6 +74014,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -71564,6 +74084,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -71630,6 +74153,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -71886,6 +74412,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCatalogListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72012,6 +74541,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCurrentAppWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72078,6 +74610,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -72146,6 +74681,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72212,6 +74750,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -72280,6 +74821,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72346,6 +74890,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -72437,6 +74984,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeVendorNameWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72503,6 +75053,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeVendorIDWithParams:params
             subscriptionEstablished:^() {
@@ -72571,6 +75124,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApplicationNameWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72637,6 +75193,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeProductIDWithParams:params
             subscriptionEstablished:^() {
@@ -72706,6 +75265,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApplicationWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72772,6 +75334,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeStatusWithParams:params
             subscriptionEstablished:^() {
@@ -72840,6 +75405,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApplicationVersionWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -72906,6 +75474,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAllowedVendorListWithParams:params
             subscriptionEstablished:^() {
@@ -72974,6 +75545,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -73040,6 +75614,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -73108,6 +75685,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -73175,6 +75755,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -73241,6 +75824,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -73472,6 +76058,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -73538,6 +76127,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -73606,6 +76198,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -73673,6 +76268,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -73739,6 +76337,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -74045,6 +76646,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasurementTypeWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74111,6 +76715,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -74179,6 +76786,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcVoltageMinWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74245,6 +76855,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcVoltageMaxWithParams:params
             subscriptionEstablished:^() {
@@ -74313,6 +76926,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74379,6 +76995,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcCurrentMinWithParams:params
             subscriptionEstablished:^() {
@@ -74447,6 +77066,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcCurrentMaxWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74513,6 +77135,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcPowerWithParams:params
             subscriptionEstablished:^() {
@@ -74581,6 +77206,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcPowerMinWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74647,6 +77275,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcPowerMaxWithParams:params
             subscriptionEstablished:^() {
@@ -74715,6 +77346,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcVoltageMultiplierWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74781,6 +77415,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcVoltageDivisorWithParams:params
             subscriptionEstablished:^() {
@@ -74849,6 +77486,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcCurrentMultiplierWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -74915,6 +77555,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcCurrentDivisorWithParams:params
             subscriptionEstablished:^() {
@@ -74983,6 +77626,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeDcPowerMultiplierWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75049,6 +77695,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeDcPowerDivisorWithParams:params
             subscriptionEstablished:^() {
@@ -75117,6 +77766,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcFrequencyWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75183,6 +77835,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcFrequencyMinWithParams:params
             subscriptionEstablished:^() {
@@ -75251,6 +77906,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcFrequencyMaxWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75317,6 +77975,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNeutralCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -75385,6 +78046,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTotalActivePowerWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75451,6 +78115,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTotalReactivePowerWithParams:params
             subscriptionEstablished:^() {
@@ -75519,6 +78186,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeTotalApparentPowerWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75585,6 +78255,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMeasured1stHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -75653,6 +78326,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasured3rdHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75719,6 +78395,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMeasured5thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -75787,6 +78466,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasured7thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75854,6 +78536,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasured9thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -75920,6 +78605,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMeasured11thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -75989,6 +78677,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredPhase1stHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76056,6 +78747,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMeasuredPhase3rdHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -76125,6 +78819,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredPhase5thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76192,6 +78889,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeMeasuredPhase7thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -76261,6 +78961,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredPhase9thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76329,6 +79032,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeMeasuredPhase11thHarmonicCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76395,6 +79101,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcFrequencyMultiplierWithParams:params
             subscriptionEstablished:^() {
@@ -76463,6 +79172,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcFrequencyDivisorWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76529,6 +79241,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePowerMultiplierWithParams:params
             subscriptionEstablished:^() {
@@ -76597,6 +79312,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePowerDivisorWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76663,6 +79381,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeHarmonicCurrentMultiplierWithParams:params
             subscriptionEstablished:^() {
@@ -76732,6 +79453,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributePhaseHarmonicCurrentMultiplierWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76798,6 +79522,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInstantaneousVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -76866,6 +79593,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInstantaneousLineCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -76932,6 +79662,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInstantaneousActiveCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -77000,6 +79733,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInstantaneousReactiveCurrentWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77066,6 +79802,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInstantaneousPowerWithParams:params
             subscriptionEstablished:^() {
@@ -77134,6 +79873,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77200,6 +79942,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageMinWithParams:params
             subscriptionEstablished:^() {
@@ -77268,6 +80013,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageMaxWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77334,6 +80082,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsCurrentWithParams:params
             subscriptionEstablished:^() {
@@ -77402,6 +80153,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsCurrentMinWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77468,6 +80222,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsCurrentMaxWithParams:params
             subscriptionEstablished:^() {
@@ -77536,6 +80293,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActivePowerWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77602,6 +80362,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeActivePowerMinWithParams:params
             subscriptionEstablished:^() {
@@ -77670,6 +80433,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActivePowerMaxWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77736,6 +80502,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeReactivePowerWithParams:params
             subscriptionEstablished:^() {
@@ -77804,6 +80573,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApparentPowerWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -77870,6 +80642,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePowerFactorWithParams:params
             subscriptionEstablished:^() {
@@ -77981,6 +80756,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAverageRmsVoltageMeasurementPeriodWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78090,6 +80868,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAverageRmsUnderVoltageCounterWithParams:params
             subscriptionEstablished:^() {
@@ -78201,6 +80982,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsExtremeOverVoltagePeriodWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78311,6 +81095,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsExtremeUnderVoltagePeriodWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78417,6 +81204,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageSagPeriodWithParams:params
             subscriptionEstablished:^() {
@@ -78526,6 +81316,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageSwellPeriodWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78592,6 +81385,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcVoltageMultiplierWithParams:params
             subscriptionEstablished:^() {
@@ -78660,6 +81456,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcVoltageDivisorWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78726,6 +81525,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcCurrentMultiplierWithParams:params
             subscriptionEstablished:^() {
@@ -78794,6 +81596,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcCurrentDivisorWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78861,6 +81666,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcPowerMultiplierWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -78927,6 +81735,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcPowerDivisorWithParams:params
             subscriptionEstablished:^() {
@@ -79035,6 +81846,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeOverloadAlarmsMaskWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79102,6 +81916,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeVoltageOverloadWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79168,6 +81985,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeCurrentOverloadWithParams:params
             subscriptionEstablished:^() {
@@ -79277,6 +82097,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcOverloadAlarmsMaskWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79343,6 +82166,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcVoltageOverloadWithParams:params
             subscriptionEstablished:^() {
@@ -79411,6 +82237,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcCurrentOverloadWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79477,6 +82306,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAcActivePowerOverloadWithParams:params
             subscriptionEstablished:^() {
@@ -79545,6 +82377,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcReactivePowerOverloadWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79611,6 +82446,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAverageRmsOverVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -79679,6 +82517,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAverageRmsUnderVoltageWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79745,6 +82586,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsExtremeOverVoltageWithParams:params
             subscriptionEstablished:^() {
@@ -79813,6 +82657,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsExtremeUnderVoltageWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -79879,6 +82726,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageSagWithParams:params
             subscriptionEstablished:^() {
@@ -79947,6 +82797,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageSwellWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80013,6 +82866,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLineCurrentPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80081,6 +82937,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveCurrentPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80147,6 +83006,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeReactiveCurrentPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80215,6 +83077,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltagePhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80281,6 +83146,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageMinPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80349,6 +83217,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageMaxPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80415,6 +83286,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsCurrentPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80483,6 +83357,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsCurrentMinPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80549,6 +83426,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsCurrentMaxPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80617,6 +83497,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActivePowerPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80683,6 +83566,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeActivePowerMinPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80751,6 +83637,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActivePowerMaxPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80817,6 +83706,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeReactivePowerPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -80885,6 +83777,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApparentPowerPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -80951,6 +83846,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePowerFactorPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -81020,6 +83918,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81087,6 +83988,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAverageRmsOverVoltageCounterPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -81156,6 +84060,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAverageRmsUnderVoltageCounterPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81223,6 +84130,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -81292,6 +84202,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81358,6 +84271,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageSagPeriodPhaseBWithParams:params
             subscriptionEstablished:^() {
@@ -81426,6 +84342,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageSwellPeriodPhaseBWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81492,6 +84411,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLineCurrentPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -81560,6 +84482,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActiveCurrentPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81626,6 +84551,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeReactiveCurrentPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -81694,6 +84622,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltagePhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81760,6 +84691,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageMinPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -81828,6 +84762,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageMaxPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -81894,6 +84831,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsCurrentPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -81962,6 +84902,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsCurrentMinPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82028,6 +84971,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsCurrentMaxPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82096,6 +85042,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActivePowerPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82162,6 +85111,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeActivePowerMinPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82230,6 +85182,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeActivePowerMaxPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82296,6 +85251,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeReactivePowerPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82364,6 +85322,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeApparentPowerPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82430,6 +85391,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributePowerFactorPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82499,6 +85463,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82566,6 +85533,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAverageRmsOverVoltageCounterPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82635,6 +85605,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAverageRmsUnderVoltageCounterPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82702,6 +85675,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82771,6 +85747,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82837,6 +85816,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRmsVoltageSagPeriodPhaseCWithParams:params
             subscriptionEstablished:^() {
@@ -82905,6 +85887,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRmsVoltageSwellPeriodPhaseCWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -82971,6 +85956,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -83039,6 +86027,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -83105,6 +86096,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -83173,6 +86167,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -83239,6 +86236,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
@@ -85034,6 +88034,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBooleanWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -85140,6 +88143,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBitmap8WithParams:params
             subscriptionEstablished:^() {
@@ -85248,6 +88254,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBitmap16WithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -85354,6 +88363,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeBitmap32WithParams:params
             subscriptionEstablished:^() {
@@ -85462,6 +88474,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeBitmap64WithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -85568,6 +88583,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt8uWithParams:params
             subscriptionEstablished:^() {
@@ -85676,6 +88694,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt16uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -85782,6 +88803,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt24uWithParams:params
             subscriptionEstablished:^() {
@@ -85890,6 +88914,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt32uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -85996,6 +89023,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt40uWithParams:params
             subscriptionEstablished:^() {
@@ -86104,6 +89134,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt48uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -86210,6 +89243,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt56uWithParams:params
             subscriptionEstablished:^() {
@@ -86318,6 +89354,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt64uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -86424,6 +89463,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt8sWithParams:params
             subscriptionEstablished:^() {
@@ -86532,6 +89574,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt16sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -86638,6 +89683,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt24sWithParams:params
             subscriptionEstablished:^() {
@@ -86746,6 +89794,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt32sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -86852,6 +89903,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt40sWithParams:params
             subscriptionEstablished:^() {
@@ -86960,6 +90014,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt48sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -87066,6 +90123,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeInt56sWithParams:params
             subscriptionEstablished:^() {
@@ -87174,6 +90234,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeInt64sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -87280,6 +90343,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEnum8WithParams:params
             subscriptionEstablished:^() {
@@ -87388,6 +90454,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEnum16WithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -87494,6 +90563,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeFloatSingleWithParams:params
             subscriptionEstablished:^() {
@@ -87602,6 +90674,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFloatDoubleWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -87708,6 +90783,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeOctetStringWithParams:params
             subscriptionEstablished:^() {
@@ -87827,6 +90905,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeListInt8uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -87944,6 +91025,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeListOctetStringWithParams:params
             subscriptionEstablished:^() {
@@ -88066,6 +91150,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeListStructOctetStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -88172,6 +91259,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeLongOctetStringWithParams:params
             subscriptionEstablished:^() {
@@ -88282,6 +91372,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeCharStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -88391,6 +91484,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeLongCharStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -88497,6 +91593,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEpochUsWithParams:params
             subscriptionEstablished:^() {
@@ -88605,6 +91704,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeEpochSWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -88711,6 +91813,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeVendorIdWithParams:params
             subscriptionEstablished:^() {
@@ -88986,6 +92091,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeListNullablesAndOptionalsStructWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -89092,6 +92200,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeEnumAttrWithParams:params
             subscriptionEstablished:^() {
@@ -89212,6 +92323,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeStructAttrWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -89318,6 +92432,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRangeRestrictedInt8uWithParams:params
             subscriptionEstablished:^() {
@@ -89426,6 +92543,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRangeRestrictedInt8sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -89533,6 +92653,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeRangeRestrictedInt16uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -89639,6 +92762,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeRangeRestrictedInt16sWithParams:params
             subscriptionEstablished:^() {
@@ -89757,6 +92883,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeListLongOctetStringWithParams:params
             subscriptionEstablished:^() {
@@ -89931,6 +93060,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeListFabricScopedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -90037,6 +93169,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeTimedWriteBooleanWithParams:params
             subscriptionEstablished:^() {
@@ -90145,6 +93280,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeGeneralErrorBooleanWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -90251,6 +93389,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterErrorBooleanWithParams:params
             subscriptionEstablished:^() {
@@ -90359,6 +93500,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeUnsupportedWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -90465,6 +93609,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableBooleanWithParams:params
             subscriptionEstablished:^() {
@@ -90573,6 +93720,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableBitmap8WithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -90679,6 +93829,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableBitmap16WithParams:params
             subscriptionEstablished:^() {
@@ -90787,6 +93940,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableBitmap32WithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -90893,6 +94049,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableBitmap64WithParams:params
             subscriptionEstablished:^() {
@@ -91001,6 +94160,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt8uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -91107,6 +94269,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt16uWithParams:params
             subscriptionEstablished:^() {
@@ -91215,6 +94380,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt24uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -91321,6 +94489,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt32uWithParams:params
             subscriptionEstablished:^() {
@@ -91429,6 +94600,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt40uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -91535,6 +94709,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt48uWithParams:params
             subscriptionEstablished:^() {
@@ -91643,6 +94820,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt56uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -91749,6 +94929,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt64uWithParams:params
             subscriptionEstablished:^() {
@@ -91857,6 +95040,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt8sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -91963,6 +95149,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt16sWithParams:params
             subscriptionEstablished:^() {
@@ -92071,6 +95260,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt24sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -92177,6 +95369,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt32sWithParams:params
             subscriptionEstablished:^() {
@@ -92285,6 +95480,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt40sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -92391,6 +95589,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt48sWithParams:params
             subscriptionEstablished:^() {
@@ -92499,6 +95700,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableInt56sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -92605,6 +95809,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableInt64sWithParams:params
             subscriptionEstablished:^() {
@@ -92713,6 +95920,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableEnum8WithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -92819,6 +96029,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableEnum16WithParams:params
             subscriptionEstablished:^() {
@@ -92927,6 +96140,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableFloatSingleWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -93034,6 +96250,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableFloatDoubleWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -93140,6 +96359,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableOctetStringWithParams:params
             subscriptionEstablished:^() {
@@ -93250,6 +96472,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableCharStringWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -93356,6 +96581,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableEnumAttrWithParams:params
             subscriptionEstablished:^() {
@@ -93482,6 +96710,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableStructWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -93590,6 +96821,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableRangeRestrictedInt8uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -93697,6 +96931,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeNullableRangeRestrictedInt8sWithParams:params
             subscriptionEstablished:^() {
@@ -93807,6 +97044,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableRangeRestrictedInt16uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -93916,6 +97156,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeNullableRangeRestrictedInt16sWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -94023,6 +97266,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeWriteOnlyInt8uWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -94089,6 +97335,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeGeneratedCommandListWithParams:params
             subscriptionEstablished:^() {
@@ -94157,6 +97406,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeAcceptedCommandListWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -94223,6 +97475,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeAttributeListWithParams:params
             subscriptionEstablished:^() {
@@ -94291,6 +97546,9 @@ public:
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
         }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
+        }
         [cluster subscribeAttributeFeatureMapWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
@@ -94357,6 +97615,9 @@ public:
         }
         if (mFabricFiltered.HasValue()) {
             params.filterByFabric = mFabricFiltered.Value();
+        }
+        if (mAutoResubscribe.HasValue()) {
+            params.resubscribeIfLost = mAutoResubscribe.Value();
         }
         [cluster subscribeAttributeClusterRevisionWithParams:params
             subscriptionEstablished:^() {
