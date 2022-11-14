@@ -62684,6 +62684,8 @@ private:
         uint16_t maxIntervalArgument = 5U;
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
                                                                           maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
         [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
@@ -63686,6 +63688,8 @@ private:
         uint16_t maxIntervalArgument = 5U;
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
                                                                           maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
         [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
@@ -64491,6 +64495,8 @@ private:
         uint16_t maxIntervalArgument = 5U;
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
                                                                           maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
         [cluster subscribeAttributeOperationalStatusWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
@@ -84651,6 +84657,8 @@ private:
         uint16_t maxIntervalArgument = 5U;
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
                                                                           maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
         [cluster subscribeAttributeListInt8uWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
@@ -93483,6 +93491,8 @@ private:
         uint16_t maxIntervalArgument = 5U;
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
                                                                           maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
         [cluster subscribeAttributeFabricsWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(testSendClusterTestFabricRemovalWhileSubscribed_6_WaitForReport_Fulfilled,
@@ -102097,6 +102107,8 @@ private:
         uint16_t maxIntervalArgument = 5U;
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
                                                                           maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
         [cluster subscribeAttributeOnOffWithParams:params
             subscriptionEstablished:^{
                 VerifyOrReturn(
