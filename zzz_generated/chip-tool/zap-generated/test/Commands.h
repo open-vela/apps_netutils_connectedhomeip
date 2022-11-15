@@ -47933,8 +47933,8 @@ private:
     chip::Optional<uint16_t> mTimeout;
 
     chip::app::DataModel::Nullable<bool> booValueNull;
-    chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> nullableValue254;
-    chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> nullableEnumAttr3;
+    chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> nullableValue254;
+    chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> nullableEnumAttr3;
     uint8_t * nullableOctetStrTestValueBuffer = nullptr;
     chip::app::DataModel::Nullable<chip::ByteSpan> nullableOctetStrTestValue;
     char * nullableCharStringSaveBuffer = nullptr;
@@ -47965,7 +47965,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestSpecificResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestSpecificResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("returnValue", value.returnValue, 7U));
             }
@@ -47973,7 +47973,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestAddArgumentsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestAddArgumentsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("returnValue", value.returnValue, 20U));
             }
@@ -48014,7 +48014,7 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap8", value, 0U));
             }
@@ -48025,7 +48025,7 @@ private:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap8", value, 255U));
             }
@@ -48036,7 +48036,7 @@ private:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap8", value, 0U));
             }
@@ -48044,7 +48044,7 @@ private:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap16", value, 0U));
             }
@@ -48055,7 +48055,7 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap16", value, 65535U));
             }
@@ -48066,7 +48066,7 @@ private:
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap16", value, 0U));
             }
@@ -48074,7 +48074,7 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 0UL));
             }
@@ -48085,7 +48085,7 @@ private:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 4294967295UL));
             }
@@ -48096,7 +48096,7 @@ private:
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 0UL));
             }
@@ -48104,7 +48104,7 @@ private:
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap64", value, 0ULL));
             }
@@ -48115,7 +48115,7 @@ private:
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap64", value, 18446744073709551615ULL));
             }
@@ -48126,7 +48126,7 @@ private:
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap64", value, 0ULL));
             }
@@ -48974,7 +48974,7 @@ private:
         case 154:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestEnumsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestEnumsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("arg1", value.arg1, 20003U));
                 VerifyOrReturn(CheckValue("arg2", value.arg2, 1U));
@@ -48983,7 +48983,7 @@ private:
         case 155:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestEnumsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestEnumsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("arg1", value.arg1, 20003U));
                 VerifyOrReturn(CheckValue("arg2", value.arg2, 4U));
@@ -48992,7 +48992,7 @@ private:
         case 156:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, true));
             }
@@ -49000,7 +49000,7 @@ private:
         case 157:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, false));
             }
@@ -49008,7 +49008,7 @@ private:
         case 158:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, true));
             }
@@ -49016,7 +49016,7 @@ private:
         case 159:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, false));
             }
@@ -49024,7 +49024,7 @@ private:
         case 160:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, true));
             }
@@ -49032,7 +49032,7 @@ private:
         case 161:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, false));
             }
@@ -49040,7 +49040,7 @@ private:
         case 162:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::SimpleStructResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::SimpleStructResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("arg1.a", value.arg1.a, 17U));
                 VerifyOrReturn(CheckValue("arg1.b", value.arg1.b, false));
@@ -49056,7 +49056,7 @@ private:
         case 163:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, true));
             }
@@ -49064,7 +49064,7 @@ private:
         case 164:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, false));
             }
@@ -49072,7 +49072,7 @@ private:
         case 165:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestListInt8UReverseResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestListInt8UReverseResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.arg1.begin();
@@ -49101,7 +49101,7 @@ private:
         case 166:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestListInt8UReverseResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestListInt8UReverseResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.arg1.begin();
@@ -49112,7 +49112,7 @@ private:
         case 167:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, true));
             }
@@ -49120,7 +49120,7 @@ private:
         case 168:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, false));
             }
@@ -49128,7 +49128,7 @@ private:
         case 169:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, true));
             }
@@ -49136,7 +49136,7 @@ private:
         case 170:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::BooleanResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::BooleanResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, false));
             }
@@ -49195,7 +49195,7 @@ private:
         case 176:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::TestCluster::Structs::TestListStructOctet::DecodableType>
+                chip::app::DataModel::DecodableList<chip::app::Clusters::UnitTesting::Structs::TestListStructOctet::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -49223,7 +49223,7 @@ private:
         case 177:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestNullableOptionalResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("wasPresent", value.wasPresent, true));
                 VerifyOrReturn(CheckValuePresent("wasNull", value.wasNull));
@@ -49238,7 +49238,7 @@ private:
         case 178:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestNullableOptionalResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("wasPresent", value.wasPresent, false));
             }
@@ -49247,7 +49247,7 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::DecodableType>
+                    chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -49271,7 +49271,7 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::DecodableType>
+                    chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -49339,7 +49339,7 @@ private:
         case 188:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap8", value));
                 VerifyOrReturn(CheckValue("nullableBitmap8.Value()", value.Value(), 254U));
@@ -49351,7 +49351,7 @@ private:
         case 190:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap8", value));
                 VerifyOrReturn(CheckValue("nullableBitmap8.Value()", value.Value(), 254U));
@@ -49364,7 +49364,7 @@ private:
         case 192:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("nullableBitmap8", value));
             }
@@ -49372,7 +49372,7 @@ private:
         case 193:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, nullableValue254));
             }
@@ -49383,7 +49383,7 @@ private:
         case 195:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap16", value));
                 VerifyOrReturn(CheckValue("nullableBitmap16.Value()", value.Value(), 65534U));
@@ -49395,7 +49395,7 @@ private:
         case 197:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap16", value));
                 VerifyOrReturn(CheckValue("nullableBitmap16.Value()", value.Value(), 65534U));
@@ -49407,7 +49407,7 @@ private:
         case 199:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("nullableBitmap16", value));
             }
@@ -49418,7 +49418,7 @@ private:
         case 201:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap32", value));
                 VerifyOrReturn(CheckValue("nullableBitmap32.Value()", value.Value(), 4294967294UL));
@@ -49430,7 +49430,7 @@ private:
         case 203:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap32", value));
                 VerifyOrReturn(CheckValue("nullableBitmap32.Value()", value.Value(), 4294967294UL));
@@ -49442,7 +49442,7 @@ private:
         case 205:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("nullableBitmap32", value));
             }
@@ -49453,7 +49453,7 @@ private:
         case 207:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap64", value));
                 VerifyOrReturn(CheckValue("nullableBitmap64.Value()", value.Value(), 18446744073709551614ULL));
@@ -49465,7 +49465,7 @@ private:
         case 209:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableBitmap64", value));
                 VerifyOrReturn(CheckValue("nullableBitmap64.Value()", value.Value(), 18446744073709551614ULL));
@@ -49477,7 +49477,7 @@ private:
         case 211:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>> value;
+                chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("nullableBitmap64", value));
             }
@@ -50332,7 +50332,7 @@ private:
         case 346:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableEnumAttr", value));
                 VerifyOrReturn(CheckValue("nullableEnumAttr.Value()", value.Value(), 0U));
@@ -50344,7 +50344,7 @@ private:
         case 348:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableEnumAttr", value));
                 VerifyOrReturn(CheckValue("nullableEnumAttr.Value()", value.Value(), 3U));
@@ -50356,7 +50356,7 @@ private:
         case 350:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("nullableEnumAttr", value));
                 VerifyOrReturn(CheckValue("nullableEnumAttr.Value()", value.Value(), 3U));
@@ -50369,7 +50369,7 @@ private:
         case 352:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("nullableEnumAttr", value));
             }
@@ -50377,7 +50377,7 @@ private:
         case 353:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, nullableEnumAttr3));
             }
@@ -51233,7 +51233,7 @@ private:
         case 489:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Structs::SimpleStruct::DecodableType value;
+                chip::app::Clusters::UnitTesting::Structs::SimpleStruct::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("structAttr.a", value.a, 5U));
                 VerifyOrReturn(CheckValue("structAttr.b", value.b, true));
@@ -51270,8 +51270,8 @@ private:
         case 1: {
             LogStep(1, "Send Test Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::Test::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::Test::Id, value,
+            chip::app::Clusters::UnitTesting::Commands::Test::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::Test::Id, value,
                                chip::NullOptional
 
             );
@@ -51279,8 +51279,8 @@ private:
         case 2: {
             LogStep(2, "Send Test Not Handled Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNotHandled::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestNotHandled::Id, value,
+            chip::app::Clusters::UnitTesting::Commands::TestNotHandled::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestNotHandled::Id, value,
                                chip::NullOptional
 
             );
@@ -51288,8 +51288,8 @@ private:
         case 3: {
             LogStep(3, "Send Test Specific Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestSpecific::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestSpecific::Id, value,
+            chip::app::Clusters::UnitTesting::Commands::TestSpecific::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestSpecific::Id, value,
                                chip::NullOptional
 
             );
@@ -51297,10 +51297,10 @@ private:
         case 4: {
             LogStep(4, "Send Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = 3U;
             value.arg2 = 17U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );
@@ -51308,17 +51308,17 @@ private:
         case 5: {
             LogStep(5, "Send failing Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = 250U;
             value.arg2 = 6U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );
         }
         case 6: {
             LogStep(6, "Read attribute BOOLEAN Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 7: {
@@ -51326,12 +51326,12 @@ private:
             ListFreer listFreer;
             bool value;
             value = 1;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "Read attribute BOOLEAN True");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 9: {
@@ -51339,141 +51339,141 @@ private:
             ListFreer listFreer;
             bool value;
             value = 0;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Read attribute BOOLEAN False");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Read attribute BITMAP8 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, true,
                                  chip::NullOptional);
         }
         case 12: {
             LogStep(12, "Write attribute BITMAP8 Max Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>>(255U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>>(255U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Read attribute BITMAP8 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, true,
                                  chip::NullOptional);
         }
         case 14: {
             LogStep(14, "Write attribute BITMAP8 Min Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>>(0U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>>(0U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Read attribute BITMAP8 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, true,
                                  chip::NullOptional);
         }
         case 16: {
             LogStep(16, "Read attribute BITMAP16 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, true,
                                  chip::NullOptional);
         }
         case 17: {
             LogStep(17, "Write attribute BITMAP16 Max Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>>(65535U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>>(65535U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "Read attribute BITMAP16 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
             LogStep(19, "Write attribute BITMAP16 Min Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>>(0U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>>(0U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "Read attribute BITMAP16 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, true,
                                  chip::NullOptional);
         }
         case 21: {
             LogStep(21, "Read attribute BITMAP32 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 22: {
             LogStep(22, "Write attribute BITMAP32 Max Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>>(4294967295UL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(4294967295UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 23: {
             LogStep(23, "Read attribute BITMAP32 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 24: {
             LogStep(24, "Write attribute BITMAP32 Min Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>>(0UL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(0UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 25: {
             LogStep(25, "Read attribute BITMAP32 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 26: {
             LogStep(26, "Read attribute BITMAP64 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, true,
                                  chip::NullOptional);
         }
         case 27: {
             LogStep(27, "Write attribute BITMAP64 Max Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>>(18446744073709551615ULL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>>(18446744073709551615ULL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "Read attribute BITMAP64 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, true,
                                  chip::NullOptional);
         }
         case 29: {
             LogStep(29, "Write attribute BITMAP64 Min Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>>(0ULL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>>(0ULL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 30: {
             LogStep(30, "Read attribute BITMAP64 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, true,
                                  chip::NullOptional);
         }
         case 31: {
             LogStep(31, "Read attribute INT8U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, true,
                                  chip::NullOptional);
         }
         case 32: {
@@ -51481,12 +51481,12 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 255U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 33: {
             LogStep(33, "Read attribute INT8U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, true,
                                  chip::NullOptional);
         }
         case 34: {
@@ -51494,17 +51494,17 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 35: {
             LogStep(35, "Read attribute INT8U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, true,
                                  chip::NullOptional);
         }
         case 36: {
             LogStep(36, "Read attribute INT16U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, true,
                                  chip::NullOptional);
         }
         case 37: {
@@ -51512,12 +51512,12 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 65535U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 38: {
             LogStep(38, "Read attribute INT16U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, true,
                                  chip::NullOptional);
         }
         case 39: {
@@ -51525,17 +51525,17 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 40: {
             LogStep(40, "Read attribute INT16U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, true,
                                  chip::NullOptional);
         }
         case 41: {
             LogStep(41, "Read attribute INT32U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 42: {
@@ -51543,12 +51543,12 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 4294967295UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 43: {
             LogStep(43, "Read attribute INT32U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 44: {
@@ -51556,17 +51556,17 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 0UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 45: {
             LogStep(45, "Read attribute INT32U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 46: {
             LogStep(46, "Read attribute INT64U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, true,
                                  chip::NullOptional);
         }
         case 47: {
@@ -51574,12 +51574,12 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = 18446744073709551615ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 48: {
             LogStep(48, "Read attribute INT64U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, true,
                                  chip::NullOptional);
         }
         case 49: {
@@ -51587,17 +51587,17 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = 0ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 50: {
             LogStep(50, "Read attribute INT64U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, true,
                                  chip::NullOptional);
         }
         case 51: {
             LogStep(51, "Read attribute INT8S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 52: {
@@ -51605,12 +51605,12 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = 127;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 53: {
             LogStep(53, "Read attribute INT8S Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 54: {
@@ -51618,12 +51618,12 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = -128;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 55: {
             LogStep(55, "Read attribute INT8S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 56: {
@@ -51631,17 +51631,17 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = 0;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 57: {
             LogStep(57, "Read attribute INT8S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 58: {
             LogStep(58, "Read attribute INT16S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 59: {
@@ -51649,12 +51649,12 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = 32767;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 60: {
             LogStep(60, "Read attribute INT16S Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 61: {
@@ -51662,12 +51662,12 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = -32768;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 62: {
             LogStep(62, "Read attribute INT16S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 63: {
@@ -51675,17 +51675,17 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = 0;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 64: {
             LogStep(64, "Read attribute INT16S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 65: {
             LogStep(65, "Read attribute INT32S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 66: {
@@ -51693,12 +51693,12 @@ private:
             ListFreer listFreer;
             int32_t value;
             value = 2147483647L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 67: {
             LogStep(67, "Read attribute INT32S Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 68: {
@@ -51706,12 +51706,12 @@ private:
             ListFreer listFreer;
             int32_t value;
             value = -2147483648L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 69: {
             LogStep(69, "Read attribute INT32S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 70: {
@@ -51719,17 +51719,17 @@ private:
             ListFreer listFreer;
             int32_t value;
             value = 0L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 71: {
             LogStep(71, "Read attribute INT32S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 72: {
             LogStep(72, "Read attribute INT64S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 73: {
@@ -51737,12 +51737,12 @@ private:
             ListFreer listFreer;
             int64_t value;
             value = 9223372036854775807LL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 74: {
             LogStep(74, "Read attribute INT64S Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 75: {
@@ -51750,12 +51750,12 @@ private:
             ListFreer listFreer;
             int64_t value;
             value = -9223372036854775807LL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 76: {
             LogStep(76, "Read attribute INT64S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 77: {
@@ -51763,17 +51763,17 @@ private:
             ListFreer listFreer;
             int64_t value;
             value = 0LL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 78: {
             LogStep(78, "Read attribute INT64S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 79: {
             LogStep(79, "Read attribute SINGLE Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, true,
                                  chip::NullOptional);
         }
         case 80: {
@@ -51781,12 +51781,12 @@ private:
             ListFreer listFreer;
             float value;
             value = 0.1f;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 81: {
             LogStep(81, "Read attribute SINGLE medium Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, true,
                                  chip::NullOptional);
         }
         case 82: {
@@ -51794,12 +51794,12 @@ private:
             ListFreer listFreer;
             float value;
             value = 17000000000.0f;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 83: {
             LogStep(83, "Read attribute SINGLE large Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, true,
                                  chip::NullOptional);
         }
         case 84: {
@@ -51807,12 +51807,12 @@ private:
             ListFreer listFreer;
             float value;
             value = 1.7e-10f;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 85: {
             LogStep(85, "Read attribute SINGLE small Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, true,
                                  chip::NullOptional);
         }
         case 86: {
@@ -51820,17 +51820,17 @@ private:
             ListFreer listFreer;
             float value;
             value = 0.0f;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 87: {
             LogStep(87, "Read attribute SINGLE Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatSingle::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatSingle::Id, true,
                                  chip::NullOptional);
         }
         case 88: {
             LogStep(88, "Read attribute DOUBLE Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, true,
                                  chip::NullOptional);
         }
         case 89: {
@@ -51838,12 +51838,12 @@ private:
             ListFreer listFreer;
             double value;
             value = 0.1234567890123;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 90: {
             LogStep(90, "Read attribute DOUBLE medium Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, true,
                                  chip::NullOptional);
         }
         case 91: {
@@ -51851,12 +51851,12 @@ private:
             ListFreer listFreer;
             double value;
             value = 1.7e+200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 92: {
             LogStep(92, "Read attribute DOUBLE large Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, true,
                                  chip::NullOptional);
         }
         case 93: {
@@ -51864,12 +51864,12 @@ private:
             ListFreer listFreer;
             double value;
             value = 1.7e-200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 94: {
             LogStep(94, "Read attribute DOUBLE small Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, true,
                                  chip::NullOptional);
         }
         case 95: {
@@ -51877,17 +51877,17 @@ private:
             ListFreer listFreer;
             double value;
             value = 0;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 96: {
             LogStep(96, "Read attribute DOUBLE Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::FloatDouble::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::FloatDouble::Id, true,
                                  chip::NullOptional);
         }
         case 97: {
             LogStep(97, "Read attribute ENUM8 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, true,
                                  chip::NullOptional);
         }
         case 98: {
@@ -51895,12 +51895,12 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 255U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 99: {
             LogStep(99, "Read attribute ENUM8 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, true,
                                  chip::NullOptional);
         }
         case 100: {
@@ -51908,17 +51908,17 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 101: {
             LogStep(101, "Read attribute ENUM8 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, true,
                                  chip::NullOptional);
         }
         case 102: {
             LogStep(102, "Read attribute ENUM16 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, true,
                                  chip::NullOptional);
         }
         case 103: {
@@ -51926,12 +51926,12 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 65535U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 104: {
             LogStep(104, "Read attribute ENUM16 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, true,
                                  chip::NullOptional);
         }
         case 105: {
@@ -51939,17 +51939,17 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 106: {
             LogStep(106, "Read attribute ENUM16 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, true,
                                  chip::NullOptional);
         }
         case 107: {
             LogStep(107, "Read attribute OCTET_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 108: {
@@ -51957,12 +51957,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("Tes\000ti\000nggarbage: not in length on purpose"), 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 109: {
             LogStep(109, "Read attribute OCTET_STRING with embedded null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 110: {
@@ -51970,12 +51970,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("\x00\x01\x02\x03\x04\x05garbage: not in length on purpose"), 6);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 111: {
             LogStep(111, "Read attribute OCTET_STRING with hex: format");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 112: {
@@ -51983,12 +51983,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("\015\012\377\042\240garbage: not in length on purpose"), 5);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 113: {
             LogStep(113, "Read attribute OCTET_STRING with weird chars");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 114: {
@@ -51996,12 +51996,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("TestValuegarbage: not in length on purpose"), 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 115: {
             LogStep(115, "Read attribute OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 116: {
@@ -52009,12 +52009,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("TestValueLongerThan10garbage: not in length on purpose"), 21);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 117: {
             LogStep(117, "Read attribute OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 118: {
@@ -52022,12 +52022,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("garbage: not in length on purpose"), 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 119: {
             LogStep(119, "Read attribute LONG_OCTET_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 120: {
@@ -52040,12 +52040,12 @@ private:
                                              "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
                                              "111111111111111111111111111111111111111111111garbage: not in length on purpose"),
                 300);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 121: {
             LogStep(121, "Read attribute LONG_OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 122: {
@@ -52053,12 +52053,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("garbage: not in length on purpose"), 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 123: {
             LogStep(123, "Read attribute CHAR_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 124: {
@@ -52066,12 +52066,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("☉T☉garbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 125: {
             LogStep(125, "Read attribute CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 126: {
@@ -52079,12 +52079,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("☉TestValueLongerThan10☉garbage: not in length on purpose", 27);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 127: {
             LogStep(127, "Read attribute CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 128: {
@@ -52092,12 +52092,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 129: {
             LogStep(129, "Read attribute LONG_CHAR_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongCharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongCharString::Id, true,
                                  chip::NullOptional);
         }
         case 130: {
@@ -52109,12 +52109,12 @@ private:
                 "☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉"
                 "☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉☉garbage: not in length on purpose",
                 900);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongCharString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongCharString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 131: {
             LogStep(131, "Read attribute LONG_CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongCharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongCharString::Id, true,
                                  chip::NullOptional);
         }
         case 132: {
@@ -52122,12 +52122,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::LongCharString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::LongCharString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 133: {
             LogStep(133, "Read attribute LIST_LONG_OCTET_STRING (for chunked read)");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListLongOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListLongOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 134: {
@@ -52185,17 +52185,17 @@ private:
                     512);
                 value = chip::app::DataModel::List<chip::ByteSpan>(listHolder_0->mList, 5);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListLongOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListLongOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 135: {
             LogStep(135, "Read attribute LIST_LONG_OCTET_STRING (for chunked read)");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListLongOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListLongOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 136: {
             LogStep(136, "Read attribute EPOCH_US Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, true,
                                  chip::NullOptional);
         }
         case 137: {
@@ -52203,12 +52203,12 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = 18446744073709551615ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 138: {
             LogStep(138, "Read attribute EPOCH_US Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, true,
                                  chip::NullOptional);
         }
         case 139: {
@@ -52216,17 +52216,17 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = 0ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 140: {
             LogStep(140, "Read attribute EPOCH_US Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, true,
                                  chip::NullOptional);
         }
         case 141: {
             LogStep(141, "Read attribute EPOCH_S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, true,
                                  chip::NullOptional);
         }
         case 142: {
@@ -52234,12 +52234,12 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 4294967295UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 143: {
             LogStep(143, "Read attribute EPOCH_S Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, true,
                                  chip::NullOptional);
         }
         case 144: {
@@ -52247,17 +52247,17 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 0UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 145: {
             LogStep(145, "Read attribute EPOCH_S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, true,
                                  chip::NullOptional);
         }
         case 146: {
             LogStep(146, "Read attribute UNSUPPORTED");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Unsupported::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Unsupported::Id, true,
                                  chip::NullOptional);
         }
         case 147: {
@@ -52265,14 +52265,14 @@ private:
             ListFreer listFreer;
             bool value;
             value = 0;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Unsupported::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Unsupported::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 148: {
             LogStep(148, "Send Test Command to unsupported endpoint");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::Test::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(200), TestCluster::Id, TestCluster::Commands::Test::Id, value,
+            chip::app::Clusters::UnitTesting::Commands::Test::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(200), UnitTesting::Id, UnitTesting::Commands::Test::Id, value,
                                chip::NullOptional
 
             );
@@ -52280,15 +52280,15 @@ private:
         case 149: {
             LogStep(149, "Send Test Command to unsupported cluster");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::Test::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(0), TestCluster::Id, TestCluster::Commands::Test::Id, value,
+            chip::app::Clusters::UnitTesting::Commands::Test::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), UnitTesting::Id, UnitTesting::Commands::Test::Id, value,
                                chip::NullOptional
 
             );
         }
         case 150: {
             LogStep(150, "Read attribute vendor_id Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, true,
                                  chip::NullOptional);
         }
         case 151: {
@@ -52296,12 +52296,12 @@ private:
             ListFreer listFreer;
             chip::VendorId value;
             value = static_cast<chip::VendorId>(17);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 152: {
             LogStep(152, "Read attribute vendor_id");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, true,
                                  chip::NullOptional);
         }
         case 153: {
@@ -52309,16 +52309,16 @@ private:
             ListFreer listFreer;
             chip::VendorId value;
             value = static_cast<chip::VendorId>(0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 154: {
             LogStep(154, "Send a command with a vendor_id and enum");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestEnumsRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestEnumsRequest::Type value;
             value.arg1 = static_cast<chip::VendorId>(20003);
-            value.arg2 = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(1);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestEnumsRequest::Id, value,
+            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(1);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestEnumsRequest::Id, value,
                                chip::NullOptional
 
             );
@@ -52326,10 +52326,10 @@ private:
         case 155: {
             LogStep(155, "Send a command with a vendor_id and invalid enum");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestEnumsRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestEnumsRequest::Type value;
             value.arg1 = static_cast<chip::VendorId>(20003);
-            value.arg2 = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(101);
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestEnumsRequest::Id, value,
+            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(101);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestEnumsRequest::Id, value,
                                chip::NullOptional
 
             );
@@ -52337,127 +52337,127 @@ private:
         case 156: {
             LogStep(156, "Send Test Command With Struct Argument and arg1.b is true");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestStructArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestStructArgumentRequest::Type value;
 
             value.arg1.a = 0U;
             value.arg1.b = true;
-            value.arg1.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.g = 0.0f;
             value.arg1.h = 0;
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestStructArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestStructArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 157: {
             LogStep(157, "Send Test Command With Struct Argument and arg1.b is false");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestStructArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestStructArgumentRequest::Type value;
 
             value.arg1.a = 0U;
             value.arg1.b = false;
-            value.arg1.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.g = 0.0f;
             value.arg1.h = 0;
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestStructArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestStructArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 158: {
             LogStep(158, "Send Test Command With Nested Struct Argument and arg1.c.b is true");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNestedStructArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestNestedStructArgumentRequest::Type value;
 
             value.arg1.a = 0U;
             value.arg1.b = true;
 
             value.arg1.c.a = 0U;
             value.arg1.c.b = true;
-            value.arg1.c.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.c.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.c.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.c.g = 0.0f;
             value.arg1.c.h = 0;
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNestedStructArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNestedStructArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 159: {
             LogStep(159, "Send Test Command With Nested Struct Argument arg1.c.b is false");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNestedStructArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestNestedStructArgumentRequest::Type value;
 
             value.arg1.a = 0U;
             value.arg1.b = true;
 
             value.arg1.c.a = 0U;
             value.arg1.c.b = false;
-            value.arg1.c.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.c.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.c.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.c.g = 0.0f;
             value.arg1.c.h = 0;
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNestedStructArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNestedStructArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 160: {
             LogStep(160, "Send Test Command With Nested Struct List Argument and all fields b of arg1.d are true");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNestedStructListArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestNestedStructListArgumentRequest::Type value;
 
             value.arg1.a = 0U;
             value.arg1.b = true;
 
             value.arg1.c.a = 0U;
             value.arg1.c.b = true;
-            value.arg1.c.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.c.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.c.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.c.g = 0.0f;
             value.arg1.c.h = 0;
 
             {
-                auto * listHolder_1 = new ListHolder<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(2);
+                auto * listHolder_1 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(2);
                 listFreer.add(listHolder_1);
 
                 listHolder_1->mList[0].a = 1U;
                 listHolder_1->mList[0].b = true;
-                listHolder_1->mList[0].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                listHolder_1->mList[0].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                 listHolder_1->mList[0].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                 listHolder_1->mList[0].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                listHolder_1->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_1->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_1->mList[0].g = 0.0f;
                 listHolder_1->mList[0].h = 0;
 
                 listHolder_1->mList[1].a = 2U;
                 listHolder_1->mList[1].b = true;
-                listHolder_1->mList[1].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                listHolder_1->mList[1].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                 listHolder_1->mList[1].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                 listHolder_1->mList[1].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                listHolder_1->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_1->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_1->mList[1].g = 0.0f;
                 listHolder_1->mList[1].h = 0;
 
-                value.arg1.d = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(
+                value.arg1.d = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(
                     listHolder_1->mList, 2);
             }
 
@@ -52490,53 +52490,53 @@ private:
                 value.arg1.g           = chip::app::DataModel::List<uint8_t>(listHolder_1->mList, 2);
             }
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNestedStructListArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNestedStructListArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 161: {
             LogStep(161, "Send Test Command With Nested Struct List Argument and some fields b of arg1.d are false");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNestedStructListArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestNestedStructListArgumentRequest::Type value;
 
             value.arg1.a = 0U;
             value.arg1.b = true;
 
             value.arg1.c.a = 0U;
             value.arg1.c.b = true;
-            value.arg1.c.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.c.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.c.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.c.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.c.g = 0.0f;
             value.arg1.c.h = 0;
 
             {
-                auto * listHolder_1 = new ListHolder<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(2);
+                auto * listHolder_1 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(2);
                 listFreer.add(listHolder_1);
 
                 listHolder_1->mList[0].a = 1U;
                 listHolder_1->mList[0].b = true;
-                listHolder_1->mList[0].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                listHolder_1->mList[0].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                 listHolder_1->mList[0].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                 listHolder_1->mList[0].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                listHolder_1->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_1->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_1->mList[0].g = 0.0f;
                 listHolder_1->mList[0].h = 0;
 
                 listHolder_1->mList[1].a = 2U;
                 listHolder_1->mList[1].b = false;
-                listHolder_1->mList[1].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                listHolder_1->mList[1].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                 listHolder_1->mList[1].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                 listHolder_1->mList[1].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                listHolder_1->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_1->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_1->mList[1].g = 0.0f;
                 listHolder_1->mList[1].h = 0;
 
-                value.arg1.d = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(
+                value.arg1.d = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(
                     listHolder_1->mList, 2);
             }
 
@@ -52569,26 +52569,26 @@ private:
                 value.arg1.g           = chip::app::DataModel::List<uint8_t>(listHolder_1->mList, 2);
             }
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNestedStructListArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNestedStructListArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 162: {
             LogStep(162, "Send Test Command With Struct Argument and see what we get back");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::SimpleStructEchoRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::SimpleStructEchoRequest::Type value;
 
             value.arg1.a = 17U;
             value.arg1.b = false;
-            value.arg1.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg1.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg1.d = chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
             value.arg1.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-            value.arg1.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+            value.arg1.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
             value.arg1.g = 0.1f;
             value.arg1.h = 0.1;
 
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::SimpleStructEchoRequest::Id,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::SimpleStructEchoRequest::Id,
                                value, chip::NullOptional
 
             );
@@ -52596,7 +52596,7 @@ private:
         case 163: {
             LogStep(163, "Send Test Command With List of INT8U and none of them is set to 0");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListInt8UArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListInt8UArgumentRequest::Type value;
 
             {
                 auto * listHolder_0 = new ListHolder<uint8_t>(9);
@@ -52612,15 +52612,15 @@ private:
                 listHolder_0->mList[8] = 9U;
                 value.arg1             = chip::app::DataModel::List<uint8_t>(listHolder_0->mList, 9);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListInt8UArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListInt8UArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 164: {
             LogStep(164, "Send Test Command With List of INT8U and one of them is set to 0");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListInt8UArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListInt8UArgumentRequest::Type value;
 
             {
                 auto * listHolder_0 = new ListHolder<uint8_t>(10);
@@ -52637,15 +52637,15 @@ private:
                 listHolder_0->mList[9] = 0U;
                 value.arg1             = chip::app::DataModel::List<uint8_t>(listHolder_0->mList, 10);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListInt8UArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListInt8UArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 165: {
             LogStep(165, "Send Test Command With List of INT8U and get it reversed");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListInt8UReverseRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListInt8UReverseRequest::Type value;
 
             {
                 auto * listHolder_0 = new ListHolder<uint8_t>(9);
@@ -52661,93 +52661,93 @@ private:
                 listHolder_0->mList[8] = 9U;
                 value.arg1             = chip::app::DataModel::List<uint8_t>(listHolder_0->mList, 9);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListInt8UReverseRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListInt8UReverseRequest::Id, value, chip::NullOptional
 
             );
         }
         case 166: {
             LogStep(166, "Send Test Command With empty List of INT8U and get an empty list back");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListInt8UReverseRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListInt8UReverseRequest::Type value;
 
             value.arg1 = chip::app::DataModel::List<uint8_t>();
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListInt8UReverseRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListInt8UReverseRequest::Id, value, chip::NullOptional
 
             );
         }
         case 167: {
             LogStep(167, "Send Test Command With List of Struct Argument and arg1.b of first item is true");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListStructArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListStructArgumentRequest::Type value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(2);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].a = 0U;
                 listHolder_0->mList[0].b = true;
-                listHolder_0->mList[0].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+                listHolder_0->mList[0].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
                 listHolder_0->mList[0].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("first_octet_stringgarbage: not in length on purpose"), 18);
                 listHolder_0->mList[0].e = chip::Span<const char>("first_char_stringgarbage: not in length on purpose", 17);
-                listHolder_0->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_0->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_0->mList[0].g = 0.0f;
                 listHolder_0->mList[0].h = 0;
 
                 listHolder_0->mList[1].a = 1U;
                 listHolder_0->mList[1].b = true;
-                listHolder_0->mList[1].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                listHolder_0->mList[1].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                 listHolder_0->mList[1].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("second_octet_stringgarbage: not in length on purpose"), 19);
                 listHolder_0->mList[1].e = chip::Span<const char>("second_char_stringgarbage: not in length on purpose", 18);
-                listHolder_0->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_0->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_0->mList[1].g = 0.0f;
                 listHolder_0->mList[1].h = 0;
 
-                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(
+                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(
                     listHolder_0->mList, 2);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListStructArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListStructArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 168: {
             LogStep(168, "Send Test Command With List of Struct Argument and arg1.b of first item is false");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListStructArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListStructArgumentRequest::Type value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(2);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].a = 1U;
                 listHolder_0->mList[0].b = true;
-                listHolder_0->mList[0].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                listHolder_0->mList[0].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                 listHolder_0->mList[0].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("second_octet_stringgarbage: not in length on purpose"), 19);
                 listHolder_0->mList[0].e = chip::Span<const char>("second_char_stringgarbage: not in length on purpose", 18);
-                listHolder_0->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_0->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_0->mList[0].g = 0.0f;
                 listHolder_0->mList[0].h = 0;
 
                 listHolder_0->mList[1].a = 0U;
                 listHolder_0->mList[1].b = false;
-                listHolder_0->mList[1].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+                listHolder_0->mList[1].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
                 listHolder_0->mList[1].d =
                     chip::ByteSpan(chip::Uint8::from_const_char("first_octet_stringgarbage: not in length on purpose"), 18);
                 listHolder_0->mList[1].e = chip::Span<const char>("first_char_stringgarbage: not in length on purpose", 17);
-                listHolder_0->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_0->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_0->mList[1].g = 0.0f;
                 listHolder_0->mList[1].h = 0;
 
-                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(
+                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(
                     listHolder_0->mList, 2);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListStructArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListStructArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
@@ -52755,10 +52755,10 @@ private:
             LogStep(169,
                     "Send Test Command With List of Nested Struct List Argument and all fields b of elements of arg1.d are true");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListNestedStructListArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TestCluster::Structs::NestedStructList::Type>(1);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].a = 0U;
@@ -52766,40 +52766,40 @@ private:
 
                 listHolder_0->mList[0].c.a = 0U;
                 listHolder_0->mList[0].c.b = true;
-                listHolder_0->mList[0].c.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+                listHolder_0->mList[0].c.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
                 listHolder_0->mList[0].c.d =
                     chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
                 listHolder_0->mList[0].c.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-                listHolder_0->mList[0].c.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_0->mList[0].c.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_0->mList[0].c.g = 0.0f;
                 listHolder_0->mList[0].c.h = 0;
 
                 {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(2);
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(2);
                     listFreer.add(listHolder_2);
 
                     listHolder_2->mList[0].a = 1U;
                     listHolder_2->mList[0].b = true;
-                    listHolder_2->mList[0].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                    listHolder_2->mList[0].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                     listHolder_2->mList[0].d =
                         chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                     listHolder_2->mList[0].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                    listHolder_2->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                    listHolder_2->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                     listHolder_2->mList[0].g = 0.0f;
                     listHolder_2->mList[0].h = 0;
 
                     listHolder_2->mList[1].a = 2U;
                     listHolder_2->mList[1].b = true;
-                    listHolder_2->mList[1].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                    listHolder_2->mList[1].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                     listHolder_2->mList[1].d =
                         chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                     listHolder_2->mList[1].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                    listHolder_2->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                    listHolder_2->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                     listHolder_2->mList[1].g = 0.0f;
                     listHolder_2->mList[1].h = 0;
 
                     listHolder_0->mList[0].d =
-                        chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(
+                        chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(
                             listHolder_2->mList, 2);
                 }
 
@@ -52832,21 +52832,21 @@ private:
                     listHolder_0->mList[0].g = chip::app::DataModel::List<uint8_t>(listHolder_2->mList, 2);
                 }
 
-                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::NestedStructList::Type>(
+                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type>(
                     listHolder_0->mList, 1);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListNestedStructListArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListNestedStructListArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 170: {
             LogStep(170, "Send Test Command With Nested Struct List Argument and some fields b of elements of arg1.d are false");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestListNestedStructListArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TestCluster::Structs::NestedStructList::Type>(1);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].a = 0U;
@@ -52854,40 +52854,40 @@ private:
 
                 listHolder_0->mList[0].c.a = 0U;
                 listHolder_0->mList[0].c.b = true;
-                listHolder_0->mList[0].c.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+                listHolder_0->mList[0].c.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
                 listHolder_0->mList[0].c.d =
                     chip::ByteSpan(chip::Uint8::from_const_char("octet_stringgarbage: not in length on purpose"), 12);
                 listHolder_0->mList[0].c.e = chip::Span<const char>("char_stringgarbage: not in length on purpose", 11);
-                listHolder_0->mList[0].c.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                listHolder_0->mList[0].c.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                 listHolder_0->mList[0].c.g = 0.0f;
                 listHolder_0->mList[0].c.h = 0;
 
                 {
-                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(2);
+                    auto * listHolder_2 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(2);
                     listFreer.add(listHolder_2);
 
                     listHolder_2->mList[0].a = 1U;
                     listHolder_2->mList[0].b = true;
-                    listHolder_2->mList[0].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                    listHolder_2->mList[0].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                     listHolder_2->mList[0].d =
                         chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                     listHolder_2->mList[0].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                    listHolder_2->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                    listHolder_2->mList[0].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                     listHolder_2->mList[0].g = 0.0f;
                     listHolder_2->mList[0].h = 0;
 
                     listHolder_2->mList[1].a = 2U;
                     listHolder_2->mList[1].b = false;
-                    listHolder_2->mList[1].c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+                    listHolder_2->mList[1].c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
                     listHolder_2->mList[1].d =
                         chip::ByteSpan(chip::Uint8::from_const_char("nested_octet_stringgarbage: not in length on purpose"), 19);
                     listHolder_2->mList[1].e = chip::Span<const char>("nested_char_stringgarbage: not in length on purpose", 18);
-                    listHolder_2->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(1U);
+                    listHolder_2->mList[1].f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(1U);
                     listHolder_2->mList[1].g = 0.0f;
                     listHolder_2->mList[1].h = 0;
 
                     listHolder_0->mList[0].d =
-                        chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>(
+                        chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>(
                             listHolder_2->mList, 2);
                 }
 
@@ -52920,11 +52920,11 @@ private:
                     listHolder_0->mList[0].g = chip::app::DataModel::List<uint8_t>(listHolder_2->mList, 2);
                 }
 
-                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::NestedStructList::Type>(
+                value.arg1 = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type>(
                     listHolder_0->mList, 1);
             }
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestListNestedStructListArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestListNestedStructListArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
@@ -52942,12 +52942,12 @@ private:
                 listHolder_0->mList[3] = 4U;
                 value                  = chip::app::DataModel::List<uint8_t>(listHolder_0->mList, 4);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 172: {
             LogStep(172, "Read attribute LIST With List of INT8U");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 173: {
@@ -52964,21 +52964,21 @@ private:
                 listHolder_0->mList[3] = chip::ByteSpan(chip::Uint8::from_const_char("Test3garbage: not in length on purpose"), 5);
                 value                  = chip::app::DataModel::List<chip::ByteSpan>(listHolder_0->mList, 4);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 174: {
             LogStep(174, "Read attribute LIST With List of OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 175: {
             LogStep(175, "Write attribute LIST With List of LIST_STRUCT_OCTET_STRING");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::TestListStructOctet::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::TestListStructOctet::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::TestCluster::Structs::TestListStructOctet::Type>(4);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::UnitTesting::Structs::TestListStructOctet::Type>(4);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].member1 = 0ULL;
@@ -52997,52 +52997,52 @@ private:
                 listHolder_0->mList[3].member2 =
                     chip::ByteSpan(chip::Uint8::from_const_char("Test3garbage: not in length on purpose"), 5);
 
-                value = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::TestListStructOctet::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::TestListStructOctet::Type>(
                     listHolder_0->mList, 4);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::ListStructOctetString::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::ListStructOctetString::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 176: {
             LogStep(176, "Read attribute LIST With List of LIST_STRUCT_OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::ListStructOctetString::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::ListStructOctetString::Id, true, chip::NullOptional);
         }
         case 177: {
             LogStep(177, "Send Test Command with optional arg set.");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNullableOptionalRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalRequest::Type value;
             value.arg1.Emplace();
             value.arg1.Value().SetNonNull();
             value.arg1.Value().Value() = 5U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNullableOptionalRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNullableOptionalRequest::Id, value, chip::NullOptional
 
             );
         }
         case 178: {
             LogStep(178, "Send Test Command without its optional arg.");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNullableOptionalRequest::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNullableOptionalRequest::Id, value, chip::NullOptional
+            chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNullableOptionalRequest::Id, value, chip::NullOptional
 
             );
         }
         case 179: {
             LogStep(179, "Read list of structs containing nullables and optionals");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::ListNullablesAndOptionalsStruct::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::ListNullablesAndOptionalsStruct::Id, true, chip::NullOptional);
         }
         case 180: {
             LogStep(180, "Write list of structs containing nullables and optionals");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::Type> value;
 
             {
                 auto * listHolder_0 =
-                    new ListHolder<chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::Type>(1);
+                    new ListHolder<chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].nullableInt.SetNull();
@@ -53051,37 +53051,37 @@ private:
                 listHolder_0->mList[0].nullableList.SetNonNull();
 
                 {
-                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
                     listFreer.add(listHolder_3);
-                    listHolder_3->mList[0] = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(1);
-                    listHolder_3->mList[1] = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+                    listHolder_3->mList[0] = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(1);
+                    listHolder_3->mList[1] = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
                     listHolder_0->mList[0].nullableList.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::TestCluster::SimpleEnum>(listHolder_3->mList, 2);
+                        chip::app::DataModel::List<chip::app::Clusters::UnitTesting::SimpleEnum>(listHolder_3->mList, 2);
                 }
 
-                value = chip::app::DataModel::List<chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::Type>(
                     listHolder_0->mList, 1);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::ListNullablesAndOptionalsStruct::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::ListNullablesAndOptionalsStruct::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 181: {
             LogStep(181, "Read list of structs containing nullables and optionals after writing");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::ListNullablesAndOptionalsStruct::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::ListNullablesAndOptionalsStruct::Id, true, chip::NullOptional);
         }
         case 182: {
             LogStep(182, "Write attribute NULLABLE_BOOLEAN null");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<bool> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBoolean::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 183: {
             LogStep(183, "Read attribute NULLABLE_BOOLEAN null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 184: {
@@ -53090,186 +53090,186 @@ private:
             chip::app::DataModel::Nullable<bool> value;
             value.SetNonNull();
             value.Value() = true;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBoolean::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 185: {
             LogStep(185, "Read attribute NULLABLE_BOOLEAN True");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 186: {
             LogStep(186, "Read attribute NULLABLE_BOOLEAN not null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 187: {
             LogStep(187, "Write attribute NULLABLE_BITMAP8 Max Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>>(254U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>>(254U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 188: {
             LogStep(188, "Read attribute NULLABLE_BITMAP8 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                  true, chip::NullOptional);
         }
         case 189: {
             LogStep(189, "Write attribute NULLABLE_BITMAP8 Invalid Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>>(255U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>>(255U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 190: {
             LogStep(190, "Read attribute NULLABLE_BITMAP8 unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                  true, chip::NullOptional);
         }
         case 191: {
             LogStep(191, "Write attribute NULLABLE_BITMAP8 null Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 192: {
             LogStep(192, "Read attribute NULLABLE_BITMAP8 null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                  true, chip::NullOptional);
         }
         case 193: {
             LogStep(193, "Read attribute NULLABLE_BITMAP8 not 254 Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap8::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap8::Id,
                                  true, chip::NullOptional);
         }
         case 194: {
             LogStep(194, "Write attribute NULLABLE_BITMAP16 Max Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>>(65534U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap16::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>>(65534U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 195: {
             LogStep(195, "Read attribute NULLABLE_BITMAP16 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap16::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap16::Id,
                                  true, chip::NullOptional);
         }
         case 196: {
             LogStep(196, "Write attribute NULLABLE_BITMAP16 Invalid Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>>(65535U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap16::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>>(65535U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 197: {
             LogStep(197, "Read attribute NULLABLE_BITMAP16 unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap16::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap16::Id,
                                  true, chip::NullOptional);
         }
         case 198: {
             LogStep(198, "Write attribute NULLABLE_BITMAP16 null Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap16::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 199: {
             LogStep(199, "Read attribute NULLABLE_BITMAP16 null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap16::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap16::Id,
                                  true, chip::NullOptional);
         }
         case 200: {
             LogStep(200, "Write attribute NULLABLE_BITMAP32 Max Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>>(4294967294UL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap32::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(4294967294UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap32::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 201: {
             LogStep(201, "Read attribute NULLABLE_BITMAP32 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap32::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap32::Id,
                                  true, chip::NullOptional);
         }
         case 202: {
             LogStep(202, "Write attribute NULLABLE_BITMAP32 Invalid Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>>(4294967295UL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap32::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(4294967295UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap32::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 203: {
             LogStep(203, "Read attribute NULLABLE_BITMAP32 unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap32::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap32::Id,
                                  true, chip::NullOptional);
         }
         case 204: {
             LogStep(204, "Write attribute NULLABLE_BITMAP32 null Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap32::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap32::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 205: {
             LogStep(205, "Read attribute NULLABLE_BITMAP32 null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap32::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap32::Id,
                                  true, chip::NullOptional);
         }
         case 206: {
             LogStep(206, "Write attribute NULLABLE_BITMAP64 Max Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>>(18446744073709551614ULL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap64::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>>(18446744073709551614ULL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap64::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 207: {
             LogStep(207, "Read attribute NULLABLE_BITMAP64 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap64::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap64::Id,
                                  true, chip::NullOptional);
         }
         case 208: {
             LogStep(208, "Write attribute NULLABLE_BITMAP64 Invalid Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>>(18446744073709551615ULL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap64::Id,
+            value.Value() = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>>(18446744073709551615ULL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap64::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 209: {
             LogStep(209, "Read attribute NULLABLE_BITMAP64 unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap64::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap64::Id,
                                  true, chip::NullOptional);
         }
         case 210: {
             LogStep(210, "Write attribute NULLABLE_BITMAP64 null Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>> value;
+            chip::app::DataModel::Nullable<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap64::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap64::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 211: {
             LogStep(211, "Read attribute NULLABLE_BITMAP64 null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableBitmap64::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableBitmap64::Id,
                                  true, chip::NullOptional);
         }
         case 212: {
@@ -53278,12 +53278,12 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 213: {
             LogStep(213, "Read attribute NULLABLE_INT8U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 214: {
@@ -53292,12 +53292,12 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 254U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 215: {
             LogStep(215, "Read attribute NULLABLE_INT8U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 216: {
@@ -53306,17 +53306,17 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 255U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 217: {
             LogStep(217, "Read attribute NULLABLE_INT8U unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 218: {
             LogStep(218, "Read attribute NULLABLE_INT8U unchanged Value with constraint");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 219: {
@@ -53324,22 +53324,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 220: {
             LogStep(220, "Read attribute NULLABLE_INT8U null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 221: {
             LogStep(221, "Read attribute NULLABLE_INT8U null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 222: {
             LogStep(222, "Read attribute NULLABLE_INT8U null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 223: {
@@ -53348,17 +53348,17 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 128U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 224: {
             LogStep(224, "Read attribute NULLABLE_INT8U Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 225: {
             LogStep(225, "Read attribute NULLABLE_INT8U notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 226: {
@@ -53367,12 +53367,12 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 227: {
             LogStep(227, "Read attribute NULLABLE_INT16U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 228: {
@@ -53381,12 +53381,12 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 65534U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 229: {
             LogStep(229, "Read attribute NULLABLE_INT16U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 230: {
@@ -53395,12 +53395,12 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 65535U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 231: {
             LogStep(231, "Read attribute NULLABLE_INT16U unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 232: {
@@ -53408,22 +53408,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 233: {
             LogStep(233, "Read attribute NULLABLE_INT16U null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 234: {
             LogStep(234, "Read attribute NULLABLE_INT16U null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 235: {
             LogStep(235, "Read attribute NULLABLE_INT16U null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 236: {
@@ -53432,17 +53432,17 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 32000U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 237: {
             LogStep(237, "Read attribute NULLABLE_INT16U Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 238: {
             LogStep(238, "Read attribute NULLABLE_INT16U notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16u::Id, true,
                                  chip::NullOptional);
         }
         case 239: {
@@ -53451,12 +53451,12 @@ private:
             chip::app::DataModel::Nullable<uint32_t> value;
             value.SetNonNull();
             value.Value() = 0UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 240: {
             LogStep(240, "Read attribute NULLABLE_INT32U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 241: {
@@ -53465,12 +53465,12 @@ private:
             chip::app::DataModel::Nullable<uint32_t> value;
             value.SetNonNull();
             value.Value() = 4294967294UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 242: {
             LogStep(242, "Read attribute NULLABLE_INT32U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 243: {
@@ -53479,12 +53479,12 @@ private:
             chip::app::DataModel::Nullable<uint32_t> value;
             value.SetNonNull();
             value.Value() = 4294967295UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 244: {
             LogStep(244, "Read attribute NULLABLE_INT32U unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 245: {
@@ -53492,22 +53492,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint32_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 246: {
             LogStep(246, "Read attribute NULLABLE_INT32U null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 247: {
             LogStep(247, "Read attribute NULLABLE_INT32U null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 248: {
             LogStep(248, "Read attribute NULLABLE_INT32U null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 249: {
@@ -53516,17 +53516,17 @@ private:
             chip::app::DataModel::Nullable<uint32_t> value;
             value.SetNonNull();
             value.Value() = 2147483647UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 250: {
             LogStep(250, "Read attribute NULLABLE_INT32U Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 251: {
             LogStep(251, "Read attribute NULLABLE_INT32U notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32u::Id, true,
                                  chip::NullOptional);
         }
         case 252: {
@@ -53535,12 +53535,12 @@ private:
             chip::app::DataModel::Nullable<uint64_t> value;
             value.SetNonNull();
             value.Value() = 0ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 253: {
             LogStep(253, "Read attribute NULLABLE_INT64U Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 254: {
@@ -53549,12 +53549,12 @@ private:
             chip::app::DataModel::Nullable<uint64_t> value;
             value.SetNonNull();
             value.Value() = 18446744073709551614ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 255: {
             LogStep(255, "Read attribute NULLABLE_INT64U Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 256: {
@@ -53563,12 +53563,12 @@ private:
             chip::app::DataModel::Nullable<uint64_t> value;
             value.SetNonNull();
             value.Value() = 18446744073709551615ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 257: {
             LogStep(257, "Read attribute NULLABLE_INT64U unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 258: {
@@ -53576,22 +53576,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint64_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 259: {
             LogStep(259, "Read attribute NULLABLE_INT64U null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 260: {
             LogStep(260, "Read attribute NULLABLE_INT64U null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 261: {
             LogStep(261, "Read attribute NULLABLE_INT64U null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 262: {
@@ -53600,17 +53600,17 @@ private:
             chip::app::DataModel::Nullable<uint64_t> value;
             value.SetNonNull();
             value.Value() = 18000000000000000000ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 263: {
             LogStep(263, "Read attribute NULLABLE_INT64U Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 264: {
             LogStep(264, "Read attribute NULLABLE_INT64U notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64u::Id, true,
                                  chip::NullOptional);
         }
         case 265: {
@@ -53619,12 +53619,12 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = -127;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 266: {
             LogStep(266, "Read attribute NULLABLE_INT8S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 267: {
@@ -53633,12 +53633,12 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = -128;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 268: {
             LogStep(268, "Read attribute NULLABLE_INT8S unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 269: {
@@ -53646,22 +53646,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 270: {
             LogStep(270, "Read attribute NULLABLE_INT8S null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 271: {
             LogStep(271, "Read attribute NULLABLE_INT8S null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 272: {
             LogStep(272, "Read attribute NULLABLE_INT8S null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 273: {
@@ -53670,17 +53670,17 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = -127;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 274: {
             LogStep(274, "Read attribute NULLABLE_INT8S Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 275: {
             LogStep(275, "Read attribute NULLABLE_INT8S notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt8s::Id, true,
                                  chip::NullOptional);
         }
         case 276: {
@@ -53689,12 +53689,12 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = -32767;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 277: {
             LogStep(277, "Read attribute NULLABLE_INT16S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 278: {
@@ -53703,12 +53703,12 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = -32768;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 279: {
             LogStep(279, "Read attribute NULLABLE_INT16S unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 280: {
@@ -53716,22 +53716,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 281: {
             LogStep(281, "Read attribute NULLABLE_INT16S null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 282: {
             LogStep(282, "Read attribute NULLABLE_INT16S null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 283: {
             LogStep(283, "Read attribute NULLABLE_INT16S null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 284: {
@@ -53740,17 +53740,17 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = -32767;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 285: {
             LogStep(285, "Read attribute NULLABLE_INT16S Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 286: {
             LogStep(286, "Read attribute NULLABLE_INT16S notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt16s::Id, true,
                                  chip::NullOptional);
         }
         case 287: {
@@ -53759,12 +53759,12 @@ private:
             chip::app::DataModel::Nullable<int32_t> value;
             value.SetNonNull();
             value.Value() = -2147483647L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 288: {
             LogStep(288, "Read attribute NULLABLE_INT32S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 289: {
@@ -53773,12 +53773,12 @@ private:
             chip::app::DataModel::Nullable<int32_t> value;
             value.SetNonNull();
             value.Value() = -2147483648L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 290: {
             LogStep(290, "Read attribute NULLABLE_INT32S unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 291: {
@@ -53786,22 +53786,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<int32_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 292: {
             LogStep(292, "Read attribute NULLABLE_INT32S null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 293: {
             LogStep(293, "Read attribute NULLABLE_INT32S null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 294: {
             LogStep(294, "Read attribute NULLABLE_INT32S null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 295: {
@@ -53810,17 +53810,17 @@ private:
             chip::app::DataModel::Nullable<int32_t> value;
             value.SetNonNull();
             value.Value() = -2147483647L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 296: {
             LogStep(296, "Read attribute NULLABLE_INT32S Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 297: {
             LogStep(297, "Read attribute NULLABLE_INT32S notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt32s::Id, true,
                                  chip::NullOptional);
         }
         case 298: {
@@ -53829,12 +53829,12 @@ private:
             chip::app::DataModel::Nullable<int64_t> value;
             value.SetNonNull();
             value.Value() = -9223372036854775807LL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 299: {
             LogStep(299, "Read attribute NULLABLE_INT64S Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 300: {
@@ -53843,12 +53843,12 @@ private:
             chip::app::DataModel::Nullable<int64_t> value;
             value.SetNonNull();
             value.Value() = static_cast<int64_t>(-9223372036854775807LL - 1);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 301: {
             LogStep(301, "Read attribute NULLABLE_INT64S unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 302: {
@@ -53856,22 +53856,22 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<int64_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 303: {
             LogStep(303, "Read attribute NULLABLE_INT64S null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 304: {
             LogStep(304, "Read attribute NULLABLE_INT64S null Value & range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 305: {
             LogStep(305, "Read attribute NULLABLE_INT64S null Value & not");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 306: {
@@ -53880,17 +53880,17 @@ private:
             chip::app::DataModel::Nullable<int64_t> value;
             value.SetNonNull();
             value.Value() = -9223372036854775807LL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 307: {
             LogStep(307, "Read attribute NULLABLE_INT64S Value in range");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 308: {
             LogStep(308, "Read attribute NULLABLE_INT64S notValue OK");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableInt64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableInt64s::Id, true,
                                  chip::NullOptional);
         }
         case 309: {
@@ -53899,12 +53899,12 @@ private:
             chip::app::DataModel::Nullable<float> value;
             value.SetNonNull();
             value.Value() = 0.1f;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 310: {
             LogStep(310, "Read attribute NULLABLE_SINGLE medium Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                  true, chip::NullOptional);
         }
         case 311: {
@@ -53913,12 +53913,12 @@ private:
             chip::app::DataModel::Nullable<float> value;
             value.SetNonNull();
             value.Value() = INFINITY;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 312: {
             LogStep(312, "Read attribute NULLABLE_SINGLE largest Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                  true, chip::NullOptional);
         }
         case 313: {
@@ -53927,12 +53927,12 @@ private:
             chip::app::DataModel::Nullable<float> value;
             value.SetNonNull();
             value.Value() = -INFINITY;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 314: {
             LogStep(314, "Read attribute NULLABLE_SINGLE smallest Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                  true, chip::NullOptional);
         }
         case 315: {
@@ -53940,12 +53940,12 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<float> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 316: {
             LogStep(316, "Read attribute NULLABLE_SINGLE null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                  true, chip::NullOptional);
         }
         case 317: {
@@ -53954,12 +53954,12 @@ private:
             chip::app::DataModel::Nullable<float> value;
             value.SetNonNull();
             value.Value() = 0.0f;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 318: {
             LogStep(318, "Read attribute NULLABLE_SINGLE 0 Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatSingle::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatSingle::Id,
                                  true, chip::NullOptional);
         }
         case 319: {
@@ -53968,12 +53968,12 @@ private:
             chip::app::DataModel::Nullable<double> value;
             value.SetNonNull();
             value.Value() = 0.1234567890123;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 320: {
             LogStep(320, "Read attribute NULLABLE_DOUBLE medium Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                  true, chip::NullOptional);
         }
         case 321: {
@@ -53982,12 +53982,12 @@ private:
             chip::app::DataModel::Nullable<double> value;
             value.SetNonNull();
             value.Value() = INFINITY;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 322: {
             LogStep(322, "Read attribute NULLABLE_DOUBLE largest Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                  true, chip::NullOptional);
         }
         case 323: {
@@ -53996,12 +53996,12 @@ private:
             chip::app::DataModel::Nullable<double> value;
             value.SetNonNull();
             value.Value() = -INFINITY;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 324: {
             LogStep(324, "Read attribute NULLABLE_DOUBLE smallest Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                  true, chip::NullOptional);
         }
         case 325: {
@@ -54009,12 +54009,12 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<double> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 326: {
             LogStep(326, "Read attribute NULLABLE_DOUBLE null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                  true, chip::NullOptional);
         }
         case 327: {
@@ -54023,12 +54023,12 @@ private:
             chip::app::DataModel::Nullable<double> value;
             value.SetNonNull();
             value.Value() = 0;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 328: {
             LogStep(328, "Read attribute NULLABLE_DOUBLE 0 Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableFloatDouble::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableFloatDouble::Id,
                                  true, chip::NullOptional);
         }
         case 329: {
@@ -54037,12 +54037,12 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 330: {
             LogStep(330, "Read attribute NULLABLE_ENUM8 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id, true,
                                  chip::NullOptional);
         }
         case 331: {
@@ -54051,12 +54051,12 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 254U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 332: {
             LogStep(332, "Read attribute NULLABLE_ENUM8 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id, true,
                                  chip::NullOptional);
         }
         case 333: {
@@ -54065,12 +54065,12 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 255U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 334: {
             LogStep(334, "Read attribute NULLABLE_ENUM8 unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id, true,
                                  chip::NullOptional);
         }
         case 335: {
@@ -54078,12 +54078,12 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 336: {
             LogStep(336, "Read attribute NULLABLE_ENUM8 null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum8::Id, true,
                                  chip::NullOptional);
         }
         case 337: {
@@ -54092,12 +54092,12 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 338: {
             LogStep(338, "Read attribute NULLABLE_ENUM16 Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id, true,
                                  chip::NullOptional);
         }
         case 339: {
@@ -54106,12 +54106,12 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 65534U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 340: {
             LogStep(340, "Read attribute NULLABLE_ENUM16 Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id, true,
                                  chip::NullOptional);
         }
         case 341: {
@@ -54120,12 +54120,12 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 65535U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 342: {
             LogStep(342, "Read attribute NULLABLE_ENUM16 unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id, true,
                                  chip::NullOptional);
         }
         case 343: {
@@ -54133,77 +54133,77 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 344: {
             LogStep(344, "Read attribute NULLABLE_ENUM16 null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnum16::Id, true,
                                  chip::NullOptional);
         }
         case 345: {
             LogStep(345, "Write attribute NULLABLE_SIMPLE_ENUM Min Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+            chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            value.Value() = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(0);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 346: {
             LogStep(346, "Read attribute NULLABLE_SIMPLE_ENUM Min Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                  true, chip::NullOptional);
         }
         case 347: {
             LogStep(347, "Write attribute NULLABLE_SIMPLE_ENUM Max Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+            chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            value.Value() = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 348: {
             LogStep(348, "Read attribute NULLABLE_SIMPLE_ENUM Max Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                  true, chip::NullOptional);
         }
         case 349: {
             LogStep(349, "Write attribute NULLABLE_SIMPLE_ENUM Invalid Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+            chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
             value.SetNonNull();
-            value.Value() = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(255);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            value.Value() = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(255);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 350: {
             LogStep(350, "Read attribute NULLABLE_SIMPLE_ENUM unchanged Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                  true, chip::NullOptional);
         }
         case 351: {
             LogStep(351, "Write attribute NULLABLE_SIMPLE_ENUM null Value");
             ListFreer listFreer;
-            chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::SimpleEnum> value;
+            chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::SimpleEnum> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 352: {
             LogStep(352, "Read attribute NULLABLE_SIMPLE_ENUM null Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                  true, chip::NullOptional);
         }
         case 353: {
             LogStep(353, "Read attribute NULLABLE_SIMPLE_ENUM not 3 Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableEnumAttr::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableEnumAttr::Id,
                                  true, chip::NullOptional);
         }
         case 354: {
             LogStep(354, "Read attribute NULLABLE_OCTET_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 355: {
@@ -54212,12 +54212,12 @@ private:
             chip::app::DataModel::Nullable<chip::ByteSpan> value;
             value.SetNonNull();
             value.Value() = chip::ByteSpan(chip::Uint8::from_const_char("TestValuegarbage: not in length on purpose"), 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 356: {
             LogStep(356, "Read attribute NULLABLE_OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 357: {
@@ -54225,12 +54225,12 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<chip::ByteSpan> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 358: {
             LogStep(358, "Read attribute NULLABLE_OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 359: {
@@ -54239,22 +54239,22 @@ private:
             chip::app::DataModel::Nullable<chip::ByteSpan> value;
             value.SetNonNull();
             value.Value() = chip::ByteSpan(chip::Uint8::from_const_char("garbage: not in length on purpose"), 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 360: {
             LogStep(360, "Read attribute NULLABLE_OCTET_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 361: {
             LogStep(361, "Read attribute NULLABLE_OCTET_STRING not TestValue");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableOctetString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableOctetString::Id,
                                  true, chip::NullOptional);
         }
         case 362: {
             LogStep(362, "Read attribute NULLABLE_CHAR_STRING Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                  true, chip::NullOptional);
         }
         case 363: {
@@ -54263,17 +54263,17 @@ private:
             chip::app::DataModel::Nullable<chip::CharSpan> value;
             value.SetNonNull();
             value.Value() = chip::Span<const char>("☉T☉garbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 364: {
             LogStep(364, "Read attribute NULLABLE_CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                  true, chip::NullOptional);
         }
         case 365: {
             LogStep(365, "Read attribute NULLABLE_CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                  true, chip::NullOptional);
         }
         case 366: {
@@ -54281,12 +54281,12 @@ private:
             ListFreer listFreer;
             chip::app::DataModel::Nullable<chip::CharSpan> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 367: {
             LogStep(367, "Read attribute NULLABLE_CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                  true, chip::NullOptional);
         }
         case 368: {
@@ -54295,52 +54295,52 @@ private:
             chip::app::DataModel::Nullable<chip::CharSpan> value;
             value.SetNonNull();
             value.Value() = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 369: {
             LogStep(369, "Read attribute NULLABLE_CHAR_STRING");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                  true, chip::NullOptional);
         }
         case 370: {
             LogStep(370, "Read attribute NULLABLE_CHAR_STRING not ☉T☉");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::NullableCharString::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::NullableCharString::Id,
                                  true, chip::NullOptional);
         }
         case 371: {
             LogStep(371, "Read attribute from nonexistent endpoint.");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(200), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(200), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 372: {
             LogStep(372, "Read attribute from nonexistent cluster.");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 373: {
             LogStep(373, "Send a command that takes an optional parameter but do not set it.");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestSimpleOptionalArgumentRequest::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestSimpleOptionalArgumentRequest::Id, value, chip::NullOptional
+            chip::app::Clusters::UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 374: {
             LogStep(374, "Send a command that takes an optional parameter but do not set it.");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestSimpleOptionalArgumentRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type value;
             value.arg1.Emplace();
             value.arg1.Value() = 1;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestSimpleOptionalArgumentRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Id, value, chip::NullOptional
 
             );
         }
         case 375: {
             LogStep(375, "Subscribe to list attribute");
-            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, 2, 5,
+            return SubscribeAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, 2, 5,
                                       true, chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 376: {
@@ -54357,7 +54357,7 @@ private:
                 listHolder_0->mList[3] = 8U;
                 value                  = chip::app::DataModel::List<uint8_t>(listHolder_0->mList, 4);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 377: {
@@ -54366,7 +54366,7 @@ private:
         }
         case 378: {
             LogStep(378, "Read range-restricted unsigned 8-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8u::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8u::Id,
                                  true, chip::NullOptional);
         }
         case 379: {
@@ -54374,36 +54374,36 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 380: {
             LogStep(380, "Write just-below-range value to a range-restricted unsigned 8-bit integer");
             ListFreer listFreer;
             uint8_t value;
             value = 19U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 381: {
             LogStep(381, "Write just-above-range value to a range-restricted unsigned 8-bit integer");
             ListFreer listFreer;
             uint8_t value;
             value = 101U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 382: {
             LogStep(382, "Write max value to a range-restricted unsigned 8-bit integer");
             ListFreer listFreer;
             uint8_t value;
             value = 255U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 383: {
             LogStep(383, "Verify range-restricted unsigned 8-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8u::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8u::Id,
                                  true, chip::NullOptional);
         }
         case 384: {
@@ -54411,12 +54411,12 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 20U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 385: {
             LogStep(385, "Verify range-restricted unsigned 8-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8u::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8u::Id,
                                  true, chip::NullOptional);
         }
         case 386: {
@@ -54424,12 +54424,12 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 100U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 387: {
             LogStep(387, "Verify range-restricted unsigned 8-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8u::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8u::Id,
                                  true, chip::NullOptional);
         }
         case 388: {
@@ -54437,26 +54437,26 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 50U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8u::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 389: {
             LogStep(389, "Verify range-restricted unsigned 8-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8u::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8u::Id,
                                  true, chip::NullOptional);
         }
         case 390: {
             LogStep(390, "Read range-restricted unsigned 16-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 391: {
             LogStep(391, "Write min value to a range-restricted unsigned 16-bit integer");
             ListFreer listFreer;
             uint16_t value;
             value = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 392: {
@@ -54464,8 +54464,8 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 99U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 393: {
@@ -54473,8 +54473,8 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 1001U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 394: {
@@ -54482,60 +54482,60 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 65535U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 395: {
             LogStep(395, "Verify range-restricted unsigned 16-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 396: {
             LogStep(396, "Write min valid value to a range-restricted unsigned 16-bit integer");
             ListFreer listFreer;
             uint16_t value;
             value = 100U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 397: {
             LogStep(397, "Verify range-restricted unsigned 16-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 398: {
             LogStep(398, "Write max valid value to a range-restricted unsigned 16-bit integer");
             ListFreer listFreer;
             uint16_t value;
             value = 1000U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 399: {
             LogStep(399, "Verify range-restricted unsigned 16-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 400: {
             LogStep(400, "Write middle valid value to a range-restricted unsigned 16-bit integer");
             ListFreer listFreer;
             uint16_t value;
             value = 500U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 401: {
             LogStep(401, "Verify range-restricted unsigned 16-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 402: {
             LogStep(402, "Read range-restricted signed 8-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8s::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8s::Id,
                                  true, chip::NullOptional);
         }
         case 403: {
@@ -54543,36 +54543,36 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = -128;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 404: {
             LogStep(404, "Write just-below-range value to a range-restricted signed 8-bit integer");
             ListFreer listFreer;
             int8_t value;
             value = -41;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 405: {
             LogStep(405, "Write just-above-range value to a range-restricted signed 8-bit integer");
             ListFreer listFreer;
             int8_t value;
             value = 51;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 406: {
             LogStep(406, "Write max value to a range-restricted signed 8-bit integer");
             ListFreer listFreer;
             int8_t value;
             value = 127;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 407: {
             LogStep(407, "Verify range-restricted signed 8-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8s::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8s::Id,
                                  true, chip::NullOptional);
         }
         case 408: {
@@ -54580,12 +54580,12 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = -40;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 409: {
             LogStep(409, "Verify range-restricted signed 8-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8s::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8s::Id,
                                  true, chip::NullOptional);
         }
         case 410: {
@@ -54593,12 +54593,12 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = 50;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 411: {
             LogStep(411, "Verify range-restricted signed 8-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8s::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8s::Id,
                                  true, chip::NullOptional);
         }
         case 412: {
@@ -54606,26 +54606,26 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = 6;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt8s::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 413: {
             LogStep(413, "Verify range-restricted signed 8-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::RangeRestrictedInt8s::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::RangeRestrictedInt8s::Id,
                                  true, chip::NullOptional);
         }
         case 414: {
             LogStep(414, "Read range-restricted signed 16-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 415: {
             LogStep(415, "Write min value to a range-restricted signed 16-bit integer");
             ListFreer listFreer;
             int16_t value;
             value = -32768;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 416: {
@@ -54633,8 +54633,8 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = -151;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 417: {
@@ -54642,8 +54642,8 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = 201;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 418: {
@@ -54651,61 +54651,61 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = 32767;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 419: {
             LogStep(419, "Verify range-restricted signed 16-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 420: {
             LogStep(420, "Write min valid value to a range-restricted signed 16-bit integer");
             ListFreer listFreer;
             int16_t value;
             value = -150;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 421: {
             LogStep(421, "Verify range-restricted signed 16-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 422: {
             LogStep(422, "Write max valid value to a range-restricted signed 16-bit integer");
             ListFreer listFreer;
             int16_t value;
             value = 200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 423: {
             LogStep(423, "Verify range-restricted signed 16-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 424: {
             LogStep(424, "Write middle valid value to a range-restricted signed 16-bit integer");
             ListFreer listFreer;
             int16_t value;
             value = 7;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::RangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 425: {
             LogStep(425, "Verify range-restricted signed 16-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::RangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 426: {
             LogStep(426, "Read nullable range-restricted unsigned 8-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
         }
         case 427: {
             LogStep(427, "Write min value to a nullable range-restricted unsigned 8-bit integer");
@@ -54713,8 +54713,8 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 428: {
@@ -54723,8 +54723,8 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 19U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 429: {
@@ -54733,8 +54733,8 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 101U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 430: {
@@ -54743,14 +54743,14 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 254U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 431: {
             LogStep(431, "Verify nullable range-restricted unsigned 8-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
         }
         case 432: {
             LogStep(432, "Write min valid value to a nullable range-restricted unsigned 8-bit integer");
@@ -54758,14 +54758,14 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 20U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 433: {
             LogStep(433, "Verify nullable range-restricted unsigned 8-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
         }
         case 434: {
             LogStep(434, "Write max valid value to a nullable range-restricted unsigned 8-bit integer");
@@ -54773,14 +54773,14 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 100U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 435: {
             LogStep(435, "Verify nullable range-restricted unsigned 8-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
         }
         case 436: {
             LogStep(436, "Write middle valid value to a nullable range-restricted unsigned 8-bit integer");
@@ -54788,33 +54788,33 @@ private:
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNonNull();
             value.Value() = 50U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 437: {
             LogStep(437, "Verify nullable range-restricted unsigned 8-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
         }
         case 438: {
             LogStep(438, "Write null value to a nullable range-restricted unsigned 8-bit integer");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint8_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 439: {
             LogStep(439, "Verify nullable range-restricted unsigned 8-bit integer value is null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8u::Id, true, chip::NullOptional);
         }
         case 440: {
             LogStep(440, "Read nullable range-restricted unsigned 16-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 441: {
             LogStep(441, "Write min value to a nullable range-restricted unsigned 16-bit integer");
@@ -54822,8 +54822,8 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 0U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 442: {
@@ -54832,8 +54832,8 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 99U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 443: {
@@ -54842,8 +54842,8 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 1001U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 444: {
@@ -54852,14 +54852,14 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 65534U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 445: {
             LogStep(445, "Verify nullable range-restricted unsigned 16-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 446: {
             LogStep(446, "Write min valid value to a nullable range-restricted unsigned 16-bit integer");
@@ -54867,14 +54867,14 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 100U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 447: {
             LogStep(447, "Verify nullable range-restricted unsigned 16-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 448: {
             LogStep(448, "Write max valid value to a nullable range-restricted unsigned 16-bit integer");
@@ -54882,14 +54882,14 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 1000U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 449: {
             LogStep(449, "Verify nullable range-restricted unsigned 16-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 450: {
             LogStep(450, "Write middle valid value to a nullable range-restricted unsigned 16-bit integer");
@@ -54897,33 +54897,33 @@ private:
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNonNull();
             value.Value() = 500U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 451: {
             LogStep(451, "Verify nullable range-restricted unsigned 16-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 452: {
             LogStep(452, "Write null value to a nullable range-restricted unsigned 16-bit integer");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<uint16_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 453: {
             LogStep(453, "Verify nullable range-restricted unsigned 16-bit integer value is null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16u::Id, true, chip::NullOptional);
         }
         case 454: {
             LogStep(454, "Read nullable range-restricted signed 8-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
         }
         case 455: {
             LogStep(455, "Write min value to a nullable range-restricted signed 8-bit integer");
@@ -54931,8 +54931,8 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = -127;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 456: {
@@ -54941,8 +54941,8 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = -41;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 457: {
@@ -54951,8 +54951,8 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = 51;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 458: {
@@ -54961,14 +54961,14 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = 127;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 459: {
             LogStep(459, "Verify nullable range-restricted signed 8-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
         }
         case 460: {
             LogStep(460, "Write min valid value to a nullable range-restricted signed 8-bit integer");
@@ -54976,14 +54976,14 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = -40;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 461: {
             LogStep(461, "Verify nullable range-restricted signed 8-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
         }
         case 462: {
             LogStep(462, "Write max valid value to a nullable range-restricted signed 8-bit integer");
@@ -54991,14 +54991,14 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = 50;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 463: {
             LogStep(463, "Verify nullable range-restricted signed 8-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
         }
         case 464: {
             LogStep(464, "Write middle valid value to a nullable range-restricted signed 8-bit integer");
@@ -55006,33 +55006,33 @@ private:
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNonNull();
             value.Value() = 6;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 465: {
             LogStep(465, "Verify nullable range-restricted signed 8-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
         }
         case 466: {
             LogStep(466, "Write null value to a nullable range-restricted signed 8-bit integer");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<int8_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 467: {
             LogStep(467, "Verify nullable range-restricted signed 8-bit integer value is at null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt8s::Id, true, chip::NullOptional);
         }
         case 468: {
             LogStep(468, "Read nullable range-restricted signed 16-bit integer");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 469: {
             LogStep(469, "Write min value to a nullable range-restricted signed 16-bit integer");
@@ -55040,8 +55040,8 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = -32767;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 470: {
@@ -55050,8 +55050,8 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = -151;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 471: {
@@ -55060,8 +55060,8 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = 201;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 472: {
@@ -55070,14 +55070,14 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = 32767;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 473: {
             LogStep(473, "Verify nullable range-restricted signed 16-bit integer value has not changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 474: {
             LogStep(474, "Write min valid value to a nullable range-restricted signed 16-bit integer");
@@ -55085,14 +55085,14 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = -150;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 475: {
             LogStep(475, "Verify nullable range-restricted signed 16-bit integer value is at min valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 476: {
             LogStep(476, "Write max valid value to a nullable range-restricted signed 16-bit integer");
@@ -55100,14 +55100,14 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = 200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 477: {
             LogStep(477, "Verify nullable range-restricted signed 16-bit integer value is at max valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 478: {
             LogStep(478, "Write middle valid value to a nullable range-restricted signed 16-bit integer");
@@ -55115,35 +55115,35 @@ private:
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNonNull();
             value.Value() = 7;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 479: {
             LogStep(479, "Verify nullable range-restricted signed 16-bit integer value is at mid valid");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 480: {
             LogStep(480, "Write null value to a nullable range-restricted signed 16-bit integer");
             ListFreer listFreer;
             chip::app::DataModel::Nullable<int16_t> value;
             value.SetNull();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                  TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                  UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 481: {
             LogStep(481, "Verify nullable range-restricted signed 16-bit integer value is null");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                 TestCluster::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                 UnitTesting::Attributes::NullableRangeRestrictedInt16s::Id, true, chip::NullOptional);
         }
         case 482: {
             LogStep(482, "Write attribute that returns general status on write");
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::GeneralErrorBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::GeneralErrorBoolean::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 483: {
@@ -55151,49 +55151,49 @@ private:
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ClusterErrorBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ClusterErrorBoolean::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 484: {
             LogStep(484, "Read attribute that returns general status on read");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::GeneralErrorBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::GeneralErrorBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 485: {
             LogStep(485, "read attribute that returns cluster-specific status on read");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ClusterErrorBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ClusterErrorBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 486: {
             LogStep(486, "read AcceptedCommandList attribute");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::AcceptedCommandList::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::AcceptedCommandList::Id,
                                  true, chip::NullOptional);
         }
         case 487: {
             LogStep(487, "read GeneratedCommandList attribute");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::GeneratedCommandList::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::GeneratedCommandList::Id,
                                  true, chip::NullOptional);
         }
         case 488: {
             LogStep(488, "Write struct-typed attribute");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type value;
+            chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type value;
 
             value.a = 5U;
             value.b = true;
-            value.c = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.c = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.d = chip::ByteSpan(chip::Uint8::from_const_char("abcgarbage: not in length on purpose"), 3);
             value.e = chip::Span<const char>("garbage: not in length on purpose", 0);
-            value.f = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::SimpleBitmap>>(17U);
+            value.f = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::SimpleBitmap>>(17U);
             value.g = 1.5f;
             value.h = 3.14159265358979;
 
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::StructAttr::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::StructAttr::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 489: {
             LogStep(489, "Read struct-typed attribute");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::StructAttr::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::StructAttr::Id, true,
                                  chip::NullOptional);
         }
         }
@@ -55245,7 +55245,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestNullableOptionalResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("wasPresent", value.wasPresent, true));
                 VerifyOrReturn(CheckValuePresent("wasNull", value.wasNull));
@@ -55371,19 +55371,19 @@ private:
         case 1: {
             LogStep(1, "Send Test Command with optional arg set to null.");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestNullableOptionalRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalRequest::Type value;
             value.arg1.Emplace();
             value.arg1.Value().SetNull();
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                               TestCluster::Commands::TestNullableOptionalRequest::Id, value, chip::NullOptional
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                               UnitTesting::Commands::TestNullableOptionalRequest::Id, value, chip::NullOptional
 
             );
         }
         case 2: {
             LogStep(2, "Send command that needs timed invoke without a timeout value");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TimedInvokeRequest::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TimedInvokeRequest::Id,
+            chip::app::Clusters::UnitTesting::Commands::TimedInvokeRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TimedInvokeRequest::Id,
                                value, chip::NullOptional, chip::NullOptional
 
             );
@@ -55391,8 +55391,8 @@ private:
         case 3: {
             LogStep(3, "Send command that needs timed invoke with a long timeout value");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TimedInvokeRequest::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TimedInvokeRequest::Id,
+            chip::app::Clusters::UnitTesting::Commands::TimedInvokeRequest::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TimedInvokeRequest::Id,
                                value, chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );
@@ -55400,9 +55400,9 @@ private:
         case 4: {
             LogStep(4, "Send command that needs timed invoke with a too-short timeout value");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TimedInvokeRequest::Type value;
-            ReturnErrorOnFailure(SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                             TestCluster::Commands::TimedInvokeRequest::Id, value, chip::Optional<uint16_t>(1),
+            chip::app::Clusters::UnitTesting::Commands::TimedInvokeRequest::Type value;
+            ReturnErrorOnFailure(SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                             UnitTesting::Commands::TimedInvokeRequest::Id, value, chip::Optional<uint16_t>(1),
                                              chip::NullOptional
 
                                              ));
@@ -55413,8 +55413,8 @@ private:
         case 5: {
             LogStep(5, "Send command that does not need timed invoke with a long timeout value");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::Test::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::Test::Id, value,
+            chip::app::Clusters::UnitTesting::Commands::Test::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::Test::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );
@@ -55422,8 +55422,8 @@ private:
         case 6: {
             LogStep(6, "Send command that does not need timed invoke with a too-short timeout value");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::Test::Type value;
-            ReturnErrorOnFailure(SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::Test::Id,
+            chip::app::Clusters::UnitTesting::Commands::Test::Type value;
+            ReturnErrorOnFailure(SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::Test::Id,
                                              value, chip::Optional<uint16_t>(1), chip::NullOptional
 
                                              ));
@@ -55433,7 +55433,7 @@ private:
         }
         case 7: {
             LogStep(7, "Read attribute that needs timed write initial state");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 8: {
@@ -55441,12 +55441,12 @@ private:
             ListFreer listFreer;
             bool value;
             value = true;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                   value, chip::NullOptional, chip::NullOptional, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Read attribute that needs timed write state unchanged 1");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 10: {
@@ -55454,8 +55454,8 @@ private:
             ListFreer listFreer;
             bool value;
             value = true;
-            ReturnErrorOnFailure(WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                                TestCluster::Attributes::TimedWriteBoolean::Id, value, chip::Optional<uint16_t>(1),
+            ReturnErrorOnFailure(WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                                UnitTesting::Attributes::TimedWriteBoolean::Id, value, chip::Optional<uint16_t>(1),
                                                 chip::NullOptional, chip::NullOptional));
 
             using namespace chip::System::Clock::Literals;
@@ -55463,7 +55463,7 @@ private:
         }
         case 11: {
             LogStep(11, "Read attribute that needs timed write state unchanged 2");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 12: {
@@ -55471,12 +55471,12 @@ private:
             ListFreer listFreer;
             bool value;
             value = true;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                   value, chip::Optional<uint16_t>(10000), chip::NullOptional, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Read attribute that needs timed write state changed");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                  true, chip::NullOptional);
         }
         case 14: {
@@ -55484,12 +55484,12 @@ private:
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::TimedWriteBoolean::Id,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::TimedWriteBoolean::Id,
                                   value, chip::Optional<uint16_t>(10000), chip::NullOptional, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Read attribute that does not need timed write initial value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 16: {
@@ -55497,8 +55497,8 @@ private:
             ListFreer listFreer;
             bool value;
             value = true;
-            ReturnErrorOnFailure(WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id,
-                                                TestCluster::Attributes::Boolean::Id, value, chip::Optional<uint16_t>(1),
+            ReturnErrorOnFailure(WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id,
+                                                UnitTesting::Attributes::Boolean::Id, value, chip::Optional<uint16_t>(1),
                                                 chip::NullOptional, chip::NullOptional));
 
             using namespace chip::System::Clock::Literals;
@@ -55506,7 +55506,7 @@ private:
         }
         case 17: {
             LogStep(17, "Read attribute that does not need timed write unchanged value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 18: {
@@ -55514,12 +55514,12 @@ private:
             ListFreer listFreer;
             bool value;
             value = true;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, value,
                                   chip::Optional<uint16_t>(10000), chip::NullOptional, chip::NullOptional);
         }
         case 19: {
             LogStep(19, "Read attribute that does not need timed write changed value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
@@ -55527,7 +55527,7 @@ private:
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         }
@@ -55603,7 +55603,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 0UL));
             }
@@ -55614,7 +55614,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 5UL));
                 VerifyOrReturn(CheckConstraintHasMasksClear("value", value, 2UL));
@@ -55623,7 +55623,7 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 5UL));
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
@@ -55632,7 +55632,7 @@ private:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 5UL));
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
@@ -55641,7 +55641,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 5UL));
                 VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
@@ -55810,17 +55810,17 @@ private:
                 listHolder_0->mList[3] = 4U;
                 value                  = chip::app::DataModel::List<uint8_t>(listHolder_0->mList, 4);
             }
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Read attribute LIST With Partial List of INT8U that should be in it");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 3: {
             LogStep(3, "Read attribute LIST With Partial List of INT8U that should not be included");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, true,
                                  chip::NullOptional);
         }
         case 4: {
@@ -55829,40 +55829,40 @@ private:
             chip::app::DataModel::List<const uint8_t> value;
 
             value = chip::app::DataModel::List<uint8_t>();
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::ListInt8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::ListInt8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Read attribute BITMAP32 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 6: {
             LogStep(6, "Write attribute BITMAP32 with MaskVal1 and MaskVal3");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>>(5UL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(5UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal2 is not set");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 8: {
             LogStep(8, "Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal1 is set");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure MaskVal3 is set");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Read attribute BITMAP32 with MaskVal1 and MaskVal3 and ensure Maskval1 and MaskVal3 are set");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 11: {
@@ -55870,22 +55870,22 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 5UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "Read attribute INT32U Value MinValue Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Read attribute INT32U Value MaxValue Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 14: {
             LogStep(14, "Read attribute INT32U Value NotValue Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 15: {
@@ -55893,7 +55893,7 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 0UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 16: {
@@ -55901,27 +55901,27 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("** Test **garbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "Read attribute CHAR_STRING Value MinLength Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 18: {
             LogStep(18, "Read attribute CHAR_STRING Value MaxLength Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
             LogStep(19, "Read attribute CHAR_STRING Value StartsWith Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
             LogStep(20, "Read attribute CHAR_STRING Value EndsWith Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 21: {
@@ -55929,12 +55929,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("lowercasegarbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 22: {
             LogStep(22, "Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 23: {
@@ -55942,12 +55942,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("UPPERCASEgarbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 24: {
             LogStep(24, "Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 25: {
@@ -55955,12 +55955,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("lowUPPERgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 26: {
             LogStep(26, "Read attribute CHAR_STRING Value isLowerCase/isUpperCase Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 27: {
@@ -55968,12 +55968,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("ABCDEF012Vgarbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "Read attribute CHAR_STRING Value isHexString Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 29: {
@@ -55981,12 +55981,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("ABCDEF0123garbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 30: {
             LogStep(30, "Read attribute CHAR_STRING Value isHexString Constraints");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 31: {
@@ -55994,7 +55994,7 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         }
@@ -56141,7 +56141,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestEmitTestEventResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 eventNumber = value.value;
             }
@@ -56152,7 +56152,7 @@ private:
             case 0:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 1U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 2U));
@@ -56171,7 +56171,7 @@ private:
             case 0:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 1U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 2U));
@@ -56195,7 +56195,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestEmitTestEventResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, static_cast<uint64_t>(eventNumber + 1)));
             }
@@ -56206,7 +56206,7 @@ private:
             case 0:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 1U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 2U));
@@ -56217,7 +56217,7 @@ private:
             case 1:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 3U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 4U));
@@ -56236,7 +56236,7 @@ private:
             case 0:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 1U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 2U));
@@ -56247,7 +56247,7 @@ private:
             case 1:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 3U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 4U));
@@ -56263,7 +56263,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestEmitTestEventResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("value", value.value, static_cast<uint64_t>(eventNumber + 2)));
             }
@@ -56274,7 +56274,7 @@ private:
             case 0:
                 VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
                 {
-                    chip::app::Clusters::TestCluster::Events::TestEvent::DecodableType value;
+                    chip::app::Clusters::UnitTesting::Events::TestEvent::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                     VerifyOrReturn(CheckValue("testEvent.arg1", value.arg1, 4U));
                     VerifyOrReturn(CheckValue("testEvent.arg2", value.arg2, 3U));
@@ -56313,23 +56313,23 @@ private:
         case 1: {
             LogStep(1, "Check there is no event on the target endpoint");
             mTestSubStepCount = 0;
-            return ReadEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, false,
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Check reading events from an invalid endpoint");
             mTestSubStepCount = 0;
-            return ReadEvent(kIdentityAlpha, GetEndpoint(0), TestCluster::Id, TestCluster::Events::TestEvent::Id, false,
+            return ReadEvent(kIdentityAlpha, GetEndpoint(0), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::NullOptional);
         }
         case 3: {
             LogStep(3, "Generate an event on the accessory");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestEmitTestEventRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventRequest::Type value;
             value.arg1 = 1U;
-            value.arg2 = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(2);
+            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(2);
             value.arg3 = true;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestEmitTestEventRequest::Id,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestEmitTestEventRequest::Id,
                                value, chip::NullOptional
 
             );
@@ -56337,29 +56337,29 @@ private:
         case 4: {
             LogStep(4, "Read the event back");
             mTestSubStepCount = 1;
-            return ReadEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, false,
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Read the event with eventNumber set to the event value");
             mTestSubStepCount = 1;
-            return ReadEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, false,
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::Optional<chip::EventNumber>(eventNumber));
         }
         case 6: {
             LogStep(6, "Read the event with eventNumber set to the event value + 1");
             mTestSubStepCount = 0;
-            return ReadEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, false,
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::Optional<chip::EventNumber>(eventNumber + 1));
         }
         case 7: {
             LogStep(7, "Generate a second event on the accessory");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestEmitTestEventRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventRequest::Type value;
             value.arg1 = 3U;
-            value.arg2 = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(4);
+            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(4);
             value.arg3 = false;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestEmitTestEventRequest::Id,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestEmitTestEventRequest::Id,
                                value, chip::NullOptional
 
             );
@@ -56367,23 +56367,23 @@ private:
         case 8: {
             LogStep(8, "Read the event back");
             mTestSubStepCount = 2;
-            return ReadEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, false,
+            return ReadEvent(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, false,
                              chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Subscribe to the event");
             mTestSubStepCount = 2;
-            return SubscribeEvent(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Events::TestEvent::Id, 3, 5, false,
+            return SubscribeEvent(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Events::TestEvent::Id, 3, 5, false,
                                   chip::NullOptional, chip::NullOptional, /* autoResubscribe = */ chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Generate a third event on the accessory");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestEmitTestEventRequest::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventRequest::Type value;
             value.arg1 = 4U;
-            value.arg2 = static_cast<chip::app::Clusters::TestCluster::SimpleEnum>(3);
+            value.arg2 = static_cast<chip::app::Clusters::UnitTesting::SimpleEnum>(3);
             value.arg3 = true;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestEmitTestEventRequest::Id,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestEmitTestEventRequest::Id,
                                value, chip::NullOptional
 
             );
@@ -57022,10 +57022,10 @@ private:
 
     uint8_t TestAddArgumentDefaultValue;
     bool readAttributeBooleanDefaultValue;
-    chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> readAttributeBitmap8DefaultValue;
-    chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> readAttributeBitmap16DefaultValue;
-    chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> readAttributeBitmap32DefaultValue;
-    chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> readAttributeBitmap64DefaultValue;
+    chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> readAttributeBitmap8DefaultValue;
+    chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> readAttributeBitmap16DefaultValue;
+    chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> readAttributeBitmap32DefaultValue;
+    chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> readAttributeBitmap64DefaultValue;
     uint8_t readAttributeInt8uDefaultValue;
     uint16_t readAttributeInt16uDefaultValue;
     uint32_t readAttributeInt32uDefaultValue;
@@ -57067,7 +57067,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestAddArgumentsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestAddArgumentsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("returnValue", value.returnValue, 20U));
                 TestAddArgumentDefaultValue = value.returnValue;
@@ -57076,7 +57076,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestAddArgumentsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestAddArgumentsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("returnValue", value.returnValue, TestAddArgumentDefaultValue));
             }
@@ -57084,7 +57084,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestAddArgumentsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestAddArgumentsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value.returnValue", value.returnValue, TestAddArgumentDefaultValue));
             }
@@ -57123,7 +57123,7 @@ private:
         case 9:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap8", value, 0U));
                 readAttributeBitmap8DefaultValue = value;
@@ -57135,7 +57135,7 @@ private:
         case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, readAttributeBitmap8DefaultValue));
             }
@@ -57146,7 +57146,7 @@ private:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap8", value, readAttributeBitmap8DefaultValue));
             }
@@ -57154,7 +57154,7 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap16", value, 0U));
                 readAttributeBitmap16DefaultValue = value;
@@ -57166,7 +57166,7 @@ private:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, readAttributeBitmap16DefaultValue));
             }
@@ -57177,7 +57177,7 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap16", value, readAttributeBitmap16DefaultValue));
             }
@@ -57185,7 +57185,7 @@ private:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, 0UL));
                 readAttributeBitmap32DefaultValue = value;
@@ -57197,7 +57197,7 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, readAttributeBitmap32DefaultValue));
             }
@@ -57208,7 +57208,7 @@ private:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap32", value, readAttributeBitmap32DefaultValue));
             }
@@ -57216,7 +57216,7 @@ private:
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap64", value, 0ULL));
                 readAttributeBitmap64DefaultValue = value;
@@ -57228,7 +57228,7 @@ private:
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintNotValue("value", value, readAttributeBitmap64DefaultValue));
             }
@@ -57239,7 +57239,7 @@ private:
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+                chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("bitmap64", value, readAttributeBitmap64DefaultValue));
             }
@@ -57805,10 +57805,10 @@ private:
         case 1: {
             LogStep(1, "Send Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = 3U;
             value.arg2 = 17U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );
@@ -57816,10 +57816,10 @@ private:
         case 2: {
             LogStep(2, "Send Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = 3U;
             value.arg2 = 17U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );
@@ -57827,17 +57827,17 @@ private:
         case 3: {
             LogStep(3, "Send Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = 3U;
             value.arg2 = TestAddArgumentDefaultValue;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );
         }
         case 4: {
             LogStep(4, "Read attribute BOOLEAN Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 5: {
@@ -57845,12 +57845,12 @@ private:
             ListFreer listFreer;
             bool value;
             value = 1;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "Read attribute BOOLEAN Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 7: {
@@ -57858,141 +57858,141 @@ private:
             ListFreer listFreer;
             bool value;
             value = readAttributeBooleanDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "Read attribute BOOLEAN False");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Boolean::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Boolean::Id, true,
                                  chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Read attribute BITMAP8 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, true,
                                  chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Write attribute BITMAP8 Not Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap>>(1U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap>>(1U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Read attribute BITMAP8 Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, true,
                                  chip::NullOptional);
         }
         case 12: {
             LogStep(12, "Write attribute BITMAP8 Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap8MaskMap> value;
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap8MaskMap> value;
             value = readAttributeBitmap8DefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Read attribute BITMAP8 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap8::Id, true,
                                  chip::NullOptional);
         }
         case 14: {
             LogStep(14, "Read attribute BITMAP16 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, true,
                                  chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Write attribute BITMAP16 Not Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap>>(1U);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap>>(1U);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "Read attribute BITMAP16 Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, true,
                                  chip::NullOptional);
         }
         case 17: {
             LogStep(17, "Write attribute BITMAP16 Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap16MaskMap> value;
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap16MaskMap> value;
             value = readAttributeBitmap16DefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "Read attribute BITMAP16 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap16::Id, true,
                                  chip::NullOptional);
         }
         case 19: {
             LogStep(19, "Read attribute BITMAP32 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 20: {
             LogStep(20, "Write attribute BITMAP32 Not Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap>>(1UL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap>>(1UL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 21: {
             LogStep(21, "Read attribute BITMAP32 Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 22: {
             LogStep(22, "Write attribute BITMAP32 Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap32MaskMap> value;
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap32MaskMap> value;
             value = readAttributeBitmap32DefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 23: {
             LogStep(23, "Read attribute BITMAP32 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap32::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap32::Id, true,
                                  chip::NullOptional);
         }
         case 24: {
             LogStep(24, "Read attribute BITMAP64 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, true,
                                  chip::NullOptional);
         }
         case 25: {
             LogStep(25, "Write attribute BITMAP64 Not Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
-            value = static_cast<chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap>>(1ULL);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, value,
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap>>(1ULL);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 26: {
             LogStep(26, "Read attribute BITMAP64 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, true,
                                  chip::NullOptional);
         }
         case 27: {
             LogStep(27, "Write attribute BITMAP64 Default Value");
             ListFreer listFreer;
-            chip::BitMask<chip::app::Clusters::TestCluster::Bitmap64MaskMap> value;
+            chip::BitMask<chip::app::Clusters::UnitTesting::Bitmap64MaskMap> value;
             value = readAttributeBitmap64DefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "Read attribute BITMAP64 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Bitmap64::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Bitmap64::Id, true,
                                  chip::NullOptional);
         }
         case 29: {
             LogStep(29, "Read attribute INT8U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, true,
                                  chip::NullOptional);
         }
         case 30: {
@@ -58000,12 +58000,12 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 1U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 31: {
             LogStep(31, "Read attribute INT8U Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, true,
                                  chip::NullOptional);
         }
         case 32: {
@@ -58013,17 +58013,17 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = readAttributeInt8uDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 33: {
             LogStep(33, "Read attribute INT8U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8u::Id, true,
                                  chip::NullOptional);
         }
         case 34: {
             LogStep(34, "Read attribute INT16U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, true,
                                  chip::NullOptional);
         }
         case 35: {
@@ -58031,12 +58031,12 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 1U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 36: {
             LogStep(36, "Read attribute INT16U Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, true,
                                  chip::NullOptional);
         }
         case 37: {
@@ -58044,17 +58044,17 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = readAttributeInt16uDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 38: {
             LogStep(38, "Read attribute INT16U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16u::Id, true,
                                  chip::NullOptional);
         }
         case 39: {
             LogStep(39, "Read attribute INT32U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 40: {
@@ -58062,12 +58062,12 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 1UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 41: {
             LogStep(41, "Read attribute INT32U Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 42: {
@@ -58075,17 +58075,17 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = readAttributeInt32uDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 43: {
             LogStep(43, "Read attribute INT32U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32u::Id, true,
                                  chip::NullOptional);
         }
         case 44: {
             LogStep(44, "Read attribute INT64U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, true,
                                  chip::NullOptional);
         }
         case 45: {
@@ -58093,12 +58093,12 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = 1ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 46: {
             LogStep(46, "Read attribute INT64U Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, true,
                                  chip::NullOptional);
         }
         case 47: {
@@ -58106,17 +58106,17 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = readAttributeInt64uDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 48: {
             LogStep(48, "Read attribute INT64U Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64u::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64u::Id, true,
                                  chip::NullOptional);
         }
         case 49: {
             LogStep(49, "Read attribute INT8S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 50: {
@@ -58124,12 +58124,12 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = 1;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 51: {
             LogStep(51, "Read attribute INT8S Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 52: {
@@ -58137,17 +58137,17 @@ private:
             ListFreer listFreer;
             int8_t value;
             value = readAttributeInt8sDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 53: {
             LogStep(53, "Read attribute INT8S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int8s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int8s::Id, true,
                                  chip::NullOptional);
         }
         case 54: {
             LogStep(54, "Read attribute INT16S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 55: {
@@ -58155,12 +58155,12 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = 1;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 56: {
             LogStep(56, "Read attribute INT16S Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 57: {
@@ -58168,17 +58168,17 @@ private:
             ListFreer listFreer;
             int16_t value;
             value = readAttributeInt16sDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 58: {
             LogStep(58, "Read attribute INT16S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int16s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int16s::Id, true,
                                  chip::NullOptional);
         }
         case 59: {
             LogStep(59, "Read attribute INT32S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 60: {
@@ -58186,12 +58186,12 @@ private:
             ListFreer listFreer;
             int32_t value;
             value = 1L;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 61: {
             LogStep(61, "Read attribute INT32S Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 62: {
@@ -58199,17 +58199,17 @@ private:
             ListFreer listFreer;
             int32_t value;
             value = readAttributeInt32sDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 63: {
             LogStep(63, "Read attribute INT32S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int32s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int32s::Id, true,
                                  chip::NullOptional);
         }
         case 64: {
             LogStep(64, "Read attribute INT64S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 65: {
@@ -58217,12 +58217,12 @@ private:
             ListFreer listFreer;
             int64_t value;
             value = 1LL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 66: {
             LogStep(66, "Read attribute INT64S Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 67: {
@@ -58230,17 +58230,17 @@ private:
             ListFreer listFreer;
             int64_t value;
             value = readAttributeInt64sDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 68: {
             LogStep(68, "Read attribute INT64S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Int64s::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Int64s::Id, true,
                                  chip::NullOptional);
         }
         case 69: {
             LogStep(69, "Read attribute ENUM8 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, true,
                                  chip::NullOptional);
         }
         case 70: {
@@ -58248,12 +58248,12 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = 1U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 71: {
             LogStep(71, "Read attribute ENUM8 Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, true,
                                  chip::NullOptional);
         }
         case 72: {
@@ -58261,17 +58261,17 @@ private:
             ListFreer listFreer;
             uint8_t value;
             value = readAttributeEnum8DefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 73: {
             LogStep(73, "Read attribute ENUM8 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum8::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum8::Id, true,
                                  chip::NullOptional);
         }
         case 74: {
             LogStep(74, "Read attribute ENUM16 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, true,
                                  chip::NullOptional);
         }
         case 75: {
@@ -58279,12 +58279,12 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 1U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 76: {
             LogStep(76, "Read attribute ENUM16 Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, true,
                                  chip::NullOptional);
         }
         case 77: {
@@ -58292,17 +58292,17 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = readAttributeEnum16DefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 78: {
             LogStep(78, "Read attribute ENUM16 Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::Enum16::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::Enum16::Id, true,
                                  chip::NullOptional);
         }
         case 79: {
             LogStep(79, "Read attribute EPOCH_US Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, true,
                                  chip::NullOptional);
         }
         case 80: {
@@ -58310,12 +58310,12 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = 1ULL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 81: {
             LogStep(81, "Read attribute EPOCH_US Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, true,
                                  chip::NullOptional);
         }
         case 82: {
@@ -58323,17 +58323,17 @@ private:
             ListFreer listFreer;
             uint64_t value;
             value = readAttributeEpochUSDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 83: {
             LogStep(83, "Read attribute EPOCH_US Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochUs::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochUs::Id, true,
                                  chip::NullOptional);
         }
         case 84: {
             LogStep(84, "Read attribute EPOCH_S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, true,
                                  chip::NullOptional);
         }
         case 85: {
@@ -58341,12 +58341,12 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 1UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 86: {
             LogStep(86, "Read attribute EPOCH_S Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, true,
                                  chip::NullOptional);
         }
         case 87: {
@@ -58354,17 +58354,17 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = readAttributeEpochSDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 88: {
             LogStep(88, "Read attribute EPOCH_S Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::EpochS::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::EpochS::Id, true,
                                  chip::NullOptional);
         }
         case 89: {
             LogStep(89, "Read attribute vendor_id Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, true,
                                  chip::NullOptional);
         }
         case 90: {
@@ -58372,12 +58372,12 @@ private:
             ListFreer listFreer;
             chip::VendorId value;
             value = static_cast<chip::VendorId>(1);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 91: {
             LogStep(91, "Read attribute vendor_id Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, true,
                                  chip::NullOptional);
         }
         case 92: {
@@ -58385,22 +58385,22 @@ private:
             ListFreer listFreer;
             chip::VendorId value;
             value = readAttributeVendorIdDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 93: {
             LogStep(93, "Read attribute vendor_id Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::VendorId::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::VendorId::Id, true,
                                  chip::NullOptional);
         }
         case 94: {
             LogStep(94, "Read attribute char_string Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 95: {
             LogStep(95, "Read attribute char_string Default Value and compare to saved value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 96: {
@@ -58408,17 +58408,17 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("NotDefaultgarbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 97: {
             LogStep(97, "Read attribute char_string Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 98: {
             LogStep(98, "Read attribute char_string Not Default Value and compare to saved value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 99: {
@@ -58426,12 +58426,12 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = readAttributeCharStringNotDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 100: {
             LogStep(100, "Read attribute char_string Not Default Value and compare to expected value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, true,
                                  chip::NullOptional);
         }
         case 101: {
@@ -58439,17 +58439,17 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = readAttributeCharStringDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::CharString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::CharString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 102: {
             LogStep(102, "Read attribute octet_string Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 103: {
             LogStep(103, "Read attribute octet_string Default Value and compare to saved value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 104: {
@@ -58457,17 +58457,17 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = chip::ByteSpan(chip::Uint8::from_const_char("NotDefaultgarbage: not in length on purpose"), 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 105: {
             LogStep(105, "Read attribute octet_string Not Default Value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 106: {
             LogStep(106, "Read attribute octet_string Not Default Value and compare to saved value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 107: {
@@ -58475,12 +58475,12 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = readAttributeOctetStringNotDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         case 108: {
             LogStep(108, "Read attribute octet_string Not Default Value and compare to expected value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, true,
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, true,
                                  chip::NullOptional);
         }
         case 109: {
@@ -58488,7 +58488,7 @@ private:
             ListFreer listFreer;
             chip::ByteSpan value;
             value = readAttributeOctetStringDefaultValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Attributes::OctetString::Id, value,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Attributes::OctetString::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
         }
@@ -58546,7 +58546,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestAddArgumentsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestAddArgumentsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("returnValue", value.returnValue, 20U));
                 TestAddArgumentDefaultValue = value.returnValue;
@@ -58555,7 +58555,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::TestCluster::Commands::TestAddArgumentsResponse::DecodableType value;
+                chip::app::Clusters::UnitTesting::Commands::TestAddArgumentsResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("returnValue", value.returnValue,
                                           mReturnValueWithArg1.HasValue() ? mReturnValueWithArg1.Value() : 25U));
@@ -58586,10 +58586,10 @@ private:
         case 1: {
             LogStep(1, "Send Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = 3U;
             value.arg2 = 17U;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );
@@ -58597,10 +58597,10 @@ private:
         case 2: {
             LogStep(2, "Send Test Add Arguments Command");
             ListFreer listFreer;
-            chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type value;
+            chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type value;
             value.arg1 = mArg1.HasValue() ? mArg1.Value() : 5U;
             value.arg2 = TestAddArgumentDefaultValue;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), TestCluster::Id, TestCluster::Commands::TestAddArguments::Id, value,
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), UnitTesting::Id, UnitTesting::Commands::TestAddArguments::Id, value,
                                chip::NullOptional
 
             );

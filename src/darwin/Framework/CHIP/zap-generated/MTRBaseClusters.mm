@@ -121187,7 +121187,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterTestCluster
+@implementation MTRBaseClusterUnitTesting
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
 {
@@ -121206,7 +121206,7 @@ using chip::SessionHandle;
 {
     [self testWithParams:nil completion:completion];
 }
-- (void)testWithParams:(MTRTestClusterClusterTestParams * _Nullable)params completion:(MTRStatusCompletion)completion
+- (void)testWithParams:(MTRUnitTestingClusterTestParams * _Nullable)params completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -121219,14 +121219,14 @@ using chip::SessionHandle;
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::Test::Type request;
+            UnitTesting::Commands::Test::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -121236,7 +121236,7 @@ using chip::SessionHandle;
 {
     [self testNotHandledWithParams:nil completion:completion];
 }
-- (void)testNotHandledWithParams:(MTRTestClusterClusterTestNotHandledParams * _Nullable)params
+- (void)testNotHandledWithParams:(MTRUnitTestingClusterTestNotHandledParams * _Nullable)params
                       completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -121250,44 +121250,44 @@ using chip::SessionHandle;
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestNotHandled::Type request;
+            UnitTesting::Commands::TestNotHandled::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testSpecificWithCompletion:(void (^)(MTRTestClusterClusterTestSpecificResponseParams * _Nullable data,
+- (void)testSpecificWithCompletion:(void (^)(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable data,
                                        NSError * _Nullable error))completion
 {
     [self testSpecificWithParams:nil completion:completion];
 }
-- (void)testSpecificWithParams:(MTRTestClusterClusterTestSpecificParams * _Nullable)params
-                    completion:(void (^)(MTRTestClusterClusterTestSpecificResponseParams * _Nullable data,
+- (void)testSpecificWithParams:(MTRUnitTestingClusterTestSpecificParams * _Nullable)params
+                    completion:(void (^)(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable data,
                                    NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestSpecificResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestSpecificResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestSpecificResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestSpecificResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestSpecific::Type request;
+            UnitTesting::Commands::TestSpecific::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -121297,7 +121297,7 @@ using chip::SessionHandle;
 {
     [self testUnknownCommandWithParams:nil completion:completion];
 }
-- (void)testUnknownCommandWithParams:(MTRTestClusterClusterTestUnknownCommandParams * _Nullable)params
+- (void)testUnknownCommandWithParams:(MTRUnitTestingClusterTestUnknownCommandParams * _Nullable)params
                           completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -121311,32 +121311,32 @@ using chip::SessionHandle;
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestUnknownCommand::Type request;
+            UnitTesting::Commands::TestUnknownCommand::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testAddArgumentsWithParams:(MTRTestClusterClusterTestAddArgumentsParams *)params
-                        completion:(void (^)(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable data,
+- (void)testAddArgumentsWithParams:(MTRUnitTestingClusterTestAddArgumentsParams *)params
+                        completion:(void (^)(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable data,
                                        NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestAddArgumentsResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestAddArgumentsResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestAddArgumentsResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestAddArgumentsResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestAddArguments::Type request;
+            UnitTesting::Commands::TestAddArguments::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121345,25 +121345,25 @@ using chip::SessionHandle;
             request.arg1 = params.arg1.unsignedCharValue;
             request.arg2 = params.arg2.unsignedCharValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testSimpleArgumentRequestWithParams:(MTRTestClusterClusterTestSimpleArgumentRequestParams *)params
-                                 completion:(void (^)(MTRTestClusterClusterTestSimpleArgumentResponseParams * _Nullable data,
+- (void)testSimpleArgumentRequestWithParams:(MTRUnitTestingClusterTestSimpleArgumentRequestParams *)params
+                                 completion:(void (^)(MTRUnitTestingClusterTestSimpleArgumentResponseParams * _Nullable data,
                                                 NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestSimpleArgumentResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestSimpleArgumentResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestSimpleArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestSimpleArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestSimpleArgumentRequest::Type request;
+            UnitTesting::Commands::TestSimpleArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121371,26 +121371,26 @@ using chip::SessionHandle;
             }
             request.arg1 = params.arg1.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testStructArrayArgumentRequestWithParams:(MTRTestClusterClusterTestStructArrayArgumentRequestParams *)params
+- (void)testStructArrayArgumentRequestWithParams:(MTRUnitTestingClusterTestStructArrayArgumentRequestParams *)params
                                       completion:
-                                          (void (^)(MTRTestClusterClusterTestStructArrayArgumentResponseParams * _Nullable data,
+                                          (void (^)(MTRUnitTestingClusterTestStructArrayArgumentResponseParams * _Nullable data,
                                               NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestStructArrayArgumentResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestStructArrayArgumentResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestStructArrayArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestStructArrayArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestStructArrayArgumentRequest::Type request;
+            UnitTesting::Commands::TestStructArrayArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121406,11 +121406,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[MTRTestClusterClusterNestedStructList class]]) {
+                        if (![params.arg1[i_0] isKindOfClass:[MTRUnitTestingClusterNestedStructList class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterNestedStructList *) params.arg1[i_0];
+                        auto element_0 = (MTRUnitTestingClusterNestedStructList *) params.arg1[i_0];
                         listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
                         listHolder_0->mList[i_0].b = element_0.b.boolValue;
                         listHolder_0->mList[i_0].c.a = element_0.c.a.unsignedCharValue;
@@ -121433,11 +121433,11 @@ using chip::SessionHandle;
                                 }
                                 listFreer.add(listHolder_2);
                                 for (size_t i_2 = 0; i_2 < element_0.d.count; ++i_2) {
-                                    if (![element_0.d[i_2] isKindOfClass:[MTRTestClusterClusterSimpleStruct class]]) {
+                                    if (![element_0.d[i_2] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
                                         // Wrong kind of value.
                                         return CHIP_ERROR_INVALID_ARGUMENT;
                                     }
-                                    auto element_2 = (MTRTestClusterClusterSimpleStruct *) element_0.d[i_2];
+                                    auto element_2 = (MTRUnitTestingClusterSimpleStruct *) element_0.d[i_2];
                                     listHolder_2->mList[i_2].a = element_2.a.unsignedCharValue;
                                     listHolder_2->mList[i_2].b = element_2.b.boolValue;
                                     listHolder_2->mList[i_2].c
@@ -121538,11 +121538,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < params.arg2.count; ++i_0) {
-                        if (![params.arg2[i_0] isKindOfClass:[MTRTestClusterClusterSimpleStruct class]]) {
+                        if (![params.arg2[i_0] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterSimpleStruct *) params.arg2[i_0];
+                        auto element_0 = (MTRUnitTestingClusterSimpleStruct *) params.arg2[i_0];
                         listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
                         listHolder_0->mList[i_0].b = element_0.b.boolValue;
                         listHolder_0->mList[i_0].c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c)>>(
@@ -121607,24 +121607,24 @@ using chip::SessionHandle;
             request.arg5 = static_cast<std::remove_reference_t<decltype(request.arg5)>>(params.arg5.unsignedCharValue);
             request.arg6 = params.arg6.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testStructArgumentRequestWithParams:(MTRTestClusterClusterTestStructArgumentRequestParams *)params
-                                 completion:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testStructArgumentRequestWithParams:(MTRUnitTestingClusterTestStructArgumentRequestParams *)params
+                                 completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                 NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterBooleanResponseCallbackType successCb,
+    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestStructArgumentRequest::Type request;
+            UnitTesting::Commands::TestStructArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121639,24 +121639,24 @@ using chip::SessionHandle;
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testNestedStructArgumentRequestWithParams:(MTRTestClusterClusterTestNestedStructArgumentRequestParams *)params
-                                       completion:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testNestedStructArgumentRequestWithParams:(MTRUnitTestingClusterTestNestedStructArgumentRequestParams *)params
+                                       completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                       NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterBooleanResponseCallbackType successCb,
+    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestNestedStructArgumentRequest::Type request;
+            UnitTesting::Commands::TestNestedStructArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121673,24 +121673,24 @@ using chip::SessionHandle;
             request.arg1.c.g = params.arg1.c.g.floatValue;
             request.arg1.c.h = params.arg1.c.h.doubleValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testListStructArgumentRequestWithParams:(MTRTestClusterClusterTestListStructArgumentRequestParams *)params
-                                     completion:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testListStructArgumentRequestWithParams:(MTRUnitTestingClusterTestListStructArgumentRequestParams *)params
+                                     completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                     NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterBooleanResponseCallbackType successCb,
+    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestListStructArgumentRequest::Type request;
+            UnitTesting::Commands::TestListStructArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121706,11 +121706,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[MTRTestClusterClusterSimpleStruct class]]) {
+                        if (![params.arg1[i_0] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterSimpleStruct *) params.arg1[i_0];
+                        auto element_0 = (MTRUnitTestingClusterSimpleStruct *) params.arg1[i_0];
                         listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
                         listHolder_0->mList[i_0].b = element_0.b.boolValue;
                         listHolder_0->mList[i_0].c = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].c)>>(
@@ -121728,24 +121728,24 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testListInt8UArgumentRequestWithParams:(MTRTestClusterClusterTestListInt8UArgumentRequestParams *)params
-                                    completion:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testListInt8UArgumentRequestWithParams:(MTRUnitTestingClusterTestListInt8UArgumentRequestParams *)params
+                                    completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                    NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterBooleanResponseCallbackType successCb,
+    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestListInt8UArgumentRequest::Type request;
+            UnitTesting::Commands::TestListInt8UArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121774,24 +121774,24 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testNestedStructListArgumentRequestWithParams:(MTRTestClusterClusterTestNestedStructListArgumentRequestParams *)params
-                                           completion:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testNestedStructListArgumentRequestWithParams:(MTRUnitTestingClusterTestNestedStructListArgumentRequestParams *)params
+                                           completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                           NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterBooleanResponseCallbackType successCb,
+    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestNestedStructListArgumentRequest::Type request;
+            UnitTesting::Commands::TestNestedStructListArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121817,11 +121817,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_1);
                     for (size_t i_1 = 0; i_1 < params.arg1.d.count; ++i_1) {
-                        if (![params.arg1.d[i_1] isKindOfClass:[MTRTestClusterClusterSimpleStruct class]]) {
+                        if (![params.arg1.d[i_1] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_1 = (MTRTestClusterClusterSimpleStruct *) params.arg1.d[i_1];
+                        auto element_1 = (MTRUnitTestingClusterSimpleStruct *) params.arg1.d[i_1];
                         listHolder_1->mList[i_1].a = element_1.a.unsignedCharValue;
                         listHolder_1->mList[i_1].b = element_1.b.boolValue;
                         listHolder_1->mList[i_1].c = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].c)>>(
@@ -121905,25 +121905,25 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
 - (void)testListNestedStructListArgumentRequestWithParams:
-            (MTRTestClusterClusterTestListNestedStructListArgumentRequestParams *)params
-                                               completion:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+            (MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams *)params
+                                               completion:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                               NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterBooleanResponseCallbackType successCb,
+    auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestListNestedStructListArgumentRequest::Type request;
+            UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -121939,11 +121939,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < params.arg1.count; ++i_0) {
-                        if (![params.arg1[i_0] isKindOfClass:[MTRTestClusterClusterNestedStructList class]]) {
+                        if (![params.arg1[i_0] isKindOfClass:[MTRUnitTestingClusterNestedStructList class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterNestedStructList *) params.arg1[i_0];
+                        auto element_0 = (MTRUnitTestingClusterNestedStructList *) params.arg1[i_0];
                         listHolder_0->mList[i_0].a = element_0.a.unsignedCharValue;
                         listHolder_0->mList[i_0].b = element_0.b.boolValue;
                         listHolder_0->mList[i_0].c.a = element_0.c.a.unsignedCharValue;
@@ -121966,11 +121966,11 @@ using chip::SessionHandle;
                                 }
                                 listFreer.add(listHolder_2);
                                 for (size_t i_2 = 0; i_2 < element_0.d.count; ++i_2) {
-                                    if (![element_0.d[i_2] isKindOfClass:[MTRTestClusterClusterSimpleStruct class]]) {
+                                    if (![element_0.d[i_2] isKindOfClass:[MTRUnitTestingClusterSimpleStruct class]]) {
                                         // Wrong kind of value.
                                         return CHIP_ERROR_INVALID_ARGUMENT;
                                     }
-                                    auto element_2 = (MTRTestClusterClusterSimpleStruct *) element_0.d[i_2];
+                                    auto element_2 = (MTRUnitTestingClusterSimpleStruct *) element_0.d[i_2];
                                     listHolder_2->mList[i_2].a = element_2.a.unsignedCharValue;
                                     listHolder_2->mList[i_2].b = element_2.b.boolValue;
                                     listHolder_2->mList[i_2].c
@@ -122062,25 +122062,25 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testListInt8UReverseRequestWithParams:(MTRTestClusterClusterTestListInt8UReverseRequestParams *)params
-                                   completion:(void (^)(MTRTestClusterClusterTestListInt8UReverseResponseParams * _Nullable data,
+- (void)testListInt8UReverseRequestWithParams:(MTRUnitTestingClusterTestListInt8UReverseRequestParams *)params
+                                   completion:(void (^)(MTRUnitTestingClusterTestListInt8UReverseResponseParams * _Nullable data,
                                                   NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestListInt8UReverseResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestListInt8UReverseResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestListInt8UReverseResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestListInt8UReverseResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestListInt8UReverseRequest::Type request;
+            UnitTesting::Commands::TestListInt8UReverseRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122109,24 +122109,24 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testEnumsRequestWithParams:(MTRTestClusterClusterTestEnumsRequestParams *)params
-                        completion:(void (^)(MTRTestClusterClusterTestEnumsResponseParams * _Nullable data,
+- (void)testEnumsRequestWithParams:(MTRUnitTestingClusterTestEnumsRequestParams *)params
+                        completion:(void (^)(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable data,
                                        NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestEnumsResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestEnumsResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestEnumsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            UnitTestingClusterTestEnumsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestEnumsRequest::Type request;
+            UnitTesting::Commands::TestEnumsRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122135,25 +122135,25 @@ using chip::SessionHandle;
             request.arg1 = static_cast<std::remove_reference_t<decltype(request.arg1)>>(params.arg1.unsignedShortValue);
             request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testNullableOptionalRequestWithParams:(MTRTestClusterClusterTestNullableOptionalRequestParams * _Nullable)params
-                                   completion:(void (^)(MTRTestClusterClusterTestNullableOptionalResponseParams * _Nullable data,
+- (void)testNullableOptionalRequestWithParams:(MTRUnitTestingClusterTestNullableOptionalRequestParams * _Nullable)params
+                                   completion:(void (^)(MTRUnitTestingClusterTestNullableOptionalResponseParams * _Nullable data,
                                                   NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestNullableOptionalResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestNullableOptionalResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestNullableOptionalRequest::Type request;
+            UnitTesting::Commands::TestNullableOptionalRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122171,27 +122171,27 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testComplexNullableOptionalRequestWithParams:(MTRTestClusterClusterTestComplexNullableOptionalRequestParams *)params
+- (void)testComplexNullableOptionalRequestWithParams:(MTRUnitTestingClusterTestComplexNullableOptionalRequestParams *)params
                                           completion:
                                               (void (^)(
-                                                  MTRTestClusterClusterTestComplexNullableOptionalResponseParams * _Nullable data,
+                                                  MTRUnitTestingClusterTestComplexNullableOptionalResponseParams * _Nullable data,
                                                   NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestComplexNullableOptionalResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestComplexNullableOptionalResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestComplexNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestComplexNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestComplexNullableOptionalRequest::Type request;
+            UnitTesting::Commands::TestComplexNullableOptionalRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122367,25 +122367,25 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)simpleStructEchoRequestWithParams:(MTRTestClusterClusterSimpleStructEchoRequestParams *)params
-                               completion:(void (^)(MTRTestClusterClusterSimpleStructResponseParams * _Nullable data,
+- (void)simpleStructEchoRequestWithParams:(MTRUnitTestingClusterSimpleStructEchoRequestParams *)params
+                               completion:(void (^)(MTRUnitTestingClusterSimpleStructResponseParams * _Nullable data,
                                               NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterSimpleStructResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterSimpleStructResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterSimpleStructResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterSimpleStructResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::SimpleStructEchoRequest::Type request;
+            UnitTesting::Commands::SimpleStructEchoRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122400,7 +122400,7 @@ using chip::SessionHandle;
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122410,7 +122410,7 @@ using chip::SessionHandle;
 {
     [self timedInvokeRequestWithParams:nil completion:completion];
 }
-- (void)timedInvokeRequestWithParams:(MTRTestClusterClusterTimedInvokeRequestParams * _Nullable)params
+- (void)timedInvokeRequestWithParams:(MTRUnitTestingClusterTimedInvokeRequestParams * _Nullable)params
                           completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -122424,7 +122424,7 @@ using chip::SessionHandle;
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TimedInvokeRequest::Type request;
+            UnitTesting::Commands::TimedInvokeRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122434,13 +122434,13 @@ using chip::SessionHandle;
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testSimpleOptionalArgumentRequestWithParams:(MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams * _Nullable)params
+- (void)testSimpleOptionalArgumentRequestWithParams:(MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams * _Nullable)params
                                          completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -122454,7 +122454,7 @@ using chip::SessionHandle;
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestSimpleOptionalArgumentRequest::Type request;
+            UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122467,25 +122467,25 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)testEmitTestEventRequestWithParams:(MTRTestClusterClusterTestEmitTestEventRequestParams *)params
-                                completion:(void (^)(MTRTestClusterClusterTestEmitTestEventResponseParams * _Nullable data,
+- (void)testEmitTestEventRequestWithParams:(MTRUnitTestingClusterTestEmitTestEventRequestParams *)params
+                                completion:(void (^)(MTRUnitTestingClusterTestEmitTestEventResponseParams * _Nullable data,
                                                NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestEmitTestEventResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestEmitTestEventResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestEmitTestEventResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestEmitTestEventResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestEmitTestEventRequest::Type request;
+            UnitTesting::Commands::TestEmitTestEventRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122495,28 +122495,28 @@ using chip::SessionHandle;
             request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
             request.arg3 = params.arg3.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
 - (void)
-    testEmitTestFabricScopedEventRequestWithParams:(MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams *)params
+    testEmitTestFabricScopedEventRequestWithParams:(MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams *)params
                                         completion:
                                             (void (^)(
-                                                MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams * _Nullable data,
+                                                MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams * _Nullable data,
                                                 NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterTestEmitTestFabricScopedEventResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterClusterTestEmitTestFabricScopedEventResponseCallbackType successCb, MTRErrorCallback failureCb,
+            UnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            TestCluster::Commands::TestEmitTestFabricScopedEventRequest::Type request;
+            UnitTesting::Commands::TestEmitTestFabricScopedEventRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -122524,7 +122524,7 @@ using chip::SessionHandle;
             }
             request.arg1 = params.arg1.unsignedCharValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122535,8 +122535,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRBooleanAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, BooleanAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Boolean::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Boolean::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122569,11 +122569,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Boolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Boolean::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122594,9 +122594,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Boolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Boolean::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -122621,7 +122621,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Boolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Boolean::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -122638,11 +122638,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeBitmap8WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap8AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap8AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingBitmap8AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap8AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Bitmap8::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Bitmap8::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122675,11 +122675,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Bitmap8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap8::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122691,21 +122691,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterBitmap8AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingBitmap8AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap8AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap8AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterBitmap8AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingBitmap8AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Bitmap8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap8::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
+                MTRUnitTestingBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
                 !params.replaceExistingSubscriptions, chip::NullOptional, [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
                 // Now that we kicked off the subscribe, flag our callback bridge
@@ -122723,11 +122723,11 @@ using chip::SessionHandle;
                                          queue:(dispatch_queue_t)queue
                                     completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap8AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterBitmap8AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingBitmap8AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingBitmap8AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Bitmap8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap8::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -122744,11 +122744,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeBitmap16WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap16AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap16AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingBitmap16AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap16AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Bitmap16::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Bitmap16::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122781,11 +122781,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Bitmap16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap16::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedShortValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122797,21 +122797,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterBitmap16AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingBitmap16AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap16AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap16AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterBitmap16AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingBitmap16AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Bitmap16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap16::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
+                MTRUnitTestingBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
                 !params.replaceExistingSubscriptions, chip::NullOptional, [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
                 // Now that we kicked off the subscribe, flag our callback bridge
@@ -122829,11 +122829,11 @@ using chip::SessionHandle;
                                           queue:(dispatch_queue_t)queue
                                      completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap16AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterBitmap16AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingBitmap16AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingBitmap16AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Bitmap16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap16::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -122850,11 +122850,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeBitmap32WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap32AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap32AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingBitmap32AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap32AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Bitmap32::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Bitmap32::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122887,11 +122887,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Bitmap32::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap32::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedIntValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122903,21 +122903,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterBitmap32AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingBitmap32AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap32AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap32AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterBitmap32AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingBitmap32AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Bitmap32::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap32::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
+                MTRUnitTestingBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
                 !params.replaceExistingSubscriptions, chip::NullOptional, [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
                 // Now that we kicked off the subscribe, flag our callback bridge
@@ -122935,11 +122935,11 @@ using chip::SessionHandle;
                                           queue:(dispatch_queue_t)queue
                                      completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap32AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterBitmap32AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingBitmap32AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingBitmap32AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Bitmap32::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap32::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -122956,11 +122956,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeBitmap64WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap64AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap64AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingBitmap64AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap64AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Bitmap64::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Bitmap64::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -122993,11 +122993,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Bitmap64::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap64::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedLongLongValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123009,21 +123009,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterBitmap64AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingBitmap64AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterBitmap64AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingBitmap64AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterBitmap64AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingBitmap64AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Bitmap64::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap64::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
+                MTRUnitTestingBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
                 !params.replaceExistingSubscriptions, chip::NullOptional, [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
                 // Now that we kicked off the subscribe, flag our callback bridge
@@ -123041,11 +123041,11 @@ using chip::SessionHandle;
                                           queue:(dispatch_queue_t)queue
                                      completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterBitmap64AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterBitmap64AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingBitmap64AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingBitmap64AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Bitmap64::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Bitmap64::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123065,8 +123065,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int8u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int8u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123099,11 +123099,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int8u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123124,9 +123124,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int8u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123151,7 +123151,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int8u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123171,8 +123171,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int16u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int16u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123205,11 +123205,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int16u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123230,9 +123230,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int16u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123257,7 +123257,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int16u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123277,8 +123277,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt32uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int32uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int24u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int24u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123311,11 +123311,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int24u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int24u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123336,9 +123336,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int24u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int24u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123363,7 +123363,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int24u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int24u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123383,8 +123383,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt32uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int32uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int32u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int32u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123417,11 +123417,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int32u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int32u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123442,9 +123442,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int32u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int32u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123469,7 +123469,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int32u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int32u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123489,8 +123489,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int40u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int40u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123523,11 +123523,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int40u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int40u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123548,9 +123548,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int40u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int40u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123575,7 +123575,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int40u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int40u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123595,8 +123595,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int48u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int48u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123629,11 +123629,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int48u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int48u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123654,9 +123654,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int48u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int48u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123681,7 +123681,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int48u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int48u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123701,8 +123701,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int56u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int56u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123735,11 +123735,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int56u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int56u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123760,9 +123760,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int56u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int56u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123787,7 +123787,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int56u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int56u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123807,8 +123807,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int64u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int64u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123841,11 +123841,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int64u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int64u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123866,9 +123866,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int64u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int64u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123893,7 +123893,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int64u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int64u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -123913,8 +123913,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt8sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int8sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int8s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int8s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123947,11 +123947,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int8s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.charValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -123972,9 +123972,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int8s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -123999,7 +123999,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int8sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int8s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124019,8 +124019,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt16sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int16sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int16s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int16s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124053,11 +124053,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int16s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124078,9 +124078,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int16s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124105,7 +124105,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int16sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int16s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124125,8 +124125,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt32sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int32sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int24s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int24s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124159,11 +124159,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int24s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int24s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.intValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124184,9 +124184,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int24s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int24s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124211,7 +124211,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int32sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int24s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int24s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124231,8 +124231,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt32sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int32sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int32s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int32s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124265,11 +124265,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int32s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int32s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.intValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124290,9 +124290,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int32s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int32s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124317,7 +124317,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int32sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int32s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int32s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124337,8 +124337,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int40s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int40s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124371,11 +124371,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int40s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int40s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124396,9 +124396,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int40s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int40s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124423,7 +124423,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int40s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int40s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124443,8 +124443,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int48s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int48s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124477,11 +124477,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int48s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int48s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124502,9 +124502,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int48s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int48s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124529,7 +124529,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int48s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int48s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124549,8 +124549,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int56s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int56s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124583,11 +124583,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int56s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int56s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124608,9 +124608,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int56s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int56s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124635,7 +124635,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int56s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int56s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124655,8 +124655,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Int64s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Int64s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124689,11 +124689,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Int64s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int64s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.longLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124714,9 +124714,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Int64s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int64s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124741,7 +124741,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Int64s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Int64s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124761,8 +124761,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Enum8::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Enum8::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124795,11 +124795,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Enum8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Enum8::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124820,9 +124820,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Enum8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Enum8::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124847,7 +124847,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Enum8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Enum8::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124867,8 +124867,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Enum16::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Enum16::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124901,11 +124901,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Enum16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Enum16::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -124926,9 +124926,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Enum16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Enum16::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -124953,7 +124953,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Enum16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Enum16::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -124973,8 +124973,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRFloatAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, FloatAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::FloatSingle::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::FloatSingle::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125007,11 +125007,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::FloatSingle::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FloatSingle::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.floatValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125032,9 +125032,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::FloatSingle::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FloatSingle::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -125059,7 +125059,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(FloatAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::FloatSingle::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FloatSingle::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125079,8 +125079,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRDoubleAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoubleAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::FloatDouble::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::FloatDouble::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125113,11 +125113,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::FloatDouble::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FloatDouble::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.doubleValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125138,9 +125138,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::FloatDouble::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FloatDouble::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRDoubleAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -125165,7 +125165,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(DoubleAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::FloatDouble::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FloatDouble::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125185,8 +125185,8 @@ using chip::SessionHandle;
     auto * bridge = new MTROctetStringAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, OctetStringAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::OctetString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::OctetString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125219,11 +125219,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::OctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::OctetString::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = [self asByteSpan:value];
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125244,9 +125244,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::OctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::OctetString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTROctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -125271,7 +125271,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(OctetStringAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::OctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::OctetString::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125288,11 +125288,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeListInt8uWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListInt8uListAttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterListInt8uListAttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingListInt8uListAttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingListInt8uListAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ListInt8u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ListInt8u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125325,7 +125325,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ListInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListInt8u::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -125350,7 +125350,7 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125362,21 +125362,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListInt8uListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingListInt8uListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterListInt8uListAttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingListInt8uListAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterListInt8uListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingListInt8uListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ListInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListInt8u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterListInt8uListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingListInt8uListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -125395,11 +125395,11 @@ using chip::SessionHandle;
                                            queue:(dispatch_queue_t)queue
                                       completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListInt8uListAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterListInt8uListAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingListInt8uListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingListInt8uListAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::ListInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListInt8u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125416,11 +125416,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeListOctetStringWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListOctetStringListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingListOctetStringListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ListOctetString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            UnitTestingListOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            using TypeInfo = UnitTesting::Attributes::ListOctetString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125453,7 +125453,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ListOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListOctetString::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -125478,7 +125478,7 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125490,21 +125490,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListOctetStringListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingListOctetStringListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterListOctetStringListAttributeCallbackSubscriptionBridge *>(bridge);
+            UnitTestingListOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingListOctetStringListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ListOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListOctetString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterListOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingListOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -125523,12 +125523,12 @@ using chip::SessionHandle;
                                                  queue:(dispatch_queue_t)queue
                                             completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListOctetStringListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingListOctetStringListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterListOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingListOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::ListOctetString::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::ListOctetString::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125545,12 +125545,12 @@ using chip::SessionHandle;
 
 - (void)readAttributeListStructOctetStringWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListStructOctetStringListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingListStructOctetStringListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListStructOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListStructOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ListStructOctetString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ListStructOctetString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125583,7 +125583,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ListStructOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListStructOctetString::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -125595,11 +125595,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTRTestClusterClusterTestListStructOctet class]]) {
+                        if (![value[i_0] isKindOfClass:[MTRUnitTestingClusterTestListStructOctet class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterTestListStructOctet *) value[i_0];
+                        auto element_0 = (MTRUnitTestingClusterTestListStructOctet *) value[i_0];
                         listHolder_0->mList[i_0].member1 = element_0.member1.unsignedLongLongValue;
                         listHolder_0->mList[i_0].member2 = [self asByteSpan:element_0.member2];
                     }
@@ -125609,7 +125609,7 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125622,22 +125622,22 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListStructOctetStringListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingListStructOctetStringListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListStructOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListStructOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterListStructOctetStringListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingListStructOctetStringListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ListStructOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListStructOctetString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterListStructOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingListStructOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -125657,12 +125657,12 @@ using chip::SessionHandle;
                                                   completion:
                                                       (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListStructOctetStringListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingListStructOctetStringListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterListStructOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingListStructOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::ListStructOctetString::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::ListStructOctetString::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125682,8 +125682,8 @@ using chip::SessionHandle;
     auto * bridge = new MTROctetStringAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, OctetStringAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::LongOctetString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::LongOctetString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125716,11 +125716,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::LongOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::LongOctetString::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = [self asByteSpan:value];
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125741,9 +125741,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::LongOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::LongOctetString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTROctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -125768,7 +125768,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(OctetStringAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::LongOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::LongOctetString::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125788,8 +125788,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRCharStringAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CharStringAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::CharString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::CharString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125822,11 +125822,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::CharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::CharString::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125847,9 +125847,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::CharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::CharString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -125874,7 +125874,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::CharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::CharString::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -125894,8 +125894,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRCharStringAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CharStringAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::LongCharString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::LongCharString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125928,11 +125928,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::LongCharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::LongCharString::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -125953,9 +125953,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::LongCharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::LongCharString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -125980,7 +125980,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::LongCharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::LongCharString::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126000,8 +126000,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::EpochUs::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::EpochUs::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126034,11 +126034,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::EpochUs::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EpochUs::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedLongLongValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126059,9 +126059,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::EpochUs::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EpochUs::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -126086,7 +126086,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::EpochUs::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EpochUs::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126106,8 +126106,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt32uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int32uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::EpochS::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::EpochS::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126140,11 +126140,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::EpochS::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EpochS::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedIntValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126165,9 +126165,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::EpochS::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EpochS::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -126192,7 +126192,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::EpochS::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EpochS::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126212,8 +126212,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRVendorIdAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, VendorIdAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::VendorId::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::VendorId::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126246,11 +126246,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::VendorId::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::VendorId::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedShortValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126271,9 +126271,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::VendorId::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::VendorId::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRVendorIdAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -126298,7 +126298,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(VendorIdAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::VendorId::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::VendorId::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126316,12 +126316,12 @@ using chip::SessionHandle;
 - (void)readAttributeListNullablesAndOptionalsStructWithCompletion:(void (^)(NSArray * _Nullable value,
                                                                        NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListNullablesAndOptionalsStructListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingListNullablesAndOptionalsStructListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListNullablesAndOptionalsStructListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListNullablesAndOptionalsStructListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126354,7 +126354,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -126366,11 +126366,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTRTestClusterClusterNullablesAndOptionalsStruct class]]) {
+                        if (![value[i_0] isKindOfClass:[MTRUnitTestingClusterNullablesAndOptionalsStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterNullablesAndOptionalsStruct *) value[i_0];
+                        auto element_0 = (MTRUnitTestingClusterNullablesAndOptionalsStruct *) value[i_0];
                         if (element_0.nullableInt == nil) {
                             listHolder_0->mList[i_0].nullableInt.SetNull();
                         } else {
@@ -126551,7 +126551,7 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126565,23 +126565,23 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListNullablesAndOptionalsStructListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListNullablesAndOptionalsStructListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge
-                = static_cast<MTRTestClusterListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge *>(bridge);
+                = static_cast<MTRUnitTestingListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
+                MTRUnitTestingListNullablesAndOptionalsStructListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished,
                 nil, params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -126601,12 +126601,12 @@ using chip::SessionHandle;
                                                             completion:(void (^)(NSArray * _Nullable value,
                                                                            NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListNullablesAndOptionalsStructListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingListNullablesAndOptionalsStructListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterListNullablesAndOptionalsStructListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingListNullablesAndOptionalsStructListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::ListNullablesAndOptionalsStruct::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126623,11 +126623,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeEnumAttrWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterClusterSimpleEnumAttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterSimpleEnumAttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingClusterSimpleEnumAttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterSimpleEnumAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::EnumAttr::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::EnumAttr::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126660,11 +126660,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::EnumAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EnumAttr::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126676,21 +126676,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingClusterSimpleEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterClusterSimpleEnumAttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterSimpleEnumAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingClusterSimpleEnumAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::EnumAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EnumAttr::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -126709,11 +126709,11 @@ using chip::SessionHandle;
                                           queue:(dispatch_queue_t)queue
                                      completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterClusterSimpleEnumAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingClusterSimpleEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::EnumAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::EnumAttr::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126728,25 +126728,25 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributeStructAttrWithCompletion:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+- (void)readAttributeStructAttrWithCompletion:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                   NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterStructAttrStructAttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterStructAttrStructAttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingStructAttrStructAttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingStructAttrStructAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::StructAttr::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::StructAttr::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)writeAttributeStructAttrWithValue:(MTRTestClusterClusterSimpleStruct * _Nonnull)value
+- (void)writeAttributeStructAttrWithValue:(MTRUnitTestingClusterSimpleStruct * _Nonnull)value
                                completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeStructAttrWithValue:(MTRTestClusterClusterSimpleStruct * _Nonnull) value params:nil completion:completion];
+    [self writeAttributeStructAttrWithValue:(MTRUnitTestingClusterSimpleStruct * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributeStructAttrWithValue:(MTRTestClusterClusterSimpleStruct * _Nonnull)value
+- (void)writeAttributeStructAttrWithValue:(MTRUnitTestingClusterSimpleStruct * _Nonnull)value
                                    params:(MTRWriteParams * _Nullable)params
                                completion:(MTRStatusCompletion)completion
 {
@@ -126769,7 +126769,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::StructAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::StructAttr::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue.a = value.a.unsignedCharValue;
             cppValue.b = value.b.boolValue;
@@ -126780,7 +126780,7 @@ using chip::SessionHandle;
             cppValue.g = value.g.floatValue;
             cppValue.h = value.h.doubleValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126788,26 +126788,26 @@ using chip::SessionHandle;
 
 - (void)subscribeAttributeStructAttrWithParams:(MTRSubscribeParams * _Nonnull)params
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                 reportHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                 reportHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                    NSError * _Nullable error))reportHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterStructAttrStructAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingStructAttrStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterStructAttrStructAttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingStructAttrStructAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterStructAttrStructAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingStructAttrStructAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::StructAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::StructAttr::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterStructAttrStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingStructAttrStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -126824,14 +126824,14 @@ using chip::SessionHandle;
 + (void)readAttributeStructAttrWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                          endpoint:(NSNumber *)endpoint
                                             queue:(dispatch_queue_t)queue
-                                       completion:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                       completion:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                       NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterStructAttrStructAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterStructAttrStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingStructAttrStructAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingStructAttrStructAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::StructAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::StructAttr::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126851,8 +126851,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126885,11 +126885,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126911,9 +126911,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -126939,7 +126939,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -126959,8 +126959,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt8sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int8sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -126993,11 +126993,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.charValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127019,9 +127019,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -127047,7 +127047,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int8sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt8s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127067,8 +127067,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127101,11 +127101,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127127,9 +127127,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -127155,7 +127155,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127175,8 +127175,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt16sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int16sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127209,11 +127209,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16s::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.shortValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127235,9 +127235,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -127263,7 +127263,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int16sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::RangeRestrictedInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::RangeRestrictedInt16s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127280,12 +127280,12 @@ using chip::SessionHandle;
 
 - (void)readAttributeListLongOctetStringWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListLongOctetStringListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingListLongOctetStringListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListLongOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListLongOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ListLongOctetString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ListLongOctetString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127318,7 +127318,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ListLongOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListLongOctetString::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -127343,7 +127343,7 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127356,22 +127356,22 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListLongOctetStringListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingListLongOctetStringListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListLongOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListLongOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterListLongOctetStringListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingListLongOctetStringListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ListLongOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListLongOctetString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterListLongOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingListLongOctetStringListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -127391,12 +127391,12 @@ using chip::SessionHandle;
                                                 completion:
                                                     (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListLongOctetStringListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingListLongOctetStringListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterListLongOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingListLongOctetStringListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::ListLongOctetString::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::ListLongOctetString::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127415,12 +127415,12 @@ using chip::SessionHandle;
                                      completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 { // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListFabricScopedListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingListFabricScopedListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListFabricScopedListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListFabricScopedListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ListFabricScoped::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ListFabricScoped::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb, params.filterByFabric);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127453,7 +127453,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ListFabricScoped::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListFabricScoped::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -127465,11 +127465,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTRTestClusterClusterTestFabricScoped class]]) {
+                        if (![value[i_0] isKindOfClass:[MTRUnitTestingClusterTestFabricScoped class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRTestClusterClusterTestFabricScoped *) value[i_0];
+                        auto element_0 = (MTRUnitTestingClusterTestFabricScoped *) value[i_0];
                         listHolder_0->mList[i_0].fabricSensitiveInt8u = element_0.fabricSensitiveInt8u.unsignedCharValue;
                         if (element_0.optionalFabricSensitiveInt8u != nil) {
                             auto & definedValue_2 = listHolder_0->mList[i_0].optionalFabricSensitiveInt8u.Emplace();
@@ -127534,7 +127534,7 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127546,22 +127546,22 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterListFabricScopedListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingListFabricScopedListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterListFabricScopedListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingListFabricScopedListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterListFabricScopedListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingListFabricScopedListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ListFabricScoped::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ListFabricScoped::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterListFabricScopedListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingListFabricScopedListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -127580,12 +127580,12 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterListFabricScopedListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingListFabricScopedListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterListFabricScopedListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingListFabricScopedListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::ListFabricScoped::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::ListFabricScoped::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127605,8 +127605,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRBooleanAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, BooleanAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::TimedWriteBoolean::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::TimedWriteBoolean::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127639,11 +127639,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::TimedWriteBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::TimedWriteBoolean::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127664,9 +127664,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::TimedWriteBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::TimedWriteBoolean::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -127691,7 +127691,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::TimedWriteBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::TimedWriteBoolean::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127711,8 +127711,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRBooleanAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, BooleanAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::GeneralErrorBoolean::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::GeneralErrorBoolean::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127745,11 +127745,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::GeneralErrorBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::GeneralErrorBoolean::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127771,9 +127771,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::GeneralErrorBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::GeneralErrorBoolean::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -127799,7 +127799,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::GeneralErrorBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::GeneralErrorBoolean::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127819,8 +127819,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRBooleanAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, BooleanAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ClusterErrorBoolean::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ClusterErrorBoolean::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127853,11 +127853,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::ClusterErrorBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ClusterErrorBoolean::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127879,9 +127879,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ClusterErrorBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ClusterErrorBoolean::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -127907,7 +127907,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::ClusterErrorBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ClusterErrorBoolean::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -127927,8 +127927,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRBooleanAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, BooleanAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::Unsupported::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::Unsupported::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127961,11 +127961,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::Unsupported::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Unsupported::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -127986,9 +127986,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::Unsupported::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Unsupported::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -128013,7 +128013,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::Unsupported::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::Unsupported::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128033,8 +128033,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableBooleanAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableBooleanAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableBoolean::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableBoolean::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128067,7 +128067,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBoolean::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128076,7 +128076,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.boolValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128097,9 +128097,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBoolean::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableBooleanAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -128124,7 +128124,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableBooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableBoolean::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBoolean::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128141,11 +128141,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeNullableBitmap8WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap8AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap8AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingNullableBitmap8AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap8AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableBitmap8::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap8::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128178,7 +128178,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap8::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128187,7 +128187,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedCharValue);
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128199,21 +128199,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterNullableBitmap8AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingNullableBitmap8AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap8AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap8AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterNullableBitmap8AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingNullableBitmap8AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableBitmap8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap8::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterNullableBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingNullableBitmap8AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -128232,11 +128232,11 @@ using chip::SessionHandle;
                                                  queue:(dispatch_queue_t)queue
                                             completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap8AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterNullableBitmap8AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingNullableBitmap8AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingNullableBitmap8AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap8::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128253,11 +128253,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeNullableBitmap16WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap16AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap16AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingNullableBitmap16AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap16AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableBitmap16::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap16::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128290,7 +128290,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap16::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128299,7 +128299,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedShortValue);
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128311,21 +128311,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterNullableBitmap16AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingNullableBitmap16AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap16AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap16AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterNullableBitmap16AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingNullableBitmap16AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableBitmap16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap16::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterNullableBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingNullableBitmap16AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -128344,11 +128344,11 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap16AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterNullableBitmap16AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingNullableBitmap16AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingNullableBitmap16AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap16::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128365,11 +128365,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeNullableBitmap32WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap32AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap32AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingNullableBitmap32AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap32AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableBitmap32::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap32::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128402,7 +128402,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap32::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap32::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128411,7 +128411,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedIntValue);
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128423,21 +128423,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterNullableBitmap32AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingNullableBitmap32AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap32AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap32AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterNullableBitmap32AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingNullableBitmap32AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableBitmap32::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap32::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterNullableBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingNullableBitmap32AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -128456,11 +128456,11 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap32AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterNullableBitmap32AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingNullableBitmap32AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingNullableBitmap32AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap32::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap32::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128477,11 +128477,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeNullableBitmap64WithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap64AttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap64AttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingNullableBitmap64AttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap64AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableBitmap64::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap64::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128514,7 +128514,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap64::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap64::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128523,7 +128523,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedLongLongValue);
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128535,21 +128535,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterNullableBitmap64AttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingNullableBitmap64AttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterNullableBitmap64AttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingNullableBitmap64AttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterNullableBitmap64AttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingNullableBitmap64AttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableBitmap64::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap64::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterNullableBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingNullableBitmap64AttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -128568,11 +128568,11 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableBitmap64AttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterNullableBitmap64AttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingNullableBitmap64AttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingNullableBitmap64AttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableBitmap64::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableBitmap64::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128592,8 +128592,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt8u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt8u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128626,7 +128626,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt8u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128635,7 +128635,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128656,9 +128656,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt8u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -128683,7 +128683,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt8u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128703,8 +128703,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt16u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt16u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128737,7 +128737,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt16u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128746,7 +128746,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128767,9 +128767,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt16u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -128794,7 +128794,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt16u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128814,8 +128814,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt32uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt24u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt24u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128848,7 +128848,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt24u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt24u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128857,7 +128857,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128878,9 +128878,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt24u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt24u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -128905,7 +128905,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt32uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt24u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt24u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -128925,8 +128925,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt32uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt32uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt32u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt32u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128959,7 +128959,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt32u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt32u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -128968,7 +128968,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedIntValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -128989,9 +128989,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt32u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt32u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129016,7 +129016,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt32uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt32u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt32u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129036,8 +129036,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt40u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt40u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129070,7 +129070,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt40u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt40u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129079,7 +129079,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129100,9 +129100,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt40u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt40u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129127,7 +129127,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt40u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt40u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129147,8 +129147,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt48u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt48u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129181,7 +129181,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt48u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt48u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129190,7 +129190,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129211,9 +129211,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt48u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt48u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129238,7 +129238,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt48u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt48u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129258,8 +129258,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt56u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt56u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129292,7 +129292,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt56u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt56u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129301,7 +129301,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129322,9 +129322,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt56u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt56u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129349,7 +129349,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt56u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt56u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129369,8 +129369,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt64u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt64u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129403,7 +129403,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt64u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt64u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129412,7 +129412,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedLongLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129433,9 +129433,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt64u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt64u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129460,7 +129460,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt64u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt64u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129480,8 +129480,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt8sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt8sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt8s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt8s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129514,7 +129514,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt8s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129523,7 +129523,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.charValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129544,9 +129544,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt8s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129571,7 +129571,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt8sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt8s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129591,8 +129591,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt16sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt16sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt16s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt16s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129625,7 +129625,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt16s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129634,7 +129634,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.shortValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129655,9 +129655,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt16s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129682,7 +129682,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt16sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt16s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129702,8 +129702,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt32sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt32sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt24s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt24s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129736,7 +129736,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt24s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt24s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129745,7 +129745,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.intValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129766,9 +129766,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt24s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt24s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129793,7 +129793,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt32sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt24s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt24s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129813,8 +129813,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt32sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt32sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt32s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt32s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129847,7 +129847,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt32s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt32s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129856,7 +129856,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.intValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129877,9 +129877,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt32s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt32s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt32sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -129904,7 +129904,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt32sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt32s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt32s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -129924,8 +129924,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt40s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt40s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129958,7 +129958,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt40s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt40s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -129967,7 +129967,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -129988,9 +129988,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt40s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt40s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130015,7 +130015,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt40s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt40s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130035,8 +130035,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt48s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt48s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130069,7 +130069,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt48s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt48s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130078,7 +130078,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130099,9 +130099,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt48s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt48s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130126,7 +130126,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt48s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt48s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130146,8 +130146,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt56s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt56s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130180,7 +130180,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt56s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt56s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130189,7 +130189,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130210,9 +130210,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt56s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt56s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130237,7 +130237,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt56s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt56s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130257,8 +130257,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt64sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt64sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableInt64s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableInt64s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130291,7 +130291,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableInt64s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt64s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130300,7 +130300,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.longLongValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130321,9 +130321,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableInt64s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt64s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt64sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130348,7 +130348,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt64sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableInt64s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableInt64s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130368,8 +130368,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableEnum8::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableEnum8::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130402,7 +130402,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableEnum8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnum8::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130411,7 +130411,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130432,9 +130432,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableEnum8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnum8::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130459,7 +130459,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableEnum8::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnum8::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130479,8 +130479,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableEnum16::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableEnum16::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130513,7 +130513,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableEnum16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnum16::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130522,7 +130522,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130543,9 +130543,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableEnum16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnum16::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130570,7 +130570,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableEnum16::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnum16::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130590,8 +130590,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableFloatAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableFloatAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableFloatSingle::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableFloatSingle::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130624,7 +130624,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableFloatSingle::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableFloatSingle::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130633,7 +130633,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.floatValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130655,9 +130655,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableFloatSingle::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableFloatSingle::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableFloatAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130683,7 +130683,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableFloatAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableFloatSingle::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableFloatSingle::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130703,8 +130703,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableDoubleAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableDoubleAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableFloatDouble::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableFloatDouble::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130737,7 +130737,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableFloatDouble::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableFloatDouble::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130746,7 +130746,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.doubleValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130768,9 +130768,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableFloatDouble::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableFloatDouble::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableDoubleAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130796,7 +130796,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableDoubleAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableFloatDouble::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableFloatDouble::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130816,8 +130816,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableOctetStringAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableOctetStringAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableOctetString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableOctetString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130850,7 +130850,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableOctetString::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130859,7 +130859,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = [self asByteSpan:value];
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130880,9 +130880,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableOctetString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableOctetStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -130907,7 +130907,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableOctetStringAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableOctetString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableOctetString::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -130927,8 +130927,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableCharStringAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableCharStringAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableCharString::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableCharString::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130961,7 +130961,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableCharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableCharString::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -130970,7 +130970,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = [self asCharSpan:value];
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -130992,9 +130992,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableCharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableCharString::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableCharStringAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -131020,7 +131020,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableCharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableCharString::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableCharString::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131037,12 +131037,12 @@ using chip::SessionHandle;
 
 - (void)readAttributeNullableEnumAttrWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableTestClusterClusterSimpleEnumAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRNullableUnitTestingClusterSimpleEnumAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            NullableTestClusterClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb,
+            NullableUnitTestingClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableEnumAttr::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableEnumAttr::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131075,7 +131075,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableEnumAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnumAttr::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -131084,7 +131084,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(value.unsignedCharValue);
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131096,22 +131096,22 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRNullableTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRNullableUnitTestingClusterSimpleEnumAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            NullableTestClusterClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb,
+            NullableUnitTestingClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRNullableTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRNullableUnitTestingClusterSimpleEnumAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableEnumAttr::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableEnumAttr::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRNullableTestClusterClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRNullableUnitTestingClusterSimpleEnumAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -131130,12 +131130,12 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableTestClusterClusterSimpleEnumAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableUnitTestingClusterSimpleEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(NullableTestClusterClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableUnitTestingClusterSimpleEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::NullableEnumAttr::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::NullableEnumAttr::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131150,28 +131150,28 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeNullableStructWithCompletion:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+- (void)readAttributeNullableStructWithCompletion:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                       NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableStructStructAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingNullableStructStructAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterNullableStructStructAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingNullableStructStructAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableStruct::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableStruct::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)writeAttributeNullableStructWithValue:(MTRTestClusterClusterSimpleStruct * _Nullable)value
+- (void)writeAttributeNullableStructWithValue:(MTRUnitTestingClusterSimpleStruct * _Nullable)value
                                    completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeNullableStructWithValue:(MTRTestClusterClusterSimpleStruct * _Nullable) value
+    [self writeAttributeNullableStructWithValue:(MTRUnitTestingClusterSimpleStruct * _Nullable) value
                                          params:nil
                                      completion:completion];
 }
-- (void)writeAttributeNullableStructWithValue:(MTRTestClusterClusterSimpleStruct * _Nullable)value
+- (void)writeAttributeNullableStructWithValue:(MTRUnitTestingClusterSimpleStruct * _Nullable)value
                                        params:(MTRWriteParams * _Nullable)params
                                    completion:(MTRStatusCompletion)completion
 {
@@ -131194,7 +131194,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableStruct::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableStruct::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -131210,7 +131210,7 @@ using chip::SessionHandle;
                 nonNullValue_0.h = value.h.doubleValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131218,27 +131218,27 @@ using chip::SessionHandle;
 
 - (void)subscribeAttributeNullableStructWithParams:(MTRSubscribeParams * _Nonnull)params
                            subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                     reportHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                     reportHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                        NSError * _Nullable error))reportHandler
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterNullableStructStructAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingNullableStructStructAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterNullableStructStructAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingNullableStructStructAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterNullableStructStructAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingNullableStructStructAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableStruct::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableStruct::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterNullableStructStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingNullableStructStructAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -131255,15 +131255,15 @@ using chip::SessionHandle;
 + (void)readAttributeNullableStructWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                              endpoint:(NSNumber *)endpoint
                                                 queue:(dispatch_queue_t)queue
-                                           completion:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                           completion:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                           NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterNullableStructStructAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingNullableStructStructAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterNullableStructStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingNullableStructStructAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::NullableStruct::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::NullableStruct::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131284,8 +131284,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131318,7 +131318,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -131327,7 +131327,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedCharValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131350,9 +131350,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -131378,7 +131378,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131399,8 +131399,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt8sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt8sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131433,7 +131433,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -131442,7 +131442,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.charValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131465,9 +131465,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt8sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -131493,7 +131493,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt8sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt8s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131514,8 +131514,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131548,7 +131548,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -131557,7 +131557,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.unsignedShortValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131580,9 +131580,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -131608,7 +131608,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131629,8 +131629,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRNullableInt16sAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, NullableInt16sAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131663,7 +131663,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -131672,7 +131672,7 @@ using chip::SessionHandle;
                 nonNullValue_0 = value.shortValue;
             }
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131695,9 +131695,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRNullableInt16sAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -131723,7 +131723,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(NullableInt16sAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::NullableRangeRestrictedInt16s::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131743,8 +131743,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt8uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int8uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::WriteOnlyInt8u::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131777,11 +131777,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::WriteOnlyInt8u::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131802,9 +131802,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::WriteOnlyInt8u::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt8uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -131829,7 +131829,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::WriteOnlyInt8u::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::WriteOnlyInt8u::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131846,12 +131846,12 @@ using chip::SessionHandle;
 
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingGeneratedCommandListListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::GeneratedCommandList::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::GeneratedCommandList::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131864,22 +131864,22 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterGeneratedCommandListListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingGeneratedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterGeneratedCommandListListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingGeneratedCommandListListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::GeneratedCommandList::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::GeneratedCommandList::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingGeneratedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -131899,12 +131899,12 @@ using chip::SessionHandle;
                                                  completion:
                                                      (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingGeneratedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::GeneratedCommandList::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::GeneratedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131921,12 +131921,12 @@ using chip::SessionHandle;
 
 - (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRUnitTestingAcceptedCommandListListAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::AcceptedCommandList::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::AcceptedCommandList::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -131939,22 +131939,22 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterAcceptedCommandListListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingAcceptedCommandListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            TestClusterAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
+            UnitTestingAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterAcceptedCommandListListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingAcceptedCommandListListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::AcceptedCommandList::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::AcceptedCommandList::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingAcceptedCommandListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -131974,12 +131974,12 @@ using chip::SessionHandle;
                                                 completion:
                                                     (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRUnitTestingAcceptedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(TestClusterAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(UnitTestingAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (attributeCacheContainer.cppAttributeCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = TestCluster::Attributes::AcceptedCommandList::TypeInfo;
+                using TypeInfo = UnitTesting::Attributes::AcceptedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -131996,11 +131996,11 @@ using chip::SessionHandle;
 
 - (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterAttributeListListAttributeCallbackBridge(self.callbackQueue, completion,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterAttributeListListAttributeCallback successCb,
+    auto * bridge = new MTRUnitTestingAttributeListListAttributeCallbackBridge(self.callbackQueue, completion,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingAttributeListListAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::AttributeList::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::AttributeList::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -132012,21 +132012,21 @@ using chip::SessionHandle;
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRTestClusterAttributeListListAttributeCallbackSubscriptionBridge(
+    auto * bridge = new MTRUnitTestingAttributeListListAttributeCallbackSubscriptionBridge(
         self.callbackQueue, reportHandler,
-        ^(ExchangeManager & exchangeManager, const SessionHandle & session, TestClusterAttributeListListAttributeCallback successCb,
+        ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingAttributeListListAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRTestClusterAttributeListListAttributeCallbackSubscriptionBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRUnitTestingAttributeListListAttributeCallbackSubscriptionBridge *>(bridge);
             if (!params.resubscribeIfLost) {
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::AttributeList::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::AttributeList::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
-                MTRTestClusterAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
+                MTRUnitTestingAttributeListListAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil,
                 params.filterByFabric, !params.replaceExistingSubscriptions, chip::NullOptional,
                 [typedBridge](void) { typedBridge->OnDone(); });
             if (err == CHIP_NO_ERROR) {
@@ -132045,11 +132045,11 @@ using chip::SessionHandle;
                                                queue:(dispatch_queue_t)queue
                                           completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRTestClusterAttributeListListAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(TestClusterAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRUnitTestingAttributeListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(UnitTestingAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::AttributeList::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::AttributeList::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -132069,8 +132069,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt32uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int32uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::FeatureMap::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::FeatureMap::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -132091,9 +132091,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::FeatureMap::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FeatureMap::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt32uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -132118,7 +132118,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::FeatureMap::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::FeatureMap::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -132138,8 +132138,8 @@ using chip::SessionHandle;
     auto * bridge = new MTRInt16uAttributeCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, Int16uAttributeCallback successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
-            using TypeInfo = TestCluster::Attributes::ClusterRevision::TypeInfo;
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            using TypeInfo = UnitTesting::Attributes::ClusterRevision::TypeInfo;
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.ReadAttribute<TypeInfo>(bridge, successCb, failureCb);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -132160,9 +132160,9 @@ using chip::SessionHandle;
                 // We don't support disabling auto-resubscribe.
                 return CHIP_ERROR_INVALID_ARGUMENT;
             }
-            using TypeInfo = TestCluster::Attributes::ClusterRevision::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ClusterRevision::TypeInfo;
 
-            chip::Controller::TestClusterCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
             CHIP_ERROR err = cppCluster.SubscribeAttribute<TypeInfo>(bridge, successCb, failureCb,
                 [params.minInterval unsignedShortValue], [params.maxInterval unsignedShortValue],
                 MTRInt16uAttributeCallbackSubscriptionBridge::OnSubscriptionEstablished, nil, params.filterByFabric,
@@ -132187,7 +132187,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchLocalAction(^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (attributeCacheContainer.cppAttributeCache) {
             chip::app::ConcreteAttributePath path;
-            using TypeInfo = TestCluster::Attributes::ClusterRevision::TypeInfo;
+            using TypeInfo = UnitTesting::Attributes::ClusterRevision::TypeInfo;
             path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
             path.mClusterId = TypeInfo::GetClusterId();
             path.mAttributeId = TypeInfo::GetAttributeId();
@@ -132204,9 +132204,9 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterTestCluster (Deprecated)
+@implementation MTRBaseClusterUnitTesting (Deprecated)
 
-- (void)testWithParams:(MTRTestClusterClusterTestParams * _Nullable)params completionHandler:(MTRStatusCompletion)completionHandler
+- (void)testWithParams:(MTRUnitTestingClusterTestParams * _Nullable)params completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self testWithParams:params completion:completionHandler];
 }
@@ -132214,7 +132214,7 @@ using chip::SessionHandle;
 {
     [self testWithParams:nil completion:completionHandler];
 }
-- (void)testNotHandledWithParams:(MTRTestClusterClusterTestNotHandledParams * _Nullable)params
+- (void)testNotHandledWithParams:(MTRUnitTestingClusterTestNotHandledParams * _Nullable)params
                completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self testNotHandledWithParams:params completion:completionHandler];
@@ -132223,18 +132223,18 @@ using chip::SessionHandle;
 {
     [self testNotHandledWithParams:nil completion:completionHandler];
 }
-- (void)testSpecificWithParams:(MTRTestClusterClusterTestSpecificParams * _Nullable)params
-             completionHandler:(void (^)(MTRTestClusterClusterTestSpecificResponseParams * _Nullable data,
+- (void)testSpecificWithParams:(MTRUnitTestingClusterTestSpecificParams * _Nullable)params
+             completionHandler:(void (^)(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable data,
                                    NSError * _Nullable error))completionHandler
 {
     [self testSpecificWithParams:params completion:completionHandler];
 }
-- (void)testSpecificWithCompletionHandler:(void (^)(MTRTestClusterClusterTestSpecificResponseParams * _Nullable data,
+- (void)testSpecificWithCompletionHandler:(void (^)(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable data,
                                               NSError * _Nullable error))completionHandler
 {
     [self testSpecificWithParams:nil completion:completionHandler];
 }
-- (void)testUnknownCommandWithParams:(MTRTestClusterClusterTestUnknownCommandParams * _Nullable)params
+- (void)testUnknownCommandWithParams:(MTRUnitTestingClusterTestUnknownCommandParams * _Nullable)params
                    completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self testUnknownCommandWithParams:params completion:completionHandler];
@@ -132243,94 +132243,94 @@ using chip::SessionHandle;
 {
     [self testUnknownCommandWithParams:nil completion:completionHandler];
 }
-- (void)testAddArgumentsWithParams:(MTRTestClusterClusterTestAddArgumentsParams *)params
-                 completionHandler:(void (^)(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable data,
+- (void)testAddArgumentsWithParams:(MTRUnitTestingClusterTestAddArgumentsParams *)params
+                 completionHandler:(void (^)(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable data,
                                        NSError * _Nullable error))completionHandler
 {
     [self testAddArgumentsWithParams:params completion:completionHandler];
 }
-- (void)testSimpleArgumentRequestWithParams:(MTRTestClusterClusterTestSimpleArgumentRequestParams *)params
-                          completionHandler:(void (^)(MTRTestClusterClusterTestSimpleArgumentResponseParams * _Nullable data,
+- (void)testSimpleArgumentRequestWithParams:(MTRUnitTestingClusterTestSimpleArgumentRequestParams *)params
+                          completionHandler:(void (^)(MTRUnitTestingClusterTestSimpleArgumentResponseParams * _Nullable data,
                                                 NSError * _Nullable error))completionHandler
 {
     [self testSimpleArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testStructArrayArgumentRequestWithParams:(MTRTestClusterClusterTestStructArrayArgumentRequestParams *)params
+- (void)testStructArrayArgumentRequestWithParams:(MTRUnitTestingClusterTestStructArrayArgumentRequestParams *)params
                                completionHandler:
-                                   (void (^)(MTRTestClusterClusterTestStructArrayArgumentResponseParams * _Nullable data,
+                                   (void (^)(MTRUnitTestingClusterTestStructArrayArgumentResponseParams * _Nullable data,
                                        NSError * _Nullable error))completionHandler
 {
     [self testStructArrayArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testStructArgumentRequestWithParams:(MTRTestClusterClusterTestStructArgumentRequestParams *)params
-                          completionHandler:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testStructArgumentRequestWithParams:(MTRUnitTestingClusterTestStructArgumentRequestParams *)params
+                          completionHandler:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                 NSError * _Nullable error))completionHandler
 {
     [self testStructArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testNestedStructArgumentRequestWithParams:(MTRTestClusterClusterTestNestedStructArgumentRequestParams *)params
-                                completionHandler:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testNestedStructArgumentRequestWithParams:(MTRUnitTestingClusterTestNestedStructArgumentRequestParams *)params
+                                completionHandler:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                       NSError * _Nullable error))completionHandler
 {
     [self testNestedStructArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testListStructArgumentRequestWithParams:(MTRTestClusterClusterTestListStructArgumentRequestParams *)params
-                              completionHandler:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testListStructArgumentRequestWithParams:(MTRUnitTestingClusterTestListStructArgumentRequestParams *)params
+                              completionHandler:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                     NSError * _Nullable error))completionHandler
 {
     [self testListStructArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testListInt8UArgumentRequestWithParams:(MTRTestClusterClusterTestListInt8UArgumentRequestParams *)params
-                             completionHandler:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testListInt8UArgumentRequestWithParams:(MTRUnitTestingClusterTestListInt8UArgumentRequestParams *)params
+                             completionHandler:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                    NSError * _Nullable error))completionHandler
 {
     [self testListInt8UArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testNestedStructListArgumentRequestWithParams:(MTRTestClusterClusterTestNestedStructListArgumentRequestParams *)params
-                                    completionHandler:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+- (void)testNestedStructListArgumentRequestWithParams:(MTRUnitTestingClusterTestNestedStructListArgumentRequestParams *)params
+                                    completionHandler:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                           NSError * _Nullable error))completionHandler
 {
     [self testNestedStructListArgumentRequestWithParams:params completion:completionHandler];
 }
 - (void)testListNestedStructListArgumentRequestWithParams:
-            (MTRTestClusterClusterTestListNestedStructListArgumentRequestParams *)params
-                                        completionHandler:(void (^)(MTRTestClusterClusterBooleanResponseParams * _Nullable data,
+            (MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams *)params
+                                        completionHandler:(void (^)(MTRUnitTestingClusterBooleanResponseParams * _Nullable data,
                                                               NSError * _Nullable error))completionHandler
 {
     [self testListNestedStructListArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testListInt8UReverseRequestWithParams:(MTRTestClusterClusterTestListInt8UReverseRequestParams *)params
-                            completionHandler:(void (^)(MTRTestClusterClusterTestListInt8UReverseResponseParams * _Nullable data,
+- (void)testListInt8UReverseRequestWithParams:(MTRUnitTestingClusterTestListInt8UReverseRequestParams *)params
+                            completionHandler:(void (^)(MTRUnitTestingClusterTestListInt8UReverseResponseParams * _Nullable data,
                                                   NSError * _Nullable error))completionHandler
 {
     [self testListInt8UReverseRequestWithParams:params completion:completionHandler];
 }
-- (void)testEnumsRequestWithParams:(MTRTestClusterClusterTestEnumsRequestParams *)params
-                 completionHandler:(void (^)(MTRTestClusterClusterTestEnumsResponseParams * _Nullable data,
+- (void)testEnumsRequestWithParams:(MTRUnitTestingClusterTestEnumsRequestParams *)params
+                 completionHandler:(void (^)(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable data,
                                        NSError * _Nullable error))completionHandler
 {
     [self testEnumsRequestWithParams:params completion:completionHandler];
 }
-- (void)testNullableOptionalRequestWithParams:(MTRTestClusterClusterTestNullableOptionalRequestParams * _Nullable)params
-                            completionHandler:(void (^)(MTRTestClusterClusterTestNullableOptionalResponseParams * _Nullable data,
+- (void)testNullableOptionalRequestWithParams:(MTRUnitTestingClusterTestNullableOptionalRequestParams * _Nullable)params
+                            completionHandler:(void (^)(MTRUnitTestingClusterTestNullableOptionalResponseParams * _Nullable data,
                                                   NSError * _Nullable error))completionHandler
 {
     [self testNullableOptionalRequestWithParams:params completion:completionHandler];
 }
-- (void)testComplexNullableOptionalRequestWithParams:(MTRTestClusterClusterTestComplexNullableOptionalRequestParams *)params
+- (void)testComplexNullableOptionalRequestWithParams:(MTRUnitTestingClusterTestComplexNullableOptionalRequestParams *)params
                                    completionHandler:
-                                       (void (^)(MTRTestClusterClusterTestComplexNullableOptionalResponseParams * _Nullable data,
+                                       (void (^)(MTRUnitTestingClusterTestComplexNullableOptionalResponseParams * _Nullable data,
                                            NSError * _Nullable error))completionHandler
 {
     [self testComplexNullableOptionalRequestWithParams:params completion:completionHandler];
 }
-- (void)simpleStructEchoRequestWithParams:(MTRTestClusterClusterSimpleStructEchoRequestParams *)params
-                        completionHandler:(void (^)(MTRTestClusterClusterSimpleStructResponseParams * _Nullable data,
+- (void)simpleStructEchoRequestWithParams:(MTRUnitTestingClusterSimpleStructEchoRequestParams *)params
+                        completionHandler:(void (^)(MTRUnitTestingClusterSimpleStructResponseParams * _Nullable data,
                                               NSError * _Nullable error))completionHandler
 {
     [self simpleStructEchoRequestWithParams:params completion:completionHandler];
 }
-- (void)timedInvokeRequestWithParams:(MTRTestClusterClusterTimedInvokeRequestParams * _Nullable)params
+- (void)timedInvokeRequestWithParams:(MTRUnitTestingClusterTimedInvokeRequestParams * _Nullable)params
                    completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self timedInvokeRequestWithParams:params completion:completionHandler];
@@ -132339,21 +132339,21 @@ using chip::SessionHandle;
 {
     [self timedInvokeRequestWithParams:nil completion:completionHandler];
 }
-- (void)testSimpleOptionalArgumentRequestWithParams:(MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams * _Nullable)params
+- (void)testSimpleOptionalArgumentRequestWithParams:(MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams * _Nullable)params
                                   completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self testSimpleOptionalArgumentRequestWithParams:params completion:completionHandler];
 }
-- (void)testEmitTestEventRequestWithParams:(MTRTestClusterClusterTestEmitTestEventRequestParams *)params
-                         completionHandler:(void (^)(MTRTestClusterClusterTestEmitTestEventResponseParams * _Nullable data,
+- (void)testEmitTestEventRequestWithParams:(MTRUnitTestingClusterTestEmitTestEventRequestParams *)params
+                         completionHandler:(void (^)(MTRUnitTestingClusterTestEmitTestEventResponseParams * _Nullable data,
                                                NSError * _Nullable error))completionHandler
 {
     [self testEmitTestEventRequestWithParams:params completion:completionHandler];
 }
-- (void)testEmitTestFabricScopedEventRequestWithParams:(MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams *)params
+- (void)testEmitTestFabricScopedEventRequestWithParams:(MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams *)params
                                      completionHandler:
                                          (void (^)(
-                                             MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams * _Nullable data,
+                                             MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams * _Nullable data,
                                              NSError * _Nullable error))completionHandler
 {
     [self testEmitTestFabricScopedEventRequestWithParams:params completion:completionHandler];
@@ -133887,17 +133887,17 @@ using chip::SessionHandle;
                                        completion:completionHandler];
 }
 
-- (void)readAttributeStructAttrWithCompletionHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+- (void)readAttributeStructAttrWithCompletionHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                          NSError * _Nullable error))completionHandler
 {
     [self readAttributeStructAttrWithCompletion:completionHandler];
 }
-- (void)writeAttributeStructAttrWithValue:(MTRTestClusterClusterSimpleStruct * _Nonnull)value
+- (void)writeAttributeStructAttrWithValue:(MTRUnitTestingClusterSimpleStruct * _Nonnull)value
                         completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self writeAttributeStructAttrWithValue:value params:nil completion:completionHandler];
 }
-- (void)writeAttributeStructAttrWithValue:(MTRTestClusterClusterSimpleStruct * _Nonnull)value
+- (void)writeAttributeStructAttrWithValue:(MTRUnitTestingClusterSimpleStruct * _Nonnull)value
                                    params:(MTRWriteParams * _Nullable)params
                         completionHandler:(MTRStatusCompletion)completionHandler
 {
@@ -133907,7 +133907,7 @@ using chip::SessionHandle;
                                         maxInterval:(NSNumber * _Nonnull)maxInterval
                                              params:(MTRSubscribeParams * _Nullable)params
                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
-                                      reportHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                      reportHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                         NSError * _Nullable error))reportHandler
 {
     MTRSubscribeParams * _Nullable subscribeParams = [params copy];
@@ -133924,7 +133924,7 @@ using chip::SessionHandle;
 + (void)readAttributeStructAttrWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                          endpoint:(NSNumber *)endpoint
                                             queue:(dispatch_queue_t)queue
-                                completionHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                completionHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                       NSError * _Nullable error))completionHandler
 {
     [self readAttributeStructAttrWithAttributeCache:attributeCacheContainer
@@ -135665,17 +135665,17 @@ using chip::SessionHandle;
                                                completion:completionHandler];
 }
 
-- (void)readAttributeNullableStructWithCompletionHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+- (void)readAttributeNullableStructWithCompletionHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                              NSError * _Nullable error))completionHandler
 {
     [self readAttributeNullableStructWithCompletion:completionHandler];
 }
-- (void)writeAttributeNullableStructWithValue:(MTRTestClusterClusterSimpleStruct * _Nullable)value
+- (void)writeAttributeNullableStructWithValue:(MTRUnitTestingClusterSimpleStruct * _Nullable)value
                             completionHandler:(MTRStatusCompletion)completionHandler
 {
     [self writeAttributeNullableStructWithValue:value params:nil completion:completionHandler];
 }
-- (void)writeAttributeNullableStructWithValue:(MTRTestClusterClusterSimpleStruct * _Nullable)value
+- (void)writeAttributeNullableStructWithValue:(MTRUnitTestingClusterSimpleStruct * _Nullable)value
                                        params:(MTRWriteParams * _Nullable)params
                             completionHandler:(MTRStatusCompletion)completionHandler
 {
@@ -135685,7 +135685,7 @@ using chip::SessionHandle;
                                             maxInterval:(NSNumber * _Nonnull)maxInterval
                                                  params:(MTRSubscribeParams * _Nullable)params
                                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablishedHandler
-                                          reportHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                          reportHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                             NSError * _Nullable error))reportHandler
 {
     MTRSubscribeParams * _Nullable subscribeParams = [params copy];
@@ -135702,7 +135702,7 @@ using chip::SessionHandle;
 + (void)readAttributeNullableStructWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                              endpoint:(NSNumber *)endpoint
                                                 queue:(dispatch_queue_t)queue
-                                    completionHandler:(void (^)(MTRTestClusterClusterSimpleStruct * _Nullable value,
+                                    completionHandler:(void (^)(MTRUnitTestingClusterSimpleStruct * _Nullable value,
                                                           NSError * _Nullable error))completionHandler
 {
     [self readAttributeNullableStructWithAttributeCache:attributeCacheContainer
