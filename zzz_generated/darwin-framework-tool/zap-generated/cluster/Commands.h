@@ -104,7 +104,7 @@
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
 | ElectricalMeasurement                                               | 0x0B04 |
-| TestCluster                                                         | 0xFFF1FC05|
+| UnitTesting                                                         | 0xFFF1FC05|
 | FaultInjection                                                      | 0xFFF1FC06|
 \*----------------------------------------------------------------------------*/
 
@@ -86254,7 +86254,7 @@ public:
 };
 
 /*----------------------------------------------------------------------------*\
-| Cluster TestCluster                                                 | 0xFFF1FC05|
+| Cluster UnitTesting                                                 | 0xFFF1FC05|
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 | * Test                                                              |   0x00 |
@@ -86377,9 +86377,9 @@ public:
 /*
  * Command Test
  */
-class TestClusterTest : public ClusterCommand {
+class UnitTestingTest : public ClusterCommand {
 public:
-    TestClusterTest()
+    UnitTestingTest()
         : ClusterCommand("test")
     {
         ClusterCommand::AddArguments();
@@ -86390,10 +86390,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -86420,9 +86420,9 @@ private:
 /*
  * Command TestNotHandled
  */
-class TestClusterTestNotHandled : public ClusterCommand {
+class UnitTestingTestNotHandled : public ClusterCommand {
 public:
-    TestClusterTestNotHandled()
+    UnitTestingTestNotHandled()
         : ClusterCommand("test-not-handled")
     {
         ClusterCommand::AddArguments();
@@ -86433,10 +86433,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestNotHandledParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestNotHandledParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -86463,9 +86463,9 @@ private:
 /*
  * Command TestSpecific
  */
-class TestClusterTestSpecific : public ClusterCommand {
+class UnitTestingTestSpecific : public ClusterCommand {
 public:
-    TestClusterTestSpecific()
+    UnitTestingTestSpecific()
         : ClusterCommand("test-specific")
     {
         ClusterCommand::AddArguments();
@@ -86476,17 +86476,17 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestSpecificParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestSpecificParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testSpecificWithParams:params
-                                 completion:^(MTRTestClusterClusterTestSpecificResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestSpecificResponseParams * _Nullable values,
                                      NSError * _Nullable error) {
                                      NSLog(@"Values: %@", values);
                                      responsesNeeded--;
@@ -86508,9 +86508,9 @@ private:
 /*
  * Command TestUnknownCommand
  */
-class TestClusterTestUnknownCommand : public ClusterCommand {
+class UnitTestingTestUnknownCommand : public ClusterCommand {
 public:
-    TestClusterTestUnknownCommand()
+    UnitTestingTestUnknownCommand()
         : ClusterCommand("test-unknown-command")
     {
         ClusterCommand::AddArguments();
@@ -86521,10 +86521,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestUnknownCommandParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestUnknownCommandParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -86551,9 +86551,9 @@ private:
 /*
  * Command TestAddArguments
  */
-class TestClusterTestAddArguments : public ClusterCommand {
+class UnitTestingTestAddArguments : public ClusterCommand {
 public:
-    TestClusterTestAddArguments()
+    UnitTestingTestAddArguments()
         : ClusterCommand("test-add-arguments")
     {
         AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
@@ -86566,10 +86566,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1];
@@ -86578,7 +86578,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testAddArgumentsWithParams:params
-                                     completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                     completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                          NSError * _Nullable error) {
                                          NSLog(@"Values: %@", values);
                                          responsesNeeded--;
@@ -86595,15 +86595,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestAddArguments::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestAddArguments::Type mRequest;
 };
 
 /*
  * Command TestSimpleArgumentRequest
  */
-class TestClusterTestSimpleArgumentRequest : public ClusterCommand {
+class UnitTestingTestSimpleArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestSimpleArgumentRequest()
+    UnitTestingTestSimpleArgumentRequest()
         : ClusterCommand("test-simple-argument-request")
     {
         AddArgument("Arg1", 0, 1, &mRequest.arg1);
@@ -86615,10 +86615,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestSimpleArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestSimpleArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.arg1 = [NSNumber numberWithBool:mRequest.arg1];
@@ -86626,7 +86626,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testSimpleArgumentRequestWithParams:params
-                                              completion:^(MTRTestClusterClusterTestSimpleArgumentResponseParams * _Nullable values,
+                                              completion:^(MTRUnitTestingClusterTestSimpleArgumentResponseParams * _Nullable values,
                                                   NSError * _Nullable error) {
                                                   NSLog(@"Values: %@", values);
                                                   responsesNeeded--;
@@ -86643,15 +86643,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestSimpleArgumentRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestSimpleArgumentRequest::Type mRequest;
 };
 
 /*
  * Command TestStructArrayArgumentRequest
  */
-class TestClusterTestStructArrayArgumentRequest : public ClusterCommand {
+class UnitTestingTestStructArrayArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestStructArrayArgumentRequest()
+    UnitTestingTestStructArrayArgumentRequest()
         : ClusterCommand("test-struct-array-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
         , mComplex_Arg2(&mRequest.arg2)
@@ -86672,20 +86672,20 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestStructArrayArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestStructArrayArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.arg1) {
-                MTRTestClusterClusterNestedStructList * newElement_0;
-                newElement_0 = [MTRTestClusterClusterNestedStructList new];
+                MTRUnitTestingClusterNestedStructList * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterNestedStructList new];
                 newElement_0.a = [NSNumber numberWithUnsignedChar:entry_0.a];
                 newElement_0.b = [NSNumber numberWithBool:entry_0.b];
-                newElement_0.c = [MTRTestClusterClusterSimpleStruct new];
+                newElement_0.c = [MTRUnitTestingClusterSimpleStruct new];
                 newElement_0.c.a = [NSNumber numberWithUnsignedChar:entry_0.c.a];
                 newElement_0.c.b = [NSNumber numberWithBool:entry_0.c.b];
                 newElement_0.c.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_0.c.c)];
@@ -86699,8 +86699,8 @@ public:
                 { // Scope for our temporary variables
                     auto * array_2 = [NSMutableArray new];
                     for (auto & entry_2 : entry_0.d) {
-                        MTRTestClusterClusterSimpleStruct * newElement_2;
-                        newElement_2 = [MTRTestClusterClusterSimpleStruct new];
+                        MTRUnitTestingClusterSimpleStruct * newElement_2;
+                        newElement_2 = [MTRUnitTestingClusterSimpleStruct new];
                         newElement_2.a = [NSNumber numberWithUnsignedChar:entry_2.a];
                         newElement_2.b = [NSNumber numberWithBool:entry_2.b];
                         newElement_2.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_2.c)];
@@ -86749,8 +86749,8 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.arg2) {
-                MTRTestClusterClusterSimpleStruct * newElement_0;
-                newElement_0 = [MTRTestClusterClusterSimpleStruct new];
+                MTRUnitTestingClusterSimpleStruct * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterSimpleStruct new];
                 newElement_0.a = [NSNumber numberWithUnsignedChar:entry_0.a];
                 newElement_0.b = [NSNumber numberWithBool:entry_0.b];
                 newElement_0.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_0.c)];
@@ -86791,7 +86791,7 @@ public:
             [cluster
                 testStructArrayArgumentRequestWithParams:params
                                               completion:^(
-                                                  MTRTestClusterClusterTestStructArrayArgumentResponseParams * _Nullable values,
+                                                  MTRUnitTestingClusterTestStructArrayArgumentResponseParams * _Nullable values,
                                                   NSError * _Nullable error) {
                                                   NSLog(@"Values: %@", values);
                                                   responsesNeeded--;
@@ -86808,21 +86808,21 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestStructArrayArgumentRequest::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::NestedStructList::Type>>
+    chip::app::Clusters::UnitTesting::Commands::TestStructArrayArgumentRequest::Type mRequest;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type>>
         mComplex_Arg1;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>>
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>>
         mComplex_Arg2;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::SimpleEnum>> mComplex_Arg3;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::SimpleEnum>> mComplex_Arg3;
     TypedComplexArgument<chip::app::DataModel::List<const bool>> mComplex_Arg4;
 };
 
 /*
  * Command TestStructArgumentRequest
  */
-class TestClusterTestStructArgumentRequest : public ClusterCommand {
+class UnitTestingTestStructArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestStructArgumentRequest()
+    UnitTestingTestStructArgumentRequest()
         : ClusterCommand("test-struct-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -86835,13 +86835,13 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestStructArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestStructArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [MTRTestClusterClusterSimpleStruct new];
+        params.arg1 = [MTRUnitTestingClusterSimpleStruct new];
         params.arg1.a = [NSNumber numberWithUnsignedChar:mRequest.arg1.a];
         params.arg1.b = [NSNumber numberWithBool:mRequest.arg1.b];
         params.arg1.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg1.c)];
@@ -86856,7 +86856,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testStructArgumentRequestWithParams:params
-                                              completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                              completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                   NSError * _Nullable error) {
                                                   NSLog(@"Values: %@", values);
                                                   responsesNeeded--;
@@ -86873,16 +86873,16 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestStructArgumentRequest::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type> mComplex_Arg1;
+    chip::app::Clusters::UnitTesting::Commands::TestStructArgumentRequest::Type mRequest;
+    TypedComplexArgument<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type> mComplex_Arg1;
 };
 
 /*
  * Command TestNestedStructArgumentRequest
  */
-class TestClusterTestNestedStructArgumentRequest : public ClusterCommand {
+class UnitTestingTestNestedStructArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestNestedStructArgumentRequest()
+    UnitTestingTestNestedStructArgumentRequest()
         : ClusterCommand("test-nested-struct-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -86895,16 +86895,16 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestNestedStructArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestNestedStructArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [MTRTestClusterClusterNestedStruct new];
+        params.arg1 = [MTRUnitTestingClusterNestedStruct new];
         params.arg1.a = [NSNumber numberWithUnsignedChar:mRequest.arg1.a];
         params.arg1.b = [NSNumber numberWithBool:mRequest.arg1.b];
-        params.arg1.c = [MTRTestClusterClusterSimpleStruct new];
+        params.arg1.c = [MTRUnitTestingClusterSimpleStruct new];
         params.arg1.c.a = [NSNumber numberWithUnsignedChar:mRequest.arg1.c.a];
         params.arg1.c.b = [NSNumber numberWithBool:mRequest.arg1.c.b];
         params.arg1.c.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg1.c.c)];
@@ -86919,7 +86919,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testNestedStructArgumentRequestWithParams:params
-                                                    completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                    completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                         NSError * _Nullable error) {
                                                         NSLog(@"Values: %@", values);
                                                         responsesNeeded--;
@@ -86936,16 +86936,16 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestNestedStructArgumentRequest::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::TestCluster::Structs::NestedStruct::Type> mComplex_Arg1;
+    chip::app::Clusters::UnitTesting::Commands::TestNestedStructArgumentRequest::Type mRequest;
+    TypedComplexArgument<chip::app::Clusters::UnitTesting::Structs::NestedStruct::Type> mComplex_Arg1;
 };
 
 /*
  * Command TestListStructArgumentRequest
  */
-class TestClusterTestListStructArgumentRequest : public ClusterCommand {
+class UnitTestingTestListStructArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestListStructArgumentRequest()
+    UnitTestingTestListStructArgumentRequest()
         : ClusterCommand("test-list-struct-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -86958,17 +86958,17 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestListStructArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListStructArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.arg1) {
-                MTRTestClusterClusterSimpleStruct * newElement_0;
-                newElement_0 = [MTRTestClusterClusterSimpleStruct new];
+                MTRUnitTestingClusterSimpleStruct * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterSimpleStruct new];
                 newElement_0.a = [NSNumber numberWithUnsignedChar:entry_0.a];
                 newElement_0.b = [NSNumber numberWithBool:entry_0.b];
                 newElement_0.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_0.c)];
@@ -86987,7 +86987,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testListStructArgumentRequestWithParams:params
-                                                  completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                  completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                       NSError * _Nullable error) {
                                                       NSLog(@"Values: %@", values);
                                                       responsesNeeded--;
@@ -87004,17 +87004,17 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestListStructArgumentRequest::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>>
+    chip::app::Clusters::UnitTesting::Commands::TestListStructArgumentRequest::Type mRequest;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>>
         mComplex_Arg1;
 };
 
 /*
  * Command TestListInt8UArgumentRequest
  */
-class TestClusterTestListInt8UArgumentRequest : public ClusterCommand {
+class UnitTestingTestListInt8UArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestListInt8UArgumentRequest()
+    UnitTestingTestListInt8UArgumentRequest()
         : ClusterCommand("test-list-int8uargument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -87027,10 +87027,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestListInt8UArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListInt8UArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         { // Scope for our temporary variables
@@ -87046,7 +87046,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testListInt8UArgumentRequestWithParams:params
-                                                 completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                 completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                      NSError * _Nullable error) {
                                                      NSLog(@"Values: %@", values);
                                                      responsesNeeded--;
@@ -87063,16 +87063,16 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestListInt8UArgumentRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestListInt8UArgumentRequest::Type mRequest;
     TypedComplexArgument<chip::app::DataModel::List<const uint8_t>> mComplex_Arg1;
 };
 
 /*
  * Command TestNestedStructListArgumentRequest
  */
-class TestClusterTestNestedStructListArgumentRequest : public ClusterCommand {
+class UnitTestingTestNestedStructListArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestNestedStructListArgumentRequest()
+    UnitTestingTestNestedStructListArgumentRequest()
         : ClusterCommand("test-nested-struct-list-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -87085,16 +87085,16 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestNestedStructListArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestNestedStructListArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [MTRTestClusterClusterNestedStructList new];
+        params.arg1 = [MTRUnitTestingClusterNestedStructList new];
         params.arg1.a = [NSNumber numberWithUnsignedChar:mRequest.arg1.a];
         params.arg1.b = [NSNumber numberWithBool:mRequest.arg1.b];
-        params.arg1.c = [MTRTestClusterClusterSimpleStruct new];
+        params.arg1.c = [MTRUnitTestingClusterSimpleStruct new];
         params.arg1.c.a = [NSNumber numberWithUnsignedChar:mRequest.arg1.c.a];
         params.arg1.c.b = [NSNumber numberWithBool:mRequest.arg1.c.b];
         params.arg1.c.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg1.c.c)];
@@ -87108,8 +87108,8 @@ public:
         { // Scope for our temporary variables
             auto * array_1 = [NSMutableArray new];
             for (auto & entry_1 : mRequest.arg1.d) {
-                MTRTestClusterClusterSimpleStruct * newElement_1;
-                newElement_1 = [MTRTestClusterClusterSimpleStruct new];
+                MTRUnitTestingClusterSimpleStruct * newElement_1;
+                newElement_1 = [MTRUnitTestingClusterSimpleStruct new];
                 newElement_1.a = [NSNumber numberWithUnsignedChar:entry_1.a];
                 newElement_1.b = [NSNumber numberWithBool:entry_1.b];
                 newElement_1.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_1.c)];
@@ -87155,7 +87155,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testNestedStructListArgumentRequestWithParams:params
-                                                        completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                        completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                             NSError * _Nullable error) {
                                                             NSLog(@"Values: %@", values);
                                                             responsesNeeded--;
@@ -87172,16 +87172,16 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestNestedStructListArgumentRequest::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::TestCluster::Structs::NestedStructList::Type> mComplex_Arg1;
+    chip::app::Clusters::UnitTesting::Commands::TestNestedStructListArgumentRequest::Type mRequest;
+    TypedComplexArgument<chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type> mComplex_Arg1;
 };
 
 /*
  * Command TestListNestedStructListArgumentRequest
  */
-class TestClusterTestListNestedStructListArgumentRequest : public ClusterCommand {
+class UnitTestingTestListNestedStructListArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestListNestedStructListArgumentRequest()
+    UnitTestingTestListNestedStructListArgumentRequest()
         : ClusterCommand("test-list-nested-struct-list-argument-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -87194,20 +87194,20 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestListNestedStructListArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mRequest.arg1) {
-                MTRTestClusterClusterNestedStructList * newElement_0;
-                newElement_0 = [MTRTestClusterClusterNestedStructList new];
+                MTRUnitTestingClusterNestedStructList * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterNestedStructList new];
                 newElement_0.a = [NSNumber numberWithUnsignedChar:entry_0.a];
                 newElement_0.b = [NSNumber numberWithBool:entry_0.b];
-                newElement_0.c = [MTRTestClusterClusterSimpleStruct new];
+                newElement_0.c = [MTRUnitTestingClusterSimpleStruct new];
                 newElement_0.c.a = [NSNumber numberWithUnsignedChar:entry_0.c.a];
                 newElement_0.c.b = [NSNumber numberWithBool:entry_0.c.b];
                 newElement_0.c.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_0.c.c)];
@@ -87221,8 +87221,8 @@ public:
                 { // Scope for our temporary variables
                     auto * array_2 = [NSMutableArray new];
                     for (auto & entry_2 : entry_0.d) {
-                        MTRTestClusterClusterSimpleStruct * newElement_2;
-                        newElement_2 = [MTRTestClusterClusterSimpleStruct new];
+                        MTRUnitTestingClusterSimpleStruct * newElement_2;
+                        newElement_2 = [MTRUnitTestingClusterSimpleStruct new];
                         newElement_2.a = [NSNumber numberWithUnsignedChar:entry_2.a];
                         newElement_2.b = [NSNumber numberWithBool:entry_2.b];
                         newElement_2.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_2.c)];
@@ -87273,7 +87273,7 @@ public:
         while (repeatCount--) {
             [cluster
                 testListNestedStructListArgumentRequestWithParams:params
-                                                       completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                       completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                            NSError * _Nullable error) {
                                                            NSLog(@"Values: %@", values);
                                                            responsesNeeded--;
@@ -87290,17 +87290,17 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestListNestedStructListArgumentRequest::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::NestedStructList::Type>>
+    chip::app::Clusters::UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type mRequest;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::NestedStructList::Type>>
         mComplex_Arg1;
 };
 
 /*
  * Command TestListInt8UReverseRequest
  */
-class TestClusterTestListInt8UReverseRequest : public ClusterCommand {
+class UnitTestingTestListInt8UReverseRequest : public ClusterCommand {
 public:
-    TestClusterTestListInt8UReverseRequest()
+    UnitTestingTestListInt8UReverseRequest()
         : ClusterCommand("test-list-int8ureverse-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -87313,10 +87313,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestListInt8UReverseRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListInt8UReverseRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         { // Scope for our temporary variables
@@ -87333,7 +87333,7 @@ public:
         while (repeatCount--) {
             [cluster
                 testListInt8UReverseRequestWithParams:params
-                                           completion:^(MTRTestClusterClusterTestListInt8UReverseResponseParams * _Nullable values,
+                                           completion:^(MTRUnitTestingClusterTestListInt8UReverseResponseParams * _Nullable values,
                                                NSError * _Nullable error) {
                                                NSLog(@"Values: %@", values);
                                                responsesNeeded--;
@@ -87350,16 +87350,16 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestListInt8UReverseRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestListInt8UReverseRequest::Type mRequest;
     TypedComplexArgument<chip::app::DataModel::List<const uint8_t>> mComplex_Arg1;
 };
 
 /*
  * Command TestEnumsRequest
  */
-class TestClusterTestEnumsRequest : public ClusterCommand {
+class UnitTestingTestEnumsRequest : public ClusterCommand {
 public:
-    TestClusterTestEnumsRequest()
+    UnitTestingTestEnumsRequest()
         : ClusterCommand("test-enums-request")
     {
         AddArgument("Arg1", 0, UINT16_MAX, &mRequest.arg1);
@@ -87372,10 +87372,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestEnumsRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestEnumsRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.arg1 = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.arg1)];
@@ -87384,7 +87384,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testEnumsRequestWithParams:params
-                                     completion:^(MTRTestClusterClusterTestEnumsResponseParams * _Nullable values,
+                                     completion:^(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable values,
                                          NSError * _Nullable error) {
                                          NSLog(@"Values: %@", values);
                                          responsesNeeded--;
@@ -87401,15 +87401,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestEnumsRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestEnumsRequest::Type mRequest;
 };
 
 /*
  * Command TestNullableOptionalRequest
  */
-class TestClusterTestNullableOptionalRequest : public ClusterCommand {
+class UnitTestingTestNullableOptionalRequest : public ClusterCommand {
 public:
-    TestClusterTestNullableOptionalRequest()
+    UnitTestingTestNullableOptionalRequest()
         : ClusterCommand("test-nullable-optional-request")
     {
         AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
@@ -87421,10 +87421,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x0000000F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestNullableOptionalRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestNullableOptionalRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         if (mRequest.arg1.HasValue()) {
@@ -87441,7 +87441,7 @@ public:
         while (repeatCount--) {
             [cluster
                 testNullableOptionalRequestWithParams:params
-                                           completion:^(MTRTestClusterClusterTestNullableOptionalResponseParams * _Nullable values,
+                                           completion:^(MTRUnitTestingClusterTestNullableOptionalResponseParams * _Nullable values,
                                                NSError * _Nullable error) {
                                                NSLog(@"Values: %@", values);
                                                responsesNeeded--;
@@ -87458,15 +87458,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestNullableOptionalRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestNullableOptionalRequest::Type mRequest;
 };
 
 /*
  * Command TestComplexNullableOptionalRequest
  */
-class TestClusterTestComplexNullableOptionalRequest : public ClusterCommand {
+class UnitTestingTestComplexNullableOptionalRequest : public ClusterCommand {
 public:
-    TestClusterTestComplexNullableOptionalRequest()
+    UnitTestingTestComplexNullableOptionalRequest()
         : ClusterCommand("test-complex-nullable-optional-request")
         , mComplex_NullableStruct(&mRequest.nullableStruct)
         , mComplex_OptionalStruct(&mRequest.optionalStruct)
@@ -87495,10 +87495,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000010) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestComplexNullableOptionalRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestComplexNullableOptionalRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         if (mRequest.nullableInt.IsNull()) {
@@ -87549,7 +87549,7 @@ public:
         if (mRequest.nullableStruct.IsNull()) {
             params.nullableStruct = nil;
         } else {
-            params.nullableStruct = [MTRTestClusterClusterSimpleStruct new];
+            params.nullableStruct = [MTRUnitTestingClusterSimpleStruct new];
             params.nullableStruct.a = [NSNumber numberWithUnsignedChar:mRequest.nullableStruct.Value().a];
             params.nullableStruct.b = [NSNumber numberWithBool:mRequest.nullableStruct.Value().b];
             params.nullableStruct.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.nullableStruct.Value().c)];
@@ -87563,7 +87563,7 @@ public:
             params.nullableStruct.h = [NSNumber numberWithDouble:mRequest.nullableStruct.Value().h];
         }
         if (mRequest.optionalStruct.HasValue()) {
-            params.optionalStruct = [MTRTestClusterClusterSimpleStruct new];
+            params.optionalStruct = [MTRUnitTestingClusterSimpleStruct new];
             params.optionalStruct.a = [NSNumber numberWithUnsignedChar:mRequest.optionalStruct.Value().a];
             params.optionalStruct.b = [NSNumber numberWithBool:mRequest.optionalStruct.Value().b];
             params.optionalStruct.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.optionalStruct.Value().c)];
@@ -87582,7 +87582,7 @@ public:
             if (mRequest.nullableOptionalStruct.Value().IsNull()) {
                 params.nullableOptionalStruct = nil;
             } else {
-                params.nullableOptionalStruct = [MTRTestClusterClusterSimpleStruct new];
+                params.nullableOptionalStruct = [MTRUnitTestingClusterSimpleStruct new];
                 params.nullableOptionalStruct.a =
                     [NSNumber numberWithUnsignedChar:mRequest.nullableOptionalStruct.Value().Value().a];
                 params.nullableOptionalStruct.b = [NSNumber numberWithBool:mRequest.nullableOptionalStruct.Value().Value().b];
@@ -87651,7 +87651,7 @@ public:
             [cluster
                 testComplexNullableOptionalRequestWithParams:params
                                                   completion:^(
-                                                      MTRTestClusterClusterTestComplexNullableOptionalResponseParams * _Nullable values,
+                                                      MTRUnitTestingClusterTestComplexNullableOptionalResponseParams * _Nullable values,
                                                       NSError * _Nullable error) {
                                                       NSLog(@"Values: %@", values);
                                                       responsesNeeded--;
@@ -87668,29 +87668,29 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestComplexNullableOptionalRequest::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>>
+    chip::app::Clusters::UnitTesting::Commands::TestComplexNullableOptionalRequest::Type mRequest;
+    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>>
         mComplex_NullableStruct;
-    TypedComplexArgument<chip::Optional<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>> mComplex_OptionalStruct;
+    TypedComplexArgument<chip::Optional<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>> mComplex_OptionalStruct;
     TypedComplexArgument<
-        chip::Optional<chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>>>
+        chip::Optional<chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>>>
         mComplex_NullableOptionalStruct;
     TypedComplexArgument<
-        chip::app::DataModel::Nullable<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::SimpleEnum>>>
+        chip::app::DataModel::Nullable<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::SimpleEnum>>>
         mComplex_NullableList;
-    TypedComplexArgument<chip::Optional<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::SimpleEnum>>>
+    TypedComplexArgument<chip::Optional<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::SimpleEnum>>>
         mComplex_OptionalList;
     TypedComplexArgument<chip::Optional<
-        chip::app::DataModel::Nullable<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::SimpleEnum>>>>
+        chip::app::DataModel::Nullable<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::SimpleEnum>>>>
         mComplex_NullableOptionalList;
 };
 
 /*
  * Command SimpleStructEchoRequest
  */
-class TestClusterSimpleStructEchoRequest : public ClusterCommand {
+class UnitTestingSimpleStructEchoRequest : public ClusterCommand {
 public:
-    TestClusterSimpleStructEchoRequest()
+    UnitTestingSimpleStructEchoRequest()
         : ClusterCommand("simple-struct-echo-request")
         , mComplex_Arg1(&mRequest.arg1)
     {
@@ -87703,13 +87703,13 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterSimpleStructEchoRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterSimpleStructEchoRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.arg1 = [MTRTestClusterClusterSimpleStruct new];
+        params.arg1 = [MTRUnitTestingClusterSimpleStruct new];
         params.arg1.a = [NSNumber numberWithUnsignedChar:mRequest.arg1.a];
         params.arg1.b = [NSNumber numberWithBool:mRequest.arg1.b];
         params.arg1.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.arg1.c)];
@@ -87724,7 +87724,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster simpleStructEchoRequestWithParams:params
-                                            completion:^(MTRTestClusterClusterSimpleStructResponseParams * _Nullable values,
+                                            completion:^(MTRUnitTestingClusterSimpleStructResponseParams * _Nullable values,
                                                 NSError * _Nullable error) {
                                                 NSLog(@"Values: %@", values);
                                                 responsesNeeded--;
@@ -87741,16 +87741,16 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::SimpleStructEchoRequest::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type> mComplex_Arg1;
+    chip::app::Clusters::UnitTesting::Commands::SimpleStructEchoRequest::Type mRequest;
+    TypedComplexArgument<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type> mComplex_Arg1;
 };
 
 /*
  * Command TimedInvokeRequest
  */
-class TestClusterTimedInvokeRequest : public ClusterCommand {
+class UnitTestingTimedInvokeRequest : public ClusterCommand {
 public:
-    TestClusterTimedInvokeRequest()
+    UnitTestingTimedInvokeRequest()
         : ClusterCommand("timed-invoke-request")
     {
         ClusterCommand::AddArguments();
@@ -87761,10 +87761,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTimedInvokeRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTimedInvokeRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
@@ -87791,9 +87791,9 @@ private:
 /*
  * Command TestSimpleOptionalArgumentRequest
  */
-class TestClusterTestSimpleOptionalArgumentRequest : public ClusterCommand {
+class UnitTestingTestSimpleOptionalArgumentRequest : public ClusterCommand {
 public:
-    TestClusterTestSimpleOptionalArgumentRequest()
+    UnitTestingTestSimpleOptionalArgumentRequest()
         : ClusterCommand("test-simple-optional-argument-request")
     {
         AddArgument("Arg1", 0, 1, &mRequest.arg1);
@@ -87805,10 +87805,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000013) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         if (mRequest.arg1.HasValue()) {
@@ -87835,15 +87835,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestSimpleOptionalArgumentRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type mRequest;
 };
 
 /*
  * Command TestEmitTestEventRequest
  */
-class TestClusterTestEmitTestEventRequest : public ClusterCommand {
+class UnitTestingTestEmitTestEventRequest : public ClusterCommand {
 public:
-    TestClusterTestEmitTestEventRequest()
+    UnitTestingTestEmitTestEventRequest()
         : ClusterCommand("test-emit-test-event-request")
     {
         AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
@@ -87857,10 +87857,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000014) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestEmitTestEventRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestEmitTestEventRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1];
@@ -87870,7 +87870,7 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster testEmitTestEventRequestWithParams:params
-                                             completion:^(MTRTestClusterClusterTestEmitTestEventResponseParams * _Nullable values,
+                                             completion:^(MTRUnitTestingClusterTestEmitTestEventResponseParams * _Nullable values,
                                                  NSError * _Nullable error) {
                                                  NSLog(@"Values: %@", values);
                                                  responsesNeeded--;
@@ -87887,15 +87887,15 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestEmitTestEventRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestEmitTestEventRequest::Type mRequest;
 };
 
 /*
  * Command TestEmitTestFabricScopedEventRequest
  */
-class TestClusterTestEmitTestFabricScopedEventRequest : public ClusterCommand {
+class UnitTestingTestEmitTestFabricScopedEventRequest : public ClusterCommand {
 public:
-    TestClusterTestEmitTestFabricScopedEventRequest()
+    UnitTestingTestEmitTestFabricScopedEventRequest()
         : ClusterCommand("test-emit-test-fabric-scoped-event-request")
     {
         AddArgument("Arg1", 0, UINT8_MAX, &mRequest.arg1);
@@ -87907,10 +87907,10 @@ public:
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) command (0x00000015) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
-        __auto_type * params = [[MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.arg1 = [NSNumber numberWithUnsignedChar:mRequest.arg1];
@@ -87920,7 +87920,7 @@ public:
             [cluster
                 testEmitTestFabricScopedEventRequestWithParams:params
                                                     completion:^(
-                                                        MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams * _Nullable values,
+                                                        MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams * _Nullable values,
                                                         NSError * _Nullable error) {
                                                         NSLog(@"Values: %@", values);
                                                         responsesNeeded--;
@@ -87937,33 +87937,33 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Commands::TestEmitTestFabricScopedEventRequest::Type mRequest;
+    chip::app::Clusters::UnitTesting::Commands::TestEmitTestFabricScopedEventRequest::Type mRequest;
 };
 
 /*
  * Attribute Boolean
  */
-class ReadTestClusterBoolean : public ReadAttribute {
+class ReadUnitTestingBoolean : public ReadAttribute {
 public:
-    ReadTestClusterBoolean()
+    ReadUnitTestingBoolean()
         : ReadAttribute("boolean")
     {
     }
 
-    ~ReadTestClusterBoolean() {}
+    ~ReadUnitTestingBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Boolean response %@", [value description]);
+            NSLog(@"UnitTesting.Boolean response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Boolean read Error", error);
+                LogNSError("UnitTesting Boolean read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -87971,9 +87971,9 @@ public:
     }
 };
 
-class WriteTestClusterBoolean : public WriteAttribute {
+class WriteUnitTestingBoolean : public WriteAttribute {
 public:
-    WriteTestClusterBoolean()
+    WriteUnitTestingBoolean()
         : WriteAttribute("boolean")
     {
         AddArgument("attr-name", "boolean");
@@ -87981,13 +87981,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterBoolean() {}
+    ~WriteUnitTestingBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88000,7 +88000,7 @@ public:
                                          params:params
                                      completion:^(NSError * _Nullable error) {
                                          if (error != nil) {
-                                             LogNSError("TestCluster Boolean write Error", error);
+                                             LogNSError("UnitTesting Boolean write Error", error);
                                          }
                                          SetCommandExitStatus(error);
                                      }];
@@ -88011,20 +88011,20 @@ private:
     bool mValue;
 };
 
-class SubscribeAttributeTestClusterBoolean : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingBoolean : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterBoolean()
+    SubscribeAttributeUnitTestingBoolean()
         : SubscribeAttribute("boolean")
     {
     }
 
-    ~SubscribeAttributeTestClusterBoolean() {}
+    ~SubscribeAttributeUnitTestingBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88042,7 +88042,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Boolean response %@", [value description]);
+                NSLog(@"UnitTesting.Boolean response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88053,27 +88053,27 @@ public:
 /*
  * Attribute Bitmap8
  */
-class ReadTestClusterBitmap8 : public ReadAttribute {
+class ReadUnitTestingBitmap8 : public ReadAttribute {
 public:
-    ReadTestClusterBitmap8()
+    ReadUnitTestingBitmap8()
         : ReadAttribute("bitmap8")
     {
     }
 
-    ~ReadTestClusterBitmap8() {}
+    ~ReadUnitTestingBitmap8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeBitmap8WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Bitmap8 response %@", [value description]);
+            NSLog(@"UnitTesting.Bitmap8 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Bitmap8 read Error", error);
+                LogNSError("UnitTesting Bitmap8 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88081,9 +88081,9 @@ public:
     }
 };
 
-class WriteTestClusterBitmap8 : public WriteAttribute {
+class WriteUnitTestingBitmap8 : public WriteAttribute {
 public:
-    WriteTestClusterBitmap8()
+    WriteUnitTestingBitmap8()
         : WriteAttribute("bitmap8")
     {
         AddArgument("attr-name", "bitmap8");
@@ -88091,13 +88091,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterBitmap8() {}
+    ~WriteUnitTestingBitmap8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88110,7 +88110,7 @@ public:
                                          params:params
                                      completion:^(NSError * _Nullable error) {
                                          if (error != nil) {
-                                             LogNSError("TestCluster Bitmap8 write Error", error);
+                                             LogNSError("UnitTesting Bitmap8 write Error", error);
                                          }
                                          SetCommandExitStatus(error);
                                      }];
@@ -88121,20 +88121,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterBitmap8 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingBitmap8 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterBitmap8()
+    SubscribeAttributeUnitTestingBitmap8()
         : SubscribeAttribute("bitmap8")
     {
     }
 
-    ~SubscribeAttributeTestClusterBitmap8() {}
+    ~SubscribeAttributeUnitTestingBitmap8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88152,7 +88152,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Bitmap8 response %@", [value description]);
+                NSLog(@"UnitTesting.Bitmap8 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88163,27 +88163,27 @@ public:
 /*
  * Attribute Bitmap16
  */
-class ReadTestClusterBitmap16 : public ReadAttribute {
+class ReadUnitTestingBitmap16 : public ReadAttribute {
 public:
-    ReadTestClusterBitmap16()
+    ReadUnitTestingBitmap16()
         : ReadAttribute("bitmap16")
     {
     }
 
-    ~ReadTestClusterBitmap16() {}
+    ~ReadUnitTestingBitmap16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeBitmap16WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Bitmap16 response %@", [value description]);
+            NSLog(@"UnitTesting.Bitmap16 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Bitmap16 read Error", error);
+                LogNSError("UnitTesting Bitmap16 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88191,9 +88191,9 @@ public:
     }
 };
 
-class WriteTestClusterBitmap16 : public WriteAttribute {
+class WriteUnitTestingBitmap16 : public WriteAttribute {
 public:
-    WriteTestClusterBitmap16()
+    WriteUnitTestingBitmap16()
         : WriteAttribute("bitmap16")
     {
         AddArgument("attr-name", "bitmap16");
@@ -88201,13 +88201,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterBitmap16() {}
+    ~WriteUnitTestingBitmap16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88220,7 +88220,7 @@ public:
                                           params:params
                                       completion:^(NSError * _Nullable error) {
                                           if (error != nil) {
-                                              LogNSError("TestCluster Bitmap16 write Error", error);
+                                              LogNSError("UnitTesting Bitmap16 write Error", error);
                                           }
                                           SetCommandExitStatus(error);
                                       }];
@@ -88231,20 +88231,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterBitmap16 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingBitmap16 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterBitmap16()
+    SubscribeAttributeUnitTestingBitmap16()
         : SubscribeAttribute("bitmap16")
     {
     }
 
-    ~SubscribeAttributeTestClusterBitmap16() {}
+    ~SubscribeAttributeUnitTestingBitmap16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88262,7 +88262,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Bitmap16 response %@", [value description]);
+                NSLog(@"UnitTesting.Bitmap16 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88273,27 +88273,27 @@ public:
 /*
  * Attribute Bitmap32
  */
-class ReadTestClusterBitmap32 : public ReadAttribute {
+class ReadUnitTestingBitmap32 : public ReadAttribute {
 public:
-    ReadTestClusterBitmap32()
+    ReadUnitTestingBitmap32()
         : ReadAttribute("bitmap32")
     {
     }
 
-    ~ReadTestClusterBitmap32() {}
+    ~ReadUnitTestingBitmap32() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeBitmap32WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Bitmap32 response %@", [value description]);
+            NSLog(@"UnitTesting.Bitmap32 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Bitmap32 read Error", error);
+                LogNSError("UnitTesting Bitmap32 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88301,9 +88301,9 @@ public:
     }
 };
 
-class WriteTestClusterBitmap32 : public WriteAttribute {
+class WriteUnitTestingBitmap32 : public WriteAttribute {
 public:
-    WriteTestClusterBitmap32()
+    WriteUnitTestingBitmap32()
         : WriteAttribute("bitmap32")
     {
         AddArgument("attr-name", "bitmap32");
@@ -88311,13 +88311,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterBitmap32() {}
+    ~WriteUnitTestingBitmap32() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88330,7 +88330,7 @@ public:
                                           params:params
                                       completion:^(NSError * _Nullable error) {
                                           if (error != nil) {
-                                              LogNSError("TestCluster Bitmap32 write Error", error);
+                                              LogNSError("UnitTesting Bitmap32 write Error", error);
                                           }
                                           SetCommandExitStatus(error);
                                       }];
@@ -88341,20 +88341,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterBitmap32 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingBitmap32 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterBitmap32()
+    SubscribeAttributeUnitTestingBitmap32()
         : SubscribeAttribute("bitmap32")
     {
     }
 
-    ~SubscribeAttributeTestClusterBitmap32() {}
+    ~SubscribeAttributeUnitTestingBitmap32() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88372,7 +88372,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Bitmap32 response %@", [value description]);
+                NSLog(@"UnitTesting.Bitmap32 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88383,27 +88383,27 @@ public:
 /*
  * Attribute Bitmap64
  */
-class ReadTestClusterBitmap64 : public ReadAttribute {
+class ReadUnitTestingBitmap64 : public ReadAttribute {
 public:
-    ReadTestClusterBitmap64()
+    ReadUnitTestingBitmap64()
         : ReadAttribute("bitmap64")
     {
     }
 
-    ~ReadTestClusterBitmap64() {}
+    ~ReadUnitTestingBitmap64() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeBitmap64WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Bitmap64 response %@", [value description]);
+            NSLog(@"UnitTesting.Bitmap64 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Bitmap64 read Error", error);
+                LogNSError("UnitTesting Bitmap64 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88411,9 +88411,9 @@ public:
     }
 };
 
-class WriteTestClusterBitmap64 : public WriteAttribute {
+class WriteUnitTestingBitmap64 : public WriteAttribute {
 public:
-    WriteTestClusterBitmap64()
+    WriteUnitTestingBitmap64()
         : WriteAttribute("bitmap64")
     {
         AddArgument("attr-name", "bitmap64");
@@ -88421,13 +88421,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterBitmap64() {}
+    ~WriteUnitTestingBitmap64() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88440,7 +88440,7 @@ public:
                                           params:params
                                       completion:^(NSError * _Nullable error) {
                                           if (error != nil) {
-                                              LogNSError("TestCluster Bitmap64 write Error", error);
+                                              LogNSError("UnitTesting Bitmap64 write Error", error);
                                           }
                                           SetCommandExitStatus(error);
                                       }];
@@ -88451,20 +88451,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterBitmap64 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingBitmap64 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterBitmap64()
+    SubscribeAttributeUnitTestingBitmap64()
         : SubscribeAttribute("bitmap64")
     {
     }
 
-    ~SubscribeAttributeTestClusterBitmap64() {}
+    ~SubscribeAttributeUnitTestingBitmap64() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88482,7 +88482,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Bitmap64 response %@", [value description]);
+                NSLog(@"UnitTesting.Bitmap64 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88493,27 +88493,27 @@ public:
 /*
  * Attribute Int8u
  */
-class ReadTestClusterInt8u : public ReadAttribute {
+class ReadUnitTestingInt8u : public ReadAttribute {
 public:
-    ReadTestClusterInt8u()
+    ReadUnitTestingInt8u()
         : ReadAttribute("int8u")
     {
     }
 
-    ~ReadTestClusterInt8u() {}
+    ~ReadUnitTestingInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt8uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int8u response %@", [value description]);
+            NSLog(@"UnitTesting.Int8u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int8u read Error", error);
+                LogNSError("UnitTesting Int8u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88521,9 +88521,9 @@ public:
     }
 };
 
-class WriteTestClusterInt8u : public WriteAttribute {
+class WriteUnitTestingInt8u : public WriteAttribute {
 public:
-    WriteTestClusterInt8u()
+    WriteUnitTestingInt8u()
         : WriteAttribute("int8u")
     {
         AddArgument("attr-name", "int8u");
@@ -88531,13 +88531,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt8u() {}
+    ~WriteUnitTestingInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88550,7 +88550,7 @@ public:
                                        params:params
                                    completion:^(NSError * _Nullable error) {
                                        if (error != nil) {
-                                           LogNSError("TestCluster Int8u write Error", error);
+                                           LogNSError("UnitTesting Int8u write Error", error);
                                        }
                                        SetCommandExitStatus(error);
                                    }];
@@ -88561,20 +88561,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt8u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt8u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt8u()
+    SubscribeAttributeUnitTestingInt8u()
         : SubscribeAttribute("int8u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt8u() {}
+    ~SubscribeAttributeUnitTestingInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88592,7 +88592,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int8u response %@", [value description]);
+                NSLog(@"UnitTesting.Int8u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88603,27 +88603,27 @@ public:
 /*
  * Attribute Int16u
  */
-class ReadTestClusterInt16u : public ReadAttribute {
+class ReadUnitTestingInt16u : public ReadAttribute {
 public:
-    ReadTestClusterInt16u()
+    ReadUnitTestingInt16u()
         : ReadAttribute("int16u")
     {
     }
 
-    ~ReadTestClusterInt16u() {}
+    ~ReadUnitTestingInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt16uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int16u response %@", [value description]);
+            NSLog(@"UnitTesting.Int16u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int16u read Error", error);
+                LogNSError("UnitTesting Int16u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88631,9 +88631,9 @@ public:
     }
 };
 
-class WriteTestClusterInt16u : public WriteAttribute {
+class WriteUnitTestingInt16u : public WriteAttribute {
 public:
-    WriteTestClusterInt16u()
+    WriteUnitTestingInt16u()
         : WriteAttribute("int16u")
     {
         AddArgument("attr-name", "int16u");
@@ -88641,13 +88641,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt16u() {}
+    ~WriteUnitTestingInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88660,7 +88660,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int16u write Error", error);
+                                            LogNSError("UnitTesting Int16u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -88671,20 +88671,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt16u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt16u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt16u()
+    SubscribeAttributeUnitTestingInt16u()
         : SubscribeAttribute("int16u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt16u() {}
+    ~SubscribeAttributeUnitTestingInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88702,7 +88702,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int16u response %@", [value description]);
+                NSLog(@"UnitTesting.Int16u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88713,27 +88713,27 @@ public:
 /*
  * Attribute Int24u
  */
-class ReadTestClusterInt24u : public ReadAttribute {
+class ReadUnitTestingInt24u : public ReadAttribute {
 public:
-    ReadTestClusterInt24u()
+    ReadUnitTestingInt24u()
         : ReadAttribute("int24u")
     {
     }
 
-    ~ReadTestClusterInt24u() {}
+    ~ReadUnitTestingInt24u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt24uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int24u response %@", [value description]);
+            NSLog(@"UnitTesting.Int24u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int24u read Error", error);
+                LogNSError("UnitTesting Int24u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88741,9 +88741,9 @@ public:
     }
 };
 
-class WriteTestClusterInt24u : public WriteAttribute {
+class WriteUnitTestingInt24u : public WriteAttribute {
 public:
-    WriteTestClusterInt24u()
+    WriteUnitTestingInt24u()
         : WriteAttribute("int24u")
     {
         AddArgument("attr-name", "int24u");
@@ -88751,13 +88751,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt24u() {}
+    ~WriteUnitTestingInt24u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88770,7 +88770,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int24u write Error", error);
+                                            LogNSError("UnitTesting Int24u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -88781,20 +88781,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt24u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt24u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt24u()
+    SubscribeAttributeUnitTestingInt24u()
         : SubscribeAttribute("int24u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt24u() {}
+    ~SubscribeAttributeUnitTestingInt24u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88812,7 +88812,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int24u response %@", [value description]);
+                NSLog(@"UnitTesting.Int24u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88823,27 +88823,27 @@ public:
 /*
  * Attribute Int32u
  */
-class ReadTestClusterInt32u : public ReadAttribute {
+class ReadUnitTestingInt32u : public ReadAttribute {
 public:
-    ReadTestClusterInt32u()
+    ReadUnitTestingInt32u()
         : ReadAttribute("int32u")
     {
     }
 
-    ~ReadTestClusterInt32u() {}
+    ~ReadUnitTestingInt32u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt32uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int32u response %@", [value description]);
+            NSLog(@"UnitTesting.Int32u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int32u read Error", error);
+                LogNSError("UnitTesting Int32u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88851,9 +88851,9 @@ public:
     }
 };
 
-class WriteTestClusterInt32u : public WriteAttribute {
+class WriteUnitTestingInt32u : public WriteAttribute {
 public:
-    WriteTestClusterInt32u()
+    WriteUnitTestingInt32u()
         : WriteAttribute("int32u")
     {
         AddArgument("attr-name", "int32u");
@@ -88861,13 +88861,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt32u() {}
+    ~WriteUnitTestingInt32u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88880,7 +88880,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int32u write Error", error);
+                                            LogNSError("UnitTesting Int32u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -88891,20 +88891,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt32u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt32u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt32u()
+    SubscribeAttributeUnitTestingInt32u()
         : SubscribeAttribute("int32u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt32u() {}
+    ~SubscribeAttributeUnitTestingInt32u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -88922,7 +88922,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int32u response %@", [value description]);
+                NSLog(@"UnitTesting.Int32u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -88933,27 +88933,27 @@ public:
 /*
  * Attribute Int40u
  */
-class ReadTestClusterInt40u : public ReadAttribute {
+class ReadUnitTestingInt40u : public ReadAttribute {
 public:
-    ReadTestClusterInt40u()
+    ReadUnitTestingInt40u()
         : ReadAttribute("int40u")
     {
     }
 
-    ~ReadTestClusterInt40u() {}
+    ~ReadUnitTestingInt40u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt40uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int40u response %@", [value description]);
+            NSLog(@"UnitTesting.Int40u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int40u read Error", error);
+                LogNSError("UnitTesting Int40u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -88961,9 +88961,9 @@ public:
     }
 };
 
-class WriteTestClusterInt40u : public WriteAttribute {
+class WriteUnitTestingInt40u : public WriteAttribute {
 public:
-    WriteTestClusterInt40u()
+    WriteUnitTestingInt40u()
         : WriteAttribute("int40u")
     {
         AddArgument("attr-name", "int40u");
@@ -88971,13 +88971,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt40u() {}
+    ~WriteUnitTestingInt40u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -88990,7 +88990,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int40u write Error", error);
+                                            LogNSError("UnitTesting Int40u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89001,20 +89001,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt40u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt40u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt40u()
+    SubscribeAttributeUnitTestingInt40u()
         : SubscribeAttribute("int40u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt40u() {}
+    ~SubscribeAttributeUnitTestingInt40u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89032,7 +89032,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int40u response %@", [value description]);
+                NSLog(@"UnitTesting.Int40u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89043,27 +89043,27 @@ public:
 /*
  * Attribute Int48u
  */
-class ReadTestClusterInt48u : public ReadAttribute {
+class ReadUnitTestingInt48u : public ReadAttribute {
 public:
-    ReadTestClusterInt48u()
+    ReadUnitTestingInt48u()
         : ReadAttribute("int48u")
     {
     }
 
-    ~ReadTestClusterInt48u() {}
+    ~ReadUnitTestingInt48u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt48uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int48u response %@", [value description]);
+            NSLog(@"UnitTesting.Int48u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int48u read Error", error);
+                LogNSError("UnitTesting Int48u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89071,9 +89071,9 @@ public:
     }
 };
 
-class WriteTestClusterInt48u : public WriteAttribute {
+class WriteUnitTestingInt48u : public WriteAttribute {
 public:
-    WriteTestClusterInt48u()
+    WriteUnitTestingInt48u()
         : WriteAttribute("int48u")
     {
         AddArgument("attr-name", "int48u");
@@ -89081,13 +89081,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt48u() {}
+    ~WriteUnitTestingInt48u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89100,7 +89100,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int48u write Error", error);
+                                            LogNSError("UnitTesting Int48u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89111,20 +89111,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt48u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt48u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt48u()
+    SubscribeAttributeUnitTestingInt48u()
         : SubscribeAttribute("int48u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt48u() {}
+    ~SubscribeAttributeUnitTestingInt48u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89142,7 +89142,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int48u response %@", [value description]);
+                NSLog(@"UnitTesting.Int48u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89153,27 +89153,27 @@ public:
 /*
  * Attribute Int56u
  */
-class ReadTestClusterInt56u : public ReadAttribute {
+class ReadUnitTestingInt56u : public ReadAttribute {
 public:
-    ReadTestClusterInt56u()
+    ReadUnitTestingInt56u()
         : ReadAttribute("int56u")
     {
     }
 
-    ~ReadTestClusterInt56u() {}
+    ~ReadUnitTestingInt56u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt56uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int56u response %@", [value description]);
+            NSLog(@"UnitTesting.Int56u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int56u read Error", error);
+                LogNSError("UnitTesting Int56u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89181,9 +89181,9 @@ public:
     }
 };
 
-class WriteTestClusterInt56u : public WriteAttribute {
+class WriteUnitTestingInt56u : public WriteAttribute {
 public:
-    WriteTestClusterInt56u()
+    WriteUnitTestingInt56u()
         : WriteAttribute("int56u")
     {
         AddArgument("attr-name", "int56u");
@@ -89191,13 +89191,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt56u() {}
+    ~WriteUnitTestingInt56u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89210,7 +89210,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int56u write Error", error);
+                                            LogNSError("UnitTesting Int56u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89221,20 +89221,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt56u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt56u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt56u()
+    SubscribeAttributeUnitTestingInt56u()
         : SubscribeAttribute("int56u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt56u() {}
+    ~SubscribeAttributeUnitTestingInt56u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89252,7 +89252,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int56u response %@", [value description]);
+                NSLog(@"UnitTesting.Int56u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89263,27 +89263,27 @@ public:
 /*
  * Attribute Int64u
  */
-class ReadTestClusterInt64u : public ReadAttribute {
+class ReadUnitTestingInt64u : public ReadAttribute {
 public:
-    ReadTestClusterInt64u()
+    ReadUnitTestingInt64u()
         : ReadAttribute("int64u")
     {
     }
 
-    ~ReadTestClusterInt64u() {}
+    ~ReadUnitTestingInt64u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt64uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int64u response %@", [value description]);
+            NSLog(@"UnitTesting.Int64u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int64u read Error", error);
+                LogNSError("UnitTesting Int64u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89291,9 +89291,9 @@ public:
     }
 };
 
-class WriteTestClusterInt64u : public WriteAttribute {
+class WriteUnitTestingInt64u : public WriteAttribute {
 public:
-    WriteTestClusterInt64u()
+    WriteUnitTestingInt64u()
         : WriteAttribute("int64u")
     {
         AddArgument("attr-name", "int64u");
@@ -89301,13 +89301,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt64u() {}
+    ~WriteUnitTestingInt64u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89320,7 +89320,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int64u write Error", error);
+                                            LogNSError("UnitTesting Int64u write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89331,20 +89331,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt64u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt64u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt64u()
+    SubscribeAttributeUnitTestingInt64u()
         : SubscribeAttribute("int64u")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt64u() {}
+    ~SubscribeAttributeUnitTestingInt64u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89362,7 +89362,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int64u response %@", [value description]);
+                NSLog(@"UnitTesting.Int64u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89373,27 +89373,27 @@ public:
 /*
  * Attribute Int8s
  */
-class ReadTestClusterInt8s : public ReadAttribute {
+class ReadUnitTestingInt8s : public ReadAttribute {
 public:
-    ReadTestClusterInt8s()
+    ReadUnitTestingInt8s()
         : ReadAttribute("int8s")
     {
     }
 
-    ~ReadTestClusterInt8s() {}
+    ~ReadUnitTestingInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt8sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int8s response %@", [value description]);
+            NSLog(@"UnitTesting.Int8s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int8s read Error", error);
+                LogNSError("UnitTesting Int8s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89401,9 +89401,9 @@ public:
     }
 };
 
-class WriteTestClusterInt8s : public WriteAttribute {
+class WriteUnitTestingInt8s : public WriteAttribute {
 public:
-    WriteTestClusterInt8s()
+    WriteUnitTestingInt8s()
         : WriteAttribute("int8s")
     {
         AddArgument("attr-name", "int8s");
@@ -89411,13 +89411,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt8s() {}
+    ~WriteUnitTestingInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89430,7 +89430,7 @@ public:
                                        params:params
                                    completion:^(NSError * _Nullable error) {
                                        if (error != nil) {
-                                           LogNSError("TestCluster Int8s write Error", error);
+                                           LogNSError("UnitTesting Int8s write Error", error);
                                        }
                                        SetCommandExitStatus(error);
                                    }];
@@ -89441,20 +89441,20 @@ private:
     int8_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt8s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt8s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt8s()
+    SubscribeAttributeUnitTestingInt8s()
         : SubscribeAttribute("int8s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt8s() {}
+    ~SubscribeAttributeUnitTestingInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89472,7 +89472,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int8s response %@", [value description]);
+                NSLog(@"UnitTesting.Int8s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89483,27 +89483,27 @@ public:
 /*
  * Attribute Int16s
  */
-class ReadTestClusterInt16s : public ReadAttribute {
+class ReadUnitTestingInt16s : public ReadAttribute {
 public:
-    ReadTestClusterInt16s()
+    ReadUnitTestingInt16s()
         : ReadAttribute("int16s")
     {
     }
 
-    ~ReadTestClusterInt16s() {}
+    ~ReadUnitTestingInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt16sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int16s response %@", [value description]);
+            NSLog(@"UnitTesting.Int16s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int16s read Error", error);
+                LogNSError("UnitTesting Int16s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89511,9 +89511,9 @@ public:
     }
 };
 
-class WriteTestClusterInt16s : public WriteAttribute {
+class WriteUnitTestingInt16s : public WriteAttribute {
 public:
-    WriteTestClusterInt16s()
+    WriteUnitTestingInt16s()
         : WriteAttribute("int16s")
     {
         AddArgument("attr-name", "int16s");
@@ -89521,13 +89521,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt16s() {}
+    ~WriteUnitTestingInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89540,7 +89540,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int16s write Error", error);
+                                            LogNSError("UnitTesting Int16s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89551,20 +89551,20 @@ private:
     int16_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt16s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt16s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt16s()
+    SubscribeAttributeUnitTestingInt16s()
         : SubscribeAttribute("int16s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt16s() {}
+    ~SubscribeAttributeUnitTestingInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89582,7 +89582,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int16s response %@", [value description]);
+                NSLog(@"UnitTesting.Int16s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89593,27 +89593,27 @@ public:
 /*
  * Attribute Int24s
  */
-class ReadTestClusterInt24s : public ReadAttribute {
+class ReadUnitTestingInt24s : public ReadAttribute {
 public:
-    ReadTestClusterInt24s()
+    ReadUnitTestingInt24s()
         : ReadAttribute("int24s")
     {
     }
 
-    ~ReadTestClusterInt24s() {}
+    ~ReadUnitTestingInt24s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000000F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt24sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int24s response %@", [value description]);
+            NSLog(@"UnitTesting.Int24s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int24s read Error", error);
+                LogNSError("UnitTesting Int24s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89621,9 +89621,9 @@ public:
     }
 };
 
-class WriteTestClusterInt24s : public WriteAttribute {
+class WriteUnitTestingInt24s : public WriteAttribute {
 public:
-    WriteTestClusterInt24s()
+    WriteUnitTestingInt24s()
         : WriteAttribute("int24s")
     {
         AddArgument("attr-name", "int24s");
@@ -89631,13 +89631,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt24s() {}
+    ~WriteUnitTestingInt24s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000000F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89650,7 +89650,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int24s write Error", error);
+                                            LogNSError("UnitTesting Int24s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89661,20 +89661,20 @@ private:
     int32_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt24s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt24s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt24s()
+    SubscribeAttributeUnitTestingInt24s()
         : SubscribeAttribute("int24s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt24s() {}
+    ~SubscribeAttributeUnitTestingInt24s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000000F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89692,7 +89692,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int24s response %@", [value description]);
+                NSLog(@"UnitTesting.Int24s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89703,27 +89703,27 @@ public:
 /*
  * Attribute Int32s
  */
-class ReadTestClusterInt32s : public ReadAttribute {
+class ReadUnitTestingInt32s : public ReadAttribute {
 public:
-    ReadTestClusterInt32s()
+    ReadUnitTestingInt32s()
         : ReadAttribute("int32s")
     {
     }
 
-    ~ReadTestClusterInt32s() {}
+    ~ReadUnitTestingInt32s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000010) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt32sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int32s response %@", [value description]);
+            NSLog(@"UnitTesting.Int32s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int32s read Error", error);
+                LogNSError("UnitTesting Int32s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89731,9 +89731,9 @@ public:
     }
 };
 
-class WriteTestClusterInt32s : public WriteAttribute {
+class WriteUnitTestingInt32s : public WriteAttribute {
 public:
-    WriteTestClusterInt32s()
+    WriteUnitTestingInt32s()
         : WriteAttribute("int32s")
     {
         AddArgument("attr-name", "int32s");
@@ -89741,13 +89741,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt32s() {}
+    ~WriteUnitTestingInt32s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89760,7 +89760,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int32s write Error", error);
+                                            LogNSError("UnitTesting Int32s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89771,20 +89771,20 @@ private:
     int32_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt32s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt32s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt32s()
+    SubscribeAttributeUnitTestingInt32s()
         : SubscribeAttribute("int32s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt32s() {}
+    ~SubscribeAttributeUnitTestingInt32s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89802,7 +89802,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int32s response %@", [value description]);
+                NSLog(@"UnitTesting.Int32s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89813,27 +89813,27 @@ public:
 /*
  * Attribute Int40s
  */
-class ReadTestClusterInt40s : public ReadAttribute {
+class ReadUnitTestingInt40s : public ReadAttribute {
 public:
-    ReadTestClusterInt40s()
+    ReadUnitTestingInt40s()
         : ReadAttribute("int40s")
     {
     }
 
-    ~ReadTestClusterInt40s() {}
+    ~ReadUnitTestingInt40s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt40sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int40s response %@", [value description]);
+            NSLog(@"UnitTesting.Int40s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int40s read Error", error);
+                LogNSError("UnitTesting Int40s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89841,9 +89841,9 @@ public:
     }
 };
 
-class WriteTestClusterInt40s : public WriteAttribute {
+class WriteUnitTestingInt40s : public WriteAttribute {
 public:
-    WriteTestClusterInt40s()
+    WriteUnitTestingInt40s()
         : WriteAttribute("int40s")
     {
         AddArgument("attr-name", "int40s");
@@ -89851,13 +89851,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt40s() {}
+    ~WriteUnitTestingInt40s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89870,7 +89870,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int40s write Error", error);
+                                            LogNSError("UnitTesting Int40s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89881,20 +89881,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt40s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt40s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt40s()
+    SubscribeAttributeUnitTestingInt40s()
         : SubscribeAttribute("int40s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt40s() {}
+    ~SubscribeAttributeUnitTestingInt40s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -89912,7 +89912,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int40s response %@", [value description]);
+                NSLog(@"UnitTesting.Int40s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -89923,27 +89923,27 @@ public:
 /*
  * Attribute Int48s
  */
-class ReadTestClusterInt48s : public ReadAttribute {
+class ReadUnitTestingInt48s : public ReadAttribute {
 public:
-    ReadTestClusterInt48s()
+    ReadUnitTestingInt48s()
         : ReadAttribute("int48s")
     {
     }
 
-    ~ReadTestClusterInt48s() {}
+    ~ReadUnitTestingInt48s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt48sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int48s response %@", [value description]);
+            NSLog(@"UnitTesting.Int48s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int48s read Error", error);
+                LogNSError("UnitTesting Int48s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -89951,9 +89951,9 @@ public:
     }
 };
 
-class WriteTestClusterInt48s : public WriteAttribute {
+class WriteUnitTestingInt48s : public WriteAttribute {
 public:
-    WriteTestClusterInt48s()
+    WriteUnitTestingInt48s()
         : WriteAttribute("int48s")
     {
         AddArgument("attr-name", "int48s");
@@ -89961,13 +89961,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt48s() {}
+    ~WriteUnitTestingInt48s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -89980,7 +89980,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int48s write Error", error);
+                                            LogNSError("UnitTesting Int48s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -89991,20 +89991,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt48s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt48s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt48s()
+    SubscribeAttributeUnitTestingInt48s()
         : SubscribeAttribute("int48s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt48s() {}
+    ~SubscribeAttributeUnitTestingInt48s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90022,7 +90022,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int48s response %@", [value description]);
+                NSLog(@"UnitTesting.Int48s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90033,27 +90033,27 @@ public:
 /*
  * Attribute Int56s
  */
-class ReadTestClusterInt56s : public ReadAttribute {
+class ReadUnitTestingInt56s : public ReadAttribute {
 public:
-    ReadTestClusterInt56s()
+    ReadUnitTestingInt56s()
         : ReadAttribute("int56s")
     {
     }
 
-    ~ReadTestClusterInt56s() {}
+    ~ReadUnitTestingInt56s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000013) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt56sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int56s response %@", [value description]);
+            NSLog(@"UnitTesting.Int56s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int56s read Error", error);
+                LogNSError("UnitTesting Int56s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90061,9 +90061,9 @@ public:
     }
 };
 
-class WriteTestClusterInt56s : public WriteAttribute {
+class WriteUnitTestingInt56s : public WriteAttribute {
 public:
-    WriteTestClusterInt56s()
+    WriteUnitTestingInt56s()
         : WriteAttribute("int56s")
     {
         AddArgument("attr-name", "int56s");
@@ -90071,13 +90071,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt56s() {}
+    ~WriteUnitTestingInt56s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90090,7 +90090,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int56s write Error", error);
+                                            LogNSError("UnitTesting Int56s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -90101,20 +90101,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt56s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt56s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt56s()
+    SubscribeAttributeUnitTestingInt56s()
         : SubscribeAttribute("int56s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt56s() {}
+    ~SubscribeAttributeUnitTestingInt56s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90132,7 +90132,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int56s response %@", [value description]);
+                NSLog(@"UnitTesting.Int56s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90143,27 +90143,27 @@ public:
 /*
  * Attribute Int64s
  */
-class ReadTestClusterInt64s : public ReadAttribute {
+class ReadUnitTestingInt64s : public ReadAttribute {
 public:
-    ReadTestClusterInt64s()
+    ReadUnitTestingInt64s()
         : ReadAttribute("int64s")
     {
     }
 
-    ~ReadTestClusterInt64s() {}
+    ~ReadUnitTestingInt64s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000014) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeInt64sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Int64s response %@", [value description]);
+            NSLog(@"UnitTesting.Int64s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Int64s read Error", error);
+                LogNSError("UnitTesting Int64s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90171,9 +90171,9 @@ public:
     }
 };
 
-class WriteTestClusterInt64s : public WriteAttribute {
+class WriteUnitTestingInt64s : public WriteAttribute {
 public:
-    WriteTestClusterInt64s()
+    WriteUnitTestingInt64s()
         : WriteAttribute("int64s")
     {
         AddArgument("attr-name", "int64s");
@@ -90181,13 +90181,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterInt64s() {}
+    ~WriteUnitTestingInt64s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90200,7 +90200,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Int64s write Error", error);
+                                            LogNSError("UnitTesting Int64s write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -90211,20 +90211,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterInt64s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingInt64s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterInt64s()
+    SubscribeAttributeUnitTestingInt64s()
         : SubscribeAttribute("int64s")
     {
     }
 
-    ~SubscribeAttributeTestClusterInt64s() {}
+    ~SubscribeAttributeUnitTestingInt64s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90242,7 +90242,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Int64s response %@", [value description]);
+                NSLog(@"UnitTesting.Int64s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90253,27 +90253,27 @@ public:
 /*
  * Attribute Enum8
  */
-class ReadTestClusterEnum8 : public ReadAttribute {
+class ReadUnitTestingEnum8 : public ReadAttribute {
 public:
-    ReadTestClusterEnum8()
+    ReadUnitTestingEnum8()
         : ReadAttribute("enum8")
     {
     }
 
-    ~ReadTestClusterEnum8() {}
+    ~ReadUnitTestingEnum8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000015) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeEnum8WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Enum8 response %@", [value description]);
+            NSLog(@"UnitTesting.Enum8 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Enum8 read Error", error);
+                LogNSError("UnitTesting Enum8 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90281,9 +90281,9 @@ public:
     }
 };
 
-class WriteTestClusterEnum8 : public WriteAttribute {
+class WriteUnitTestingEnum8 : public WriteAttribute {
 public:
-    WriteTestClusterEnum8()
+    WriteUnitTestingEnum8()
         : WriteAttribute("enum8")
     {
         AddArgument("attr-name", "enum8");
@@ -90291,13 +90291,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterEnum8() {}
+    ~WriteUnitTestingEnum8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90310,7 +90310,7 @@ public:
                                        params:params
                                    completion:^(NSError * _Nullable error) {
                                        if (error != nil) {
-                                           LogNSError("TestCluster Enum8 write Error", error);
+                                           LogNSError("UnitTesting Enum8 write Error", error);
                                        }
                                        SetCommandExitStatus(error);
                                    }];
@@ -90321,20 +90321,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterEnum8 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingEnum8 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterEnum8()
+    SubscribeAttributeUnitTestingEnum8()
         : SubscribeAttribute("enum8")
     {
     }
 
-    ~SubscribeAttributeTestClusterEnum8() {}
+    ~SubscribeAttributeUnitTestingEnum8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90352,7 +90352,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Enum8 response %@", [value description]);
+                NSLog(@"UnitTesting.Enum8 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90363,27 +90363,27 @@ public:
 /*
  * Attribute Enum16
  */
-class ReadTestClusterEnum16 : public ReadAttribute {
+class ReadUnitTestingEnum16 : public ReadAttribute {
 public:
-    ReadTestClusterEnum16()
+    ReadUnitTestingEnum16()
         : ReadAttribute("enum16")
     {
     }
 
-    ~ReadTestClusterEnum16() {}
+    ~ReadUnitTestingEnum16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000016) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeEnum16WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Enum16 response %@", [value description]);
+            NSLog(@"UnitTesting.Enum16 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Enum16 read Error", error);
+                LogNSError("UnitTesting Enum16 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90391,9 +90391,9 @@ public:
     }
 };
 
-class WriteTestClusterEnum16 : public WriteAttribute {
+class WriteUnitTestingEnum16 : public WriteAttribute {
 public:
-    WriteTestClusterEnum16()
+    WriteUnitTestingEnum16()
         : WriteAttribute("enum16")
     {
         AddArgument("attr-name", "enum16");
@@ -90401,13 +90401,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterEnum16() {}
+    ~WriteUnitTestingEnum16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90420,7 +90420,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster Enum16 write Error", error);
+                                            LogNSError("UnitTesting Enum16 write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -90431,20 +90431,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterEnum16 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingEnum16 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterEnum16()
+    SubscribeAttributeUnitTestingEnum16()
         : SubscribeAttribute("enum16")
     {
     }
 
-    ~SubscribeAttributeTestClusterEnum16() {}
+    ~SubscribeAttributeUnitTestingEnum16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90462,7 +90462,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Enum16 response %@", [value description]);
+                NSLog(@"UnitTesting.Enum16 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90473,27 +90473,27 @@ public:
 /*
  * Attribute FloatSingle
  */
-class ReadTestClusterFloatSingle : public ReadAttribute {
+class ReadUnitTestingFloatSingle : public ReadAttribute {
 public:
-    ReadTestClusterFloatSingle()
+    ReadUnitTestingFloatSingle()
         : ReadAttribute("float-single")
     {
     }
 
-    ~ReadTestClusterFloatSingle() {}
+    ~ReadUnitTestingFloatSingle() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000017) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeFloatSingleWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.FloatSingle response %@", [value description]);
+            NSLog(@"UnitTesting.FloatSingle response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster FloatSingle read Error", error);
+                LogNSError("UnitTesting FloatSingle read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90501,9 +90501,9 @@ public:
     }
 };
 
-class WriteTestClusterFloatSingle : public WriteAttribute {
+class WriteUnitTestingFloatSingle : public WriteAttribute {
 public:
-    WriteTestClusterFloatSingle()
+    WriteUnitTestingFloatSingle()
         : WriteAttribute("float-single")
     {
         AddArgument("attr-name", "float-single");
@@ -90511,13 +90511,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterFloatSingle() {}
+    ~WriteUnitTestingFloatSingle() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90530,7 +90530,7 @@ public:
                                              params:params
                                          completion:^(NSError * _Nullable error) {
                                              if (error != nil) {
-                                                 LogNSError("TestCluster FloatSingle write Error", error);
+                                                 LogNSError("UnitTesting FloatSingle write Error", error);
                                              }
                                              SetCommandExitStatus(error);
                                          }];
@@ -90541,20 +90541,20 @@ private:
     float mValue;
 };
 
-class SubscribeAttributeTestClusterFloatSingle : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingFloatSingle : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterFloatSingle()
+    SubscribeAttributeUnitTestingFloatSingle()
         : SubscribeAttribute("float-single")
     {
     }
 
-    ~SubscribeAttributeTestClusterFloatSingle() {}
+    ~SubscribeAttributeUnitTestingFloatSingle() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90572,7 +90572,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.FloatSingle response %@", [value description]);
+                NSLog(@"UnitTesting.FloatSingle response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90583,27 +90583,27 @@ public:
 /*
  * Attribute FloatDouble
  */
-class ReadTestClusterFloatDouble : public ReadAttribute {
+class ReadUnitTestingFloatDouble : public ReadAttribute {
 public:
-    ReadTestClusterFloatDouble()
+    ReadUnitTestingFloatDouble()
         : ReadAttribute("float-double")
     {
     }
 
-    ~ReadTestClusterFloatDouble() {}
+    ~ReadUnitTestingFloatDouble() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000018) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeFloatDoubleWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.FloatDouble response %@", [value description]);
+            NSLog(@"UnitTesting.FloatDouble response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster FloatDouble read Error", error);
+                LogNSError("UnitTesting FloatDouble read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90611,9 +90611,9 @@ public:
     }
 };
 
-class WriteTestClusterFloatDouble : public WriteAttribute {
+class WriteUnitTestingFloatDouble : public WriteAttribute {
 public:
-    WriteTestClusterFloatDouble()
+    WriteUnitTestingFloatDouble()
         : WriteAttribute("float-double")
     {
         AddArgument("attr-name", "float-double");
@@ -90621,13 +90621,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterFloatDouble() {}
+    ~WriteUnitTestingFloatDouble() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90640,7 +90640,7 @@ public:
                                              params:params
                                          completion:^(NSError * _Nullable error) {
                                              if (error != nil) {
-                                                 LogNSError("TestCluster FloatDouble write Error", error);
+                                                 LogNSError("UnitTesting FloatDouble write Error", error);
                                              }
                                              SetCommandExitStatus(error);
                                          }];
@@ -90651,20 +90651,20 @@ private:
     double mValue;
 };
 
-class SubscribeAttributeTestClusterFloatDouble : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingFloatDouble : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterFloatDouble()
+    SubscribeAttributeUnitTestingFloatDouble()
         : SubscribeAttribute("float-double")
     {
     }
 
-    ~SubscribeAttributeTestClusterFloatDouble() {}
+    ~SubscribeAttributeUnitTestingFloatDouble() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90682,7 +90682,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.FloatDouble response %@", [value description]);
+                NSLog(@"UnitTesting.FloatDouble response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90693,27 +90693,27 @@ public:
 /*
  * Attribute OctetString
  */
-class ReadTestClusterOctetString : public ReadAttribute {
+class ReadUnitTestingOctetString : public ReadAttribute {
 public:
-    ReadTestClusterOctetString()
+    ReadUnitTestingOctetString()
         : ReadAttribute("octet-string")
     {
     }
 
-    ~ReadTestClusterOctetString() {}
+    ~ReadUnitTestingOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000019) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeOctetStringWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.OctetString response %@", [value description]);
+            NSLog(@"UnitTesting.OctetString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster OctetString read Error", error);
+                LogNSError("UnitTesting OctetString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90721,9 +90721,9 @@ public:
     }
 };
 
-class WriteTestClusterOctetString : public WriteAttribute {
+class WriteUnitTestingOctetString : public WriteAttribute {
 public:
-    WriteTestClusterOctetString()
+    WriteUnitTestingOctetString()
         : WriteAttribute("octet-string")
     {
         AddArgument("attr-name", "octet-string");
@@ -90731,13 +90731,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterOctetString() {}
+    ~WriteUnitTestingOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90750,7 +90750,7 @@ public:
                                              params:params
                                          completion:^(NSError * _Nullable error) {
                                              if (error != nil) {
-                                                 LogNSError("TestCluster OctetString write Error", error);
+                                                 LogNSError("UnitTesting OctetString write Error", error);
                                              }
                                              SetCommandExitStatus(error);
                                          }];
@@ -90761,20 +90761,20 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeTestClusterOctetString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingOctetString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterOctetString()
+    SubscribeAttributeUnitTestingOctetString()
         : SubscribeAttribute("octet-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterOctetString() {}
+    ~SubscribeAttributeUnitTestingOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90792,7 +90792,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.OctetString response %@", [value description]);
+                NSLog(@"UnitTesting.OctetString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90803,27 +90803,27 @@ public:
 /*
  * Attribute ListInt8u
  */
-class ReadTestClusterListInt8u : public ReadAttribute {
+class ReadUnitTestingListInt8u : public ReadAttribute {
 public:
-    ReadTestClusterListInt8u()
+    ReadUnitTestingListInt8u()
         : ReadAttribute("list-int8u")
     {
     }
 
-    ~ReadTestClusterListInt8u() {}
+    ~ReadUnitTestingListInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeListInt8uWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.ListInt8u response %@", [value description]);
+            NSLog(@"UnitTesting.ListInt8u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster ListInt8u read Error", error);
+                LogNSError("UnitTesting ListInt8u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90831,9 +90831,9 @@ public:
     }
 };
 
-class WriteTestClusterListInt8u : public WriteAttribute {
+class WriteUnitTestingListInt8u : public WriteAttribute {
 public:
-    WriteTestClusterListInt8u()
+    WriteUnitTestingListInt8u()
         : WriteAttribute("list-int8u")
         , mComplex(&mValue)
     {
@@ -90842,13 +90842,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterListInt8u() {}
+    ~WriteUnitTestingListInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90870,7 +90870,7 @@ public:
                                            params:params
                                        completion:^(NSError * _Nullable error) {
                                            if (error != nil) {
-                                               LogNSError("TestCluster ListInt8u write Error", error);
+                                               LogNSError("UnitTesting ListInt8u write Error", error);
                                            }
                                            SetCommandExitStatus(error);
                                        }];
@@ -90882,20 +90882,20 @@ private:
     TypedComplexArgument<chip::app::DataModel::List<const uint8_t>> mComplex;
 };
 
-class SubscribeAttributeTestClusterListInt8u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingListInt8u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterListInt8u()
+    SubscribeAttributeUnitTestingListInt8u()
         : SubscribeAttribute("list-int8u")
     {
     }
 
-    ~SubscribeAttributeTestClusterListInt8u() {}
+    ~SubscribeAttributeUnitTestingListInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -90913,7 +90913,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListInt8u response %@", [value description]);
+                NSLog(@"UnitTesting.ListInt8u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -90924,27 +90924,27 @@ public:
 /*
  * Attribute ListOctetString
  */
-class ReadTestClusterListOctetString : public ReadAttribute {
+class ReadUnitTestingListOctetString : public ReadAttribute {
 public:
-    ReadTestClusterListOctetString()
+    ReadUnitTestingListOctetString()
         : ReadAttribute("list-octet-string")
     {
     }
 
-    ~ReadTestClusterListOctetString() {}
+    ~ReadUnitTestingListOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeListOctetStringWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.ListOctetString response %@", [value description]);
+            NSLog(@"UnitTesting.ListOctetString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster ListOctetString read Error", error);
+                LogNSError("UnitTesting ListOctetString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -90952,9 +90952,9 @@ public:
     }
 };
 
-class WriteTestClusterListOctetString : public WriteAttribute {
+class WriteUnitTestingListOctetString : public WriteAttribute {
 public:
-    WriteTestClusterListOctetString()
+    WriteUnitTestingListOctetString()
         : WriteAttribute("list-octet-string")
         , mComplex(&mValue)
     {
@@ -90963,13 +90963,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterListOctetString() {}
+    ~WriteUnitTestingListOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -90991,7 +90991,7 @@ public:
                                                  params:params
                                              completion:^(NSError * _Nullable error) {
                                                  if (error != nil) {
-                                                     LogNSError("TestCluster ListOctetString write Error", error);
+                                                     LogNSError("UnitTesting ListOctetString write Error", error);
                                                  }
                                                  SetCommandExitStatus(error);
                                              }];
@@ -91003,20 +91003,20 @@ private:
     TypedComplexArgument<chip::app::DataModel::List<const chip::ByteSpan>> mComplex;
 };
 
-class SubscribeAttributeTestClusterListOctetString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingListOctetString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterListOctetString()
+    SubscribeAttributeUnitTestingListOctetString()
         : SubscribeAttribute("list-octet-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterListOctetString() {}
+    ~SubscribeAttributeUnitTestingListOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91034,7 +91034,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListOctetString response %@", [value description]);
+                NSLog(@"UnitTesting.ListOctetString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91045,27 +91045,27 @@ public:
 /*
  * Attribute ListStructOctetString
  */
-class ReadTestClusterListStructOctetString : public ReadAttribute {
+class ReadUnitTestingListStructOctetString : public ReadAttribute {
 public:
-    ReadTestClusterListStructOctetString()
+    ReadUnitTestingListStructOctetString()
         : ReadAttribute("list-struct-octet-string")
     {
     }
 
-    ~ReadTestClusterListStructOctetString() {}
+    ~ReadUnitTestingListStructOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeListStructOctetStringWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.ListStructOctetString response %@", [value description]);
+            NSLog(@"UnitTesting.ListStructOctetString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster ListStructOctetString read Error", error);
+                LogNSError("UnitTesting ListStructOctetString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91073,9 +91073,9 @@ public:
     }
 };
 
-class WriteTestClusterListStructOctetString : public WriteAttribute {
+class WriteUnitTestingListStructOctetString : public WriteAttribute {
 public:
-    WriteTestClusterListStructOctetString()
+    WriteUnitTestingListStructOctetString()
         : WriteAttribute("list-struct-octet-string")
         , mComplex(&mValue)
     {
@@ -91084,13 +91084,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterListStructOctetString() {}
+    ~WriteUnitTestingListStructOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91101,8 +91101,8 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mValue) {
-                MTRTestClusterClusterTestListStructOctet * newElement_0;
-                newElement_0 = [MTRTestClusterClusterTestListStructOctet new];
+                MTRUnitTestingClusterTestListStructOctet * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterTestListStructOctet new];
                 newElement_0.member1 = [NSNumber numberWithUnsignedLongLong:entry_0.member1];
                 newElement_0.member2 = [NSData dataWithBytes:entry_0.member2.data() length:entry_0.member2.size()];
                 [array_0 addObject:newElement_0];
@@ -91114,7 +91114,7 @@ public:
                                                        params:params
                                                    completion:^(NSError * _Nullable error) {
                                                        if (error != nil) {
-                                                           LogNSError("TestCluster ListStructOctetString write Error", error);
+                                                           LogNSError("UnitTesting ListStructOctetString write Error", error);
                                                        }
                                                        SetCommandExitStatus(error);
                                                    }];
@@ -91122,25 +91122,25 @@ public:
     }
 
 private:
-    chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::TestListStructOctet::Type> mValue;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::TestListStructOctet::Type>>
+    chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::TestListStructOctet::Type> mValue;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::TestListStructOctet::Type>>
         mComplex;
 };
 
-class SubscribeAttributeTestClusterListStructOctetString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingListStructOctetString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterListStructOctetString()
+    SubscribeAttributeUnitTestingListStructOctetString()
         : SubscribeAttribute("list-struct-octet-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterListStructOctetString() {}
+    ~SubscribeAttributeUnitTestingListStructOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91158,7 +91158,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListStructOctetString response %@", [value description]);
+                NSLog(@"UnitTesting.ListStructOctetString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91169,27 +91169,27 @@ public:
 /*
  * Attribute LongOctetString
  */
-class ReadTestClusterLongOctetString : public ReadAttribute {
+class ReadUnitTestingLongOctetString : public ReadAttribute {
 public:
-    ReadTestClusterLongOctetString()
+    ReadUnitTestingLongOctetString()
         : ReadAttribute("long-octet-string")
     {
     }
 
-    ~ReadTestClusterLongOctetString() {}
+    ~ReadUnitTestingLongOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeLongOctetStringWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.LongOctetString response %@", [value description]);
+            NSLog(@"UnitTesting.LongOctetString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster LongOctetString read Error", error);
+                LogNSError("UnitTesting LongOctetString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91197,9 +91197,9 @@ public:
     }
 };
 
-class WriteTestClusterLongOctetString : public WriteAttribute {
+class WriteUnitTestingLongOctetString : public WriteAttribute {
 public:
-    WriteTestClusterLongOctetString()
+    WriteUnitTestingLongOctetString()
         : WriteAttribute("long-octet-string")
     {
         AddArgument("attr-name", "long-octet-string");
@@ -91207,13 +91207,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterLongOctetString() {}
+    ~WriteUnitTestingLongOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91226,7 +91226,7 @@ public:
                                                  params:params
                                              completion:^(NSError * _Nullable error) {
                                                  if (error != nil) {
-                                                     LogNSError("TestCluster LongOctetString write Error", error);
+                                                     LogNSError("UnitTesting LongOctetString write Error", error);
                                                  }
                                                  SetCommandExitStatus(error);
                                              }];
@@ -91237,20 +91237,20 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeTestClusterLongOctetString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingLongOctetString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterLongOctetString()
+    SubscribeAttributeUnitTestingLongOctetString()
         : SubscribeAttribute("long-octet-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterLongOctetString() {}
+    ~SubscribeAttributeUnitTestingLongOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91268,7 +91268,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.LongOctetString response %@", [value description]);
+                NSLog(@"UnitTesting.LongOctetString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91279,27 +91279,27 @@ public:
 /*
  * Attribute CharString
  */
-class ReadTestClusterCharString : public ReadAttribute {
+class ReadUnitTestingCharString : public ReadAttribute {
 public:
-    ReadTestClusterCharString()
+    ReadUnitTestingCharString()
         : ReadAttribute("char-string")
     {
     }
 
-    ~ReadTestClusterCharString() {}
+    ~ReadUnitTestingCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.CharString response %@", [value description]);
+            NSLog(@"UnitTesting.CharString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster CharString read Error", error);
+                LogNSError("UnitTesting CharString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91307,9 +91307,9 @@ public:
     }
 };
 
-class WriteTestClusterCharString : public WriteAttribute {
+class WriteUnitTestingCharString : public WriteAttribute {
 public:
-    WriteTestClusterCharString()
+    WriteUnitTestingCharString()
         : WriteAttribute("char-string")
     {
         AddArgument("attr-name", "char-string");
@@ -91317,13 +91317,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterCharString() {}
+    ~WriteUnitTestingCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91338,7 +91338,7 @@ public:
                                             params:params
                                         completion:^(NSError * _Nullable error) {
                                             if (error != nil) {
-                                                LogNSError("TestCluster CharString write Error", error);
+                                                LogNSError("UnitTesting CharString write Error", error);
                                             }
                                             SetCommandExitStatus(error);
                                         }];
@@ -91349,20 +91349,20 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeTestClusterCharString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingCharString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterCharString()
+    SubscribeAttributeUnitTestingCharString()
         : SubscribeAttribute("char-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterCharString() {}
+    ~SubscribeAttributeUnitTestingCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91380,7 +91380,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.CharString response %@", [value description]);
+                NSLog(@"UnitTesting.CharString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91391,27 +91391,27 @@ public:
 /*
  * Attribute LongCharString
  */
-class ReadTestClusterLongCharString : public ReadAttribute {
+class ReadUnitTestingLongCharString : public ReadAttribute {
 public:
-    ReadTestClusterLongCharString()
+    ReadUnitTestingLongCharString()
         : ReadAttribute("long-char-string")
     {
     }
 
-    ~ReadTestClusterLongCharString() {}
+    ~ReadUnitTestingLongCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000001F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeLongCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.LongCharString response %@", [value description]);
+            NSLog(@"UnitTesting.LongCharString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster LongCharString read Error", error);
+                LogNSError("UnitTesting LongCharString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91419,9 +91419,9 @@ public:
     }
 };
 
-class WriteTestClusterLongCharString : public WriteAttribute {
+class WriteUnitTestingLongCharString : public WriteAttribute {
 public:
-    WriteTestClusterLongCharString()
+    WriteUnitTestingLongCharString()
         : WriteAttribute("long-char-string")
     {
         AddArgument("attr-name", "long-char-string");
@@ -91429,13 +91429,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterLongCharString() {}
+    ~WriteUnitTestingLongCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000001F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91450,7 +91450,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster LongCharString write Error", error);
+                                                    LogNSError("UnitTesting LongCharString write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -91461,20 +91461,20 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeTestClusterLongCharString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingLongCharString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterLongCharString()
+    SubscribeAttributeUnitTestingLongCharString()
         : SubscribeAttribute("long-char-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterLongCharString() {}
+    ~SubscribeAttributeUnitTestingLongCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000001F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91492,7 +91492,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.LongCharString response %@", [value description]);
+                NSLog(@"UnitTesting.LongCharString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91503,27 +91503,27 @@ public:
 /*
  * Attribute EpochUs
  */
-class ReadTestClusterEpochUs : public ReadAttribute {
+class ReadUnitTestingEpochUs : public ReadAttribute {
 public:
-    ReadTestClusterEpochUs()
+    ReadUnitTestingEpochUs()
         : ReadAttribute("epoch-us")
     {
     }
 
-    ~ReadTestClusterEpochUs() {}
+    ~ReadUnitTestingEpochUs() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000020) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeEpochUsWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.EpochUs response %@", [value description]);
+            NSLog(@"UnitTesting.EpochUs response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster EpochUs read Error", error);
+                LogNSError("UnitTesting EpochUs read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91531,9 +91531,9 @@ public:
     }
 };
 
-class WriteTestClusterEpochUs : public WriteAttribute {
+class WriteUnitTestingEpochUs : public WriteAttribute {
 public:
-    WriteTestClusterEpochUs()
+    WriteUnitTestingEpochUs()
         : WriteAttribute("epoch-us")
     {
         AddArgument("attr-name", "epoch-us");
@@ -91541,13 +91541,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterEpochUs() {}
+    ~WriteUnitTestingEpochUs() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000020) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91560,7 +91560,7 @@ public:
                                          params:params
                                      completion:^(NSError * _Nullable error) {
                                          if (error != nil) {
-                                             LogNSError("TestCluster EpochUs write Error", error);
+                                             LogNSError("UnitTesting EpochUs write Error", error);
                                          }
                                          SetCommandExitStatus(error);
                                      }];
@@ -91571,20 +91571,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterEpochUs : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingEpochUs : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterEpochUs()
+    SubscribeAttributeUnitTestingEpochUs()
         : SubscribeAttribute("epoch-us")
     {
     }
 
-    ~SubscribeAttributeTestClusterEpochUs() {}
+    ~SubscribeAttributeUnitTestingEpochUs() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000020) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91602,7 +91602,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.EpochUs response %@", [value description]);
+                NSLog(@"UnitTesting.EpochUs response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91613,27 +91613,27 @@ public:
 /*
  * Attribute EpochS
  */
-class ReadTestClusterEpochS : public ReadAttribute {
+class ReadUnitTestingEpochS : public ReadAttribute {
 public:
-    ReadTestClusterEpochS()
+    ReadUnitTestingEpochS()
         : ReadAttribute("epoch-s")
     {
     }
 
-    ~ReadTestClusterEpochS() {}
+    ~ReadUnitTestingEpochS() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000021) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeEpochSWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.EpochS response %@", [value description]);
+            NSLog(@"UnitTesting.EpochS response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster EpochS read Error", error);
+                LogNSError("UnitTesting EpochS read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91641,9 +91641,9 @@ public:
     }
 };
 
-class WriteTestClusterEpochS : public WriteAttribute {
+class WriteUnitTestingEpochS : public WriteAttribute {
 public:
-    WriteTestClusterEpochS()
+    WriteUnitTestingEpochS()
         : WriteAttribute("epoch-s")
     {
         AddArgument("attr-name", "epoch-s");
@@ -91651,13 +91651,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterEpochS() {}
+    ~WriteUnitTestingEpochS() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000021) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91670,7 +91670,7 @@ public:
                                         params:params
                                     completion:^(NSError * _Nullable error) {
                                         if (error != nil) {
-                                            LogNSError("TestCluster EpochS write Error", error);
+                                            LogNSError("UnitTesting EpochS write Error", error);
                                         }
                                         SetCommandExitStatus(error);
                                     }];
@@ -91681,20 +91681,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterEpochS : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingEpochS : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterEpochS()
+    SubscribeAttributeUnitTestingEpochS()
         : SubscribeAttribute("epoch-s")
     {
     }
 
-    ~SubscribeAttributeTestClusterEpochS() {}
+    ~SubscribeAttributeUnitTestingEpochS() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000021) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91712,7 +91712,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.EpochS response %@", [value description]);
+                NSLog(@"UnitTesting.EpochS response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91723,27 +91723,27 @@ public:
 /*
  * Attribute VendorId
  */
-class ReadTestClusterVendorId : public ReadAttribute {
+class ReadUnitTestingVendorId : public ReadAttribute {
 public:
-    ReadTestClusterVendorId()
+    ReadUnitTestingVendorId()
         : ReadAttribute("vendor-id")
     {
     }
 
-    ~ReadTestClusterVendorId() {}
+    ~ReadUnitTestingVendorId() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000022) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeVendorIdWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.VendorId response %@", [value description]);
+            NSLog(@"UnitTesting.VendorId response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster VendorId read Error", error);
+                LogNSError("UnitTesting VendorId read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -91751,9 +91751,9 @@ public:
     }
 };
 
-class WriteTestClusterVendorId : public WriteAttribute {
+class WriteUnitTestingVendorId : public WriteAttribute {
 public:
-    WriteTestClusterVendorId()
+    WriteUnitTestingVendorId()
         : WriteAttribute("vendor-id")
     {
         AddArgument("attr-name", "vendor-id");
@@ -91761,13 +91761,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterVendorId() {}
+    ~WriteUnitTestingVendorId() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000022) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91780,7 +91780,7 @@ public:
                                           params:params
                                       completion:^(NSError * _Nullable error) {
                                           if (error != nil) {
-                                              LogNSError("TestCluster VendorId write Error", error);
+                                              LogNSError("UnitTesting VendorId write Error", error);
                                           }
                                           SetCommandExitStatus(error);
                                       }];
@@ -91791,20 +91791,20 @@ private:
     chip::VendorId mValue;
 };
 
-class SubscribeAttributeTestClusterVendorId : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingVendorId : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterVendorId()
+    SubscribeAttributeUnitTestingVendorId()
         : SubscribeAttribute("vendor-id")
     {
     }
 
-    ~SubscribeAttributeTestClusterVendorId() {}
+    ~SubscribeAttributeUnitTestingVendorId() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000022) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -91822,7 +91822,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.VendorId response %@", [value description]);
+                NSLog(@"UnitTesting.VendorId response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -91833,28 +91833,28 @@ public:
 /*
  * Attribute ListNullablesAndOptionalsStruct
  */
-class ReadTestClusterListNullablesAndOptionalsStruct : public ReadAttribute {
+class ReadUnitTestingListNullablesAndOptionalsStruct : public ReadAttribute {
 public:
-    ReadTestClusterListNullablesAndOptionalsStruct()
+    ReadUnitTestingListNullablesAndOptionalsStruct()
         : ReadAttribute("list-nullables-and-optionals-struct")
     {
     }
 
-    ~ReadTestClusterListNullablesAndOptionalsStruct() {}
+    ~ReadUnitTestingListNullablesAndOptionalsStruct() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000023) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster
             readAttributeListNullablesAndOptionalsStructWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListNullablesAndOptionalsStruct response %@", [value description]);
+                NSLog(@"UnitTesting.ListNullablesAndOptionalsStruct response %@", [value description]);
                 if (error != nil) {
-                    LogNSError("TestCluster ListNullablesAndOptionalsStruct read Error", error);
+                    LogNSError("UnitTesting ListNullablesAndOptionalsStruct read Error", error);
                 }
                 SetCommandExitStatus(error);
             }];
@@ -91862,9 +91862,9 @@ public:
     }
 };
 
-class WriteTestClusterListNullablesAndOptionalsStruct : public WriteAttribute {
+class WriteUnitTestingListNullablesAndOptionalsStruct : public WriteAttribute {
 public:
-    WriteTestClusterListNullablesAndOptionalsStruct()
+    WriteUnitTestingListNullablesAndOptionalsStruct()
         : WriteAttribute("list-nullables-and-optionals-struct")
         , mComplex(&mValue)
     {
@@ -91873,13 +91873,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterListNullablesAndOptionalsStruct() {}
+    ~WriteUnitTestingListNullablesAndOptionalsStruct() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000023) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -91890,8 +91890,8 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mValue) {
-                MTRTestClusterClusterNullablesAndOptionalsStruct * newElement_0;
-                newElement_0 = [MTRTestClusterClusterNullablesAndOptionalsStruct new];
+                MTRUnitTestingClusterNullablesAndOptionalsStruct * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterNullablesAndOptionalsStruct new];
                 if (entry_0.nullableInt.IsNull()) {
                     newElement_0.nullableInt = nil;
                 } else {
@@ -91941,7 +91941,7 @@ public:
                 if (entry_0.nullableStruct.IsNull()) {
                     newElement_0.nullableStruct = nil;
                 } else {
-                    newElement_0.nullableStruct = [MTRTestClusterClusterSimpleStruct new];
+                    newElement_0.nullableStruct = [MTRUnitTestingClusterSimpleStruct new];
                     newElement_0.nullableStruct.a = [NSNumber numberWithUnsignedChar:entry_0.nullableStruct.Value().a];
                     newElement_0.nullableStruct.b = [NSNumber numberWithBool:entry_0.nullableStruct.Value().b];
                     newElement_0.nullableStruct.c =
@@ -91956,7 +91956,7 @@ public:
                     newElement_0.nullableStruct.h = [NSNumber numberWithDouble:entry_0.nullableStruct.Value().h];
                 }
                 if (entry_0.optionalStruct.HasValue()) {
-                    newElement_0.optionalStruct = [MTRTestClusterClusterSimpleStruct new];
+                    newElement_0.optionalStruct = [MTRUnitTestingClusterSimpleStruct new];
                     newElement_0.optionalStruct.a = [NSNumber numberWithUnsignedChar:entry_0.optionalStruct.Value().a];
                     newElement_0.optionalStruct.b = [NSNumber numberWithBool:entry_0.optionalStruct.Value().b];
                     newElement_0.optionalStruct.c =
@@ -91976,7 +91976,7 @@ public:
                     if (entry_0.nullableOptionalStruct.Value().IsNull()) {
                         newElement_0.nullableOptionalStruct = nil;
                     } else {
-                        newElement_0.nullableOptionalStruct = [MTRTestClusterClusterSimpleStruct new];
+                        newElement_0.nullableOptionalStruct = [MTRUnitTestingClusterSimpleStruct new];
                         newElement_0.nullableOptionalStruct.a =
                             [NSNumber numberWithUnsignedChar:entry_0.nullableOptionalStruct.Value().Value().a];
                         newElement_0.nullableOptionalStruct.b =
@@ -92053,7 +92053,7 @@ public:
                                                              completion:^(NSError * _Nullable error) {
                                                                  if (error != nil) {
                                                                      LogNSError(
-                                                                         "TestCluster ListNullablesAndOptionalsStruct write Error",
+                                                                         "UnitTesting ListNullablesAndOptionalsStruct write Error",
                                                                          error);
                                                                  }
                                                                  SetCommandExitStatus(error);
@@ -92062,26 +92062,26 @@ public:
     }
 
 private:
-    chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::Type> mValue;
+    chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::Type> mValue;
     TypedComplexArgument<
-        chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::NullablesAndOptionalsStruct::Type>>
+        chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::NullablesAndOptionalsStruct::Type>>
         mComplex;
 };
 
-class SubscribeAttributeTestClusterListNullablesAndOptionalsStruct : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingListNullablesAndOptionalsStruct : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterListNullablesAndOptionalsStruct()
+    SubscribeAttributeUnitTestingListNullablesAndOptionalsStruct()
         : SubscribeAttribute("list-nullables-and-optionals-struct")
     {
     }
 
-    ~SubscribeAttributeTestClusterListNullablesAndOptionalsStruct() {}
+    ~SubscribeAttributeUnitTestingListNullablesAndOptionalsStruct() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000023) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92099,7 +92099,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListNullablesAndOptionalsStruct response %@", [value description]);
+                NSLog(@"UnitTesting.ListNullablesAndOptionalsStruct response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92110,27 +92110,27 @@ public:
 /*
  * Attribute EnumAttr
  */
-class ReadTestClusterEnumAttr : public ReadAttribute {
+class ReadUnitTestingEnumAttr : public ReadAttribute {
 public:
-    ReadTestClusterEnumAttr()
+    ReadUnitTestingEnumAttr()
         : ReadAttribute("enum-attr")
     {
     }
 
-    ~ReadTestClusterEnumAttr() {}
+    ~ReadUnitTestingEnumAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000024) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeEnumAttrWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.EnumAttr response %@", [value description]);
+            NSLog(@"UnitTesting.EnumAttr response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster EnumAttr read Error", error);
+                LogNSError("UnitTesting EnumAttr read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92138,9 +92138,9 @@ public:
     }
 };
 
-class WriteTestClusterEnumAttr : public WriteAttribute {
+class WriteUnitTestingEnumAttr : public WriteAttribute {
 public:
-    WriteTestClusterEnumAttr()
+    WriteUnitTestingEnumAttr()
         : WriteAttribute("enum-attr")
     {
         AddArgument("attr-name", "enum-attr");
@@ -92148,13 +92148,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterEnumAttr() {}
+    ~WriteUnitTestingEnumAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92167,7 +92167,7 @@ public:
                                           params:params
                                       completion:^(NSError * _Nullable error) {
                                           if (error != nil) {
-                                              LogNSError("TestCluster EnumAttr write Error", error);
+                                              LogNSError("UnitTesting EnumAttr write Error", error);
                                           }
                                           SetCommandExitStatus(error);
                                       }];
@@ -92178,20 +92178,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterEnumAttr : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingEnumAttr : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterEnumAttr()
+    SubscribeAttributeUnitTestingEnumAttr()
         : SubscribeAttribute("enum-attr")
     {
     }
 
-    ~SubscribeAttributeTestClusterEnumAttr() {}
+    ~SubscribeAttributeUnitTestingEnumAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92209,7 +92209,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.EnumAttr response %@", [value description]);
+                NSLog(@"UnitTesting.EnumAttr response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92220,28 +92220,28 @@ public:
 /*
  * Attribute StructAttr
  */
-class ReadTestClusterStructAttr : public ReadAttribute {
+class ReadUnitTestingStructAttr : public ReadAttribute {
 public:
-    ReadTestClusterStructAttr()
+    ReadUnitTestingStructAttr()
         : ReadAttribute("struct-attr")
     {
     }
 
-    ~ReadTestClusterStructAttr() {}
+    ~ReadUnitTestingStructAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000025) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeStructAttrWithCompletion:^(
-            MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.StructAttr response %@", [value description]);
+            MTRUnitTestingClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"UnitTesting.StructAttr response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster StructAttr read Error", error);
+                LogNSError("UnitTesting StructAttr read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92249,9 +92249,9 @@ public:
     }
 };
 
-class WriteTestClusterStructAttr : public WriteAttribute {
+class WriteUnitTestingStructAttr : public WriteAttribute {
 public:
-    WriteTestClusterStructAttr()
+    WriteUnitTestingStructAttr()
         : WriteAttribute("struct-attr")
         , mComplex(&mValue)
     {
@@ -92260,21 +92260,21 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterStructAttr() {}
+    ~WriteUnitTestingStructAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
         params.timedWriteTimeout
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        MTRTestClusterClusterSimpleStruct * _Nonnull value;
-        value = [MTRTestClusterClusterSimpleStruct new];
+        MTRUnitTestingClusterSimpleStruct * _Nonnull value;
+        value = [MTRUnitTestingClusterSimpleStruct new];
         value.a = [NSNumber numberWithUnsignedChar:mValue.a];
         value.b = [NSNumber numberWithBool:mValue.b];
         value.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mValue.c)];
@@ -92288,7 +92288,7 @@ public:
                                             params:params
                                         completion:^(NSError * _Nullable error) {
                                             if (error != nil) {
-                                                LogNSError("TestCluster StructAttr write Error", error);
+                                                LogNSError("UnitTesting StructAttr write Error", error);
                                             }
                                             SetCommandExitStatus(error);
                                         }];
@@ -92296,24 +92296,24 @@ public:
     }
 
 private:
-    chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type mValue;
-    TypedComplexArgument<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type> mComplex;
+    chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type mValue;
+    TypedComplexArgument<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type> mComplex;
 };
 
-class SubscribeAttributeTestClusterStructAttr : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingStructAttr : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterStructAttr()
+    SubscribeAttributeUnitTestingStructAttr()
         : SubscribeAttribute("struct-attr")
     {
     }
 
-    ~SubscribeAttributeTestClusterStructAttr() {}
+    ~SubscribeAttributeUnitTestingStructAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92330,8 +92330,8 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.StructAttr response %@", [value description]);
+            reportHandler:^(MTRUnitTestingClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"UnitTesting.StructAttr response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92342,27 +92342,27 @@ public:
 /*
  * Attribute RangeRestrictedInt8u
  */
-class ReadTestClusterRangeRestrictedInt8u : public ReadAttribute {
+class ReadUnitTestingRangeRestrictedInt8u : public ReadAttribute {
 public:
-    ReadTestClusterRangeRestrictedInt8u()
+    ReadUnitTestingRangeRestrictedInt8u()
         : ReadAttribute("range-restricted-int8u")
     {
     }
 
-    ~ReadTestClusterRangeRestrictedInt8u() {}
+    ~ReadUnitTestingRangeRestrictedInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000026) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeRangeRestrictedInt8uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.RangeRestrictedInt8u response %@", [value description]);
+            NSLog(@"UnitTesting.RangeRestrictedInt8u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster RangeRestrictedInt8u read Error", error);
+                LogNSError("UnitTesting RangeRestrictedInt8u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92370,9 +92370,9 @@ public:
     }
 };
 
-class WriteTestClusterRangeRestrictedInt8u : public WriteAttribute {
+class WriteUnitTestingRangeRestrictedInt8u : public WriteAttribute {
 public:
-    WriteTestClusterRangeRestrictedInt8u()
+    WriteUnitTestingRangeRestrictedInt8u()
         : WriteAttribute("range-restricted-int8u")
     {
         AddArgument("attr-name", "range-restricted-int8u");
@@ -92380,13 +92380,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterRangeRestrictedInt8u() {}
+    ~WriteUnitTestingRangeRestrictedInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92399,7 +92399,7 @@ public:
                                                       params:params
                                                   completion:^(NSError * _Nullable error) {
                                                       if (error != nil) {
-                                                          LogNSError("TestCluster RangeRestrictedInt8u write Error", error);
+                                                          LogNSError("UnitTesting RangeRestrictedInt8u write Error", error);
                                                       }
                                                       SetCommandExitStatus(error);
                                                   }];
@@ -92410,20 +92410,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterRangeRestrictedInt8u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingRangeRestrictedInt8u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterRangeRestrictedInt8u()
+    SubscribeAttributeUnitTestingRangeRestrictedInt8u()
         : SubscribeAttribute("range-restricted-int8u")
     {
     }
 
-    ~SubscribeAttributeTestClusterRangeRestrictedInt8u() {}
+    ~SubscribeAttributeUnitTestingRangeRestrictedInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92441,7 +92441,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.RangeRestrictedInt8u response %@", [value description]);
+                NSLog(@"UnitTesting.RangeRestrictedInt8u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92452,27 +92452,27 @@ public:
 /*
  * Attribute RangeRestrictedInt8s
  */
-class ReadTestClusterRangeRestrictedInt8s : public ReadAttribute {
+class ReadUnitTestingRangeRestrictedInt8s : public ReadAttribute {
 public:
-    ReadTestClusterRangeRestrictedInt8s()
+    ReadUnitTestingRangeRestrictedInt8s()
         : ReadAttribute("range-restricted-int8s")
     {
     }
 
-    ~ReadTestClusterRangeRestrictedInt8s() {}
+    ~ReadUnitTestingRangeRestrictedInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000027) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeRangeRestrictedInt8sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.RangeRestrictedInt8s response %@", [value description]);
+            NSLog(@"UnitTesting.RangeRestrictedInt8s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster RangeRestrictedInt8s read Error", error);
+                LogNSError("UnitTesting RangeRestrictedInt8s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92480,9 +92480,9 @@ public:
     }
 };
 
-class WriteTestClusterRangeRestrictedInt8s : public WriteAttribute {
+class WriteUnitTestingRangeRestrictedInt8s : public WriteAttribute {
 public:
-    WriteTestClusterRangeRestrictedInt8s()
+    WriteUnitTestingRangeRestrictedInt8s()
         : WriteAttribute("range-restricted-int8s")
     {
         AddArgument("attr-name", "range-restricted-int8s");
@@ -92490,13 +92490,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterRangeRestrictedInt8s() {}
+    ~WriteUnitTestingRangeRestrictedInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92509,7 +92509,7 @@ public:
                                                       params:params
                                                   completion:^(NSError * _Nullable error) {
                                                       if (error != nil) {
-                                                          LogNSError("TestCluster RangeRestrictedInt8s write Error", error);
+                                                          LogNSError("UnitTesting RangeRestrictedInt8s write Error", error);
                                                       }
                                                       SetCommandExitStatus(error);
                                                   }];
@@ -92520,20 +92520,20 @@ private:
     int8_t mValue;
 };
 
-class SubscribeAttributeTestClusterRangeRestrictedInt8s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingRangeRestrictedInt8s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterRangeRestrictedInt8s()
+    SubscribeAttributeUnitTestingRangeRestrictedInt8s()
         : SubscribeAttribute("range-restricted-int8s")
     {
     }
 
-    ~SubscribeAttributeTestClusterRangeRestrictedInt8s() {}
+    ~SubscribeAttributeUnitTestingRangeRestrictedInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92551,7 +92551,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.RangeRestrictedInt8s response %@", [value description]);
+                NSLog(@"UnitTesting.RangeRestrictedInt8s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92562,27 +92562,27 @@ public:
 /*
  * Attribute RangeRestrictedInt16u
  */
-class ReadTestClusterRangeRestrictedInt16u : public ReadAttribute {
+class ReadUnitTestingRangeRestrictedInt16u : public ReadAttribute {
 public:
-    ReadTestClusterRangeRestrictedInt16u()
+    ReadUnitTestingRangeRestrictedInt16u()
         : ReadAttribute("range-restricted-int16u")
     {
     }
 
-    ~ReadTestClusterRangeRestrictedInt16u() {}
+    ~ReadUnitTestingRangeRestrictedInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000028) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeRangeRestrictedInt16uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.RangeRestrictedInt16u response %@", [value description]);
+            NSLog(@"UnitTesting.RangeRestrictedInt16u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster RangeRestrictedInt16u read Error", error);
+                LogNSError("UnitTesting RangeRestrictedInt16u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92590,9 +92590,9 @@ public:
     }
 };
 
-class WriteTestClusterRangeRestrictedInt16u : public WriteAttribute {
+class WriteUnitTestingRangeRestrictedInt16u : public WriteAttribute {
 public:
-    WriteTestClusterRangeRestrictedInt16u()
+    WriteUnitTestingRangeRestrictedInt16u()
         : WriteAttribute("range-restricted-int16u")
     {
         AddArgument("attr-name", "range-restricted-int16u");
@@ -92600,13 +92600,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterRangeRestrictedInt16u() {}
+    ~WriteUnitTestingRangeRestrictedInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92619,7 +92619,7 @@ public:
                                                        params:params
                                                    completion:^(NSError * _Nullable error) {
                                                        if (error != nil) {
-                                                           LogNSError("TestCluster RangeRestrictedInt16u write Error", error);
+                                                           LogNSError("UnitTesting RangeRestrictedInt16u write Error", error);
                                                        }
                                                        SetCommandExitStatus(error);
                                                    }];
@@ -92630,20 +92630,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterRangeRestrictedInt16u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingRangeRestrictedInt16u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterRangeRestrictedInt16u()
+    SubscribeAttributeUnitTestingRangeRestrictedInt16u()
         : SubscribeAttribute("range-restricted-int16u")
     {
     }
 
-    ~SubscribeAttributeTestClusterRangeRestrictedInt16u() {}
+    ~SubscribeAttributeUnitTestingRangeRestrictedInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92661,7 +92661,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.RangeRestrictedInt16u response %@", [value description]);
+                NSLog(@"UnitTesting.RangeRestrictedInt16u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92672,27 +92672,27 @@ public:
 /*
  * Attribute RangeRestrictedInt16s
  */
-class ReadTestClusterRangeRestrictedInt16s : public ReadAttribute {
+class ReadUnitTestingRangeRestrictedInt16s : public ReadAttribute {
 public:
-    ReadTestClusterRangeRestrictedInt16s()
+    ReadUnitTestingRangeRestrictedInt16s()
         : ReadAttribute("range-restricted-int16s")
     {
     }
 
-    ~ReadTestClusterRangeRestrictedInt16s() {}
+    ~ReadUnitTestingRangeRestrictedInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000029) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeRangeRestrictedInt16sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.RangeRestrictedInt16s response %@", [value description]);
+            NSLog(@"UnitTesting.RangeRestrictedInt16s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster RangeRestrictedInt16s read Error", error);
+                LogNSError("UnitTesting RangeRestrictedInt16s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92700,9 +92700,9 @@ public:
     }
 };
 
-class WriteTestClusterRangeRestrictedInt16s : public WriteAttribute {
+class WriteUnitTestingRangeRestrictedInt16s : public WriteAttribute {
 public:
-    WriteTestClusterRangeRestrictedInt16s()
+    WriteUnitTestingRangeRestrictedInt16s()
         : WriteAttribute("range-restricted-int16s")
     {
         AddArgument("attr-name", "range-restricted-int16s");
@@ -92710,13 +92710,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterRangeRestrictedInt16s() {}
+    ~WriteUnitTestingRangeRestrictedInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92729,7 +92729,7 @@ public:
                                                        params:params
                                                    completion:^(NSError * _Nullable error) {
                                                        if (error != nil) {
-                                                           LogNSError("TestCluster RangeRestrictedInt16s write Error", error);
+                                                           LogNSError("UnitTesting RangeRestrictedInt16s write Error", error);
                                                        }
                                                        SetCommandExitStatus(error);
                                                    }];
@@ -92740,20 +92740,20 @@ private:
     int16_t mValue;
 };
 
-class SubscribeAttributeTestClusterRangeRestrictedInt16s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingRangeRestrictedInt16s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterRangeRestrictedInt16s()
+    SubscribeAttributeUnitTestingRangeRestrictedInt16s()
         : SubscribeAttribute("range-restricted-int16s")
     {
     }
 
-    ~SubscribeAttributeTestClusterRangeRestrictedInt16s() {}
+    ~SubscribeAttributeUnitTestingRangeRestrictedInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92771,7 +92771,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.RangeRestrictedInt16s response %@", [value description]);
+                NSLog(@"UnitTesting.RangeRestrictedInt16s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92782,27 +92782,27 @@ public:
 /*
  * Attribute ListLongOctetString
  */
-class ReadTestClusterListLongOctetString : public ReadAttribute {
+class ReadUnitTestingListLongOctetString : public ReadAttribute {
 public:
-    ReadTestClusterListLongOctetString()
+    ReadUnitTestingListLongOctetString()
         : ReadAttribute("list-long-octet-string")
     {
     }
 
-    ~ReadTestClusterListLongOctetString() {}
+    ~ReadUnitTestingListLongOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000002A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeListLongOctetStringWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.ListLongOctetString response %@", [value description]);
+            NSLog(@"UnitTesting.ListLongOctetString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster ListLongOctetString read Error", error);
+                LogNSError("UnitTesting ListLongOctetString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -92810,9 +92810,9 @@ public:
     }
 };
 
-class WriteTestClusterListLongOctetString : public WriteAttribute {
+class WriteUnitTestingListLongOctetString : public WriteAttribute {
 public:
-    WriteTestClusterListLongOctetString()
+    WriteUnitTestingListLongOctetString()
         : WriteAttribute("list-long-octet-string")
         , mComplex(&mValue)
     {
@@ -92821,13 +92821,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterListLongOctetString() {}
+    ~WriteUnitTestingListLongOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000002A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92849,7 +92849,7 @@ public:
                                                      params:params
                                                  completion:^(NSError * _Nullable error) {
                                                      if (error != nil) {
-                                                         LogNSError("TestCluster ListLongOctetString write Error", error);
+                                                         LogNSError("UnitTesting ListLongOctetString write Error", error);
                                                      }
                                                      SetCommandExitStatus(error);
                                                  }];
@@ -92861,20 +92861,20 @@ private:
     TypedComplexArgument<chip::app::DataModel::List<const chip::ByteSpan>> mComplex;
 };
 
-class SubscribeAttributeTestClusterListLongOctetString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingListLongOctetString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterListLongOctetString()
+    SubscribeAttributeUnitTestingListLongOctetString()
         : SubscribeAttribute("list-long-octet-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterListLongOctetString() {}
+    ~SubscribeAttributeUnitTestingListLongOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000002A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -92892,7 +92892,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListLongOctetString response %@", [value description]);
+                NSLog(@"UnitTesting.ListLongOctetString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -92903,21 +92903,21 @@ public:
 /*
  * Attribute ListFabricScoped
  */
-class ReadTestClusterListFabricScoped : public ReadAttribute {
+class ReadUnitTestingListFabricScoped : public ReadAttribute {
 public:
-    ReadTestClusterListFabricScoped()
+    ReadUnitTestingListFabricScoped()
         : ReadAttribute("list-fabric-scoped")
     {
     }
 
-    ~ReadTestClusterListFabricScoped() {}
+    ~ReadUnitTestingListFabricScoped() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000002B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRReadParams * params = [[MTRReadParams alloc] init];
@@ -92926,9 +92926,9 @@ public:
         }
         [cluster readAttributeListFabricScopedWithParams:params
                                               completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                                  NSLog(@"TestCluster.ListFabricScoped response %@", [value description]);
+                                                  NSLog(@"UnitTesting.ListFabricScoped response %@", [value description]);
                                                   if (error != nil) {
-                                                      LogNSError("TestCluster ListFabricScoped read Error", error);
+                                                      LogNSError("UnitTesting ListFabricScoped read Error", error);
                                                   }
                                                   SetCommandExitStatus(error);
                                               }];
@@ -92936,9 +92936,9 @@ public:
     }
 };
 
-class WriteTestClusterListFabricScoped : public WriteAttribute {
+class WriteUnitTestingListFabricScoped : public WriteAttribute {
 public:
-    WriteTestClusterListFabricScoped()
+    WriteUnitTestingListFabricScoped()
         : WriteAttribute("list-fabric-scoped")
         , mComplex(&mValue)
     {
@@ -92947,13 +92947,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterListFabricScoped() {}
+    ~WriteUnitTestingListFabricScoped() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000002B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -92964,8 +92964,8 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mValue) {
-                MTRTestClusterClusterTestFabricScoped * newElement_0;
-                newElement_0 = [MTRTestClusterClusterTestFabricScoped new];
+                MTRUnitTestingClusterTestFabricScoped * newElement_0;
+                newElement_0 = [MTRUnitTestingClusterTestFabricScoped new];
                 newElement_0.fabricSensitiveInt8u = [NSNumber numberWithUnsignedChar:entry_0.fabricSensitiveInt8u];
                 if (entry_0.optionalFabricSensitiveInt8u.HasValue()) {
                     newElement_0.optionalFabricSensitiveInt8u =
@@ -92992,7 +92992,7 @@ public:
                 newElement_0.fabricSensitiveCharString = [[NSString alloc] initWithBytes:entry_0.fabricSensitiveCharString.data()
                                                                                   length:entry_0.fabricSensitiveCharString.size()
                                                                                 encoding:NSUTF8StringEncoding];
-                newElement_0.fabricSensitiveStruct = [MTRTestClusterClusterSimpleStruct new];
+                newElement_0.fabricSensitiveStruct = [MTRUnitTestingClusterSimpleStruct new];
                 newElement_0.fabricSensitiveStruct.a = [NSNumber numberWithUnsignedChar:entry_0.fabricSensitiveStruct.a];
                 newElement_0.fabricSensitiveStruct.b = [NSNumber numberWithBool:entry_0.fabricSensitiveStruct.b];
                 newElement_0.fabricSensitiveStruct.c =
@@ -93024,7 +93024,7 @@ public:
                                                   params:params
                                               completion:^(NSError * _Nullable error) {
                                                   if (error != nil) {
-                                                      LogNSError("TestCluster ListFabricScoped write Error", error);
+                                                      LogNSError("UnitTesting ListFabricScoped write Error", error);
                                                   }
                                                   SetCommandExitStatus(error);
                                               }];
@@ -93032,25 +93032,25 @@ public:
     }
 
 private:
-    chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::TestFabricScoped::Type> mValue;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::TestCluster::Structs::TestFabricScoped::Type>>
+    chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::TestFabricScoped::Type> mValue;
+    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::UnitTesting::Structs::TestFabricScoped::Type>>
         mComplex;
 };
 
-class SubscribeAttributeTestClusterListFabricScoped : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingListFabricScoped : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterListFabricScoped()
+    SubscribeAttributeUnitTestingListFabricScoped()
         : SubscribeAttribute("list-fabric-scoped")
     {
     }
 
-    ~SubscribeAttributeTestClusterListFabricScoped() {}
+    ~SubscribeAttributeUnitTestingListFabricScoped() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000002B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93068,7 +93068,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ListFabricScoped response %@", [value description]);
+                NSLog(@"UnitTesting.ListFabricScoped response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93079,27 +93079,27 @@ public:
 /*
  * Attribute TimedWriteBoolean
  */
-class ReadTestClusterTimedWriteBoolean : public ReadAttribute {
+class ReadUnitTestingTimedWriteBoolean : public ReadAttribute {
 public:
-    ReadTestClusterTimedWriteBoolean()
+    ReadUnitTestingTimedWriteBoolean()
         : ReadAttribute("timed-write-boolean")
     {
     }
 
-    ~ReadTestClusterTimedWriteBoolean() {}
+    ~ReadUnitTestingTimedWriteBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000030) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeTimedWriteBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.TimedWriteBoolean response %@", [value description]);
+            NSLog(@"UnitTesting.TimedWriteBoolean response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster TimedWriteBoolean read Error", error);
+                LogNSError("UnitTesting TimedWriteBoolean read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93107,9 +93107,9 @@ public:
     }
 };
 
-class WriteTestClusterTimedWriteBoolean : public WriteAttribute {
+class WriteUnitTestingTimedWriteBoolean : public WriteAttribute {
 public:
-    WriteTestClusterTimedWriteBoolean()
+    WriteUnitTestingTimedWriteBoolean()
         : WriteAttribute("timed-write-boolean")
     {
         AddArgument("attr-name", "timed-write-boolean");
@@ -93117,13 +93117,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterTimedWriteBoolean() {}
+    ~WriteUnitTestingTimedWriteBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000030) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93136,7 +93136,7 @@ public:
                                                    params:params
                                                completion:^(NSError * _Nullable error) {
                                                    if (error != nil) {
-                                                       LogNSError("TestCluster TimedWriteBoolean write Error", error);
+                                                       LogNSError("UnitTesting TimedWriteBoolean write Error", error);
                                                    }
                                                    SetCommandExitStatus(error);
                                                }];
@@ -93147,20 +93147,20 @@ private:
     bool mValue;
 };
 
-class SubscribeAttributeTestClusterTimedWriteBoolean : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingTimedWriteBoolean : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterTimedWriteBoolean()
+    SubscribeAttributeUnitTestingTimedWriteBoolean()
         : SubscribeAttribute("timed-write-boolean")
     {
     }
 
-    ~SubscribeAttributeTestClusterTimedWriteBoolean() {}
+    ~SubscribeAttributeUnitTestingTimedWriteBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000030) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93178,7 +93178,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.TimedWriteBoolean response %@", [value description]);
+                NSLog(@"UnitTesting.TimedWriteBoolean response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93189,27 +93189,27 @@ public:
 /*
  * Attribute GeneralErrorBoolean
  */
-class ReadTestClusterGeneralErrorBoolean : public ReadAttribute {
+class ReadUnitTestingGeneralErrorBoolean : public ReadAttribute {
 public:
-    ReadTestClusterGeneralErrorBoolean()
+    ReadUnitTestingGeneralErrorBoolean()
         : ReadAttribute("general-error-boolean")
     {
     }
 
-    ~ReadTestClusterGeneralErrorBoolean() {}
+    ~ReadUnitTestingGeneralErrorBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000031) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeGeneralErrorBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.GeneralErrorBoolean response %@", [value description]);
+            NSLog(@"UnitTesting.GeneralErrorBoolean response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster GeneralErrorBoolean read Error", error);
+                LogNSError("UnitTesting GeneralErrorBoolean read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93217,9 +93217,9 @@ public:
     }
 };
 
-class WriteTestClusterGeneralErrorBoolean : public WriteAttribute {
+class WriteUnitTestingGeneralErrorBoolean : public WriteAttribute {
 public:
-    WriteTestClusterGeneralErrorBoolean()
+    WriteUnitTestingGeneralErrorBoolean()
         : WriteAttribute("general-error-boolean")
     {
         AddArgument("attr-name", "general-error-boolean");
@@ -93227,13 +93227,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterGeneralErrorBoolean() {}
+    ~WriteUnitTestingGeneralErrorBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000031) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93246,7 +93246,7 @@ public:
                                                      params:params
                                                  completion:^(NSError * _Nullable error) {
                                                      if (error != nil) {
-                                                         LogNSError("TestCluster GeneralErrorBoolean write Error", error);
+                                                         LogNSError("UnitTesting GeneralErrorBoolean write Error", error);
                                                      }
                                                      SetCommandExitStatus(error);
                                                  }];
@@ -93257,20 +93257,20 @@ private:
     bool mValue;
 };
 
-class SubscribeAttributeTestClusterGeneralErrorBoolean : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingGeneralErrorBoolean : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterGeneralErrorBoolean()
+    SubscribeAttributeUnitTestingGeneralErrorBoolean()
         : SubscribeAttribute("general-error-boolean")
     {
     }
 
-    ~SubscribeAttributeTestClusterGeneralErrorBoolean() {}
+    ~SubscribeAttributeUnitTestingGeneralErrorBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000031) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93288,7 +93288,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.GeneralErrorBoolean response %@", [value description]);
+                NSLog(@"UnitTesting.GeneralErrorBoolean response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93299,27 +93299,27 @@ public:
 /*
  * Attribute ClusterErrorBoolean
  */
-class ReadTestClusterClusterErrorBoolean : public ReadAttribute {
+class ReadUnitTestingClusterErrorBoolean : public ReadAttribute {
 public:
-    ReadTestClusterClusterErrorBoolean()
+    ReadUnitTestingClusterErrorBoolean()
         : ReadAttribute("cluster-error-boolean")
     {
     }
 
-    ~ReadTestClusterClusterErrorBoolean() {}
+    ~ReadUnitTestingClusterErrorBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00000032) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeClusterErrorBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.ClusterErrorBoolean response %@", [value description]);
+            NSLog(@"UnitTesting.ClusterErrorBoolean response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster ClusterErrorBoolean read Error", error);
+                LogNSError("UnitTesting ClusterErrorBoolean read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93327,9 +93327,9 @@ public:
     }
 };
 
-class WriteTestClusterClusterErrorBoolean : public WriteAttribute {
+class WriteUnitTestingClusterErrorBoolean : public WriteAttribute {
 public:
-    WriteTestClusterClusterErrorBoolean()
+    WriteUnitTestingClusterErrorBoolean()
         : WriteAttribute("cluster-error-boolean")
     {
         AddArgument("attr-name", "cluster-error-boolean");
@@ -93337,13 +93337,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterClusterErrorBoolean() {}
+    ~WriteUnitTestingClusterErrorBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00000032) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93356,7 +93356,7 @@ public:
                                                      params:params
                                                  completion:^(NSError * _Nullable error) {
                                                      if (error != nil) {
-                                                         LogNSError("TestCluster ClusterErrorBoolean write Error", error);
+                                                         LogNSError("UnitTesting ClusterErrorBoolean write Error", error);
                                                      }
                                                      SetCommandExitStatus(error);
                                                  }];
@@ -93367,20 +93367,20 @@ private:
     bool mValue;
 };
 
-class SubscribeAttributeTestClusterClusterErrorBoolean : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingClusterErrorBoolean : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterClusterErrorBoolean()
+    SubscribeAttributeUnitTestingClusterErrorBoolean()
         : SubscribeAttribute("cluster-error-boolean")
     {
     }
 
-    ~SubscribeAttributeTestClusterClusterErrorBoolean() {}
+    ~SubscribeAttributeUnitTestingClusterErrorBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00000032) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93398,7 +93398,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ClusterErrorBoolean response %@", [value description]);
+                NSLog(@"UnitTesting.ClusterErrorBoolean response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93409,27 +93409,27 @@ public:
 /*
  * Attribute Unsupported
  */
-class ReadTestClusterUnsupported : public ReadAttribute {
+class ReadUnitTestingUnsupported : public ReadAttribute {
 public:
-    ReadTestClusterUnsupported()
+    ReadUnitTestingUnsupported()
         : ReadAttribute("unsupported")
     {
     }
 
-    ~ReadTestClusterUnsupported() {}
+    ~ReadUnitTestingUnsupported() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x000000FF) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeUnsupportedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.Unsupported response %@", [value description]);
+            NSLog(@"UnitTesting.Unsupported response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster Unsupported read Error", error);
+                LogNSError("UnitTesting Unsupported read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93437,9 +93437,9 @@ public:
     }
 };
 
-class WriteTestClusterUnsupported : public WriteAttribute {
+class WriteUnitTestingUnsupported : public WriteAttribute {
 public:
-    WriteTestClusterUnsupported()
+    WriteUnitTestingUnsupported()
         : WriteAttribute("unsupported")
     {
         AddArgument("attr-name", "unsupported");
@@ -93447,13 +93447,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterUnsupported() {}
+    ~WriteUnitTestingUnsupported() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x000000FF) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93466,7 +93466,7 @@ public:
                                              params:params
                                          completion:^(NSError * _Nullable error) {
                                              if (error != nil) {
-                                                 LogNSError("TestCluster Unsupported write Error", error);
+                                                 LogNSError("UnitTesting Unsupported write Error", error);
                                              }
                                              SetCommandExitStatus(error);
                                          }];
@@ -93477,20 +93477,20 @@ private:
     bool mValue;
 };
 
-class SubscribeAttributeTestClusterUnsupported : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingUnsupported : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterUnsupported()
+    SubscribeAttributeUnitTestingUnsupported()
         : SubscribeAttribute("unsupported")
     {
     }
 
-    ~SubscribeAttributeTestClusterUnsupported() {}
+    ~SubscribeAttributeUnitTestingUnsupported() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x000000FF) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93508,7 +93508,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.Unsupported response %@", [value description]);
+                NSLog(@"UnitTesting.Unsupported response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93519,27 +93519,27 @@ public:
 /*
  * Attribute NullableBoolean
  */
-class ReadTestClusterNullableBoolean : public ReadAttribute {
+class ReadUnitTestingNullableBoolean : public ReadAttribute {
 public:
-    ReadTestClusterNullableBoolean()
+    ReadUnitTestingNullableBoolean()
         : ReadAttribute("nullable-boolean")
     {
     }
 
-    ~ReadTestClusterNullableBoolean() {}
+    ~ReadUnitTestingNullableBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004000) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableBooleanWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableBoolean response %@", [value description]);
+            NSLog(@"UnitTesting.NullableBoolean response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableBoolean read Error", error);
+                LogNSError("UnitTesting NullableBoolean read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93547,9 +93547,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableBoolean : public WriteAttribute {
+class WriteUnitTestingNullableBoolean : public WriteAttribute {
 public:
-    WriteTestClusterNullableBoolean()
+    WriteUnitTestingNullableBoolean()
         : WriteAttribute("nullable-boolean")
     {
         AddArgument("attr-name", "nullable-boolean");
@@ -93557,13 +93557,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableBoolean() {}
+    ~WriteUnitTestingNullableBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93576,7 +93576,7 @@ public:
                                                  params:params
                                              completion:^(NSError * _Nullable error) {
                                                  if (error != nil) {
-                                                     LogNSError("TestCluster NullableBoolean write Error", error);
+                                                     LogNSError("UnitTesting NullableBoolean write Error", error);
                                                  }
                                                  SetCommandExitStatus(error);
                                              }];
@@ -93587,20 +93587,20 @@ private:
     bool mValue;
 };
 
-class SubscribeAttributeTestClusterNullableBoolean : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableBoolean : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableBoolean()
+    SubscribeAttributeUnitTestingNullableBoolean()
         : SubscribeAttribute("nullable-boolean")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableBoolean() {}
+    ~SubscribeAttributeUnitTestingNullableBoolean() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004000) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93618,7 +93618,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableBoolean response %@", [value description]);
+                NSLog(@"UnitTesting.NullableBoolean response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93629,27 +93629,27 @@ public:
 /*
  * Attribute NullableBitmap8
  */
-class ReadTestClusterNullableBitmap8 : public ReadAttribute {
+class ReadUnitTestingNullableBitmap8 : public ReadAttribute {
 public:
-    ReadTestClusterNullableBitmap8()
+    ReadUnitTestingNullableBitmap8()
         : ReadAttribute("nullable-bitmap8")
     {
     }
 
-    ~ReadTestClusterNullableBitmap8() {}
+    ~ReadUnitTestingNullableBitmap8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableBitmap8WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableBitmap8 response %@", [value description]);
+            NSLog(@"UnitTesting.NullableBitmap8 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableBitmap8 read Error", error);
+                LogNSError("UnitTesting NullableBitmap8 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93657,9 +93657,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableBitmap8 : public WriteAttribute {
+class WriteUnitTestingNullableBitmap8 : public WriteAttribute {
 public:
-    WriteTestClusterNullableBitmap8()
+    WriteUnitTestingNullableBitmap8()
         : WriteAttribute("nullable-bitmap8")
     {
         AddArgument("attr-name", "nullable-bitmap8");
@@ -93667,13 +93667,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableBitmap8() {}
+    ~WriteUnitTestingNullableBitmap8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93686,7 +93686,7 @@ public:
                                                  params:params
                                              completion:^(NSError * _Nullable error) {
                                                  if (error != nil) {
-                                                     LogNSError("TestCluster NullableBitmap8 write Error", error);
+                                                     LogNSError("UnitTesting NullableBitmap8 write Error", error);
                                                  }
                                                  SetCommandExitStatus(error);
                                              }];
@@ -93697,20 +93697,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableBitmap8 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableBitmap8 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableBitmap8()
+    SubscribeAttributeUnitTestingNullableBitmap8()
         : SubscribeAttribute("nullable-bitmap8")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableBitmap8() {}
+    ~SubscribeAttributeUnitTestingNullableBitmap8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93728,7 +93728,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableBitmap8 response %@", [value description]);
+                NSLog(@"UnitTesting.NullableBitmap8 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93739,27 +93739,27 @@ public:
 /*
  * Attribute NullableBitmap16
  */
-class ReadTestClusterNullableBitmap16 : public ReadAttribute {
+class ReadUnitTestingNullableBitmap16 : public ReadAttribute {
 public:
-    ReadTestClusterNullableBitmap16()
+    ReadUnitTestingNullableBitmap16()
         : ReadAttribute("nullable-bitmap16")
     {
     }
 
-    ~ReadTestClusterNullableBitmap16() {}
+    ~ReadUnitTestingNullableBitmap16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableBitmap16WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableBitmap16 response %@", [value description]);
+            NSLog(@"UnitTesting.NullableBitmap16 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableBitmap16 read Error", error);
+                LogNSError("UnitTesting NullableBitmap16 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93767,9 +93767,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableBitmap16 : public WriteAttribute {
+class WriteUnitTestingNullableBitmap16 : public WriteAttribute {
 public:
-    WriteTestClusterNullableBitmap16()
+    WriteUnitTestingNullableBitmap16()
         : WriteAttribute("nullable-bitmap16")
     {
         AddArgument("attr-name", "nullable-bitmap16");
@@ -93777,13 +93777,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableBitmap16() {}
+    ~WriteUnitTestingNullableBitmap16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93796,7 +93796,7 @@ public:
                                                   params:params
                                               completion:^(NSError * _Nullable error) {
                                                   if (error != nil) {
-                                                      LogNSError("TestCluster NullableBitmap16 write Error", error);
+                                                      LogNSError("UnitTesting NullableBitmap16 write Error", error);
                                                   }
                                                   SetCommandExitStatus(error);
                                               }];
@@ -93807,20 +93807,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableBitmap16 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableBitmap16 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableBitmap16()
+    SubscribeAttributeUnitTestingNullableBitmap16()
         : SubscribeAttribute("nullable-bitmap16")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableBitmap16() {}
+    ~SubscribeAttributeUnitTestingNullableBitmap16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93838,7 +93838,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableBitmap16 response %@", [value description]);
+                NSLog(@"UnitTesting.NullableBitmap16 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93849,27 +93849,27 @@ public:
 /*
  * Attribute NullableBitmap32
  */
-class ReadTestClusterNullableBitmap32 : public ReadAttribute {
+class ReadUnitTestingNullableBitmap32 : public ReadAttribute {
 public:
-    ReadTestClusterNullableBitmap32()
+    ReadUnitTestingNullableBitmap32()
         : ReadAttribute("nullable-bitmap32")
     {
     }
 
-    ~ReadTestClusterNullableBitmap32() {}
+    ~ReadUnitTestingNullableBitmap32() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableBitmap32WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableBitmap32 response %@", [value description]);
+            NSLog(@"UnitTesting.NullableBitmap32 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableBitmap32 read Error", error);
+                LogNSError("UnitTesting NullableBitmap32 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93877,9 +93877,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableBitmap32 : public WriteAttribute {
+class WriteUnitTestingNullableBitmap32 : public WriteAttribute {
 public:
-    WriteTestClusterNullableBitmap32()
+    WriteUnitTestingNullableBitmap32()
         : WriteAttribute("nullable-bitmap32")
     {
         AddArgument("attr-name", "nullable-bitmap32");
@@ -93887,13 +93887,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableBitmap32() {}
+    ~WriteUnitTestingNullableBitmap32() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -93906,7 +93906,7 @@ public:
                                                   params:params
                                               completion:^(NSError * _Nullable error) {
                                                   if (error != nil) {
-                                                      LogNSError("TestCluster NullableBitmap32 write Error", error);
+                                                      LogNSError("UnitTesting NullableBitmap32 write Error", error);
                                                   }
                                                   SetCommandExitStatus(error);
                                               }];
@@ -93917,20 +93917,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableBitmap32 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableBitmap32 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableBitmap32()
+    SubscribeAttributeUnitTestingNullableBitmap32()
         : SubscribeAttribute("nullable-bitmap32")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableBitmap32() {}
+    ~SubscribeAttributeUnitTestingNullableBitmap32() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -93948,7 +93948,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableBitmap32 response %@", [value description]);
+                NSLog(@"UnitTesting.NullableBitmap32 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -93959,27 +93959,27 @@ public:
 /*
  * Attribute NullableBitmap64
  */
-class ReadTestClusterNullableBitmap64 : public ReadAttribute {
+class ReadUnitTestingNullableBitmap64 : public ReadAttribute {
 public:
-    ReadTestClusterNullableBitmap64()
+    ReadUnitTestingNullableBitmap64()
         : ReadAttribute("nullable-bitmap64")
     {
     }
 
-    ~ReadTestClusterNullableBitmap64() {}
+    ~ReadUnitTestingNullableBitmap64() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004004) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableBitmap64WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableBitmap64 response %@", [value description]);
+            NSLog(@"UnitTesting.NullableBitmap64 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableBitmap64 read Error", error);
+                LogNSError("UnitTesting NullableBitmap64 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -93987,9 +93987,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableBitmap64 : public WriteAttribute {
+class WriteUnitTestingNullableBitmap64 : public WriteAttribute {
 public:
-    WriteTestClusterNullableBitmap64()
+    WriteUnitTestingNullableBitmap64()
         : WriteAttribute("nullable-bitmap64")
     {
         AddArgument("attr-name", "nullable-bitmap64");
@@ -93997,13 +93997,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableBitmap64() {}
+    ~WriteUnitTestingNullableBitmap64() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94016,7 +94016,7 @@ public:
                                                   params:params
                                               completion:^(NSError * _Nullable error) {
                                                   if (error != nil) {
-                                                      LogNSError("TestCluster NullableBitmap64 write Error", error);
+                                                      LogNSError("UnitTesting NullableBitmap64 write Error", error);
                                                   }
                                                   SetCommandExitStatus(error);
                                               }];
@@ -94027,20 +94027,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableBitmap64 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableBitmap64 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableBitmap64()
+    SubscribeAttributeUnitTestingNullableBitmap64()
         : SubscribeAttribute("nullable-bitmap64")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableBitmap64() {}
+    ~SubscribeAttributeUnitTestingNullableBitmap64() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004004) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94058,7 +94058,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableBitmap64 response %@", [value description]);
+                NSLog(@"UnitTesting.NullableBitmap64 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94069,27 +94069,27 @@ public:
 /*
  * Attribute NullableInt8u
  */
-class ReadTestClusterNullableInt8u : public ReadAttribute {
+class ReadUnitTestingNullableInt8u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt8u()
+    ReadUnitTestingNullableInt8u()
         : ReadAttribute("nullable-int8u")
     {
     }
 
-    ~ReadTestClusterNullableInt8u() {}
+    ~ReadUnitTestingNullableInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt8uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt8u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt8u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt8u read Error", error);
+                LogNSError("UnitTesting NullableInt8u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94097,9 +94097,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt8u : public WriteAttribute {
+class WriteUnitTestingNullableInt8u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt8u()
+    WriteUnitTestingNullableInt8u()
         : WriteAttribute("nullable-int8u")
     {
         AddArgument("attr-name", "nullable-int8u");
@@ -94107,13 +94107,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt8u() {}
+    ~WriteUnitTestingNullableInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94126,7 +94126,7 @@ public:
                                                params:params
                                            completion:^(NSError * _Nullable error) {
                                                if (error != nil) {
-                                                   LogNSError("TestCluster NullableInt8u write Error", error);
+                                                   LogNSError("UnitTesting NullableInt8u write Error", error);
                                                }
                                                SetCommandExitStatus(error);
                                            }];
@@ -94137,20 +94137,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt8u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt8u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt8u()
+    SubscribeAttributeUnitTestingNullableInt8u()
         : SubscribeAttribute("nullable-int8u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt8u() {}
+    ~SubscribeAttributeUnitTestingNullableInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94168,7 +94168,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt8u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt8u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94179,27 +94179,27 @@ public:
 /*
  * Attribute NullableInt16u
  */
-class ReadTestClusterNullableInt16u : public ReadAttribute {
+class ReadUnitTestingNullableInt16u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt16u()
+    ReadUnitTestingNullableInt16u()
         : ReadAttribute("nullable-int16u")
     {
     }
 
-    ~ReadTestClusterNullableInt16u() {}
+    ~ReadUnitTestingNullableInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004006) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt16uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt16u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt16u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt16u read Error", error);
+                LogNSError("UnitTesting NullableInt16u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94207,9 +94207,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt16u : public WriteAttribute {
+class WriteUnitTestingNullableInt16u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt16u()
+    WriteUnitTestingNullableInt16u()
         : WriteAttribute("nullable-int16u")
     {
         AddArgument("attr-name", "nullable-int16u");
@@ -94217,13 +94217,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt16u() {}
+    ~WriteUnitTestingNullableInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94236,7 +94236,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt16u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt16u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94247,20 +94247,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt16u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt16u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt16u()
+    SubscribeAttributeUnitTestingNullableInt16u()
         : SubscribeAttribute("nullable-int16u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt16u() {}
+    ~SubscribeAttributeUnitTestingNullableInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004006) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94278,7 +94278,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt16u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt16u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94289,27 +94289,27 @@ public:
 /*
  * Attribute NullableInt24u
  */
-class ReadTestClusterNullableInt24u : public ReadAttribute {
+class ReadUnitTestingNullableInt24u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt24u()
+    ReadUnitTestingNullableInt24u()
         : ReadAttribute("nullable-int24u")
     {
     }
 
-    ~ReadTestClusterNullableInt24u() {}
+    ~ReadUnitTestingNullableInt24u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt24uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt24u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt24u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt24u read Error", error);
+                LogNSError("UnitTesting NullableInt24u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94317,9 +94317,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt24u : public WriteAttribute {
+class WriteUnitTestingNullableInt24u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt24u()
+    WriteUnitTestingNullableInt24u()
         : WriteAttribute("nullable-int24u")
     {
         AddArgument("attr-name", "nullable-int24u");
@@ -94327,13 +94327,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt24u() {}
+    ~WriteUnitTestingNullableInt24u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94346,7 +94346,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt24u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt24u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94357,20 +94357,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt24u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt24u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt24u()
+    SubscribeAttributeUnitTestingNullableInt24u()
         : SubscribeAttribute("nullable-int24u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt24u() {}
+    ~SubscribeAttributeUnitTestingNullableInt24u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94388,7 +94388,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt24u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt24u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94399,27 +94399,27 @@ public:
 /*
  * Attribute NullableInt32u
  */
-class ReadTestClusterNullableInt32u : public ReadAttribute {
+class ReadUnitTestingNullableInt32u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt32u()
+    ReadUnitTestingNullableInt32u()
         : ReadAttribute("nullable-int32u")
     {
     }
 
-    ~ReadTestClusterNullableInt32u() {}
+    ~ReadUnitTestingNullableInt32u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt32uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt32u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt32u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt32u read Error", error);
+                LogNSError("UnitTesting NullableInt32u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94427,9 +94427,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt32u : public WriteAttribute {
+class WriteUnitTestingNullableInt32u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt32u()
+    WriteUnitTestingNullableInt32u()
         : WriteAttribute("nullable-int32u")
     {
         AddArgument("attr-name", "nullable-int32u");
@@ -94437,13 +94437,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt32u() {}
+    ~WriteUnitTestingNullableInt32u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94456,7 +94456,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt32u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt32u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94467,20 +94467,20 @@ private:
     uint32_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt32u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt32u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt32u()
+    SubscribeAttributeUnitTestingNullableInt32u()
         : SubscribeAttribute("nullable-int32u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt32u() {}
+    ~SubscribeAttributeUnitTestingNullableInt32u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94498,7 +94498,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt32u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt32u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94509,27 +94509,27 @@ public:
 /*
  * Attribute NullableInt40u
  */
-class ReadTestClusterNullableInt40u : public ReadAttribute {
+class ReadUnitTestingNullableInt40u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt40u()
+    ReadUnitTestingNullableInt40u()
         : ReadAttribute("nullable-int40u")
     {
     }
 
-    ~ReadTestClusterNullableInt40u() {}
+    ~ReadUnitTestingNullableInt40u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt40uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt40u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt40u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt40u read Error", error);
+                LogNSError("UnitTesting NullableInt40u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94537,9 +94537,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt40u : public WriteAttribute {
+class WriteUnitTestingNullableInt40u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt40u()
+    WriteUnitTestingNullableInt40u()
         : WriteAttribute("nullable-int40u")
     {
         AddArgument("attr-name", "nullable-int40u");
@@ -94547,13 +94547,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt40u() {}
+    ~WriteUnitTestingNullableInt40u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94566,7 +94566,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt40u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt40u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94577,20 +94577,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt40u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt40u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt40u()
+    SubscribeAttributeUnitTestingNullableInt40u()
         : SubscribeAttribute("nullable-int40u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt40u() {}
+    ~SubscribeAttributeUnitTestingNullableInt40u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94608,7 +94608,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt40u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt40u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94619,27 +94619,27 @@ public:
 /*
  * Attribute NullableInt48u
  */
-class ReadTestClusterNullableInt48u : public ReadAttribute {
+class ReadUnitTestingNullableInt48u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt48u()
+    ReadUnitTestingNullableInt48u()
         : ReadAttribute("nullable-int48u")
     {
     }
 
-    ~ReadTestClusterNullableInt48u() {}
+    ~ReadUnitTestingNullableInt48u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt48uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt48u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt48u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt48u read Error", error);
+                LogNSError("UnitTesting NullableInt48u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94647,9 +94647,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt48u : public WriteAttribute {
+class WriteUnitTestingNullableInt48u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt48u()
+    WriteUnitTestingNullableInt48u()
         : WriteAttribute("nullable-int48u")
     {
         AddArgument("attr-name", "nullable-int48u");
@@ -94657,13 +94657,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt48u() {}
+    ~WriteUnitTestingNullableInt48u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94676,7 +94676,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt48u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt48u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94687,20 +94687,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt48u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt48u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt48u()
+    SubscribeAttributeUnitTestingNullableInt48u()
         : SubscribeAttribute("nullable-int48u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt48u() {}
+    ~SubscribeAttributeUnitTestingNullableInt48u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94718,7 +94718,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt48u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt48u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94729,27 +94729,27 @@ public:
 /*
  * Attribute NullableInt56u
  */
-class ReadTestClusterNullableInt56u : public ReadAttribute {
+class ReadUnitTestingNullableInt56u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt56u()
+    ReadUnitTestingNullableInt56u()
         : ReadAttribute("nullable-int56u")
     {
     }
 
-    ~ReadTestClusterNullableInt56u() {}
+    ~ReadUnitTestingNullableInt56u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt56uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt56u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt56u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt56u read Error", error);
+                LogNSError("UnitTesting NullableInt56u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94757,9 +94757,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt56u : public WriteAttribute {
+class WriteUnitTestingNullableInt56u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt56u()
+    WriteUnitTestingNullableInt56u()
         : WriteAttribute("nullable-int56u")
     {
         AddArgument("attr-name", "nullable-int56u");
@@ -94767,13 +94767,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt56u() {}
+    ~WriteUnitTestingNullableInt56u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94786,7 +94786,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt56u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt56u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94797,20 +94797,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt56u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt56u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt56u()
+    SubscribeAttributeUnitTestingNullableInt56u()
         : SubscribeAttribute("nullable-int56u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt56u() {}
+    ~SubscribeAttributeUnitTestingNullableInt56u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94828,7 +94828,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt56u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt56u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94839,27 +94839,27 @@ public:
 /*
  * Attribute NullableInt64u
  */
-class ReadTestClusterNullableInt64u : public ReadAttribute {
+class ReadUnitTestingNullableInt64u : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt64u()
+    ReadUnitTestingNullableInt64u()
         : ReadAttribute("nullable-int64u")
     {
     }
 
-    ~ReadTestClusterNullableInt64u() {}
+    ~ReadUnitTestingNullableInt64u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt64uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt64u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt64u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt64u read Error", error);
+                LogNSError("UnitTesting NullableInt64u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94867,9 +94867,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt64u : public WriteAttribute {
+class WriteUnitTestingNullableInt64u : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt64u()
+    WriteUnitTestingNullableInt64u()
         : WriteAttribute("nullable-int64u")
     {
         AddArgument("attr-name", "nullable-int64u");
@@ -94877,13 +94877,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt64u() {}
+    ~WriteUnitTestingNullableInt64u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -94896,7 +94896,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt64u write Error", error);
+                                                    LogNSError("UnitTesting NullableInt64u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -94907,20 +94907,20 @@ private:
     uint64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt64u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt64u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt64u()
+    SubscribeAttributeUnitTestingNullableInt64u()
         : SubscribeAttribute("nullable-int64u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt64u() {}
+    ~SubscribeAttributeUnitTestingNullableInt64u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -94938,7 +94938,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt64u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt64u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -94949,27 +94949,27 @@ public:
 /*
  * Attribute NullableInt8s
  */
-class ReadTestClusterNullableInt8s : public ReadAttribute {
+class ReadUnitTestingNullableInt8s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt8s()
+    ReadUnitTestingNullableInt8s()
         : ReadAttribute("nullable-int8s")
     {
     }
 
-    ~ReadTestClusterNullableInt8s() {}
+    ~ReadUnitTestingNullableInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt8sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt8s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt8s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt8s read Error", error);
+                LogNSError("UnitTesting NullableInt8s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -94977,9 +94977,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt8s : public WriteAttribute {
+class WriteUnitTestingNullableInt8s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt8s()
+    WriteUnitTestingNullableInt8s()
         : WriteAttribute("nullable-int8s")
     {
         AddArgument("attr-name", "nullable-int8s");
@@ -94987,13 +94987,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt8s() {}
+    ~WriteUnitTestingNullableInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95006,7 +95006,7 @@ public:
                                                params:params
                                            completion:^(NSError * _Nullable error) {
                                                if (error != nil) {
-                                                   LogNSError("TestCluster NullableInt8s write Error", error);
+                                                   LogNSError("UnitTesting NullableInt8s write Error", error);
                                                }
                                                SetCommandExitStatus(error);
                                            }];
@@ -95017,20 +95017,20 @@ private:
     int8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt8s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt8s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt8s()
+    SubscribeAttributeUnitTestingNullableInt8s()
         : SubscribeAttribute("nullable-int8s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt8s() {}
+    ~SubscribeAttributeUnitTestingNullableInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95048,7 +95048,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt8s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt8s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95059,27 +95059,27 @@ public:
 /*
  * Attribute NullableInt16s
  */
-class ReadTestClusterNullableInt16s : public ReadAttribute {
+class ReadUnitTestingNullableInt16s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt16s()
+    ReadUnitTestingNullableInt16s()
         : ReadAttribute("nullable-int16s")
     {
     }
 
-    ~ReadTestClusterNullableInt16s() {}
+    ~ReadUnitTestingNullableInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt16sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt16s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt16s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt16s read Error", error);
+                LogNSError("UnitTesting NullableInt16s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95087,9 +95087,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt16s : public WriteAttribute {
+class WriteUnitTestingNullableInt16s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt16s()
+    WriteUnitTestingNullableInt16s()
         : WriteAttribute("nullable-int16s")
     {
         AddArgument("attr-name", "nullable-int16s");
@@ -95097,13 +95097,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt16s() {}
+    ~WriteUnitTestingNullableInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95116,7 +95116,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt16s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt16s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95127,20 +95127,20 @@ private:
     int16_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt16s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt16s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt16s()
+    SubscribeAttributeUnitTestingNullableInt16s()
         : SubscribeAttribute("nullable-int16s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt16s() {}
+    ~SubscribeAttributeUnitTestingNullableInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95158,7 +95158,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt16s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt16s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95169,27 +95169,27 @@ public:
 /*
  * Attribute NullableInt24s
  */
-class ReadTestClusterNullableInt24s : public ReadAttribute {
+class ReadUnitTestingNullableInt24s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt24s()
+    ReadUnitTestingNullableInt24s()
         : ReadAttribute("nullable-int24s")
     {
     }
 
-    ~ReadTestClusterNullableInt24s() {}
+    ~ReadUnitTestingNullableInt24s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000400F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt24sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt24s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt24s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt24s read Error", error);
+                LogNSError("UnitTesting NullableInt24s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95197,9 +95197,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt24s : public WriteAttribute {
+class WriteUnitTestingNullableInt24s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt24s()
+    WriteUnitTestingNullableInt24s()
         : WriteAttribute("nullable-int24s")
     {
         AddArgument("attr-name", "nullable-int24s");
@@ -95207,13 +95207,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt24s() {}
+    ~WriteUnitTestingNullableInt24s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000400F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95226,7 +95226,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt24s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt24s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95237,20 +95237,20 @@ private:
     int32_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt24s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt24s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt24s()
+    SubscribeAttributeUnitTestingNullableInt24s()
         : SubscribeAttribute("nullable-int24s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt24s() {}
+    ~SubscribeAttributeUnitTestingNullableInt24s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000400F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95268,7 +95268,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt24s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt24s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95279,27 +95279,27 @@ public:
 /*
  * Attribute NullableInt32s
  */
-class ReadTestClusterNullableInt32s : public ReadAttribute {
+class ReadUnitTestingNullableInt32s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt32s()
+    ReadUnitTestingNullableInt32s()
         : ReadAttribute("nullable-int32s")
     {
     }
 
-    ~ReadTestClusterNullableInt32s() {}
+    ~ReadUnitTestingNullableInt32s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004010) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt32sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt32s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt32s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt32s read Error", error);
+                LogNSError("UnitTesting NullableInt32s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95307,9 +95307,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt32s : public WriteAttribute {
+class WriteUnitTestingNullableInt32s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt32s()
+    WriteUnitTestingNullableInt32s()
         : WriteAttribute("nullable-int32s")
     {
         AddArgument("attr-name", "nullable-int32s");
@@ -95317,13 +95317,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt32s() {}
+    ~WriteUnitTestingNullableInt32s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95336,7 +95336,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt32s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt32s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95347,20 +95347,20 @@ private:
     int32_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt32s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt32s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt32s()
+    SubscribeAttributeUnitTestingNullableInt32s()
         : SubscribeAttribute("nullable-int32s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt32s() {}
+    ~SubscribeAttributeUnitTestingNullableInt32s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004010) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95378,7 +95378,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt32s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt32s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95389,27 +95389,27 @@ public:
 /*
  * Attribute NullableInt40s
  */
-class ReadTestClusterNullableInt40s : public ReadAttribute {
+class ReadUnitTestingNullableInt40s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt40s()
+    ReadUnitTestingNullableInt40s()
         : ReadAttribute("nullable-int40s")
     {
     }
 
-    ~ReadTestClusterNullableInt40s() {}
+    ~ReadUnitTestingNullableInt40s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt40sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt40s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt40s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt40s read Error", error);
+                LogNSError("UnitTesting NullableInt40s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95417,9 +95417,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt40s : public WriteAttribute {
+class WriteUnitTestingNullableInt40s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt40s()
+    WriteUnitTestingNullableInt40s()
         : WriteAttribute("nullable-int40s")
     {
         AddArgument("attr-name", "nullable-int40s");
@@ -95427,13 +95427,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt40s() {}
+    ~WriteUnitTestingNullableInt40s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95446,7 +95446,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt40s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt40s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95457,20 +95457,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt40s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt40s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt40s()
+    SubscribeAttributeUnitTestingNullableInt40s()
         : SubscribeAttribute("nullable-int40s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt40s() {}
+    ~SubscribeAttributeUnitTestingNullableInt40s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95488,7 +95488,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt40s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt40s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95499,27 +95499,27 @@ public:
 /*
  * Attribute NullableInt48s
  */
-class ReadTestClusterNullableInt48s : public ReadAttribute {
+class ReadUnitTestingNullableInt48s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt48s()
+    ReadUnitTestingNullableInt48s()
         : ReadAttribute("nullable-int48s")
     {
     }
 
-    ~ReadTestClusterNullableInt48s() {}
+    ~ReadUnitTestingNullableInt48s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt48sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt48s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt48s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt48s read Error", error);
+                LogNSError("UnitTesting NullableInt48s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95527,9 +95527,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt48s : public WriteAttribute {
+class WriteUnitTestingNullableInt48s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt48s()
+    WriteUnitTestingNullableInt48s()
         : WriteAttribute("nullable-int48s")
     {
         AddArgument("attr-name", "nullable-int48s");
@@ -95537,13 +95537,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt48s() {}
+    ~WriteUnitTestingNullableInt48s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95556,7 +95556,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt48s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt48s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95567,20 +95567,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt48s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt48s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt48s()
+    SubscribeAttributeUnitTestingNullableInt48s()
         : SubscribeAttribute("nullable-int48s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt48s() {}
+    ~SubscribeAttributeUnitTestingNullableInt48s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95598,7 +95598,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt48s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt48s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95609,27 +95609,27 @@ public:
 /*
  * Attribute NullableInt56s
  */
-class ReadTestClusterNullableInt56s : public ReadAttribute {
+class ReadUnitTestingNullableInt56s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt56s()
+    ReadUnitTestingNullableInt56s()
         : ReadAttribute("nullable-int56s")
     {
     }
 
-    ~ReadTestClusterNullableInt56s() {}
+    ~ReadUnitTestingNullableInt56s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004013) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt56sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt56s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt56s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt56s read Error", error);
+                LogNSError("UnitTesting NullableInt56s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95637,9 +95637,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt56s : public WriteAttribute {
+class WriteUnitTestingNullableInt56s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt56s()
+    WriteUnitTestingNullableInt56s()
         : WriteAttribute("nullable-int56s")
     {
         AddArgument("attr-name", "nullable-int56s");
@@ -95647,13 +95647,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt56s() {}
+    ~WriteUnitTestingNullableInt56s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95666,7 +95666,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt56s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt56s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95677,20 +95677,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt56s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt56s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt56s()
+    SubscribeAttributeUnitTestingNullableInt56s()
         : SubscribeAttribute("nullable-int56s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt56s() {}
+    ~SubscribeAttributeUnitTestingNullableInt56s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004013) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95708,7 +95708,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt56s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt56s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95719,27 +95719,27 @@ public:
 /*
  * Attribute NullableInt64s
  */
-class ReadTestClusterNullableInt64s : public ReadAttribute {
+class ReadUnitTestingNullableInt64s : public ReadAttribute {
 public:
-    ReadTestClusterNullableInt64s()
+    ReadUnitTestingNullableInt64s()
         : ReadAttribute("nullable-int64s")
     {
     }
 
-    ~ReadTestClusterNullableInt64s() {}
+    ~ReadUnitTestingNullableInt64s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004014) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableInt64sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableInt64s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableInt64s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableInt64s read Error", error);
+                LogNSError("UnitTesting NullableInt64s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95747,9 +95747,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableInt64s : public WriteAttribute {
+class WriteUnitTestingNullableInt64s : public WriteAttribute {
 public:
-    WriteTestClusterNullableInt64s()
+    WriteUnitTestingNullableInt64s()
         : WriteAttribute("nullable-int64s")
     {
         AddArgument("attr-name", "nullable-int64s");
@@ -95757,13 +95757,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableInt64s() {}
+    ~WriteUnitTestingNullableInt64s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95776,7 +95776,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableInt64s write Error", error);
+                                                    LogNSError("UnitTesting NullableInt64s write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -95787,20 +95787,20 @@ private:
     int64_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableInt64s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableInt64s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableInt64s()
+    SubscribeAttributeUnitTestingNullableInt64s()
         : SubscribeAttribute("nullable-int64s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableInt64s() {}
+    ~SubscribeAttributeUnitTestingNullableInt64s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004014) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95818,7 +95818,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableInt64s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableInt64s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95829,27 +95829,27 @@ public:
 /*
  * Attribute NullableEnum8
  */
-class ReadTestClusterNullableEnum8 : public ReadAttribute {
+class ReadUnitTestingNullableEnum8 : public ReadAttribute {
 public:
-    ReadTestClusterNullableEnum8()
+    ReadUnitTestingNullableEnum8()
         : ReadAttribute("nullable-enum8")
     {
     }
 
-    ~ReadTestClusterNullableEnum8() {}
+    ~ReadUnitTestingNullableEnum8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004015) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableEnum8WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableEnum8 response %@", [value description]);
+            NSLog(@"UnitTesting.NullableEnum8 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableEnum8 read Error", error);
+                LogNSError("UnitTesting NullableEnum8 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95857,9 +95857,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableEnum8 : public WriteAttribute {
+class WriteUnitTestingNullableEnum8 : public WriteAttribute {
 public:
-    WriteTestClusterNullableEnum8()
+    WriteUnitTestingNullableEnum8()
         : WriteAttribute("nullable-enum8")
     {
         AddArgument("attr-name", "nullable-enum8");
@@ -95867,13 +95867,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableEnum8() {}
+    ~WriteUnitTestingNullableEnum8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95886,7 +95886,7 @@ public:
                                                params:params
                                            completion:^(NSError * _Nullable error) {
                                                if (error != nil) {
-                                                   LogNSError("TestCluster NullableEnum8 write Error", error);
+                                                   LogNSError("UnitTesting NullableEnum8 write Error", error);
                                                }
                                                SetCommandExitStatus(error);
                                            }];
@@ -95897,20 +95897,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableEnum8 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableEnum8 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableEnum8()
+    SubscribeAttributeUnitTestingNullableEnum8()
         : SubscribeAttribute("nullable-enum8")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableEnum8() {}
+    ~SubscribeAttributeUnitTestingNullableEnum8() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004015) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -95928,7 +95928,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableEnum8 response %@", [value description]);
+                NSLog(@"UnitTesting.NullableEnum8 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -95939,27 +95939,27 @@ public:
 /*
  * Attribute NullableEnum16
  */
-class ReadTestClusterNullableEnum16 : public ReadAttribute {
+class ReadUnitTestingNullableEnum16 : public ReadAttribute {
 public:
-    ReadTestClusterNullableEnum16()
+    ReadUnitTestingNullableEnum16()
         : ReadAttribute("nullable-enum16")
     {
     }
 
-    ~ReadTestClusterNullableEnum16() {}
+    ~ReadUnitTestingNullableEnum16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004016) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableEnum16WithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableEnum16 response %@", [value description]);
+            NSLog(@"UnitTesting.NullableEnum16 response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableEnum16 read Error", error);
+                LogNSError("UnitTesting NullableEnum16 read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -95967,9 +95967,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableEnum16 : public WriteAttribute {
+class WriteUnitTestingNullableEnum16 : public WriteAttribute {
 public:
-    WriteTestClusterNullableEnum16()
+    WriteUnitTestingNullableEnum16()
         : WriteAttribute("nullable-enum16")
     {
         AddArgument("attr-name", "nullable-enum16");
@@ -95977,13 +95977,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableEnum16() {}
+    ~WriteUnitTestingNullableEnum16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -95996,7 +95996,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableEnum16 write Error", error);
+                                                    LogNSError("UnitTesting NullableEnum16 write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -96007,20 +96007,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableEnum16 : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableEnum16 : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableEnum16()
+    SubscribeAttributeUnitTestingNullableEnum16()
         : SubscribeAttribute("nullable-enum16")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableEnum16() {}
+    ~SubscribeAttributeUnitTestingNullableEnum16() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004016) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96038,7 +96038,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableEnum16 response %@", [value description]);
+                NSLog(@"UnitTesting.NullableEnum16 response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96049,27 +96049,27 @@ public:
 /*
  * Attribute NullableFloatSingle
  */
-class ReadTestClusterNullableFloatSingle : public ReadAttribute {
+class ReadUnitTestingNullableFloatSingle : public ReadAttribute {
 public:
-    ReadTestClusterNullableFloatSingle()
+    ReadUnitTestingNullableFloatSingle()
         : ReadAttribute("nullable-float-single")
     {
     }
 
-    ~ReadTestClusterNullableFloatSingle() {}
+    ~ReadUnitTestingNullableFloatSingle() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004017) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableFloatSingleWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableFloatSingle response %@", [value description]);
+            NSLog(@"UnitTesting.NullableFloatSingle response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableFloatSingle read Error", error);
+                LogNSError("UnitTesting NullableFloatSingle read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96077,9 +96077,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableFloatSingle : public WriteAttribute {
+class WriteUnitTestingNullableFloatSingle : public WriteAttribute {
 public:
-    WriteTestClusterNullableFloatSingle()
+    WriteUnitTestingNullableFloatSingle()
         : WriteAttribute("nullable-float-single")
     {
         AddArgument("attr-name", "nullable-float-single");
@@ -96087,13 +96087,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableFloatSingle() {}
+    ~WriteUnitTestingNullableFloatSingle() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96106,7 +96106,7 @@ public:
                                                      params:params
                                                  completion:^(NSError * _Nullable error) {
                                                      if (error != nil) {
-                                                         LogNSError("TestCluster NullableFloatSingle write Error", error);
+                                                         LogNSError("UnitTesting NullableFloatSingle write Error", error);
                                                      }
                                                      SetCommandExitStatus(error);
                                                  }];
@@ -96117,20 +96117,20 @@ private:
     float mValue;
 };
 
-class SubscribeAttributeTestClusterNullableFloatSingle : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableFloatSingle : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableFloatSingle()
+    SubscribeAttributeUnitTestingNullableFloatSingle()
         : SubscribeAttribute("nullable-float-single")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableFloatSingle() {}
+    ~SubscribeAttributeUnitTestingNullableFloatSingle() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004017) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96148,7 +96148,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableFloatSingle response %@", [value description]);
+                NSLog(@"UnitTesting.NullableFloatSingle response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96159,27 +96159,27 @@ public:
 /*
  * Attribute NullableFloatDouble
  */
-class ReadTestClusterNullableFloatDouble : public ReadAttribute {
+class ReadUnitTestingNullableFloatDouble : public ReadAttribute {
 public:
-    ReadTestClusterNullableFloatDouble()
+    ReadUnitTestingNullableFloatDouble()
         : ReadAttribute("nullable-float-double")
     {
     }
 
-    ~ReadTestClusterNullableFloatDouble() {}
+    ~ReadUnitTestingNullableFloatDouble() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004018) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableFloatDoubleWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableFloatDouble response %@", [value description]);
+            NSLog(@"UnitTesting.NullableFloatDouble response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableFloatDouble read Error", error);
+                LogNSError("UnitTesting NullableFloatDouble read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96187,9 +96187,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableFloatDouble : public WriteAttribute {
+class WriteUnitTestingNullableFloatDouble : public WriteAttribute {
 public:
-    WriteTestClusterNullableFloatDouble()
+    WriteUnitTestingNullableFloatDouble()
         : WriteAttribute("nullable-float-double")
     {
         AddArgument("attr-name", "nullable-float-double");
@@ -96197,13 +96197,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableFloatDouble() {}
+    ~WriteUnitTestingNullableFloatDouble() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96216,7 +96216,7 @@ public:
                                                      params:params
                                                  completion:^(NSError * _Nullable error) {
                                                      if (error != nil) {
-                                                         LogNSError("TestCluster NullableFloatDouble write Error", error);
+                                                         LogNSError("UnitTesting NullableFloatDouble write Error", error);
                                                      }
                                                      SetCommandExitStatus(error);
                                                  }];
@@ -96227,20 +96227,20 @@ private:
     double mValue;
 };
 
-class SubscribeAttributeTestClusterNullableFloatDouble : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableFloatDouble : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableFloatDouble()
+    SubscribeAttributeUnitTestingNullableFloatDouble()
         : SubscribeAttribute("nullable-float-double")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableFloatDouble() {}
+    ~SubscribeAttributeUnitTestingNullableFloatDouble() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004018) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96258,7 +96258,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableFloatDouble response %@", [value description]);
+                NSLog(@"UnitTesting.NullableFloatDouble response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96269,27 +96269,27 @@ public:
 /*
  * Attribute NullableOctetString
  */
-class ReadTestClusterNullableOctetString : public ReadAttribute {
+class ReadUnitTestingNullableOctetString : public ReadAttribute {
 public:
-    ReadTestClusterNullableOctetString()
+    ReadUnitTestingNullableOctetString()
         : ReadAttribute("nullable-octet-string")
     {
     }
 
-    ~ReadTestClusterNullableOctetString() {}
+    ~ReadUnitTestingNullableOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004019) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableOctetStringWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableOctetString response %@", [value description]);
+            NSLog(@"UnitTesting.NullableOctetString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableOctetString read Error", error);
+                LogNSError("UnitTesting NullableOctetString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96297,9 +96297,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableOctetString : public WriteAttribute {
+class WriteUnitTestingNullableOctetString : public WriteAttribute {
 public:
-    WriteTestClusterNullableOctetString()
+    WriteUnitTestingNullableOctetString()
         : WriteAttribute("nullable-octet-string")
     {
         AddArgument("attr-name", "nullable-octet-string");
@@ -96307,13 +96307,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableOctetString() {}
+    ~WriteUnitTestingNullableOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96326,7 +96326,7 @@ public:
                                                      params:params
                                                  completion:^(NSError * _Nullable error) {
                                                      if (error != nil) {
-                                                         LogNSError("TestCluster NullableOctetString write Error", error);
+                                                         LogNSError("UnitTesting NullableOctetString write Error", error);
                                                      }
                                                      SetCommandExitStatus(error);
                                                  }];
@@ -96337,20 +96337,20 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeTestClusterNullableOctetString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableOctetString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableOctetString()
+    SubscribeAttributeUnitTestingNullableOctetString()
         : SubscribeAttribute("nullable-octet-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableOctetString() {}
+    ~SubscribeAttributeUnitTestingNullableOctetString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004019) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96368,7 +96368,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableOctetString response %@", [value description]);
+                NSLog(@"UnitTesting.NullableOctetString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96379,27 +96379,27 @@ public:
 /*
  * Attribute NullableCharString
  */
-class ReadTestClusterNullableCharString : public ReadAttribute {
+class ReadUnitTestingNullableCharString : public ReadAttribute {
 public:
-    ReadTestClusterNullableCharString()
+    ReadUnitTestingNullableCharString()
         : ReadAttribute("nullable-char-string")
     {
     }
 
-    ~ReadTestClusterNullableCharString() {}
+    ~ReadUnitTestingNullableCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000401E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableCharStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableCharString response %@", [value description]);
+            NSLog(@"UnitTesting.NullableCharString response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableCharString read Error", error);
+                LogNSError("UnitTesting NullableCharString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96407,9 +96407,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableCharString : public WriteAttribute {
+class WriteUnitTestingNullableCharString : public WriteAttribute {
 public:
-    WriteTestClusterNullableCharString()
+    WriteUnitTestingNullableCharString()
         : WriteAttribute("nullable-char-string")
     {
         AddArgument("attr-name", "nullable-char-string");
@@ -96417,13 +96417,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableCharString() {}
+    ~WriteUnitTestingNullableCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000401E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96438,7 +96438,7 @@ public:
                                                     params:params
                                                 completion:^(NSError * _Nullable error) {
                                                     if (error != nil) {
-                                                        LogNSError("TestCluster NullableCharString write Error", error);
+                                                        LogNSError("UnitTesting NullableCharString write Error", error);
                                                     }
                                                     SetCommandExitStatus(error);
                                                 }];
@@ -96449,20 +96449,20 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeTestClusterNullableCharString : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableCharString : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableCharString()
+    SubscribeAttributeUnitTestingNullableCharString()
         : SubscribeAttribute("nullable-char-string")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableCharString() {}
+    ~SubscribeAttributeUnitTestingNullableCharString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000401E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96480,7 +96480,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableCharString response %@", [value description]);
+                NSLog(@"UnitTesting.NullableCharString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96491,27 +96491,27 @@ public:
 /*
  * Attribute NullableEnumAttr
  */
-class ReadTestClusterNullableEnumAttr : public ReadAttribute {
+class ReadUnitTestingNullableEnumAttr : public ReadAttribute {
 public:
-    ReadTestClusterNullableEnumAttr()
+    ReadUnitTestingNullableEnumAttr()
         : ReadAttribute("nullable-enum-attr")
     {
     }
 
-    ~ReadTestClusterNullableEnumAttr() {}
+    ~ReadUnitTestingNullableEnumAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004024) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableEnumAttrWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableEnumAttr response %@", [value description]);
+            NSLog(@"UnitTesting.NullableEnumAttr response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableEnumAttr read Error", error);
+                LogNSError("UnitTesting NullableEnumAttr read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96519,9 +96519,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableEnumAttr : public WriteAttribute {
+class WriteUnitTestingNullableEnumAttr : public WriteAttribute {
 public:
-    WriteTestClusterNullableEnumAttr()
+    WriteUnitTestingNullableEnumAttr()
         : WriteAttribute("nullable-enum-attr")
     {
         AddArgument("attr-name", "nullable-enum-attr");
@@ -96529,13 +96529,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableEnumAttr() {}
+    ~WriteUnitTestingNullableEnumAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96548,7 +96548,7 @@ public:
                                                   params:params
                                               completion:^(NSError * _Nullable error) {
                                                   if (error != nil) {
-                                                      LogNSError("TestCluster NullableEnumAttr write Error", error);
+                                                      LogNSError("UnitTesting NullableEnumAttr write Error", error);
                                                   }
                                                   SetCommandExitStatus(error);
                                               }];
@@ -96559,20 +96559,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableEnumAttr : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableEnumAttr : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableEnumAttr()
+    SubscribeAttributeUnitTestingNullableEnumAttr()
         : SubscribeAttribute("nullable-enum-attr")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableEnumAttr() {}
+    ~SubscribeAttributeUnitTestingNullableEnumAttr() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004024) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96590,7 +96590,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableEnumAttr response %@", [value description]);
+                NSLog(@"UnitTesting.NullableEnumAttr response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96601,28 +96601,28 @@ public:
 /*
  * Attribute NullableStruct
  */
-class ReadTestClusterNullableStruct : public ReadAttribute {
+class ReadUnitTestingNullableStruct : public ReadAttribute {
 public:
-    ReadTestClusterNullableStruct()
+    ReadUnitTestingNullableStruct()
         : ReadAttribute("nullable-struct")
     {
     }
 
-    ~ReadTestClusterNullableStruct() {}
+    ~ReadUnitTestingNullableStruct() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004025) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableStructWithCompletion:^(
-            MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableStruct response %@", [value description]);
+            MTRUnitTestingClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"UnitTesting.NullableStruct response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableStruct read Error", error);
+                LogNSError("UnitTesting NullableStruct read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96630,9 +96630,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableStruct : public WriteAttribute {
+class WriteUnitTestingNullableStruct : public WriteAttribute {
 public:
-    WriteTestClusterNullableStruct()
+    WriteUnitTestingNullableStruct()
         : WriteAttribute("nullable-struct")
         , mComplex(&mValue)
     {
@@ -96641,24 +96641,24 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableStruct() {}
+    ~WriteUnitTestingNullableStruct() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
         params.timedWriteTimeout
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        MTRTestClusterClusterSimpleStruct * _Nullable value;
+        MTRUnitTestingClusterSimpleStruct * _Nullable value;
         if (mValue.IsNull()) {
             value = nil;
         } else {
-            value = [MTRTestClusterClusterSimpleStruct new];
+            value = [MTRUnitTestingClusterSimpleStruct new];
             value.a = [NSNumber numberWithUnsignedChar:mValue.Value().a];
             value.b = [NSNumber numberWithBool:mValue.Value().b];
             value.c = [NSNumber numberWithUnsignedChar:chip::to_underlying(mValue.Value().c)];
@@ -96675,7 +96675,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster NullableStruct write Error", error);
+                                                    LogNSError("UnitTesting NullableStruct write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -96683,24 +96683,24 @@ public:
     }
 
 private:
-    chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type> mValue;
-    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::TestCluster::Structs::SimpleStruct::Type>> mComplex;
+    chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type> mValue;
+    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::UnitTesting::Structs::SimpleStruct::Type>> mComplex;
 };
 
-class SubscribeAttributeTestClusterNullableStruct : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableStruct : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableStruct()
+    SubscribeAttributeUnitTestingNullableStruct()
         : SubscribeAttribute("nullable-struct")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableStruct() {}
+    ~SubscribeAttributeUnitTestingNullableStruct() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004025) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96717,8 +96717,8 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableStruct response %@", [value description]);
+            reportHandler:^(MTRUnitTestingClusterSimpleStruct * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"UnitTesting.NullableStruct response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96729,27 +96729,27 @@ public:
 /*
  * Attribute NullableRangeRestrictedInt8u
  */
-class ReadTestClusterNullableRangeRestrictedInt8u : public ReadAttribute {
+class ReadUnitTestingNullableRangeRestrictedInt8u : public ReadAttribute {
 public:
-    ReadTestClusterNullableRangeRestrictedInt8u()
+    ReadUnitTestingNullableRangeRestrictedInt8u()
         : ReadAttribute("nullable-range-restricted-int8u")
     {
     }
 
-    ~ReadTestClusterNullableRangeRestrictedInt8u() {}
+    ~ReadUnitTestingNullableRangeRestrictedInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004026) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableRangeRestrictedInt8uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableRangeRestrictedInt8u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableRangeRestrictedInt8u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableRangeRestrictedInt8u read Error", error);
+                LogNSError("UnitTesting NullableRangeRestrictedInt8u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96757,9 +96757,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableRangeRestrictedInt8u : public WriteAttribute {
+class WriteUnitTestingNullableRangeRestrictedInt8u : public WriteAttribute {
 public:
-    WriteTestClusterNullableRangeRestrictedInt8u()
+    WriteUnitTestingNullableRangeRestrictedInt8u()
         : WriteAttribute("nullable-range-restricted-int8u")
     {
         AddArgument("attr-name", "nullable-range-restricted-int8u");
@@ -96767,13 +96767,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableRangeRestrictedInt8u() {}
+    ~WriteUnitTestingNullableRangeRestrictedInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96786,7 +96786,7 @@ public:
                                                               params:params
                                                           completion:^(NSError * _Nullable error) {
                                                               if (error != nil) {
-                                                                  LogNSError("TestCluster NullableRangeRestrictedInt8u write Error",
+                                                                  LogNSError("UnitTesting NullableRangeRestrictedInt8u write Error",
                                                                       error);
                                                               }
                                                               SetCommandExitStatus(error);
@@ -96798,20 +96798,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableRangeRestrictedInt8u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableRangeRestrictedInt8u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableRangeRestrictedInt8u()
+    SubscribeAttributeUnitTestingNullableRangeRestrictedInt8u()
         : SubscribeAttribute("nullable-range-restricted-int8u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableRangeRestrictedInt8u() {}
+    ~SubscribeAttributeUnitTestingNullableRangeRestrictedInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004026) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96829,7 +96829,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableRangeRestrictedInt8u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableRangeRestrictedInt8u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96840,27 +96840,27 @@ public:
 /*
  * Attribute NullableRangeRestrictedInt8s
  */
-class ReadTestClusterNullableRangeRestrictedInt8s : public ReadAttribute {
+class ReadUnitTestingNullableRangeRestrictedInt8s : public ReadAttribute {
 public:
-    ReadTestClusterNullableRangeRestrictedInt8s()
+    ReadUnitTestingNullableRangeRestrictedInt8s()
         : ReadAttribute("nullable-range-restricted-int8s")
     {
     }
 
-    ~ReadTestClusterNullableRangeRestrictedInt8s() {}
+    ~ReadUnitTestingNullableRangeRestrictedInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004027) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableRangeRestrictedInt8sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableRangeRestrictedInt8s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableRangeRestrictedInt8s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableRangeRestrictedInt8s read Error", error);
+                LogNSError("UnitTesting NullableRangeRestrictedInt8s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96868,9 +96868,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableRangeRestrictedInt8s : public WriteAttribute {
+class WriteUnitTestingNullableRangeRestrictedInt8s : public WriteAttribute {
 public:
-    WriteTestClusterNullableRangeRestrictedInt8s()
+    WriteUnitTestingNullableRangeRestrictedInt8s()
         : WriteAttribute("nullable-range-restricted-int8s")
     {
         AddArgument("attr-name", "nullable-range-restricted-int8s");
@@ -96878,13 +96878,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableRangeRestrictedInt8s() {}
+    ~WriteUnitTestingNullableRangeRestrictedInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -96897,7 +96897,7 @@ public:
                                                               params:params
                                                           completion:^(NSError * _Nullable error) {
                                                               if (error != nil) {
-                                                                  LogNSError("TestCluster NullableRangeRestrictedInt8s write Error",
+                                                                  LogNSError("UnitTesting NullableRangeRestrictedInt8s write Error",
                                                                       error);
                                                               }
                                                               SetCommandExitStatus(error);
@@ -96909,20 +96909,20 @@ private:
     int8_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableRangeRestrictedInt8s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableRangeRestrictedInt8s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableRangeRestrictedInt8s()
+    SubscribeAttributeUnitTestingNullableRangeRestrictedInt8s()
         : SubscribeAttribute("nullable-range-restricted-int8s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableRangeRestrictedInt8s() {}
+    ~SubscribeAttributeUnitTestingNullableRangeRestrictedInt8s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004027) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -96940,7 +96940,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableRangeRestrictedInt8s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableRangeRestrictedInt8s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -96951,27 +96951,27 @@ public:
 /*
  * Attribute NullableRangeRestrictedInt16u
  */
-class ReadTestClusterNullableRangeRestrictedInt16u : public ReadAttribute {
+class ReadUnitTestingNullableRangeRestrictedInt16u : public ReadAttribute {
 public:
-    ReadTestClusterNullableRangeRestrictedInt16u()
+    ReadUnitTestingNullableRangeRestrictedInt16u()
         : ReadAttribute("nullable-range-restricted-int16u")
     {
     }
 
-    ~ReadTestClusterNullableRangeRestrictedInt16u() {}
+    ~ReadUnitTestingNullableRangeRestrictedInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004028) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableRangeRestrictedInt16uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableRangeRestrictedInt16u response %@", [value description]);
+            NSLog(@"UnitTesting.NullableRangeRestrictedInt16u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableRangeRestrictedInt16u read Error", error);
+                LogNSError("UnitTesting NullableRangeRestrictedInt16u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -96979,9 +96979,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableRangeRestrictedInt16u : public WriteAttribute {
+class WriteUnitTestingNullableRangeRestrictedInt16u : public WriteAttribute {
 public:
-    WriteTestClusterNullableRangeRestrictedInt16u()
+    WriteUnitTestingNullableRangeRestrictedInt16u()
         : WriteAttribute("nullable-range-restricted-int16u")
     {
         AddArgument("attr-name", "nullable-range-restricted-int16u");
@@ -96989,13 +96989,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableRangeRestrictedInt16u() {}
+    ~WriteUnitTestingNullableRangeRestrictedInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -97010,7 +97010,7 @@ public:
                                                       completion:^(NSError * _Nullable error) {
                                                           if (error != nil) {
                                                               LogNSError(
-                                                                  "TestCluster NullableRangeRestrictedInt16u write Error", error);
+                                                                  "UnitTesting NullableRangeRestrictedInt16u write Error", error);
                                                           }
                                                           SetCommandExitStatus(error);
                                                       }];
@@ -97021,20 +97021,20 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableRangeRestrictedInt16u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableRangeRestrictedInt16u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableRangeRestrictedInt16u()
+    SubscribeAttributeUnitTestingNullableRangeRestrictedInt16u()
         : SubscribeAttribute("nullable-range-restricted-int16u")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableRangeRestrictedInt16u() {}
+    ~SubscribeAttributeUnitTestingNullableRangeRestrictedInt16u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004028) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97052,7 +97052,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableRangeRestrictedInt16u response %@", [value description]);
+                NSLog(@"UnitTesting.NullableRangeRestrictedInt16u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97063,27 +97063,27 @@ public:
 /*
  * Attribute NullableRangeRestrictedInt16s
  */
-class ReadTestClusterNullableRangeRestrictedInt16s : public ReadAttribute {
+class ReadUnitTestingNullableRangeRestrictedInt16s : public ReadAttribute {
 public:
-    ReadTestClusterNullableRangeRestrictedInt16s()
+    ReadUnitTestingNullableRangeRestrictedInt16s()
         : ReadAttribute("nullable-range-restricted-int16s")
     {
     }
 
-    ~ReadTestClusterNullableRangeRestrictedInt16s() {}
+    ~ReadUnitTestingNullableRangeRestrictedInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x00004029) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeNullableRangeRestrictedInt16sWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.NullableRangeRestrictedInt16s response %@", [value description]);
+            NSLog(@"UnitTesting.NullableRangeRestrictedInt16s response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster NullableRangeRestrictedInt16s read Error", error);
+                LogNSError("UnitTesting NullableRangeRestrictedInt16s read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97091,9 +97091,9 @@ public:
     }
 };
 
-class WriteTestClusterNullableRangeRestrictedInt16s : public WriteAttribute {
+class WriteUnitTestingNullableRangeRestrictedInt16s : public WriteAttribute {
 public:
-    WriteTestClusterNullableRangeRestrictedInt16s()
+    WriteUnitTestingNullableRangeRestrictedInt16s()
         : WriteAttribute("nullable-range-restricted-int16s")
     {
         AddArgument("attr-name", "nullable-range-restricted-int16s");
@@ -97101,13 +97101,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterNullableRangeRestrictedInt16s() {}
+    ~WriteUnitTestingNullableRangeRestrictedInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x00004029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -97122,7 +97122,7 @@ public:
                                                       completion:^(NSError * _Nullable error) {
                                                           if (error != nil) {
                                                               LogNSError(
-                                                                  "TestCluster NullableRangeRestrictedInt16s write Error", error);
+                                                                  "UnitTesting NullableRangeRestrictedInt16s write Error", error);
                                                           }
                                                           SetCommandExitStatus(error);
                                                       }];
@@ -97133,20 +97133,20 @@ private:
     int16_t mValue;
 };
 
-class SubscribeAttributeTestClusterNullableRangeRestrictedInt16s : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingNullableRangeRestrictedInt16s : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterNullableRangeRestrictedInt16s()
+    SubscribeAttributeUnitTestingNullableRangeRestrictedInt16s()
         : SubscribeAttribute("nullable-range-restricted-int16s")
     {
     }
 
-    ~SubscribeAttributeTestClusterNullableRangeRestrictedInt16s() {}
+    ~SubscribeAttributeUnitTestingNullableRangeRestrictedInt16s() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x00004029) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97164,7 +97164,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.NullableRangeRestrictedInt16s response %@", [value description]);
+                NSLog(@"UnitTesting.NullableRangeRestrictedInt16s response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97175,27 +97175,27 @@ public:
 /*
  * Attribute WriteOnlyInt8u
  */
-class ReadTestClusterWriteOnlyInt8u : public ReadAttribute {
+class ReadUnitTestingWriteOnlyInt8u : public ReadAttribute {
 public:
-    ReadTestClusterWriteOnlyInt8u()
+    ReadUnitTestingWriteOnlyInt8u()
         : ReadAttribute("write-only-int8u")
     {
     }
 
-    ~ReadTestClusterWriteOnlyInt8u() {}
+    ~ReadUnitTestingWriteOnlyInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000402A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeWriteOnlyInt8uWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.WriteOnlyInt8u response %@", [value description]);
+            NSLog(@"UnitTesting.WriteOnlyInt8u response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster WriteOnlyInt8u read Error", error);
+                LogNSError("UnitTesting WriteOnlyInt8u read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97203,9 +97203,9 @@ public:
     }
 };
 
-class WriteTestClusterWriteOnlyInt8u : public WriteAttribute {
+class WriteUnitTestingWriteOnlyInt8u : public WriteAttribute {
 public:
-    WriteTestClusterWriteOnlyInt8u()
+    WriteUnitTestingWriteOnlyInt8u()
         : WriteAttribute("write-only-int8u")
     {
         AddArgument("attr-name", "write-only-int8u");
@@ -97213,13 +97213,13 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteTestClusterWriteOnlyInt8u() {}
+    ~WriteUnitTestingWriteOnlyInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) WriteAttribute (0x0000402A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRWriteParams * params = [[MTRWriteParams alloc] init];
@@ -97232,7 +97232,7 @@ public:
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("TestCluster WriteOnlyInt8u write Error", error);
+                                                    LogNSError("UnitTesting WriteOnlyInt8u write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -97243,20 +97243,20 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeTestClusterWriteOnlyInt8u : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingWriteOnlyInt8u : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterWriteOnlyInt8u()
+    SubscribeAttributeUnitTestingWriteOnlyInt8u()
         : SubscribeAttribute("write-only-int8u")
     {
     }
 
-    ~SubscribeAttributeTestClusterWriteOnlyInt8u() {}
+    ~SubscribeAttributeUnitTestingWriteOnlyInt8u() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000402A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97274,7 +97274,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.WriteOnlyInt8u response %@", [value description]);
+                NSLog(@"UnitTesting.WriteOnlyInt8u response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97285,27 +97285,27 @@ public:
 /*
  * Attribute GeneratedCommandList
  */
-class ReadTestClusterGeneratedCommandList : public ReadAttribute {
+class ReadUnitTestingGeneratedCommandList : public ReadAttribute {
 public:
-    ReadTestClusterGeneratedCommandList()
+    ReadUnitTestingGeneratedCommandList()
         : ReadAttribute("generated-command-list")
     {
     }
 
-    ~ReadTestClusterGeneratedCommandList() {}
+    ~ReadUnitTestingGeneratedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.GeneratedCommandList response %@", [value description]);
+            NSLog(@"UnitTesting.GeneratedCommandList response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster GeneratedCommandList read Error", error);
+                LogNSError("UnitTesting GeneratedCommandList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97313,20 +97313,20 @@ public:
     }
 };
 
-class SubscribeAttributeTestClusterGeneratedCommandList : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingGeneratedCommandList : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterGeneratedCommandList()
+    SubscribeAttributeUnitTestingGeneratedCommandList()
         : SubscribeAttribute("generated-command-list")
     {
     }
 
-    ~SubscribeAttributeTestClusterGeneratedCommandList() {}
+    ~SubscribeAttributeUnitTestingGeneratedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97344,7 +97344,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.GeneratedCommandList response %@", [value description]);
+                NSLog(@"UnitTesting.GeneratedCommandList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97355,27 +97355,27 @@ public:
 /*
  * Attribute AcceptedCommandList
  */
-class ReadTestClusterAcceptedCommandList : public ReadAttribute {
+class ReadUnitTestingAcceptedCommandList : public ReadAttribute {
 public:
-    ReadTestClusterAcceptedCommandList()
+    ReadUnitTestingAcceptedCommandList()
         : ReadAttribute("accepted-command-list")
     {
     }
 
-    ~ReadTestClusterAcceptedCommandList() {}
+    ~ReadUnitTestingAcceptedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.AcceptedCommandList response %@", [value description]);
+            NSLog(@"UnitTesting.AcceptedCommandList response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster AcceptedCommandList read Error", error);
+                LogNSError("UnitTesting AcceptedCommandList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97383,20 +97383,20 @@ public:
     }
 };
 
-class SubscribeAttributeTestClusterAcceptedCommandList : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingAcceptedCommandList : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterAcceptedCommandList()
+    SubscribeAttributeUnitTestingAcceptedCommandList()
         : SubscribeAttribute("accepted-command-list")
     {
     }
 
-    ~SubscribeAttributeTestClusterAcceptedCommandList() {}
+    ~SubscribeAttributeUnitTestingAcceptedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97414,7 +97414,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.AcceptedCommandList response %@", [value description]);
+                NSLog(@"UnitTesting.AcceptedCommandList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97425,27 +97425,27 @@ public:
 /*
  * Attribute AttributeList
  */
-class ReadTestClusterAttributeList : public ReadAttribute {
+class ReadUnitTestingAttributeList : public ReadAttribute {
 public:
-    ReadTestClusterAttributeList()
+    ReadUnitTestingAttributeList()
         : ReadAttribute("attribute-list")
     {
     }
 
-    ~ReadTestClusterAttributeList() {}
+    ~ReadUnitTestingAttributeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.AttributeList response %@", [value description]);
+            NSLog(@"UnitTesting.AttributeList response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster AttributeList read Error", error);
+                LogNSError("UnitTesting AttributeList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97453,20 +97453,20 @@ public:
     }
 };
 
-class SubscribeAttributeTestClusterAttributeList : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingAttributeList : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterAttributeList()
+    SubscribeAttributeUnitTestingAttributeList()
         : SubscribeAttribute("attribute-list")
     {
     }
 
-    ~SubscribeAttributeTestClusterAttributeList() {}
+    ~SubscribeAttributeUnitTestingAttributeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97484,7 +97484,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.AttributeList response %@", [value description]);
+                NSLog(@"UnitTesting.AttributeList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97495,27 +97495,27 @@ public:
 /*
  * Attribute FeatureMap
  */
-class ReadTestClusterFeatureMap : public ReadAttribute {
+class ReadUnitTestingFeatureMap : public ReadAttribute {
 public:
-    ReadTestClusterFeatureMap()
+    ReadUnitTestingFeatureMap()
         : ReadAttribute("feature-map")
     {
     }
 
-    ~ReadTestClusterFeatureMap() {}
+    ~ReadUnitTestingFeatureMap() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.FeatureMap response %@", [value description]);
+            NSLog(@"UnitTesting.FeatureMap response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster FeatureMap read Error", error);
+                LogNSError("UnitTesting FeatureMap read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97523,20 +97523,20 @@ public:
     }
 };
 
-class SubscribeAttributeTestClusterFeatureMap : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingFeatureMap : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterFeatureMap()
+    SubscribeAttributeUnitTestingFeatureMap()
         : SubscribeAttribute("feature-map")
     {
     }
 
-    ~SubscribeAttributeTestClusterFeatureMap() {}
+    ~SubscribeAttributeUnitTestingFeatureMap() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97554,7 +97554,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.FeatureMap response %@", [value description]);
+                NSLog(@"UnitTesting.FeatureMap response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97565,27 +97565,27 @@ public:
 /*
  * Attribute ClusterRevision
  */
-class ReadTestClusterClusterRevision : public ReadAttribute {
+class ReadUnitTestingClusterRevision : public ReadAttribute {
 public:
-    ReadTestClusterClusterRevision()
+    ReadUnitTestingClusterRevision()
         : ReadAttribute("cluster-revision")
     {
     }
 
-    ~ReadTestClusterClusterRevision() {}
+    ~ReadUnitTestingClusterRevision() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"TestCluster.ClusterRevision response %@", [value description]);
+            NSLog(@"UnitTesting.ClusterRevision response %@", [value description]);
             if (error != nil) {
-                LogNSError("TestCluster ClusterRevision read Error", error);
+                LogNSError("UnitTesting ClusterRevision read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -97593,20 +97593,20 @@ public:
     }
 };
 
-class SubscribeAttributeTestClusterClusterRevision : public SubscribeAttribute {
+class SubscribeAttributeUnitTestingClusterRevision : public SubscribeAttribute {
 public:
-    SubscribeAttributeTestClusterClusterRevision()
+    SubscribeAttributeUnitTestingClusterRevision()
         : SubscribeAttribute("cluster-revision")
     {
     }
 
-    ~SubscribeAttributeTestClusterClusterRevision() {}
+    ~SubscribeAttributeUnitTestingClusterRevision() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0xFFF1FC05) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(endpointId)
                                                                                           queue:callbackQueue];
         MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
@@ -97624,7 +97624,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"TestCluster.ClusterRevision response %@", [value description]);
+                NSLog(@"UnitTesting.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -100902,295 +100902,295 @@ void registerClusterElectricalMeasurement(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
-void registerClusterTestCluster(Commands & commands)
+void registerClusterUnitTesting(Commands & commands)
 {
-    using namespace chip::app::Clusters::TestCluster;
+    using namespace chip::app::Clusters::UnitTesting;
 
-    const char * clusterName = "TestCluster";
+    const char * clusterName = "UnitTesting";
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
-        make_unique<TestClusterTest>(), //
-        make_unique<TestClusterTestNotHandled>(), //
-        make_unique<TestClusterTestSpecific>(), //
-        make_unique<TestClusterTestUnknownCommand>(), //
-        make_unique<TestClusterTestAddArguments>(), //
-        make_unique<TestClusterTestSimpleArgumentRequest>(), //
-        make_unique<TestClusterTestStructArrayArgumentRequest>(), //
-        make_unique<TestClusterTestStructArgumentRequest>(), //
-        make_unique<TestClusterTestNestedStructArgumentRequest>(), //
-        make_unique<TestClusterTestListStructArgumentRequest>(), //
-        make_unique<TestClusterTestListInt8UArgumentRequest>(), //
-        make_unique<TestClusterTestNestedStructListArgumentRequest>(), //
-        make_unique<TestClusterTestListNestedStructListArgumentRequest>(), //
-        make_unique<TestClusterTestListInt8UReverseRequest>(), //
-        make_unique<TestClusterTestEnumsRequest>(), //
-        make_unique<TestClusterTestNullableOptionalRequest>(), //
-        make_unique<TestClusterTestComplexNullableOptionalRequest>(), //
-        make_unique<TestClusterSimpleStructEchoRequest>(), //
-        make_unique<TestClusterTimedInvokeRequest>(), //
-        make_unique<TestClusterTestSimpleOptionalArgumentRequest>(), //
-        make_unique<TestClusterTestEmitTestEventRequest>(), //
-        make_unique<TestClusterTestEmitTestFabricScopedEventRequest>(), //
+        make_unique<UnitTestingTest>(), //
+        make_unique<UnitTestingTestNotHandled>(), //
+        make_unique<UnitTestingTestSpecific>(), //
+        make_unique<UnitTestingTestUnknownCommand>(), //
+        make_unique<UnitTestingTestAddArguments>(), //
+        make_unique<UnitTestingTestSimpleArgumentRequest>(), //
+        make_unique<UnitTestingTestStructArrayArgumentRequest>(), //
+        make_unique<UnitTestingTestStructArgumentRequest>(), //
+        make_unique<UnitTestingTestNestedStructArgumentRequest>(), //
+        make_unique<UnitTestingTestListStructArgumentRequest>(), //
+        make_unique<UnitTestingTestListInt8UArgumentRequest>(), //
+        make_unique<UnitTestingTestNestedStructListArgumentRequest>(), //
+        make_unique<UnitTestingTestListNestedStructListArgumentRequest>(), //
+        make_unique<UnitTestingTestListInt8UReverseRequest>(), //
+        make_unique<UnitTestingTestEnumsRequest>(), //
+        make_unique<UnitTestingTestNullableOptionalRequest>(), //
+        make_unique<UnitTestingTestComplexNullableOptionalRequest>(), //
+        make_unique<UnitTestingSimpleStructEchoRequest>(), //
+        make_unique<UnitTestingTimedInvokeRequest>(), //
+        make_unique<UnitTestingTestSimpleOptionalArgumentRequest>(), //
+        make_unique<UnitTestingTestEmitTestEventRequest>(), //
+        make_unique<UnitTestingTestEmitTestFabricScopedEventRequest>(), //
         make_unique<ReadAttribute>(Id), //
-        make_unique<ReadTestClusterBoolean>(), //
+        make_unique<ReadUnitTestingBoolean>(), //
         make_unique<WriteAttribute>(Id), //
-        make_unique<WriteTestClusterBoolean>(), //
+        make_unique<WriteUnitTestingBoolean>(), //
         make_unique<SubscribeAttribute>(Id), //
-        make_unique<SubscribeAttributeTestClusterBoolean>(), //
-        make_unique<ReadTestClusterBitmap8>(), //
-        make_unique<WriteTestClusterBitmap8>(), //
-        make_unique<SubscribeAttributeTestClusterBitmap8>(), //
-        make_unique<ReadTestClusterBitmap16>(), //
-        make_unique<WriteTestClusterBitmap16>(), //
-        make_unique<SubscribeAttributeTestClusterBitmap16>(), //
-        make_unique<ReadTestClusterBitmap32>(), //
-        make_unique<WriteTestClusterBitmap32>(), //
-        make_unique<SubscribeAttributeTestClusterBitmap32>(), //
-        make_unique<ReadTestClusterBitmap64>(), //
-        make_unique<WriteTestClusterBitmap64>(), //
-        make_unique<SubscribeAttributeTestClusterBitmap64>(), //
-        make_unique<ReadTestClusterInt8u>(), //
-        make_unique<WriteTestClusterInt8u>(), //
-        make_unique<SubscribeAttributeTestClusterInt8u>(), //
-        make_unique<ReadTestClusterInt16u>(), //
-        make_unique<WriteTestClusterInt16u>(), //
-        make_unique<SubscribeAttributeTestClusterInt16u>(), //
-        make_unique<ReadTestClusterInt24u>(), //
-        make_unique<WriteTestClusterInt24u>(), //
-        make_unique<SubscribeAttributeTestClusterInt24u>(), //
-        make_unique<ReadTestClusterInt32u>(), //
-        make_unique<WriteTestClusterInt32u>(), //
-        make_unique<SubscribeAttributeTestClusterInt32u>(), //
-        make_unique<ReadTestClusterInt40u>(), //
-        make_unique<WriteTestClusterInt40u>(), //
-        make_unique<SubscribeAttributeTestClusterInt40u>(), //
-        make_unique<ReadTestClusterInt48u>(), //
-        make_unique<WriteTestClusterInt48u>(), //
-        make_unique<SubscribeAttributeTestClusterInt48u>(), //
-        make_unique<ReadTestClusterInt56u>(), //
-        make_unique<WriteTestClusterInt56u>(), //
-        make_unique<SubscribeAttributeTestClusterInt56u>(), //
-        make_unique<ReadTestClusterInt64u>(), //
-        make_unique<WriteTestClusterInt64u>(), //
-        make_unique<SubscribeAttributeTestClusterInt64u>(), //
-        make_unique<ReadTestClusterInt8s>(), //
-        make_unique<WriteTestClusterInt8s>(), //
-        make_unique<SubscribeAttributeTestClusterInt8s>(), //
-        make_unique<ReadTestClusterInt16s>(), //
-        make_unique<WriteTestClusterInt16s>(), //
-        make_unique<SubscribeAttributeTestClusterInt16s>(), //
-        make_unique<ReadTestClusterInt24s>(), //
-        make_unique<WriteTestClusterInt24s>(), //
-        make_unique<SubscribeAttributeTestClusterInt24s>(), //
-        make_unique<ReadTestClusterInt32s>(), //
-        make_unique<WriteTestClusterInt32s>(), //
-        make_unique<SubscribeAttributeTestClusterInt32s>(), //
-        make_unique<ReadTestClusterInt40s>(), //
-        make_unique<WriteTestClusterInt40s>(), //
-        make_unique<SubscribeAttributeTestClusterInt40s>(), //
-        make_unique<ReadTestClusterInt48s>(), //
-        make_unique<WriteTestClusterInt48s>(), //
-        make_unique<SubscribeAttributeTestClusterInt48s>(), //
-        make_unique<ReadTestClusterInt56s>(), //
-        make_unique<WriteTestClusterInt56s>(), //
-        make_unique<SubscribeAttributeTestClusterInt56s>(), //
-        make_unique<ReadTestClusterInt64s>(), //
-        make_unique<WriteTestClusterInt64s>(), //
-        make_unique<SubscribeAttributeTestClusterInt64s>(), //
-        make_unique<ReadTestClusterEnum8>(), //
-        make_unique<WriteTestClusterEnum8>(), //
-        make_unique<SubscribeAttributeTestClusterEnum8>(), //
-        make_unique<ReadTestClusterEnum16>(), //
-        make_unique<WriteTestClusterEnum16>(), //
-        make_unique<SubscribeAttributeTestClusterEnum16>(), //
-        make_unique<ReadTestClusterFloatSingle>(), //
-        make_unique<WriteTestClusterFloatSingle>(), //
-        make_unique<SubscribeAttributeTestClusterFloatSingle>(), //
-        make_unique<ReadTestClusterFloatDouble>(), //
-        make_unique<WriteTestClusterFloatDouble>(), //
-        make_unique<SubscribeAttributeTestClusterFloatDouble>(), //
-        make_unique<ReadTestClusterOctetString>(), //
-        make_unique<WriteTestClusterOctetString>(), //
-        make_unique<SubscribeAttributeTestClusterOctetString>(), //
-        make_unique<ReadTestClusterListInt8u>(), //
-        make_unique<WriteTestClusterListInt8u>(), //
-        make_unique<SubscribeAttributeTestClusterListInt8u>(), //
-        make_unique<ReadTestClusterListOctetString>(), //
-        make_unique<WriteTestClusterListOctetString>(), //
-        make_unique<SubscribeAttributeTestClusterListOctetString>(), //
-        make_unique<ReadTestClusterListStructOctetString>(), //
-        make_unique<WriteTestClusterListStructOctetString>(), //
-        make_unique<SubscribeAttributeTestClusterListStructOctetString>(), //
-        make_unique<ReadTestClusterLongOctetString>(), //
-        make_unique<WriteTestClusterLongOctetString>(), //
-        make_unique<SubscribeAttributeTestClusterLongOctetString>(), //
-        make_unique<ReadTestClusterCharString>(), //
-        make_unique<WriteTestClusterCharString>(), //
-        make_unique<SubscribeAttributeTestClusterCharString>(), //
-        make_unique<ReadTestClusterLongCharString>(), //
-        make_unique<WriteTestClusterLongCharString>(), //
-        make_unique<SubscribeAttributeTestClusterLongCharString>(), //
-        make_unique<ReadTestClusterEpochUs>(), //
-        make_unique<WriteTestClusterEpochUs>(), //
-        make_unique<SubscribeAttributeTestClusterEpochUs>(), //
-        make_unique<ReadTestClusterEpochS>(), //
-        make_unique<WriteTestClusterEpochS>(), //
-        make_unique<SubscribeAttributeTestClusterEpochS>(), //
-        make_unique<ReadTestClusterVendorId>(), //
-        make_unique<WriteTestClusterVendorId>(), //
-        make_unique<SubscribeAttributeTestClusterVendorId>(), //
-        make_unique<ReadTestClusterListNullablesAndOptionalsStruct>(), //
-        make_unique<WriteTestClusterListNullablesAndOptionalsStruct>(), //
-        make_unique<SubscribeAttributeTestClusterListNullablesAndOptionalsStruct>(), //
-        make_unique<ReadTestClusterEnumAttr>(), //
-        make_unique<WriteTestClusterEnumAttr>(), //
-        make_unique<SubscribeAttributeTestClusterEnumAttr>(), //
-        make_unique<ReadTestClusterStructAttr>(), //
-        make_unique<WriteTestClusterStructAttr>(), //
-        make_unique<SubscribeAttributeTestClusterStructAttr>(), //
-        make_unique<ReadTestClusterRangeRestrictedInt8u>(), //
-        make_unique<WriteTestClusterRangeRestrictedInt8u>(), //
-        make_unique<SubscribeAttributeTestClusterRangeRestrictedInt8u>(), //
-        make_unique<ReadTestClusterRangeRestrictedInt8s>(), //
-        make_unique<WriteTestClusterRangeRestrictedInt8s>(), //
-        make_unique<SubscribeAttributeTestClusterRangeRestrictedInt8s>(), //
-        make_unique<ReadTestClusterRangeRestrictedInt16u>(), //
-        make_unique<WriteTestClusterRangeRestrictedInt16u>(), //
-        make_unique<SubscribeAttributeTestClusterRangeRestrictedInt16u>(), //
-        make_unique<ReadTestClusterRangeRestrictedInt16s>(), //
-        make_unique<WriteTestClusterRangeRestrictedInt16s>(), //
-        make_unique<SubscribeAttributeTestClusterRangeRestrictedInt16s>(), //
-        make_unique<ReadTestClusterListLongOctetString>(), //
-        make_unique<WriteTestClusterListLongOctetString>(), //
-        make_unique<SubscribeAttributeTestClusterListLongOctetString>(), //
-        make_unique<ReadTestClusterListFabricScoped>(), //
-        make_unique<WriteTestClusterListFabricScoped>(), //
-        make_unique<SubscribeAttributeTestClusterListFabricScoped>(), //
-        make_unique<ReadTestClusterTimedWriteBoolean>(), //
-        make_unique<WriteTestClusterTimedWriteBoolean>(), //
-        make_unique<SubscribeAttributeTestClusterTimedWriteBoolean>(), //
-        make_unique<ReadTestClusterGeneralErrorBoolean>(), //
-        make_unique<WriteTestClusterGeneralErrorBoolean>(), //
-        make_unique<SubscribeAttributeTestClusterGeneralErrorBoolean>(), //
-        make_unique<ReadTestClusterClusterErrorBoolean>(), //
-        make_unique<WriteTestClusterClusterErrorBoolean>(), //
-        make_unique<SubscribeAttributeTestClusterClusterErrorBoolean>(), //
-        make_unique<ReadTestClusterUnsupported>(), //
-        make_unique<WriteTestClusterUnsupported>(), //
-        make_unique<SubscribeAttributeTestClusterUnsupported>(), //
-        make_unique<ReadTestClusterNullableBoolean>(), //
-        make_unique<WriteTestClusterNullableBoolean>(), //
-        make_unique<SubscribeAttributeTestClusterNullableBoolean>(), //
-        make_unique<ReadTestClusterNullableBitmap8>(), //
-        make_unique<WriteTestClusterNullableBitmap8>(), //
-        make_unique<SubscribeAttributeTestClusterNullableBitmap8>(), //
-        make_unique<ReadTestClusterNullableBitmap16>(), //
-        make_unique<WriteTestClusterNullableBitmap16>(), //
-        make_unique<SubscribeAttributeTestClusterNullableBitmap16>(), //
-        make_unique<ReadTestClusterNullableBitmap32>(), //
-        make_unique<WriteTestClusterNullableBitmap32>(), //
-        make_unique<SubscribeAttributeTestClusterNullableBitmap32>(), //
-        make_unique<ReadTestClusterNullableBitmap64>(), //
-        make_unique<WriteTestClusterNullableBitmap64>(), //
-        make_unique<SubscribeAttributeTestClusterNullableBitmap64>(), //
-        make_unique<ReadTestClusterNullableInt8u>(), //
-        make_unique<WriteTestClusterNullableInt8u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt8u>(), //
-        make_unique<ReadTestClusterNullableInt16u>(), //
-        make_unique<WriteTestClusterNullableInt16u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt16u>(), //
-        make_unique<ReadTestClusterNullableInt24u>(), //
-        make_unique<WriteTestClusterNullableInt24u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt24u>(), //
-        make_unique<ReadTestClusterNullableInt32u>(), //
-        make_unique<WriteTestClusterNullableInt32u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt32u>(), //
-        make_unique<ReadTestClusterNullableInt40u>(), //
-        make_unique<WriteTestClusterNullableInt40u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt40u>(), //
-        make_unique<ReadTestClusterNullableInt48u>(), //
-        make_unique<WriteTestClusterNullableInt48u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt48u>(), //
-        make_unique<ReadTestClusterNullableInt56u>(), //
-        make_unique<WriteTestClusterNullableInt56u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt56u>(), //
-        make_unique<ReadTestClusterNullableInt64u>(), //
-        make_unique<WriteTestClusterNullableInt64u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt64u>(), //
-        make_unique<ReadTestClusterNullableInt8s>(), //
-        make_unique<WriteTestClusterNullableInt8s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt8s>(), //
-        make_unique<ReadTestClusterNullableInt16s>(), //
-        make_unique<WriteTestClusterNullableInt16s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt16s>(), //
-        make_unique<ReadTestClusterNullableInt24s>(), //
-        make_unique<WriteTestClusterNullableInt24s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt24s>(), //
-        make_unique<ReadTestClusterNullableInt32s>(), //
-        make_unique<WriteTestClusterNullableInt32s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt32s>(), //
-        make_unique<ReadTestClusterNullableInt40s>(), //
-        make_unique<WriteTestClusterNullableInt40s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt40s>(), //
-        make_unique<ReadTestClusterNullableInt48s>(), //
-        make_unique<WriteTestClusterNullableInt48s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt48s>(), //
-        make_unique<ReadTestClusterNullableInt56s>(), //
-        make_unique<WriteTestClusterNullableInt56s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt56s>(), //
-        make_unique<ReadTestClusterNullableInt64s>(), //
-        make_unique<WriteTestClusterNullableInt64s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableInt64s>(), //
-        make_unique<ReadTestClusterNullableEnum8>(), //
-        make_unique<WriteTestClusterNullableEnum8>(), //
-        make_unique<SubscribeAttributeTestClusterNullableEnum8>(), //
-        make_unique<ReadTestClusterNullableEnum16>(), //
-        make_unique<WriteTestClusterNullableEnum16>(), //
-        make_unique<SubscribeAttributeTestClusterNullableEnum16>(), //
-        make_unique<ReadTestClusterNullableFloatSingle>(), //
-        make_unique<WriteTestClusterNullableFloatSingle>(), //
-        make_unique<SubscribeAttributeTestClusterNullableFloatSingle>(), //
-        make_unique<ReadTestClusterNullableFloatDouble>(), //
-        make_unique<WriteTestClusterNullableFloatDouble>(), //
-        make_unique<SubscribeAttributeTestClusterNullableFloatDouble>(), //
-        make_unique<ReadTestClusterNullableOctetString>(), //
-        make_unique<WriteTestClusterNullableOctetString>(), //
-        make_unique<SubscribeAttributeTestClusterNullableOctetString>(), //
-        make_unique<ReadTestClusterNullableCharString>(), //
-        make_unique<WriteTestClusterNullableCharString>(), //
-        make_unique<SubscribeAttributeTestClusterNullableCharString>(), //
-        make_unique<ReadTestClusterNullableEnumAttr>(), //
-        make_unique<WriteTestClusterNullableEnumAttr>(), //
-        make_unique<SubscribeAttributeTestClusterNullableEnumAttr>(), //
-        make_unique<ReadTestClusterNullableStruct>(), //
-        make_unique<WriteTestClusterNullableStruct>(), //
-        make_unique<SubscribeAttributeTestClusterNullableStruct>(), //
-        make_unique<ReadTestClusterNullableRangeRestrictedInt8u>(), //
-        make_unique<WriteTestClusterNullableRangeRestrictedInt8u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableRangeRestrictedInt8u>(), //
-        make_unique<ReadTestClusterNullableRangeRestrictedInt8s>(), //
-        make_unique<WriteTestClusterNullableRangeRestrictedInt8s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableRangeRestrictedInt8s>(), //
-        make_unique<ReadTestClusterNullableRangeRestrictedInt16u>(), //
-        make_unique<WriteTestClusterNullableRangeRestrictedInt16u>(), //
-        make_unique<SubscribeAttributeTestClusterNullableRangeRestrictedInt16u>(), //
-        make_unique<ReadTestClusterNullableRangeRestrictedInt16s>(), //
-        make_unique<WriteTestClusterNullableRangeRestrictedInt16s>(), //
-        make_unique<SubscribeAttributeTestClusterNullableRangeRestrictedInt16s>(), //
-        make_unique<ReadTestClusterWriteOnlyInt8u>(), //
-        make_unique<WriteTestClusterWriteOnlyInt8u>(), //
-        make_unique<SubscribeAttributeTestClusterWriteOnlyInt8u>(), //
-        make_unique<ReadTestClusterGeneratedCommandList>(), //
-        make_unique<SubscribeAttributeTestClusterGeneratedCommandList>(), //
-        make_unique<ReadTestClusterAcceptedCommandList>(), //
-        make_unique<SubscribeAttributeTestClusterAcceptedCommandList>(), //
-        make_unique<ReadTestClusterAttributeList>(), //
-        make_unique<SubscribeAttributeTestClusterAttributeList>(), //
-        make_unique<ReadTestClusterFeatureMap>(), //
-        make_unique<SubscribeAttributeTestClusterFeatureMap>(), //
-        make_unique<ReadTestClusterClusterRevision>(), //
-        make_unique<SubscribeAttributeTestClusterClusterRevision>(), //
+        make_unique<SubscribeAttributeUnitTestingBoolean>(), //
+        make_unique<ReadUnitTestingBitmap8>(), //
+        make_unique<WriteUnitTestingBitmap8>(), //
+        make_unique<SubscribeAttributeUnitTestingBitmap8>(), //
+        make_unique<ReadUnitTestingBitmap16>(), //
+        make_unique<WriteUnitTestingBitmap16>(), //
+        make_unique<SubscribeAttributeUnitTestingBitmap16>(), //
+        make_unique<ReadUnitTestingBitmap32>(), //
+        make_unique<WriteUnitTestingBitmap32>(), //
+        make_unique<SubscribeAttributeUnitTestingBitmap32>(), //
+        make_unique<ReadUnitTestingBitmap64>(), //
+        make_unique<WriteUnitTestingBitmap64>(), //
+        make_unique<SubscribeAttributeUnitTestingBitmap64>(), //
+        make_unique<ReadUnitTestingInt8u>(), //
+        make_unique<WriteUnitTestingInt8u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt8u>(), //
+        make_unique<ReadUnitTestingInt16u>(), //
+        make_unique<WriteUnitTestingInt16u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt16u>(), //
+        make_unique<ReadUnitTestingInt24u>(), //
+        make_unique<WriteUnitTestingInt24u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt24u>(), //
+        make_unique<ReadUnitTestingInt32u>(), //
+        make_unique<WriteUnitTestingInt32u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt32u>(), //
+        make_unique<ReadUnitTestingInt40u>(), //
+        make_unique<WriteUnitTestingInt40u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt40u>(), //
+        make_unique<ReadUnitTestingInt48u>(), //
+        make_unique<WriteUnitTestingInt48u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt48u>(), //
+        make_unique<ReadUnitTestingInt56u>(), //
+        make_unique<WriteUnitTestingInt56u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt56u>(), //
+        make_unique<ReadUnitTestingInt64u>(), //
+        make_unique<WriteUnitTestingInt64u>(), //
+        make_unique<SubscribeAttributeUnitTestingInt64u>(), //
+        make_unique<ReadUnitTestingInt8s>(), //
+        make_unique<WriteUnitTestingInt8s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt8s>(), //
+        make_unique<ReadUnitTestingInt16s>(), //
+        make_unique<WriteUnitTestingInt16s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt16s>(), //
+        make_unique<ReadUnitTestingInt24s>(), //
+        make_unique<WriteUnitTestingInt24s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt24s>(), //
+        make_unique<ReadUnitTestingInt32s>(), //
+        make_unique<WriteUnitTestingInt32s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt32s>(), //
+        make_unique<ReadUnitTestingInt40s>(), //
+        make_unique<WriteUnitTestingInt40s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt40s>(), //
+        make_unique<ReadUnitTestingInt48s>(), //
+        make_unique<WriteUnitTestingInt48s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt48s>(), //
+        make_unique<ReadUnitTestingInt56s>(), //
+        make_unique<WriteUnitTestingInt56s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt56s>(), //
+        make_unique<ReadUnitTestingInt64s>(), //
+        make_unique<WriteUnitTestingInt64s>(), //
+        make_unique<SubscribeAttributeUnitTestingInt64s>(), //
+        make_unique<ReadUnitTestingEnum8>(), //
+        make_unique<WriteUnitTestingEnum8>(), //
+        make_unique<SubscribeAttributeUnitTestingEnum8>(), //
+        make_unique<ReadUnitTestingEnum16>(), //
+        make_unique<WriteUnitTestingEnum16>(), //
+        make_unique<SubscribeAttributeUnitTestingEnum16>(), //
+        make_unique<ReadUnitTestingFloatSingle>(), //
+        make_unique<WriteUnitTestingFloatSingle>(), //
+        make_unique<SubscribeAttributeUnitTestingFloatSingle>(), //
+        make_unique<ReadUnitTestingFloatDouble>(), //
+        make_unique<WriteUnitTestingFloatDouble>(), //
+        make_unique<SubscribeAttributeUnitTestingFloatDouble>(), //
+        make_unique<ReadUnitTestingOctetString>(), //
+        make_unique<WriteUnitTestingOctetString>(), //
+        make_unique<SubscribeAttributeUnitTestingOctetString>(), //
+        make_unique<ReadUnitTestingListInt8u>(), //
+        make_unique<WriteUnitTestingListInt8u>(), //
+        make_unique<SubscribeAttributeUnitTestingListInt8u>(), //
+        make_unique<ReadUnitTestingListOctetString>(), //
+        make_unique<WriteUnitTestingListOctetString>(), //
+        make_unique<SubscribeAttributeUnitTestingListOctetString>(), //
+        make_unique<ReadUnitTestingListStructOctetString>(), //
+        make_unique<WriteUnitTestingListStructOctetString>(), //
+        make_unique<SubscribeAttributeUnitTestingListStructOctetString>(), //
+        make_unique<ReadUnitTestingLongOctetString>(), //
+        make_unique<WriteUnitTestingLongOctetString>(), //
+        make_unique<SubscribeAttributeUnitTestingLongOctetString>(), //
+        make_unique<ReadUnitTestingCharString>(), //
+        make_unique<WriteUnitTestingCharString>(), //
+        make_unique<SubscribeAttributeUnitTestingCharString>(), //
+        make_unique<ReadUnitTestingLongCharString>(), //
+        make_unique<WriteUnitTestingLongCharString>(), //
+        make_unique<SubscribeAttributeUnitTestingLongCharString>(), //
+        make_unique<ReadUnitTestingEpochUs>(), //
+        make_unique<WriteUnitTestingEpochUs>(), //
+        make_unique<SubscribeAttributeUnitTestingEpochUs>(), //
+        make_unique<ReadUnitTestingEpochS>(), //
+        make_unique<WriteUnitTestingEpochS>(), //
+        make_unique<SubscribeAttributeUnitTestingEpochS>(), //
+        make_unique<ReadUnitTestingVendorId>(), //
+        make_unique<WriteUnitTestingVendorId>(), //
+        make_unique<SubscribeAttributeUnitTestingVendorId>(), //
+        make_unique<ReadUnitTestingListNullablesAndOptionalsStruct>(), //
+        make_unique<WriteUnitTestingListNullablesAndOptionalsStruct>(), //
+        make_unique<SubscribeAttributeUnitTestingListNullablesAndOptionalsStruct>(), //
+        make_unique<ReadUnitTestingEnumAttr>(), //
+        make_unique<WriteUnitTestingEnumAttr>(), //
+        make_unique<SubscribeAttributeUnitTestingEnumAttr>(), //
+        make_unique<ReadUnitTestingStructAttr>(), //
+        make_unique<WriteUnitTestingStructAttr>(), //
+        make_unique<SubscribeAttributeUnitTestingStructAttr>(), //
+        make_unique<ReadUnitTestingRangeRestrictedInt8u>(), //
+        make_unique<WriteUnitTestingRangeRestrictedInt8u>(), //
+        make_unique<SubscribeAttributeUnitTestingRangeRestrictedInt8u>(), //
+        make_unique<ReadUnitTestingRangeRestrictedInt8s>(), //
+        make_unique<WriteUnitTestingRangeRestrictedInt8s>(), //
+        make_unique<SubscribeAttributeUnitTestingRangeRestrictedInt8s>(), //
+        make_unique<ReadUnitTestingRangeRestrictedInt16u>(), //
+        make_unique<WriteUnitTestingRangeRestrictedInt16u>(), //
+        make_unique<SubscribeAttributeUnitTestingRangeRestrictedInt16u>(), //
+        make_unique<ReadUnitTestingRangeRestrictedInt16s>(), //
+        make_unique<WriteUnitTestingRangeRestrictedInt16s>(), //
+        make_unique<SubscribeAttributeUnitTestingRangeRestrictedInt16s>(), //
+        make_unique<ReadUnitTestingListLongOctetString>(), //
+        make_unique<WriteUnitTestingListLongOctetString>(), //
+        make_unique<SubscribeAttributeUnitTestingListLongOctetString>(), //
+        make_unique<ReadUnitTestingListFabricScoped>(), //
+        make_unique<WriteUnitTestingListFabricScoped>(), //
+        make_unique<SubscribeAttributeUnitTestingListFabricScoped>(), //
+        make_unique<ReadUnitTestingTimedWriteBoolean>(), //
+        make_unique<WriteUnitTestingTimedWriteBoolean>(), //
+        make_unique<SubscribeAttributeUnitTestingTimedWriteBoolean>(), //
+        make_unique<ReadUnitTestingGeneralErrorBoolean>(), //
+        make_unique<WriteUnitTestingGeneralErrorBoolean>(), //
+        make_unique<SubscribeAttributeUnitTestingGeneralErrorBoolean>(), //
+        make_unique<ReadUnitTestingClusterErrorBoolean>(), //
+        make_unique<WriteUnitTestingClusterErrorBoolean>(), //
+        make_unique<SubscribeAttributeUnitTestingClusterErrorBoolean>(), //
+        make_unique<ReadUnitTestingUnsupported>(), //
+        make_unique<WriteUnitTestingUnsupported>(), //
+        make_unique<SubscribeAttributeUnitTestingUnsupported>(), //
+        make_unique<ReadUnitTestingNullableBoolean>(), //
+        make_unique<WriteUnitTestingNullableBoolean>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableBoolean>(), //
+        make_unique<ReadUnitTestingNullableBitmap8>(), //
+        make_unique<WriteUnitTestingNullableBitmap8>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableBitmap8>(), //
+        make_unique<ReadUnitTestingNullableBitmap16>(), //
+        make_unique<WriteUnitTestingNullableBitmap16>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableBitmap16>(), //
+        make_unique<ReadUnitTestingNullableBitmap32>(), //
+        make_unique<WriteUnitTestingNullableBitmap32>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableBitmap32>(), //
+        make_unique<ReadUnitTestingNullableBitmap64>(), //
+        make_unique<WriteUnitTestingNullableBitmap64>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableBitmap64>(), //
+        make_unique<ReadUnitTestingNullableInt8u>(), //
+        make_unique<WriteUnitTestingNullableInt8u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt8u>(), //
+        make_unique<ReadUnitTestingNullableInt16u>(), //
+        make_unique<WriteUnitTestingNullableInt16u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt16u>(), //
+        make_unique<ReadUnitTestingNullableInt24u>(), //
+        make_unique<WriteUnitTestingNullableInt24u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt24u>(), //
+        make_unique<ReadUnitTestingNullableInt32u>(), //
+        make_unique<WriteUnitTestingNullableInt32u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt32u>(), //
+        make_unique<ReadUnitTestingNullableInt40u>(), //
+        make_unique<WriteUnitTestingNullableInt40u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt40u>(), //
+        make_unique<ReadUnitTestingNullableInt48u>(), //
+        make_unique<WriteUnitTestingNullableInt48u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt48u>(), //
+        make_unique<ReadUnitTestingNullableInt56u>(), //
+        make_unique<WriteUnitTestingNullableInt56u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt56u>(), //
+        make_unique<ReadUnitTestingNullableInt64u>(), //
+        make_unique<WriteUnitTestingNullableInt64u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt64u>(), //
+        make_unique<ReadUnitTestingNullableInt8s>(), //
+        make_unique<WriteUnitTestingNullableInt8s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt8s>(), //
+        make_unique<ReadUnitTestingNullableInt16s>(), //
+        make_unique<WriteUnitTestingNullableInt16s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt16s>(), //
+        make_unique<ReadUnitTestingNullableInt24s>(), //
+        make_unique<WriteUnitTestingNullableInt24s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt24s>(), //
+        make_unique<ReadUnitTestingNullableInt32s>(), //
+        make_unique<WriteUnitTestingNullableInt32s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt32s>(), //
+        make_unique<ReadUnitTestingNullableInt40s>(), //
+        make_unique<WriteUnitTestingNullableInt40s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt40s>(), //
+        make_unique<ReadUnitTestingNullableInt48s>(), //
+        make_unique<WriteUnitTestingNullableInt48s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt48s>(), //
+        make_unique<ReadUnitTestingNullableInt56s>(), //
+        make_unique<WriteUnitTestingNullableInt56s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt56s>(), //
+        make_unique<ReadUnitTestingNullableInt64s>(), //
+        make_unique<WriteUnitTestingNullableInt64s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableInt64s>(), //
+        make_unique<ReadUnitTestingNullableEnum8>(), //
+        make_unique<WriteUnitTestingNullableEnum8>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableEnum8>(), //
+        make_unique<ReadUnitTestingNullableEnum16>(), //
+        make_unique<WriteUnitTestingNullableEnum16>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableEnum16>(), //
+        make_unique<ReadUnitTestingNullableFloatSingle>(), //
+        make_unique<WriteUnitTestingNullableFloatSingle>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableFloatSingle>(), //
+        make_unique<ReadUnitTestingNullableFloatDouble>(), //
+        make_unique<WriteUnitTestingNullableFloatDouble>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableFloatDouble>(), //
+        make_unique<ReadUnitTestingNullableOctetString>(), //
+        make_unique<WriteUnitTestingNullableOctetString>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableOctetString>(), //
+        make_unique<ReadUnitTestingNullableCharString>(), //
+        make_unique<WriteUnitTestingNullableCharString>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableCharString>(), //
+        make_unique<ReadUnitTestingNullableEnumAttr>(), //
+        make_unique<WriteUnitTestingNullableEnumAttr>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableEnumAttr>(), //
+        make_unique<ReadUnitTestingNullableStruct>(), //
+        make_unique<WriteUnitTestingNullableStruct>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableStruct>(), //
+        make_unique<ReadUnitTestingNullableRangeRestrictedInt8u>(), //
+        make_unique<WriteUnitTestingNullableRangeRestrictedInt8u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableRangeRestrictedInt8u>(), //
+        make_unique<ReadUnitTestingNullableRangeRestrictedInt8s>(), //
+        make_unique<WriteUnitTestingNullableRangeRestrictedInt8s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableRangeRestrictedInt8s>(), //
+        make_unique<ReadUnitTestingNullableRangeRestrictedInt16u>(), //
+        make_unique<WriteUnitTestingNullableRangeRestrictedInt16u>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableRangeRestrictedInt16u>(), //
+        make_unique<ReadUnitTestingNullableRangeRestrictedInt16s>(), //
+        make_unique<WriteUnitTestingNullableRangeRestrictedInt16s>(), //
+        make_unique<SubscribeAttributeUnitTestingNullableRangeRestrictedInt16s>(), //
+        make_unique<ReadUnitTestingWriteOnlyInt8u>(), //
+        make_unique<WriteUnitTestingWriteOnlyInt8u>(), //
+        make_unique<SubscribeAttributeUnitTestingWriteOnlyInt8u>(), //
+        make_unique<ReadUnitTestingGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeUnitTestingGeneratedCommandList>(), //
+        make_unique<ReadUnitTestingAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeUnitTestingAcceptedCommandList>(), //
+        make_unique<ReadUnitTestingAttributeList>(), //
+        make_unique<SubscribeAttributeUnitTestingAttributeList>(), //
+        make_unique<ReadUnitTestingFeatureMap>(), //
+        make_unique<SubscribeAttributeUnitTestingFeatureMap>(), //
+        make_unique<ReadUnitTestingClusterRevision>(), //
+        make_unique<SubscribeAttributeUnitTestingClusterRevision>(), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -101278,5 +101278,5 @@ void registerClusters(Commands & commands)
     registerClusterApplicationBasic(commands);
     registerClusterAccountLogin(commands);
     registerClusterElectricalMeasurement(commands);
-    registerClusterTestCluster(commands);
+    registerClusterUnitTesting(commands);
 }

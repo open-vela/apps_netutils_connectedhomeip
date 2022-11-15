@@ -74977,7 +74977,7 @@ private:
     CHIP_ERROR TestSendTestCommand_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -74996,7 +74996,7 @@ private:
     CHIP_ERROR TestSendTestNotHandledCommand_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75016,13 +75016,13 @@ private:
     CHIP_ERROR TestSendTestSpecificCommand_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster testSpecificWithCompletion:^(
-            MTRTestClusterClusterTestSpecificResponseParams * _Nullable values, NSError * _Nullable err) {
+            MTRUnitTestingClusterTestSpecificResponseParams * _Nullable values, NSError * _Nullable err) {
             NSLog(@"Send Test Specific Command Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -75041,16 +75041,16 @@ private:
     CHIP_ERROR TestSendTestAddArgumentsCommand_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:3U];
         params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send Test Add Arguments Command Error: %@", err);
 
@@ -75070,16 +75070,16 @@ private:
     CHIP_ERROR TestSendFailingTestAddArgumentsCommand_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:250U];
         params.arg2 = [NSNumber numberWithUnsignedChar:6U];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send failing Test Add Arguments Command Error: %@", err);
 
@@ -75097,7 +75097,7 @@ private:
     CHIP_ERROR TestReadAttributeBooleanDefaultValue_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75121,7 +75121,7 @@ private:
     CHIP_ERROR TestWriteAttributeBooleanTrue_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75143,7 +75143,7 @@ private:
     CHIP_ERROR TestReadAttributeBooleanTrue_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75167,7 +75167,7 @@ private:
     CHIP_ERROR TestWriteAttributeBooleanFalse_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75189,7 +75189,7 @@ private:
     CHIP_ERROR TestReadAttributeBooleanFalse_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75213,7 +75213,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap8DefaultValue_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75237,7 +75237,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap8MaxValue_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75259,7 +75259,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap8MaxValue_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75283,7 +75283,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap8MinValue_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75305,7 +75305,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap8MinValue_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75329,7 +75329,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap16DefaultValue_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75353,7 +75353,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap16MaxValue_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75375,7 +75375,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap16MaxValue_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75399,7 +75399,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap16MinValue_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75421,7 +75421,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap16MinValue_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75445,7 +75445,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32DefaultValue_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75469,7 +75469,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap32MaxValue_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75491,7 +75491,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32MaxValue_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75515,7 +75515,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap32MinValue_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75537,7 +75537,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32MinValue_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75561,7 +75561,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap64DefaultValue_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75585,7 +75585,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap64MaxValue_27()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75607,7 +75607,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap64MaxValue_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75631,7 +75631,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap64MinValue_29()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75653,7 +75653,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap64MinValue_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75677,7 +75677,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8uDefaultValue_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75701,7 +75701,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8uMaxValue_32()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75723,7 +75723,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8uMaxValue_33()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75747,7 +75747,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8uMinValue_34()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75769,7 +75769,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8uMinValue_35()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75793,7 +75793,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16uDefaultValue_36()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75817,7 +75817,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16uMaxValue_37()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75839,7 +75839,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16uMaxValue_38()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75863,7 +75863,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16uMinValue_39()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75885,7 +75885,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16uMinValue_40()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75909,7 +75909,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uDefaultValue_41()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75933,7 +75933,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32uMaxValue_42()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75955,7 +75955,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uMaxValue_43()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -75979,7 +75979,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32uMinValue_44()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76001,7 +76001,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uMinValue_45()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76025,7 +76025,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64uDefaultValue_46()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76049,7 +76049,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64uMaxValue_47()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76071,7 +76071,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64uMaxValue_48()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76095,7 +76095,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64uMinValue_49()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76117,7 +76117,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64uMinValue_50()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76141,7 +76141,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sDefaultValue_51()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76165,7 +76165,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8sMaxValue_52()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76187,7 +76187,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sMaxValue_53()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76211,7 +76211,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8sMinValue_54()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76233,7 +76233,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sMinValue_55()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76257,7 +76257,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8sDefaultValue_56()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76279,7 +76279,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sDefaultValue_57()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76303,7 +76303,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sDefaultValue_58()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76327,7 +76327,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16sMaxValue_59()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76349,7 +76349,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sMaxValue_60()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76373,7 +76373,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16sMinValue_61()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76395,7 +76395,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sMinValue_62()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76419,7 +76419,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16sDefaultValue_63()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76441,7 +76441,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sDefaultValue_64()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76465,7 +76465,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sDefaultValue_65()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76489,7 +76489,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32sMaxValue_66()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76511,7 +76511,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sMaxValue_67()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76535,7 +76535,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32sMinValue_68()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76557,7 +76557,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sMinValue_69()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76581,7 +76581,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32sDefaultValue_70()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76603,7 +76603,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sDefaultValue_71()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76627,7 +76627,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sDefaultValue_72()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76651,7 +76651,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64sMaxValue_73()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76673,7 +76673,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sMaxValue_74()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76697,7 +76697,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64sMinValue_75()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76719,7 +76719,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sMinValue_76()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76743,7 +76743,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64sDefaultValue_77()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76765,7 +76765,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sDefaultValue_78()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76789,7 +76789,7 @@ private:
     CHIP_ERROR TestReadAttributeSingleDefaultValue_79()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76813,7 +76813,7 @@ private:
     CHIP_ERROR TestWriteAttributeSingleMediumValue_80()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76835,7 +76835,7 @@ private:
     CHIP_ERROR TestReadAttributeSingleMediumValue_81()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76859,7 +76859,7 @@ private:
     CHIP_ERROR TestWriteAttributeSingleLargeValue_82()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76881,7 +76881,7 @@ private:
     CHIP_ERROR TestReadAttributeSingleLargeValue_83()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76905,7 +76905,7 @@ private:
     CHIP_ERROR TestWriteAttributeSingleSmallValue_84()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76927,7 +76927,7 @@ private:
     CHIP_ERROR TestReadAttributeSingleSmallValue_85()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76951,7 +76951,7 @@ private:
     CHIP_ERROR TestWriteAttributeSingleDefaultValue_86()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76973,7 +76973,7 @@ private:
     CHIP_ERROR TestReadAttributeSingleDefaultValue_87()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -76997,7 +76997,7 @@ private:
     CHIP_ERROR TestReadAttributeDoubleDefaultValue_88()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77021,7 +77021,7 @@ private:
     CHIP_ERROR TestWriteAttributeDoubleMediumValue_89()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77043,7 +77043,7 @@ private:
     CHIP_ERROR TestReadAttributeDoubleMediumValue_90()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77067,7 +77067,7 @@ private:
     CHIP_ERROR TestWriteAttributeDoubleLargeValue_91()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77089,7 +77089,7 @@ private:
     CHIP_ERROR TestReadAttributeDoubleLargeValue_92()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77113,7 +77113,7 @@ private:
     CHIP_ERROR TestWriteAttributeDoubleSmallValue_93()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77135,7 +77135,7 @@ private:
     CHIP_ERROR TestReadAttributeDoubleSmallValue_94()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77159,7 +77159,7 @@ private:
     CHIP_ERROR TestWriteAttributeDoubleDefaultValue_95()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77181,7 +77181,7 @@ private:
     CHIP_ERROR TestReadAttributeDoubleDefaultValue_96()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77205,7 +77205,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum8DefaultValue_97()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77229,7 +77229,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum8MaxValue_98()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77251,7 +77251,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum8MaxValue_99()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77275,7 +77275,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum8MinValue_100()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77297,7 +77297,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum8MinValue_101()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77321,7 +77321,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum16DefaultValue_102()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77345,7 +77345,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum16MaxValue_103()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77367,7 +77367,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum16MaxValue_104()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77391,7 +77391,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum16MinValue_105()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77413,7 +77413,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum16MinValue_106()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77437,7 +77437,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringDefaultValue_107()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77461,7 +77461,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetStringWithEmbeddedNull_108()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77483,7 +77483,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringWithEmbeddedNull_109()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77508,7 +77508,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetStringWithHexFormat_110()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77530,7 +77530,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringWithHexFormat_111()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77555,7 +77555,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetStringWithWeirdChars_112()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77577,7 +77577,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringWithWeirdChars_113()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77602,7 +77602,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetString_114()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77624,7 +77624,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetString_115()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77649,7 +77649,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetString_116()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77675,7 +77675,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetString_117()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77700,7 +77700,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetString_118()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77722,7 +77722,7 @@ private:
     CHIP_ERROR TestReadAttributeLongOctetStringDefaultValue_119()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77746,7 +77746,7 @@ private:
     CHIP_ERROR TestWriteAttributeLongOctetString_120()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77772,7 +77772,7 @@ private:
     CHIP_ERROR TestReadAttributeLongOctetString_121()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77802,7 +77802,7 @@ private:
     CHIP_ERROR TestWriteAttributeLongOctetString_122()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77824,7 +77824,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringDefaultValue_123()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77848,7 +77848,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharString_124()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77870,7 +77870,7 @@ private:
     CHIP_ERROR TestReadAttributeCharString_125()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77894,7 +77894,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValueTooLong_126()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77920,7 +77920,7 @@ private:
     CHIP_ERROR TestReadAttributeCharString_127()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77944,7 +77944,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringEmpty_128()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77966,7 +77966,7 @@ private:
     CHIP_ERROR TestReadAttributeLongCharStringDefaultValue_129()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -77990,7 +77990,7 @@ private:
     CHIP_ERROR TestWriteAttributeLongCharString_130()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78015,7 +78015,7 @@ private:
     CHIP_ERROR TestReadAttributeLongCharString_131()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78042,7 +78042,7 @@ private:
     CHIP_ERROR TestWriteAttributeLongCharString_132()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78064,7 +78064,7 @@ private:
     CHIP_ERROR TestReadAttributeListLongOctetStringForChunkedRead_133()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78124,7 +78124,7 @@ private:
     CHIP_ERROR TestWriteAttributeListLongOctetStringForChunkedWrite_134()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78190,7 +78190,7 @@ private:
     CHIP_ERROR TestReadAttributeListLongOctetStringForChunkedRead_135()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78259,7 +78259,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochUsDefaultValue_136()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78283,7 +78283,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochUsMaxValue_137()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78305,7 +78305,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochUsMaxValue_138()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78329,7 +78329,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochUsMinValue_139()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78351,7 +78351,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochUsMinValue_140()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78375,7 +78375,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochSDefaultValue_141()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78399,7 +78399,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochSMaxValue_142()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78421,7 +78421,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochSMaxValue_143()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78445,7 +78445,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochSMinValue_144()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78467,7 +78467,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochSMinValue_145()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78491,7 +78491,7 @@ private:
     CHIP_ERROR TestReadAttributeUnsupported_146()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78520,7 +78520,7 @@ private:
     CHIP_ERROR TestWriteattributeUnsupported_147()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78547,7 +78547,7 @@ private:
     CHIP_ERROR TestSendTestCommandToUnsupportedEndpoint_148()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(200)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78567,7 +78567,7 @@ private:
     CHIP_ERROR TestSendTestCommandToUnsupportedCluster_149()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(0)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78587,7 +78587,7 @@ private:
     CHIP_ERROR TestReadAttributeVendorIdDefaultValue_150()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78611,7 +78611,7 @@ private:
     CHIP_ERROR TestWriteAttributeVendorId_151()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78633,7 +78633,7 @@ private:
     CHIP_ERROR TestReadAttributeVendorId_152()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78657,7 +78657,7 @@ private:
     CHIP_ERROR TestRestoreAttributeVendorId_153()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -78679,17 +78679,17 @@ private:
     CHIP_ERROR TestSendACommandWithAVendorIdAndEnum_154()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestEnumsRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestEnumsRequestParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedShort:20003U];
         params.arg2 = [NSNumber numberWithUnsignedChar:1U];
         [cluster
             testEnumsRequestWithParams:params
-                            completion:^(MTRTestClusterClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable err) {
+                            completion:^(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Send a command with a vendor_id and enum Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -78713,17 +78713,17 @@ private:
     CHIP_ERROR TestSendACommandWithAVendorIdAndInvalidEnum_155()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestEnumsRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestEnumsRequestParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedShort:20003U];
         params.arg2 = [NSNumber numberWithUnsignedChar:101U];
         [cluster
             testEnumsRequestWithParams:params
-                            completion:^(MTRTestClusterClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable err) {
+                            completion:^(MTRUnitTestingClusterTestEnumsResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Send a command with a vendor_id and invalid enum Error: %@", err);
 
                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -78747,24 +78747,24 @@ private:
     CHIP_ERROR TestSendTestCommandWithStructArgumentAndArg1bIsTrue_156()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestStructArgumentRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.0f];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0];
+        __auto_type * params = [[MTRUnitTestingClusterTestStructArgumentRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:true];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.0f];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0];
 
         [cluster testStructArgumentRequestWithParams:params
-                                          completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                          completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                               NSError * _Nullable err) {
                                               NSLog(@"Send Test Command With Struct Argument and arg1.b is true Error: %@", err);
 
@@ -78784,24 +78784,24 @@ private:
     CHIP_ERROR TestSendTestCommandWithStructArgumentAndArg1bIsFalse_157()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestStructArgumentRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:false];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.0f];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0];
+        __auto_type * params = [[MTRUnitTestingClusterTestStructArgumentRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:false];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.0f];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0];
 
         [cluster testStructArgumentRequestWithParams:params
-                                          completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                          completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                               NSError * _Nullable err) {
                                               NSLog(@"Send Test Command With Struct Argument and arg1.b is false Error: %@", err);
 
@@ -78821,35 +78821,35 @@ private:
     CHIP_ERROR TestSendTestCommandWithNestedStructArgumentAndArg1cbIsTrue_158()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestNestedStructArgumentRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterNestedStruct alloc] init];
-        ((MTRTestClusterClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterNestedStruct *) params.arg1).b = [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterNestedStruct *) params.arg1).c = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).a =
+        __auto_type * params = [[MTRUnitTestingClusterTestNestedStructArgumentRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterNestedStruct alloc] init];
+        ((MTRUnitTestingClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRUnitTestingClusterNestedStruct *) params.arg1).b = [NSNumber numberWithBool:true];
+        ((MTRUnitTestingClusterNestedStruct *) params.arg1).c = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).a =
             [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).b =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).b =
             [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).c =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).c =
             [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).d =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).f =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).f =
             [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).g =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).h =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).h =
             [NSNumber numberWithDouble:0];
 
         [cluster
             testNestedStructArgumentRequestWithParams:params
-                                           completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                           completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                NSError * _Nullable err) {
                                                NSLog(
                                                    @"Send Test Command With Nested Struct Argument and arg1.c.b is true Error: %@",
@@ -78871,35 +78871,35 @@ private:
     CHIP_ERROR TestSendTestCommandWithNestedStructArgumentArg1cbIsFalse_159()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestNestedStructArgumentRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterNestedStruct alloc] init];
-        ((MTRTestClusterClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterNestedStruct *) params.arg1).b = [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterNestedStruct *) params.arg1).c = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).a =
+        __auto_type * params = [[MTRUnitTestingClusterTestNestedStructArgumentRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterNestedStruct alloc] init];
+        ((MTRUnitTestingClusterNestedStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRUnitTestingClusterNestedStruct *) params.arg1).b = [NSNumber numberWithBool:true];
+        ((MTRUnitTestingClusterNestedStruct *) params.arg1).c = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).a =
             [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).b =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).b =
             [NSNumber numberWithBool:false];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).c =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).c =
             [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).d =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).f =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).f =
             [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).g =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStruct *) params.arg1).c).h =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStruct *) params.arg1).c).h =
             [NSNumber numberWithDouble:0];
 
         [cluster
             testNestedStructArgumentRequestWithParams:params
-                                           completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                           completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                NSError * _Nullable err) {
                                                NSLog(@"Send Test Command With Nested Struct Argument arg1.c.b is false Error: %@",
                                                    err);
@@ -78920,79 +78920,79 @@ private:
     CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndAllFieldsBOfArg1dAreTrue_160()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestNestedStructListArgumentRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterNestedStructList alloc] init];
-        ((MTRTestClusterClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterNestedStructList *) params.arg1).b = [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterNestedStructList *) params.arg1).c = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).a =
+        __auto_type * params = [[MTRUnitTestingClusterTestNestedStructListArgumentRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterNestedStructList alloc] init];
+        ((MTRUnitTestingClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRUnitTestingClusterNestedStructList *) params.arg1).b = [NSNumber numberWithBool:true];
+        ((MTRUnitTestingClusterNestedStructList *) params.arg1).c = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).a =
             [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).b =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).b =
             [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).c =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).c =
             [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).d =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).f =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).f =
             [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).g =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).h =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).h =
             [NSNumber numberWithDouble:0];
 
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
-            temp_1[0] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).e = @"nested_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).h = [NSNumber numberWithDouble:0];
+            temp_1[0] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).e = @"nested_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).h = [NSNumber numberWithDouble:0];
 
-            temp_1[1] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).e = @"nested_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).h = [NSNumber numberWithDouble:0];
+            temp_1[1] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).e = @"nested_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).h = [NSNumber numberWithDouble:0];
 
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).d = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).d = temp_1;
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [NSNumber numberWithUnsignedInt:1UL];
             temp_1[1] = [NSNumber numberWithUnsignedInt:2UL];
             temp_1[2] = [NSNumber numberWithUnsignedInt:3UL];
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).e = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).e = temp_1;
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [[NSData alloc] initWithBytes:"octet_string_1" length:14];
             temp_1[1] = [[NSData alloc] initWithBytes:"octect_string_2" length:15];
             temp_1[2] = [[NSData alloc] initWithBytes:"octet_string_3" length:14];
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).f = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).f = temp_1;
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [NSNumber numberWithUnsignedChar:0U];
             temp_1[1] = [NSNumber numberWithUnsignedChar:255U];
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).g = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).g = temp_1;
         }
 
         [cluster testNestedStructListArgumentRequestWithParams:params
-                                                    completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                    completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                         NSError * _Nullable err) {
                                                         NSLog(@"Send Test Command With Nested Struct List Argument and all fields "
                                                               @"b of arg1.d are true Error: %@",
@@ -79014,79 +79014,79 @@ private:
     CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfArg1dAreFalse_161()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestNestedStructListArgumentRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterNestedStructList alloc] init];
-        ((MTRTestClusterClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterNestedStructList *) params.arg1).b = [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterNestedStructList *) params.arg1).c = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).a =
+        __auto_type * params = [[MTRUnitTestingClusterTestNestedStructListArgumentRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterNestedStructList alloc] init];
+        ((MTRUnitTestingClusterNestedStructList *) params.arg1).a = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRUnitTestingClusterNestedStructList *) params.arg1).b = [NSNumber numberWithBool:true];
+        ((MTRUnitTestingClusterNestedStructList *) params.arg1).c = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).a =
             [NSNumber numberWithUnsignedChar:0U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).b =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).b =
             [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).c =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).c =
             [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).d =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).d =
             [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).f =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).f =
             [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).g =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).g =
             [NSNumber numberWithFloat:0.0f];
-        ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) params.arg1).c).h =
+        ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) params.arg1).c).h =
             [NSNumber numberWithDouble:0];
 
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
-            temp_1[0] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).e = @"nested_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[0]).h = [NSNumber numberWithDouble:0];
+            temp_1[0] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).a = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).c = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).e = @"nested_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[0]).h = [NSNumber numberWithDouble:0];
 
-            temp_1[1] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).b = [NSNumber numberWithBool:false];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).e = @"nested_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_1[1]).h = [NSNumber numberWithDouble:0];
+            temp_1[1] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).a = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).b = [NSNumber numberWithBool:false];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).c = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string" length:19];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).e = @"nested_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_1[1]).h = [NSNumber numberWithDouble:0];
 
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).d = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).d = temp_1;
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [NSNumber numberWithUnsignedInt:1UL];
             temp_1[1] = [NSNumber numberWithUnsignedInt:2UL];
             temp_1[2] = [NSNumber numberWithUnsignedInt:3UL];
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).e = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).e = temp_1;
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [[NSData alloc] initWithBytes:"octet_string_1" length:14];
             temp_1[1] = [[NSData alloc] initWithBytes:"octect_string_2" length:15];
             temp_1[2] = [[NSData alloc] initWithBytes:"octet_string_3" length:14];
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).f = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).f = temp_1;
         }
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
             temp_1[0] = [NSNumber numberWithUnsignedChar:0U];
             temp_1[1] = [NSNumber numberWithUnsignedChar:255U];
-            ((MTRTestClusterClusterNestedStructList *) params.arg1).g = temp_1;
+            ((MTRUnitTestingClusterNestedStructList *) params.arg1).g = temp_1;
         }
 
         [cluster testNestedStructListArgumentRequestWithParams:params
-                                                    completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                    completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                         NSError * _Nullable err) {
                                                         NSLog(@"Send Test Command With Nested Struct List Argument and some fields "
                                                               @"b of arg1.d are false Error: %@",
@@ -79108,25 +79108,25 @@ private:
     CHIP_ERROR TestSendTestCommandWithStructArgumentAndSeeWhatWeGetBack_162()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterSimpleStructEchoRequestParams alloc] init];
-        params.arg1 = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:17U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:false];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).e = @"char_string";
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.1f];
-        ((MTRTestClusterClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0.1];
+        __auto_type * params = [[MTRUnitTestingClusterSimpleStructEchoRequestParams alloc] init];
+        params.arg1 = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).a = [NSNumber numberWithUnsignedChar:17U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).b = [NSNumber numberWithBool:false];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).c = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).d = [[NSData alloc] initWithBytes:"octet_string" length:12];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).e = @"char_string";
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).f = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).g = [NSNumber numberWithFloat:0.1f];
+        ((MTRUnitTestingClusterSimpleStruct *) params.arg1).h = [NSNumber numberWithDouble:0.1];
 
         [cluster
             simpleStructEchoRequestWithParams:params
-                                   completion:^(MTRTestClusterClusterSimpleStructResponseParams * _Nullable values,
+                                   completion:^(MTRUnitTestingClusterSimpleStructResponseParams * _Nullable values,
                                        NSError * _Nullable err) {
                                        NSLog(@"Send Test Command With Struct Argument and see what we get back Error: %@", err);
 
@@ -79135,22 +79135,22 @@ private:
                                        {
                                            id actualValue = values.arg1;
                                            VerifyOrReturn(
-                                               CheckValue("a", ((MTRTestClusterClusterSimpleStruct *) actualValue).a, 17U));
+                                               CheckValue("a", ((MTRUnitTestingClusterSimpleStruct *) actualValue).a, 17U));
                                            VerifyOrReturn(
-                                               CheckValue("b", ((MTRTestClusterClusterSimpleStruct *) actualValue).b, false));
+                                               CheckValue("b", ((MTRUnitTestingClusterSimpleStruct *) actualValue).b, false));
                                            VerifyOrReturn(
-                                               CheckValue("c", ((MTRTestClusterClusterSimpleStruct *) actualValue).c, 2U));
+                                               CheckValue("c", ((MTRUnitTestingClusterSimpleStruct *) actualValue).c, 2U));
                                            VerifyOrReturn(
-                                               CheckValueAsString("d", ((MTRTestClusterClusterSimpleStruct *) actualValue).d,
+                                               CheckValueAsString("d", ((MTRUnitTestingClusterSimpleStruct *) actualValue).d,
                                                    [[NSData alloc] initWithBytes:"octet_string" length:12]));
                                            VerifyOrReturn(CheckValueAsString(
-                                               "e", ((MTRTestClusterClusterSimpleStruct *) actualValue).e, @"char_string"));
+                                               "e", ((MTRUnitTestingClusterSimpleStruct *) actualValue).e, @"char_string"));
                                            VerifyOrReturn(
-                                               CheckValue("f", ((MTRTestClusterClusterSimpleStruct *) actualValue).f, 1U));
+                                               CheckValue("f", ((MTRUnitTestingClusterSimpleStruct *) actualValue).f, 1U));
                                            VerifyOrReturn(
-                                               CheckValue("g", ((MTRTestClusterClusterSimpleStruct *) actualValue).g, 0.1f));
+                                               CheckValue("g", ((MTRUnitTestingClusterSimpleStruct *) actualValue).g, 0.1f));
                                            VerifyOrReturn(
-                                               CheckValue("h", ((MTRTestClusterClusterSimpleStruct *) actualValue).h, 0.1));
+                                               CheckValue("h", ((MTRUnitTestingClusterSimpleStruct *) actualValue).h, 0.1));
                                        }
 
                                        NextTest();
@@ -79162,12 +79162,12 @@ private:
     CHIP_ERROR TestSendTestCommandWithListOfInt8uAndNoneOfThemIsSetTo0_163()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListInt8UArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListInt8UArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
@@ -79183,7 +79183,7 @@ private:
         }
         [cluster
             testListInt8UArgumentRequestWithParams:params
-                                        completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                        completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                             NSError * _Nullable err) {
                                             NSLog(@"Send Test Command With List of INT8U and none of them is set to 0 Error: %@",
                                                 err);
@@ -79204,12 +79204,12 @@ private:
     CHIP_ERROR TestSendTestCommandWithListOfInt8uAndOneOfThemIsSetTo0_164()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListInt8UArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListInt8UArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
@@ -79226,7 +79226,7 @@ private:
         }
         [cluster
             testListInt8UArgumentRequestWithParams:params
-                                        completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                        completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                             NSError * _Nullable err) {
                                             NSLog(
                                                 @"Send Test Command With List of INT8U and one of them is set to 0 Error: %@", err);
@@ -79247,12 +79247,12 @@ private:
     CHIP_ERROR TestSendTestCommandWithListOfInt8uAndGetItReversed_165()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListInt8UReverseRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListInt8UReverseRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             temp_0[0] = [NSNumber numberWithUnsignedChar:1U];
@@ -79268,7 +79268,7 @@ private:
         }
         [cluster
             testListInt8UReverseRequestWithParams:params
-                                       completion:^(MTRTestClusterClusterTestListInt8UReverseResponseParams * _Nullable values,
+                                       completion:^(MTRUnitTestingClusterTestListInt8UReverseResponseParams * _Nullable values,
                                            NSError * _Nullable err) {
                                            NSLog(@"Send Test Command With List of INT8U and get it reversed Error: %@", err);
 
@@ -79297,19 +79297,19 @@ private:
     CHIP_ERROR TestSendTestCommandWithEmptyListOfInt8uAndGetAnEmptyListBack_166()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListInt8UReverseRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListInt8UReverseRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
             params.arg1 = temp_0;
         }
         [cluster
             testListInt8UReverseRequestWithParams:params
-                                       completion:^(MTRTestClusterClusterTestListInt8UReverseResponseParams * _Nullable values,
+                                       completion:^(MTRUnitTestingClusterTestListInt8UReverseResponseParams * _Nullable values,
                                            NSError * _Nullable err) {
                                            NSLog(@"Send Test Command With empty List of INT8U and get an empty list back Error: %@",
                                                err);
@@ -79330,38 +79330,38 @@ private:
     CHIP_ERROR TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsTrue_167()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListStructArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListStructArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).d = [[NSData alloc] initWithBytes:"first_octet_string" length:18];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).e = @"first_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).h = [NSNumber numberWithDouble:0];
+            temp_0[0] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).d = [[NSData alloc] initWithBytes:"first_octet_string" length:18];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).e = @"first_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).h = [NSNumber numberWithDouble:0];
 
-            temp_0[1] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).d = [[NSData alloc] initWithBytes:"second_octet_string" length:19];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).e = @"second_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).h = [NSNumber numberWithDouble:0];
+            temp_0[1] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).d = [[NSData alloc] initWithBytes:"second_octet_string" length:19];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).e = @"second_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).h = [NSNumber numberWithDouble:0];
 
             params.arg1 = temp_0;
         }
         [cluster testListStructArgumentRequestWithParams:params
-                                              completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                              completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                   NSError * _Nullable err) {
                                                   NSLog(@"Send Test Command With List of Struct Argument and arg1.b of first item "
                                                         @"is true Error: %@",
@@ -79383,38 +79383,38 @@ private:
     CHIP_ERROR TestSendTestCommandWithListOfStructArgumentAndArg1bOfFirstItemIsFalse_168()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListStructArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListStructArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).d = [[NSData alloc] initWithBytes:"second_octet_string" length:19];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).e = @"second_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[0]).h = [NSNumber numberWithDouble:0];
+            temp_0[0] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).c = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).d = [[NSData alloc] initWithBytes:"second_octet_string" length:19];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).e = @"second_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[0]).h = [NSNumber numberWithDouble:0];
 
-            temp_0[1] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:0U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).b = [NSNumber numberWithBool:false];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).d = [[NSData alloc] initWithBytes:"first_octet_string" length:18];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).e = @"first_char_string";
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).g = [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) temp_0[1]).h = [NSNumber numberWithDouble:0];
+            temp_0[1] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).a = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).b = [NSNumber numberWithBool:false];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).c = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).d = [[NSData alloc] initWithBytes:"first_octet_string" length:18];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).e = @"first_char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).f = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).g = [NSNumber numberWithFloat:0.0f];
+            ((MTRUnitTestingClusterSimpleStruct *) temp_0[1]).h = [NSNumber numberWithDouble:0];
 
             params.arg1 = temp_0;
         }
         [cluster testListStructArgumentRequestWithParams:params
-                                              completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                              completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                   NSError * _Nullable err) {
                                                   NSLog(@"Send Test Command With List of Struct Argument and arg1.b of first item "
                                                         @"is false Error: %@",
@@ -79436,85 +79436,85 @@ private:
     CHIP_ERROR TestSendTestCommandWithListOfNestedStructListArgumentAndAllFieldsBOfElementsOfArg1dAreTrue_169()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListNestedStructListArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRTestClusterClusterNestedStructList alloc] init];
-            ((MTRTestClusterClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
-            ((MTRTestClusterClusterNestedStructList *) temp_0[0]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).a =
+            temp_0[0] = [[MTRUnitTestingClusterNestedStructList alloc] init];
+            ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).a =
                 [NSNumber numberWithUnsignedChar:0U];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).b =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).b =
                 [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).c =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).c =
                 [NSNumber numberWithUnsignedChar:2U];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).d =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).d =
                 [[NSData alloc] initWithBytes:"octet_string" length:12];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).e = @"char_string";
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).f =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).e = @"char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).f =
                 [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).g =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).g =
                 [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).h =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).h =
                 [NSNumber numberWithDouble:0];
 
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).b = [NSNumber numberWithBool:true];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
+                temp_2[0] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).b = [NSNumber numberWithBool:true];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                              length:19];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).e = @"nested_char_string";
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).g = [NSNumber numberWithFloat:0.0f];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).h = [NSNumber numberWithDouble:0];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).e = @"nested_char_string";
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).g = [NSNumber numberWithFloat:0.0f];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).h = [NSNumber numberWithDouble:0];
 
-                temp_2[1] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).b = [NSNumber numberWithBool:true];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
+                temp_2[1] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).b = [NSNumber numberWithBool:true];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                              length:19];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).e = @"nested_char_string";
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).g = [NSNumber numberWithFloat:0.0f];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).h = [NSNumber numberWithDouble:0];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).e = @"nested_char_string";
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).g = [NSNumber numberWithFloat:0.0f];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).h = [NSNumber numberWithDouble:0];
 
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).d = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).d = temp_2;
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [NSNumber numberWithUnsignedInt:1UL];
                 temp_2[1] = [NSNumber numberWithUnsignedInt:2UL];
                 temp_2[2] = [NSNumber numberWithUnsignedInt:3UL];
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).e = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).e = temp_2;
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [[NSData alloc] initWithBytes:"octet_string_1" length:14];
                 temp_2[1] = [[NSData alloc] initWithBytes:"octect_string_2" length:15];
                 temp_2[2] = [[NSData alloc] initWithBytes:"octet_string_3" length:14];
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).f = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).f = temp_2;
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [NSNumber numberWithUnsignedChar:0U];
                 temp_2[1] = [NSNumber numberWithUnsignedChar:255U];
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).g = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).g = temp_2;
             }
 
             params.arg1 = temp_0;
         }
         [cluster testListNestedStructListArgumentRequestWithParams:params
-                                                        completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                        completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                             NSError * _Nullable err) {
                                                             NSLog(@"Send Test Command With List of Nested Struct List Argument and "
                                                                   @"all fields b of elements of arg1.d are true Error: %@",
@@ -79536,85 +79536,85 @@ private:
     CHIP_ERROR TestSendTestCommandWithNestedStructListArgumentAndSomeFieldsBOfElementsOfArg1dAreFalse_170()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestListNestedStructListArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams alloc] init];
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRTestClusterClusterNestedStructList alloc] init];
-            ((MTRTestClusterClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
-            ((MTRTestClusterClusterNestedStructList *) temp_0[0]).b = [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c = [[MTRTestClusterClusterSimpleStruct alloc] init];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).a =
+            temp_0[0] = [[MTRUnitTestingClusterNestedStructList alloc] init];
+            ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).a = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).b = [NSNumber numberWithBool:true];
+            ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).a =
                 [NSNumber numberWithUnsignedChar:0U];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).b =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).b =
                 [NSNumber numberWithBool:true];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).c =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).c =
                 [NSNumber numberWithUnsignedChar:2U];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).d =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).d =
                 [[NSData alloc] initWithBytes:"octet_string" length:12];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).e = @"char_string";
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).f =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).e = @"char_string";
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).f =
                 [NSNumber numberWithUnsignedChar:1U];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).g =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).g =
                 [NSNumber numberWithFloat:0.0f];
-            ((MTRTestClusterClusterSimpleStruct *) ((MTRTestClusterClusterNestedStructList *) temp_0[0]).c).h =
+            ((MTRUnitTestingClusterSimpleStruct *) ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).c).h =
                 [NSNumber numberWithDouble:0];
 
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
-                temp_2[0] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).b = [NSNumber numberWithBool:true];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
+                temp_2[0] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).a = [NSNumber numberWithUnsignedChar:1U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).b = [NSNumber numberWithBool:true];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).c = [NSNumber numberWithUnsignedChar:3U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                              length:19];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).e = @"nested_char_string";
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).g = [NSNumber numberWithFloat:0.0f];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[0]).h = [NSNumber numberWithDouble:0];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).e = @"nested_char_string";
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).f = [NSNumber numberWithUnsignedChar:1U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).g = [NSNumber numberWithFloat:0.0f];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[0]).h = [NSNumber numberWithDouble:0];
 
-                temp_2[1] = [[MTRTestClusterClusterSimpleStruct alloc] init];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).b = [NSNumber numberWithBool:false];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
+                temp_2[1] = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).a = [NSNumber numberWithUnsignedChar:2U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).b = [NSNumber numberWithBool:false];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).c = [NSNumber numberWithUnsignedChar:3U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).d = [[NSData alloc] initWithBytes:"nested_octet_string"
                                                                                              length:19];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).e = @"nested_char_string";
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1U];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).g = [NSNumber numberWithFloat:0.0f];
-                ((MTRTestClusterClusterSimpleStruct *) temp_2[1]).h = [NSNumber numberWithDouble:0];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).e = @"nested_char_string";
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).f = [NSNumber numberWithUnsignedChar:1U];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).g = [NSNumber numberWithFloat:0.0f];
+                ((MTRUnitTestingClusterSimpleStruct *) temp_2[1]).h = [NSNumber numberWithDouble:0];
 
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).d = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).d = temp_2;
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [NSNumber numberWithUnsignedInt:1UL];
                 temp_2[1] = [NSNumber numberWithUnsignedInt:2UL];
                 temp_2[2] = [NSNumber numberWithUnsignedInt:3UL];
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).e = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).e = temp_2;
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [[NSData alloc] initWithBytes:"octet_string_1" length:14];
                 temp_2[1] = [[NSData alloc] initWithBytes:"octect_string_2" length:15];
                 temp_2[2] = [[NSData alloc] initWithBytes:"octet_string_3" length:14];
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).f = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).f = temp_2;
             }
             {
                 NSMutableArray * temp_2 = [[NSMutableArray alloc] init];
                 temp_2[0] = [NSNumber numberWithUnsignedChar:0U];
                 temp_2[1] = [NSNumber numberWithUnsignedChar:255U];
-                ((MTRTestClusterClusterNestedStructList *) temp_0[0]).g = temp_2;
+                ((MTRUnitTestingClusterNestedStructList *) temp_0[0]).g = temp_2;
             }
 
             params.arg1 = temp_0;
         }
         [cluster testListNestedStructListArgumentRequestWithParams:params
-                                                        completion:^(MTRTestClusterClusterBooleanResponseParams * _Nullable values,
+                                                        completion:^(MTRUnitTestingClusterBooleanResponseParams * _Nullable values,
                                                             NSError * _Nullable err) {
                                                             NSLog(@"Send Test Command With Nested Struct List Argument and some "
                                                                   @"fields b of elements of arg1.d are false Error: %@",
@@ -79636,7 +79636,7 @@ private:
     CHIP_ERROR TestWriteAttributeListWithListOfInt8uAndNoneOfThemIsSetTo0_171()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79666,7 +79666,7 @@ private:
     CHIP_ERROR TestReadAttributeListWithListOfInt8u_172()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79694,7 +79694,7 @@ private:
     CHIP_ERROR TestWriteAttributeListWithListOfOctetString_173()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79723,7 +79723,7 @@ private:
     CHIP_ERROR TestReadAttributeListWithListOfOctetString_174()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79751,7 +79751,7 @@ private:
     CHIP_ERROR TestWriteAttributeListWithListOfListStructOctetString_175()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79759,21 +79759,21 @@ private:
         id listStructOctetStringArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRTestClusterClusterTestListStructOctet alloc] init];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[0]).member1 = [NSNumber numberWithUnsignedLongLong:0ULL];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[0]).member2 = [[NSData alloc] initWithBytes:"Test0" length:5];
+            temp_0[0] = [[MTRUnitTestingClusterTestListStructOctet alloc] init];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[0]).member1 = [NSNumber numberWithUnsignedLongLong:0ULL];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[0]).member2 = [[NSData alloc] initWithBytes:"Test0" length:5];
 
-            temp_0[1] = [[MTRTestClusterClusterTestListStructOctet alloc] init];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[1]).member1 = [NSNumber numberWithUnsignedLongLong:1ULL];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[1]).member2 = [[NSData alloc] initWithBytes:"Test1" length:5];
+            temp_0[1] = [[MTRUnitTestingClusterTestListStructOctet alloc] init];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[1]).member1 = [NSNumber numberWithUnsignedLongLong:1ULL];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[1]).member2 = [[NSData alloc] initWithBytes:"Test1" length:5];
 
-            temp_0[2] = [[MTRTestClusterClusterTestListStructOctet alloc] init];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[2]).member1 = [NSNumber numberWithUnsignedLongLong:2ULL];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[2]).member2 = [[NSData alloc] initWithBytes:"Test2" length:5];
+            temp_0[2] = [[MTRUnitTestingClusterTestListStructOctet alloc] init];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[2]).member1 = [NSNumber numberWithUnsignedLongLong:2ULL];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[2]).member2 = [[NSData alloc] initWithBytes:"Test2" length:5];
 
-            temp_0[3] = [[MTRTestClusterClusterTestListStructOctet alloc] init];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[3]).member1 = [NSNumber numberWithUnsignedLongLong:3ULL];
-            ((MTRTestClusterClusterTestListStructOctet *) temp_0[3]).member2 = [[NSData alloc] initWithBytes:"Test3" length:5];
+            temp_0[3] = [[MTRUnitTestingClusterTestListStructOctet alloc] init];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[3]).member1 = [NSNumber numberWithUnsignedLongLong:3ULL];
+            ((MTRUnitTestingClusterTestListStructOctet *) temp_0[3]).member2 = [[NSData alloc] initWithBytes:"Test3" length:5];
 
             listStructOctetStringArgument = temp_0;
         }
@@ -79794,7 +79794,7 @@ private:
     CHIP_ERROR TestReadAttributeListWithListOfListStructOctetString_176()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79807,17 +79807,17 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_struct_octet_string", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValue("member1", ((MTRTestClusterClusterTestListStructOctet *) actualValue[0]).member1, 0ULL));
-                VerifyOrReturn(CheckValueAsString("member2", ((MTRTestClusterClusterTestListStructOctet *) actualValue[0]).member2,
+                VerifyOrReturn(CheckValue("member1", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[0]).member1, 0ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[0]).member2,
                     [[NSData alloc] initWithBytes:"Test0" length:5]));
-                VerifyOrReturn(CheckValue("member1", ((MTRTestClusterClusterTestListStructOctet *) actualValue[1]).member1, 1ULL));
-                VerifyOrReturn(CheckValueAsString("member2", ((MTRTestClusterClusterTestListStructOctet *) actualValue[1]).member2,
+                VerifyOrReturn(CheckValue("member1", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[1]).member1, 1ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[1]).member2,
                     [[NSData alloc] initWithBytes:"Test1" length:5]));
-                VerifyOrReturn(CheckValue("member1", ((MTRTestClusterClusterTestListStructOctet *) actualValue[2]).member1, 2ULL));
-                VerifyOrReturn(CheckValueAsString("member2", ((MTRTestClusterClusterTestListStructOctet *) actualValue[2]).member2,
+                VerifyOrReturn(CheckValue("member1", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[2]).member1, 2ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[2]).member2,
                     [[NSData alloc] initWithBytes:"Test2" length:5]));
-                VerifyOrReturn(CheckValue("member1", ((MTRTestClusterClusterTestListStructOctet *) actualValue[3]).member1, 3ULL));
-                VerifyOrReturn(CheckValueAsString("member2", ((MTRTestClusterClusterTestListStructOctet *) actualValue[3]).member2,
+                VerifyOrReturn(CheckValue("member1", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[3]).member1, 3ULL));
+                VerifyOrReturn(CheckValueAsString("member2", ((MTRUnitTestingClusterTestListStructOctet *) actualValue[3]).member2,
                     [[NSData alloc] initWithBytes:"Test3" length:5]));
             }
 
@@ -79830,15 +79830,15 @@ private:
     CHIP_ERROR TestSendTestCommandWithOptionalArgSet_177()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestNullableOptionalRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestNullableOptionalRequestParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:5U];
         [cluster testNullableOptionalRequestWithParams:params
-                                            completion:^(MTRTestClusterClusterTestNullableOptionalResponseParams * _Nullable values,
+                                            completion:^(MTRUnitTestingClusterTestNullableOptionalResponseParams * _Nullable values,
                                                 NSError * _Nullable err) {
                                                 NSLog(@"Send Test Command with optional arg set. Error: %@", err);
 
@@ -79874,14 +79874,14 @@ private:
     CHIP_ERROR TestSendTestCommandWithoutItsOptionalArg_178()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestNullableOptionalRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestNullableOptionalRequestParams alloc] init];
         [cluster testNullableOptionalRequestWithParams:params
-                                            completion:^(MTRTestClusterClusterTestNullableOptionalResponseParams * _Nullable values,
+                                            completion:^(MTRUnitTestingClusterTestNullableOptionalResponseParams * _Nullable values,
                                                 NSError * _Nullable err) {
                                                 NSLog(@"Send Test Command without its optional arg. Error: %@", err);
 
@@ -79901,7 +79901,7 @@ private:
     CHIP_ERROR TestReadListOfStructsContainingNullablesAndOptionals_179()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79915,13 +79915,13 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_nullables_and_optionals_struct", [actualValue count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableInt", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableInt));
+                    "NullableInt", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableInt));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableString", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableString));
+                    "NullableString", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableString));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableStruct", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableStruct));
+                    "NullableStruct", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableStruct));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableList", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList));
+                    "NullableList", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList));
             }
 
             NextTest();
@@ -79933,7 +79933,7 @@ private:
     CHIP_ERROR TestWriteListOfStructsContainingNullablesAndOptionals_180()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79941,15 +79941,15 @@ private:
         id listNullablesAndOptionalsStructArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRTestClusterClusterNullablesAndOptionalsStruct alloc] init];
-            ((MTRTestClusterClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableInt = nil;
-            ((MTRTestClusterClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableString = nil;
-            ((MTRTestClusterClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableStruct = nil;
+            temp_0[0] = [[MTRUnitTestingClusterNullablesAndOptionalsStruct alloc] init];
+            ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableInt = nil;
+            ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableString = nil;
+            ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableStruct = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedChar:1U];
                 temp_3[1] = [NSNumber numberWithUnsignedChar:2U];
-                ((MTRTestClusterClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableList = temp_3;
+                ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) temp_0[0]).nullableList = temp_3;
             }
 
             listNullablesAndOptionalsStructArgument = temp_0;
@@ -79971,7 +79971,7 @@ private:
     CHIP_ERROR TestReadListOfStructsContainingNullablesAndOptionalsAfterWriting_181()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -79985,20 +79985,20 @@ private:
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("list_nullables_and_optionals_struct", [actualValue count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableInt", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableInt));
+                    "NullableInt", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableInt));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableString", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableString));
+                    "NullableString", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableString));
                 VerifyOrReturn(CheckValueNull(
-                    "NullableStruct", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableStruct));
+                    "NullableStruct", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableStruct));
                 VerifyOrReturn(CheckValueNonNull(
-                    "NullableList", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList));
+                    "NullableList", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList));
                 VerifyOrReturn(CheckValue("NullableList",
-                    [((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList count],
+                    [((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList count],
                     static_cast<uint32_t>(2)));
                 VerifyOrReturn(
-                    CheckValue("", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[0], 1U));
+                    CheckValue("", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[0], 1U));
                 VerifyOrReturn(
-                    CheckValue("", ((MTRTestClusterClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[1], 2U));
+                    CheckValue("", ((MTRUnitTestingClusterNullablesAndOptionalsStruct *) actualValue[0]).nullableList[1], 2U));
             }
 
             NextTest();
@@ -80010,7 +80010,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBooleanNull_182()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80033,7 +80033,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBooleanNull_183()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80060,7 +80060,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBooleanTrue_184()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80082,7 +80082,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBooleanTrue_185()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80107,7 +80107,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBooleanNotNull_186()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80130,7 +80130,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap8MaxValue_187()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80152,7 +80152,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap8MaxValue_188()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80177,7 +80177,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap8InvalidValue_189()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80204,7 +80204,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap8UnchangedValue_190()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80232,7 +80232,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap8NullValue_191()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80254,7 +80254,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap8NullValue_192()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80278,7 +80278,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap8Not254Value_193()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80301,7 +80301,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap16MaxValue_194()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80323,7 +80323,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap16MaxValue_195()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80348,7 +80348,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap16InvalidValue_196()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80374,7 +80374,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap16UnchangedValue_197()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80399,7 +80399,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap16NullValue_198()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80421,7 +80421,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap16NullValue_199()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80445,7 +80445,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap32MaxValue_200()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80467,7 +80467,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap32MaxValue_201()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80492,7 +80492,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap32InvalidValue_202()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80518,7 +80518,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap32UnchangedValue_203()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80543,7 +80543,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap32NullValue_204()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80565,7 +80565,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap32NullValue_205()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80589,7 +80589,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap64MaxValue_206()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80611,7 +80611,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap64MaxValue_207()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80636,7 +80636,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap64InvalidValue_208()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80662,7 +80662,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap64UnchangedValue_209()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80687,7 +80687,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableBitmap64NullValue_210()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80709,7 +80709,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableBitmap64NullValue_211()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80733,7 +80733,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8uMinValue_212()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80755,7 +80755,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uMinValue_213()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80780,7 +80780,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8uMaxValue_214()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80802,7 +80802,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uMaxValue_215()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80827,7 +80827,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8uInvalidValue_216()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80853,7 +80853,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uUnchangedValue_217()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80878,7 +80878,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uUnchangedValueWithConstraint_218()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80901,7 +80901,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8uNullValue_219()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80923,7 +80923,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uNullValue_220()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80947,7 +80947,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uNullValueRange_221()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80972,7 +80972,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uNullValueNot_222()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -80995,7 +80995,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8uValue_223()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81017,7 +81017,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uValueInRange_224()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81042,7 +81042,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8uNotValueOk_225()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81065,7 +81065,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16uMinValue_226()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81087,7 +81087,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uMinValue_227()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81112,7 +81112,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16uMaxValue_228()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81134,7 +81134,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uMaxValue_229()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81159,7 +81159,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16uInvalidValue_230()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81185,7 +81185,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uUnchangedValue_231()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81210,7 +81210,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16uNullValue_232()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81232,7 +81232,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uNullValue_233()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81256,7 +81256,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uNullValueRange_234()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81281,7 +81281,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uNullValueNot_235()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81304,7 +81304,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16uValue_236()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81326,7 +81326,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uValueInRange_237()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81351,7 +81351,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16uNotValueOk_238()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81374,7 +81374,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32uMinValue_239()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81396,7 +81396,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uMinValue_240()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81421,7 +81421,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32uMaxValue_241()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81443,7 +81443,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uMaxValue_242()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81468,7 +81468,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32uInvalidValue_243()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81494,7 +81494,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uUnchangedValue_244()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81519,7 +81519,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32uNullValue_245()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81541,7 +81541,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uNullValue_246()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81565,7 +81565,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uNullValueRange_247()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81590,7 +81590,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uNullValueNot_248()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81613,7 +81613,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32uValue_249()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81635,7 +81635,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uValueInRange_250()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81660,7 +81660,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32uNotValueOk_251()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81683,7 +81683,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64uMinValue_252()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81705,7 +81705,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uMinValue_253()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81730,7 +81730,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64uMaxValue_254()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81752,7 +81752,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uMaxValue_255()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81777,7 +81777,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64uInvalidValue_256()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81803,7 +81803,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uUnchangedValue_257()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81828,7 +81828,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64uNullValue_258()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81850,7 +81850,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uNullValue_259()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81874,7 +81874,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uNullValueRange_260()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81900,7 +81900,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uNullValueNot_261()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81923,7 +81923,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64uValue_262()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81945,7 +81945,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uValueInRange_263()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81971,7 +81971,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64uNotValueOk_264()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -81994,7 +81994,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8sMinValue_265()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82016,7 +82016,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sMinValue_266()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82041,7 +82041,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8sInvalidValue_267()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82067,7 +82067,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sUnchangedValue_268()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82092,7 +82092,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8sNullValue_269()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82114,7 +82114,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sNullValue_270()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82138,7 +82138,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sNullValueRange_271()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82163,7 +82163,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sNullValueNot_272()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82186,7 +82186,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt8sValue_273()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82208,7 +82208,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sValueInRange_274()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82233,7 +82233,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt8sNotValueOk_275()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82256,7 +82256,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16sMinValue_276()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82278,7 +82278,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sMinValue_277()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82303,7 +82303,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16sInvalidValue_278()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82329,7 +82329,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sUnchangedValue_279()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82354,7 +82354,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16sNullValue_280()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82376,7 +82376,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sNullValue_281()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82400,7 +82400,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sNullValueRange_282()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82425,7 +82425,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sNullValueNot_283()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82448,7 +82448,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt16sValue_284()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82470,7 +82470,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sValueInRange_285()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82495,7 +82495,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt16sNotValueOk_286()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82518,7 +82518,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32sMinValue_287()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82540,7 +82540,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sMinValue_288()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82565,7 +82565,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32sInvalidValue_289()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82591,7 +82591,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sUnchangedValue_290()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82616,7 +82616,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32sNullValue_291()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82638,7 +82638,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sNullValue_292()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82662,7 +82662,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sNullValueRange_293()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82687,7 +82687,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sNullValueNot_294()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82710,7 +82710,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt32sValue_295()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82732,7 +82732,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sValueInRange_296()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82757,7 +82757,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt32sNotValueOk_297()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82780,7 +82780,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64sMinValue_298()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82802,7 +82802,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sMinValue_299()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82827,7 +82827,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64sInvalidValue_300()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82853,7 +82853,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sUnchangedValue_301()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82878,7 +82878,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64sNullValue_302()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82900,7 +82900,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sNullValue_303()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82924,7 +82924,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sNullValueRange_304()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82949,7 +82949,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sNullValueNot_305()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82972,7 +82972,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableInt64sValue_306()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -82994,7 +82994,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sValueInRange_307()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83019,7 +83019,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableInt64sNotValueOk_308()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83042,7 +83042,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSingleMediumValue_309()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83064,7 +83064,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSingleMediumValue_310()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83089,7 +83089,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSingleLargestValue_311()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83111,7 +83111,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSingleLargestValue_312()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83136,7 +83136,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSingleSmallestValue_313()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83158,7 +83158,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSingleSmallestValue_314()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83183,7 +83183,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSingleNullValue_315()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83205,7 +83205,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSingleNullValue_316()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83229,7 +83229,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSingle0Value_317()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83251,7 +83251,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSingle0Value_318()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83276,7 +83276,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableDoubleMediumValue_319()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83298,7 +83298,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableDoubleMediumValue_320()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83323,7 +83323,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableDoubleLargestValue_321()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83345,7 +83345,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableDoubleLargestValue_322()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83370,7 +83370,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableDoubleSmallestValue_323()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83392,7 +83392,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableDoubleSmallestValue_324()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83417,7 +83417,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableDoubleNullValue_325()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83439,7 +83439,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableDoubleNullValue_326()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83463,7 +83463,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableDouble0Value_327()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83485,7 +83485,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableDouble0Value_328()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83510,7 +83510,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum8MinValue_329()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83532,7 +83532,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum8MinValue_330()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83557,7 +83557,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum8MaxValue_331()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83579,7 +83579,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum8MaxValue_332()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83604,7 +83604,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum8InvalidValue_333()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83630,7 +83630,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum8UnchangedValue_334()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83655,7 +83655,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum8NullValue_335()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83677,7 +83677,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum8NullValue_336()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83701,7 +83701,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum16MinValue_337()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83723,7 +83723,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum16MinValue_338()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83748,7 +83748,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum16MaxValue_339()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83770,7 +83770,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum16MaxValue_340()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83795,7 +83795,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum16InvalidValue_341()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83821,7 +83821,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum16UnchangedValue_342()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83846,7 +83846,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableEnum16NullValue_343()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83868,7 +83868,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableEnum16NullValue_344()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83892,7 +83892,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSimpleEnumMinValue_345()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83914,7 +83914,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSimpleEnumMinValue_346()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83939,7 +83939,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSimpleEnumMaxValue_347()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83961,7 +83961,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSimpleEnumMaxValue_348()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -83986,7 +83986,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSimpleEnumInvalidValue_349()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84013,7 +84013,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSimpleEnumUnchangedValue_350()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84041,7 +84041,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableSimpleEnumNullValue_351()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84063,7 +84063,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSimpleEnumNullValue_352()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84087,7 +84087,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableSimpleEnumNot3Value_353()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84110,7 +84110,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableOctetStringDefaultValue_354()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84136,7 +84136,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableOctetString_355()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84159,7 +84159,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableOctetString_356()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84188,7 +84188,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableOctetString_357()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84210,7 +84210,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableOctetString_358()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84234,7 +84234,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableOctetString_359()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84256,7 +84256,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableOctetString_360()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84282,7 +84282,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableOctetStringNotTestValue_361()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84305,7 +84305,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableCharStringDefaultValue_362()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84330,7 +84330,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableCharString_363()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84353,7 +84353,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableCharString_364()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84381,7 +84381,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableCharString_365()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84410,7 +84410,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableCharStringValueTooLong_366()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84432,7 +84432,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableCharString_367()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84456,7 +84456,7 @@ private:
     CHIP_ERROR TestWriteAttributeNullableCharStringEmpty_368()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84478,7 +84478,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableCharString_369()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84503,7 +84503,7 @@ private:
     CHIP_ERROR TestReadAttributeNullableCharStringNott_370()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84526,7 +84526,7 @@ private:
     CHIP_ERROR TestReadAttributeFromNonexistentEndpoint_371()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(200)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84546,7 +84546,7 @@ private:
     CHIP_ERROR TestReadAttributeFromNonexistentCluster_372()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(0)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84566,12 +84566,12 @@ private:
     CHIP_ERROR TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_373()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams alloc] init];
         [cluster testSimpleOptionalArgumentRequestWithParams:params
                                                   completion:^(NSError * _Nullable err) {
                                                       NSLog(@"Send a command that takes an optional parameter but do not set it. "
@@ -84593,12 +84593,12 @@ private:
     CHIP_ERROR TestSendACommandThatTakesAnOptionalParameterButDoNotSetIt_374()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestSimpleOptionalArgumentRequestParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams alloc] init];
         params.arg1 = [NSNumber numberWithBool:1];
         [cluster testSimpleOptionalArgumentRequestWithParams:params
                                                   completion:^(NSError * _Nullable err) {
@@ -84619,7 +84619,7 @@ private:
     CHIP_ERROR TestReportSubscribeToListAttribute_375()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84648,7 +84648,7 @@ private:
     CHIP_ERROR TestSubscribeToListAttribute_376()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84682,7 +84682,7 @@ private:
     CHIP_ERROR TestWriteSubscribedToListAttribute_377()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84711,7 +84711,7 @@ private:
     CHIP_ERROR TestCheckForListAttributeReport_378()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84739,7 +84739,7 @@ private:
     CHIP_ERROR TestReadRangeRestrictedUnsigned8BitInteger_379()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84763,7 +84763,7 @@ private:
     CHIP_ERROR TestWriteMinValueToARangeRestrictedUnsigned8BitInteger_380()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84791,7 +84791,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedUnsigned8BitInteger_381()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84819,7 +84819,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedUnsigned8BitInteger_382()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84847,7 +84847,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToARangeRestrictedUnsigned8BitInteger_383()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84875,7 +84875,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_384()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84899,7 +84899,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToARangeRestrictedUnsigned8BitInteger_385()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84923,7 +84923,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_386()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84947,7 +84947,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedUnsigned8BitInteger_387()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84971,7 +84971,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_388()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -84995,7 +84995,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedUnsigned8BitInteger_389()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85019,7 +85019,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_390()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85043,7 +85043,7 @@ private:
     CHIP_ERROR TestReadRangeRestrictedUnsigned16BitInteger_391()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85067,7 +85067,7 @@ private:
     CHIP_ERROR TestWriteMinValueToARangeRestrictedUnsigned16BitInteger_392()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85095,7 +85095,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedUnsigned16BitInteger_393()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85123,7 +85123,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedUnsigned16BitInteger_394()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85151,7 +85151,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToARangeRestrictedUnsigned16BitInteger_395()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85179,7 +85179,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_396()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85203,7 +85203,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToARangeRestrictedUnsigned16BitInteger_397()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85227,7 +85227,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_398()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85251,7 +85251,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedUnsigned16BitInteger_399()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85275,7 +85275,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_400()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85299,7 +85299,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedUnsigned16BitInteger_401()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85323,7 +85323,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_402()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85347,7 +85347,7 @@ private:
     CHIP_ERROR TestReadRangeRestrictedSigned8BitInteger_403()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85371,7 +85371,7 @@ private:
     CHIP_ERROR TestWriteMinValueToARangeRestrictedSigned8BitInteger_404()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85398,7 +85398,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedSigned8BitInteger_405()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85426,7 +85426,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedSigned8BitInteger_406()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85454,7 +85454,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToARangeRestrictedSigned8BitInteger_407()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85481,7 +85481,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueHasNotChanged_408()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85505,7 +85505,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToARangeRestrictedSigned8BitInteger_409()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85530,7 +85530,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMinValid_410()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85554,7 +85554,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedSigned8BitInteger_411()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85579,7 +85579,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_412()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85603,7 +85603,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedSigned8BitInteger_413()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85627,7 +85627,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned8BitIntegerValueIsAtMidValid_414()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85651,7 +85651,7 @@ private:
     CHIP_ERROR TestReadRangeRestrictedSigned16BitInteger_415()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85675,7 +85675,7 @@ private:
     CHIP_ERROR TestWriteMinValueToARangeRestrictedSigned16BitInteger_416()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85703,7 +85703,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToARangeRestrictedSigned16BitInteger_417()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85731,7 +85731,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToARangeRestrictedSigned16BitInteger_418()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85759,7 +85759,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToARangeRestrictedSigned16BitInteger_419()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85787,7 +85787,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueHasNotChanged_420()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85811,7 +85811,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToARangeRestrictedSigned16BitInteger_421()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85835,7 +85835,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMinValid_422()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85859,7 +85859,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToARangeRestrictedSigned16BitInteger_423()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85883,7 +85883,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_424()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85907,7 +85907,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToARangeRestrictedSigned16BitInteger_425()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85931,7 +85931,7 @@ private:
     CHIP_ERROR TestVerifyRangeRestrictedSigned16BitIntegerValueIsAtMidValid_426()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85955,7 +85955,7 @@ private:
     CHIP_ERROR TestReadNullableRangeRestrictedUnsigned8BitInteger_427()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -85980,7 +85980,7 @@ private:
     CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedUnsigned8BitInteger_428()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86008,7 +86008,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned8BitInteger_429()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86036,7 +86036,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned8BitInteger_430()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86064,7 +86064,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedUnsigned8BitInteger_431()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86092,7 +86092,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueHasNotChanged_432()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86117,7 +86117,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedUnsigned8BitInteger_433()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86141,7 +86141,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMinValid_434()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86166,7 +86166,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedUnsigned8BitInteger_435()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86190,7 +86190,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMaxValid_436()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86215,7 +86215,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned8BitInteger_437()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86239,7 +86239,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsAtMidValid_438()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86264,7 +86264,7 @@ private:
     CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedUnsigned8BitInteger_439()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86288,7 +86288,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned8BitIntegerValueIsNull_440()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86312,7 +86312,7 @@ private:
     CHIP_ERROR TestReadNullableRangeRestrictedUnsigned16BitInteger_441()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86337,7 +86337,7 @@ private:
     CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedUnsigned16BitInteger_442()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86365,7 +86365,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedUnsigned16BitInteger_443()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86393,7 +86393,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedUnsigned16BitInteger_444()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86421,7 +86421,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedUnsigned16BitInteger_445()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86449,7 +86449,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueHasNotChanged_446()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86474,7 +86474,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedUnsigned16BitInteger_447()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86498,7 +86498,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMinValid_448()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86523,7 +86523,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedUnsigned16BitInteger_449()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86547,7 +86547,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMaxValid_450()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86572,7 +86572,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedUnsigned16BitInteger_451()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86596,7 +86596,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsAtMidValid_452()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86621,7 +86621,7 @@ private:
     CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedUnsigned16BitInteger_453()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86645,7 +86645,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedUnsigned16BitIntegerValueIsNull_454()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86669,7 +86669,7 @@ private:
     CHIP_ERROR TestReadNullableRangeRestrictedSigned8BitInteger_455()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86694,7 +86694,7 @@ private:
     CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedSigned8BitInteger_456()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86722,7 +86722,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned8BitInteger_457()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86750,7 +86750,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned8BitInteger_458()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86778,7 +86778,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedSigned8BitInteger_459()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86806,7 +86806,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueHasNotChanged_460()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86831,7 +86831,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedSigned8BitInteger_461()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86855,7 +86855,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMinValid_462()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86880,7 +86880,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedSigned8BitInteger_463()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86904,7 +86904,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMaxValid_464()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86929,7 +86929,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedSigned8BitInteger_465()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86953,7 +86953,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtMidValid_466()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -86978,7 +86978,7 @@ private:
     CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedSigned8BitInteger_467()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87002,7 +87002,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned8BitIntegerValueIsAtNull_468()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87026,7 +87026,7 @@ private:
     CHIP_ERROR TestReadNullableRangeRestrictedSigned16BitInteger_469()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87051,7 +87051,7 @@ private:
     CHIP_ERROR TestWriteMinValueToANullableRangeRestrictedSigned16BitInteger_470()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87079,7 +87079,7 @@ private:
     CHIP_ERROR TestWriteJustBelowRangeValueToANullableRangeRestrictedSigned16BitInteger_471()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87107,7 +87107,7 @@ private:
     CHIP_ERROR TestWriteJustAboveRangeValueToANullableRangeRestrictedSigned16BitInteger_472()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87135,7 +87135,7 @@ private:
     CHIP_ERROR TestWriteMaxValueToANullableRangeRestrictedSigned16BitInteger_473()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87163,7 +87163,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueHasNotChanged_474()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87188,7 +87188,7 @@ private:
     CHIP_ERROR TestWriteMinValidValueToANullableRangeRestrictedSigned16BitInteger_475()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87212,7 +87212,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMinValid_476()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87237,7 +87237,7 @@ private:
     CHIP_ERROR TestWriteMaxValidValueToANullableRangeRestrictedSigned16BitInteger_477()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87261,7 +87261,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMaxValid_478()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87286,7 +87286,7 @@ private:
     CHIP_ERROR TestWriteMiddleValidValueToANullableRangeRestrictedSigned16BitInteger_479()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87310,7 +87310,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsAtMidValid_480()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87335,7 +87335,7 @@ private:
     CHIP_ERROR TestWriteNullValueToANullableRangeRestrictedSigned16BitInteger_481()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87359,7 +87359,7 @@ private:
     CHIP_ERROR TestVerifyNullableRangeRestrictedSigned16BitIntegerValueIsNull_482()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87383,7 +87383,7 @@ private:
     CHIP_ERROR TestWriteAttributeThatReturnsGeneralStatusOnWrite_483()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87409,7 +87409,7 @@ private:
     CHIP_ERROR TestWriteAttributeThatReturnsClusterSpecificStatusOnWrite_484()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87437,7 +87437,7 @@ private:
     CHIP_ERROR TestReadAttributeThatReturnsGeneralStatusOnRead_485()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87457,7 +87457,7 @@ private:
     CHIP_ERROR TestReadAttributeThatReturnsClusterSpecificStatusOnRead_486()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87477,7 +87477,7 @@ private:
     CHIP_ERROR TestReadAcceptedCommandListAttribute_487()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87519,7 +87519,7 @@ private:
     CHIP_ERROR TestReadGeneratedCommandListAttribute_488()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87552,21 +87552,21 @@ private:
     CHIP_ERROR TestWriteStructTypedAttribute_489()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         id structAttrArgument;
-        structAttrArgument = [[MTRTestClusterClusterSimpleStruct alloc] init];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).a = [NSNumber numberWithUnsignedChar:5U];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).b = [NSNumber numberWithBool:true];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).c = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).d = [[NSData alloc] initWithBytes:"abc" length:3];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).e = @"";
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).f = [NSNumber numberWithUnsignedChar:17U];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).g = [NSNumber numberWithFloat:1.5f];
-        ((MTRTestClusterClusterSimpleStruct *) structAttrArgument).h = [NSNumber numberWithDouble:3.14159265358979];
+        structAttrArgument = [[MTRUnitTestingClusterSimpleStruct alloc] init];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).a = [NSNumber numberWithUnsignedChar:5U];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).b = [NSNumber numberWithBool:true];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).c = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).d = [[NSData alloc] initWithBytes:"abc" length:3];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).e = @"";
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).f = [NSNumber numberWithUnsignedChar:17U];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).g = [NSNumber numberWithFloat:1.5f];
+        ((MTRUnitTestingClusterSimpleStruct *) structAttrArgument).h = [NSNumber numberWithDouble:3.14159265358979];
 
         [cluster writeAttributeStructAttrWithValue:structAttrArgument
                                         completion:^(NSError * _Nullable err) {
@@ -87583,28 +87583,28 @@ private:
     CHIP_ERROR TestReadStructTypedAttribute_490()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster
-            readAttributeStructAttrWithCompletion:^(MTRTestClusterClusterSimpleStruct * _Nullable value, NSError * _Nullable err) {
+            readAttributeStructAttrWithCompletion:^(MTRUnitTestingClusterSimpleStruct * _Nullable value, NSError * _Nullable err) {
                 NSLog(@"Read struct-typed attribute Error: %@", err);
 
                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                 {
                     id actualValue = value;
-                    VerifyOrReturn(CheckValue("a", ((MTRTestClusterClusterSimpleStruct *) actualValue).a, 5U));
-                    VerifyOrReturn(CheckValue("b", ((MTRTestClusterClusterSimpleStruct *) actualValue).b, true));
-                    VerifyOrReturn(CheckValue("c", ((MTRTestClusterClusterSimpleStruct *) actualValue).c, 2U));
+                    VerifyOrReturn(CheckValue("a", ((MTRUnitTestingClusterSimpleStruct *) actualValue).a, 5U));
+                    VerifyOrReturn(CheckValue("b", ((MTRUnitTestingClusterSimpleStruct *) actualValue).b, true));
+                    VerifyOrReturn(CheckValue("c", ((MTRUnitTestingClusterSimpleStruct *) actualValue).c, 2U));
                     VerifyOrReturn(CheckValueAsString(
-                        "d", ((MTRTestClusterClusterSimpleStruct *) actualValue).d, [[NSData alloc] initWithBytes:"abc" length:3]));
-                    VerifyOrReturn(CheckValueAsString("e", ((MTRTestClusterClusterSimpleStruct *) actualValue).e, @""));
-                    VerifyOrReturn(CheckValue("f", ((MTRTestClusterClusterSimpleStruct *) actualValue).f, 17U));
-                    VerifyOrReturn(CheckValue("g", ((MTRTestClusterClusterSimpleStruct *) actualValue).g, 1.5f));
-                    VerifyOrReturn(CheckValue("h", ((MTRTestClusterClusterSimpleStruct *) actualValue).h, 3.14159265358979));
+                        "d", ((MTRUnitTestingClusterSimpleStruct *) actualValue).d, [[NSData alloc] initWithBytes:"abc" length:3]));
+                    VerifyOrReturn(CheckValueAsString("e", ((MTRUnitTestingClusterSimpleStruct *) actualValue).e, @""));
+                    VerifyOrReturn(CheckValue("f", ((MTRUnitTestingClusterSimpleStruct *) actualValue).f, 17U));
+                    VerifyOrReturn(CheckValue("g", ((MTRUnitTestingClusterSimpleStruct *) actualValue).g, 1.5f));
+                    VerifyOrReturn(CheckValue("h", ((MTRUnitTestingClusterSimpleStruct *) actualValue).h, 3.14159265358979));
                 }
 
                 NextTest();
@@ -87926,7 +87926,7 @@ private:
     CHIP_ERROR TestWriteAttributeListWithListOfInt8u_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87955,7 +87955,7 @@ private:
     CHIP_ERROR TestReadAttributeListWithPartialListOfInt8uThatShouldBeInIt_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -87978,7 +87978,7 @@ private:
     CHIP_ERROR TestReadAttributeListWithPartialListOfInt8uThatShouldNotBeIncluded_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88000,7 +88000,7 @@ private:
     CHIP_ERROR TestWriteAttributeListBackToDefaultValue_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88025,7 +88025,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32DefaultValue_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88049,7 +88049,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap32WithMaskVal1AndMaskVal3_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88071,7 +88071,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal2IsNotSet_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88095,7 +88095,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal1IsSet_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88119,7 +88119,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskVal3IsSet_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88143,7 +88143,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32WithMaskVal1AndMaskVal3AndEnsureMaskval1AndMaskVal3AreSet_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88167,7 +88167,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32uValue_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88189,7 +88189,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uValueMinValueConstraints_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88210,7 +88210,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uValueMaxValueConstraints_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88231,7 +88231,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uValueNotValueConstraints_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88252,7 +88252,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32uValueBackToDefaultValue_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88274,7 +88274,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValue_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88296,7 +88296,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueMinLengthConstraints_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88316,7 +88316,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueMaxLengthConstraints_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88336,7 +88336,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueStartsWithConstraints_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88356,7 +88356,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueEndsWithConstraints_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88376,7 +88376,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValue_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88398,7 +88398,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88419,7 +88419,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValue_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88441,7 +88441,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88462,7 +88462,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValue_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88484,7 +88484,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueIsLowerCaseIsUpperCaseConstraints_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88505,7 +88505,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValue_27()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88527,7 +88527,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88547,7 +88547,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValue_29()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88569,7 +88569,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringValueIsHexStringConstraints_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -88589,7 +88589,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringValueBackToDefaultValue_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89675,16 +89675,16 @@ private:
     CHIP_ERROR TestSendTestAddArgumentsCommand_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:3U];
         params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send Test Add Arguments Command Error: %@", err);
 
@@ -89707,16 +89707,16 @@ private:
     CHIP_ERROR TestSendTestAddArgumentsCommand_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:3U];
         params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send Test Add Arguments Command Error: %@", err);
 
@@ -89736,16 +89736,16 @@ private:
     CHIP_ERROR TestSendTestAddArgumentsCommand_3()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:3U];
         params.arg2 = [TestAddArgumentDefaultValue copy];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send Test Add Arguments Command Error: %@", err);
 
@@ -89764,7 +89764,7 @@ private:
     CHIP_ERROR TestReadAttributeBooleanDefaultValue_4()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89791,7 +89791,7 @@ private:
     CHIP_ERROR TestWriteAttributeBooleanNotDefaultValue_5()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89813,7 +89813,7 @@ private:
     CHIP_ERROR TestReadAttributeBooleanNotDefaultValue_6()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89834,7 +89834,7 @@ private:
     CHIP_ERROR TestWriteAttributeBooleanDefaultValue_7()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89856,7 +89856,7 @@ private:
     CHIP_ERROR TestReadAttributeBooleanFalse_8()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89881,7 +89881,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap8DefaultValue_9()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89908,7 +89908,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap8NotDefaultValue_10()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89930,7 +89930,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap8NotDefaultValue_11()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89951,7 +89951,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap8DefaultValue_12()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89973,7 +89973,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap8DefaultValue_13()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -89998,7 +89998,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap16DefaultValue_14()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90025,7 +90025,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap16NotDefaultValue_15()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90047,7 +90047,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap16NotDefaultValue_16()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90068,7 +90068,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap16DefaultValue_17()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90090,7 +90090,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap16DefaultValue_18()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90115,7 +90115,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32DefaultValue_19()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90142,7 +90142,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap32NotDefaultValue_20()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90164,7 +90164,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32NotDefaultValue_21()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90185,7 +90185,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap32DefaultValue_22()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90207,7 +90207,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap32DefaultValue_23()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90232,7 +90232,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap64DefaultValue_24()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90259,7 +90259,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap64NotDefaultValue_25()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90281,7 +90281,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap64DefaultValue_26()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90302,7 +90302,7 @@ private:
     CHIP_ERROR TestWriteAttributeBitmap64DefaultValue_27()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90324,7 +90324,7 @@ private:
     CHIP_ERROR TestReadAttributeBitmap64DefaultValue_28()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90349,7 +90349,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8uDefaultValue_29()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90376,7 +90376,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8uNotDefaultValue_30()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90398,7 +90398,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8uNotDefaultValue_31()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90419,7 +90419,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8uDefaultValue_32()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90441,7 +90441,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8uDefaultValue_33()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90466,7 +90466,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16uDefaultValue_34()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90493,7 +90493,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16uNotDefaultValue_35()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90515,7 +90515,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16uNotDefaultValue_36()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90536,7 +90536,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16uDefaultValue_37()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90558,7 +90558,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16uDefaultValue_38()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90583,7 +90583,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uDefaultValue_39()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90610,7 +90610,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32uNotDefaultValue_40()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90632,7 +90632,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uNotDefaultValue_41()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90653,7 +90653,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32uDefaultValue_42()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90675,7 +90675,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32uDefaultValue_43()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90700,7 +90700,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64uDefaultValue_44()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90727,7 +90727,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64uNotDefaultValue_45()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90749,7 +90749,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64uNotDefaultValue_46()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90770,7 +90770,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64uDefaultValue_47()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90792,7 +90792,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64uDefaultValue_48()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90817,7 +90817,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sDefaultValue_49()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90844,7 +90844,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8sNotDefaultValue_50()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90866,7 +90866,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sNotDefaultValue_51()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90887,7 +90887,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt8sDefaultValue_52()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90909,7 +90909,7 @@ private:
     CHIP_ERROR TestReadAttributeInt8sDefaultValue_53()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90934,7 +90934,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sDefaultValue_54()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90961,7 +90961,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16sNotDefaultValue_55()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -90983,7 +90983,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sNotDefaultValue_56()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91004,7 +91004,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt16sDefaultValue_57()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91026,7 +91026,7 @@ private:
     CHIP_ERROR TestReadAttributeInt16sDefaultValue_58()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91051,7 +91051,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sDefaultValue_59()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91078,7 +91078,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32sNotDefaultValue_60()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91100,7 +91100,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sNotDefaultValue_61()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91121,7 +91121,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt32sDefaultValue_62()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91143,7 +91143,7 @@ private:
     CHIP_ERROR TestReadAttributeInt32sDefaultValue_63()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91168,7 +91168,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sDefaultValue_64()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91195,7 +91195,7 @@ private:
     CHIP_ERROR TestWriteAttributeIntsNotDefaultValue_65()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91217,7 +91217,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sNotDefaultValue_66()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91238,7 +91238,7 @@ private:
     CHIP_ERROR TestWriteAttributeInt64sDefaultValue_67()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91260,7 +91260,7 @@ private:
     CHIP_ERROR TestReadAttributeInt64sDefaultValue_68()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91285,7 +91285,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum8DefaultValue_69()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91312,7 +91312,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum8NotDefaultValue_70()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91334,7 +91334,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum8NotDefaultValue_71()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91355,7 +91355,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum8DefaultValue_72()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91377,7 +91377,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum8DefaultValue_73()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91402,7 +91402,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum16DefaultValue_74()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91429,7 +91429,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum16NotDefaultValue_75()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91451,7 +91451,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum16NotDefaultValue_76()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91472,7 +91472,7 @@ private:
     CHIP_ERROR TestWriteAttributeEnum16DefaultValue_77()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91494,7 +91494,7 @@ private:
     CHIP_ERROR TestReadAttributeEnum16DefaultValue_78()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91519,7 +91519,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochUsDefaultValue_79()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91546,7 +91546,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochUsNotDefaultValue_80()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91568,7 +91568,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochUsNotDefaultValue_81()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91589,7 +91589,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochUsDefaultValue_82()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91611,7 +91611,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochUsDefaultValue_83()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91636,7 +91636,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochSDefaultValue_84()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91663,7 +91663,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochSNotDefaultValue_85()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91685,7 +91685,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochSNotDefaultValue_86()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91706,7 +91706,7 @@ private:
     CHIP_ERROR TestWriteAttributeEpochSDefaultValue_87()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91728,7 +91728,7 @@ private:
     CHIP_ERROR TestReadAttributeEpochSDefaultValue_88()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91753,7 +91753,7 @@ private:
     CHIP_ERROR TestReadAttributeVendorIdDefaultValue_89()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91780,7 +91780,7 @@ private:
     CHIP_ERROR TestWriteAttributeVendorIdNotDefaultValue_90()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91802,7 +91802,7 @@ private:
     CHIP_ERROR TestReadAttributeVendorIdNotDefaultValue_91()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91823,7 +91823,7 @@ private:
     CHIP_ERROR TestWriteAttributeVendorIdDefaultValue_92()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91845,7 +91845,7 @@ private:
     CHIP_ERROR TestReadAttributeVendorIdDefaultValue_93()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91870,7 +91870,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringDefaultValue_94()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91897,7 +91897,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringDefaultValueAndCompareToSavedValue_95()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91921,7 +91921,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringNotDefaultValue_96()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91944,7 +91944,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringNotDefaultValue_97()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91973,7 +91973,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringNotDefaultValueAndCompareToSavedValue_98()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -91999,7 +91999,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringNotDefaultValueFromSavedValue_99()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92021,7 +92021,7 @@ private:
     CHIP_ERROR TestReadAttributeCharStringNotDefaultValueAndCompareToExpectedValue_100()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92045,7 +92045,7 @@ private:
     CHIP_ERROR TestWriteAttributeCharStringDefaultValue_101()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92068,7 +92068,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringDefaultValue_102()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92095,7 +92095,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringDefaultValueAndCompareToSavedValue_103()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92119,7 +92119,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetStringNotDefaultValue_104()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92142,7 +92142,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringNotDefaultValue_105()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92172,7 +92172,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringNotDefaultValueAndCompareToSavedValue_106()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92198,7 +92198,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetStringNotDefaultValueFromSavedValue_107()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92221,7 +92221,7 @@ private:
     CHIP_ERROR TestReadAttributeOctetStringNotDefaultValueAndCompareToExpectedValue_108()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92246,7 +92246,7 @@ private:
     CHIP_ERROR TestWriteAttributeOctetStringDefaultValue_109()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
@@ -92371,16 +92371,16 @@ private:
     CHIP_ERROR TestSendTestAddArgumentsCommand_1()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = [NSNumber numberWithUnsignedChar:3U];
         params.arg2 = [NSNumber numberWithUnsignedChar:17U];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send Test Add Arguments Command Error: %@", err);
 
@@ -92403,16 +92403,16 @@ private:
     CHIP_ERROR TestSendTestAddArgumentsCommand_2()
     {
         MTRBaseDevice * device = GetDevice("alpha");
-        MTRBaseClusterTestCluster * cluster = [[MTRBaseClusterTestCluster alloc] initWithDevice:device
+        MTRBaseClusterUnitTesting * cluster = [[MTRBaseClusterUnitTesting alloc] initWithDevice:device
                                                                                      endpointID:@(1)
                                                                                           queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRTestClusterClusterTestAddArgumentsParams alloc] init];
+        __auto_type * params = [[MTRUnitTestingClusterTestAddArgumentsParams alloc] init];
         params.arg1 = mArg1.HasValue() ? [NSNumber numberWithUnsignedChar:mArg1.Value()] : [NSNumber numberWithUnsignedChar:5U];
         params.arg2 = [TestAddArgumentDefaultValue copy];
         [cluster testAddArgumentsWithParams:params
-                                 completion:^(MTRTestClusterClusterTestAddArgumentsResponseParams * _Nullable values,
+                                 completion:^(MTRUnitTestingClusterTestAddArgumentsResponseParams * _Nullable values,
                                      NSError * _Nullable err) {
                                      NSLog(@"Send Test Add Arguments Command Error: %@", err);
 
