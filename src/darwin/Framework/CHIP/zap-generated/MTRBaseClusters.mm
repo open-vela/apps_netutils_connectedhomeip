@@ -64,6 +64,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Identify::Commands::Identify::Type request;
@@ -74,8 +75,8 @@ using chip::SessionHandle;
             }
             request.identifyTime = params.identifyTime.unsignedShortValue;
 
-            chip::Controller::IdentifyCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -91,6 +92,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Identify::Commands::TriggerEffect::Type request;
@@ -104,8 +106,8 @@ using chip::SessionHandle;
             request.effectVariant
                 = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
 
-            chip::Controller::IdentifyCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -806,6 +808,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRGroupsClusterAddGroupResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterAddGroupResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGroupsClusterAddGroupResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Groups::Commands::AddGroup::Type request;
@@ -817,8 +820,8 @@ using chip::SessionHandle;
             request.groupId = params.groupId.unsignedShortValue;
             request.groupName = [self asCharSpan:params.groupName];
 
-            chip::Controller::GroupsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -832,6 +835,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRGroupsClusterViewGroupResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterViewGroupResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGroupsClusterViewGroupResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Groups::Commands::ViewGroup::Type request;
@@ -842,8 +846,8 @@ using chip::SessionHandle;
             }
             request.groupId = params.groupId.unsignedShortValue;
 
-            chip::Controller::GroupsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -858,6 +862,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             GroupsClusterGetGroupMembershipResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGroupsClusterGetGroupMembershipResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Groups::Commands::GetGroupMembership::Type request;
@@ -889,8 +894,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::GroupsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -904,6 +909,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRGroupsClusterRemoveGroupResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterRemoveGroupResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGroupsClusterRemoveGroupResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Groups::Commands::RemoveGroup::Type request;
@@ -914,8 +920,8 @@ using chip::SessionHandle;
             }
             request.groupId = params.groupId.unsignedShortValue;
 
-            chip::Controller::GroupsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -936,6 +942,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Groups::Commands::RemoveAllGroups::Type request;
@@ -945,8 +952,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::GroupsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -963,6 +970,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Groups::Commands::AddGroupIfIdentifying::Type request;
@@ -974,8 +982,8 @@ using chip::SessionHandle;
             request.groupId = params.groupId.unsignedShortValue;
             request.groupName = [self asCharSpan:params.groupName];
 
-            chip::Controller::GroupsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1589,6 +1597,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRScenesClusterAddSceneResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterAddSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterAddSceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::AddScene::Type request;
@@ -1675,8 +1684,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1690,6 +1699,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRScenesClusterViewSceneResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterViewSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterViewSceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::ViewScene::Type request;
@@ -1701,8 +1711,8 @@ using chip::SessionHandle;
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1716,6 +1726,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRScenesClusterRemoveSceneResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterRemoveSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterRemoveSceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::RemoveScene::Type request;
@@ -1727,8 +1738,8 @@ using chip::SessionHandle;
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1743,6 +1754,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ScenesClusterRemoveAllScenesResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterRemoveAllScenesResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::RemoveAllScenes::Type request;
@@ -1753,8 +1765,8 @@ using chip::SessionHandle;
             }
             request.groupId = params.groupId.unsignedShortValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1768,6 +1780,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRScenesClusterStoreSceneResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterStoreSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterStoreSceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::StoreScene::Type request;
@@ -1779,8 +1792,8 @@ using chip::SessionHandle;
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1796,6 +1809,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::RecallScene::Type request;
@@ -1816,8 +1830,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1832,6 +1846,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ScenesClusterGetSceneMembershipResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterGetSceneMembershipResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::GetSceneMembership::Type request;
@@ -1842,8 +1857,8 @@ using chip::SessionHandle;
             }
             request.groupId = params.groupId.unsignedShortValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1858,6 +1873,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ScenesClusterEnhancedAddSceneResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterEnhancedAddSceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::EnhancedAddScene::Type request;
@@ -1944,8 +1960,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1960,6 +1976,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ScenesClusterEnhancedViewSceneResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterEnhancedViewSceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::EnhancedViewScene::Type request;
@@ -1971,8 +1988,8 @@ using chip::SessionHandle;
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1986,6 +2003,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRScenesClusterCopySceneResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterCopySceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRScenesClusterCopySceneResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Scenes::Commands::CopyScene::Type request;
@@ -2000,8 +2018,8 @@ using chip::SessionHandle;
             request.groupIdTo = params.groupIdTo.unsignedShortValue;
             request.sceneIdTo = params.sceneIdTo.unsignedCharValue;
 
-            chip::Controller::ScenesCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3087,6 +3105,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OnOff::Commands::Off::Type request;
@@ -3096,8 +3115,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3117,6 +3136,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OnOff::Commands::On::Type request;
@@ -3126,8 +3146,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3147,6 +3167,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OnOff::Commands::Toggle::Type request;
@@ -3156,8 +3177,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3173,6 +3194,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OnOff::Commands::OffWithEffect::Type request;
@@ -3185,8 +3207,8 @@ using chip::SessionHandle;
             request.effectVariant
                 = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3207,6 +3229,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OnOff::Commands::OnWithRecallGlobalScene::Type request;
@@ -3216,8 +3239,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3233,6 +3256,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OnOff::Commands::OnWithTimedOff::Type request;
@@ -3246,8 +3270,8 @@ using chip::SessionHandle;
             request.onTime = params.onTime.unsignedShortValue;
             request.offWaitTime = params.offWaitTime.unsignedShortValue;
 
-            chip::Controller::OnOffCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5019,6 +5043,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::MoveToLevel::Type request;
@@ -5037,8 +5062,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5054,6 +5079,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::Move::Type request;
@@ -5072,8 +5098,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5089,6 +5115,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::Step::Type request;
@@ -5108,8 +5135,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5125,6 +5152,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::Stop::Type request;
@@ -5136,8 +5164,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5154,6 +5182,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::MoveToLevelWithOnOff::Type request;
@@ -5172,8 +5201,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5189,6 +5218,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::MoveWithOnOff::Type request;
@@ -5207,8 +5237,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5224,6 +5254,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::StepWithOnOff::Type request;
@@ -5243,8 +5274,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5260,6 +5291,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::StopWithOnOff::Type request;
@@ -5271,8 +5303,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5289,6 +5321,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LevelControl::Commands::MoveToClosestFrequency::Type request;
@@ -5299,8 +5332,8 @@ using chip::SessionHandle;
             }
             request.frequency = params.frequency.unsignedShortValue;
 
-            chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11432,6 +11465,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::InstantAction::Type request;
@@ -11446,8 +11480,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11464,6 +11498,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::InstantActionWithTransition::Type request;
@@ -11479,8 +11514,8 @@ using chip::SessionHandle;
             }
             request.transitionTime = params.transitionTime.unsignedShortValue;
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11496,6 +11531,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::StartAction::Type request;
@@ -11510,8 +11546,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11528,6 +11564,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::StartActionWithDuration::Type request;
@@ -11543,8 +11580,8 @@ using chip::SessionHandle;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11560,6 +11597,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::StopAction::Type request;
@@ -11574,8 +11612,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11591,6 +11629,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::PauseAction::Type request;
@@ -11605,8 +11644,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11623,6 +11662,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::PauseActionWithDuration::Type request;
@@ -11638,8 +11678,8 @@ using chip::SessionHandle;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11655,6 +11695,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::ResumeAction::Type request;
@@ -11669,8 +11710,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11686,6 +11727,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::EnableAction::Type request;
@@ -11700,8 +11742,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11718,6 +11760,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::EnableActionWithDuration::Type request;
@@ -11733,8 +11776,8 @@ using chip::SessionHandle;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11750,6 +11793,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::DisableAction::Type request;
@@ -11764,8 +11808,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11782,6 +11826,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Actions::Commands::DisableActionWithDuration::Type request;
@@ -11797,8 +11842,8 @@ using chip::SessionHandle;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            chip::Controller::ActionsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -12591,6 +12636,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Basic::Commands::MfgSpecificPing::Type request;
@@ -12600,8 +12646,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::BasicCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -14946,6 +14992,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OtaSoftwareUpdateProviderClusterQueryImageResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROtaSoftwareUpdateProviderClusterQueryImageResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::QueryImage::Type request;
@@ -14997,8 +15044,8 @@ using chip::SessionHandle;
                 definedValue_0 = [self asByteSpan:params.metadataForProvider];
             }
 
-            chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15013,6 +15060,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::ApplyUpdateRequest::Type request;
@@ -15024,8 +15072,8 @@ using chip::SessionHandle;
             request.updateToken = [self asByteSpan:params.updateToken];
             request.newVersion = params.newVersion.unsignedIntValue;
 
-            chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15042,6 +15090,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::NotifyUpdateApplied::Type request;
@@ -15053,8 +15102,8 @@ using chip::SessionHandle;
             request.updateToken = [self asByteSpan:params.updateToken];
             request.softwareVersion = params.softwareVersion.unsignedIntValue;
 
-            chip::Controller::OtaSoftwareUpdateProviderCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15564,6 +15613,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OtaSoftwareUpdateRequestor::Commands::AnnounceOtaProvider::Type request;
@@ -15582,8 +15632,8 @@ using chip::SessionHandle;
             }
             request.endpoint = params.endpoint.unsignedShortValue;
 
-            chip::Controller::OtaSoftwareUpdateRequestorCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -22320,6 +22370,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             GeneralCommissioningClusterArmFailSafeResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGeneralCommissioningClusterArmFailSafeResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GeneralCommissioning::Commands::ArmFailSafe::Type request;
@@ -22331,8 +22382,8 @@ using chip::SessionHandle;
             request.expiryLengthSeconds = params.expiryLengthSeconds.unsignedShortValue;
             request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
 
-            chip::Controller::GeneralCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -22347,6 +22398,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             GeneralCommissioningClusterSetRegulatoryConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGeneralCommissioningClusterSetRegulatoryConfigResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GeneralCommissioning::Commands::SetRegulatoryConfig::Type request;
@@ -22360,8 +22412,8 @@ using chip::SessionHandle;
             request.countryCode = [self asCharSpan:params.countryCode];
             request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
 
-            chip::Controller::GeneralCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -22383,6 +22435,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             GeneralCommissioningClusterCommissioningCompleteResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGeneralCommissioningClusterCommissioningCompleteResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GeneralCommissioning::Commands::CommissioningComplete::Type request;
@@ -22392,8 +22445,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::GeneralCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23425,6 +23478,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             NetworkCommissioningClusterScanNetworksResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterScanNetworksResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             NetworkCommissioning::Commands::ScanNetworks::Type request;
@@ -23449,8 +23503,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23465,6 +23519,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             NetworkCommissioning::Commands::AddOrUpdateWiFiNetwork::Type request;
@@ -23480,8 +23535,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23496,6 +23551,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             NetworkCommissioning::Commands::AddOrUpdateThreadNetwork::Type request;
@@ -23510,8 +23566,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23526,6 +23582,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             NetworkCommissioning::Commands::RemoveNetwork::Type request;
@@ -23540,8 +23597,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23556,6 +23613,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             NetworkCommissioningClusterConnectNetworkResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterConnectNetworkResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             NetworkCommissioning::Commands::ConnectNetwork::Type request;
@@ -23570,8 +23628,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23586,6 +23644,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             NetworkCommissioning::Commands::ReorderNetwork::Type request;
@@ -23601,8 +23660,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            chip::Controller::NetworkCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -24897,6 +24956,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             DiagnosticLogsClusterRetrieveLogsResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDiagnosticLogsClusterRetrieveLogsResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DiagnosticLogs::Commands::RetrieveLogsRequest::Type request;
@@ -24910,8 +24970,8 @@ using chip::SessionHandle;
                 params.requestedProtocol.unsignedCharValue);
             request.transferFileDesignator = [self asByteSpan:params.transferFileDesignator];
 
-            chip::Controller::DiagnosticLogsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -25402,6 +25462,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GeneralDiagnostics::Commands::TestEventTrigger::Type request;
@@ -25413,8 +25474,8 @@ using chip::SessionHandle;
             request.enableKey = [self asByteSpan:params.enableKey];
             request.eventTrigger = params.eventTrigger.unsignedLongLongValue;
 
-            chip::Controller::GeneralDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -26689,6 +26750,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             SoftwareDiagnostics::Commands::ResetWatermarks::Type request;
@@ -26698,8 +26760,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::SoftwareDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -27541,6 +27603,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ThreadNetworkDiagnostics::Commands::ResetCounts::Type request;
@@ -27550,8 +27613,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ThreadNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -33555,6 +33618,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WiFiNetworkDiagnostics::Commands::ResetCounts::Type request;
@@ -33564,8 +33628,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::WiFiNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -35187,6 +35251,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             EthernetNetworkDiagnostics::Commands::ResetCounts::Type request;
@@ -35196,8 +35261,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::EthernetNetworkDiagnosticsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -38965,6 +39030,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AdministratorCommissioning::Commands::OpenCommissioningWindow::Type request;
@@ -38982,8 +39048,8 @@ using chip::SessionHandle;
             request.iterations = params.iterations.unsignedIntValue;
             request.salt = [self asByteSpan:params.salt];
 
-            chip::Controller::AdministratorCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39000,6 +39066,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type request;
@@ -39013,8 +39080,8 @@ using chip::SessionHandle;
             }
             request.commissioningTimeout = params.commissioningTimeout.unsignedShortValue;
 
-            chip::Controller::AdministratorCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39035,6 +39102,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AdministratorCommissioning::Commands::RevokeCommissioning::Type request;
@@ -39047,8 +39115,8 @@ using chip::SessionHandle;
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            chip::Controller::AdministratorCommissioningCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39807,6 +39875,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterAttestationResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterAttestationResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::AttestationRequest::Type request;
@@ -39817,8 +39886,8 @@ using chip::SessionHandle;
             }
             request.attestationNonce = [self asByteSpan:params.attestationNonce];
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39833,6 +39902,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterCertificateChainResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterCertificateChainResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::CertificateChainRequest::Type request;
@@ -39843,8 +39913,8 @@ using chip::SessionHandle;
             }
             request.certificateType = params.certificateType.unsignedCharValue;
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39859,6 +39929,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterCSRResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterCSRResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::CSRRequest::Type request;
@@ -39873,8 +39944,8 @@ using chip::SessionHandle;
                 definedValue_0 = params.isForUpdateNOC.boolValue;
             }
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39889,6 +39960,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::AddNOC::Type request;
@@ -39907,8 +39979,8 @@ using chip::SessionHandle;
             request.adminVendorId
                 = static_cast<std::remove_reference_t<decltype(request.adminVendorId)>>(params.adminVendorId.unsignedShortValue);
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39923,6 +39995,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::UpdateNOC::Type request;
@@ -39937,8 +40010,8 @@ using chip::SessionHandle;
                 definedValue_0 = [self asByteSpan:params.icacValue];
             }
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39953,6 +40026,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::UpdateFabricLabel::Type request;
@@ -39963,8 +40037,8 @@ using chip::SessionHandle;
             }
             request.label = [self asCharSpan:params.label];
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39979,6 +40053,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::RemoveFabric::Type request;
@@ -39989,8 +40064,8 @@ using chip::SessionHandle;
             }
             request.fabricIndex = params.fabricIndex.unsignedCharValue;
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40007,6 +40082,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OperationalCredentials::Commands::AddTrustedRootCertificate::Type request;
@@ -40017,8 +40093,8 @@ using chip::SessionHandle;
             }
             request.rootCertificate = [self asByteSpan:params.rootCertificate];
 
-            chip::Controller::OperationalCredentialsCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41110,6 +41186,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetWrite::Type request;
@@ -41159,8 +41236,8 @@ using chip::SessionHandle;
                 nonNullValue_1 = params.groupKeySet.epochStartTime2.unsignedLongLongValue;
             }
 
-            chip::Controller::GroupKeyManagementCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41175,6 +41252,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             GroupKeyManagementClusterKeySetReadResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGroupKeyManagementClusterKeySetReadResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetRead::Type request;
@@ -41185,8 +41263,8 @@ using chip::SessionHandle;
             }
             request.groupKeySetID = params.groupKeySetID.unsignedShortValue;
 
-            chip::Controller::GroupKeyManagementCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41202,6 +41280,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetRemove::Type request;
@@ -41212,8 +41291,8 @@ using chip::SessionHandle;
             }
             request.groupKeySetID = params.groupKeySetID.unsignedShortValue;
 
-            chip::Controller::GroupKeyManagementCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41228,6 +41307,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             GroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetReadAllIndices::Type request;
@@ -41259,8 +41339,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::GroupKeyManagementCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -43897,6 +43977,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ModeSelect::Commands::ChangeToMode::Type request;
@@ -43907,8 +43988,8 @@ using chip::SessionHandle;
             }
             request.newMode = params.newMode.unsignedCharValue;
 
-            chip::Controller::ModeSelectCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45006,6 +45087,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::LockDoor::Type request;
@@ -45024,8 +45106,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45041,6 +45123,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::UnlockDoor::Type request;
@@ -45059,8 +45142,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45076,6 +45159,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::UnlockWithTimeout::Type request;
@@ -45093,8 +45177,8 @@ using chip::SessionHandle;
                 definedValue_0 = [self asByteSpan:params.pinCode];
             }
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45110,6 +45194,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::SetWeekDaySchedule::Type request;
@@ -45126,8 +45211,8 @@ using chip::SessionHandle;
             request.endHour = params.endHour.unsignedCharValue;
             request.endMinute = params.endMinute.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45142,6 +45227,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             DoorLockClusterGetWeekDayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDoorLockClusterGetWeekDayScheduleResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::GetWeekDaySchedule::Type request;
@@ -45153,8 +45239,8 @@ using chip::SessionHandle;
             request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45171,6 +45257,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::ClearWeekDaySchedule::Type request;
@@ -45182,8 +45269,8 @@ using chip::SessionHandle;
             request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45199,6 +45286,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::SetYearDaySchedule::Type request;
@@ -45212,8 +45300,8 @@ using chip::SessionHandle;
             request.localStartTime = params.localStartTime.unsignedIntValue;
             request.localEndTime = params.localEndTime.unsignedIntValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45228,6 +45316,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             DoorLockClusterGetYearDayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDoorLockClusterGetYearDayScheduleResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::GetYearDaySchedule::Type request;
@@ -45239,8 +45328,8 @@ using chip::SessionHandle;
             request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45257,6 +45346,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::ClearYearDaySchedule::Type request;
@@ -45268,8 +45358,8 @@ using chip::SessionHandle;
             request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45285,6 +45375,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::SetHolidaySchedule::Type request;
@@ -45299,8 +45390,8 @@ using chip::SessionHandle;
             request.operatingMode
                 = static_cast<std::remove_reference_t<decltype(request.operatingMode)>>(params.operatingMode.unsignedCharValue);
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45315,6 +45406,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             DoorLockClusterGetHolidayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDoorLockClusterGetHolidayScheduleResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::GetHolidaySchedule::Type request;
@@ -45325,8 +45417,8 @@ using chip::SessionHandle;
             }
             request.holidayIndex = params.holidayIndex.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45343,6 +45435,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::ClearHolidaySchedule::Type request;
@@ -45353,8 +45446,8 @@ using chip::SessionHandle;
             }
             request.holidayIndex = params.holidayIndex.unsignedCharValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45370,6 +45463,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::SetUser::Type request;
@@ -45417,8 +45511,8 @@ using chip::SessionHandle;
                     = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.credentialRule.unsignedCharValue);
             }
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45431,6 +45525,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRDoorLockClusterGetUserResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetUserResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDoorLockClusterGetUserResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::GetUser::Type request;
@@ -45441,8 +45536,8 @@ using chip::SessionHandle;
             }
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45458,6 +45553,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::ClearUser::Type request;
@@ -45471,8 +45567,8 @@ using chip::SessionHandle;
             }
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45487,6 +45583,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             DoorLockClusterSetCredentialResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDoorLockClusterSetCredentialResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::SetCredential::Type request;
@@ -45524,8 +45621,8 @@ using chip::SessionHandle;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.userType.unsignedCharValue);
             }
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45540,6 +45637,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             DoorLockClusterGetCredentialStatusResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRDoorLockClusterGetCredentialStatusResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::GetCredentialStatus::Type request;
@@ -45552,8 +45650,8 @@ using chip::SessionHandle;
                 params.credential.credentialType.unsignedCharValue);
             request.credential.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45569,6 +45667,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             DoorLock::Commands::ClearCredential::Type request;
@@ -45589,8 +45688,8 @@ using chip::SessionHandle;
                 nonNullValue_0.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
             }
 
-            chip::Controller::DoorLockCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50236,6 +50335,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::UpOrOpen::Type request;
@@ -50245,8 +50345,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50267,6 +50367,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::DownOrClose::Type request;
@@ -50276,8 +50377,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50297,6 +50398,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::StopMotion::Type request;
@@ -50306,8 +50408,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50323,6 +50425,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::GoToLiftValue::Type request;
@@ -50333,8 +50436,8 @@ using chip::SessionHandle;
             }
             request.liftValue = params.liftValue.unsignedShortValue;
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50351,6 +50454,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::GoToLiftPercentage::Type request;
@@ -50361,8 +50465,8 @@ using chip::SessionHandle;
             }
             request.liftPercent100thsValue = params.liftPercent100thsValue.unsignedShortValue;
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50378,6 +50482,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::GoToTiltValue::Type request;
@@ -50388,8 +50493,8 @@ using chip::SessionHandle;
             }
             request.tiltValue = params.tiltValue.unsignedShortValue;
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50406,6 +50511,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             WindowCovering::Commands::GoToTiltPercentage::Type request;
@@ -50416,8 +50522,8 @@ using chip::SessionHandle;
             }
             request.tiltPercent100thsValue = params.tiltPercent100thsValue.unsignedShortValue;
 
-            chip::Controller::WindowCoveringCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -52946,6 +53052,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             BarrierControl::Commands::BarrierControlGoToPercent::Type request;
@@ -52956,8 +53063,8 @@ using chip::SessionHandle;
             }
             request.percentOpen = params.percentOpen.unsignedCharValue;
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -52978,6 +53085,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             BarrierControl::Commands::BarrierControlStop::Type request;
@@ -52987,8 +53095,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::BarrierControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -57298,6 +57406,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Thermostat::Commands::SetpointRaiseLower::Type request;
@@ -57309,8 +57418,8 @@ using chip::SessionHandle;
             request.mode = static_cast<std::remove_reference_t<decltype(request.mode)>>(params.mode.unsignedCharValue);
             request.amount = params.amount.charValue;
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -57326,6 +57435,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Thermostat::Commands::SetWeeklySchedule::Type request;
@@ -57374,8 +57484,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -57390,6 +57500,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ThermostatClusterGetWeeklyScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRThermostatClusterGetWeeklyScheduleResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Thermostat::Commands::GetWeeklySchedule::Type request;
@@ -57403,8 +57514,8 @@ using chip::SessionHandle;
             request.modeToReturn
                 = static_cast<std::remove_reference_t<decltype(request.modeToReturn)>>(params.modeToReturn.unsignedCharValue);
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -57425,6 +57536,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Thermostat::Commands::ClearWeeklySchedule::Type request;
@@ -57434,8 +57546,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ThermostatCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66136,6 +66248,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveToHue::Type request;
@@ -66151,8 +66264,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66168,6 +66281,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveHue::Type request;
@@ -66181,8 +66295,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66198,6 +66312,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::StepHue::Type request;
@@ -66212,8 +66327,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66229,6 +66344,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveToSaturation::Type request;
@@ -66242,8 +66358,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66259,6 +66375,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveSaturation::Type request;
@@ -66272,8 +66389,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66289,6 +66406,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::StepSaturation::Type request;
@@ -66303,8 +66421,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66321,6 +66439,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveToHueAndSaturation::Type request;
@@ -66335,8 +66454,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66352,6 +66471,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveToColor::Type request;
@@ -66366,8 +66486,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66383,6 +66503,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveColor::Type request;
@@ -66396,8 +66517,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66413,6 +66534,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::StepColor::Type request;
@@ -66427,8 +66549,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66445,6 +66567,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveToColorTemperature::Type request;
@@ -66458,8 +66581,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66476,6 +66599,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedMoveToHue::Type request;
@@ -66491,8 +66615,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66508,6 +66632,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedMoveHue::Type request;
@@ -66521,8 +66646,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66538,6 +66663,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedStepHue::Type request;
@@ -66552,8 +66678,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66570,6 +66696,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedMoveToHueAndSaturation::Type request;
@@ -66584,8 +66711,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66601,6 +66728,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::ColorLoopSet::Type request;
@@ -66619,8 +66747,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66636,6 +66764,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::StopMoveStep::Type request;
@@ -66647,8 +66776,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66665,6 +66794,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::MoveColorTemperature::Type request;
@@ -66680,8 +66810,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66698,6 +66828,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ColorControl::Commands::StepColorTemperature::Type request;
@@ -66714,8 +66845,8 @@ using chip::SessionHandle;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            chip::Controller::ColorControlCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -81674,6 +81805,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRChannelClusterChangeChannelResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ChannelClusterChangeChannelResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRChannelClusterChangeChannelResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Channel::Commands::ChangeChannel::Type request;
@@ -81684,8 +81816,8 @@ using chip::SessionHandle;
             }
             request.match = [self asCharSpan:params.match];
 
-            chip::Controller::ChannelCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -81702,6 +81834,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Channel::Commands::ChangeChannelByNumber::Type request;
@@ -81713,8 +81846,8 @@ using chip::SessionHandle;
             request.majorNumber = params.majorNumber.unsignedShortValue;
             request.minorNumber = params.minorNumber.unsignedShortValue;
 
-            chip::Controller::ChannelCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -81730,6 +81863,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             Channel::Commands::SkipChannel::Type request;
@@ -81740,8 +81874,8 @@ using chip::SessionHandle;
             }
             request.count = params.count.unsignedShortValue;
 
-            chip::Controller::ChannelCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -82501,6 +82635,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             TargetNavigatorClusterNavigateTargetResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRTargetNavigatorClusterNavigateTargetResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             TargetNavigator::Commands::NavigateTarget::Type request;
@@ -82515,8 +82650,8 @@ using chip::SessionHandle;
                 definedValue_0 = [self asCharSpan:params.data];
             }
 
-            chip::Controller::TargetNavigatorCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83180,6 +83315,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::Play::Type request;
@@ -83189,8 +83325,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83210,6 +83346,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::Pause::Type request;
@@ -83219,8 +83356,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83240,6 +83377,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::StopPlayback::Type request;
@@ -83249,8 +83387,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83270,6 +83408,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::StartOver::Type request;
@@ -83279,8 +83418,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83300,6 +83439,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::Previous::Type request;
@@ -83309,8 +83449,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83330,6 +83470,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::Next::Type request;
@@ -83339,8 +83480,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83360,6 +83501,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::Rewind::Type request;
@@ -83369,8 +83511,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83390,6 +83532,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::FastForward::Type request;
@@ -83399,8 +83542,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83415,6 +83558,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::SkipForward::Type request;
@@ -83425,8 +83569,8 @@ using chip::SessionHandle;
             }
             request.deltaPositionMilliseconds = params.deltaPositionMilliseconds.unsignedLongLongValue;
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83441,6 +83585,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::SkipBackward::Type request;
@@ -83451,8 +83596,8 @@ using chip::SessionHandle;
             }
             request.deltaPositionMilliseconds = params.deltaPositionMilliseconds.unsignedLongLongValue;
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83467,6 +83612,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaPlayback::Commands::Seek::Type request;
@@ -83477,8 +83623,8 @@ using chip::SessionHandle;
             }
             request.position = params.position.unsignedLongLongValue;
 
-            chip::Controller::MediaPlaybackCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84713,6 +84859,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaInput::Commands::SelectInput::Type request;
@@ -84723,8 +84870,8 @@ using chip::SessionHandle;
             }
             request.index = params.index.unsignedCharValue;
 
-            chip::Controller::MediaInputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84745,6 +84892,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaInput::Commands::ShowInputStatus::Type request;
@@ -84754,8 +84902,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaInputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84776,6 +84924,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaInput::Commands::HideInputStatus::Type request;
@@ -84785,8 +84934,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::MediaInputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84802,6 +84951,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             MediaInput::Commands::RenameInput::Type request;
@@ -84813,8 +84963,8 @@ using chip::SessionHandle;
             request.index = params.index.unsignedCharValue;
             request.name = [self asCharSpan:params.name];
 
-            chip::Controller::MediaInputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -85493,6 +85643,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             LowPower::Commands::Sleep::Type request;
@@ -85502,8 +85653,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::LowPowerCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -85987,6 +86138,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRKeypadInputClusterSendKeyResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, KeypadInputClusterSendKeyResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRKeypadInputClusterSendKeyResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             KeypadInput::Commands::SendKey::Type request;
@@ -85997,8 +86149,8 @@ using chip::SessionHandle;
             }
             request.keyCode = static_cast<std::remove_reference_t<decltype(request.keyCode)>>(params.keyCode.unsignedCharValue);
 
-            chip::Controller::KeypadInputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -86485,6 +86637,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ContentLauncherClusterLaunchResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRContentLauncherClusterLaunchResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ContentLauncher::Commands::LaunchContent::Type request;
@@ -86551,8 +86704,8 @@ using chip::SessionHandle;
                 definedValue_0 = [self asCharSpan:params.data];
             }
 
-            chip::Controller::ContentLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -86567,6 +86720,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ContentLauncherClusterLaunchResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRContentLauncherClusterLaunchResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ContentLauncher::Commands::LaunchURL::Type request;
@@ -86675,8 +86829,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ContentLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -87399,6 +87553,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AudioOutput::Commands::SelectOutput::Type request;
@@ -87409,8 +87564,8 @@ using chip::SessionHandle;
             }
             request.index = params.index.unsignedCharValue;
 
-            chip::Controller::AudioOutputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -87426,6 +87581,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AudioOutput::Commands::RenameOutput::Type request;
@@ -87437,8 +87593,8 @@ using chip::SessionHandle;
             request.index = params.index.unsignedCharValue;
             request.name = [self asCharSpan:params.name];
 
-            chip::Controller::AudioOutputCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -88095,6 +88251,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ApplicationLauncher::Commands::LaunchApp::Type request;
@@ -88110,8 +88267,8 @@ using chip::SessionHandle;
                 definedValue_0 = [self asByteSpan:params.data];
             }
 
-            chip::Controller::ApplicationLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -88126,6 +88283,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ApplicationLauncher::Commands::StopApp::Type request;
@@ -88137,8 +88295,8 @@ using chip::SessionHandle;
             request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
             request.application.applicationId = [self asCharSpan:params.application.applicationId];
 
-            chip::Controller::ApplicationLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -88153,6 +88311,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ApplicationLauncher::Commands::HideApp::Type request;
@@ -88164,8 +88323,8 @@ using chip::SessionHandle;
             request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
             request.application.applicationId = [self asCharSpan:params.application.applicationId];
 
-            chip::Controller::ApplicationLauncherCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -90076,6 +90235,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             AccountLoginClusterGetSetupPINResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRAccountLoginClusterGetSetupPINResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AccountLogin::Commands::GetSetupPIN::Type request;
@@ -90089,8 +90249,8 @@ using chip::SessionHandle;
             }
             request.tempAccountIdentifier = [self asCharSpan:params.tempAccountIdentifier];
 
-            chip::Controller::AccountLoginCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -90106,6 +90266,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AccountLogin::Commands::Login::Type request;
@@ -90120,8 +90281,8 @@ using chip::SessionHandle;
             request.tempAccountIdentifier = [self asCharSpan:params.tempAccountIdentifier];
             request.setupPIN = [self asCharSpan:params.setupPIN];
 
-            chip::Controller::AccountLoginCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -90141,6 +90302,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             AccountLogin::Commands::Logout::Type request;
@@ -90153,8 +90315,8 @@ using chip::SessionHandle;
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            chip::Controller::AccountLoginCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -90660,6 +90822,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ElectricalMeasurement::Commands::GetProfileInfoCommand::Type request;
@@ -90669,8 +90832,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -90687,6 +90850,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             ElectricalMeasurement::Commands::GetMeasurementProfileCommand::Type request;
@@ -90699,8 +90863,8 @@ using chip::SessionHandle;
             request.startTime = params.startTime.unsignedIntValue;
             request.numberOfIntervals = params.numberOfIntervals.unsignedCharValue;
 
-            chip::Controller::ElectricalMeasurementCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -102884,6 +103048,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::Test::Type request;
@@ -102893,8 +103058,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -102915,6 +103080,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestNotHandled::Type request;
@@ -102924,8 +103090,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -102945,6 +103111,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestSpecificResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestSpecificResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestSpecific::Type request;
@@ -102954,8 +103121,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -102976,6 +103143,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestUnknownCommand::Type request;
@@ -102985,8 +103153,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103001,6 +103169,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestAddArgumentsResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestAddArgumentsResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestAddArguments::Type request;
@@ -103012,8 +103181,8 @@ using chip::SessionHandle;
             request.arg1 = params.arg1.unsignedCharValue;
             request.arg2 = params.arg2.unsignedCharValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103028,6 +103197,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestSimpleArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestSimpleArgumentResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestSimpleArgumentRequest::Type request;
@@ -103038,8 +103208,8 @@ using chip::SessionHandle;
             }
             request.arg1 = params.arg1.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103055,6 +103225,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestStructArrayArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestStructArrayArgumentResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestStructArrayArgumentRequest::Type request;
@@ -103274,8 +103445,8 @@ using chip::SessionHandle;
             request.arg5 = static_cast<std::remove_reference_t<decltype(request.arg5)>>(params.arg5.unsignedCharValue);
             request.arg6 = params.arg6.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103289,6 +103460,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestStructArgumentRequest::Type request;
@@ -103306,8 +103478,8 @@ using chip::SessionHandle;
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103321,6 +103493,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestNestedStructArgumentRequest::Type request;
@@ -103340,8 +103513,8 @@ using chip::SessionHandle;
             request.arg1.c.g = params.arg1.c.g.floatValue;
             request.arg1.c.h = params.arg1.c.h.doubleValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103355,6 +103528,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestListStructArgumentRequest::Type request;
@@ -103395,8 +103569,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103410,6 +103584,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestListInt8UArgumentRequest::Type request;
@@ -103441,8 +103616,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103456,6 +103631,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestNestedStructListArgumentRequest::Type request;
@@ -103572,8 +103748,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103588,6 +103764,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterBooleanResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type request;
@@ -103729,8 +103906,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103745,6 +103922,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestListInt8UReverseResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestListInt8UReverseResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestListInt8UReverseRequest::Type request;
@@ -103776,8 +103954,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103791,6 +103969,7 @@ using chip::SessionHandle;
     auto * bridge = new MTRUnitTestingClusterTestEnumsResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestEnumsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestEnumsResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestEnumsRequest::Type request;
@@ -103802,8 +103981,8 @@ using chip::SessionHandle;
             request.arg1 = static_cast<std::remove_reference_t<decltype(request.arg1)>>(params.arg1.unsignedShortValue);
             request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103818,6 +103997,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestNullableOptionalResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestNullableOptionalRequest::Type request;
@@ -103838,8 +104018,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -103856,6 +104036,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestComplexNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestComplexNullableOptionalResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestComplexNullableOptionalRequest::Type request;
@@ -104034,8 +104215,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104050,6 +104231,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterSimpleStructResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterSimpleStructResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::SimpleStructEchoRequest::Type request;
@@ -104067,8 +104249,8 @@ using chip::SessionHandle;
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104089,6 +104271,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TimedInvokeRequest::Type request;
@@ -104101,8 +104284,8 @@ using chip::SessionHandle;
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104119,6 +104302,7 @@ using chip::SessionHandle;
         },
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type request;
@@ -104134,8 +104318,8 @@ using chip::SessionHandle;
                 }
             }
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104150,6 +104334,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestEmitTestEventResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestEmitTestEventResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestEmitTestEventRequest::Type request;
@@ -104162,8 +104347,8 @@ using chip::SessionHandle;
             request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
             request.arg3 = params.arg3.boolValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104181,6 +104366,7 @@ using chip::SessionHandle;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
+            auto * typedBridge = static_cast<MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             UnitTesting::Commands::TestEmitTestFabricScopedEventRequest::Type request;
@@ -104191,8 +104377,8 @@ using chip::SessionHandle;
             }
             request.arg1 = params.arg1.unsignedCharValue;
 
-            chip::Controller::UnitTestingCluster cppCluster(exchangeManager, session, self->_endpoint);
-            return cppCluster.InvokeCommand(request, bridge, successCb, failureCb, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(
+                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
