@@ -216,6 +216,7 @@ public:
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
+        printf("TestSubscribe_AdministratorCommissioning\n");
         printf("DL_UsersAndCredentials\n");
         printf("DL_LockUnlock\n");
         printf("DL_Schedules\n");
@@ -100150,8 +100151,6 @@ public:
         AddArgument("cluster", &mCluster);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
-        AddArgument("alphaIndex", 0, UINT8_MAX, &mAlphaIndex);
-        AddArgument("betaIndex", 0, UINT8_MAX, &mBetaIndex);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -100408,8 +100407,6 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
-    chip::Optional<uint8_t> mAlphaIndex;
-    chip::Optional<uint8_t> mBetaIndex;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForAlpha_0()
@@ -100418,6 +100415,7 @@ private:
         value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
         return WaitForCommissionee("alpha", value);
     }
+    NSNumber * _Nonnull alphaIndex;
 
     CHIP_ERROR TestGetAlphasFabricIndex_1()
     {
@@ -100432,8 +100430,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentFabricIndex", actualValue, mAlphaIndex.HasValue() ? mAlphaIndex.Value() : 1U));
+                alphaIndex = value;
             }
 
             NextTest();
@@ -100569,8 +100566,12 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("AdminFabricIndex", actualValue));
-                VerifyOrReturn(CheckValue("AdminFabricIndex", actualValue, mAlphaIndex.HasValue() ? mAlphaIndex.Value() : 1U));
+                if (alphaIndex == nil) {
+                    VerifyOrReturn(CheckValueNull("AdminFabricIndex", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("AdminFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("AdminFabricIndex", actualValue, alphaIndex));
+                }
             }
 
             NextTest();
@@ -100792,6 +100793,7 @@ private:
 
         return CHIP_NO_ERROR;
     }
+    NSNumber * _Nonnull betaIndex;
 
     CHIP_ERROR TestGetBetasFabricIndex_19()
     {
@@ -100806,8 +100808,7 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("CurrentFabricIndex", actualValue, mBetaIndex.HasValue() ? mBetaIndex.Value() : 2U));
+                betaIndex = value;
             }
 
             NextTest();
@@ -100874,8 +100875,12 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("AdminFabricIndex", actualValue));
-                VerifyOrReturn(CheckValue("AdminFabricIndex", actualValue, mBetaIndex.HasValue() ? mBetaIndex.Value() : 2U));
+                if (betaIndex == nil) {
+                    VerifyOrReturn(CheckValueNull("AdminFabricIndex", actualValue));
+                } else {
+                    VerifyOrReturn(CheckValueNonNull("AdminFabricIndex", actualValue));
+                    VerifyOrReturn(CheckValue("AdminFabricIndex", actualValue, betaIndex));
+                }
             }
 
             NextTest();
@@ -100918,8 +100923,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTROperationalCredentialsClusterRemoveFabricParams alloc] init];
-        params.fabricIndex
-            = mBetaIndex.HasValue() ? [NSNumber numberWithUnsignedChar:mBetaIndex.Value()] : [NSNumber numberWithUnsignedChar:2U];
+        params.fabricIndex = [betaIndex copy];
         [cluster removeFabricWithParams:params
                              completion:^(
                                  MTROperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -102203,6 +102207,695 @@ private:
 
             NextTest();
         };
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestSubscribe_AdministratorCommissioning : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestSubscribe_AdministratorCommissioning()
+        : TestCommandBridge("TestSubscribe_AdministratorCommissioning")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("ourVendorId", 0, UINT16_MAX, &mOurVendorId);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestSubscribe_AdministratorCommissioning() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestSubscribe_AdministratorCommissioning\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestSubscribe_AdministratorCommissioning\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Get ourfabric index\n");
+            err = TestGetOurfabricIndex_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Report: Subscribe WindowStatus Attribute\n");
+            err = TestReportSubscribeWindowStatusAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Subscribe WindowStatus Attribute\n");
+            err = TestSubscribeWindowStatusAttribute_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Open the commissioning window 1\n");
+            err = TestOpenTheCommissioningWindow1_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Check for first attribute report for WindowStatus\n");
+            err = TestCheckForFirstAttributeReportForWindowStatus_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Close the commissioning window 1\n");
+            err = TestCloseTheCommissioningWindow1_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Check for second attribute report for WindowStatus\n");
+            err = TestCheckForSecondAttributeReportForWindowStatus_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Report: Subscribe AdminVendorId Attribute\n");
+            err = TestReportSubscribeAdminVendorIdAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Subscribe AdminVendorId Attribute\n");
+            err = TestSubscribeAdminVendorIdAttribute_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : Open the commissioning window 2\n");
+            err = TestOpenTheCommissioningWindow2_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Check for first attribute report for AdminVendorId\n");
+            err = TestCheckForFirstAttributeReportForAdminVendorId_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Close the commissioning window 2\n");
+            err = TestCloseTheCommissioningWindow2_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Check for second attribute report for AdminVendorId\n");
+            err = TestCheckForSecondAttributeReportForAdminVendorId_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Report: Subscribe AdminFabricIndex Attribute\n");
+            err = TestReportSubscribeAdminFabricIndexAttribute_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : Subscribe AdminFabricIndex Attribute\n");
+            err = TestSubscribeAdminFabricIndexAttribute_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : Open the commissioning window 3\n");
+            err = TestOpenTheCommissioningWindow3_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : Check for first attribute report for AdminFabricIndex\n");
+            err = TestCheckForFirstAttributeReportForAdminFabricIndex_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Close the commissioning window 2\n");
+            err = TestCloseTheCommissioningWindow2_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Check for second attribute report for AdminFabricIndex\n");
+            err = TestCheckForSecondAttributeReportForAdminFabricIndex_19();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 20;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mOurVendorId;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nonnull ourFabricIndex;
+
+    CHIP_ERROR TestGetOurfabricIndex_1()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterOperationalCredentials * cluster =
+            [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentFabricIndexWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Get ourfabric index Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                ourFabricIndex = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+    bool testSendClusterTestSubscribe_AdministratorCommissioning_2_WaitForReport_Fulfilled = false;
+    ResponseHandler _Nullable test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported = nil;
+
+    CHIP_ERROR TestReportSubscribeWindowStatusAttribute_2()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Report: Subscribe WindowStatus Attribute Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValue("WindowStatus", actualValue, 0U));
+                  }
+
+                  testSendClusterTestSubscribe_AdministratorCommissioning_2_WaitForReport_Fulfilled = true;
+              };
+
+        NextTest();
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSubscribeWindowStatusAttribute_3()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        uint16_t minIntervalArgument = 2U;
+        uint16_t maxIntervalArgument = 50U;
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
+        [cluster subscribeAttributeWindowStatusWithParams:params
+            subscriptionEstablished:^{
+                VerifyOrReturn(testSendClusterTestSubscribe_AdministratorCommissioning_2_WaitForReport_Fulfilled,
+                    SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
+                NextTest();
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Subscribe WindowStatus Attribute Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                if (test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported != nil) {
+                    ResponseHandler callback = test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported;
+                    test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported = nil;
+                    callback(value, err);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestOpenTheCommissioningWindow1_4()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Open the commissioning window 1 Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckForFirstAttributeReportForWindowStatus_5()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Check for first attribute report for WindowStatus Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValue("WindowStatus", actualValue, 2U));
+                  }
+
+                  NextTest();
+              };
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCloseTheCommissioningWindow1_6()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster revokeCommissioningWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"Close the commissioning window 1 Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckForSecondAttributeReportForWindowStatus_7()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_WindowStatus_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Check for second attribute report for WindowStatus Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValue("WindowStatus", actualValue, 0U));
+                  }
+
+                  NextTest();
+              };
+
+        return CHIP_NO_ERROR;
+    }
+    bool testSendClusterTestSubscribe_AdministratorCommissioning_8_WaitForReport_Fulfilled = false;
+    ResponseHandler _Nullable test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported = nil;
+
+    CHIP_ERROR TestReportSubscribeAdminVendorIdAttribute_8()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Report: Subscribe AdminVendorId Attribute Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValueNull("AdminVendorId", actualValue));
+                  }
+
+                  testSendClusterTestSubscribe_AdministratorCommissioning_8_WaitForReport_Fulfilled = true;
+              };
+
+        NextTest();
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSubscribeAdminVendorIdAttribute_9()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        uint16_t minIntervalArgument = 2U;
+        uint16_t maxIntervalArgument = 50U;
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
+        [cluster subscribeAttributeAdminVendorIdWithParams:params
+            subscriptionEstablished:^{
+                VerifyOrReturn(testSendClusterTestSubscribe_AdministratorCommissioning_8_WaitForReport_Fulfilled,
+                    SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
+                NextTest();
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Subscribe AdminVendorId Attribute Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                if (test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported != nil) {
+                    ResponseHandler callback = test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported;
+                    test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported = nil;
+                    callback(value, err);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestOpenTheCommissioningWindow2_10()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Open the commissioning window 2 Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckForFirstAttributeReportForAdminVendorId_11()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported = ^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Check for first attribute report for AdminVendorId Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("AdminVendorId", actualValue));
+                VerifyOrReturn(CheckValue("AdminVendorId", actualValue, mOurVendorId.HasValue() ? mOurVendorId.Value() : 65521U));
+            }
+
+            NextTest();
+        };
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCloseTheCommissioningWindow2_12()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster revokeCommissioningWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"Close the commissioning window 2 Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckForSecondAttributeReportForAdminVendorId_13()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_AdminVendorId_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Check for second attribute report for AdminVendorId Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValueNull("AdminVendorId", actualValue));
+                  }
+
+                  NextTest();
+              };
+
+        return CHIP_NO_ERROR;
+    }
+    bool testSendClusterTestSubscribe_AdministratorCommissioning_14_WaitForReport_Fulfilled = false;
+    ResponseHandler _Nullable test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported = nil;
+
+    CHIP_ERROR TestReportSubscribeAdminFabricIndexAttribute_14()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Report: Subscribe AdminFabricIndex Attribute Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValueNull("AdminFabricIndex", actualValue));
+                  }
+
+                  testSendClusterTestSubscribe_AdministratorCommissioning_14_WaitForReport_Fulfilled = true;
+              };
+
+        NextTest();
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestSubscribeAdminFabricIndexAttribute_15()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        uint16_t minIntervalArgument = 2U;
+        uint16_t maxIntervalArgument = 50U;
+        MTRSubscribeParams * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(minIntervalArgument)
+                                                                          maxInterval:@(maxIntervalArgument)];
+        params.filterByFabric = true;
+        params.replaceExistingSubscriptions = true;
+        [cluster subscribeAttributeAdminFabricIndexWithParams:params
+            subscriptionEstablished:^{
+                VerifyOrReturn(testSendClusterTestSubscribe_AdministratorCommissioning_14_WaitForReport_Fulfilled,
+                    SetCommandExitStatus(CHIP_ERROR_INCORRECT_STATE));
+                NextTest();
+            }
+            reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                NSLog(@"Subscribe AdminFabricIndex Attribute Error: %@", err);
+
+                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                if (test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported != nil) {
+                    ResponseHandler callback = test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported;
+                    test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported = nil;
+                    callback(value, err);
+                }
+            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestOpenTheCommissioningWindow3_16()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Open the commissioning window 3 Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckForFirstAttributeReportForAdminFabricIndex_17()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Check for first attribute report for AdminFabricIndex Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      if (ourFabricIndex == nil) {
+                          VerifyOrReturn(CheckValueNull("AdminFabricIndex", actualValue));
+                      } else {
+                          VerifyOrReturn(CheckValueNonNull("AdminFabricIndex", actualValue));
+                          VerifyOrReturn(CheckValue("AdminFabricIndex", actualValue, ourFabricIndex));
+                      }
+                  }
+
+                  NextTest();
+              };
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCloseTheCommissioningWindow2_18()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster revokeCommissioningWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"Close the commissioning window 2 Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCheckForSecondAttributeReportForAdminFabricIndex_19()
+    {
+        MTRBaseDevice * device = GetDevice("alpha");
+        MTRBaseClusterAdministratorCommissioning * cluster =
+            [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        test_TestSubscribe_AdministratorCommissioning_AdminFabricIndex_Reported
+            = ^(NSNumber * _Nullable value, NSError * _Nullable err) {
+                  NSLog(@"Check for second attribute report for AdminFabricIndex Error: %@", err);
+
+                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                  {
+                      id actualValue = value;
+                      VerifyOrReturn(CheckValueNull("AdminFabricIndex", actualValue));
+                  }
+
+                  NextTest();
+              };
 
         return CHIP_NO_ERROR;
     }
@@ -125555,6 +126248,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestMultiAdmin>(),
         make_unique<Test_TC_DGSW_1_1>(),
         make_unique<TestSubscribe_OnOff>(),
+        make_unique<TestSubscribe_AdministratorCommissioning>(),
         make_unique<DL_UsersAndCredentials>(),
         make_unique<DL_LockUnlock>(),
         make_unique<DL_Schedules>(),
