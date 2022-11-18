@@ -5065,8 +5065,10 @@ using chip::SessionHandle;
                 auto & nonNullValue_0 = request.transitionTime.SetNonNull();
                 nonNullValue_0 = params.transitionTime.unsignedShortValue;
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5101,8 +5103,10 @@ using chip::SessionHandle;
                 auto & nonNullValue_0 = request.rate.SetNonNull();
                 nonNullValue_0 = params.rate.unsignedCharValue;
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5138,8 +5142,10 @@ using chip::SessionHandle;
                 auto & nonNullValue_0 = request.transitionTime.SetNonNull();
                 nonNullValue_0 = params.transitionTime.unsignedShortValue;
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5167,8 +5173,10 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5204,8 +5212,10 @@ using chip::SessionHandle;
                 auto & nonNullValue_0 = request.transitionTime.SetNonNull();
                 nonNullValue_0 = params.transitionTime.unsignedShortValue;
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5240,8 +5250,10 @@ using chip::SessionHandle;
                 auto & nonNullValue_0 = request.rate.SetNonNull();
                 nonNullValue_0 = params.rate.unsignedCharValue;
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5277,8 +5289,10 @@ using chip::SessionHandle;
                 auto & nonNullValue_0 = request.transitionTime.SetNonNull();
                 nonNullValue_0 = params.transitionTime.unsignedShortValue;
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5306,8 +5320,10 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.optionsMask = params.optionsMask.unsignedCharValue;
-            request.optionsOverride = params.optionsOverride.unsignedCharValue;
+            request.optionsMask
+                = static_cast<std::remove_reference_t<decltype(request.optionsMask)>>(params.optionsMask.unsignedCharValue);
+            request.optionsOverride
+                = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -5643,7 +5659,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = LevelControl::Attributes::Options::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRLevelControlOptionsAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -5676,7 +5692,7 @@ using chip::SessionHandle;
             ListFreer listFreer;
             using TypeInfo = LevelControl::Attributes::Options::TypeInfo;
             TypeInfo::Type cppValue;
-            cppValue = value.unsignedCharValue;
+            cppValue = static_cast<std::remove_reference_t<decltype(cppValue)>>(value.unsignedCharValue);
 
             chip::Controller::LevelControlCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
@@ -5689,7 +5705,7 @@ using chip::SessionHandle;
                               reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = LevelControl::Attributes::Options::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRLevelControlOptionsAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -5699,8 +5715,8 @@ using chip::SessionHandle;
                                             queue:(dispatch_queue_t)queue
                                        completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRLevelControlOptionsAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(LevelControlOptionsAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = LevelControl::Attributes::Options::TypeInfo;
