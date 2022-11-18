@@ -4602,8 +4602,8 @@ public:
         } else {
             params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
         }
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4658,8 +4658,8 @@ public:
         } else {
             params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate.Value()];
         }
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4716,8 +4716,8 @@ public:
         } else {
             params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
         }
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4764,8 +4764,8 @@ public:
         __auto_type * params = [[MTRLevelControlClusterStopParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4820,8 +4820,8 @@ public:
         } else {
             params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
         }
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4876,8 +4876,8 @@ public:
         } else {
             params.rate = [NSNumber numberWithUnsignedChar:mRequest.rate.Value()];
         }
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4934,8 +4934,8 @@ public:
         } else {
             params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime.Value()];
         }
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -4982,8 +4982,8 @@ public:
         __auto_type * params = [[MTRLevelControlClusterStopWithOnOffParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
-        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
+        params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask.Raw()];
+        params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride.Raw()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {

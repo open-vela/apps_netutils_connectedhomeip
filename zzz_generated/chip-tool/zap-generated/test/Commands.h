@@ -18154,7 +18154,7 @@ private:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
             }
@@ -18867,7 +18867,7 @@ private:
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("options", value, 0U));
             }
@@ -18932,7 +18932,7 @@ private:
         case 35:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("options", value, 1U));
             }
@@ -19040,8 +19040,8 @@ private:
             LogStep(4, "TH writes 0 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 0U;
+            chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -19062,8 +19062,8 @@ private:
             value.level = 50U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevelWithOnOff::Id,
                                value, chip::NullOptional
 
@@ -19097,8 +19097,8 @@ private:
             value.level = 50U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19120,8 +19120,8 @@ private:
             value.level = 200U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 300U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19194,8 +19194,8 @@ private:
             LogStep(22, "TH writes 0 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 0U;
+            chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -19222,8 +19222,8 @@ private:
             value.level = 100U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19252,8 +19252,8 @@ private:
             value.level = 120U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19273,8 +19273,8 @@ private:
             value.level = 140U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 1U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19294,8 +19294,8 @@ private:
             value.level = 160U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 1U;
-            value.optionsOverride        = 1U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19311,8 +19311,8 @@ private:
             LogStep(34, "TH writes 1 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 1U;
+            chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -19339,8 +19339,8 @@ private:
             value.level = 100U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19369,8 +19369,8 @@ private:
             value.level = 120U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19390,8 +19390,8 @@ private:
             value.level = 140U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 1U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19411,8 +19411,8 @@ private:
             value.level = 160U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 1U;
-            value.optionsOverride        = 1U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19664,8 +19664,8 @@ private:
             LogStep(4, "TH writes 0 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 0U;
+            chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -19692,8 +19692,8 @@ private:
             value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
             value.rate.SetNonNull();
             value.rate.Value()    = 10U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.optionsMask     = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveWithOnOff::Id, value,
                                chip::NullOptional
 
@@ -19740,8 +19740,8 @@ private:
             value.level = 50U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -19761,8 +19761,8 @@ private:
             value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
             value.rate.SetNonNull();
             value.rate.Value()    = 5U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.optionsMask     = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
                                chip::NullOptional
 
@@ -20049,8 +20049,8 @@ private:
             LogStep(4, "TH writes 0 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 0U;
+            chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -20074,8 +20074,8 @@ private:
             value.stepSize = 50U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::StepWithOnOff::Id, value,
                                chip::NullOptional
 
@@ -20103,8 +20103,8 @@ private:
             value.level = 50U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -20125,8 +20125,8 @@ private:
             value.stepSize = 150U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 300U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Step::Id, value,
                                chip::NullOptional
 
@@ -20367,8 +20367,8 @@ private:
             LogStep(2, "TH writes 0 to the Options attribute");
             VerifyOrDo(!ShouldSkip("LVL.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            uint8_t value;
-            value = 0U;
+            chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions> value;
+            value = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Attributes::Options::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -20389,8 +20389,8 @@ private:
             value.level = 50U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 0U;
-            value.optionsOverride        = 0U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -20412,8 +20412,8 @@ private:
             value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
             value.rate.SetNonNull();
             value.rate.Value()    = 5U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.optionsMask     = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
                                chip::NullOptional
 
@@ -20431,8 +20431,8 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C03.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::Stop::Type value;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.optionsMask     = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Stop::Id, value,
                                chip::NullOptional
 
@@ -20465,8 +20465,8 @@ private:
             value.moveMode = static_cast<chip::app::Clusters::LevelControl::MoveMode>(0);
             value.rate.SetNonNull();
             value.rate.Value()    = 5U;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.optionsMask     = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::Move::Id, value,
                                chip::NullOptional
 
@@ -20484,8 +20484,8 @@ private:
             VerifyOrDo(!ShouldSkip("LVL.S.C07.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LevelControl::Commands::StopWithOnOff::Type value;
-            value.optionsMask     = 0U;
-            value.optionsOverride = 0U;
+            value.optionsMask     = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
+            value.optionsOverride = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(0U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::StopWithOnOff::Id, value,
                                chip::NullOptional
 
@@ -62946,8 +62946,8 @@ private:
             value.level = 1U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 1U;
-            value.optionsOverride        = 1U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
@@ -63066,8 +63066,8 @@ private:
             value.level = 127U;
             value.transitionTime.SetNonNull();
             value.transitionTime.Value() = 0U;
-            value.optionsMask            = 1U;
-            value.optionsOverride        = 1U;
+            value.optionsMask            = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
+            value.optionsOverride        = static_cast<chip::BitMask<chip::app::Clusters::LevelControl::LevelControlOptions>>(1U);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), LevelControl::Id, LevelControl::Commands::MoveToLevel::Id, value,
                                chip::NullOptional
 
