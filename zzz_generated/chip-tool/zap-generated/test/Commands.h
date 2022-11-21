@@ -48621,7 +48621,7 @@ private:
                 chip::ByteSpan value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueAsString("octetString", value,
-                                                  chip::ByteSpan(chip::Uint8::from_const_char("\015\012\377\042\240"), 5)));
+                                                  chip::ByteSpan(chip::Uint8::from_const_char("\x0d\x0a\xff\x22\xa0"), 5)));
             }
             break;
         case 114:
