@@ -77591,7 +77591,7 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueAsString(
-                    "octet_string", actualValue, [[NSData alloc] initWithBytes:"\015\012\377\042\240" length:5]));
+                    "octet_string", actualValue, [[NSData alloc] initWithBytes:"\x0d\x0a\xff\x22\xa0" length:5]));
             }
 
             NextTest();
