@@ -10364,20 +10364,20 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)readAttributeAclWithParams:(MTRReadParams * _Nullable)params
+- (void)readAttributeACLWithParams:(MTRReadParams * _Nullable)params
                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 { // Make a copy of params before we go async.
     params = [params copy];
     using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
-    return MTRReadAttribute<MTRAccessControlAclListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRAccessControlACLListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributeAclWithValue:(NSArray * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributeACLWithValue:(NSArray * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeAclWithValue:(NSArray * _Nonnull) value params:nil completion:completion];
+    [self writeAttributeACLWithValue:(NSArray * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributeAclWithValue:(NSArray * _Nonnull)value
+- (void)writeAttributeACLWithValue:(NSArray * _Nonnull)value
                             params:(MTRWriteParams * _Nullable)params
                         completion:(MTRStatusCompletion)completion
 {
@@ -10508,23 +10508,23 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)subscribeAttributeAclWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributeACLWithParams:(MTRSubscribeParams * _Nonnull)params
                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                           reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
-    MTRSubscribeAttribute<MTRAccessControlAclListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(params,
+    MTRSubscribeAttribute<MTRAccessControlACLListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeAclWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributeACLWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                      endpoint:(NSNumber *)endpoint
                                         queue:(dispatch_queue_t)queue
                                    completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRAccessControlAclListAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(AccessControlAclListAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRAccessControlACLListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(AccessControlACLListAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = AccessControl::Attributes::Acl::TypeInfo;
@@ -11007,7 +11007,7 @@ using chip::SessionHandle;
 - (void)readAttributeAclWithParams:(MTRReadParams * _Nullable)params
                  completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeAclWithParams:params
+    [self readAttributeACLWithParams:params
                           completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
                               // Cast is safe because subclass does not add any selectors.
                               completionHandler(static_cast<NSArray *>(value), error);
@@ -11015,13 +11015,13 @@ using chip::SessionHandle;
 }
 - (void)writeAttributeAclWithValue:(NSArray * _Nonnull)value completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributeAclWithValue:value params:nil completion:completionHandler];
+    [self writeAttributeACLWithValue:value params:nil completion:completionHandler];
 }
 - (void)writeAttributeAclWithValue:(NSArray * _Nonnull)value
                             params:(MTRWriteParams * _Nullable)params
                  completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributeAclWithValue:value params:params completion:completionHandler];
+    [self writeAttributeACLWithValue:value params:params completion:completionHandler];
 }
 - (void)subscribeAttributeAclWithMinInterval:(NSNumber * _Nonnull)minInterval
                                  maxInterval:(NSNumber * _Nonnull)maxInterval
@@ -11036,7 +11036,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeAclWithParams:subscribeParams
+    [self subscribeAttributeACLWithParams:subscribeParams
                   subscriptionEstablished:subscriptionEstablishedHandler
                             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                                 // Cast is safe because subclass does not add any selectors.
@@ -11048,7 +11048,7 @@ using chip::SessionHandle;
                                      queue:(dispatch_queue_t)queue
                          completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeAclWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributeACLWithClusterStateCache:attributeCacheContainer.realContainer
                                        endpoint:endpoint
                                           queue:queue
                                      completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
@@ -15005,7 +15005,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterOtaSoftwareUpdateProvider
+@implementation MTRBaseClusterOTASoftwareUpdateProvider
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
 {
@@ -15020,17 +15020,17 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)queryImageWithParams:(MTROtaSoftwareUpdateProviderClusterQueryImageParams *)params
-                  completion:(void (^)(MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data,
+- (void)queryImageWithParams:(MTROTASoftwareUpdateProviderClusterQueryImageParams *)params
+                  completion:(void (^)(MTROTASoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data,
                                  NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTROtaSoftwareUpdateProviderClusterQueryImageResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTROTASoftwareUpdateProviderClusterQueryImageResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            OtaSoftwareUpdateProviderClusterQueryImageResponseCallbackType successCb, MTRErrorCallback failureCb,
+            OTASoftwareUpdateProviderClusterQueryImageResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROtaSoftwareUpdateProviderClusterQueryImageResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTROTASoftwareUpdateProviderClusterQueryImageResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::QueryImage::Type request;
@@ -15088,17 +15088,17 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)applyUpdateRequestWithParams:(MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams *)params
-                          completion:(void (^)(MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data,
+- (void)applyUpdateRequestWithParams:(MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams *)params
+                          completion:(void (^)(MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data,
                                          NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTROTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            OtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackType successCb, MTRErrorCallback failureCb,
+            OTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTROTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::ApplyUpdateRequest::Type request;
@@ -15116,7 +15116,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)notifyUpdateAppliedWithParams:(MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams *)params
+- (void)notifyUpdateAppliedWithParams:(MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams *)params
                            completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -15150,7 +15150,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateProvider::Attributes::GeneratedCommandList::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge, NSArray,
+    return MTRReadAttribute<MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15161,7 +15161,7 @@ using chip::SessionHandle;
                                                (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateProvider::Attributes::GeneratedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15172,9 +15172,9 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateProviderGeneratedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateProviderGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateProviderGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateProvider::Attributes::GeneratedCommandList::TypeInfo;
@@ -15196,7 +15196,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AcceptedCommandList::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge, NSArray,
+    return MTRReadAttribute<MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15207,7 +15207,7 @@ using chip::SessionHandle;
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AcceptedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15218,9 +15218,9 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateProviderAcceptedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateProviderAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateProviderAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AcceptedCommandList::TypeInfo;
@@ -15242,7 +15242,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AttributeList::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -15251,7 +15251,7 @@ using chip::SessionHandle;
                                     reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AttributeList::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15261,9 +15261,9 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateProviderAttributeListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateProviderAttributeListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateProviderAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateProviderAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateProvider::Attributes::AttributeList::TypeInfo;
@@ -15368,6 +15368,9 @@ using chip::SessionHandle;
 
 @end
 
+@implementation MTRBaseClusterOtaSoftwareUpdateProvider
+@end
+
 @implementation MTRBaseClusterOtaSoftwareUpdateProvider (Deprecated)
 
 - (void)queryImageWithParams:(MTROtaSoftwareUpdateProviderClusterQueryImageParams *)params
@@ -15376,7 +15379,7 @@ using chip::SessionHandle;
 {
     [self queryImageWithParams:params
                     completion:^(
-                        MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data, NSError * _Nullable error) {
+                        MTROTASoftwareUpdateProviderClusterQueryImageResponseParams * _Nullable data, NSError * _Nullable error) {
                         // Cast is safe because subclass does not add any selectors.
                         completionHandler(static_cast<MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams *>(data), error);
                     }];
@@ -15386,7 +15389,7 @@ using chip::SessionHandle;
                                          NSError * _Nullable error))completionHandler
 {
     [self applyUpdateRequestWithParams:params
-                            completion:^(MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data,
+                            completion:^(MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams * _Nullable data,
                                 NSError * _Nullable error) {
                                 // Cast is safe because subclass does not add any selectors.
                                 completionHandler(
@@ -15625,7 +15628,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterOtaSoftwareUpdateRequestor
+@implementation MTRBaseClusterOTASoftwareUpdateRequestor
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
 {
@@ -15640,7 +15643,7 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)announceOtaProviderWithParams:(MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params
+- (void)announceOtaProviderWithParams:(MTROTASoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params
                            completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -15682,7 +15685,7 @@ using chip::SessionHandle;
 { // Make a copy of params before we go async.
     params = [params copy];
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge, NSArray,
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15726,11 +15729,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTROtaSoftwareUpdateRequestorClusterProviderLocation class]]) {
+                        if (![value[i_0] isKindOfClass:[MTROTASoftwareUpdateRequestorClusterProviderLocation class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTROtaSoftwareUpdateRequestorClusterProviderLocation *) value[i_0];
+                        auto element_0 = (MTROTASoftwareUpdateRequestorClusterProviderLocation *) value[i_0];
                         listHolder_0->mList[i_0].providerNodeID = element_0.providerNodeID.unsignedLongLongValue;
                         listHolder_0->mList[i_0].endpoint = element_0.endpoint.unsignedShortValue;
                         listHolder_0->mList[i_0].fabricIndex = element_0.fabricIndex.unsignedCharValue;
@@ -15753,7 +15756,7 @@ using chip::SessionHandle;
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15764,9 +15767,9 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
@@ -15830,7 +15833,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15840,7 +15843,7 @@ using chip::SessionHandle;
                                   reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15850,9 +15853,9 @@ using chip::SessionHandle;
                                                 queue:(dispatch_queue_t)queue
                                            completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateRequestorClusterOTAUpdateStateEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::UpdateState::TypeInfo;
@@ -15918,7 +15921,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::GeneratedCommandList::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge, NSArray,
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15929,7 +15932,7 @@ using chip::SessionHandle;
                                                (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::GeneratedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15940,9 +15943,9 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateRequestorGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateRequestorGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::GeneratedCommandList::TypeInfo;
@@ -15964,7 +15967,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AcceptedCommandList::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge, NSArray,
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15975,7 +15978,7 @@ using chip::SessionHandle;
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AcceptedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -15986,9 +15989,9 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateRequestorAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateRequestorAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AcceptedCommandList::TypeInfo;
@@ -16010,7 +16013,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AttributeList::TypeInfo;
-    return MTRReadAttribute<MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackBridge, NSArray,
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -16020,7 +16023,7 @@ using chip::SessionHandle;
                                     reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AttributeList::TypeInfo;
-    MTRSubscribeAttribute<MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -16030,9 +16033,9 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROtaSoftwareUpdateRequestorAttributeListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateRequestorAttributeListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(OtaSoftwareUpdateRequestorAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateRequestorAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::AttributeList::TypeInfo;
@@ -16135,6 +16138,9 @@ using chip::SessionHandle;
     });
 }
 
+@end
+
+@implementation MTRBaseClusterOtaSoftwareUpdateRequestor
 @end
 
 @implementation MTRBaseClusterOtaSoftwareUpdateRequestor (Deprecated)
@@ -79555,7 +79561,7 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributePirOccupiedToUnoccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
+- (void)readAttributePIROccupiedToUnoccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
                                                                     NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
@@ -79564,11 +79570,11 @@ using chip::SessionHandle;
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+    [self writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                                      params:(MTRWriteParams * _Nullable)params
                                                  completion:(MTRStatusCompletion)completion
 {
@@ -79601,7 +79607,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)subscribeAttributePirOccupiedToUnoccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributePIROccupiedToUnoccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
                                          subscriptionEstablished:
                                              (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                                    reportHandler:(void (^)(NSNumber * _Nullable value,
@@ -79613,7 +79619,7 @@ using chip::SessionHandle;
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributePirOccupiedToUnoccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributePIROccupiedToUnoccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                               endpoint:(NSNumber *)endpoint
                                                                  queue:(dispatch_queue_t)queue
                                                             completion:(void (^)(NSNumber * _Nullable value,
@@ -79638,7 +79644,7 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributePirUnoccupiedToOccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
+- (void)readAttributePIRUnoccupiedToOccupiedDelayWithCompletion:(void (^)(NSNumber * _Nullable value,
                                                                     NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
@@ -79647,11 +79653,11 @@ using chip::SessionHandle;
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributePIRUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+    [self writeAttributePIRUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIRUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                                      params:(MTRWriteParams * _Nullable)params
                                                  completion:(MTRStatusCompletion)completion
 {
@@ -79684,7 +79690,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)subscribeAttributePirUnoccupiedToOccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributePIRUnoccupiedToOccupiedDelayWithParams:(MTRSubscribeParams * _Nonnull)params
                                          subscriptionEstablished:
                                              (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                                    reportHandler:(void (^)(NSNumber * _Nullable value,
@@ -79696,7 +79702,7 @@ using chip::SessionHandle;
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributePirUnoccupiedToOccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributePIRUnoccupiedToOccupiedDelayWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                               endpoint:(NSNumber *)endpoint
                                                                  queue:(dispatch_queue_t)queue
                                                             completion:(void (^)(NSNumber * _Nullable value,
@@ -79721,7 +79727,7 @@ using chip::SessionHandle;
     });
 }
 
-- (void)readAttributePirUnoccupiedToOccupiedThresholdWithCompletion:(void (^)(NSNumber * _Nullable value,
+- (void)readAttributePIRUnoccupiedToOccupiedThresholdWithCompletion:(void (^)(NSNumber * _Nullable value,
                                                                         NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
@@ -79730,12 +79736,12 @@ using chip::SessionHandle;
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
                                                      completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
+    [self writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
+- (void)writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
                                                          params:(MTRWriteParams * _Nullable)params
                                                      completion:(MTRStatusCompletion)completion
 {
@@ -79768,7 +79774,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)subscribeAttributePirUnoccupiedToOccupiedThresholdWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributePIRUnoccupiedToOccupiedThresholdWithParams:(MTRSubscribeParams * _Nonnull)params
                                              subscriptionEstablished:
                                                  (MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                                        reportHandler:(void (^)(NSNumber * _Nullable value,
@@ -79780,7 +79786,7 @@ using chip::SessionHandle;
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributePirUnoccupiedToOccupiedThresholdWithClusterStateCache:
++ (void)readAttributePIRUnoccupiedToOccupiedThresholdWithClusterStateCache:
             (MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                                   endpoint:(NSNumber *)endpoint
                                                                      queue:(dispatch_queue_t)queue
@@ -80681,7 +80687,7 @@ using chip::SessionHandle;
 - (void)readAttributePirOccupiedToUnoccupiedDelayWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                            NSError * _Nullable error))completionHandler
 {
-    [self readAttributePirOccupiedToUnoccupiedDelayWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+    [self readAttributePIROccupiedToUnoccupiedDelayWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSNumber *>(value), error);
     }];
@@ -80689,13 +80695,13 @@ using chip::SessionHandle;
 - (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                           completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributePirOccupiedToUnoccupiedDelayWithValue:value params:nil completion:completionHandler];
+    [self writeAttributePIROccupiedToUnoccupiedDelayWithValue:value params:nil completion:completionHandler];
 }
 - (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                                      params:(MTRWriteParams * _Nullable)params
                                           completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributePirOccupiedToUnoccupiedDelayWithValue:value params:params completion:completionHandler];
+    [self writeAttributePIROccupiedToUnoccupiedDelayWithValue:value params:params completion:completionHandler];
 }
 - (void)subscribeAttributePirOccupiedToUnoccupiedDelayWithMinInterval:(NSNumber * _Nonnull)minInterval
                                                           maxInterval:(NSNumber * _Nonnull)maxInterval
@@ -80712,7 +80718,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributePirOccupiedToUnoccupiedDelayWithParams:subscribeParams
+    [self subscribeAttributePIROccupiedToUnoccupiedDelayWithParams:subscribeParams
                                            subscriptionEstablished:subscriptionEstablishedHandler
                                                      reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                                                          // Cast is safe because subclass does not add any selectors.
@@ -80725,7 +80731,7 @@ using chip::SessionHandle;
                                                   completionHandler:(void (^)(NSNumber * _Nullable value,
                                                                         NSError * _Nullable error))completionHandler
 {
-    [self readAttributePirOccupiedToUnoccupiedDelayWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributePIROccupiedToUnoccupiedDelayWithClusterStateCache:attributeCacheContainer.realContainer
                                                                 endpoint:endpoint
                                                                    queue:queue
                                                               completion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
@@ -80737,7 +80743,7 @@ using chip::SessionHandle;
 - (void)readAttributePirUnoccupiedToOccupiedDelayWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                            NSError * _Nullable error))completionHandler
 {
-    [self readAttributePirUnoccupiedToOccupiedDelayWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+    [self readAttributePIRUnoccupiedToOccupiedDelayWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSNumber *>(value), error);
     }];
@@ -80745,13 +80751,13 @@ using chip::SessionHandle;
 - (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                           completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributePirUnoccupiedToOccupiedDelayWithValue:value params:nil completion:completionHandler];
+    [self writeAttributePIRUnoccupiedToOccupiedDelayWithValue:value params:nil completion:completionHandler];
 }
 - (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSNumber * _Nonnull)value
                                                      params:(MTRWriteParams * _Nullable)params
                                           completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributePirUnoccupiedToOccupiedDelayWithValue:value params:params completion:completionHandler];
+    [self writeAttributePIRUnoccupiedToOccupiedDelayWithValue:value params:params completion:completionHandler];
 }
 - (void)subscribeAttributePirUnoccupiedToOccupiedDelayWithMinInterval:(NSNumber * _Nonnull)minInterval
                                                           maxInterval:(NSNumber * _Nonnull)maxInterval
@@ -80768,7 +80774,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributePirUnoccupiedToOccupiedDelayWithParams:subscribeParams
+    [self subscribeAttributePIRUnoccupiedToOccupiedDelayWithParams:subscribeParams
                                            subscriptionEstablished:subscriptionEstablishedHandler
                                                      reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                                                          // Cast is safe because subclass does not add any selectors.
@@ -80781,7 +80787,7 @@ using chip::SessionHandle;
                                                   completionHandler:(void (^)(NSNumber * _Nullable value,
                                                                         NSError * _Nullable error))completionHandler
 {
-    [self readAttributePirUnoccupiedToOccupiedDelayWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributePIRUnoccupiedToOccupiedDelayWithClusterStateCache:attributeCacheContainer.realContainer
                                                                 endpoint:endpoint
                                                                    queue:queue
                                                               completion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
@@ -80793,7 +80799,7 @@ using chip::SessionHandle;
 - (void)readAttributePirUnoccupiedToOccupiedThresholdWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                                NSError * _Nullable error))completionHandler
 {
-    [self readAttributePirUnoccupiedToOccupiedThresholdWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+    [self readAttributePIRUnoccupiedToOccupiedThresholdWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSNumber *>(value), error);
     }];
@@ -80801,13 +80807,13 @@ using chip::SessionHandle;
 - (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
                                               completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributePirUnoccupiedToOccupiedThresholdWithValue:value params:nil completion:completionHandler];
+    [self writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:value params:nil completion:completionHandler];
 }
 - (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSNumber * _Nonnull)value
                                                          params:(MTRWriteParams * _Nullable)params
                                               completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributePirUnoccupiedToOccupiedThresholdWithValue:value params:params completion:completionHandler];
+    [self writeAttributePIRUnoccupiedToOccupiedThresholdWithValue:value params:params completion:completionHandler];
 }
 - (void)subscribeAttributePirUnoccupiedToOccupiedThresholdWithMinInterval:(NSNumber * _Nonnull)minInterval
                                                               maxInterval:(NSNumber * _Nonnull)maxInterval
@@ -80824,7 +80830,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributePirUnoccupiedToOccupiedThresholdWithParams:subscribeParams
+    [self subscribeAttributePIRUnoccupiedToOccupiedThresholdWithParams:subscribeParams
                                                subscriptionEstablished:subscriptionEstablishedHandler
                                                          reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                                                              // Cast is safe because subclass does not add any selectors.
@@ -80837,7 +80843,7 @@ using chip::SessionHandle;
                                                       completionHandler:(void (^)(NSNumber * _Nullable value,
                                                                             NSError * _Nullable error))completionHandler
 {
-    [self readAttributePirUnoccupiedToOccupiedThresholdWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributePIRUnoccupiedToOccupiedThresholdWithClusterStateCache:attributeCacheContainer.realContainer
                                                                     endpoint:endpoint
                                                                        queue:queue
                                                                   completion:^(
@@ -81437,7 +81443,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterWakeOnLan
+@implementation MTRBaseClusterWakeOnLAN
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
 {
@@ -81498,7 +81504,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WakeOnLan::Attributes::GeneratedCommandList::TypeInfo;
-    return MTRReadAttribute<MTRWakeOnLanGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRWakeOnLANGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -81508,7 +81514,7 @@ using chip::SessionHandle;
                                                (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = WakeOnLan::Attributes::GeneratedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTRWakeOnLanGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+    MTRSubscribeAttribute<MTRWakeOnLANGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -81519,9 +81525,9 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRWakeOnLanGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRWakeOnLANGeneratedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(WakeOnLanGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(WakeOnLANGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = WakeOnLan::Attributes::GeneratedCommandList::TypeInfo;
@@ -81543,7 +81549,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WakeOnLan::Attributes::AcceptedCommandList::TypeInfo;
-    return MTRReadAttribute<MTRWakeOnLanAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRWakeOnLANAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -81553,7 +81559,7 @@ using chip::SessionHandle;
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = WakeOnLan::Attributes::AcceptedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTRWakeOnLanAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+    MTRSubscribeAttribute<MTRWakeOnLANAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
         params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -81564,9 +81570,9 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRWakeOnLanAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRWakeOnLANAcceptedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(
-        ^(WakeOnLanAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(WakeOnLANAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = WakeOnLan::Attributes::AcceptedCommandList::TypeInfo;
@@ -81588,7 +81594,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WakeOnLan::Attributes::AttributeList::TypeInfo;
-    return MTRReadAttribute<MTRWakeOnLanAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRWakeOnLANAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -81597,7 +81603,7 @@ using chip::SessionHandle;
                                     reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = WakeOnLan::Attributes::AttributeList::TypeInfo;
-    MTRSubscribeAttribute<MTRWakeOnLanAttributeListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
+    MTRSubscribeAttribute<MTRWakeOnLANAttributeListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
         params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
@@ -81607,8 +81613,8 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRWakeOnLanAttributeListListAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(^(WakeOnLanAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRWakeOnLANAttributeListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(^(WakeOnLANAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
         if (clusterStateCacheContainer.cppClusterStateCache) {
             chip::app::ConcreteAttributePath path;
             using TypeInfo = WakeOnLan::Attributes::AttributeList::TypeInfo;
@@ -81711,6 +81717,9 @@ using chip::SessionHandle;
     });
 }
 
+@end
+
+@implementation MTRBaseClusterWakeOnLan
 @end
 
 @implementation MTRBaseClusterWakeOnLan (Deprecated)
