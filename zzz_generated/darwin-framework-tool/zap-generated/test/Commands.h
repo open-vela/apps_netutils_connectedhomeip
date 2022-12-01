@@ -39,8 +39,10 @@ public:
         printf("Test_TC_ACL_1_1\n");
         printf("Test_TC_ACL_2_1\n");
         printf("Test_TC_ACL_2_2\n");
+        printf("Test_TC_ACL_2_3\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
+        printf("Test_TC_BRBINFO_1_1\n");
         printf("Test_TC_ACT_1_1\n");
         printf("Test_TC_BIND_1_1\n");
         printf("Test_TC_CC_1_1\n");
@@ -102,6 +104,7 @@ public:
         printf("Test_TC_APBSC_1_10\n");
         printf("Test_TC_CONTENTLAUNCHER_1_11\n");
         printf("Test_TC_ALOGIN_1_12\n");
+        printf("Test_TC_ALOGIN_12_1\n");
         printf("Test_TC_LOWPOWER_2_1\n");
         printf("Test_TC_KEYPADINPUT_3_2\n");
         printf("Test_TC_KEYPADINPUT_3_3\n");
@@ -111,6 +114,7 @@ public:
         printf("Test_TC_MEDIAINPUT_3_11\n");
         printf("Test_TC_MEDIAINPUT_3_12\n");
         printf("Test_TC_MEDIAINPUT_3_13\n");
+        printf("Test_TC_WAKEONLAN_4_1\n");
         printf("Test_TC_CHANNEL_5_1\n");
         printf("Test_TC_CHANNEL_5_2\n");
         printf("Test_TC_CHANNEL_5_3\n");
@@ -225,6 +229,7 @@ public:
         printf("Test_TC_DRLK_2_3\n");
         printf("Test_TC_DRLK_2_4\n");
         printf("Test_TC_DRLK_2_5\n");
+        printf("Test_TC_DRLK_2_6\n");
         printf("Test_TC_DRLK_2_7\n");
         printf("Test_TC_DRLK_2_9\n");
         printf("TestGroupsCluster\n");
@@ -2752,6 +2757,1102 @@ private:
     }
 };
 
+class Test_TC_ACL_2_3 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACL_2_3()
+        : TestCommandBridge("Test_TC_ACL_2_3")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("D_OK_EMPTY", &mDOkEmpty);
+        AddArgument("D_OK_SINGLE", &mDOkSingle);
+        AddArgument("D_OK_FULL", &mDOkFull);
+        AddArgument("D_BAD_LENGTH", &mDBadLength);
+        AddArgument("D_BAD_STRUCT", &mDBadStruct);
+        AddArgument("D_BAD_LIST", &mDBadList);
+        AddArgument("D_BAD_ELEM", &mDBadElem);
+        AddArgument("D_BAD_OVERFLOW", &mDBadOverflow);
+        AddArgument("D_BAD_UNDERFLOW", &mDBadUnderflow);
+        AddArgument("D_BAD_NONE", &mDBadNone);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACL_2_3() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACL_2_3\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACL_2_3\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 1 : TH1 reads DUT Endpoint 0 OperationalCredentials cluster CurrentFabricIndex attribute\n");
+            err = TestTh1ReadsDutEndpoint0OperationalCredentialsClusterCurrentFabricIndexAttribute_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1. struct: Data field: D_OK_EMPTY : 1718\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDOkEmpty1718_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 5 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1.struct Data field: D_OK_SINGLE "
+                ":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E672061732"
+                "0612063686172737472696E670018\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDOkSingle17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1.struct Data field: D_OK_FULL "
+                ":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E672061732"
+                "0612063686172737472696E6700D00000F1FF02003148656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656"
+                "E7420616761696E2E2E2E2E2E0018\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDOkFull17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e6700d00000f1ff02003148656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e7420616761696e2e2e2e2e2e0018_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1 .struct Data field: D_BAD_LENGTH "
+                ":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E672061732"
+                "0612063686172737472696E6700D00000F1FF02003248656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656"
+                "E7420616761696E2E2E2E2E2E2E0018\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDBadLength17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e6700d00000f1ff02003248656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e7420616761696e2e2e2e2e2e2e0018_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_STRUCT : 1518\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadStruct1518_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_LIST "
+                ":3701D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E6720617"
+                "320612063686172737472696E670018\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadList3701d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 12 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_ELEM "
+                ":17103D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E672061732061206368617"
+                "2737472696E670018\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadElem17103d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1 .struct Data field: D_BAD_OVERFLOW : "
+                "17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E6720617320"
+                "612063686172737472696E670018FF\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDBadOverflow17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018ff_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 14 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_UNDERFLOW "
+                ":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E672061732"
+                "0612063686172737472696E6700\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadUnderflow17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e6700_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 15 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 1 element 1.struct Data field: D_BAD_NONE\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDBadNone_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                "AccessControlExtensionStruct containing 2 elements . value is list of AccessControlExtensionStruct containing 2 "
+                "elements . first element contains Data field: D_OK_EMPTY 1718 . second element contains Data field: D_OK_SINGLE "
+                "17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E6720617320"
+                "612063686172737472696E670018\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining2ElementsValueIsListOfAccessControlExtensionStructContaining2ElementsFirstElementContainsDataFieldDOkEmpty1718SecondElementContainsDataFieldDOkSingle17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is an empty "
+                "list\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsAnEmptyList_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute\n");
+            if (ShouldSkip("ACL.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_19();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 20;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::ByteSpan> mDOkEmpty;
+    chip::Optional<chip::ByteSpan> mDOkSingle;
+    chip::Optional<chip::ByteSpan> mDOkFull;
+    chip::Optional<chip::ByteSpan> mDBadLength;
+    chip::Optional<chip::ByteSpan> mDBadStruct;
+    chip::Optional<chip::ByteSpan> mDBadList;
+    chip::Optional<chip::ByteSpan> mDBadElem;
+    chip::Optional<chip::ByteSpan> mDBadOverflow;
+    chip::Optional<chip::ByteSpan> mDBadUnderflow;
+    chip::Optional<chip::ByteSpan> mDBadNone;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nonnull CurrentFabricIndex;
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0OperationalCredentialsClusterCurrentFabricIndexAttribute_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentFabricIndexWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads DUT Endpoint 0 OperationalCredentials cluster CurrentFabricIndex attribute Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                CurrentFabricIndex = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeExtensionWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      {
+                                          id actualValue = value;
+                                          VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(0)));
+                                      }
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDOkEmpty1718_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkEmpty.HasValue()
+                ? [NSData dataWithBytes:mDOkEmpty.Value().data() length:mDOkEmpty.Value().size()]
+                : [[NSData alloc] initWithBytes:"\x17\x18" length:2];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster writeAttributeExtensionWithValue:extensionArgument
+                                       completion:^(NSError * _Nullable err) {
+                                           NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is "
+                                                 @"list of AccessControlExtensionStruct containing 1 element 1. struct: Data "
+                                                 @"field: D_OK_EMPTY : 1718 Error: %@",
+                                               err);
+
+                                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                           NextTest();
+                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeExtensionWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      {
+                                          id actualValue = value;
+                                          VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
+                                          VerifyOrReturn(CheckValueAsString(
+                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              mDOkEmpty.HasValue() ? [NSData dataWithBytes:mDOkEmpty.Value().data()
+                                                                                    length:mDOkEmpty.Value().size()]
+                                                                   : [[NSData alloc] initWithBytes:"\x17\x18" length:2]
+
+                                              ));
+                                          VerifyOrReturn(CheckValue("FabricIndex",
+                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              CurrentFabricIndex));
+                                      }
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDOkSingle17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkSingle.HasValue()
+                ? [NSData dataWithBytes:mDOkSingle.Value().data() length:mDOkSingle.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
+                                  "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
+                                  "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
+                           length:71];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(
+                                          @"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                                          @"AccessControlExtensionStruct containing 1 element 1.struct Data field: D_OK_SINGLE "
+                                          @":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D"
+                                          @"656E74206C6976696E6720617320612063686172737472696E670018 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeExtensionWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      {
+                                          id actualValue = value;
+                                          VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
+                                          VerifyOrReturn(CheckValueAsString(
+                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              mDOkSingle.HasValue()
+                                                  ? [NSData dataWithBytes:mDOkSingle.Value().data()
+                                                                   length:mDOkSingle.Value().size()]
+                                                  : [[NSData alloc]
+                                                      initWithBytes:
+                                                          "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72"
+                                                          "\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67"
+                                                          "\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20"
+                                                          "\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
+                                                             length:71]
+
+                                              ));
+                                          VerifyOrReturn(CheckValue("FabricIndex",
+                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              CurrentFabricIndex));
+                                      }
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDOkFull17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e6700d00000f1ff02003148656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e7420616761696e2e2e2e2e2e0018_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkFull.HasValue()
+                ? [NSData dataWithBytes:mDOkFull.Value().data() length:mDOkFull.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:
+                        "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73"
+                        "\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E"
+                        "\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\xD0\x00\x00\xF1\xFF\x02\x00\x31"
+                        "\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E"
+                        "\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x00\x18"
+                           length:128];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list "
+                                            @"of AccessControlExtensionStruct containing 1 element 1.struct Data field: D_OK_FULL "
+                                            @":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C65"
+                                            @"6D656E74206C6976696E6720617320612063686172737472696E6700D00000F1FF02003148656C6C6F205"
+                                            @"76F726C642E205468697320697320612073696E676C6520656C656D656E7420616761696E2E2E2E2E2E00"
+                                            @"18 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeExtensionWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      {
+                                          id actualValue = value;
+                                          VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
+                                          VerifyOrReturn(CheckValueAsString(
+                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              mDOkFull.HasValue()
+                                                  ? [NSData dataWithBytes:mDOkFull.Value().data() length:mDOkFull.Value().size()]
+                                                  : [[NSData alloc]
+                                                      initWithBytes:
+                                                          "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72"
+                                                          "\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67"
+                                                          "\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20"
+                                                          "\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\xD0\x00"
+                                                          "\x00\xF1\xFF\x02\x00\x31\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E"
+                                                          "\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20"
+                                                          "\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E"
+                                                          "\x00\x18"
+                                                             length:128]
+
+                                              ));
+                                          VerifyOrReturn(CheckValue("FabricIndex",
+                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              CurrentFabricIndex));
+                                      }
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDBadLength17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e6700d00000f1ff02003248656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e7420616761696e2e2e2e2e2e2e0018_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadLength.HasValue()
+                ? [NSData dataWithBytes:mDBadLength.Value().data() length:mDBadLength.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:
+                        "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73"
+                        "\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E"
+                        "\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\xD0\x00\x00\xF1\xFF\x02\x00\x32"
+                        "\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E"
+                        "\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x2E\x00\x18"
+                           length:129];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(
+                                          @"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                                          @"AccessControlExtensionStruct containing 1 element 1 .struct Data field: D_BAD_LENGTH "
+                                          @":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D"
+                                          @"656E74206C6976696E6720617320612063686172737472696E6700D00000F1FF02003248656C6C6F20576F7"
+                                          @"26C642E205468697320697320612073696E676C6520656C656D656E7420616761696E2E2E2E2E2E2E0018 "
+                                          @"Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadStruct1518_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadStruct.HasValue()
+                ? [NSData dataWithBytes:mDBadStruct.Value().data() length:mDBadStruct.Value().size()]
+                : [[NSData alloc] initWithBytes:"\x15\x18" length:2];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list "
+                                            @"of AccessControlExtensionStruct containing 1 element 1. struct Data field: "
+                                            @"D_BAD_STRUCT : 1518 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadList3701d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadList.HasValue()
+                ? [NSData dataWithBytes:mDBadList.Value().data() length:mDBadList.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:"\x37\x01\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54"
+                                  "\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20"
+                                  "\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
+                           length:72];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(
+                                          @"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                                          @"AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_LIST "
+                                          @":3701D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C65"
+                                          @"6D656E74206C6976696E6720617320612063686172737472696E670018 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadElem17103d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadElem.HasValue()
+                ? [NSData dataWithBytes:mDBadElem.Value().data() length:mDBadElem.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:"\x17\x10\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20"
+                                  "\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20"
+                                  "\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
+                           length:65];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(
+                                          @"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                                          @"AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_ELEM "
+                                          @":17103D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C69"
+                                          @"76696E6720617320612063686172737472696E670018 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDBadOverflow17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018ff_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadOverflow.HasValue()
+                ? [NSData dataWithBytes:mDBadOverflow.Value().data() length:mDBadOverflow.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
+                                  "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
+                                  "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18\xFF"
+                           length:72];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list "
+                                            @"of AccessControlExtensionStruct containing 1 element 1 .struct Data field: "
+                                            @"D_BAD_OVERFLOW : "
+                                            @"17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656"
+                                            @"D656E74206C6976696E6720617320612063686172737472696E670018FF Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1StructDataFieldDBadUnderflow17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e6700_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadUnderflow.HasValue()
+                ? [NSData dataWithBytes:mDBadUnderflow.Value().data() length:mDBadUnderflow.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
+                                  "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
+                                  "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00"
+                           length:70];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list "
+                                            @"of AccessControlExtensionStruct containing 1 element 1. struct Data field: "
+                                            @"D_BAD_UNDERFLOW "
+                                            @":17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C65"
+                                            @"6D656E74206C6976696E6720617320612063686172737472696E6700 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining1Element1structDataFieldDBadNone_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadNone.HasValue()
+                ? [NSData dataWithBytes:mDBadNone.Value().data() length:mDBadNone.Value().size()]
+                : [[NSData alloc] initWithBytes:"" length:0];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list "
+                                            @"of AccessControlExtensionStruct containing 1 element 1.struct Data field: D_BAD_NONE "
+                                            @"Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR
+    TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsListOfAccessControlExtensionStructContaining2ElementsValueIsListOfAccessControlExtensionStructContaining2ElementsFirstElementContainsDataFieldDOkEmpty1718SecondElementContainsDataFieldDOkSingle17d00000f1ff01003d48656c6c6f20576f726c642e205468697320697320612073696e676c6520656c656d656e74206c6976696e6720617320612063686172737472696e670018_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkEmpty.HasValue()
+                ? [NSData dataWithBytes:mDOkEmpty.Value().data() length:mDOkEmpty.Value().size()]
+                : [[NSData alloc] initWithBytes:"\x17\x18" length:2];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+
+            temp_0[1] = [[MTRAccessControlClusterExtensionEntry alloc] init];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[1]).data = mDOkSingle.HasValue()
+                ? [NSData dataWithBytes:mDOkSingle.Value().data() length:mDOkSingle.Value().size()]
+                : [[NSData alloc]
+                    initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
+                                  "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
+                                  "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
+                           length:71];
+            ((MTRAccessControlClusterExtensionEntry *) temp_0[1]).fabricIndex = [CurrentFabricIndex copy];
+
+            extensionArgument = temp_0;
+        }
+        [cluster
+            writeAttributeExtensionWithValue:extensionArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list "
+                                            @"of AccessControlExtensionStruct containing 2 elements . value is list of "
+                                            @"AccessControlExtensionStruct containing 2 elements . first element contains Data "
+                                            @"field: D_OK_EMPTY 1718 . second element contains Data field: D_OK_SINGLE "
+                                            @"17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656"
+                                            @"D656E74206C6976696E6720617320612063686172737472696E670018 Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeExtensionWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      {
+                                          id actualValue = value;
+                                          VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
+                                          VerifyOrReturn(CheckValueAsString(
+                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              mDOkEmpty.HasValue() ? [NSData dataWithBytes:mDOkEmpty.Value().data()
+                                                                                    length:mDOkEmpty.Value().size()]
+                                                                   : [[NSData alloc] initWithBytes:"\x17\x18" length:2]
+
+                                              ));
+                                          VerifyOrReturn(CheckValue("FabricIndex",
+                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              CurrentFabricIndex));
+                                      }
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1WritesDutEndpoint0AccessControlClusterExtensionAttributeValueIsAnEmptyList_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id extensionArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            extensionArgument = temp_0;
+        }
+        [cluster writeAttributeExtensionWithValue:extensionArgument
+                                       completion:^(NSError * _Nullable err) {
+                                           NSLog(@"TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is "
+                                                 @"an empty list Error: %@",
+                                               err);
+
+                                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                           NextTest();
+                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDutEndpoint0AccessControlClusterExtensionAttribute_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeExtensionWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      {
+                                          id actualValue = value;
+                                          VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(0)));
+                                      }
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_BOOL_1_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -3102,6 +4203,735 @@ private:
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("stateValue", "boolean", "boolean"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_BRBINFO_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_BRBINFO_1_1()
+        : TestCommandBridge("Test_TC_BRBINFO_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_BRBINFO_1_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_BRBINFO_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_BRBINFO_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the ClusterRevision from DUT\n");
+            err = TestThReadsTheClusterRevisionFromDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap from DUT\n");
+            err = TestThReadsTheFeatureMapFromDut_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads AttributeList from DUT\n");
+            err = TestThReadsAttributeListFromDut_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads optional attribute(VendorName) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0001")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeVendorNameInAttributeList_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH reads optional attribute(VendorID) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeVendorIDInAttributeList_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads optional attribute(ProductName) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeProductNameInAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH reads optional attribute(NodeLabel) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0005")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeNodeLabelInAttributeList_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads optional attribute(HardwareVersion) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0007")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeHardwareVersionInAttributeList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads optional attribute(HardwareVersionString) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0008")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeHardwareVersionStringInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads optional attribute(SoftwareVersion) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0009")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeSoftwareVersionInAttributeList_10();
+            break;
+        case 11:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 11 : TH reads optional attribute(SoftwareVersionString) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A000a")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeSoftwareVersionStringInAttributeList_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads optional attribute(ManufacturingDate) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A000b")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeManufacturingDateInAttributeList_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads optional attribute(PartNumber) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A000c")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributePartNumberInAttributeList_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads optional attribute(ProductURL) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A000d")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeProductURLInAttributeList_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads optional attribute(ProductLabel) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A000e")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeProductLabelInAttributeList_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads optional attribute(SerialNumber) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A000f")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeSerialNumberInAttributeList_16();
+            break;
+        case 17:
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads optional attribute(UniqueID) in AttributeList\n");
+            if (ShouldSkip("BRBINFO.S.A0012")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsOptionalAttributeUniqueIDInAttributeList_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH1 reads AcceptedCommandList from DUT\n");
+            err = TestTh1ReadsAcceptedCommandListFromDut_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TH1 reads GeneratedCommandList from DUT\n");
+            err = TestTh1ReadsGeneratedCommandListFromDut_19();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 20;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheClusterRevisionFromDut_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the ClusterRevision from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheFeatureMapFromDut_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the FeatureMap from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsAttributeListFromDut_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads AttributeList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeVendorNameInAttributeList_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(VendorName) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeVendorIDInAttributeList_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(VendorID) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeProductNameInAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ProductName) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeNodeLabelInAttributeList_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(NodeLabel) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeHardwareVersionInAttributeList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(HardwareVersion) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeHardwareVersionStringInAttributeList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(HardwareVersionString) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeSoftwareVersionInAttributeList_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(SoftwareVersion) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 9UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeSoftwareVersionStringInAttributeList_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(SoftwareVersionString) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 10UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeManufacturingDateInAttributeList_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ManufacturingDate) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 11UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributePartNumberInAttributeList_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(PartNumber) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 12UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeProductURLInAttributeList_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ProductURL) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 13UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeProductLabelInAttributeList_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(ProductLabel) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 14UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeSerialNumberInAttributeList_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(SerialNumber) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 15UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsOptionalAttributeUniqueIDInAttributeList_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads optional attribute(UniqueID) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 18UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsAcceptedCommandListFromDut_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads AcceptedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsGeneratedCommandListFromDut_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
+                                                                              endpointID:@(3)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads GeneratedCommandList from DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
             NextTest();
         }];
 
@@ -17904,6 +19734,134 @@ public:
         // but before our function call returns, we won't end up with an
         // incorrect mTestIndex value observed when we get the response.
         switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Read the global attribute: ClusterRevision\n");
+            err = TestReadTheGlobalAttributeClusterRevision_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Read the global attribute: FeatureMap\n");
+            if (ShouldSkip(" !CNET.S.F00 && !CNET.S.F01 && !CNET.S.F02 ")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMap_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Read the global attribute: FeatureMap when CNET.S.F00 is set\n");
+            if (ShouldSkip("CNET.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMapWhenCnetsf00IsSet_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Read the global attribute: FeatureMap when CNET.S.F01 is set\n");
+            if (ShouldSkip("CNET.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMapWhenCnetsf01IsSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Read the global attribute: FeatureMap when CNET.S.F02 is set\n");
+            if (ShouldSkip("CNET.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGlobalAttributeFeatureMapWhenCnetsf02IsSet_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Read the global attribute: AttributeList\n");
+            err = TestReadTheGlobalAttributeAttributeList_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 7 : Read mandatory attributes in AttributeList if CNET.S.F00(WI)/CNET.S.F01(TH)/CNET.S.F02(ET) "
+                "is true\n");
+            if (ShouldSkip("CNET.S.F00 || CNET.S.F01 || CNET.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadMandatoryAttributesInAttributeListIfCnetsf00wiCnetsf01thCnetsf02etIsTrue_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Read the optional attribute(ScanMaxTimeSeconds): AttributeList\n");
+            if (ShouldSkip("CNET.S.A0002")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheOptionalAttributeScanMaxTimeSecondsAttributeList_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Reading optional attribute(ConnectMaxTimeSeconds) in AttributeList\n");
+            if (ShouldSkip("CNET.S.A0003")) {
+                NextTest();
+                return;
+            }
+            err = TestReadingOptionalAttributeConnectMaxTimeSecondsInAttributeList_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 10 : Read AcceptedCommandList If DUT supports Wi-Fi/Thread related features "
+                "CNET.S.F00(WI),CNET.S.F01(TH)\n");
+            if (ShouldSkip("CNET.S.F00 || CNET.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadAcceptedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCnetsf00wicnetsf01th_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : Read AcceptedCommandList If DUT supports Wi-Fi related features (CNET.S.F00(WI) is true)\n");
+            if (ShouldSkip("CNET.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestReadAcceptedCommandListIfDutSupportsWiFiRelatedFeaturesCnetsf00wiIsTrue_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 12 : Read AcceptedCommandList If DUT supports Thread related features(CNET.S.F01(TH) is true)\n");
+            if (ShouldSkip("CNET.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadAcceptedCommandListIfDutSupportsThreadRelatedFeaturesCNETSF01THIsTrue_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 13 : Read AcceptedCommandList If DUT supports Ethernet related features(CNET.S.F02(TH) is "
+                "true)\n");
+            if (ShouldSkip("CNET.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadAcceptedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02THIsTrue_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 14 : Read the GeneratedCommandList If DUT supports Wi-Fi/Thread related features(CNET.S.F00(WI) "
+                "or CNET.S.F01(TH) is true)\n");
+            if (ShouldSkip("CNET.S.F00 || CNET.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGeneratedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCNETSF00WIOrCnetsf01thIsTrue_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 15 : Read the GeneratedCommandList If DUT supports Ethernet related features(CNET.S.F02(ET) must "
+                "be true)\n");
+            if (ShouldSkip("CNET.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestReadTheGeneratedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02ETMustBeTrue_15();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -17915,6 +19873,54 @@ public:
     void OnStatusUpdate(const chip::app::StatusIB & status) override
     {
         switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -17928,12 +19934,399 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 0;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeClusterRevision_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: ClusterRevision Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 1U));
+            }
+
+            VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMap_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 0UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMapWhenCnetsf00IsSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap when CNET.S.F00 is set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 1UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMapWhenCnetsf01IsSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap when CNET.S.F01 is set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 2UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeFeatureMapWhenCnetsf02IsSet_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: FeatureMap when CNET.S.F02 is set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("FeatureMap", actualValue, 4UL));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGlobalAttributeAttributeList_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the global attribute: AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65528UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65529UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65531UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65532UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 65533UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadMandatoryAttributesInAttributeListIfCnetsf00wiCnetsf01thCnetsf02etIsTrue_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read mandatory attributes in AttributeList if CNET.S.F00(WI)/CNET.S.F01(TH)/CNET.S.F02(ET) is true Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 4UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 6UL));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheOptionalAttributeScanMaxTimeSecondsAttributeList_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the optional attribute(ScanMaxTimeSeconds): AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadingOptionalAttributeConnectMaxTimeSecondsInAttributeList_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reading optional attribute(ConnectMaxTimeSeconds) in AttributeList Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("attributeList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAcceptedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCnetsf00wicnetsf01th_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read AcceptedCommandList If DUT supports Wi-Fi/Thread related features CNET.S.F00(WI),CNET.S.F01(TH) Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 0UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 4UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 6UL));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 8UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAcceptedCommandListIfDutSupportsWiFiRelatedFeaturesCnetsf00wiIsTrue_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read AcceptedCommandList If DUT supports Wi-Fi related features (CNET.S.F00(WI) is true) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 2UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAcceptedCommandListIfDutSupportsThreadRelatedFeaturesCNETSF01THIsTrue_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read AcceptedCommandList If DUT supports Thread related features(CNET.S.F01(TH) is true) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("acceptedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("acceptedCommandList", value, 3UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadAcceptedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02THIsTrue_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read AcceptedCommandList If DUT supports Ethernet related features(CNET.S.F02(TH) is true) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("AcceptedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGeneratedCommandListIfDutSupportsWiFiThreadRelatedFeaturesCNETSF00WIOrCnetsf01thIsTrue_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the GeneratedCommandList If DUT supports Wi-Fi/Thread related features(CNET.S.F00(WI) or CNET.S.F01(TH) "
+                  @"is true) Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("generatedCommandList", "list", "list"));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 1UL));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 5UL));
+            VerifyOrReturn(CheckConstraintContains("generatedCommandList", value, 7UL));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadTheGeneratedCommandListIfDutSupportsEthernetRelatedFeaturesCNETSF02ETMustBeTrue_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterNetworkCommissioning alloc] initWithDevice:device
+                                                                                endpointID:@(0)
+                                                                                     queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Read the GeneratedCommandList If DUT supports Ethernet related features(CNET.S.F02(ET) must be true) Error: %@",
+                err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("GeneratedCommandList", [actualValue count], static_cast<uint32_t>(0)));
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
 };
 
 class Test_TC_DESC_1_1 : public TestCommandBridge {
@@ -36408,6 +38801,261 @@ private:
     }
 };
 
+class Test_TC_ALOGIN_12_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ALOGIN_12_1()
+        : TestCommandBridge("Test_TC_ALOGIN_12_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("TempAccountIdentifier", &mTempAccountIdentifier);
+        AddArgument("catalogVendorId", 0, UINT16_MAX, &mCatalogVendorId);
+        AddArgument("applicationId", &mApplicationId);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ALOGIN_12_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ALOGIN_12_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ALOGIN_12_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Launch an app with the provided a application ID\n");
+            if (ShouldSkip("APPLAUNCHER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestLaunchAnAppWithTheProvidedAApplicationId_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : TH sends a GetSetupPIN command to the DUT with test values provided by the product maker.\n");
+            if (ShouldSkip("ALOGIN.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsAGetSetupPINCommandToTheDutWithTestValuesProvidedByTheProductMaker_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 3 : TH sends a Login command to the DUT with test values provided by the product maker.\n");
+            if (ShouldSkip("ALOGIN.S.C02.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALoginCommandToTheDutWithTestValuesProvidedByTheProductMaker_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 4 : TH sends a Logout command to the DUT with test values provided by the product maker.\n");
+            if (ShouldSkip("ALOGIN.S.C03.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsALogoutCommandToTheDutWithTestValuesProvidedByTheProductMaker_4();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 5;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mTempAccountIdentifier;
+    chip::Optional<uint16_t> mCatalogVendorId;
+    chip::Optional<chip::CharSpan> mApplicationId;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestLaunchAnAppWithTheProvidedAApplicationId_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterApplicationLauncher alloc] initWithDevice:device
+                                                                               endpointID:@(3)
+                                                                                    queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRApplicationLauncherClusterLaunchAppParams alloc] init];
+        params.application = [[MTRApplicationLauncherClusterApplication alloc] init];
+        ((MTRApplicationLauncherClusterApplication *) params.application).catalogVendorId = mCatalogVendorId.HasValue()
+            ? [NSNumber numberWithUnsignedShort:mCatalogVendorId.Value()]
+            : [NSNumber numberWithUnsignedShort:123U];
+        ((MTRApplicationLauncherClusterApplication *) params.application).applicationId = mApplicationId.HasValue()
+            ? [[NSString alloc] initWithBytes:mApplicationId.Value().data()
+                                       length:mApplicationId.Value().size()
+                                     encoding:NSUTF8StringEncoding]
+            : @"exampleid";
+
+        params.data = [[NSData alloc] initWithBytes:"Hello World" length:11];
+        [cluster
+            launchAppWithParams:params
+                     completion:^(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"Launch an app with the provided a application ID Error: %@", err);
+
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                         }
+
+                         NextTest();
+                     }];
+
+        return CHIP_NO_ERROR;
+    }
+    NSString * _Nonnull setupPIN;
+
+    CHIP_ERROR TestThSendsAGetSetupPINCommandToTheDutWithTestValuesProvidedByTheProductMaker_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccountLogin alloc] initWithDevice:device endpointID:@(3) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAccountLoginClusterGetSetupPINParams alloc] init];
+        params.tempAccountIdentifier = mTempAccountIdentifier.HasValue()
+            ? [[NSString alloc] initWithBytes:mTempAccountIdentifier.Value().data()
+                                       length:mTempAccountIdentifier.Value().size()
+                                     encoding:NSUTF8StringEncoding]
+            : @"1111";
+        [cluster
+            getSetupPINWithParams:params
+                       completion:^(MTRAccountLoginClusterGetSetupPINResponseParams * _Nullable values, NSError * _Nullable err) {
+                           NSLog(@"TH sends a GetSetupPIN command to the DUT with test values provided by the product maker. "
+                                 @"Error: %@",
+                               err);
+
+                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                           {
+                               setupPIN = values.setupPIN;
+                           }
+
+                           NextTest();
+                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsALoginCommandToTheDutWithTestValuesProvidedByTheProductMaker_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccountLogin alloc] initWithDevice:device endpointID:@(3) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAccountLoginClusterLoginParams alloc] init];
+        params.tempAccountIdentifier = mTempAccountIdentifier.HasValue()
+            ? [[NSString alloc] initWithBytes:mTempAccountIdentifier.Value().data()
+                                       length:mTempAccountIdentifier.Value().size()
+                                     encoding:NSUTF8StringEncoding]
+            : @"1111";
+        params.setupPIN = [setupPIN copy];
+        [cluster
+            loginWithParams:params
+                 completion:^(NSError * _Nullable err) {
+                     NSLog(@"TH sends a Login command to the DUT with test values provided by the product maker. Error: %@", err);
+
+                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                     NextTest();
+                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsALogoutCommandToTheDutWithTestValuesProvidedByTheProductMaker_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterAccountLogin alloc] initWithDevice:device endpointID:@(3) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster logoutWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"TH sends a Logout command to the DUT with test values provided by the product maker. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_LOWPOWER_2_1 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -37995,6 +40643,172 @@ private:
 
         chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
         value.message = chip::Span<const char>("Please enter 'y' for successgarbage: not in length on purpose", 28);
+        value.expectedValue.Emplace();
+        value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+        return UserPrompt("alpha", value);
+    }
+};
+
+class Test_TC_WAKEONLAN_4_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_WAKEONLAN_4_1()
+        : TestCommandBridge("Test_TC_WAKEONLAN_4_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_WAKEONLAN_4_1() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_WAKEONLAN_4_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_WAKEONLAN_4_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the MACAddress attribute from the DUT\n");
+            if (ShouldSkip("WAKEONLAN.S.A0000")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsTheMACAddressAttributeFromTheDut_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends a Sleep command to DUT\n");
+            if (ShouldSkip("LOWPOWER.S.C00.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsASleepCommandToDut_2();
+            break;
+        case 3:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 3 : TH sends a Wake-On LAN magic packet containing the MAC address from step 1\n");
+            if (ShouldSkip("PICS_USER_PROMPT")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsAWakeOnLanMagicPacketContainingTheMacAddressFromStep1_3();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 4;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThReadsTheMACAddressAttributeFromTheDut_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterWakeOnLAN alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeMACAddressWithCompletion:^(NSString * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads the MACAddress attribute from the DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintMinLength("MACAddress", value, 12));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsASleepCommandToDut_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterLowPower alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster sleepWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"TH sends a Sleep command to DUT Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsAWakeOnLanMagicPacketContainingTheMacAddressFromStep1_3()
+    {
+
+        chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+        value.message = chip::Span<const char>("Please enter 'y' after successgarbage: not in length on purpose", 30);
         value.expectedValue.Emplace();
         value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
         return UserPrompt("alpha", value);
@@ -56030,7 +58844,7 @@ public:
             break;
         case 51:
             ChipLogProgress(chipTool, " ***** Test Step 51 : Read the optional attribute (ActiveTimestamp) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0039")) {
+            if (ShouldSkip("DGTHREAD.S.A0038")) {
                 NextTest();
                 return;
             }
@@ -56038,7 +58852,7 @@ public:
             break;
         case 52:
             ChipLogProgress(chipTool, " ***** Test Step 52 : Read the optional attribute (PendingTimestamp) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A003A")) {
+            if (ShouldSkip("DGTHREAD.S.A0039")) {
                 NextTest();
                 return;
             }
@@ -56046,7 +58860,7 @@ public:
             break;
         case 53:
             ChipLogProgress(chipTool, " ***** Test Step 53 : Read the optional attribute (Delay) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A003B")) {
+            if (ShouldSkip("DGTHREAD.S.A003a")) {
                 NextTest();
                 return;
             }
@@ -121276,6 +124090,455 @@ private:
     }
 };
 
+class Test_TC_DRLK_2_6 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_DRLK_2_6()
+        : TestCommandBridge("Test_TC_DRLK_2_6")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_DRLK_2_6() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_6\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_DRLK_2_6\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for commissionee\n");
+            err = TestWaitForCommissionee_0();
+            break;
+        case 1:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 1 : TH reads NumberOfHoliday SchedulesSupported and saves for future use.\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.A0016")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsNumberOfHolidaySchedulesSupportedAndSavesForFutureUse_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Create Holiday schedule with 1 index\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.C11.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestCreateHolidayScheduleWith1Index_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Get Holiday Schedule with HolidayIndex as 1\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.C12.Rsp && DRLK.S.C12.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestGetHolidayScheduleWithHolidayIndexAs1_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Create Holiday schedule with invalid operating mode\n");
+            if (ShouldSkip("DRLK.S.C11.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestCreateHolidayScheduleWithInvalidOperatingMode_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Get Holiday Schedule with Invalid HolidayIndex 15.\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.C12.Rsp && DRLK.S.C12.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestGetHolidayScheduleWithInvalidHolidayIndex15_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Get Holiday Schedule with the Non-scheduled HolidayIndex\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.C12.Rsp && DRLK.S.C12.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestGetHolidayScheduleWithTheNonScheduledHolidayIndex_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Clear Holiday schedule with 1 index\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.C13.Rsp")) {
+                NextTest();
+                return;
+            }
+            err = TestClearHolidayScheduleWith1Index_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Make sure that holiday schedule was deleted\n");
+            if (ShouldSkip("DRLK.S.F0b && DRLK.S.C12.Rsp && DRLK.S.C12.Tx")) {
+                NextTest();
+                return;
+            }
+            err = TestMakeSureThatHolidayScheduleWasDeleted_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Cleanup the created user\n");
+            err = TestCleanupTheCreatedUser_9();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 10;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForCommissionee_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nonnull NumberOfHolidaySchedulesSupported;
+
+    CHIP_ERROR TestThReadsNumberOfHolidaySchedulesSupportedAndSavesForFutureUse_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeNumberOfHolidaySchedulesSupportedWithCompletion:^(
+            NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH reads NumberOfHoliday SchedulesSupported and saves for future use. Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("numberOfHolidaySchedulesSupported", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("numberOfHolidaySchedulesSupported", [value unsignedCharValue], 255U));
+            {
+                NumberOfHolidaySchedulesSupported = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateHolidayScheduleWith1Index_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:20UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:30UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:0U];
+        [cluster setHolidayScheduleWithParams:params
+                                   completion:^(NSError * _Nullable err) {
+                                       NSLog(@"Create Holiday schedule with 1 index Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetHolidayScheduleWithHolidayIndexAs1_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Get Holiday Schedule with HolidayIndex as 1 Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                       }
+
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                       }
+
+                                       {
+                                           id actualValue = values.localStartTime;
+                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 20UL));
+                                       }
+
+                                       {
+                                           id actualValue = values.localEndTime;
+                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 30UL));
+                                       }
+
+                                       if (values.localEndTime != nil) {
+
+                                           VerifyOrReturn(CheckConstraintMinValue<uint32_t>(
+                                               "localEndTime", [values.localEndTime unsignedIntValue], 21UL));
+                                       }
+
+                                       {
+                                           id actualValue = values.operatingMode;
+                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCreateHolidayScheduleWithInvalidOperatingMode_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterSetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
+        params.localStartTime = [NSNumber numberWithUnsignedInt:20UL];
+        params.localEndTime = [NSNumber numberWithUnsignedInt:30UL];
+        params.operatingMode = [NSNumber numberWithUnsignedChar:5U];
+        [cluster setHolidayScheduleWithParams:params
+                                   completion:^(NSError * _Nullable err) {
+                                       NSLog(@"Create Holiday schedule with invalid operating mode Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status",
+                                           err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                         : EMBER_ZCL_STATUS_FAILURE)
+                                               : 0,
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetHolidayScheduleWithInvalidHolidayIndex15_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:15U];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Get Holiday Schedule with Invalid HolidayIndex 15. Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 15U));
+                                       }
+
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGetHolidayScheduleWithTheNonScheduledHolidayIndex_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:10U];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Get Holiday Schedule with the Non-scheduled HolidayIndex Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 10U));
+                                       }
+
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestClearHolidayScheduleWith1Index_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
+        [cluster clearHolidayScheduleWithParams:params
+                                     completion:^(NSError * _Nullable err) {
+                                         NSLog(@"Clear Holiday schedule with 1 index Error: %@", err);
+
+                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                         NextTest();
+                                     }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMakeSureThatHolidayScheduleWasDeleted_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterGetHolidayScheduleParams alloc] init];
+        params.holidayIndex = [NSNumber numberWithUnsignedChar:1U];
+        [cluster getHolidayScheduleWithParams:params
+                                   completion:^(MTRDoorLockClusterGetHolidayScheduleResponseParams * _Nullable values,
+                                       NSError * _Nullable err) {
+                                       NSLog(@"Make sure that holiday schedule was deleted Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = values.holidayIndex;
+                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                       }
+
+                                       {
+                                           id actualValue = values.status;
+                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCleanupTheCreatedUser_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRDoorLockClusterClearUserParams alloc] init];
+        params.userIndex = [NSNumber numberWithUnsignedShort:1U];
+        [cluster clearUserWithParams:params
+                          completion:^(NSError * _Nullable err) {
+                              NSLog(@"Cleanup the created user Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_DRLK_2_7 : public TestCommandBridge {
 public:
     // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
@@ -125503,8 +128766,10 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_ACL_1_1>(),
         make_unique<Test_TC_ACL_2_1>(),
         make_unique<Test_TC_ACL_2_2>(),
+        make_unique<Test_TC_ACL_2_3>(),
         make_unique<Test_TC_BOOL_1_1>(),
         make_unique<Test_TC_BOOL_2_1>(),
+        make_unique<Test_TC_BRBINFO_1_1>(),
         make_unique<Test_TC_ACT_1_1>(),
         make_unique<Test_TC_BIND_1_1>(),
         make_unique<Test_TC_CC_1_1>(),
@@ -125566,6 +128831,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_APBSC_1_10>(),
         make_unique<Test_TC_CONTENTLAUNCHER_1_11>(),
         make_unique<Test_TC_ALOGIN_1_12>(),
+        make_unique<Test_TC_ALOGIN_12_1>(),
         make_unique<Test_TC_LOWPOWER_2_1>(),
         make_unique<Test_TC_KEYPADINPUT_3_2>(),
         make_unique<Test_TC_KEYPADINPUT_3_3>(),
@@ -125575,6 +128841,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_MEDIAINPUT_3_11>(),
         make_unique<Test_TC_MEDIAINPUT_3_12>(),
         make_unique<Test_TC_MEDIAINPUT_3_13>(),
+        make_unique<Test_TC_WAKEONLAN_4_1>(),
         make_unique<Test_TC_CHANNEL_5_1>(),
         make_unique<Test_TC_CHANNEL_5_2>(),
         make_unique<Test_TC_CHANNEL_5_3>(),
@@ -125689,6 +128956,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_DRLK_2_3>(),
         make_unique<Test_TC_DRLK_2_4>(),
         make_unique<Test_TC_DRLK_2_5>(),
+        make_unique<Test_TC_DRLK_2_6>(),
         make_unique<Test_TC_DRLK_2_7>(),
         make_unique<Test_TC_DRLK_2_9>(),
         make_unique<TestGroupsCluster>(),
