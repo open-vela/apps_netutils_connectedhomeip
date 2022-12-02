@@ -104,6 +104,7 @@
 | ApplicationBasic                                                    | 0x050D |
 | AccountLogin                                                        | 0x050E |
 | ElectricalMeasurement                                               | 0x0B04 |
+| ClientMonitoring                                                    | 0x1046 |
 | UnitTesting                                                         | 0xFFF1FC05|
 | FaultInjection                                                      | 0xFFF1FC06|
 \*----------------------------------------------------------------------------*/
