@@ -21,6 +21,7 @@
 
 #if CONFIG_ENABLE_YAML_TESTS
 
+#include <app/util/af-enums.h>
 #include <commands/tests/TestCommandBridge.h>
 #include <lib/core/Optional.h>
 #include <system/SystemClock.h>
