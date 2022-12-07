@@ -62616,6 +62616,7 @@ private:
                         auto iter_2 = iter_0.GetValue().semanticTags.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().semanticTags)>(
                             "supportedModes[0].semanticTags", iter_2, 0));
+                        VerifyOrReturn(CheckValue("supportedModes[0].semanticTags[0].value", iter_2.GetValue().value, 0U));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().semanticTags)>(
                             "supportedModes[0].semanticTags", iter_2, 1));
                     }
@@ -62627,6 +62628,7 @@ private:
                         auto iter_2 = iter_0.GetValue().semanticTags.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().semanticTags)>(
                             "supportedModes[1].semanticTags", iter_2, 0));
+                        VerifyOrReturn(CheckValue("supportedModes[1].semanticTags[0].value", iter_2.GetValue().value, 0U));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().semanticTags)>(
                             "supportedModes[1].semanticTags", iter_2, 1));
                     }
@@ -62638,6 +62640,7 @@ private:
                         auto iter_2 = iter_0.GetValue().semanticTags.begin();
                         VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().semanticTags)>(
                             "supportedModes[2].semanticTags", iter_2, 0));
+                        VerifyOrReturn(CheckValue("supportedModes[2].semanticTags[0].value", iter_2.GetValue().value, 0U));
                         VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().semanticTags)>(
                             "supportedModes[2].semanticTags", iter_2, 1));
                     }
@@ -64155,6 +64158,8 @@ private:
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
@@ -66160,6 +66165,8 @@ private:
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                                              mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
             }
