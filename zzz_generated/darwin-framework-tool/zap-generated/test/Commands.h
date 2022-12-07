@@ -77629,7 +77629,7 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER));
             break;
         case 374:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_VALUE));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 375:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -87303,7 +87303,7 @@ private:
                                                                   ? err.code
                                                                   : EMBER_ZCL_STATUS_FAILURE)
                                                               : 0,
-                                                          EMBER_ZCL_STATUS_INVALID_VALUE));
+                                                          EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
                                                       NextTest();
                                                   }];
 
@@ -114251,46 +114251,46 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 9:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
             break;
         case 11:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 12:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 13:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 15:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -114311,16 +114311,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -114347,16 +114347,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 42:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -114386,16 +114386,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 51:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 52:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 53:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 54:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 55:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -114410,16 +114410,16 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 59:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 60:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 61:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 62:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 63:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
@@ -114434,10 +114434,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 67:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 68:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_FIELD));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_INVALID_COMMAND));
             break;
         case 69:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -114822,7 +114822,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -114852,7 +114852,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -114882,7 +114882,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -114912,7 +114912,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -114972,7 +114972,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115002,7 +115002,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115032,7 +115032,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115062,7 +115062,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115092,7 +115092,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115122,7 +115122,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115152,7 +115152,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115182,7 +115182,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115214,7 +115214,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115471,7 +115471,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115498,7 +115498,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115525,7 +115525,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115552,7 +115552,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115863,7 +115863,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115890,7 +115890,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115917,7 +115917,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -115944,7 +115944,7 @@ private:
                                            err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                          : EMBER_ZCL_STATUS_FAILURE)
                                                : 0,
-                                           EMBER_ZCL_STATUS_INVALID_FIELD));
+                                           EMBER_ZCL_STATUS_INVALID_COMMAND));
                                        NextTest();
                                    }];
 
@@ -116300,7 +116300,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116326,7 +116326,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116352,7 +116352,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116378,7 +116378,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116588,7 +116588,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116614,7 +116614,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116640,7 +116640,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116666,7 +116666,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116875,7 +116875,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
@@ -116900,7 +116900,7 @@ private:
                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
                                             : 0,
-                                        EMBER_ZCL_STATUS_INVALID_FIELD));
+                                        EMBER_ZCL_STATUS_INVALID_COMMAND));
                                     NextTest();
                                 }];
 
