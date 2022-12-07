@@ -97880,16 +97880,28 @@ private:
                 VerifyOrReturn(CheckValue("Mode", ((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).mode, 0U));
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("Value",
+                    ((MTRModeSelectClusterSemanticTag *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags[0])
+                        .value,
+                    0U));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).label, @"Cappuccino"));
                 VerifyOrReturn(CheckValue("Mode", ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).mode, 4U));
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("Value",
+                    ((MTRModeSelectClusterSemanticTag *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags[0])
+                        .value,
+                    0U));
                 VerifyOrReturn(
                     CheckValueAsString("Label", ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).label, @"Espresso"));
                 VerifyOrReturn(CheckValue("Mode", ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).mode, 7U));
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValue("Value",
+                    ((MTRModeSelectClusterSemanticTag *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags[0])
+                        .value,
+                    0U));
             }
 
             VerifyOrReturn(CheckConstraintType("supportedModes", "list", "list"));
@@ -100176,6 +100188,9 @@ private:
                                          {
                                              id actualValue = value;
                                              VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
+                                             VerifyOrReturn(CheckValue("NodeId",
+                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).nodeId,
+                                                 mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                                              VerifyOrReturn(CheckValueAsString("Label",
                                                  ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).label, @""));
                                          }
@@ -103918,6 +103933,9 @@ private:
                                          {
                                              id actualValue = value;
                                              VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
+                                             VerifyOrReturn(CheckValue("NodeId",
+                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).nodeId,
+                                                 mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                                          }
 
                                          NextTest();
