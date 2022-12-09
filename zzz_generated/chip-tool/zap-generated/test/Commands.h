@@ -36572,7 +36572,7 @@ private:
             {
                 uint32_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "utc", "utc"));
+                VerifyOrReturn(CheckConstraintType("value", "epoch_s", "epoch_s"));
             }
             break;
         case 53:
