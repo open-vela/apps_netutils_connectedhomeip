@@ -25480,10 +25480,18 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool, " ***** Test Step 1 : TH reads the IdentifyTime attribute from the DUT\n");
+            if (ShouldSkip("I.S.A0000")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheIdentifyTimeAttributeFromTheDut_1();
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the IdentifyType attribute from the DUT\n");
+            if (ShouldSkip("I.S.A0001")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheIdentifyTypeAttributeFromTheDut_2();
             break;
         }
