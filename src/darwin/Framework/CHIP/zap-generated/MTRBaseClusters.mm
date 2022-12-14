@@ -17,13 +17,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MTRBaseClustersCpp_Internal.h"
-#import "MTRBaseClusters_internal.h"
-#import "MTRBaseDevice.h"
+#import "MTRBaseClusterUtils.h"
+#import "MTRBaseClusters_Internal.h"
 #import "MTRBaseDevice_Internal.h"
-#import "MTRCallbackBridge_internal.h"
+#import "MTRCallbackBridge.h"
 #import "MTRClusterStateCacheContainer_Internal.h"
-#import "MTRCluster_internal.h"
+#import "MTRCluster_Internal.h"
 #import "MTRCommandPayloadsObjc.h"
 #import "MTRStructsObjc.h"
 
