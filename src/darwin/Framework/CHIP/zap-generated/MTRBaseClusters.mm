@@ -12722,7 +12722,7 @@ using chip::SessionHandle;
 
 @end
 
-@implementation MTRBaseClusterBasic
+@implementation MTRBaseClusterBasicInformation
 
 - (instancetype)initWithDevice:(MTRBaseDevice *)device endpointID:(NSNumber *)endpointID queue:(dispatch_queue_t)queue
 {
@@ -12741,7 +12741,7 @@ using chip::SessionHandle;
 {
     [self mfgSpecificPingWithParams:nil completion:completion];
 }
-- (void)mfgSpecificPingWithParams:(MTRBasicClusterMfgSpecificPingParams * _Nullable)params
+- (void)mfgSpecificPingWithParams:(MTRBasicInformationClusterMfgSpecificPingParams * _Nullable)params
                        completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -12756,7 +12756,7 @@ using chip::SessionHandle;
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            Basic::Commands::MfgSpecificPing::Type request;
+            BasicInformation::Commands::MfgSpecificPing::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
@@ -12772,7 +12772,7 @@ using chip::SessionHandle;
 - (void)readAttributeDataModelRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::DataModelRevision::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::DataModelRevision::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -12781,7 +12781,7 @@ using chip::SessionHandle;
                               subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                         reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::DataModelRevision::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::DataModelRevision::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -12798,7 +12798,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::DataModelRevision::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::DataModelRevision::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -12816,7 +12816,7 @@ using chip::SessionHandle;
 - (void)readAttributeVendorNameWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::VendorName::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::VendorName::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -12825,7 +12825,7 @@ using chip::SessionHandle;
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                  reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::VendorName::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::VendorName::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -12841,7 +12841,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::VendorName::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::VendorName::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -12859,7 +12859,7 @@ using chip::SessionHandle;
 - (void)readAttributeVendorIDWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::VendorID::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::VendorID::TypeInfo;
     return MTRReadAttribute<MTRVendorIdAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -12868,7 +12868,7 @@ using chip::SessionHandle;
                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::VendorID::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::VendorID::TypeInfo;
     MTRSubscribeAttribute<MTRVendorIdAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -12884,7 +12884,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(VendorIdAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::VendorID::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::VendorID::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -12902,7 +12902,7 @@ using chip::SessionHandle;
 - (void)readAttributeProductNameWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::ProductName::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductName::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -12911,7 +12911,7 @@ using chip::SessionHandle;
                         subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                   reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::ProductName::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductName::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -12927,7 +12927,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::ProductName::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::ProductName::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -12945,7 +12945,7 @@ using chip::SessionHandle;
 - (void)readAttributeProductIDWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::ProductID::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductID::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -12954,7 +12954,7 @@ using chip::SessionHandle;
                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::ProductID::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductID::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -12970,7 +12970,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::ProductID::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::ProductID::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -12988,7 +12988,7 @@ using chip::SessionHandle;
 - (void)readAttributeNodeLabelWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::NodeLabel::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::NodeLabel::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13020,11 +13020,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = Basic::Attributes::NodeLabel::TypeInfo;
+            using TypeInfo = BasicInformation::Attributes::NodeLabel::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::BasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -13034,7 +13034,7 @@ using chip::SessionHandle;
                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                 reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::NodeLabel::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::NodeLabel::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13050,7 +13050,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::NodeLabel::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::NodeLabel::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13068,7 +13068,7 @@ using chip::SessionHandle;
 - (void)readAttributeLocationWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::Location::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::Location::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13100,11 +13100,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = Basic::Attributes::Location::TypeInfo;
+            using TypeInfo = BasicInformation::Attributes::Location::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = [self asCharSpan:value];
 
-            chip::Controller::BasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::BasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -13114,7 +13114,7 @@ using chip::SessionHandle;
                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::Location::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::Location::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13130,7 +13130,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::Location::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::Location::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13148,7 +13148,7 @@ using chip::SessionHandle;
 - (void)readAttributeHardwareVersionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::HardwareVersion::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::HardwareVersion::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13157,7 +13157,7 @@ using chip::SessionHandle;
                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::HardwareVersion::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::HardwareVersion::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13174,7 +13174,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::HardwareVersion::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::HardwareVersion::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13192,7 +13192,7 @@ using chip::SessionHandle;
 - (void)readAttributeHardwareVersionStringWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::HardwareVersionString::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::HardwareVersionString::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13202,7 +13202,7 @@ using chip::SessionHandle;
                                             reportHandler:
                                                 (void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::HardwareVersionString::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::HardwareVersionString::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13219,7 +13219,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::HardwareVersionString::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::HardwareVersionString::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13237,7 +13237,7 @@ using chip::SessionHandle;
 - (void)readAttributeSoftwareVersionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::SoftwareVersion::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::SoftwareVersion::TypeInfo;
     return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13246,7 +13246,7 @@ using chip::SessionHandle;
                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::SoftwareVersion::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::SoftwareVersion::TypeInfo;
     MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13263,7 +13263,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::SoftwareVersion::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::SoftwareVersion::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13281,7 +13281,7 @@ using chip::SessionHandle;
 - (void)readAttributeSoftwareVersionStringWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::SoftwareVersionString::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::SoftwareVersionString::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13291,7 +13291,7 @@ using chip::SessionHandle;
                                             reportHandler:
                                                 (void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::SoftwareVersionString::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::SoftwareVersionString::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13308,7 +13308,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::SoftwareVersionString::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::SoftwareVersionString::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13326,7 +13326,7 @@ using chip::SessionHandle;
 - (void)readAttributeManufacturingDateWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::ManufacturingDate::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ManufacturingDate::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13335,7 +13335,7 @@ using chip::SessionHandle;
                               subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                         reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::ManufacturingDate::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ManufacturingDate::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13352,7 +13352,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::ManufacturingDate::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::ManufacturingDate::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13370,7 +13370,7 @@ using chip::SessionHandle;
 - (void)readAttributePartNumberWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::PartNumber::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::PartNumber::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13379,7 +13379,7 @@ using chip::SessionHandle;
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                  reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::PartNumber::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::PartNumber::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13395,7 +13395,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::PartNumber::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::PartNumber::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13413,7 +13413,7 @@ using chip::SessionHandle;
 - (void)readAttributeProductURLWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::ProductURL::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductURL::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13422,7 +13422,7 @@ using chip::SessionHandle;
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                  reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::ProductURL::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductURL::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13438,7 +13438,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::ProductURL::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::ProductURL::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13456,7 +13456,7 @@ using chip::SessionHandle;
 - (void)readAttributeProductLabelWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::ProductLabel::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductLabel::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13465,7 +13465,7 @@ using chip::SessionHandle;
                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                    reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::ProductLabel::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ProductLabel::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13481,7 +13481,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::ProductLabel::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::ProductLabel::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13499,7 +13499,7 @@ using chip::SessionHandle;
 - (void)readAttributeSerialNumberWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::SerialNumber::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::SerialNumber::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13508,7 +13508,7 @@ using chip::SessionHandle;
                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                    reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::SerialNumber::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::SerialNumber::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13524,7 +13524,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::SerialNumber::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::SerialNumber::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13542,7 +13542,7 @@ using chip::SessionHandle;
 - (void)readAttributeLocalConfigDisabledWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::LocalConfigDisabled::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::LocalConfigDisabled::TypeInfo;
     return MTRReadAttribute<MTRBooleanAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13574,11 +13574,11 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = Basic::Attributes::LocalConfigDisabled::TypeInfo;
+            using TypeInfo = BasicInformation::Attributes::LocalConfigDisabled::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.boolValue;
 
-            chip::Controller::BasicCluster cppCluster(exchangeManager, session, self->_endpoint);
+            chip::Controller::BasicInformationCluster cppCluster(exchangeManager, session, self->_endpoint);
             return cppCluster.WriteAttribute<TypeInfo>(cppValue, bridge, successCb, failureCb, timedWriteTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
@@ -13589,7 +13589,7 @@ using chip::SessionHandle;
                                           reportHandler:
                                               (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::LocalConfigDisabled::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::LocalConfigDisabled::TypeInfo;
     MTRSubscribeAttribute<MTRBooleanAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13606,7 +13606,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::LocalConfigDisabled::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::LocalConfigDisabled::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13624,7 +13624,7 @@ using chip::SessionHandle;
 - (void)readAttributeReachableWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::Reachable::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::Reachable::TypeInfo;
     return MTRReadAttribute<MTRBooleanAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13633,7 +13633,7 @@ using chip::SessionHandle;
                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::Reachable::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::Reachable::TypeInfo;
     MTRSubscribeAttribute<MTRBooleanAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13649,7 +13649,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(BooleanAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::Reachable::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::Reachable::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13667,7 +13667,7 @@ using chip::SessionHandle;
 - (void)readAttributeUniqueIDWithCompletion:(void (^)(NSString * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::UniqueID::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::UniqueID::TypeInfo;
     return MTRReadAttribute<MTRCharStringAttributeCallbackBridge, NSString, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13676,7 +13676,7 @@ using chip::SessionHandle;
                      subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                reportHandler:(void (^)(NSString * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::UniqueID::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::UniqueID::TypeInfo;
     MTRSubscribeAttribute<MTRCharStringAttributeCallbackSubscriptionBridge, NSString, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13692,7 +13692,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(CharStringAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::UniqueID::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::UniqueID::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13707,39 +13707,40 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeCapabilityMinimaWithCompletion:(void (^)(MTRBasicClusterCapabilityMinimaStruct * _Nullable value,
+- (void)readAttributeCapabilityMinimaWithCompletion:(void (^)(MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value,
                                                         NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::CapabilityMinima::TypeInfo;
-    return MTRReadAttribute<MTRBasicCapabilityMinimaStructAttributeCallbackBridge, MTRBasicClusterCapabilityMinimaStruct,
-        TypeInfo::DecodableType>(
+    using TypeInfo = BasicInformation::Attributes::CapabilityMinima::TypeInfo;
+    return MTRReadAttribute<MTRBasicInformationCapabilityMinimaStructAttributeCallbackBridge,
+        MTRBasicInformationClusterCapabilityMinimaStruct, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeCapabilityMinimaWithParams:(MTRSubscribeParams * _Nonnull)params
                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                       reportHandler:(void (^)(MTRBasicClusterCapabilityMinimaStruct * _Nullable value,
+                                       reportHandler:(void (^)(MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value,
                                                          NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::CapabilityMinima::TypeInfo;
-    MTRSubscribeAttribute<MTRBasicCapabilityMinimaStructAttributeCallbackSubscriptionBridge, MTRBasicClusterCapabilityMinimaStruct,
-        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
-        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+    using TypeInfo = BasicInformation::Attributes::CapabilityMinima::TypeInfo;
+    MTRSubscribeAttribute<MTRBasicInformationCapabilityMinimaStructAttributeCallbackSubscriptionBridge,
+        MTRBasicInformationClusterCapabilityMinimaStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeCapabilityMinimaWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                   endpoint:(NSNumber *)endpoint
                                                      queue:(dispatch_queue_t)queue
-                                                completion:(void (^)(MTRBasicClusterCapabilityMinimaStruct * _Nullable value,
-                                                               NSError * _Nullable error))completion
+                                                completion:
+                                                    (void (^)(MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value,
+                                                        NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRBasicCapabilityMinimaStructAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRBasicInformationCapabilityMinimaStructAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(BasicCapabilityMinimaStructAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(BasicInformationCapabilityMinimaStructAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::CapabilityMinima::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::CapabilityMinima::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13757,8 +13758,8 @@ using chip::SessionHandle;
 - (void)readAttributeGeneratedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::GeneratedCommandList::TypeInfo;
-    return MTRReadAttribute<MTRBasicGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    using TypeInfo = BasicInformation::Attributes::GeneratedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRBasicInformationGeneratedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -13767,10 +13768,10 @@ using chip::SessionHandle;
                                            reportHandler:
                                                (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::GeneratedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTRBasicGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
-        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    using TypeInfo = BasicInformation::Attributes::GeneratedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRBasicInformationGeneratedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeGeneratedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -13779,12 +13780,12 @@ using chip::SessionHandle;
                                                     completion:
                                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRBasicGeneratedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRBasicInformationGeneratedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(BasicGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(BasicInformationGeneratedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::GeneratedCommandList::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::GeneratedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13802,8 +13803,8 @@ using chip::SessionHandle;
 - (void)readAttributeAcceptedCommandListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::AcceptedCommandList::TypeInfo;
-    return MTRReadAttribute<MTRBasicAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    using TypeInfo = BasicInformation::Attributes::AcceptedCommandList::TypeInfo;
+    return MTRReadAttribute<MTRBasicInformationAcceptedCommandListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -13812,10 +13813,10 @@ using chip::SessionHandle;
                                           reportHandler:
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::AcceptedCommandList::TypeInfo;
-    MTRSubscribeAttribute<MTRBasicAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(
-        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    using TypeInfo = BasicInformation::Attributes::AcceptedCommandList::TypeInfo;
+    MTRSubscribeAttribute<MTRBasicInformationAcceptedCommandListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeAcceptedCommandListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -13824,12 +13825,12 @@ using chip::SessionHandle;
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRBasicAcceptedCommandListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRBasicInformationAcceptedCommandListListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(BasicAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(BasicInformationAcceptedCommandListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::AcceptedCommandList::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::AcceptedCommandList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13847,8 +13848,8 @@ using chip::SessionHandle;
 - (void)readAttributeAttributeListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::AttributeList::TypeInfo;
-    return MTRReadAttribute<MTRBasicAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    using TypeInfo = BasicInformation::Attributes::AttributeList::TypeInfo;
+    return MTRReadAttribute<MTRBasicInformationAttributeListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -13856,10 +13857,10 @@ using chip::SessionHandle;
                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                     reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::AttributeList::TypeInfo;
-    MTRSubscribeAttribute<MTRBasicAttributeListListAttributeCallbackSubscriptionBridge, NSArray, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    using TypeInfo = BasicInformation::Attributes::AttributeList::TypeInfo;
+    MTRSubscribeAttribute<MTRBasicInformationAttributeListListAttributeCallbackSubscriptionBridge, NSArray,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeAttributeListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -13867,12 +13868,12 @@ using chip::SessionHandle;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRBasicAttributeListListAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(BasicAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRBasicInformationAttributeListListAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(BasicInformationAttributeListListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::AttributeList::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::AttributeList::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13890,7 +13891,7 @@ using chip::SessionHandle;
 - (void)readAttributeFeatureMapWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::FeatureMap::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::FeatureMap::TypeInfo;
     return MTRReadAttribute<MTRInt32uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13899,7 +13900,7 @@ using chip::SessionHandle;
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                  reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::FeatureMap::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::FeatureMap::TypeInfo;
     MTRSubscribeAttribute<MTRInt32uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13915,7 +13916,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(Int32uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::FeatureMap::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::FeatureMap::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13933,7 +13934,7 @@ using chip::SessionHandle;
 - (void)readAttributeClusterRevisionWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = Basic::Attributes::ClusterRevision::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ClusterRevision::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -13942,7 +13943,7 @@ using chip::SessionHandle;
                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                       reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = Basic::Attributes::ClusterRevision::TypeInfo;
+    using TypeInfo = BasicInformation::Attributes::ClusterRevision::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -13959,7 +13960,7 @@ using chip::SessionHandle;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = Basic::Attributes::ClusterRevision::TypeInfo;
+                using TypeInfo = BasicInformation::Attributes::ClusterRevision::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -13974,6 +13975,9 @@ using chip::SessionHandle;
         });
 }
 
+@end
+
+@implementation MTRBaseClusterBasic
 @end
 
 @implementation MTRBaseClusterBasic (Deprecated)
@@ -14843,7 +14847,7 @@ using chip::SessionHandle;
                                                                NSError * _Nullable error))completionHandler
 {
     [self readAttributeCapabilityMinimaWithCompletion:^(
-        MTRBasicClusterCapabilityMinimaStruct * _Nullable value, NSError * _Nullable error) {
+        MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<MTRBasicClusterCapabilityMinimaStruct *>(value), error);
     }];
@@ -14865,8 +14869,8 @@ using chip::SessionHandle;
     }
     [self subscribeAttributeCapabilityMinimaWithParams:subscribeParams
                                subscriptionEstablished:subscriptionEstablishedHandler
-                                         reportHandler:^(
-                                             MTRBasicClusterCapabilityMinimaStruct * _Nullable value, NSError * _Nullable error) {
+                                         reportHandler:^(MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value,
+                                             NSError * _Nullable error) {
                                              // Cast is safe because subclass does not add any selectors.
                                              reportHandler(static_cast<MTRBasicClusterCapabilityMinimaStruct *>(value), error);
                                          }];
@@ -14880,7 +14884,7 @@ using chip::SessionHandle;
     [self readAttributeCapabilityMinimaWithClusterStateCache:attributeCacheContainer.realContainer
                                                     endpoint:endpoint
                                                        queue:queue
-                                                  completion:^(MTRBasicClusterCapabilityMinimaStruct * _Nullable value,
+                                                  completion:^(MTRBasicInformationClusterCapabilityMinimaStruct * _Nullable value,
                                                       NSError * _Nullable error) {
                                                       // Cast is safe because subclass does not add any selectors.
                                                       completionHandler(
