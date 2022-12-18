@@ -14069,76 +14069,76 @@ private:
         }
         case 1: {
             LogStep(1, "TH reads the ClusterRevision from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ClusterRevision::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "TH reads the FeatureMap from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::FeatureMap::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::FeatureMap::Id,
+                                 true, chip::NullOptional);
         }
         case 3: {
             LogStep(3, "TH reads AttributeList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 4: {
             LogStep(4, "TH reads optional attribute(ManufacturingDate) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "TH reads optional attribute(PartNumber) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "TH reads optional attribute(ProductURL) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH reads optional attribute(ProductLabel) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "TH reads optional attribute(SerialNumber) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "TH reads optional attribute(LocalConfigDisabled) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 10: {
             LogStep(10, "TH reads optional attribute(Reachable) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "TH reads optional attribute(UniqueID) in attributeList");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH1 reads AcceptedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AcceptedCommandList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH1 reads GeneratedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::GeneratedCommandList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -14253,7 +14253,7 @@ private:
     chip::CharSpan SerialNumberValue;
     char * UniqueIDValueBuffer = nullptr;
     chip::CharSpan UniqueIDValue;
-    chip::app::Clusters::Basic::Structs::CapabilityMinimaStruct::DecodableType CapabilityMinimaValue;
+    chip::app::Clusters::BasicInformation::Structs::CapabilityMinimaStruct::DecodableType CapabilityMinimaValue;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
 
@@ -14771,7 +14771,7 @@ private:
         case 65:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::Basic::Structs::CapabilityMinimaStruct::DecodableType value;
+                chip::app::Clusters::BasicInformation::Structs::CapabilityMinimaStruct::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 CapabilityMinimaValue = value;
             }
@@ -14782,7 +14782,7 @@ private:
         case 67:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::Basic::Structs::CapabilityMinimaStruct::DecodableType value;
+                chip::app::Clusters::BasicInformation::Structs::CapabilityMinimaStruct::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
@@ -14821,8 +14821,8 @@ private:
         case 2: {
             LogStep(2, "TH reads DataModelRevision from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::DataModelRevision::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::DataModelRevision::Id, true, chip::NullOptional);
         }
         case 3: {
             LogStep(3, "TH writes DataModelRevision from the DUT.");
@@ -14830,20 +14830,21 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 4388U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::DataModelRevision::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::DataModelRevision::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 4: {
             LogStep(4, "TH reads DataModelRevision from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::DataModelRevision::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::DataModelRevision::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "TH reads VendorName from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::VendorName::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorName::Id,
+                                 true, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "TH writes VendorName from the DUT.");
@@ -14851,20 +14852,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("samplegarbage: not in length on purpose", 6);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::VendorName::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::VendorName::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH reads VendorName from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::VendorName::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorName::Id,
+                                 true, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "TH reads VendorID from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::VendorID::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Verify that VendorID matches the value assigned to this manufacturer");
@@ -14882,20 +14883,20 @@ private:
             ListFreer listFreer;
             chip::VendorId value;
             value = static_cast<chip::VendorId>(17);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::VendorID::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "TH reads VendorID from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::VendorID::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH reads ProductName from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductName::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ProductName::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH writes ProductName from the DUT.");
@@ -14903,20 +14904,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newproductgarbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductName::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::ProductName::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "TH reads ProductName from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductName::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ProductName::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "TH reads ProductID from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductID::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::ProductID::Id,
+                                 true, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "TH writes ProductID from the DUT.");
@@ -14924,20 +14925,20 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 17697U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductID::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::ProductID::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "TH reads ProductID from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductID::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::ProductID::Id,
+                                 true, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "TH reads NodeLabel from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 19: {
             LogStep(19, "TH writes NodeLabel from the DUT.");
@@ -14945,20 +14946,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newnodegarbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "TH reads NodeLabel from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 21: {
             LogStep(21, "TH reads Location from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
         }
         case 22: {
             LogStep(22, "Verify that the Location is same as CountryCode value saved from step1");
@@ -14976,20 +14977,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("ingarbage: not in length on purpose", 2);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 24: {
             LogStep(24, "TH reads Location from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
         }
         case 25: {
             LogStep(25, "TH reads HardwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::HardwareVersion::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::HardwareVersion::Id, true, chip::NullOptional);
         }
         case 26: {
             LogStep(26, "TH writes HardwareVersion from the DUT.");
@@ -14997,20 +14998,20 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 17713U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::HardwareVersion::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::HardwareVersion::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 27: {
             LogStep(27, "TH reads HardwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::HardwareVersion::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::HardwareVersion::Id, true, chip::NullOptional);
         }
         case 28: {
             LogStep(28, "TH reads HardwareVersionString from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::HardwareVersionString::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
         }
         case 29: {
             LogStep(29, "TH writes HardwareVersionString from the DUT.");
@@ -15018,20 +15019,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newhardwareversiongarbage: not in length on purpose", 18);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::HardwareVersionString::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::HardwareVersionString::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 30: {
             LogStep(30, "TH reads HardwareVersionString from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::HardwareVersionString::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
         }
         case 31: {
             LogStep(31, "TH reads SoftwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SoftwareVersion::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
         }
         case 32: {
             LogStep(32,
@@ -15051,20 +15053,20 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 33299UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SoftwareVersion::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::SoftwareVersion::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 34: {
             LogStep(34, "TH reads SoftwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SoftwareVersion::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
         }
         case 35: {
             LogStep(35, "TH reads SoftwareVersionString from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SoftwareVersionString::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
         }
         case 36: {
             LogStep(36, "TH writes SoftwareVersionString from the DUT.");
@@ -15072,20 +15074,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("1.0garbage: not in length on purpose", 3);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SoftwareVersionString::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::SoftwareVersionString::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 37: {
             LogStep(37, "TH reads SoftwareVersionString from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SoftwareVersionString::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
         }
         case 38: {
             LogStep(38, "TH reads ManufacturingDate from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ManufacturingDate::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
         }
         case 39: {
             LogStep(39, "Verify if the first 8 characters specify date according to ISO 8601, i.e, YYYYMMDD");
@@ -15103,20 +15106,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("20210814789452INgarbage: not in length on purpose", 16);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ManufacturingDate::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::ManufacturingDate::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 41: {
             LogStep(41, "TH reads ManufacturingDate from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ManufacturingDate::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
         }
         case 42: {
             LogStep(42, "TH reads PartNumber from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::PartNumber::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::PartNumber::Id,
+                                 true, chip::NullOptional);
         }
         case 43: {
             LogStep(43, "TH writes PartNumber from the DUT.");
@@ -15124,20 +15128,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newpartgarbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::PartNumber::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::PartNumber::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 44: {
             LogStep(44, "TH reads PartNumber from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::PartNumber::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::PartNumber::Id,
+                                 true, chip::NullOptional);
         }
         case 45: {
             LogStep(45, "TH reads ProductURL from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductURL::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::ProductURL::Id,
+                                 true, chip::NullOptional);
         }
         case 46: {
             LogStep(46,
@@ -15157,20 +15161,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("https://www.example.comgarbage: not in length on purpose", 23);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductURL::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::ProductURL::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 48: {
             LogStep(48, "TH reads ProductURL from the DUT");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductURL::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::ProductURL::Id,
+                                 true, chip::NullOptional);
         }
         case 49: {
             LogStep(49, "TH reads ProductLabel from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ProductLabel::Id, true, chip::NullOptional);
         }
         case 50: {
             LogStep(50, "Verify that it does not include the name of the vendor as defined within the VendorName attribute");
@@ -15188,20 +15192,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newproductlabelgarbage: not in length on purpose", 15);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::ProductLabel::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 52: {
             LogStep(52, "TH reads ProductLabel from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::ProductLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::ProductLabel::Id, true, chip::NullOptional);
         }
         case 53: {
             LogStep(53, "TH reads SerialNumber from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SerialNumber::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::SerialNumber::Id, true, chip::NullOptional);
         }
         case 54: {
             LogStep(54, "TH writes SerialNumber from the DUT.");
@@ -15209,20 +15213,20 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newserialnumbergarbage: not in length on purpose", 15);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SerialNumber::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::SerialNumber::Id, value, chip::NullOptional, chip::NullOptional);
         }
         case 55: {
             LogStep(55, "TH reads SerialNumber from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::SerialNumber::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::SerialNumber::Id, true, chip::NullOptional);
         }
         case 56: {
             LogStep(56, "TH reads LocalConfigDisabled from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::LocalConfigDisabled::Id, true, chip::NullOptional);
         }
         case 57: {
             LogStep(57, "TH sets LocalConfigDisabled to True");
@@ -15230,20 +15234,21 @@ private:
             ListFreer listFreer;
             bool value;
             value = true;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::LocalConfigDisabled::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 58: {
             LogStep(58, "TH reads LocalConfigDisabled from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::LocalConfigDisabled::Id, true, chip::NullOptional);
         }
         case 59: {
             LogStep(59, "TH reads Reachable from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Reachable::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Reachable::Id,
+                                 true, chip::NullOptional);
         }
         case 60: {
             LogStep(60, "TH sends Write request message to DUT to change value of Reachable to false");
@@ -15251,20 +15256,20 @@ private:
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Reachable::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Reachable::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 61: {
             LogStep(61, "TH reads Reachable from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Reachable::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Reachable::Id,
+                                 true, chip::NullOptional);
         }
         case 62: {
             LogStep(62, "TH reads UniqueID from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::UniqueID::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::UniqueID::Id,
+                                 true, chip::NullOptional);
         }
         case 63: {
             LogStep(63, "TH writes UniqueID from the DUT.");
@@ -15272,38 +15277,39 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newidgarbage: not in length on purpose", 5);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::UniqueID::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::UniqueID::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 64: {
             LogStep(64, "TH reads UniqueID from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::UniqueID::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::UniqueID::Id,
+                                 true, chip::NullOptional);
         }
         case 65: {
             LogStep(65, "TH reads CapabilityMinima attribute from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0013"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::CapabilityMinima::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::CapabilityMinima::Id, true, chip::NullOptional);
         }
         case 66: {
             LogStep(66, "TH writes CapabilityMinima from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0013"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::Basic::Structs::CapabilityMinimaStruct::Type value;
+            chip::app::Clusters::BasicInformation::Structs::CapabilityMinimaStruct::Type value;
 
             value.caseSessionsPerFabric  = 4U;
             value.subscriptionsPerFabric = 4U;
 
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::CapabilityMinima::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::CapabilityMinima::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 67: {
             LogStep(67, "TH reads CapabilityMinima attribute from the DUT.");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0013"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::CapabilityMinima::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::CapabilityMinima::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -50247,8 +50253,8 @@ private:
         }
         case 1: {
             LogStep(1, "Read an attribute");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::DataModelRevision::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::DataModelRevision::Id, true, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Reboot the server");
@@ -50267,8 +50273,8 @@ private:
         }
         case 4: {
             LogStep(4, "Read an attribute again");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::DataModelRevision::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::DataModelRevision::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Re-get our session, but without expiring sesssions");
@@ -50281,8 +50287,8 @@ private:
         }
         case 6: {
             LogStep(6, "Read an attribute a third time");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::DataModelRevision::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::DataModelRevision::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -61478,70 +61484,71 @@ private:
         }
         case 1: {
             LogStep(1, "Read location");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "Write location");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("USgarbage: not in length on purpose", 2);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 3: {
             LogStep(3, "Read back location");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                 true, chip::NullOptional);
         }
         case 4: {
             LogStep(4, "Restore initial location value");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::Location::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Read AttributeList value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::AttributeList::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "Read NodeLabel");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "Write NodeLabel");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("My nodegarbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "Read back NodeLabel");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Read LocalConfigDisabled");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::LocalConfigDisabled::Id, true, chip::NullOptional);
         }
         case 10: {
             LogStep(10, "Write LocalConfigDisabled");
             ListFreer listFreer;
             bool value;
             value = true;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::LocalConfigDisabled::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Read back LocalConfigDisabled");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::LocalConfigDisabled::Id, true, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "Reboot the device");
@@ -61558,29 +61565,30 @@ private:
         }
         case 14: {
             LogStep(14, "Read back NodeLabel after reboot");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "Restore initial NodeLabel value");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "Read back LocalConfigDisabled after reboot");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                 BasicInformation::Attributes::LocalConfigDisabled::Id, true, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "Restore initial LocalConfigDisabled value");
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::LocalConfigDisabled::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id,
+                                  BasicInformation::Attributes::LocalConfigDisabled::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -64224,8 +64232,8 @@ private:
         }
         case 4: {
             LogStep(4, "Reads NodeLabel mandatory attribute of target device");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Invoke AddTrustedRootCertificate without fail-safe");
@@ -66341,29 +66349,29 @@ private:
         }
         case 14: {
             LogStep(14, "read the mandatory attribute: NodeLabel from alpha");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "write the mandatory attribute NodeLabel from beta");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("written from betagarbage: not in length on purpose", 17);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "read the mandatory attribute: NodeLabel from gamma");
-            return ReadAttribute(kIdentityGamma, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityGamma, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "write the mandatory attribute NodeLabel back to default");
             ListFreer listFreer;
             chip::CharSpan value;
             value = readFromAlpha;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -77549,15 +77557,16 @@ private:
         }
         case 7: {
             LogStep(7, "Read initial Attribute value");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "Group Write Attribute");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("xyzzygarbage: not in length on purpose", 5);
-            return WriteGroupAttribute(kIdentityAlpha, 258, Basic::Id, Basic::Attributes::NodeLabel::Id, value, chip::NullOptional);
+            return WriteGroupAttribute(kIdentityAlpha, 258, BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                       value, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Wait for write 1");
@@ -77568,15 +77577,16 @@ private:
         }
         case 10: {
             LogStep(10, "Read back Attribute");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Restore initial Attribute value");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteGroupAttribute(kIdentityAlpha, 258, Basic::Id, Basic::Attributes::NodeLabel::Id, value, chip::NullOptional);
+            return WriteGroupAttribute(kIdentityAlpha, 258, BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                       value, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "Wait for write 2");
@@ -77587,8 +77597,8 @@ private:
         }
         case 13: {
             LogStep(13, "Read back Attribute");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "Check on/off attribute value is false for endpoint 1");
@@ -77808,15 +77818,16 @@ private:
         }
         case 29: {
             LogStep(29, "Read initial Attribute value for gamma");
-            return ReadAttribute(kIdentityGamma, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityGamma, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 30: {
             LogStep(30, "Group Write Attribute for gamma");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("xyzzygarbage: not in length on purpose", 5);
-            return WriteGroupAttribute(kIdentityGamma, 258, Basic::Id, Basic::Attributes::NodeLabel::Id, value, chip::NullOptional);
+            return WriteGroupAttribute(kIdentityGamma, 258, BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                       value, chip::NullOptional);
         }
         case 31: {
             LogStep(31, "Wait for write 1 for gamma");
@@ -77827,15 +77838,16 @@ private:
         }
         case 32: {
             LogStep(32, "Read back Attribute for gamma");
-            return ReadAttribute(kIdentityGamma, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityGamma, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 33: {
             LogStep(33, "Restore initial Attribute value for gamma");
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("garbage: not in length on purpose", 0);
-            return WriteGroupAttribute(kIdentityGamma, 258, Basic::Id, Basic::Attributes::NodeLabel::Id, value, chip::NullOptional);
+            return WriteGroupAttribute(kIdentityGamma, 258, BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                       value, chip::NullOptional);
         }
         case 34: {
             LogStep(34, "Wait for write 2 for gamma");
@@ -77846,8 +77858,8 @@ private:
         }
         case 35: {
             LogStep(35, "Read back Attribute for gamma");
-            return ReadAttribute(kIdentityGamma, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityGamma, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 36: {
             LogStep(36, "Check on/off attribute value is false for endpoint 1 for gamma");
@@ -88560,8 +88572,8 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
@@ -88933,8 +88945,8 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
@@ -89818,14 +89830,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE");
@@ -89872,14 +89884,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptest1garbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
@@ -89887,14 +89899,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptest2garbage: not in length on purpose", 9);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "TH_CR2 opens a commissioning window on DUT_CE using ECM");
@@ -90206,14 +90218,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH_CR2 starts a commissioning process with DUT_CE");
@@ -90260,14 +90272,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
@@ -90275,14 +90287,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityBeta, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "TH_CR2 opens a commissioning window on DUT_CE using BCM");
@@ -90613,14 +90625,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH_CR1 opens a new commissioning window on DUT_CE using wrong PakeVerifier value using ECM");
@@ -90979,14 +90991,14 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptestgarbage: not in length on purpose", 8);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, value,
-                                  chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH_CR1 read the mandatory attribute NodeLabel of DUT_CE");
             VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), Basic::Id, Basic::Attributes::NodeLabel::Id, true,
-                                 chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                 true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH_CR1 opens a commissioning window on DUT_CE");
