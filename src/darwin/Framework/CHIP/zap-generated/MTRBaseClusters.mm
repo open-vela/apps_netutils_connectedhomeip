@@ -12741,7 +12741,7 @@ using chip::SessionHandle;
 {
     [self mfgSpecificPingWithParams:nil completion:completion];
 }
-- (void)mfgSpecificPingWithParams:(MTRBasicInformationClusterMfgSpecificPingParams * _Nullable)params
+- (void)mfgSpecificPingWithParams:(MTRBasicClusterMfgSpecificPingParams * _Nullable)params
                        completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.

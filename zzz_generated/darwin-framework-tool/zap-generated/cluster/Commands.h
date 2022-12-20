@@ -10965,49 +10965,6 @@ public:
 \*----------------------------------------------------------------------------*/
 
 /*
- * Command MfgSpecificPing
- */
-class BasicInformationMfgSpecificPing : public ClusterCommand {
-public:
-    BasicInformationMfgSpecificPing()
-        : ClusterCommand("mfg-specific-ping")
-    {
-        ClusterCommand::AddArguments();
-    }
-
-    CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
-    {
-        ChipLogProgress(chipTool, "Sending cluster (0x00000028) command (0x00000000) on endpoint %u", endpointId);
-
-        dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device
-                                                                            endpointID:@(endpointId)
-                                                                                 queue:callbackQueue];
-        __auto_type * params = [[MTRBasicInformationClusterMfgSpecificPingParams alloc] init];
-        params.timedInvokeTimeoutMs
-            = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        uint16_t repeatCount = mRepeatCount.ValueOr(1);
-        uint16_t __block responsesNeeded = repeatCount;
-        while (repeatCount--) {
-            [cluster mfgSpecificPingWithParams:params
-                                    completion:^(NSError * _Nullable error) {
-                                        responsesNeeded--;
-                                        if (error != nil) {
-                                            mError = error;
-                                            LogNSError("Error", error);
-                                        }
-                                        if (responsesNeeded == 0) {
-                                            SetCommandExitStatus(mError);
-                                        }
-                                    }];
-        }
-        return CHIP_NO_ERROR;
-    }
-
-private:
-};
-
-/*
  * Attribute DataModelRevision
  */
 class ReadBasicInformationDataModelRevision : public ReadAttribute {
@@ -97929,7 +97886,6 @@ void registerClusterBasicInformation(Commands & commands)
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
-        make_unique<BasicInformationMfgSpecificPing>(), //
         make_unique<ReadAttribute>(Id), //
         make_unique<ReadBasicInformationDataModelRevision>(), //
         make_unique<WriteAttribute>(Id), //
