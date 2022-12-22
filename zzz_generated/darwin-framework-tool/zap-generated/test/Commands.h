@@ -25631,7 +25631,7 @@ public:
             break;
         case 1:
             ChipLogProgress(chipTool,
-                " ***** Test Step 1 : TH sends Identify command to DUT, with the identify time field set to 0x003c (60s).\n");
+                " ***** Test Step 1 : TH sends Identify command to DUT, with the IdentifyTime field set to 0x003c (60s).\n");
             if (ShouldSkip("I.S.C00.Rsp")) {
                 NextTest();
                 return;
@@ -25670,7 +25670,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : TH sends Identify command to DUT, with the identify time field set to 0x0000 (stop "
+                " ***** Test Step 6 : TH sends Identify command to DUT, with the IdentifyTime field set to 0x0000 (stop "
                 "identifying).\n");
             if (ShouldSkip("I.S.C00.Rsp")) {
                 NextTest();
@@ -25787,15 +25787,15 @@ private:
 
         __auto_type * params = [[MTRIdentifyClusterIdentifyParams alloc] init];
         params.identifyTime = [NSNumber numberWithUnsignedShort:60U];
-        [cluster identifyWithParams:params
-                         completion:^(NSError * _Nullable err) {
-                             NSLog(@"TH sends Identify command to DUT, with the identify time field set to 0x003c (60s). Error: %@",
-                                 err);
+        [cluster
+            identifyWithParams:params
+                    completion:^(NSError * _Nullable err) {
+                        NSLog(@"TH sends Identify command to DUT, with the IdentifyTime field set to 0x003c (60s). Error: %@", err);
 
-                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                             NextTest();
-                         }];
+                        NextTest();
+                    }];
 
         return CHIP_NO_ERROR;
     }
@@ -25872,7 +25872,7 @@ private:
         params.identifyTime = [NSNumber numberWithUnsignedShort:0U];
         [cluster identifyWithParams:params
                          completion:^(NSError * _Nullable err) {
-                             NSLog(@"TH sends Identify command to DUT, with the identify time field set to 0x0000 (stop "
+                             NSLog(@"TH sends Identify command to DUT, with the IdentifyTime field set to 0x0000 (stop "
                                    @"identifying). Error: %@",
                                  err);
 
@@ -25898,7 +25898,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("identify time", actualValue, 0U));
+                VerifyOrReturn(CheckValue("IdentifyTime", actualValue, 0U));
             }
 
             NextTest();

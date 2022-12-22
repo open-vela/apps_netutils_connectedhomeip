@@ -18734,7 +18734,7 @@ private:
             return WaitForCommissionee(kIdentityAlpha, value);
         }
         case 1: {
-            LogStep(1, "TH sends Identify command to DUT, with the identify time field set to 0x003c (60s).");
+            LogStep(1, "TH sends Identify command to DUT, with the IdentifyTime field set to 0x003c (60s).");
             VerifyOrDo(!ShouldSkip("I.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::Identify::Type value;
@@ -18777,7 +18777,7 @@ private:
             return UserPrompt(kIdentityAlpha, value);
         }
         case 6: {
-            LogStep(6, "TH sends Identify command to DUT, with the identify time field set to 0x0000 (stop identifying).");
+            LogStep(6, "TH sends Identify command to DUT, with the IdentifyTime field set to 0x0000 (stop identifying).");
             VerifyOrDo(!ShouldSkip("I.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::Identify::Commands::Identify::Type value;
