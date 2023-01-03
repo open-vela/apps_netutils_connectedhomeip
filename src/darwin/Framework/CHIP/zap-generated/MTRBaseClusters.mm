@@ -822,7 +822,7 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.groupId = params.groupId.unsignedShortValue;
+            request.groupID = params.groupID.unsignedShortValue;
             request.groupName = [self asCharSpan:params.groupName];
 
             return MTRStartInvokeInteraction(
@@ -849,7 +849,7 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.groupId = params.groupId.unsignedShortValue;
+            request.groupID = params.groupID.unsignedShortValue;
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -923,7 +923,7 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.groupId = params.groupId.unsignedShortValue;
+            request.groupID = params.groupID.unsignedShortValue;
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -984,7 +984,7 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.groupId = params.groupId.unsignedShortValue;
+            request.groupID = params.groupID.unsignedShortValue;
             request.groupName = [self asCharSpan:params.groupName];
 
             return MTRStartInvokeInteraction(
