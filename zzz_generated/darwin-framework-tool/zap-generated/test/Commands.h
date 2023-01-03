@@ -95063,8 +95063,9 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("DeviceTypeList", [actualValue count], static_cast<uint32_t>(1)));
-                VerifyOrReturn(CheckValue("type", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).type, 22UL));
-                VerifyOrReturn(CheckValue("revision", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).revision, 1U));
+                VerifyOrReturn(
+                    CheckValue("DeviceType", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).deviceType, 22UL));
+                VerifyOrReturn(CheckValue("Revision", ((MTRDescriptorClusterDeviceTypeStruct *) actualValue[0]).revision, 1U));
             }
 
             NextTest();
