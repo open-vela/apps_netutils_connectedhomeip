@@ -126772,7 +126772,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:0U];
+        params.groupID = [NSNumber numberWithUnsignedShort:0U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Group 0 (invalid) Error: %@", err);
@@ -126781,12 +126781,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 135U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 135U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 0U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 0U));
                               }
 
                               NextTest();
@@ -126803,7 +126803,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View First Group (not found) Error: %@", err);
@@ -126812,12 +126812,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                               }
 
                               NextTest();
@@ -126834,7 +126834,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         params.groupName = @"Group #1";
         [cluster addGroupWithParams:params
                          completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -126844,12 +126844,12 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 126U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 126U));
                              }
 
                              {
-                                 id actualValue = values.groupId;
-                                 VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                              }
 
                              NextTest();
@@ -126942,7 +126942,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         params.groupName = @"Group #1";
         [cluster addGroupWithParams:params
                          completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -126952,12 +126952,12 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
-                                 id actualValue = values.groupId;
-                                 VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                              }
 
                              NextTest();
@@ -126974,7 +126974,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View First Group (new) Error: %@", err);
@@ -126983,17 +126983,17 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                               }
 
                               {
                                   id actualValue = values.groupName;
-                                  VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #1"));
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #1"));
                               }
 
                               NextTest();
@@ -127010,7 +127010,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Second Group (not found) Error: %@", err);
@@ -127019,12 +127019,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                               }
 
                               NextTest();
@@ -127054,12 +127054,12 @@ private:
 
                                        {
                                            id actualValue = values.capacity;
-                                           VerifyOrReturn(CheckValueNull("capacity", actualValue));
+                                           VerifyOrReturn(CheckValueNull("Capacity", actualValue));
                                        }
 
                                        {
                                            id actualValue = values.groupList;
-                                           VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupList", [actualValue count], static_cast<uint32_t>(1)));
                                            VerifyOrReturn(CheckValue("", actualValue[0], 257U));
                                        }
 
@@ -127077,7 +127077,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         params.groupName = @"Group #2";
         [cluster addGroupWithParams:params
                          completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -127087,12 +127087,12 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
-                                 id actualValue = values.groupId;
-                                 VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                              }
 
                              NextTest();
@@ -127109,7 +127109,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Second Group (new) Error: %@", err);
@@ -127118,17 +127118,17 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                               }
 
                               {
                                   id actualValue = values.groupName;
-                                  VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #2"));
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #2"));
                               }
 
                               NextTest();
@@ -127145,7 +127145,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:32767U];
+        params.groupID = [NSNumber numberWithUnsignedShort:32767U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Group 3 (not found) Error: %@", err);
@@ -127154,12 +127154,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 32767U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 32767U));
                               }
 
                               NextTest();
@@ -127176,7 +127176,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View First Group (existing) Error: %@", err);
@@ -127185,17 +127185,17 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                               }
 
                               {
                                   id actualValue = values.groupName;
-                                  VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #1"));
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #1"));
                               }
 
                               NextTest();
@@ -127212,7 +127212,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Second Group (existing) Error: %@", err);
@@ -127221,17 +127221,17 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                               }
 
                               {
                                   id actualValue = values.groupName;
-                                  VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #2"));
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #2"));
                               }
 
                               NextTest();
@@ -127264,12 +127264,12 @@ private:
 
                                        {
                                            id actualValue = values.capacity;
-                                           VerifyOrReturn(CheckValueNull("capacity", actualValue));
+                                           VerifyOrReturn(CheckValueNull("Capacity", actualValue));
                                        }
 
                                        {
                                            id actualValue = values.groupList;
-                                           VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupList", [actualValue count], static_cast<uint32_t>(1)));
                                            VerifyOrReturn(CheckValue("", actualValue[0], 258U));
                                        }
 
@@ -127287,7 +127287,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:0U];
+        params.groupID = [NSNumber numberWithUnsignedShort:0U];
         [cluster removeGroupWithParams:params
                             completion:^(MTRGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Remove Group 0 (invalid) Error: %@", err);
@@ -127296,12 +127296,12 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 135U));
+                                    VerifyOrReturn(CheckValue("Status", actualValue, 135U));
                                 }
 
                                 {
-                                    id actualValue = values.groupId;
-                                    VerifyOrReturn(CheckValue("groupId", actualValue, 0U));
+                                    id actualValue = values.groupID;
+                                    VerifyOrReturn(CheckValue("GroupID", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -127318,7 +127318,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:260U];
+        params.groupID = [NSNumber numberWithUnsignedShort:260U];
         [cluster removeGroupWithParams:params
                             completion:^(MTRGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Remove Group 4 (not found) Error: %@", err);
@@ -127327,12 +127327,12 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                    VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                 }
 
                                 {
-                                    id actualValue = values.groupId;
-                                    VerifyOrReturn(CheckValue("groupId", actualValue, 260U));
+                                    id actualValue = values.groupID;
+                                    VerifyOrReturn(CheckValue("GroupID", actualValue, 260U));
                                 }
 
                                 NextTest();
@@ -127349,7 +127349,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         [cluster removeGroupWithParams:params
                             completion:^(MTRGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Remove Second Group (existing) Error: %@", err);
@@ -127358,12 +127358,12 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                 }
 
                                 {
-                                    id actualValue = values.groupId;
-                                    VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                    id actualValue = values.groupID;
+                                    VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                                 }
 
                                 NextTest();
@@ -127380,7 +127380,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View First Group (not removed) Error: %@", err);
@@ -127389,17 +127389,17 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                               }
 
                               {
                                   id actualValue = values.groupName;
-                                  VerifyOrReturn(CheckValueAsString("groupName", actualValue, @"Group #1"));
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Group #1"));
                               }
 
                               NextTest();
@@ -127416,7 +127416,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Second Group (removed) Error: %@", err);
@@ -127425,12 +127425,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                               }
 
                               NextTest();
@@ -127464,12 +127464,12 @@ private:
 
                                        {
                                            id actualValue = values.capacity;
-                                           VerifyOrReturn(CheckValueNull("capacity", actualValue));
+                                           VerifyOrReturn(CheckValueNull("Capacity", actualValue));
                                        }
 
                                        {
                                            id actualValue = values.groupList;
-                                           VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupList", [actualValue count], static_cast<uint32_t>(1)));
                                            VerifyOrReturn(CheckValue("", actualValue[0], 257U));
                                        }
 
@@ -127505,7 +127505,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View First Group (removed) Error: %@", err);
@@ -127514,12 +127514,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                               }
 
                               NextTest();
@@ -127536,7 +127536,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Second Group (still removed) Error: %@", err);
@@ -127545,12 +127545,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                               }
 
                               NextTest();
@@ -127567,7 +127567,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:32767U];
+        params.groupID = [NSNumber numberWithUnsignedShort:32767U];
         [cluster viewGroupWithParams:params
                           completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                               NSLog(@"View Group 3 (removed) Error: %@", err);
@@ -127576,12 +127576,12 @@ private:
 
                               {
                                   id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                               }
 
                               {
-                                  id actualValue = values.groupId;
-                                  VerifyOrReturn(CheckValue("groupId", actualValue, 32767U));
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 32767U));
                               }
 
                               NextTest();
@@ -127616,12 +127616,12 @@ private:
 
                                        {
                                            id actualValue = values.capacity;
-                                           VerifyOrReturn(CheckValueNull("capacity", actualValue));
+                                           VerifyOrReturn(CheckValueNull("Capacity", actualValue));
                                        }
 
                                        {
                                            id actualValue = values.groupList;
-                                           VerifyOrReturn(CheckValue("groupList", [actualValue count], static_cast<uint32_t>(0)));
+                                           VerifyOrReturn(CheckValue("GroupList", [actualValue count], static_cast<uint32_t>(0)));
                                        }
 
                                        NextTest();
@@ -128225,7 +128225,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         params.groupName = @"Group #1";
         [cluster addGroupWithParams:params
                          completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -128235,12 +128235,12 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
-                                 id actualValue = values.groupId;
-                                 VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                              }
 
                              NextTest();
@@ -128257,7 +128257,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:258U];
+        params.groupID = [NSNumber numberWithUnsignedShort:258U];
         params.groupName = @"Group #2";
         [cluster addGroupWithParams:params
                          completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
@@ -128267,12 +128267,12 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
-                                 id actualValue = values.groupId;
-                                 VerifyOrReturn(CheckValue("groupId", actualValue, 258U));
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 258U));
                              }
 
                              NextTest();
@@ -128435,7 +128435,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
-        params.groupId = [NSNumber numberWithUnsignedShort:257U];
+        params.groupID = [NSNumber numberWithUnsignedShort:257U];
         [cluster removeGroupWithParams:params
                             completion:^(MTRGroupsClusterRemoveGroupResponseParams * _Nullable values, NSError * _Nullable err) {
                                 NSLog(@"Remove Group 1 Error: %@", err);
@@ -128444,12 +128444,12 @@ private:
 
                                 {
                                     id actualValue = values.status;
-                                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                 }
 
                                 {
-                                    id actualValue = values.groupId;
-                                    VerifyOrReturn(CheckValue("groupId", actualValue, 257U));
+                                    id actualValue = values.groupID;
+                                    VerifyOrReturn(CheckValue("GroupID", actualValue, 257U));
                                 }
 
                                 NextTest();

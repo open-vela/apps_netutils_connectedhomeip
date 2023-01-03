@@ -748,7 +748,7 @@ public:
     GroupsAddGroup()
         : ClusterCommand("add-group")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
         AddArgument("GroupName", &mRequest.groupName);
         ClusterCommand::AddArguments();
     }
@@ -762,7 +762,7 @@ public:
         __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
         params.groupName = [[NSString alloc] initWithBytes:mRequest.groupName.data()
                                                     length:mRequest.groupName.size()
                                                   encoding:NSUTF8StringEncoding];
@@ -797,7 +797,7 @@ public:
     GroupsViewGroup()
         : ClusterCommand("view-group")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
         ClusterCommand::AddArguments();
     }
 
@@ -810,7 +810,7 @@ public:
         __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -898,7 +898,7 @@ public:
     GroupsRemoveGroup()
         : ClusterCommand("remove-group")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
         ClusterCommand::AddArguments();
     }
 
@@ -911,7 +911,7 @@ public:
         __auto_type * params = [[MTRGroupsClusterRemoveGroupParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -985,7 +985,7 @@ public:
     GroupsAddGroupIfIdentifying()
         : ClusterCommand("add-group-if-identifying")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
         AddArgument("GroupName", &mRequest.groupName);
         ClusterCommand::AddArguments();
     }
@@ -999,7 +999,7 @@ public:
         __auto_type * params = [[MTRGroupsClusterAddGroupIfIdentifyingParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
         params.groupName = [[NSString alloc] initWithBytes:mRequest.groupName.data()
                                                     length:mRequest.groupName.size()
                                                   encoding:NSUTF8StringEncoding];
