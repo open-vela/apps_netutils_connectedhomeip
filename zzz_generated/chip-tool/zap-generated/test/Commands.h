@@ -29937,13 +29937,13 @@ private:
         case 8: {
             LogStep(8, "Send an announce OTA provider command to the requestor");
             ListFreer listFreer;
-            chip::app::Clusters::OtaSoftwareUpdateRequestor::Commands::AnnounceOtaProvider::Type value;
-            value.providerNodeId     = mProviderNodeId.HasValue() ? mProviderNodeId.Value() : 12648430ULL;
-            value.vendorId           = static_cast<chip::VendorId>(0);
+            chip::app::Clusters::OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Type value;
+            value.providerNodeID     = mProviderNodeId.HasValue() ? mProviderNodeId.Value() : 12648430ULL;
+            value.vendorID           = static_cast<chip::VendorId>(0);
             value.announcementReason = static_cast<chip::app::Clusters::OtaSoftwareUpdateRequestor::OTAAnnouncementReason>(0);
             value.endpoint           = mEndpoint.HasValue() ? mEndpoint.Value() : 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(0), OtaSoftwareUpdateRequestor::Id,
-                               OtaSoftwareUpdateRequestor::Commands::AnnounceOtaProvider::Id, value, chip::NullOptional
+                               OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Id, value, chip::NullOptional
 
             );
         }

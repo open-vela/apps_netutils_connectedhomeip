@@ -15152,8 +15152,8 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.vendorId = static_cast<std::remove_reference_t<decltype(request.vendorId)>>(params.vendorId.unsignedShortValue);
-            request.productId = params.productId.unsignedShortValue;
+            request.vendorID = static_cast<std::remove_reference_t<decltype(request.vendorID)>>(params.vendorID.unsignedShortValue);
+            request.productID = params.productID.unsignedShortValue;
             request.softwareVersion = params.softwareVersion.unsignedIntValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(request.protocolsSupported)>;
@@ -15758,7 +15758,7 @@ using chip::SessionHandle;
     return self;
 }
 
-- (void)announceOtaProviderWithParams:(MTROTASoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params
+- (void)announceOTAProviderWithParams:(MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams *)params
                            completion:(MTRStatusCompletion)completion
 {
     // Make a copy of params before we go async.
@@ -15773,14 +15773,14 @@ using chip::SessionHandle;
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
             chip::Optional<uint16_t> timedInvokeTimeoutMs;
             ListFreer listFreer;
-            OtaSoftwareUpdateRequestor::Commands::AnnounceOtaProvider::Type request;
+            OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.providerNodeId = params.providerNodeId.unsignedLongLongValue;
-            request.vendorId = static_cast<std::remove_reference_t<decltype(request.vendorId)>>(params.vendorId.unsignedShortValue);
+            request.providerNodeID = params.providerNodeID.unsignedLongLongValue;
+            request.vendorID = static_cast<std::remove_reference_t<decltype(request.vendorID)>>(params.vendorID.unsignedShortValue);
             request.announcementReason = static_cast<std::remove_reference_t<decltype(request.announcementReason)>>(
                 params.announcementReason.unsignedCharValue);
             if (params.metadataForNode != nil) {
@@ -15795,21 +15795,21 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)readAttributeDefaultOtaProvidersWithParams:(MTRReadParams * _Nullable)params
+- (void)readAttributeDefaultOTAProvidersWithParams:(MTRReadParams * _Nullable)params
                                         completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 { // Make a copy of params before we go async.
     params = [params copy];
-    using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
-    return MTRReadAttribute<MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge, NSArray,
+    using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOTAProviders::TypeInfo;
+    return MTRReadAttribute<MTROTASoftwareUpdateRequestorDefaultOTAProvidersListAttributeCallbackBridge, NSArray,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributeDefaultOtaProvidersWithValue:(NSArray * _Nonnull)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributeDefaultOTAProvidersWithValue:(NSArray * _Nonnull)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeDefaultOtaProvidersWithValue:(NSArray * _Nonnull) value params:nil completion:completion];
+    [self writeAttributeDefaultOTAProvidersWithValue:(NSArray * _Nonnull) value params:nil completion:completion];
 }
-- (void)writeAttributeDefaultOtaProvidersWithValue:(NSArray * _Nonnull)value
+- (void)writeAttributeDefaultOTAProvidersWithValue:(NSArray * _Nonnull)value
                                             params:(MTRWriteParams * _Nullable)params
                                         completion:(MTRStatusCompletion)completion
 {
@@ -15832,7 +15832,7 @@ using chip::SessionHandle;
             }
 
             ListFreer listFreer;
-            using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
+            using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOTAProviders::TypeInfo;
             TypeInfo::Type cppValue;
             {
                 using ListType_0 = std::remove_reference_t<decltype(cppValue)>;
@@ -15865,29 +15865,29 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)subscribeAttributeDefaultOtaProvidersWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributeDefaultOTAProvidersWithParams:(MTRSubscribeParams * _Nonnull)params
                                 subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                           reportHandler:
                                               (void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
-    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOTAProviders::TypeInfo;
+    MTRSubscribeAttribute<MTROTASoftwareUpdateRequestorDefaultOTAProvidersListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeDefaultOtaProvidersWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributeDefaultOTAProvidersWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                      endpoint:(NSNumber *)endpoint
                                                         queue:(dispatch_queue_t)queue
                                                    completion:
                                                        (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTROTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTROTASoftwareUpdateRequestorDefaultOTAProvidersListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(OTASoftwareUpdateRequestorDefaultOtaProvidersListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(OTASoftwareUpdateRequestorDefaultOTAProvidersListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOtaProviders::TypeInfo;
+                using TypeInfo = OtaSoftwareUpdateRequestor::Attributes::DefaultOTAProviders::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -16267,13 +16267,13 @@ using chip::SessionHandle;
 - (void)announceOtaProviderWithParams:(MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params
                     completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self announceOtaProviderWithParams:params completion:completionHandler];
+    [self announceOTAProviderWithParams:params completion:completionHandler];
 }
 
 - (void)readAttributeDefaultOtaProvidersWithParams:(MTRReadParams * _Nullable)params
                                  completionHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeDefaultOtaProvidersWithParams:params
+    [self readAttributeDefaultOTAProvidersWithParams:params
                                           completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
                                               // Cast is safe because subclass does not add any selectors.
                                               completionHandler(static_cast<NSArray *>(value), error);
@@ -16282,13 +16282,13 @@ using chip::SessionHandle;
 - (void)writeAttributeDefaultOtaProvidersWithValue:(NSArray * _Nonnull)value
                                  completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributeDefaultOtaProvidersWithValue:value params:nil completion:completionHandler];
+    [self writeAttributeDefaultOTAProvidersWithValue:value params:nil completion:completionHandler];
 }
 - (void)writeAttributeDefaultOtaProvidersWithValue:(NSArray * _Nonnull)value
                                             params:(MTRWriteParams * _Nullable)params
                                  completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributeDefaultOtaProvidersWithValue:value params:params completion:completionHandler];
+    [self writeAttributeDefaultOTAProvidersWithValue:value params:params completion:completionHandler];
 }
 - (void)subscribeAttributeDefaultOtaProvidersWithMinInterval:(NSNumber * _Nonnull)minInterval
                                                  maxInterval:(NSNumber * _Nonnull)maxInterval
@@ -16305,7 +16305,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeDefaultOtaProvidersWithParams:subscribeParams
+    [self subscribeAttributeDefaultOTAProvidersWithParams:subscribeParams
                                   subscriptionEstablished:subscriptionEstablishedHandler
                                             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
                                                 // Cast is safe because subclass does not add any selectors.
@@ -16318,7 +16318,7 @@ using chip::SessionHandle;
                                          completionHandler:
                                              (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeDefaultOtaProvidersWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributeDefaultOTAProvidersWithClusterStateCache:attributeCacheContainer.realContainer
                                                        endpoint:endpoint
                                                           queue:queue
                                                      completion:^(NSArray * _Nullable value, NSError * _Nullable error) {

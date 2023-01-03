@@ -12866,8 +12866,8 @@ public:
         : ClusterCommand("query-image")
         , mComplex_ProtocolsSupported(&mRequest.protocolsSupported)
     {
-        AddArgument("VendorId", 0, UINT16_MAX, &mRequest.vendorId);
-        AddArgument("ProductId", 0, UINT16_MAX, &mRequest.productId);
+        AddArgument("VendorID", 0, UINT16_MAX, &mRequest.vendorID);
+        AddArgument("ProductID", 0, UINT16_MAX, &mRequest.productID);
         AddArgument("SoftwareVersion", 0, UINT32_MAX, &mRequest.softwareVersion);
         AddArgument("ProtocolsSupported", &mComplex_ProtocolsSupported);
         AddArgument("HardwareVersion", 0, UINT16_MAX, &mRequest.hardwareVersion);
@@ -12888,8 +12888,8 @@ public:
         __auto_type * params = [[MTROTASoftwareUpdateProviderClusterQueryImageParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.vendorId = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.vendorId)];
-        params.productId = [NSNumber numberWithUnsignedShort:mRequest.productId];
+        params.vendorID = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.vendorID)];
+        params.productID = [NSNumber numberWithUnsignedShort:mRequest.productID];
         params.softwareVersion = [NSNumber numberWithUnsignedInt:mRequest.softwareVersion];
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
@@ -13401,10 +13401,10 @@ public:
 | Cluster OtaSoftwareUpdateRequestor                                  | 0x002A |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
-| * AnnounceOtaProvider                                               |   0x00 |
+| * AnnounceOTAProvider                                               |   0x00 |
 |------------------------------------------------------------------------------|
 | Attributes:                                                         |        |
-| * DefaultOtaProviders                                               | 0x0000 |
+| * DefaultOTAProviders                                               | 0x0000 |
 | * UpdatePossible                                                    | 0x0001 |
 | * UpdateState                                                       | 0x0002 |
 | * UpdateStateProgress                                               | 0x0003 |
@@ -13421,15 +13421,15 @@ public:
 \*----------------------------------------------------------------------------*/
 
 /*
- * Command AnnounceOtaProvider
+ * Command AnnounceOTAProvider
  */
-class OtaSoftwareUpdateRequestorAnnounceOtaProvider : public ClusterCommand {
+class OtaSoftwareUpdateRequestorAnnounceOTAProvider : public ClusterCommand {
 public:
-    OtaSoftwareUpdateRequestorAnnounceOtaProvider()
-        : ClusterCommand("announce-ota-provider")
+    OtaSoftwareUpdateRequestorAnnounceOTAProvider()
+        : ClusterCommand("announce-otaprovider")
     {
-        AddArgument("ProviderNodeId", 0, UINT64_MAX, &mRequest.providerNodeId);
-        AddArgument("VendorId", 0, UINT16_MAX, &mRequest.vendorId);
+        AddArgument("ProviderNodeID", 0, UINT64_MAX, &mRequest.providerNodeID);
+        AddArgument("VendorID", 0, UINT16_MAX, &mRequest.vendorID);
         AddArgument("AnnouncementReason", 0, UINT8_MAX, &mRequest.announcementReason);
         AddArgument("MetadataForNode", &mRequest.metadataForNode);
         AddArgument("Endpoint", 0, UINT16_MAX, &mRequest.endpoint);
@@ -13444,11 +13444,11 @@ public:
         __auto_type * cluster = [[MTRBaseClusterOTASoftwareUpdateRequestor alloc] initWithDevice:device
                                                                                       endpointID:@(endpointId)
                                                                                            queue:callbackQueue];
-        __auto_type * params = [[MTROTASoftwareUpdateRequestorClusterAnnounceOtaProviderParams alloc] init];
+        __auto_type * params = [[MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.providerNodeId = [NSNumber numberWithUnsignedLongLong:mRequest.providerNodeId];
-        params.vendorId = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.vendorId)];
+        params.providerNodeID = [NSNumber numberWithUnsignedLongLong:mRequest.providerNodeID];
+        params.vendorID = [NSNumber numberWithUnsignedShort:chip::to_underlying(mRequest.vendorID)];
         params.announcementReason = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.announcementReason)];
         if (mRequest.metadataForNode.HasValue()) {
             params.metadataForNode = [NSData dataWithBytes:mRequest.metadataForNode.Value().data()
@@ -13460,7 +13460,7 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster announceOtaProviderWithParams:params
+            [cluster announceOTAProviderWithParams:params
                                         completion:^(NSError * _Nullable error) {
                                             responsesNeeded--;
                                             if (error != nil) {
@@ -13476,20 +13476,20 @@ public:
     }
 
 private:
-    chip::app::Clusters::OtaSoftwareUpdateRequestor::Commands::AnnounceOtaProvider::Type mRequest;
+    chip::app::Clusters::OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Type mRequest;
 };
 
 /*
- * Attribute DefaultOtaProviders
+ * Attribute DefaultOTAProviders
  */
-class ReadOtaSoftwareUpdateRequestorDefaultOtaProviders : public ReadAttribute {
+class ReadOtaSoftwareUpdateRequestorDefaultOTAProviders : public ReadAttribute {
 public:
-    ReadOtaSoftwareUpdateRequestorDefaultOtaProviders()
-        : ReadAttribute("default-ota-providers")
+    ReadOtaSoftwareUpdateRequestorDefaultOTAProviders()
+        : ReadAttribute("default-otaproviders")
     {
     }
 
-    ~ReadOtaSoftwareUpdateRequestorDefaultOtaProviders() {}
+    ~ReadOtaSoftwareUpdateRequestorDefaultOTAProviders() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -13504,12 +13504,12 @@ public:
             params.filterByFabric = mFabricFiltered.Value();
         }
         [cluster
-            readAttributeDefaultOtaProvidersWithParams:params
+            readAttributeDefaultOTAProvidersWithParams:params
                                             completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                                NSLog(@"OTASoftwareUpdateRequestor.DefaultOtaProviders response %@",
+                                                NSLog(@"OTASoftwareUpdateRequestor.DefaultOTAProviders response %@",
                                                     [value description]);
                                                 if (error != nil) {
-                                                    LogNSError("OTASoftwareUpdateRequestor DefaultOtaProviders read Error", error);
+                                                    LogNSError("OTASoftwareUpdateRequestor DefaultOTAProviders read Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -13517,18 +13517,18 @@ public:
     }
 };
 
-class WriteOtaSoftwareUpdateRequestorDefaultOtaProviders : public WriteAttribute {
+class WriteOtaSoftwareUpdateRequestorDefaultOTAProviders : public WriteAttribute {
 public:
-    WriteOtaSoftwareUpdateRequestorDefaultOtaProviders()
-        : WriteAttribute("default-ota-providers")
+    WriteOtaSoftwareUpdateRequestorDefaultOTAProviders()
+        : WriteAttribute("default-otaproviders")
         , mComplex(&mValue)
     {
-        AddArgument("attr-name", "default-ota-providers");
+        AddArgument("attr-name", "default-otaproviders");
         AddArgument("attr-value", &mComplex);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteOtaSoftwareUpdateRequestorDefaultOtaProviders() {}
+    ~WriteOtaSoftwareUpdateRequestorDefaultOTAProviders() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -13556,11 +13556,11 @@ public:
         }
 
         [cluster
-            writeAttributeDefaultOtaProvidersWithValue:value
+            writeAttributeDefaultOTAProvidersWithValue:value
                                                 params:params
                                             completion:^(NSError * _Nullable error) {
                                                 if (error != nil) {
-                                                    LogNSError("OTASoftwareUpdateRequestor DefaultOtaProviders write Error", error);
+                                                    LogNSError("OTASoftwareUpdateRequestor DefaultOTAProviders write Error", error);
                                                 }
                                                 SetCommandExitStatus(error);
                                             }];
@@ -13574,14 +13574,14 @@ private:
         mComplex;
 };
 
-class SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOtaProviders : public SubscribeAttribute {
+class SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOTAProviders : public SubscribeAttribute {
 public:
-    SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOtaProviders()
-        : SubscribeAttribute("default-ota-providers")
+    SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOTAProviders()
+        : SubscribeAttribute("default-otaproviders")
     {
     }
 
-    ~SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOtaProviders() {}
+    ~SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOTAProviders() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -13600,12 +13600,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeDefaultOtaProvidersWithParams:params
+        [cluster subscribeAttributeDefaultOTAProvidersWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"OTASoftwareUpdateRequestor.DefaultOtaProviders response %@", [value description]);
+                NSLog(@"OTASoftwareUpdateRequestor.DefaultOTAProviders response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -97982,13 +97982,13 @@ void registerClusterOtaSoftwareUpdateRequestor(Commands & commands)
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
-        make_unique<OtaSoftwareUpdateRequestorAnnounceOtaProvider>(), //
+        make_unique<OtaSoftwareUpdateRequestorAnnounceOTAProvider>(), //
         make_unique<ReadAttribute>(Id), //
-        make_unique<ReadOtaSoftwareUpdateRequestorDefaultOtaProviders>(), //
+        make_unique<ReadOtaSoftwareUpdateRequestorDefaultOTAProviders>(), //
         make_unique<WriteAttribute>(Id), //
-        make_unique<WriteOtaSoftwareUpdateRequestorDefaultOtaProviders>(), //
+        make_unique<WriteOtaSoftwareUpdateRequestorDefaultOTAProviders>(), //
         make_unique<SubscribeAttribute>(Id), //
-        make_unique<SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOtaProviders>(), //
+        make_unique<SubscribeAttributeOtaSoftwareUpdateRequestorDefaultOTAProviders>(), //
         make_unique<ReadOtaSoftwareUpdateRequestorUpdatePossible>(), //
         make_unique<SubscribeAttributeOtaSoftwareUpdateRequestorUpdatePossible>(), //
         make_unique<ReadOtaSoftwareUpdateRequestorUpdateState>(), //
