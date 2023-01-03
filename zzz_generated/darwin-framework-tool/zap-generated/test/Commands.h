@@ -45256,14 +45256,14 @@ private:
                                                                                            queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTROTASoftwareUpdateRequestorClusterAnnounceOtaProviderParams alloc] init];
-        params.providerNodeId = mProviderNodeId.HasValue() ? [NSNumber numberWithUnsignedLongLong:mProviderNodeId.Value()]
+        __auto_type * params = [[MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams alloc] init];
+        params.providerNodeID = mProviderNodeId.HasValue() ? [NSNumber numberWithUnsignedLongLong:mProviderNodeId.Value()]
                                                            : [NSNumber numberWithUnsignedLongLong:12648430ULL];
-        params.vendorId = [NSNumber numberWithUnsignedShort:0U];
+        params.vendorID = [NSNumber numberWithUnsignedShort:0U];
         params.announcementReason = [NSNumber numberWithUnsignedChar:0U];
         params.endpoint
             = mEndpoint.HasValue() ? [NSNumber numberWithUnsignedShort:mEndpoint.Value()] : [NSNumber numberWithUnsignedShort:0U];
-        [cluster announceOtaProviderWithParams:params
+        [cluster announceOTAProviderWithParams:params
                                     completion:^(NSError * _Nullable err) {
                                         NSLog(@"Send an announce OTA provider command to the requestor Error: %@", err);
 
