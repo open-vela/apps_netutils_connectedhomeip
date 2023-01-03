@@ -102274,8 +102274,8 @@ private:
             VerifyOrDo(!ShouldSkip("OO.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
-            value.effectId      = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
-            value.effectVariant = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
+            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 
@@ -102332,8 +102332,8 @@ private:
             VerifyOrDo(!ShouldSkip("OO.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
-            value.effectId      = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
-            value.effectVariant = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
+            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 
@@ -102389,8 +102389,8 @@ private:
             VerifyOrDo(!ShouldSkip("OO.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
-            value.effectId      = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(1);
-            value.effectVariant = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(1);
+            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 
@@ -102613,8 +102613,8 @@ private:
             VerifyOrDo(!ShouldSkip("OO.S.C40.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::OnOff::Commands::OffWithEffect::Type value;
-            value.effectId      = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
-            value.effectVariant = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
+            value.effectIdentifier = static_cast<chip::app::Clusters::OnOff::OnOffEffectIdentifier>(0);
+            value.effectVariant    = static_cast<chip::app::Clusters::OnOff::OnOffDelayedAllOffEffectVariant>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), OnOff::Id, OnOff::Commands::OffWithEffect::Id, value,
                                chip::NullOptional
 

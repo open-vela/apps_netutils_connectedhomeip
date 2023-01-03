@@ -2908,7 +2908,7 @@ public:
     OnOffOffWithEffect()
         : ClusterCommand("off-with-effect")
     {
-        AddArgument("EffectId", 0, UINT8_MAX, &mRequest.effectId);
+        AddArgument("EffectIdentifier", 0, UINT8_MAX, &mRequest.effectIdentifier);
         AddArgument("EffectVariant", 0, UINT8_MAX, &mRequest.effectVariant);
         ClusterCommand::AddArguments();
     }
@@ -2922,7 +2922,7 @@ public:
         __auto_type * params = [[MTROnOffClusterOffWithEffectParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.effectId = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectId)];
+        params.effectIdentifier = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectIdentifier)];
         params.effectVariant = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.effectVariant)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
