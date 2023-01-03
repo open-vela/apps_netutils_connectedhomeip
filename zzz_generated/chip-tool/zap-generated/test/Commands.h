@@ -61122,7 +61122,7 @@ private:
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("deviceTypeList", iter_0, 0));
-                    VerifyOrReturn(CheckValue("deviceTypeList[0].type", iter_0.GetValue().type, 22UL));
+                    VerifyOrReturn(CheckValue("deviceTypeList[0].deviceType", iter_0.GetValue().deviceType, 22UL));
                     VerifyOrReturn(CheckValue("deviceTypeList[0].revision", iter_0.GetValue().revision, 1U));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("deviceTypeList", iter_0, 1));
                 }
