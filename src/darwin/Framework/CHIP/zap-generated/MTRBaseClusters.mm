@@ -3226,7 +3226,8 @@ using chip::SessionHandle;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.effectId = static_cast<std::remove_reference_t<decltype(request.effectId)>>(params.effectId.unsignedCharValue);
+            request.effectIdentifier = static_cast<std::remove_reference_t<decltype(request.effectIdentifier)>>(
+                params.effectIdentifier.unsignedCharValue);
             request.effectVariant
                 = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
 
