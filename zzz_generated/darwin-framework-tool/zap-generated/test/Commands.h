@@ -96574,7 +96574,7 @@ private:
 
             {
                 id actualValue = values.errorCode;
-                VerifyOrReturn(CheckValue("errorCode", actualValue, 3U));
+                VerifyOrReturn(CheckValue("ErrorCode", actualValue, 3U));
             }
 
             NextTest();
@@ -96652,7 +96652,7 @@ private:
 
                                 {
                                     id actualValue = values.errorCode;
-                                    VerifyOrReturn(CheckValue("errorCode", actualValue, 4U));
+                                    VerifyOrReturn(CheckValue("ErrorCode", actualValue, 4U));
                                 }
 
                                 NextTest();
@@ -96747,7 +96747,7 @@ private:
 
                                 {
                                     id actualValue = values.errorCode;
-                                    VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
+                                    VerifyOrReturn(CheckValue("ErrorCode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -96802,7 +96802,7 @@ private:
 
                                 {
                                     id actualValue = values.errorCode;
-                                    VerifyOrReturn(CheckValue("errorCode", actualValue, 4U));
+                                    VerifyOrReturn(CheckValue("ErrorCode", actualValue, 4U));
                                 }
 
                                 NextTest();
@@ -96853,7 +96853,7 @@ private:
 
             {
                 id actualValue = values.errorCode;
-                VerifyOrReturn(CheckValue("errorCode", actualValue, 2U));
+                VerifyOrReturn(CheckValue("ErrorCode", actualValue, 2U));
             }
 
             NextTest();
@@ -96904,7 +96904,7 @@ private:
 
             {
                 id actualValue = values.errorCode;
-                VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
+                VerifyOrReturn(CheckValue("ErrorCode", actualValue, 0U));
             }
 
             NextTest();
@@ -96959,7 +96959,7 @@ private:
 
                                 {
                                     id actualValue = values.errorCode;
-                                    VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
+                                    VerifyOrReturn(CheckValue("ErrorCode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -97014,7 +97014,7 @@ private:
 
                                 {
                                     id actualValue = values.errorCode;
-                                    VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
+                                    VerifyOrReturn(CheckValue("ErrorCode", actualValue, 0U));
                                 }
 
                                 NextTest();
@@ -100232,7 +100232,7 @@ private:
 
                                 {
                                     id actualValue = values.errorCode;
-                                    VerifyOrReturn(CheckValue("errorCode", actualValue, 0U));
+                                    VerifyOrReturn(CheckValue("ErrorCode", actualValue, 0U));
                                 }
 
                                 NextTest();
