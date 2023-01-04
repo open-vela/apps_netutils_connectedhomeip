@@ -78695,7 +78695,7 @@ class TestGroupKeyManagementClusterSuite : public TestCommand
 {
 public:
     TestGroupKeyManagementClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestGroupKeyManagementCluster", 22, credsIssuerConfig)
+        TestCommand("TestGroupKeyManagementCluster", 29, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -78928,6 +78928,51 @@ private:
             break;
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 258U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 1));
+                }
+            }
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 0));
+                }
+            }
             break;
         default:
             LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
@@ -79226,6 +79271,133 @@ private:
                                value, chip::NullOptional
 
             );
+        }
+        case 22: {
+            LogStep(22, "KeySet Write 1");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 417U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(0);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 1110000ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 1110001ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 1110002ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 23: {
+            LogStep(23, "KeySet Write 2");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
+
+            value.groupKeySet.groupKeySetID = 418U;
+            value.groupKeySet.groupKeySecurityPolicy =
+                static_cast<chip::app::Clusters::GroupKeyManagement::GroupKeySecurityPolicy>(1);
+            value.groupKeySet.epochKey0.SetNonNull();
+            value.groupKeySet.epochKey0.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime0.SetNonNull();
+            value.groupKeySet.epochStartTime0.Value() = 2110000ULL;
+            value.groupKeySet.epochKey1.SetNonNull();
+            value.groupKeySet.epochKey1.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime1.SetNonNull();
+            value.groupKeySet.epochStartTime1.Value() = 2110001ULL;
+            value.groupKeySet.epochKey2.SetNonNull();
+            value.groupKeySet.epochKey2.Value() = chip::ByteSpan(
+                chip::Uint8::from_const_char(
+                    "\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377garbage: not in length on purpose"),
+                16);
+            value.groupKeySet.epochStartTime2.SetNonNull();
+            value.groupKeySet.epochStartTime2.Value() = 2110002ULL;
+
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetWrite::Id, value, chip::NullOptional
+
+            );
+        }
+        case 24: {
+            LogStep(24, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
+
+            {
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].groupId       = 257U;
+                listHolder_0->mList[0].groupKeySetID = 417U;
+                listHolder_0->mList[0].fabricIndex   = 1U;
+
+                listHolder_0->mList[1].groupId       = 258U;
+                listHolder_0->mList[1].groupKeySetID = 418U;
+                listHolder_0->mList[1].fabricIndex   = 1U;
+
+                listHolder_0->mList[2].groupId       = 258U;
+                listHolder_0->mList[2].groupKeySetID = 417U;
+                listHolder_0->mList[2].fabricIndex   = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "Remove keyset 1");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
+            value.groupKeySetID = 417U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetRemove::Id, value, chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Remove keyset 2");
+            ListFreer listFreer;
+            chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
+            value.groupKeySetID = 418U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                               GroupKeyManagement::Commands::KeySetRemove::Id, value, chip::NullOptional
+
+            );
+        }
+        case 28: {
+            LogStep(28, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
