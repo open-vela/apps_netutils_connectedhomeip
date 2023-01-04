@@ -8958,8 +8958,8 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mValue) {
-                MTRAccessControlClusterAccessControlEntry * newElement_0;
-                newElement_0 = [MTRAccessControlClusterAccessControlEntry new];
+                MTRAccessControlClusterAccessControlEntryStruct * newElement_0;
+                newElement_0 = [MTRAccessControlClusterAccessControlEntryStruct new];
                 newElement_0.privilege = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_0.privilege)];
                 newElement_0.authMode = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_0.authMode)];
                 if (entry_0.subjects.IsNull()) {
@@ -9021,8 +9021,9 @@ public:
     }
 
 private:
-    chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> mValue;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>>
+    chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> mValue;
+    TypedComplexArgument<
+        chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>>
         mComplex;
 };
 
@@ -9129,8 +9130,8 @@ public:
         { // Scope for our temporary variables
             auto * array_0 = [NSMutableArray new];
             for (auto & entry_0 : mValue) {
-                MTRAccessControlClusterExtensionEntry * newElement_0;
-                newElement_0 = [MTRAccessControlClusterExtensionEntry new];
+                MTRAccessControlClusterAccessControlExtensionStruct * newElement_0;
+                newElement_0 = [MTRAccessControlClusterAccessControlExtensionStruct new];
                 newElement_0.data = [NSData dataWithBytes:entry_0.data.data() length:entry_0.data.size()];
                 newElement_0.fabricIndex = [NSNumber numberWithUnsignedChar:entry_0.fabricIndex];
                 [array_0 addObject:newElement_0];
@@ -9150,8 +9151,9 @@ public:
     }
 
 private:
-    chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> mValue;
-    TypedComplexArgument<chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>>
+    chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> mValue;
+    TypedComplexArgument<
+        chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>>
         mComplex;
 };
 
