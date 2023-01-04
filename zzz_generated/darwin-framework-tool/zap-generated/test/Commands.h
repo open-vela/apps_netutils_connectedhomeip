@@ -127760,6 +127760,34 @@ public:
             ChipLogProgress(chipTool, " ***** Test Step 21 : KeySet Read (also removed)\n");
             err = TestKeySetReadAlsoRemoved_21();
             break;
+        case 22:
+            ChipLogProgress(chipTool, " ***** Test Step 22 : KeySet Write 1\n");
+            err = TestKeySetWrite1_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool, " ***** Test Step 23 : KeySet Write 2\n");
+            err = TestKeySetWrite2_23();
+            break;
+        case 24:
+            ChipLogProgress(chipTool, " ***** Test Step 24 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
+            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool, " ***** Test Step 25 : Remove keyset 1\n");
+            err = TestRemoveKeyset1_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_26();
+            break;
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Remove keyset 2\n");
+            err = TestRemoveKeyset2_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_28();
+            break;
         }
 
         if (CHIP_NO_ERROR != err) {
@@ -127837,6 +127865,27 @@ public:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -127850,7 +127899,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 22;
+    const uint16_t mTestCount = 29;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -128591,6 +128640,241 @@ private:
                               EMBER_ZCL_STATUS_NOT_FOUND));
                           NextTest();
                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWrite1_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:417U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\240\241\242\243\244\245\246\247\250\251\252\253\254\255\256\257" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:1110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\260\261\262\263\264\265\266\267\270\271\272\273\274\275\276\277" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:1110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"\300\301\302\303\304\305\306\307\310\311\312\313\314\315\316\317" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:1110002ULL];
+
+        [cluster keySetWriteWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"KeySet Write 1 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestKeySetWrite2_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:418U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:1U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"\320\321\322\323\324\325\326\327\330\331\332\333\334\335\336\337" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:2110000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"\340\341\342\343\344\345\346\347\350\351\352\353\354\355\356\357" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:2110001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"\360\361\362\363\364\365\366\367\370\371\372\373\374\375\376\377" length:16];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:2110002ULL];
+
+        [cluster keySetWriteWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"KeySet Write 2 Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id groupKeyMapArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:257U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[2] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupId = [NSNumber numberWithUnsignedShort:258U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            groupKeyMapArgument = temp_0;
+        }
+        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2 Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRemoveKeyset1_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetRemoveParams alloc] init];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+        [cluster keySetRemoveWithParams:params
+                             completion:^(NSError * _Nullable err) {
+                                 NSLog(@"Remove keyset 1 Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"TH verifies GroupKeyMap entries for KeySet 1 have been removed Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(1)));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 258U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupKeySetID,
+                                                418U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex,
+                                                1U));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRemoveKeyset2_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetRemoveParams alloc] init];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+        [cluster keySetRemoveWithParams:params
+                             completion:^(NSError * _Nullable err) {
+                                 NSLog(@"Remove keyset 2 Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_28()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"TH verifies GroupKeyMap entries for KeySet 2 have been removed Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(0)));
+                                        }
+
+                                        NextTest();
+                                    }];
 
         return CHIP_NO_ERROR;
     }
