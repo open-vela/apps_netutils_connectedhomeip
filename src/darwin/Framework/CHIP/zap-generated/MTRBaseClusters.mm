@@ -10484,11 +10484,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTRAccessControlClusterAccessControlEntry class]]) {
+                        if (![value[i_0] isKindOfClass:[MTRAccessControlClusterAccessControlEntryStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRAccessControlClusterAccessControlEntry *) value[i_0];
+                        auto element_0 = (MTRAccessControlClusterAccessControlEntryStruct *) value[i_0];
                         listHolder_0->mList[i_0].privilege
                             = static_cast<std::remove_reference_t<decltype(listHolder_0->mList[i_0].privilege)>>(
                                 element_0.privilege.unsignedCharValue);
@@ -10663,11 +10663,11 @@ using chip::SessionHandle;
                     }
                     listFreer.add(listHolder_0);
                     for (size_t i_0 = 0; i_0 < value.count; ++i_0) {
-                        if (![value[i_0] isKindOfClass:[MTRAccessControlClusterExtensionEntry class]]) {
+                        if (![value[i_0] isKindOfClass:[MTRAccessControlClusterAccessControlExtensionStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_0 = (MTRAccessControlClusterExtensionEntry *) value[i_0];
+                        auto element_0 = (MTRAccessControlClusterAccessControlExtensionStruct *) value[i_0];
                         listHolder_0->mList[i_0].data = [self asByteSpan:element_0.data];
                         listHolder_0->mList[i_0].fabricIndex = element_0.fabricIndex.unsignedCharValue;
                     }

@@ -616,7 +616,8 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -767,7 +768,8 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -794,7 +796,8 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -815,7 +818,8 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -836,7 +840,8 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -857,7 +862,8 @@ private:
         case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -878,7 +884,8 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -899,7 +906,8 @@ private:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -920,7 +928,8 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -1071,7 +1080,8 @@ private:
         case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -1135,14 +1145,17 @@ private:
         case 1: {
             LogStep(1, "Write entries");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(3);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNonNull();
 
@@ -1172,8 +1185,10 @@ private:
                 }
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -1213,8 +1228,10 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                listHolder_0->mList[2].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[2].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[2].subjects.SetNonNull();
 
                 {
@@ -1254,7 +1271,7 @@ private:
                 }
                 listHolder_0->mList[2].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 3);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1268,20 +1285,25 @@ private:
         case 3: {
             LogStep(3, "Write entries empty lists");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>();
@@ -1291,7 +1313,7 @@ private:
                     chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1305,25 +1327,30 @@ private:
         case 5: {
             LogStep(5, "Write entry invalid privilege");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1337,25 +1364,30 @@ private:
         case 7: {
             LogStep(7, "Write entry invalid auth mode");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(1);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(1);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1369,20 +1401,25 @@ private:
         case 9: {
             LogStep(9, "Write entry invalid subject");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -1394,7 +1431,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1408,20 +1445,25 @@ private:
         case 11: {
             LogStep(11, "Write entry invalid target");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNonNull();
 
@@ -1439,7 +1481,7 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1453,20 +1495,25 @@ private:
         case 13: {
             LogStep(13, "Write entry too many subjects");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -1497,7 +1544,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1511,20 +1558,25 @@ private:
         case 15: {
             LogStep(15, "Write entry too many targets");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNonNull();
 
@@ -1638,7 +1690,7 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1652,14 +1704,17 @@ private:
         case 17: {
             LogStep(17, "Write too many entries");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(4);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(4);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNonNull();
 
@@ -1689,8 +1744,10 @@ private:
                 }
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -1730,8 +1787,10 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                listHolder_0->mList[2].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[2].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[2].subjects.SetNonNull();
 
                 {
@@ -1771,8 +1830,10 @@ private:
                 }
                 listHolder_0->mList[2].fabricIndex = 0U;
 
-                listHolder_0->mList[3].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(1);
-                listHolder_0->mList[3].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[3].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[3].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[3].subjects.SetNonNull();
 
                 {
@@ -1812,7 +1873,7 @@ private:
                 }
                 listHolder_0->mList[3].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 4);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -1826,19 +1887,22 @@ private:
         case 19: {
             LogStep(19, "Restore ACL");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -2319,7 +2383,8 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -2334,7 +2399,8 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -2354,7 +2420,8 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -2381,7 +2448,8 @@ private:
         case 8:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -2432,7 +2500,8 @@ private:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -2452,7 +2521,8 @@ private:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::DecodableType>
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -2500,17 +2570,18 @@ private:
                     "AccessControlExtensionStruct containing 1 element 1. struct: Data field: D_OK_EMPTY : 1718");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data =
                     mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2530,10 +2601,11 @@ private:
                     "17320612063686172737472696E670018");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDOkSingle.HasValue()
@@ -2546,7 +2618,7 @@ private:
                           71);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2567,10 +2639,11 @@ private:
                     "C656D656E7420616761696E2E2E2E2E2E0018");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDOkFull.HasValue()
@@ -2585,7 +2658,7 @@ private:
                                      128);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2606,10 +2679,11 @@ private:
                     "C656D656E7420616761696E2E2E2E2E2E2E0018");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDBadLength.HasValue()
@@ -2624,7 +2698,7 @@ private:
                                      129);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2636,17 +2710,18 @@ private:
                     "AccessControlExtensionStruct containing 1 element 1. struct Data field: D_BAD_STRUCT : 1518");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data =
                     mDBadStruct.HasValue() ? mDBadStruct.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x15\x18"), 2);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2660,10 +2735,11 @@ private:
                     "0617320612063686172737472696E670018");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDBadList.HasValue()
@@ -2676,7 +2752,7 @@ private:
                           72);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2690,10 +2766,11 @@ private:
                     "86172737472696E670018");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDBadElem.HasValue()
@@ -2705,7 +2782,7 @@ private:
                                      65);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2719,10 +2796,11 @@ private:
                     "7320612063686172737472696E670018FF");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDBadOverflow.HasValue()
@@ -2735,7 +2813,7 @@ private:
                           72);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2749,10 +2827,11 @@ private:
                     "17320612063686172737472696E6700");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data = mDBadUnderflow.HasValue()
@@ -2765,7 +2844,7 @@ private:
                           70);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2777,17 +2856,18 @@ private:
                     "AccessControlExtensionStruct containing 1 element 1.struct Data field: D_BAD_NONE");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data =
                     mDBadNone.HasValue() ? mDBadNone.Value() : chip::ByteSpan(chip::Uint8::from_const_char(""), 0);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2803,10 +2883,11 @@ private:
                 "612063686172737472696E670018");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].data =
@@ -2823,7 +2904,7 @@ private:
                           71);
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
@@ -2839,9 +2920,9 @@ private:
             LogStep(18, "TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is an empty list");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
 
-            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::ExtensionEntry::Type>();
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>();
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
@@ -29867,14 +29948,17 @@ private:
         case 4: {
             LogStep(4, "Install ACL for QueryImage");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -29886,8 +29970,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNonNull();
 
@@ -29906,7 +29992,7 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -64758,14 +64844,17 @@ private:
         case 1: {
             LogStep(1, "Constraint error: PASE reserved for future (TC-ACL-2.4 step 29)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -64777,15 +64866,17 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(1);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(1);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -64794,14 +64885,17 @@ private:
         case 2: {
             LogStep(2, "Constraint error: Invalid combination administer + group (TC-ACL-2.4 step 31)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -64813,15 +64907,17 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -64830,14 +64926,17 @@ private:
         case 3: {
             LogStep(3, "Constraint error:  Invalid auth mode (TC-ACL-2.4 step 33)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -64849,15 +64948,17 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(4);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(4);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -64866,14 +64967,17 @@ private:
         case 4: {
             LogStep(4, "Constraint error:  Invalid subject (TC-ACL-2.4 step 34)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -64885,8 +64989,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -64898,7 +65004,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -64907,14 +65013,17 @@ private:
         case 5: {
             LogStep(5, "Constraint error:  Invalid target (TC-ACL-2.4 step 38)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -64926,8 +65035,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNonNull();
 
@@ -64945,7 +65056,7 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -64954,14 +65065,17 @@ private:
         case 6: {
             LogStep(6, "Constraint error:  target has both endpoint and device type (TC-ACL-2.4 step 42)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -64973,8 +65087,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNonNull();
 
@@ -64994,7 +65110,7 @@ private:
                 }
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -65003,14 +65119,17 @@ private:
         case 7: {
             LogStep(7, "Constraint error: Invalid privilege value step 32)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -65022,13 +65141,15 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(6);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(6);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -65037,14 +65158,17 @@ private:
         case 8: {
             LogStep(8, "Constraint error: invalid subject 0xFFFF_FFFF_FFFF_FFFF (TC-ACL-2.4 step 35)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -65056,8 +65180,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -65069,7 +65195,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -65078,14 +65204,17 @@ private:
         case 9: {
             LogStep(9, "Constraint error: invalid subject 0xFFFF_FFFD_0000_0000 (TC-ACL-2.4 step 36)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -65097,8 +65226,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -65110,7 +65241,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -65119,14 +65250,17 @@ private:
         case 10: {
             LogStep(10, "Constraint error: invalid subject 0xFFFF_FFFF_FFFF_0000 (TC-ACL-2.4 step 37)");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNonNull();
 
                 {
@@ -65138,8 +65272,10 @@ private:
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -65151,7 +65287,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -77531,25 +77667,30 @@ private:
         case 6: {
             LogStep(6, "Install ACLs");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(4);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(4);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -77632,19 +77773,22 @@ private:
         case 19: {
             LogStep(19, "Cleanup ACLs");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -77792,25 +77936,30 @@ private:
         case 28: {
             LogStep(28, "Install ACLs for gamma");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(4);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(4);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[1].subjects.SetNull();
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityGamma, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -77885,19 +78034,22 @@ private:
         case 40: {
             LogStep(40, "Cleanup ACLs for gamma");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(1);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 0U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 1);
             }
             return WriteAttribute(kIdentityGamma, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
@@ -81706,20 +81858,25 @@ private:
         case 4: {
             LogStep(4, "Install ACLs");
             ListFreer listFreer;
-            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type> value;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(2);
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(5);
-                listHolder_0->mList[0].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(2);
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
                 listHolder_0->mList[0].subjects.SetNull();
                 listHolder_0->mList[0].targets.SetNull();
                 listHolder_0->mList[0].fabricIndex = 1U;
 
-                listHolder_0->mList[1].privilege = static_cast<chip::app::Clusters::AccessControl::Privilege>(3);
-                listHolder_0->mList[1].authMode  = static_cast<chip::app::Clusters::AccessControl::AuthMode>(3);
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[1].subjects.SetNonNull();
 
                 {
@@ -81731,7 +81888,7 @@ private:
                 listHolder_0->mList[1].targets.SetNull();
                 listHolder_0->mList[1].fabricIndex = 1U;
 
-                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntry::Type>(
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
                     listHolder_0->mList, 2);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,

@@ -503,10 +503,10 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -524,20 +524,20 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:3U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:4ULL];
                 temp_3[1] = [NSNumber numberWithUnsignedLongLong:5ULL];
                 temp_3[2] = [NSNumber numberWithUnsignedLongLong:6ULL];
                 temp_3[3] = [NSNumber numberWithUnsignedLongLong:7ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -556,20 +556,20 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:11U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[2] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[2] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:12ULL];
                 temp_3[1] = [NSNumber numberWithUnsignedLongLong:13ULL];
                 temp_3[2] = [NSNumber numberWithUnsignedLongLong:14ULL];
                 temp_3[3] = [NSNumber numberWithUnsignedLongLong:15ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).subjects = temp_3;
             }
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -588,9 +588,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:19U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -615,287 +615,288 @@ private:
 
         __auto_type * params = [[MTRReadParams alloc] init];
         params.filterByFabric = true;
-        [cluster readAttributeACLWithParams:params
-                                 completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-                                     NSLog(@"Verify Error: %@", err);
+        [cluster
+            readAttributeACLWithParams:params
+                            completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                NSLog(@"Verify Error: %@", err);
 
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                     {
-                                         id actualValue = value;
-                                         VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
-                                         VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
-                                         VerifyOrReturn(CheckValue("Targets",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets count],
-                                             static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValueNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .endpoint,
-                                             0U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .cluster,
-                                             1UL));
-                                         VerifyOrReturn(CheckValueNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .cluster,
-                                             2UL));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .endpoint,
-                                             3U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
-                                         VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1U));
-                                         VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects));
-                                         VerifyOrReturn(CheckValue("Subjects",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects count],
-                                             static_cast<uint32_t>(4)));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[0], 4ULL));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[1], 5ULL));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[2], 6ULL));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[3], 7ULL));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).targets));
-                                         VerifyOrReturn(CheckValue("Targets",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).targets count],
-                                             static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValueNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .endpoint,
-                                             8U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .cluster,
-                                             9UL));
-                                         VerifyOrReturn(CheckValueNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .cluster,
-                                             10UL));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .endpoint,
-                                             11U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1U));
-                                         VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).privilege, 3U));
-                                         VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).authMode, 3U));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects));
-                                         VerifyOrReturn(CheckValue("Subjects",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects count],
-                                             static_cast<uint32_t>(4)));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[0], 12ULL));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[1], 13ULL));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[2], 14ULL));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[3], 15ULL));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).targets));
-                                         VerifyOrReturn(CheckValue("Targets",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).targets count],
-                                             static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValueNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .endpoint,
-                                             16U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .cluster,
-                                             17UL));
-                                         VerifyOrReturn(CheckValueNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .cluster,
-                                             18UL));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .endpoint,
-                                             19U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).fabricIndex, 1U));
-                                     }
+                                {
+                                    id actualValue = value;
+                                    VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                    VerifyOrReturn(CheckValueNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .endpoint,
+                                        0U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .cluster,
+                                        1UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .cluster,
+                                        2UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .endpoint,
+                                        3U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).privilege, 1U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).authMode, 2U));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects));
+                                    VerifyOrReturn(CheckValue("Subjects",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects count],
+                                        static_cast<uint32_t>(4)));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[0], 4ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[1], 5ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[2], 6ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[3], 7ULL));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .endpoint,
+                                        8U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .cluster,
+                                        9UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .cluster,
+                                        10UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .endpoint,
+                                        11U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).fabricIndex, 1U));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).privilege, 3U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).authMode, 3U));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects));
+                                    VerifyOrReturn(CheckValue("Subjects",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects count],
+                                        static_cast<uint32_t>(4)));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[0], 12ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[1], 13ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[2], 14ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[3], 15ULL));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .endpoint,
+                                        16U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .cluster,
+                                        17UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .cluster,
+                                        18UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .endpoint,
+                                        19U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).fabricIndex, 1U));
+                                }
 
-                                     NextTest();
-                                 }];
+                                NextTest();
+                            }];
 
         return CHIP_NO_ERROR;
     }
@@ -910,25 +911,25 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -963,25 +964,25 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(2)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).privilege, 1U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1000,19 +1001,19 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1050,15 +1051,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1077,19 +1078,19 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1127,15 +1128,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1154,23 +1155,23 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:0ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1208,15 +1209,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1235,17 +1236,17 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -1253,9 +1254,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = nil;
                 ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1293,15 +1294,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1320,16 +1321,16 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:1ULL];
@@ -1352,10 +1353,10 @@ private:
                 temp_3[17] = [NSNumber numberWithUnsignedLongLong:18ULL];
                 temp_3[18] = [NSNumber numberWithUnsignedLongLong:19ULL];
                 temp_3[19] = [NSNumber numberWithUnsignedLongLong:20ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1393,15 +1394,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1420,17 +1421,17 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -1533,9 +1534,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[19]).endpoint = [NSNumber numberWithUnsignedShort:20U];
                 ((MTRAccessControlClusterTarget *) temp_3[19]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1573,15 +1574,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -1600,10 +1601,10 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -1621,20 +1622,20 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:3U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:4ULL];
                 temp_3[1] = [NSNumber numberWithUnsignedLongLong:5ULL];
                 temp_3[2] = [NSNumber numberWithUnsignedLongLong:6ULL];
                 temp_3[3] = [NSNumber numberWithUnsignedLongLong:7ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -1653,20 +1654,20 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:11U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[2] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[2] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).authMode = [NSNumber numberWithUnsignedChar:3U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:12ULL];
                 temp_3[1] = [NSNumber numberWithUnsignedLongLong:13ULL];
                 temp_3[2] = [NSNumber numberWithUnsignedLongLong:14ULL];
                 temp_3[3] = [NSNumber numberWithUnsignedLongLong:15ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).subjects = temp_3;
             }
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -1685,20 +1686,20 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:19U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
-            temp_0[3] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[3]).privilege = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[3]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[3] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:20ULL];
                 temp_3[1] = [NSNumber numberWithUnsignedLongLong:21ULL];
                 temp_3[2] = [NSNumber numberWithUnsignedLongLong:22ULL];
                 temp_3[3] = [NSNumber numberWithUnsignedLongLong:23ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[3]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).subjects = temp_3;
             }
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
@@ -1717,9 +1718,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:27U];
                 ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[3]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -1747,287 +1748,288 @@ private:
 
         __auto_type * params = [[MTRReadParams alloc] init];
         params.filterByFabric = true;
-        [cluster readAttributeACLWithParams:params
-                                 completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-                                     NSLog(@"Verify Error: %@", err);
+        [cluster
+            readAttributeACLWithParams:params
+                            completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                NSLog(@"Verify Error: %@", err);
 
-                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                     {
-                                         id actualValue = value;
-                                         VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
-                                         VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
-                                         VerifyOrReturn(CheckValue("Targets",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets count],
-                                             static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValueNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .endpoint,
-                                             0U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[0])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .cluster,
-                                             1UL));
-                                         VerifyOrReturn(CheckValueNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[1])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .cluster,
-                                             2UL));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .endpoint,
-                                             3U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[0])
-                                                     .targets[2])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
-                                         VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).privilege, 1U));
-                                         VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects));
-                                         VerifyOrReturn(CheckValue("Subjects",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects count],
-                                             static_cast<uint32_t>(4)));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[0], 4ULL));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[1], 5ULL));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[2], 6ULL));
-                                         VerifyOrReturn(CheckValue(
-                                             "", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).subjects[3], 7ULL));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).targets));
-                                         VerifyOrReturn(CheckValue("Targets",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).targets count],
-                                             static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValueNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .endpoint,
-                                             8U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[0])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .cluster,
-                                             9UL));
-                                         VerifyOrReturn(CheckValueNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[1])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .cluster,
-                                             10UL));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .endpoint,
-                                             11U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[1])
-                                                     .targets[2])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[1]).fabricIndex, 1U));
-                                         VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).privilege, 3U));
-                                         VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).authMode, 3U));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects));
-                                         VerifyOrReturn(CheckValue("Subjects",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects count],
-                                             static_cast<uint32_t>(4)));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[0], 12ULL));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[1], 13ULL));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[2], 14ULL));
-                                         VerifyOrReturn(CheckValue("",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).subjects[3], 15ULL));
-                                         VerifyOrReturn(CheckValueNonNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).targets));
-                                         VerifyOrReturn(CheckValue("Targets",
-                                             [((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).targets count],
-                                             static_cast<uint32_t>(3)));
-                                         VerifyOrReturn(CheckValueNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .endpoint,
-                                             16U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[0])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .cluster,
-                                             17UL));
-                                         VerifyOrReturn(CheckValueNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[1])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValueNonNull("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .cluster));
-                                         VerifyOrReturn(CheckValue("Cluster",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .cluster,
-                                             18UL));
-                                         VerifyOrReturn(CheckValueNonNull("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .endpoint));
-                                         VerifyOrReturn(CheckValue("Endpoint",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .endpoint,
-                                             19U));
-                                         VerifyOrReturn(CheckValueNull("DeviceType",
-                                             ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntry *)
-                                                                                     actualValue[2])
-                                                     .targets[2])
-                                                 .deviceType));
-                                         VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[2]).fabricIndex, 1U));
-                                     }
+                                {
+                                    id actualValue = value;
+                                    VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                    VerifyOrReturn(CheckValueNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .endpoint,
+                                        0U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .cluster,
+                                        1UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .cluster,
+                                        2UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .endpoint,
+                                        3U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[0])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).privilege, 1U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).authMode, 2U));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects));
+                                    VerifyOrReturn(CheckValue("Subjects",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects count],
+                                        static_cast<uint32_t>(4)));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[0], 4ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[1], 5ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[2], 6ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).subjects[3], 7ULL));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .endpoint,
+                                        8U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .cluster,
+                                        9UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .cluster,
+                                        10UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .endpoint,
+                                        11U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[1])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[1]).fabricIndex, 1U));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).privilege, 3U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).authMode, 3U));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects));
+                                    VerifyOrReturn(CheckValue("Subjects",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects count],
+                                        static_cast<uint32_t>(4)));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[0], 12ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[1], 13ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[2], 14ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).subjects[3], 15ULL));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .endpoint,
+                                        16U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .cluster,
+                                        17UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .cluster,
+                                        18UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .endpoint,
+                                        19U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[2])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).fabricIndex, 1U));
+                                }
 
-                                     NextTest();
-                                 }];
+                                NextTest();
+                            }];
 
         return CHIP_NO_ERROR;
     }
@@ -2042,12 +2044,12 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
             aclArgument = temp_0;
         }
@@ -2082,15 +2084,15 @@ private:
                                          id actualValue = value;
                                          VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(1)));
                                          VerifyOrReturn(CheckValue("Privilege",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).privilege, 5U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                          VerifyOrReturn(CheckValue("AuthMode",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).authMode, 2U));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Subjects", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).subjects));
-                                         VerifyOrReturn(CheckValueNull(
-                                             "Targets", ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).targets));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).authMode, 2U));
+                                         VerifyOrReturn(CheckValueNull("Subjects",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).subjects));
+                                         VerifyOrReturn(CheckValueNull("Targets",
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).targets));
                                          VerifyOrReturn(CheckValue("FabricIndex",
-                                             ((MTRAccessControlClusterAccessControlEntry *) actualValue[0]).fabricIndex, 1U));
+                                             ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).fabricIndex, 1U));
                                      }
 
                                      NextTest();
@@ -3174,11 +3176,11 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkEmpty.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDOkEmpty.HasValue()
                 ? [NSData dataWithBytes:mDOkEmpty.Value().data() length:mDOkEmpty.Value().size()]
                 : [[NSData alloc] initWithBytes:"\x17\x18" length:2];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3217,14 +3219,14 @@ private:
                                           id actualValue = value;
                                           VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
                                           VerifyOrReturn(CheckValueAsString(
-                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              "Data", ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).data,
                                               mDOkEmpty.HasValue() ? [NSData dataWithBytes:mDOkEmpty.Value().data()
                                                                                     length:mDOkEmpty.Value().size()]
                                                                    : [[NSData alloc] initWithBytes:"\x17\x18" length:2]
 
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
-                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
                                               CurrentFabricIndex));
                                       }
 
@@ -3245,15 +3247,15 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkSingle.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDOkSingle.HasValue()
                 ? [NSData dataWithBytes:mDOkSingle.Value().data() length:mDOkSingle.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:71];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3295,7 +3297,7 @@ private:
                                           id actualValue = value;
                                           VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
                                           VerifyOrReturn(CheckValueAsString(
-                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              "Data", ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).data,
                                               mDOkSingle.HasValue()
                                                   ? [NSData dataWithBytes:mDOkSingle.Value().data()
                                                                    length:mDOkSingle.Value().size()]
@@ -3309,7 +3311,7 @@ private:
 
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
-                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
                                               CurrentFabricIndex));
                                       }
 
@@ -3330,8 +3332,8 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkFull.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDOkFull.HasValue()
                 ? [NSData dataWithBytes:mDOkFull.Value().data() length:mDOkFull.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:
@@ -3341,7 +3343,7 @@ private:
                         "\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E"
                         "\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x00\x18"
                            length:128];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3384,7 +3386,7 @@ private:
                                           id actualValue = value;
                                           VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
                                           VerifyOrReturn(CheckValueAsString(
-                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              "Data", ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).data,
                                               mDOkFull.HasValue()
                                                   ? [NSData dataWithBytes:mDOkFull.Value().data() length:mDOkFull.Value().size()]
                                                   : [[NSData alloc]
@@ -3401,7 +3403,7 @@ private:
 
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
-                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
                                               CurrentFabricIndex));
                                       }
 
@@ -3422,8 +3424,8 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadLength.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadLength.HasValue()
                 ? [NSData dataWithBytes:mDBadLength.Value().data() length:mDBadLength.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:
@@ -3433,7 +3435,7 @@ private:
                         "\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E"
                         "\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x2E\x00\x18"
                            length:129];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3471,11 +3473,11 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadStruct.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadStruct.HasValue()
                 ? [NSData dataWithBytes:mDBadStruct.Value().data() length:mDBadStruct.Value().size()]
                 : [[NSData alloc] initWithBytes:"\x15\x18" length:2];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3509,15 +3511,15 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadList.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadList.HasValue()
                 ? [NSData dataWithBytes:mDBadList.Value().data() length:mDBadList.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:"\x37\x01\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54"
                                   "\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20"
                                   "\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:72];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3553,15 +3555,15 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadElem.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadElem.HasValue()
                 ? [NSData dataWithBytes:mDBadElem.Value().data() length:mDBadElem.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:"\x17\x10\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20"
                                   "\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20"
                                   "\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:65];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3597,15 +3599,15 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadOverflow.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadOverflow.HasValue()
                 ? [NSData dataWithBytes:mDBadOverflow.Value().data() length:mDBadOverflow.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18\xFF"
                            length:72];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3641,15 +3643,15 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadUnderflow.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadUnderflow.HasValue()
                 ? [NSData dataWithBytes:mDBadUnderflow.Value().data() length:mDBadUnderflow.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00"
                            length:70];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3685,11 +3687,11 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDBadNone.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDBadNone.HasValue()
                 ? [NSData dataWithBytes:mDBadNone.Value().data() length:mDBadNone.Value().size()]
                 : [[NSData alloc] initWithBytes:"" length:0];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3723,21 +3725,21 @@ private:
         id extensionArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).data = mDOkEmpty.HasValue()
+            temp_0[0] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).data = mDOkEmpty.HasValue()
                 ? [NSData dataWithBytes:mDOkEmpty.Value().data() length:mDOkEmpty.Value().size()]
                 : [[NSData alloc] initWithBytes:"\x17\x18" length:2];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[0]).fabricIndex = [CurrentFabricIndex copy];
 
-            temp_0[1] = [[MTRAccessControlClusterExtensionEntry alloc] init];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[1]).data = mDOkSingle.HasValue()
+            temp_0[1] = [[MTRAccessControlClusterAccessControlExtensionStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[1]).data = mDOkSingle.HasValue()
                 ? [NSData dataWithBytes:mDOkSingle.Value().data() length:mDOkSingle.Value().size()]
                 : [[NSData alloc]
                     initWithBytes:"\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
                                   "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C"
                                   "\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"
                            length:71];
-            ((MTRAccessControlClusterExtensionEntry *) temp_0[1]).fabricIndex = [CurrentFabricIndex copy];
+            ((MTRAccessControlClusterAccessControlExtensionStruct *) temp_0[1]).fabricIndex = [CurrentFabricIndex copy];
 
             extensionArgument = temp_0;
         }
@@ -3783,14 +3785,14 @@ private:
                                           id actualValue = value;
                                           VerifyOrReturn(CheckValue("Extension", [actualValue count], static_cast<uint32_t>(1)));
                                           VerifyOrReturn(CheckValueAsString(
-                                              "Data", ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).data,
+                                              "Data", ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).data,
                                               mDOkEmpty.HasValue() ? [NSData dataWithBytes:mDOkEmpty.Value().data()
                                                                                     length:mDOkEmpty.Value().size()]
                                                                    : [[NSData alloc] initWithBytes:"\x17\x18" length:2]
 
                                               ));
                                           VerifyOrReturn(CheckValue("FabricIndex",
-                                              ((MTRAccessControlClusterExtensionEntry *) actualValue[0]).fabricIndex,
+                                              ((MTRAccessControlClusterAccessControlExtensionStruct *) actualValue[0]).fabricIndex,
                                               CurrentFabricIndex));
                                       }
 
@@ -45182,21 +45184,21 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -45204,9 +45206,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = nil;
                 ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101341,26 +101343,26 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:1U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101389,26 +101391,26 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101439,26 +101441,26 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:4U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:4U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101487,27 +101489,27 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:0ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101536,21 +101538,21 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -101558,9 +101560,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = nil;
                 ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101589,21 +101591,21 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
@@ -101611,9 +101613,9 @@ private:
                 ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:22U];
                 ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = [NSNumber numberWithUnsignedInt:33UL];
 
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101644,23 +101646,23 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:6U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:6U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101689,27 +101691,27 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:18446744073709551615ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101740,27 +101742,27 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:18446744060824649728ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
@@ -101791,27 +101793,27 @@ private:
         id aclArgument;
         {
             NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
-            temp_0[0] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:112233ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
-            temp_0[1] = [[MTRAccessControlClusterAccessControlEntry alloc] init];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
                 temp_3[0] = [NSNumber numberWithUnsignedLongLong:18446744073709486080ULL];
-                ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).subjects = temp_3;
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
             }
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).targets = nil;
-            ((MTRAccessControlClusterAccessControlEntry *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             aclArgument = temp_0;
         }
