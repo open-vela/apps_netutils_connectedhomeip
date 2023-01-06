@@ -28172,37 +28172,35 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeNeighborTableListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeNeighborTableWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = ThreadNetworkDiagnostics::Attributes::NeighborTableList::TypeInfo;
-    return MTRReadAttribute<MTRThreadNetworkDiagnosticsNeighborTableListListAttributeCallbackBridge, NSArray,
-        TypeInfo::DecodableType>(
+    using TypeInfo = ThreadNetworkDiagnostics::Attributes::NeighborTable::TypeInfo;
+    return MTRReadAttribute<MTRThreadNetworkDiagnosticsNeighborTableListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)subscribeAttributeNeighborTableListWithParams:(MTRSubscribeParams * _Nonnull)params
-                              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                        reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeNeighborTableWithParams:(MTRSubscribeParams * _Nonnull)params
+                          subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                    reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = ThreadNetworkDiagnostics::Attributes::NeighborTableList::TypeInfo;
-    MTRSubscribeAttribute<MTRThreadNetworkDiagnosticsNeighborTableListListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = ThreadNetworkDiagnostics::Attributes::NeighborTable::TypeInfo;
+    MTRSubscribeAttribute<MTRThreadNetworkDiagnosticsNeighborTableListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeNeighborTableListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                                   endpoint:(NSNumber *)endpoint
-                                                      queue:(dispatch_queue_t)queue
-                                                 completion:
-                                                     (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
++ (void)readAttributeNeighborTableWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                               endpoint:(NSNumber *)endpoint
+                                                  queue:(dispatch_queue_t)queue
+                                             completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRThreadNetworkDiagnosticsNeighborTableListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRThreadNetworkDiagnosticsNeighborTableListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(ThreadNetworkDiagnosticsNeighborTableListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(ThreadNetworkDiagnosticsNeighborTableListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = ThreadNetworkDiagnostics::Attributes::NeighborTableList::TypeInfo;
+                using TypeInfo = ThreadNetworkDiagnostics::Attributes::NeighborTable::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -28217,35 +28215,35 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeRouteTableListWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeRouteTableWithCompletion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = ThreadNetworkDiagnostics::Attributes::RouteTableList::TypeInfo;
-    return MTRReadAttribute<MTRThreadNetworkDiagnosticsRouteTableListListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
+    using TypeInfo = ThreadNetworkDiagnostics::Attributes::RouteTable::TypeInfo;
+    return MTRReadAttribute<MTRThreadNetworkDiagnosticsRouteTableListAttributeCallbackBridge, NSArray, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)subscribeAttributeRouteTableListWithParams:(MTRSubscribeParams * _Nonnull)params
-                           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                     reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeRouteTableWithParams:(MTRSubscribeParams * _Nonnull)params
+                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                 reportHandler:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = ThreadNetworkDiagnostics::Attributes::RouteTableList::TypeInfo;
-    MTRSubscribeAttribute<MTRThreadNetworkDiagnosticsRouteTableListListAttributeCallbackSubscriptionBridge, NSArray,
+    using TypeInfo = ThreadNetworkDiagnostics::Attributes::RouteTable::TypeInfo;
+    MTRSubscribeAttribute<MTRThreadNetworkDiagnosticsRouteTableListAttributeCallbackSubscriptionBridge, NSArray,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeRouteTableListWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                                endpoint:(NSNumber *)endpoint
-                                                   queue:(dispatch_queue_t)queue
-                                              completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
++ (void)readAttributeRouteTableWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                          completion:(void (^)(NSArray * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRThreadNetworkDiagnosticsRouteTableListListAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRThreadNetworkDiagnosticsRouteTableListAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(ThreadNetworkDiagnosticsRouteTableListListAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(ThreadNetworkDiagnosticsRouteTableListAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = ThreadNetworkDiagnostics::Attributes::RouteTableList::TypeInfo;
+                using TypeInfo = ThreadNetworkDiagnostics::Attributes::RouteTable::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -31194,7 +31192,7 @@ using chip::SessionHandle;
 - (void)readAttributeNeighborTableListWithCompletionHandler:(void (^)(NSArray * _Nullable value,
                                                                 NSError * _Nullable error))completionHandler
 {
-    [self readAttributeNeighborTableListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeNeighborTableWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSArray *>(value), error);
     }];
@@ -31213,12 +31211,12 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeNeighborTableListWithParams:subscribeParams
-                                subscriptionEstablished:subscriptionEstablishedHandler
-                                          reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                              // Cast is safe because subclass does not add any selectors.
-                                              reportHandler(static_cast<NSArray *>(value), error);
-                                          }];
+    [self subscribeAttributeNeighborTableWithParams:subscribeParams
+                            subscriptionEstablished:subscriptionEstablishedHandler
+                                      reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                          // Cast is safe because subclass does not add any selectors.
+                                          reportHandler(static_cast<NSArray *>(value), error);
+                                      }];
 }
 + (void)readAttributeNeighborTableListWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                                 endpoint:(NSNumber *)endpoint
@@ -31226,19 +31224,19 @@ using chip::SessionHandle;
                                        completionHandler:
                                            (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeNeighborTableListWithClusterStateCache:attributeCacheContainer.realContainer
-                                                     endpoint:endpoint
-                                                        queue:queue
-                                                   completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                                       // Cast is safe because subclass does not add any selectors.
-                                                       completionHandler(static_cast<NSArray *>(value), error);
-                                                   }];
+    [self readAttributeNeighborTableWithClusterStateCache:attributeCacheContainer.realContainer
+                                                 endpoint:endpoint
+                                                    queue:queue
+                                               completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                                   // Cast is safe because subclass does not add any selectors.
+                                                   completionHandler(static_cast<NSArray *>(value), error);
+                                               }];
 }
 
 - (void)readAttributeRouteTableListWithCompletionHandler:(void (^)(
                                                              NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeRouteTableListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeRouteTableWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSArray *>(value), error);
     }];
@@ -31257,12 +31255,12 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeRouteTableListWithParams:subscribeParams
-                             subscriptionEstablished:subscriptionEstablishedHandler
-                                       reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                           // Cast is safe because subclass does not add any selectors.
-                                           reportHandler(static_cast<NSArray *>(value), error);
-                                       }];
+    [self subscribeAttributeRouteTableWithParams:subscribeParams
+                         subscriptionEstablished:subscriptionEstablishedHandler
+                                   reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                       // Cast is safe because subclass does not add any selectors.
+                                       reportHandler(static_cast<NSArray *>(value), error);
+                                   }];
 }
 + (void)readAttributeRouteTableListWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                              endpoint:(NSNumber *)endpoint
@@ -31270,13 +31268,13 @@ using chip::SessionHandle;
                                     completionHandler:
                                         (void (^)(NSArray * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeRouteTableListWithClusterStateCache:attributeCacheContainer.realContainer
-                                                  endpoint:endpoint
-                                                     queue:queue
-                                                completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                                                    // Cast is safe because subclass does not add any selectors.
-                                                    completionHandler(static_cast<NSArray *>(value), error);
-                                                }];
+    [self readAttributeRouteTableWithClusterStateCache:attributeCacheContainer.realContainer
+                                              endpoint:endpoint
+                                                 queue:queue
+                                            completion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+                                                // Cast is safe because subclass does not add any selectors.
+                                                completionHandler(static_cast<NSArray *>(value), error);
+                                            }];
 }
 
 - (void)readAttributePartitionIdWithCompletionHandler:(void (^)(
