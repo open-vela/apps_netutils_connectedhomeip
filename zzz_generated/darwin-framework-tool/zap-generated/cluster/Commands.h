@@ -23281,8 +23281,8 @@ public:
 | * ExtendedPanId                                                     | 0x0004 |
 | * MeshLocalPrefix                                                   | 0x0005 |
 | * OverrunCount                                                      | 0x0006 |
-| * NeighborTableList                                                 | 0x0007 |
-| * RouteTableList                                                    | 0x0008 |
+| * NeighborTable                                                     | 0x0007 |
+| * RouteTable                                                        | 0x0008 |
 | * PartitionId                                                       | 0x0009 |
 | * Weighting                                                         | 0x000A |
 | * DataVersion                                                       | 0x000B |
@@ -23882,16 +23882,16 @@ public:
 };
 
 /*
- * Attribute NeighborTableList
+ * Attribute NeighborTable
  */
-class ReadThreadNetworkDiagnosticsNeighborTableList : public ReadAttribute {
+class ReadThreadNetworkDiagnosticsNeighborTable : public ReadAttribute {
 public:
-    ReadThreadNetworkDiagnosticsNeighborTableList()
-        : ReadAttribute("neighbor-table-list")
+    ReadThreadNetworkDiagnosticsNeighborTable()
+        : ReadAttribute("neighbor-table")
     {
     }
 
-    ~ReadThreadNetworkDiagnosticsNeighborTableList() {}
+    ~ReadThreadNetworkDiagnosticsNeighborTable() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -23901,10 +23901,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
                                                                                     endpointID:@(endpointId)
                                                                                          queue:callbackQueue];
-        [cluster readAttributeNeighborTableListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ThreadNetworkDiagnostics.NeighborTableList response %@", [value description]);
+        [cluster readAttributeNeighborTableWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.NeighborTable response %@", [value description]);
             if (error != nil) {
-                LogNSError("ThreadNetworkDiagnostics NeighborTableList read Error", error);
+                LogNSError("ThreadNetworkDiagnostics NeighborTable read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -23912,14 +23912,14 @@ public:
     }
 };
 
-class SubscribeAttributeThreadNetworkDiagnosticsNeighborTableList : public SubscribeAttribute {
+class SubscribeAttributeThreadNetworkDiagnosticsNeighborTable : public SubscribeAttribute {
 public:
-    SubscribeAttributeThreadNetworkDiagnosticsNeighborTableList()
-        : SubscribeAttribute("neighbor-table-list")
+    SubscribeAttributeThreadNetworkDiagnosticsNeighborTable()
+        : SubscribeAttribute("neighbor-table")
     {
     }
 
-    ~SubscribeAttributeThreadNetworkDiagnosticsNeighborTableList() {}
+    ~SubscribeAttributeThreadNetworkDiagnosticsNeighborTable() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -23938,12 +23938,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeNeighborTableListWithParams:params
+        [cluster subscribeAttributeNeighborTableWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.NeighborTableList response %@", [value description]);
+                NSLog(@"ThreadNetworkDiagnostics.NeighborTable response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -23952,16 +23952,16 @@ public:
 };
 
 /*
- * Attribute RouteTableList
+ * Attribute RouteTable
  */
-class ReadThreadNetworkDiagnosticsRouteTableList : public ReadAttribute {
+class ReadThreadNetworkDiagnosticsRouteTable : public ReadAttribute {
 public:
-    ReadThreadNetworkDiagnosticsRouteTableList()
-        : ReadAttribute("route-table-list")
+    ReadThreadNetworkDiagnosticsRouteTable()
+        : ReadAttribute("route-table")
     {
     }
 
-    ~ReadThreadNetworkDiagnosticsRouteTableList() {}
+    ~ReadThreadNetworkDiagnosticsRouteTable() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -23971,10 +23971,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
                                                                                     endpointID:@(endpointId)
                                                                                          queue:callbackQueue];
-        [cluster readAttributeRouteTableListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"ThreadNetworkDiagnostics.RouteTableList response %@", [value description]);
+        [cluster readAttributeRouteTableWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"ThreadNetworkDiagnostics.RouteTable response %@", [value description]);
             if (error != nil) {
-                LogNSError("ThreadNetworkDiagnostics RouteTableList read Error", error);
+                LogNSError("ThreadNetworkDiagnostics RouteTable read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -23982,14 +23982,14 @@ public:
     }
 };
 
-class SubscribeAttributeThreadNetworkDiagnosticsRouteTableList : public SubscribeAttribute {
+class SubscribeAttributeThreadNetworkDiagnosticsRouteTable : public SubscribeAttribute {
 public:
-    SubscribeAttributeThreadNetworkDiagnosticsRouteTableList()
-        : SubscribeAttribute("route-table-list")
+    SubscribeAttributeThreadNetworkDiagnosticsRouteTable()
+        : SubscribeAttribute("route-table")
     {
     }
 
-    ~SubscribeAttributeThreadNetworkDiagnosticsRouteTableList() {}
+    ~SubscribeAttributeThreadNetworkDiagnosticsRouteTable() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -24008,12 +24008,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeRouteTableListWithParams:params
+        [cluster subscribeAttributeRouteTableWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"ThreadNetworkDiagnostics.RouteTableList response %@", [value description]);
+                NSLog(@"ThreadNetworkDiagnostics.RouteTable response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -98436,10 +98436,10 @@ void registerClusterThreadNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsMeshLocalPrefix>(), //
         make_unique<ReadThreadNetworkDiagnosticsOverrunCount>(), //
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsOverrunCount>(), //
-        make_unique<ReadThreadNetworkDiagnosticsNeighborTableList>(), //
-        make_unique<SubscribeAttributeThreadNetworkDiagnosticsNeighborTableList>(), //
-        make_unique<ReadThreadNetworkDiagnosticsRouteTableList>(), //
-        make_unique<SubscribeAttributeThreadNetworkDiagnosticsRouteTableList>(), //
+        make_unique<ReadThreadNetworkDiagnosticsNeighborTable>(), //
+        make_unique<SubscribeAttributeThreadNetworkDiagnosticsNeighborTable>(), //
+        make_unique<ReadThreadNetworkDiagnosticsRouteTable>(), //
+        make_unique<SubscribeAttributeThreadNetworkDiagnosticsRouteTable>(), //
         make_unique<ReadThreadNetworkDiagnosticsPartitionId>(), //
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsPartitionId>(), //
         make_unique<ReadThreadNetworkDiagnosticsWeighting>(), //
