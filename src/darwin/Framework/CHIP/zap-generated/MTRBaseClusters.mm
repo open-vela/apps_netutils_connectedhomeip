@@ -35614,7 +35614,7 @@ using chip::SessionHandle;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = EthernetNetworkDiagnostics::Attributes::PHYRate::TypeInfo;
-    return MTRReadAttribute<MTRNullableEthernetNetworkDiagnosticsClusterPHYRateTypeAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRNullableEthernetNetworkDiagnosticsClusterPHYRateAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -35624,7 +35624,7 @@ using chip::SessionHandle;
                               reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = EthernetNetworkDiagnostics::Attributes::PHYRate::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableEthernetNetworkDiagnosticsClusterPHYRateTypeAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRNullableEthernetNetworkDiagnosticsClusterPHYRateAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -35634,9 +35634,9 @@ using chip::SessionHandle;
                                             queue:(dispatch_queue_t)queue
                                        completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableEthernetNetworkDiagnosticsClusterPHYRateTypeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableEthernetNetworkDiagnosticsClusterPHYRateAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableEthernetNetworkDiagnosticsClusterPHYRateTypeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableEthernetNetworkDiagnosticsClusterPHYRateAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = EthernetNetworkDiagnostics::Attributes::PHYRate::TypeInfo;
