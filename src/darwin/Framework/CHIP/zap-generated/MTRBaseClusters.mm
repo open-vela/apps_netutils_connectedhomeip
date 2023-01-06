@@ -33962,7 +33962,7 @@ using chip::SessionHandle;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)readAttributeBssidWithCompletion:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeBSSIDWithCompletion:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WiFiNetworkDiagnostics::Attributes::Bssid::TypeInfo;
@@ -33970,7 +33970,7 @@ using chip::SessionHandle;
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)subscribeAttributeBssidWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributeBSSIDWithParams:(MTRSubscribeParams * _Nonnull)params
                   subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                             reportHandler:(void (^)(NSData * _Nullable value, NSError * _Nullable error))reportHandler
 {
@@ -33980,7 +33980,7 @@ using chip::SessionHandle;
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeBssidWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributeBSSIDWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                        endpoint:(NSNumber *)endpoint
                                           queue:(dispatch_queue_t)queue
                                      completion:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completion
@@ -34136,7 +34136,7 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeRssiWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeRSSIWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = WiFiNetworkDiagnostics::Attributes::Rssi::TypeInfo;
@@ -34144,7 +34144,7 @@ using chip::SessionHandle;
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)subscribeAttributeRssiWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributeRSSIWithParams:(MTRSubscribeParams * _Nonnull)params
                  subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                            reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
@@ -34154,7 +34154,7 @@ using chip::SessionHandle;
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeRssiWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributeRSSIWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                       endpoint:(NSNumber *)endpoint
                                          queue:(dispatch_queue_t)queue
                                     completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
@@ -34772,7 +34772,7 @@ using chip::SessionHandle;
 
 - (void)readAttributeBssidWithCompletionHandler:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeBssidWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeBSSIDWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSData *>(value), error);
     }];
@@ -34790,7 +34790,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeBssidWithParams:subscribeParams
+    [self subscribeAttributeBSSIDWithParams:subscribeParams
                     subscriptionEstablished:subscriptionEstablishedHandler
                               reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
                                   // Cast is safe because subclass does not add any selectors.
@@ -34802,7 +34802,7 @@ using chip::SessionHandle;
                                        queue:(dispatch_queue_t)queue
                            completionHandler:(void (^)(NSData * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeBssidWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributeBSSIDWithClusterStateCache:attributeCacheContainer.realContainer
                                          endpoint:endpoint
                                             queue:queue
                                        completion:^(NSData * _Nullable value, NSError * _Nullable error) {
@@ -34943,7 +34943,7 @@ using chip::SessionHandle;
 
 - (void)readAttributeRssiWithCompletionHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeRssiWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeRSSIWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSNumber *>(value), error);
     }];
@@ -34961,7 +34961,7 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeRssiWithParams:subscribeParams
+    [self subscribeAttributeRSSIWithParams:subscribeParams
                    subscriptionEstablished:subscriptionEstablishedHandler
                              reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                                  // Cast is safe because subclass does not add any selectors.
@@ -34973,7 +34973,7 @@ using chip::SessionHandle;
                                       queue:(dispatch_queue_t)queue
                           completionHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeRssiWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributeRSSIWithClusterStateCache:attributeCacheContainer.realContainer
                                         endpoint:endpoint
                                            queue:queue
                                       completion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
