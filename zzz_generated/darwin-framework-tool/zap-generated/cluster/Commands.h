@@ -28250,10 +28250,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterWiFiNetworkDiagnostics alloc] initWithDevice:device
                                                                                   endpointID:@(endpointId)
                                                                                        queue:callbackQueue];
-        [cluster readAttributeBssidWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"WiFiNetworkDiagnostics.Bssid response %@", [value description]);
+        [cluster readAttributeBSSIDWithCompletion:^(NSData * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"WiFiNetworkDiagnostics.BSSID response %@", [value description]);
             if (error != nil) {
-                LogNSError("WiFiNetworkDiagnostics Bssid read Error", error);
+                LogNSError("WiFiNetworkDiagnostics BSSID read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -28287,12 +28287,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeBssidWithParams:params
+        [cluster subscribeAttributeBSSIDWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSData * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"WiFiNetworkDiagnostics.Bssid response %@", [value description]);
+                NSLog(@"WiFiNetworkDiagnostics.BSSID response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -28530,10 +28530,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterWiFiNetworkDiagnostics alloc] initWithDevice:device
                                                                                   endpointID:@(endpointId)
                                                                                        queue:callbackQueue];
-        [cluster readAttributeRssiWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"WiFiNetworkDiagnostics.Rssi response %@", [value description]);
+        [cluster readAttributeRSSIWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"WiFiNetworkDiagnostics.RSSI response %@", [value description]);
             if (error != nil) {
-                LogNSError("WiFiNetworkDiagnostics Rssi read Error", error);
+                LogNSError("WiFiNetworkDiagnostics RSSI read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -28567,12 +28567,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeRssiWithParams:params
+        [cluster subscribeAttributeRSSIWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"WiFiNetworkDiagnostics.Rssi response %@", [value description]);
+                NSLog(@"WiFiNetworkDiagnostics.RSSI response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 

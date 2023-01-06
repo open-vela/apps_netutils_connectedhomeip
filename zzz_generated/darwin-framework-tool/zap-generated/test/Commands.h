@@ -62044,7 +62044,7 @@ private:
                                                                                        queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBssidWithCompletion:^(NSData * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBSSIDWithCompletion:^(NSData * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads BSSID attribute from DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -62148,7 +62148,7 @@ private:
                                                                                        queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeRssiWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeRSSIWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads RSSI attribute constraints Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
