@@ -40,6 +40,9 @@ public:
         printf("Test_TC_ACL_2_1\n");
         printf("Test_TC_ACL_2_2\n");
         printf("Test_TC_ACL_2_3\n");
+        printf("Test_TC_ACL_2_4\n");
+        printf("Test_TC_ACL_2_7\n");
+        printf("Test_TC_ACL_2_9\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
         printf("Test_TC_BRBINFO_1_1\n");
@@ -97,6 +100,7 @@ public:
         printf("Test_TC_LVL_6_1\n");
         printf("Test_TC_LCFG_1_1\n");
         printf("Test_TC_LUNIT_1_2\n");
+        printf("Test_TC_LUNIT_3_1\n");
         printf("Test_TC_LTIME_1_2\n");
         printf("Test_TC_LOWPOWER_1_1\n");
         printf("Test_TC_KEYPADINPUT_1_2\n");
@@ -141,6 +145,7 @@ public:
         printf("OTA_SuccessfulTransfer\n");
         printf("Test_TC_OCC_1_1\n");
         printf("Test_TC_OCC_2_1\n");
+        printf("Test_TC_OCC_2_3\n");
         printf("Test_TC_OO_1_1\n");
         printf("Test_TC_OO_2_1\n");
         printf("Test_TC_OO_2_2\n");
@@ -488,9 +493,6 @@ public:
         printf("Test_TC_WNCV_6_1\n");
         printf("Test_TC_WNCV_7_1\n");
         printf("Test_TC_FLW_2_2\n");
-        printf("Test_TC_OCC_2_2\n");
-        printf("Test_TC_OCC_2_3\n");
-        printf("Test_TC_OCC_2_4\n");
         printf("Test_TC_OCC_3_1\n");
         printf("Test_TC_PS_2_2\n");
         printf("Test_TC_BOOL_2_2\n");
@@ -513,7 +515,6 @@ public:
         printf("Test_TC_DRLK_3_2\n");
         printf("Test_TC_DRLK_3_3\n");
         printf("Test_TC_LCFG_2_1\n");
-        printf("Test_TC_LCFG_3_1\n");
         printf("Test_TC_LVL_2_3\n");
         printf("Test_TC_LVL_7_1\n");
         printf("Test_TC_LVL_8_1\n");
@@ -540,9 +541,6 @@ public:
         printf("Test_TC_LTIME_1_1\n");
         printf("Test_TC_LTIME_2_1\n");
         printf("Test_TC_LTIME_3_1\n");
-        printf("Test_TC_LUNIT_1_1\n");
-        printf("Test_TC_LUNIT_2_1\n");
-        printf("Test_TC_LUNIT_3_1\n");
         printf("Test_TC_BIND_2_1\n");
         printf("Test_TC_BIND_2_2\n");
         printf("Test_TC_BIND_2_3\n");
@@ -552,14 +550,10 @@ public:
         printf("Test_TC_S_2_3\n");
         printf("Test_TC_S_3_1\n");
         printf("Test_TC_PCC_3_1\n");
-        printf("Test_TC_ACL_2_4\n");
         printf("Test_TC_ACL_2_5\n");
         printf("Test_TC_ACL_2_6\n");
-        printf("Test_TC_ACL_2_7\n");
         printf("Test_TC_ACL_2_8\n");
-        printf("Test_TC_ACL_2_9\n");
         printf("Test_TC_ACL_2_10\n");
-        printf("Test_TC_ULABEL_3_1\n");
         printf("Test_TC_BRBINFO_2_2\n");
         printf("Test_TC_BRBINFO_2_3\n");
         printf("Test_TC_ACE_1_1\n");
@@ -2931,6 +2925,3044 @@ private:
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
                                  chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACL_2_4Suite : public TestCommand
+{
+public:
+    Test_TC_ACL_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_4", 44, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("CommissionerNodeId", 0, UINT64_MAX, &mCommissionerNodeId);
+        AddArgument("CAT1", 0, UINT64_MAX, &mCat1);
+        AddArgument("CAT2", 0, UINT64_MAX, &mCat2);
+        AddArgument("CAT3", 0, UINT64_MAX, &mCat3);
+        AddArgument("CAT4", 0, UINT64_MAX, &mCat4);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACL_2_4Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::NodeId> mCommissionerNodeId;
+    chip::Optional<uint64_t> mCat1;
+    chip::Optional<uint64_t> mCat2;
+    chip::Optional<uint64_t> mCat3;
+    chip::Optional<uint64_t> mCat4;
+    chip::Optional<uint16_t> mTimeout;
+
+    uint8_t CurrentFabricIndex;
+    uint16_t MAXSUBJECTS;
+    uint16_t TargetsPerAccessControlEntry;
+    uint16_t MAXENTRIES;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                CurrentFabricIndex = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 1));
+                }
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 1U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNonNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[0]", iter_3.GetValue(), 111ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[1]", iter_3.GetValue(), 222ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[2]", iter_3.GetValue(), 333ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[3]", iter_3.GetValue(), 444ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[1].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[1].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[1].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 11UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 22U));
+                        VerifyOrReturn(CheckValueNull("acl[1].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[1].targets.Value()", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 2));
+                    VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNonNull("acl[2].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[0]", iter_3.GetValue(), 555ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[1]", iter_3.GetValue(), 666ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[2]", iter_3.GetValue(), 777ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[3]", iter_3.GetValue(), 888ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[2].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[2].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[2].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 55UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 66U));
+                        VerifyOrReturn(CheckValueNull("acl[2].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                }
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 4U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNonNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[0]", iter_3.GetValue(), 444ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[1]", iter_3.GetValue(), 333ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[2]", iter_3.GetValue(), 222ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[3]", iter_3.GetValue(), 111ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[1].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[1].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[1].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 44UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 33U));
+                        VerifyOrReturn(CheckValueNull("acl[1].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[1].targets.Value()", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 2));
+                    VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[2].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[0]", iter_3.GetValue(), 888ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[1]", iter_3.GetValue(), 777ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[2]", iter_3.GetValue(), 666ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[3]", iter_3.GetValue(), 555ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[2].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[2].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[2].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 88UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 77U));
+                        VerifyOrReturn(CheckValueNull("acl[2].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                }
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 1U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[0]", iter_3.GetValue(), 111ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[1]", iter_3.GetValue(), 222ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[2]", iter_3.GetValue(), 333ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[3]", iter_3.GetValue(), 444ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[1].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[1].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[1].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 11UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 22U));
+                        VerifyOrReturn(CheckValueNull("acl[1].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[1].targets.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[1].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[1].cluster.Value()", iter_3.GetValue().cluster.Value(), 33UL));
+                        VerifyOrReturn(CheckValueNull("acl[1].targets.Value()[1].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[1].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[1].deviceType.Value()", iter_3.GetValue().deviceType.Value(), 44UL));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[1].targets.Value()", iter_3, 2));
+                    }
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 2));
+                    VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNonNull("acl[2].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[0]", iter_3.GetValue(), 555ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[1]", iter_3.GetValue(), 666ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[2]", iter_3.GetValue(), 777ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[3]", iter_3.GetValue(), 888ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[2].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[2].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[2].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 55UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 66U));
+                        VerifyOrReturn(CheckValueNull("acl[2].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[2].targets.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[1].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[1].cluster.Value()", iter_3.GetValue().cluster.Value(), 77UL));
+                        VerifyOrReturn(CheckValueNull("acl[2].targets.Value()[1].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[1].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[1].deviceType.Value()", iter_3.GetValue().deviceType.Value(), 88UL));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_3, 2));
+                    }
+                    VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                }
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 1U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    VerifyOrReturn(CheckValueNonNull("acl[1].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[1].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 11UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 22U));
+                        VerifyOrReturn(CheckValueNull("acl[1].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[1].targets.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[1].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[1].cluster.Value()", iter_3.GetValue().cluster.Value(), 33UL));
+                        VerifyOrReturn(CheckValueNull("acl[1].targets.Value()[1].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(CheckValueNonNull("acl[1].targets.Value()[1].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckValue("acl[1].targets.Value()[1].deviceType.Value()", iter_3.GetValue().deviceType.Value(), 44UL));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[1].targets.Value()", iter_3, 2));
+                    }
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 2));
+                    VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNull("acl[2].subjects", iter_0.GetValue().subjects));
+                    VerifyOrReturn(CheckValueNonNull("acl[2].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[2].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].cluster.Value()", iter_3.GetValue().cluster.Value(), 55UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 66U));
+                        VerifyOrReturn(CheckValueNull("acl[2].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[2].targets.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[1].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[1].cluster.Value()", iter_3.GetValue().cluster.Value(), 77UL));
+                        VerifyOrReturn(CheckValueNull("acl[2].targets.Value()[1].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(CheckValueNonNull("acl[2].targets.Value()[1].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckValue("acl[2].targets.Value()[1].deviceType.Value()", iter_3.GetValue().deviceType.Value(), 88UL));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_3, 2));
+                    }
+                    VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                }
+            }
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 1U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[0]", iter_3.GetValue(), 111ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[1]", iter_3.GetValue(), 222ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[2]", iter_3.GetValue(), 333ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[3]", iter_3.GetValue(), 444ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[1].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[1].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 2));
+                    VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNonNull("acl[2].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[0]", iter_3.GetValue(), 555ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[1]", iter_3.GetValue(), 666ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[2]", iter_3.GetValue(), 777ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[2].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[2].subjects.Value()[3]", iter_3.GetValue(), 888ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[2].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[2].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                }
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 3U));
+                    VerifyOrReturn(CheckValueNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    VerifyOrReturn(CheckValueNull("acl[1].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 2));
+                }
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 2U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    VerifyOrReturn(CheckValueNull("acl[1].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 2));
+                }
+            }
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                MAXSUBJECTS = value;
+            }
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCat1.HasValue() ? mCat1.Value() : 65520ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[1]", iter_3.GetValue(),
+                                                  mCat2.HasValue() ? mCat2.Value() : 65521ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[2]", iter_3.GetValue(),
+                                                  mCat3.HasValue() ? mCat3.Value() : 65522ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[1].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[1].subjects.Value()[3]", iter_3.GetValue(),
+                                                  mCat4.HasValue() ? mCat4.Value() : 65523ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[1].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[1].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 2));
+                }
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TargetsPerAccessControlEntry = value;
+            }
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                MAXENTRIES = value;
+            }
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 1));
+                    VerifyOrReturn(CheckValue("acl[1].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[1].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNull("acl[1].subjects", iter_0.GetValue().subjects));
+                    VerifyOrReturn(CheckValueNull("acl[1].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[1].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 2));
+                    VerifyOrReturn(CheckValue("acl[2].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[2].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNull("acl[2].subjects", iter_0.GetValue().subjects));
+                    VerifyOrReturn(CheckValueNull("acl[2].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                }
+            }
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 1));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, CurrentFabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 1));
+                }
+            }
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 37:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 38:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 39:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 40:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 41:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 42:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 43:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Step 1:Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Step 2:TH1 reads DUT Endpoint 0 OperationalCredentials cluster CurrentFabricIndex attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Step 3:TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 3: {
+            LogStep(
+                3,
+                "Step 4:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of AccessControlEntryStruct "
+                "containing 3 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE (2) Subjects field: [N1] "
+                "Targets field: null 2 . struct Privilege field: View (1) AuthMode field: CASE (3) Subjects field: [111, 222, 333, "
+                "444] Targets field: [{Cluster: 11}, {Endpoint: 22}] 3..struct Privilege field: Operate (3) AuthMode field: Group "
+                "(3) Subjects field: [555, 666, 777, 888] Targets field: [{Cluster: 55}, {Endpoint: 66}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 111ULL;
+                    listHolder_3->mList[1]                  = 222ULL;
+                    listHolder_3->mList[2]                  = 333ULL;
+                    listHolder_3->mList[3]                  = 444ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 11UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 22U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[2].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 555ULL;
+                    listHolder_3->mList[1]                  = 666ULL;
+                    listHolder_3->mList[2]                  = 777ULL;
+                    listHolder_3->mList[3]                  = 888ULL;
+                    listHolder_0->mList[2].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[2].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 55UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 66U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[2].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Step 5:TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 5: {
+            LogStep(
+                5,
+                "Step 6:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of AccessControlEntryStruct "
+                "containing 3 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE (2) Subjects field: [N1] "
+                "Targets field: null 2.struct Privilege field: Manage (4) AuthMode field: Group (3) Subjects field: [444, 333, "
+                "222, 111] Targets field: [{Cluster: 44}, {Endpoint: 33}] 3.struct Privilege field: Administer (5) AuthMode field: "
+                "CASE (2) Subjects field: [888, 777, 666, 555] Targets field: [{Cluster: 88}, {Endpoint: 77}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(4);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 444ULL;
+                    listHolder_3->mList[1]                  = 333ULL;
+                    listHolder_3->mList[2]                  = 222ULL;
+                    listHolder_3->mList[3]                  = 111ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 44UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 33U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[2].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 888ULL;
+                    listHolder_3->mList[1]                  = 777ULL;
+                    listHolder_3->mList[2]                  = 666ULL;
+                    listHolder_3->mList[3]                  = 555ULL;
+                    listHolder_0->mList[2].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[2].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 88UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 77U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[2].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Step 7:TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7,
+                    "Step 8:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 3 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: View (1) AuthMode field: CASE (2) "
+                    "Subjects field: [111, 222, 333, 444] Targets field: [{Cluster: 11, Endpoint: 22}, {Cluster: 33, DeviceType: "
+                    "44}] 3.struct Privilege field: Operate (3) AuthMode field: Group (3) Subjects field: [555, 666, 777, 888] "
+                    "Targets field: [{Cluster: 55, Endpoint: 66}, {Cluster: 77, DeviceType: 88}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 111ULL;
+                    listHolder_3->mList[1]                  = 222ULL;
+                    listHolder_3->mList[2]                  = 333ULL;
+                    listHolder_3->mList[3]                  = 444ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 11UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 22U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_3->mList[1].cluster.SetNonNull();
+                    listHolder_3->mList[1].cluster.Value() = 33UL;
+                    listHolder_3->mList[1].endpoint.SetNull();
+                    listHolder_3->mList[1].deviceType.SetNonNull();
+                    listHolder_3->mList[1].deviceType.Value() = 44UL;
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              2);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[2].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 555ULL;
+                    listHolder_3->mList[1]                  = 666ULL;
+                    listHolder_3->mList[2]                  = 777ULL;
+                    listHolder_3->mList[3]                  = 888ULL;
+                    listHolder_0->mList[2].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[2].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 55UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 66U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_3->mList[1].cluster.SetNonNull();
+                    listHolder_3->mList[1].cluster.Value() = 77UL;
+                    listHolder_3->mList[1].endpoint.SetNull();
+                    listHolder_3->mList[1].deviceType.SetNonNull();
+                    listHolder_3->mList[1].deviceType.Value() = 88UL;
+
+                    listHolder_0->mList[2].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              2);
+                }
+                listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Step 9:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9,
+                    "Step 10:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 3 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: View (1) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: [{Cluster: 11, Endpoint: 22}, {Cluster: 33, DeviceType: 44}] 3.struct "
+                    "Privilege field: Operate (3) AuthMode field: Group (3) Subjects field: null Targets field: [{Cluster: 55, "
+                    "Endpoint: 66}, {Cluster: 77, DeviceType: 88}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 11UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 22U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_3->mList[1].cluster.SetNonNull();
+                    listHolder_3->mList[1].cluster.Value() = 33UL;
+                    listHolder_3->mList[1].endpoint.SetNull();
+                    listHolder_3->mList[1].deviceType.SetNonNull();
+                    listHolder_3->mList[1].deviceType.Value() = 44UL;
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              2);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[2].subjects.SetNull();
+                listHolder_0->mList[2].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(2);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 55UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 66U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_3->mList[1].cluster.SetNonNull();
+                    listHolder_3->mList[1].cluster.Value() = 77UL;
+                    listHolder_3->mList[1].endpoint.SetNull();
+                    listHolder_3->mList[1].deviceType.SetNonNull();
+                    listHolder_3->mList[1].deviceType.Value() = 88UL;
+
+                    listHolder_0->mList[2].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              2);
+                }
+                listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Step 11:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11,
+                    "Step 12:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 3 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: View (1) AuthMode field: CASE (2) "
+                    "Subjects field: [111, 222, 333, 444] Targets field: null 3.struct Privilege field: Operate (3) AuthMode "
+                    "field: Group (3) Subjects field: [555, 666, 777, 888] Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 111ULL;
+                    listHolder_3->mList[1]                  = 222ULL;
+                    listHolder_3->mList[2]                  = 333ULL;
+                    listHolder_3->mList[3]                  = 444ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[2].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 555ULL;
+                    listHolder_3->mList[1]                  = 666ULL;
+                    listHolder_3->mList[2]                  = 777ULL;
+                    listHolder_3->mList[3]                  = 888ULL;
+                    listHolder_0->mList[2].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[2].targets.SetNull();
+                listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "Step 13:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13,
+                    "Step 14:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: Group (3) "
+                    "Subjects field: null Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 14: {
+            LogStep(14, "Step 15:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15,
+                    "Step 16:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: ProxyView (2) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(2);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "Step 17:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "Step 18:TH1 reads DUT AccessControl cluster SubjectsPerAccessControlEntry attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                                 AccessControl::Attributes::SubjectsPerAccessControlEntry::Id, true, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18,
+                    "Step 19:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: list of MAXSUBJECTS random node IDs (stored as SUBJECTS) Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000 && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 19: {
+            LogStep(19, "Step 20:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000 && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 20: {
+            LogStep(20,
+                    "Step 21:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: [CAT1, CAT2, CAT3, CAT4] Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = mCat1.HasValue() ? mCat1.Value() : 65520ULL;
+                    listHolder_3->mList[1]                  = mCat2.HasValue() ? mCat2.Value() : 65521ULL;
+                    listHolder_3->mList[2]                  = mCat3.HasValue() ? mCat3.Value() : 65522ULL;
+                    listHolder_3->mList[3]                  = mCat4.HasValue() ? mCat4.Value() : 65523ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "Step 22:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "Step 23:TH1 reads AccessControl cluster TargetsPerAccessControlEntry attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                                 AccessControl::Attributes::TargetsPerAccessControlEntry::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23,
+                    "Step 24:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field:null Targets field: list of MAXTARGETS targets {Cluster: random} (stored as TARGETS)");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000 && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 24: {
+            LogStep(24, "Step 25:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000 && PICS_SKIP_SAMPLE_APP"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
+            value.message = chip::Span<const char>("Enter 'y' after successgarbage: not in length on purpose", 23);
+            value.expectedValue.Emplace();
+            value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
+            return UserPrompt(kIdentityAlpha, value);
+        }
+        case 25: {
+            LogStep(25, "Step 26:TH1 reads AccessControl cluster AccessControlEntriesPerFabric attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                                 AccessControl::Attributes::AccessControlEntriesPerFabric::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26,
+                    "Step 27:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing MAXENTRIES elements 1.struct Privilege field: Administer (5) AuthMode "
+                    "field: CASE (2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode "
+                    "field: CASE (2) Subjects field: null Targets field: null subsequent elements same as second element");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[2].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[2].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[2].subjects.SetNull();
+                listHolder_0->mList[2].targets.SetNull();
+                listHolder_0->mList[2].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 3);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "Step 28:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 28: {
+            LogStep(28,
+                    "Step 29:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: PASE (1) "
+                    "Subjects field: null Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(1);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "Step 30:TH1 reads AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30,
+                    "Step 31:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Administer (5) AuthMode field: Group "
+                    "(3) Subjects field: null Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31,
+                    "Step 32:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute, value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: invalid value (not 1-5) AuthMode "
+                    "field: CASE (2) Subjects field: null Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(6);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32,
+                    "Step 33:TH1 writes AccessControl cluster ACL attribute, value is list of AccessControlEntryStruct containing "
+                    "2 elements");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(6);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(4);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 33: {
+            LogStep(33,
+                    "Step 34:TH1 writes AccessControl cluster ACL attribute, value is list of AccessControlEntryStruct containing "
+                    "2 elements");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 0ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 34: {
+            LogStep(34,
+                    "Step 35:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: [0xFFFFFFFFFFFFFFFF] Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 18446744073709551615ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 35: {
+            LogStep(35,
+                    "Step 36:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: [0xFFFFFFFD00000000] Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 18446744060824649728ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 36: {
+            LogStep(36,
+                    "Step 37:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: [0xFFFFFFFFFFFF0000] Targets field: null");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 18446744073709486080ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 37: {
+            LogStep(37,
+                    "Step 38:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: [{}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNull();
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 38: {
+            LogStep(38,
+                    "Step 39:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: [{Cluster: 0xFFFFFFFF}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 4294967295UL;
+                    listHolder_3->mList[0].endpoint.SetNull();
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 39: {
+            LogStep(39,
+                    "Step 40:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1. struct  Privilege field: Administer (5)  AuthMode field: "
+                    "CASE (2)  Subjects field: [N1]  Targets field: null 2. struct  Privilege field: Operate (3)  AuthMode field: "
+                    "CASE (2)  Subjects field: null  Targets field: [{Endpoint: 65535}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 65535U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 40: {
+            LogStep(40,
+                    "Step 41:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: [{DeviceType: 0xFFFFFFFF}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNull();
+                    listHolder_3->mList[0].deviceType.SetNonNull();
+                    listHolder_3->mList[0].deviceType.Value() = 4294967295UL;
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 41: {
+            LogStep(41,
+                    "Step 42:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: [{Endpoint: 22, DeviceType: 33}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 22U;
+                    listHolder_3->mList[0].deviceType.SetNonNull();
+                    listHolder_3->mList[0].deviceType.Value() = 33UL;
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 42: {
+            LogStep(42,
+                    "Step 43:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is list of "
+                    "AccessControlEntryStruct containing 2 elements 1.struct Privilege field: Administer (5) AuthMode field: CASE "
+                    "(2) Subjects field: [N1] Targets field: null 2.struct Privilege field: Operate (3) AuthMode field: CASE (2) "
+                    "Subjects field: null Targets field: [{Cluster: 11, Endpoint: 22, DeviceType: 33}]");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNull();
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 11UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 22U;
+                    listHolder_3->mList[0].deviceType.SetNonNull();
+                    listHolder_3->mList[0].deviceType.Value() = 33UL;
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 43: {
+            LogStep(43, "Step 44:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute value is an empty list");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACL_2_7Suite : public TestCommand
+{
+public:
+    Test_TC_ACL_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_7", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("TH1CommissionerNodeId", 0, UINT64_MAX, &mTH1CommissionerNodeId);
+        AddArgument("TH2CommissionerNodeId", 0, UINT64_MAX, &mTH2CommissionerNodeId);
+        AddArgument("payload", &mPayload);
+        AddArgument("D_OK_EMPTY", &mDOkEmpty);
+        AddArgument("D_OK_SINGLE", &mDOkSingle);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACL_2_7Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::NodeId> mTH1CommissionerNodeId;
+    chip::Optional<chip::NodeId> mTH2CommissionerNodeId;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<chip::ByteSpan> mDOkEmpty;
+    chip::Optional<chip::ByteSpan> mDOkSingle;
+    chip::Optional<uint16_t> mTimeout;
+
+    uint8_t TH1FabricIndex;
+    uint8_t TH2FabricIndex;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TH1FabricIndex = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                TH2FabricIndex = value;
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("extension", iter_0, 0));
+                    VerifyOrReturn(CheckValueAsString(
+                        "extension[0].data", iter_0.GetValue().data,
+                        mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2)));
+                    VerifyOrReturn(CheckValue("extension[0].fabricIndex", iter_0.GetValue().fabricIndex, TH1FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("extension", iter_0, 1));
+                }
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("extension", iter_0, 0));
+                    VerifyOrReturn(CheckValueAsString(
+                        "extension[0].data", iter_0.GetValue().data,
+                        mDOkSingle.HasValue()
+                            ? mDOkSingle.Value()
+                            : chip::ByteSpan(chip::Uint8::from_const_char(
+                                                 "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64"
+                                                 "\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65"
+                                                 "\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63"
+                                                 "\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                             71)));
+                    VerifyOrReturn(CheckValue("extension[0].fabricIndex", iter_0.GetValue().fabricIndex, TH2FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("extension", iter_0, 1));
+                }
+            }
+            break;
+        case 10:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::AccessControl::Events::AccessControlExtensionChanged::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 11:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+                {
+                    chip::app::Clusters::AccessControl::Events::AccessControlExtensionChanged::DecodableType value;
+                    VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                }
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Step 1:Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Step 2:TH1 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Step 3:TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            ListFreer listFreer;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            value.commissioningTimeout = 180U;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
+                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               chip::Optional<uint16_t>(10000), chip::NullOptional
+
+            );
+        }
+        case 3: {
+            LogStep(3, "Step 4:TH2 starts a commissioning process with DUT");
+            ListFreer listFreer;
+            chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+            value.nodeId  = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+            return PairWithCode(kIdentityBeta, value);
+        }
+        case 4: {
+            LogStep(4, "DUT is commissioned by TH2 on Fabric ID2 ");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL;
+            return WaitForCommissionee(kIdentityBeta, value);
+        }
+        case 5: {
+            LogStep(5, "Step 5:TH2 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6,
+                    "Step 6:TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                    "AccessControlExtensionStruct containing 1 element");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].data =
+                    mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2);
+                listHolder_0->mList[0].fabricIndex = TH1FabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7,
+                    "Step 7:TH2 writes DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                    "AccessControlExtensionStruct containing 1 element");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].data = mDOkSingle.HasValue()
+                    ? mDOkSingle.Value()
+                    : chip::ByteSpan(
+                          chip::Uint8::from_const_char(
+                              "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69"
+                              "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                              "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                          71);
+                listHolder_0->mList[0].fabricIndex = TH2FabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Step 8:TH1 reads AccessControl cluster Extension attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
+                                 chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Step 9:TH2 reads AccessControl cluster Extension attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityBeta, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
+                                 chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "Step 10:TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+            VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                             AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "Step 11:TH2 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+            VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityBeta, GetEndpoint(0), AccessControl::Id,
+                             AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACL_2_9Suite : public TestCommand
+{
+public:
+    Test_TC_ACL_2_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_9", 12, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
+        AddArgument("CommissionerNodeId", 0, UINT64_MAX, &mCommissionerNodeId);
+        AddArgument("payload", &mPayload);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACL_2_9Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::NodeId> mNodeId2;
+    chip::Optional<chip::NodeId> mCommissionerNodeId;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mTimeout;
+
+    uint8_t CurrentFabricIndex;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                CurrentFabricIndex = value;
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 4U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 3U));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint16_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 3U));
+            }
+            break;
+        case 10:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        case 11:
+            switch (mTestSubStepIndex)
+            {
+            case 0:
+                VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                mTestSubStepIndex++;
+                break;
+            default:
+                LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+                break;
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Step 1:Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH1 reads OperationalCredentials cluster CurrentFabricIndex attribute");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Step 2:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(4);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "Step 3:TH1 reads DUT Endpoint 0 AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
+                                 chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "Step 4:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mCommissionerNodeId.HasValue() ? mCommissionerNodeId.Value() : 112233ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Step 5:TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
+                                 chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "Step 6:TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type> value;
+
+            value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>();
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "Step 7:TH1 reads DUT Endpoint 0 AccessControl cluster SubjectsPerAccessControlEntry attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                                 AccessControl::Attributes::SubjectsPerAccessControlEntry::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "Step 8:TH1 reads DUT Endpoint 0 AccessControl cluster TargetsPerAccessControlEntry attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                                 AccessControl::Attributes::TargetsPerAccessControlEntry::Id, true, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "Step 9:TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlEntriesPerFabric attribute");
+            VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                                 AccessControl::Attributes::AccessControlEntriesPerFabric::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlEntryChanged event");
+            VerifyOrDo(!ShouldSkip("ACL.S.E00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                             AccessControl::Events::AccessControlEntryChanged::Id, false, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TH1 reads DUT Endpoint 0 AccessControl cluster AccessControlExtensionChanged event");
+            VerifyOrDo(!ShouldSkip("ACL.S.E01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            mTestSubStepCount = 1;
+            return ReadEvent(kIdentityAlpha, GetEndpoint(0), AccessControl::Id,
+                             AccessControl::Events::AccessControlExtensionChanged::Id, false, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -23064,6 +26096,177 @@ private:
     }
 };
 
+class Test_TC_LUNIT_3_1Suite : public TestCommand
+{
+public:
+    Test_TC_LUNIT_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LUNIT_3_1", 9, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_LUNIT_3_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureUnit", value, 0U));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureUnit", value, 1U));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::UnitLocalization::TempUnit value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureUnit", value, 2U));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TH reads TemperatureUnit attribute from DUT");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TH writes 0 (Fahrenheit) to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Fahrenheit"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(0);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TH reads TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Fahrenheit"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TH writes 1 (Celsius) to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Celsius"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(1);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "TH reads TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Celsius"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TH writes 2 (Kelvin) to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Kelvin"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        case 7: {
+            LogStep(7, "TH reads TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Kelvin"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TH writes 5 to TemperatureUnit attribute");
+            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            chip::app::Clusters::UnitLocalization::TempUnit value;
+            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(5);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
+                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 class Test_TC_LTIME_1_2Suite : public TestCommand
 {
 public:
@@ -30463,6 +33666,105 @@ private:
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
                                  OccupancySensing::Attributes::PhysicalContactUnoccupiedToOccupiedThreshold::Id, true,
                                  chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_OCC_2_3Suite : public TestCommand
+{
+public:
+    Test_TC_OCC_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OCC_2_3", 3, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_OCC_2_3Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
+            }
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint8_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Reads mandatory attribute constrains: OccupancySensorType");
+            VerifyOrDo(!ShouldSkip("OCC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
+                                 OccupancySensing::Attributes::OccupancySensorType::Id, true, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "Reads mandatory attribute constrains: OccupancySensorTypeBitmap");
+            VerifyOrDo(!ShouldSkip("OCC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
+                                 OccupancySensing::Attributes::OccupancySensorTypeBitmap::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -96478,217 +99780,6 @@ private:
     }
 };
 
-class Test_TC_OCC_2_2Suite : public TestCommand
-{
-public:
-    Test_TC_OCC_2_2Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OCC_2_2", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_OCC_2_2Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_OCC_2_3Suite : public TestCommand
-{
-public:
-    Test_TC_OCC_2_3Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OCC_2_3", 3, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_OCC_2_3Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 3U));
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                uint8_t value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "bitmap8", "bitmap8"));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
-                VerifyOrReturn(CheckConstraintMaxValue("value", value, 7U));
-            }
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "Reads mandatory attribute constrains: OccupancySensorType");
-            VerifyOrDo(!ShouldSkip("OCC.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
-                                 OccupancySensing::Attributes::OccupancySensorType::Id, true, chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "Reads mandatory attribute constrains: OccupancySensorTypeBitmap");
-            VerifyOrDo(!ShouldSkip("OCC.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
-                                 OccupancySensing::Attributes::OccupancySensorTypeBitmap::Id, true, chip::NullOptional);
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_OCC_2_4Suite : public TestCommand
-{
-public:
-    Test_TC_OCC_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_OCC_2_4", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_OCC_2_4Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_OCC_3_1Suite : public TestCommand
 {
 public:
@@ -101478,62 +104569,6 @@ private:
     }
 };
 
-class Test_TC_LCFG_3_1Suite : public TestCommand
-{
-public:
-    Test_TC_LCFG_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LCFG_3_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_LCFG_3_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_LVL_2_3Suite : public TestCommand
 {
 public:
@@ -104955,289 +107990,6 @@ private:
     }
 };
 
-class Test_TC_LUNIT_1_1Suite : public TestCommand
-{
-public:
-    Test_TC_LUNIT_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LUNIT_1_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_LUNIT_1_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_LUNIT_2_1Suite : public TestCommand
-{
-public:
-    Test_TC_LUNIT_2_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LUNIT_2_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_LUNIT_2_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_LUNIT_3_1Suite : public TestCommand
-{
-public:
-    Test_TC_LUNIT_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_LUNIT_3_1", 9, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_LUNIT_3_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        case 0:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
-            break;
-        case 1:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "enum8", "enum8"));
-            }
-            break;
-        case 2:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 3:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("temperatureUnit", value, 0U));
-            }
-            break;
-        case 4:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 5:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("temperatureUnit", value, 1U));
-            }
-            break;
-        case 6:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 7:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::Clusters::UnitLocalization::TempUnit value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("temperatureUnit", value, 2U));
-            }
-            break;
-        case 8:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
-            break;
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        case 0: {
-            LogStep(0, "Wait for the commissioned device to be retrieved");
-            ListFreer listFreer;
-            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
-            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
-            return WaitForCommissionee(kIdentityAlpha, value);
-        }
-        case 1: {
-            LogStep(1, "TH reads TemperatureUnit attribute from DUT");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
-        }
-        case 2: {
-            LogStep(2, "TH writes 0 (Fahrenheit) to TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Fahrenheit"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(0);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        case 3: {
-            LogStep(3, "TH reads TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Fahrenheit"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
-        }
-        case 4: {
-            LogStep(4, "TH writes 1 (Celsius) to TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Celsius"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(1);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        case 5: {
-            LogStep(5, "TH reads TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Celsius"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
-        }
-        case 6: {
-            LogStep(6, "TH writes 2 (Kelvin) to TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Kelvin"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(2);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        case 7: {
-            LogStep(7, "TH reads TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000 && LUNIT.TempUnit.Kelvin"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                 UnitLocalization::Attributes::TemperatureUnit::Id, true, chip::NullOptional);
-        }
-        case 8: {
-            LogStep(8, "TH writes 5 to TemperatureUnit attribute");
-            VerifyOrDo(!ShouldSkip("LUNIT.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            chip::app::Clusters::UnitLocalization::TempUnit value;
-            value = static_cast<chip::app::Clusters::UnitLocalization::TempUnit>(5);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), UnitLocalization::Id,
-                                  UnitLocalization::Attributes::TemperatureUnit::Id, value, chip::NullOptional, chip::NullOptional);
-        }
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_BIND_2_1Suite : public TestCommand
 {
 public:
@@ -105742,62 +108494,6 @@ private:
     }
 };
 
-class Test_TC_ACL_2_4Suite : public TestCommand
-{
-public:
-    Test_TC_ACL_2_4Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_4", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ACL_2_4Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_ACL_2_5Suite : public TestCommand
 {
 public:
@@ -105910,62 +108606,6 @@ private:
     }
 };
 
-class Test_TC_ACL_2_7Suite : public TestCommand
-{
-public:
-    Test_TC_ACL_2_7Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_7", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ACL_2_7Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_ACL_2_8Suite : public TestCommand
 {
 public:
@@ -106022,62 +108662,6 @@ private:
     }
 };
 
-class Test_TC_ACL_2_9Suite : public TestCommand
-{
-public:
-    Test_TC_ACL_2_9Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACL_2_9", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ACL_2_9Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_ACL_2_10Suite : public TestCommand
 {
 public:
@@ -106090,62 +108674,6 @@ public:
     }
 
     ~Test_TC_ACL_2_10Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        switch (testIndex)
-        {
-        }
-        return CHIP_NO_ERROR;
-    }
-};
-
-class Test_TC_ULABEL_3_1Suite : public TestCommand
-{
-public:
-    Test_TC_ULABEL_3_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ULABEL_3_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ULABEL_3_1Suite() {}
 
     chip::System::Clock::Timeout GetWaitDuration() const override
     {
@@ -106431,6 +108959,9 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_ACL_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_3Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACL_2_4Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACL_2_7Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACL_2_9Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_1_1Suite>(credsIssuerConfig),
@@ -106488,6 +109019,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_LVL_6_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LCFG_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LUNIT_1_2Suite>(credsIssuerConfig),
+        make_unique<Test_TC_LUNIT_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LTIME_1_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_LOWPOWER_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_KEYPADINPUT_1_2Suite>(credsIssuerConfig),
@@ -106532,6 +109064,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<OTA_SuccessfulTransferSuite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_2_1Suite>(credsIssuerConfig),
+        make_unique<Test_TC_OCC_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_OO_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OO_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_OO_2_2Suite>(credsIssuerConfig),
@@ -106868,9 +109401,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_WNCV_6_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_WNCV_7_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_FLW_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_OCC_2_2Suite>(credsIssuerConfig),
-        make_unique<Test_TC_OCC_2_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_OCC_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_OCC_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_PS_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_2_2Suite>(credsIssuerConfig),
@@ -106893,7 +109423,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_DRLK_3_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_DRLK_3_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_LCFG_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_LCFG_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LVL_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_LVL_7_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LVL_8_1Suite>(credsIssuerConfig),
@@ -106920,9 +109449,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_LTIME_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LTIME_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_LTIME_3_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_LUNIT_1_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_LUNIT_2_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_LUNIT_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_2_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BIND_2_3Suite>(credsIssuerConfig),
@@ -106932,14 +109458,10 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_S_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_S_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_PCC_3_1Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ACL_2_4Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_6Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ACL_2_7Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_8Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ACL_2_9Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_10Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ULABEL_3_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_3Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACE_1_1Suite>(credsIssuerConfig),
