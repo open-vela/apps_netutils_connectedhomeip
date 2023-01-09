@@ -25888,35 +25888,35 @@ using chip::SessionHandle;
         });
 }
 
-- (void)readAttributeBootReasonsWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeBootReasonWithCompletion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = GeneralDiagnostics::Attributes::BootReasons::TypeInfo;
-    return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    using TypeInfo = GeneralDiagnostics::Attributes::BootReason::TypeInfo;
+    return MTRReadAttribute<MTRGeneralDiagnosticsClusterBootReasonEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)subscribeAttributeBootReasonsWithParams:(MTRSubscribeParams * _Nonnull)params
-                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                  reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
+- (void)subscribeAttributeBootReasonWithParams:(MTRSubscribeParams * _Nonnull)params
+                       subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = GeneralDiagnostics::Attributes::BootReasons::TypeInfo;
-    MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
-        subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    using TypeInfo = GeneralDiagnostics::Attributes::BootReason::TypeInfo;
+    MTRSubscribeAttribute<MTRGeneralDiagnosticsClusterBootReasonEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeBootReasonsWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
-                                             endpoint:(NSNumber *)endpoint
-                                                queue:(dispatch_queue_t)queue
-                                           completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
++ (void)readAttributeBootReasonWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
+                                            endpoint:(NSNumber *)endpoint
+                                               queue:(dispatch_queue_t)queue
+                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRInt8uAttributeCallbackBridge(queue, completion);
-    std::move(*bridge).DispatchLocalAction(
-        clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
+    auto * bridge = new MTRGeneralDiagnosticsClusterBootReasonEnumAttributeCallbackBridge(queue, completion);
+    std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
+        ^(GeneralDiagnosticsClusterBootReasonEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = GeneralDiagnostics::Attributes::BootReasons::TypeInfo;
+                using TypeInfo = GeneralDiagnostics::Attributes::BootReason::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -26517,7 +26517,7 @@ using chip::SessionHandle;
 - (void)readAttributeBootReasonsWithCompletionHandler:(void (^)(
                                                           NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeBootReasonsWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeBootReasonWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSNumber *>(value), error);
     }];
@@ -26535,12 +26535,12 @@ using chip::SessionHandle;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeBootReasonsWithParams:subscribeParams
-                          subscriptionEstablished:subscriptionEstablishedHandler
-                                    reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                        // Cast is safe because subclass does not add any selectors.
-                                        reportHandler(static_cast<NSNumber *>(value), error);
-                                    }];
+    [self subscribeAttributeBootReasonWithParams:subscribeParams
+                         subscriptionEstablished:subscriptionEstablishedHandler
+                                   reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                       // Cast is safe because subclass does not add any selectors.
+                                       reportHandler(static_cast<NSNumber *>(value), error);
+                                   }];
 }
 + (void)readAttributeBootReasonsWithAttributeCache:(MTRAttributeCacheContainer *)attributeCacheContainer
                                           endpoint:(NSNumber *)endpoint
@@ -26548,13 +26548,13 @@ using chip::SessionHandle;
                                  completionHandler:
                                      (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeBootReasonsWithClusterStateCache:attributeCacheContainer.realContainer
-                                               endpoint:endpoint
-                                                  queue:queue
-                                             completion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                                                 // Cast is safe because subclass does not add any selectors.
-                                                 completionHandler(static_cast<NSNumber *>(value), error);
-                                             }];
+    [self readAttributeBootReasonWithClusterStateCache:attributeCacheContainer.realContainer
+                                              endpoint:endpoint
+                                                 queue:queue
+                                            completion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+                                                // Cast is safe because subclass does not add any selectors.
+                                                completionHandler(static_cast<NSNumber *>(value), error);
+                                            }];
 }
 
 - (void)readAttributeActiveHardwareFaultsWithCompletionHandler:(void (^)(NSArray * _Nullable value,

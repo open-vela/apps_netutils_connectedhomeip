@@ -21211,7 +21211,7 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::GeneralDiagnostics::Structs::NetworkInterfaceType::DecodableType>
+                    chip::app::Clusters::GeneralDiagnostics::Structs::NetworkInterface::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
@@ -21280,7 +21280,7 @@ private:
         case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                uint8_t value;
+                chip::app::Clusters::GeneralDiagnostics::BootReasonEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintMinValue("value", value, 0U));
                 VerifyOrReturn(CheckConstraintMaxValue("value", value, 6U));
@@ -21421,7 +21421,7 @@ private:
             LogStep(13, "TH reads BootReason attribute value from DUT.");
             VerifyOrDo(!ShouldSkip("DGGEN.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
-                                 GeneralDiagnostics::Attributes::BootReasons::Id, true, chip::NullOptional);
+                                 GeneralDiagnostics::Attributes::BootReason::Id, true, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "TH reads ActiveHardwareFaults attribute value from DUT.");
