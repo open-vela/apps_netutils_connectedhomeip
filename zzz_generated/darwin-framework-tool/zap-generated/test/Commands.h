@@ -220,6 +220,7 @@ public:
         printf("TestAccessControlConstraints\n");
         printf("TestLevelControlWithOnOffDependency\n");
         printf("TestCommissioningWindow\n");
+        printf("TestClientMonitoringCluster\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
@@ -95592,7 +95593,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(27)));
+                VerifyOrReturn(CheckValue("ServerList", [actualValue count], static_cast<uint32_t>(28)));
                 VerifyOrReturn(CheckValue("", actualValue[0], 3UL));
                 VerifyOrReturn(CheckValue("", actualValue[1], 4UL));
                 VerifyOrReturn(CheckValue("", actualValue[2], 29UL));
@@ -95619,7 +95620,8 @@ private:
                 VerifyOrReturn(CheckValue("", actualValue[23], 64UL));
                 VerifyOrReturn(CheckValue("", actualValue[24], 65UL));
                 VerifyOrReturn(CheckValue("", actualValue[25], 1029UL));
-                VerifyOrReturn(CheckValue("", actualValue[26], 4294048774UL));
+                VerifyOrReturn(CheckValue("", actualValue[26], 4166UL));
+                VerifyOrReturn(CheckValue("", actualValue[27], 4294048774UL));
             }
 
             NextTest();
@@ -104152,6 +104154,356 @@ private:
 
             NextTest();
         }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestClientMonitoringCluster : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    TestClientMonitoringCluster()
+        : TestCommandBridge("TestClientMonitoringCluster")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~TestClientMonitoringCluster() {}
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: TestClientMonitoringCluster\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: TestClientMonitoringCluster\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : Register Client 2 - Invalid\n");
+            err = TestRegisterClient2Invalid_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Register Client 1\n");
+            err = TestRegisterClient1_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Register Client 2 - Invalid\n");
+            err = TestRegisterClient2Invalid_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Verify Register Client\n");
+            err = TestVerifyRegisterClient_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Unregister Client - Invalid Client NodeId\n");
+            err = TestUnregisterClientInvalidClientNodeId_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Unregister Client - Invalid ICid\n");
+            err = TestUnregisterClientInvalidICid_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Unregister Client - Valid\n");
+            err = TestUnregisterClientValid_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Verify Register Client - Empty\n");
+            err = TestVerifyRegisterClientEmpty_8();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 9;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestRegisterClient2Invalid_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRClientMonitoringClusterRegisterClientMonitoringParams alloc] init];
+        params.clientNodeId = [NSNumber numberWithUnsignedLongLong:0ULL];
+        params.iCid = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster registerClientMonitoringWithParams:params
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"Register Client 2 - Invalid Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status",
+                                                 err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                         ? err.code
+                                                         : EMBER_ZCL_STATUS_FAILURE)
+                                                     : 0,
+                                                 EMBER_ZCL_STATUS_FAILURE));
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRegisterClient1_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRClientMonitoringClusterRegisterClientMonitoringParams alloc] init];
+        params.clientNodeId = [NSNumber numberWithUnsignedLongLong:10ULL];
+        params.iCid = [NSNumber numberWithUnsignedLongLong:20ULL];
+        [cluster registerClientMonitoringWithParams:params
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"Register Client 1 Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestRegisterClient2Invalid_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRClientMonitoringClusterRegisterClientMonitoringParams alloc] init];
+        params.clientNodeId = [NSNumber numberWithUnsignedLongLong:11ULL];
+        params.iCid = [NSNumber numberWithUnsignedLongLong:21ULL];
+        [cluster registerClientMonitoringWithParams:params
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"Register Client 2 - Invalid Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status",
+                                                 err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                         ? err.code
+                                                         : EMBER_ZCL_STATUS_FAILURE)
+                                                     : 0,
+                                                 EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyRegisterClient_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster readAttributeExpectedClientsWithParams:params
+                                             completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                                 NSLog(@"Verify Register Client Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 {
+                                                     id actualValue = value;
+                                                     VerifyOrReturn(CheckValue(
+                                                         "ExpectedClients", [actualValue count], static_cast<uint32_t>(1)));
+                                                     VerifyOrReturn(CheckValue("ClientNodeId",
+                                                         ((MTRClientMonitoringClusterMonitoringRegistration *) actualValue[0])
+                                                             .clientNodeId,
+                                                         10ULL));
+                                                     VerifyOrReturn(CheckValue("ICid",
+                                                         ((MTRClientMonitoringClusterMonitoringRegistration *) actualValue[0]).iCid,
+                                                         20ULL));
+                                                 }
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUnregisterClientInvalidClientNodeId_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRClientMonitoringClusterUnregisterClientMonitoringParams alloc] init];
+        params.clientNodeId = [NSNumber numberWithUnsignedLongLong:30ULL];
+        params.iCid = [NSNumber numberWithUnsignedLongLong:20ULL];
+        [cluster unregisterClientMonitoringWithParams:params
+                                           completion:^(NSError * _Nullable err) {
+                                               NSLog(@"Unregister Client - Invalid Client NodeId Error: %@", err);
+
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_FAILURE));
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUnregisterClientInvalidICid_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRClientMonitoringClusterUnregisterClientMonitoringParams alloc] init];
+        params.clientNodeId = [NSNumber numberWithUnsignedLongLong:10ULL];
+        params.iCid = [NSNumber numberWithUnsignedLongLong:30ULL];
+        [cluster unregisterClientMonitoringWithParams:params
+                                           completion:^(NSError * _Nullable err) {
+                                               NSLog(@"Unregister Client - Invalid ICid Error: %@", err);
+
+                                               VerifyOrReturn(CheckValue("status",
+                                                   err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                           ? err.code
+                                                           : EMBER_ZCL_STATUS_FAILURE)
+                                                       : 0,
+                                                   EMBER_ZCL_STATUS_FAILURE));
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestUnregisterClientValid_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRClientMonitoringClusterUnregisterClientMonitoringParams alloc] init];
+        params.clientNodeId = [NSNumber numberWithUnsignedLongLong:10ULL];
+        params.iCid = [NSNumber numberWithUnsignedLongLong:20ULL];
+        [cluster unregisterClientMonitoringWithParams:params
+                                           completion:^(NSError * _Nullable err) {
+                                               NSLog(@"Unregister Client - Valid Error: %@", err);
+
+                                               VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                               NextTest();
+                                           }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestVerifyRegisterClientEmpty_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterClientMonitoring alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster readAttributeExpectedClientsWithParams:params
+                                             completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                                 NSLog(@"Verify Register Client - Empty Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 {
+                                                     id actualValue = value;
+                                                     VerifyOrReturn(CheckValue(
+                                                         "ExpectedClients", [actualValue count], static_cast<uint32_t>(0)));
+                                                 }
+
+                                                 NextTest();
+                                             }];
 
         return CHIP_NO_ERROR;
     }
@@ -129854,6 +130206,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<TestAccessControlConstraints>(),
         make_unique<TestLevelControlWithOnOffDependency>(),
         make_unique<TestCommissioningWindow>(),
+        make_unique<TestClientMonitoringCluster>(),
         make_unique<TestMultiAdmin>(),
         make_unique<Test_TC_DGSW_1_1>(),
         make_unique<TestSubscribe_OnOff>(),

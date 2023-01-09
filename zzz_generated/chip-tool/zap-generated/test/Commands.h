@@ -242,6 +242,7 @@ public:
         printf("TestAccessControlConstraints\n");
         printf("TestLevelControlWithOnOffDependency\n");
         printf("TestCommissioningWindow\n");
+        printf("TestClientMonitoringCluster\n");
         printf("TestMultiAdmin\n");
         printf("Test_TC_DGSW_1_1\n");
         printf("TestSubscribe_OnOff\n");
@@ -64576,8 +64577,10 @@ private:
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 25));
                     VerifyOrReturn(CheckValue("serverList[25]", iter_0.GetValue(), 1029UL));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 26));
-                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 4294048774UL));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 27));
+                    VerifyOrReturn(CheckValue("serverList[26]", iter_0.GetValue(), 4166UL));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("serverList", iter_0, 27));
+                    VerifyOrReturn(CheckValue("serverList[27]", iter_0.GetValue(), 4294048774UL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("serverList", iter_0, 28));
                 }
             }
             break;
@@ -69502,6 +69505,197 @@ private:
             LogStep(27, "Check the AdminVendorId did not get reset");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                  AdministratorCommissioning::Attributes::AdminVendorId::Id, true, chip::NullOptional);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class TestClientMonitoringClusterSuite : public TestCommand
+{
+public:
+    TestClientMonitoringClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
+        TestCommand("TestClientMonitoringCluster", 9, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~TestClientMonitoringClusterSuite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_RESOURCE_EXHAUSTED));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ClientMonitoring::Structs::MonitoringRegistration::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("expectedClients", iter_0, 0));
+                    VerifyOrReturn(CheckValue("expectedClients[0].clientNodeId", iter_0.GetValue().clientNodeId, 10ULL));
+                    VerifyOrReturn(CheckValue("expectedClients[0].ICid", iter_0.GetValue().ICid, 20ULL));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("expectedClients", iter_0, 1));
+                }
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_FAILURE));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::ClientMonitoring::Structs::MonitoringRegistration::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("expectedClients", iter_0, 0));
+                }
+            }
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Register Client 2 - Invalid");
+            ListFreer listFreer;
+            chip::app::Clusters::ClientMonitoring::Commands::RegisterClientMonitoring::Type value;
+            value.clientNodeId = 0ULL;
+            value.ICid         = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                               ClientMonitoring::Commands::RegisterClientMonitoring::Id, value, chip::NullOptional
+
+            );
+        }
+        case 2: {
+            LogStep(2, "Register Client 1");
+            ListFreer listFreer;
+            chip::app::Clusters::ClientMonitoring::Commands::RegisterClientMonitoring::Type value;
+            value.clientNodeId = 10ULL;
+            value.ICid         = 20ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                               ClientMonitoring::Commands::RegisterClientMonitoring::Id, value, chip::NullOptional
+
+            );
+        }
+        case 3: {
+            LogStep(3, "Register Client 2 - Invalid");
+            ListFreer listFreer;
+            chip::app::Clusters::ClientMonitoring::Commands::RegisterClientMonitoring::Type value;
+            value.clientNodeId = 11ULL;
+            value.ICid         = 21ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                               ClientMonitoring::Commands::RegisterClientMonitoring::Id, value, chip::NullOptional
+
+            );
+        }
+        case 4: {
+            LogStep(4, "Verify Register Client");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                                 ClientMonitoring::Attributes::ExpectedClients::Id, true, chip::NullOptional);
+        }
+        case 5: {
+            LogStep(5, "Unregister Client - Invalid Client NodeId");
+            ListFreer listFreer;
+            chip::app::Clusters::ClientMonitoring::Commands::UnregisterClientMonitoring::Type value;
+            value.clientNodeId = 30ULL;
+            value.ICid         = 20ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                               ClientMonitoring::Commands::UnregisterClientMonitoring::Id, value, chip::NullOptional
+
+            );
+        }
+        case 6: {
+            LogStep(6, "Unregister Client - Invalid ICid");
+            ListFreer listFreer;
+            chip::app::Clusters::ClientMonitoring::Commands::UnregisterClientMonitoring::Type value;
+            value.clientNodeId = 10ULL;
+            value.ICid         = 30ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                               ClientMonitoring::Commands::UnregisterClientMonitoring::Id, value, chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "Unregister Client - Valid");
+            ListFreer listFreer;
+            chip::app::Clusters::ClientMonitoring::Commands::UnregisterClientMonitoring::Type value;
+            value.clientNodeId = 10ULL;
+            value.ICid         = 20ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                               ClientMonitoring::Commands::UnregisterClientMonitoring::Id, value, chip::NullOptional
+
+            );
+        }
+        case 8: {
+            LogStep(8, "Verify Register Client - Empty");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), ClientMonitoring::Id,
+                                 ClientMonitoring::Attributes::ExpectedClients::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -109161,6 +109355,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<TestAccessControlConstraintsSuite>(credsIssuerConfig),
         make_unique<TestLevelControlWithOnOffDependencySuite>(credsIssuerConfig),
         make_unique<TestCommissioningWindowSuite>(credsIssuerConfig),
+        make_unique<TestClientMonitoringClusterSuite>(credsIssuerConfig),
         make_unique<TestMultiAdminSuite>(credsIssuerConfig),
         make_unique<Test_TC_DGSW_1_1Suite>(credsIssuerConfig),
         make_unique<TestSubscribe_OnOffSuite>(credsIssuerConfig),
