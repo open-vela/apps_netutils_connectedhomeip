@@ -25113,13 +25113,13 @@ private:
                                                                                    queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeBootReasonsWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeBootReasonWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads BootReason attribute value from DUT. Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("bootReasons", [value unsignedCharValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("bootReasons", [value unsignedCharValue], 6U));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("bootReason", [value unsignedCharValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("bootReason", [value unsignedCharValue], 6U));
 
             NextTest();
         }];

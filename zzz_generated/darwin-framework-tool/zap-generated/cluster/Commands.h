@@ -21527,7 +21527,7 @@ public:
 | * RebootCount                                                       | 0x0001 |
 | * UpTime                                                            | 0x0002 |
 | * TotalOperationalHours                                             | 0x0003 |
-| * BootReasons                                                       | 0x0004 |
+| * BootReason                                                        | 0x0004 |
 | * ActiveHardwareFaults                                              | 0x0005 |
 | * ActiveRadioFaults                                                 | 0x0006 |
 | * ActiveNetworkFaults                                               | 0x0007 |
@@ -21874,16 +21874,16 @@ public:
 };
 
 /*
- * Attribute BootReasons
+ * Attribute BootReason
  */
-class ReadGeneralDiagnosticsBootReasons : public ReadAttribute {
+class ReadGeneralDiagnosticsBootReason : public ReadAttribute {
 public:
-    ReadGeneralDiagnosticsBootReasons()
-        : ReadAttribute("boot-reasons")
+    ReadGeneralDiagnosticsBootReason()
+        : ReadAttribute("boot-reason")
     {
     }
 
-    ~ReadGeneralDiagnosticsBootReasons() {}
+    ~ReadGeneralDiagnosticsBootReason() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -21893,10 +21893,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
                                                                               endpointID:@(endpointId)
                                                                                    queue:callbackQueue];
-        [cluster readAttributeBootReasonsWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"GeneralDiagnostics.BootReasons response %@", [value description]);
+        [cluster readAttributeBootReasonWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"GeneralDiagnostics.BootReason response %@", [value description]);
             if (error != nil) {
-                LogNSError("GeneralDiagnostics BootReasons read Error", error);
+                LogNSError("GeneralDiagnostics BootReason read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -21904,14 +21904,14 @@ public:
     }
 };
 
-class SubscribeAttributeGeneralDiagnosticsBootReasons : public SubscribeAttribute {
+class SubscribeAttributeGeneralDiagnosticsBootReason : public SubscribeAttribute {
 public:
-    SubscribeAttributeGeneralDiagnosticsBootReasons()
-        : SubscribeAttribute("boot-reasons")
+    SubscribeAttributeGeneralDiagnosticsBootReason()
+        : SubscribeAttribute("boot-reason")
     {
     }
 
-    ~SubscribeAttributeGeneralDiagnosticsBootReasons() {}
+    ~SubscribeAttributeGeneralDiagnosticsBootReason() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -21930,12 +21930,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeBootReasonsWithParams:params
+        [cluster subscribeAttributeBootReasonWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"GeneralDiagnostics.BootReasons response %@", [value description]);
+                NSLog(@"GeneralDiagnostics.BootReason response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -98352,8 +98352,8 @@ void registerClusterGeneralDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeGeneralDiagnosticsUpTime>(), //
         make_unique<ReadGeneralDiagnosticsTotalOperationalHours>(), //
         make_unique<SubscribeAttributeGeneralDiagnosticsTotalOperationalHours>(), //
-        make_unique<ReadGeneralDiagnosticsBootReasons>(), //
-        make_unique<SubscribeAttributeGeneralDiagnosticsBootReasons>(), //
+        make_unique<ReadGeneralDiagnosticsBootReason>(), //
+        make_unique<SubscribeAttributeGeneralDiagnosticsBootReason>(), //
         make_unique<ReadGeneralDiagnosticsActiveHardwareFaults>(), //
         make_unique<SubscribeAttributeGeneralDiagnosticsActiveHardwareFaults>(), //
         make_unique<ReadGeneralDiagnosticsActiveRadioFaults>(), //
