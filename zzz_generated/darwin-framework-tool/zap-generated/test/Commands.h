@@ -61400,17 +61400,17 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"roomName"));
+                VerifyOrReturn(CheckValue("LabelList", [actualValue count], static_cast<uint32_t>(4)));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"roomName"));
                 VerifyOrReturn(
-                    CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"master bedroom 1"));
+                    CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"master bedroom 1"));
                 VerifyOrReturn(
-                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"Orientation"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"east"));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"2"));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"roomType"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"bedroom"));
+                    CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"Orientation"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"east"));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"2"));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"roomType"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"bedroom"));
             }
 
             VerifyOrReturn(CheckConstraintType("labelList", "list", "list"));
@@ -61767,13 +61767,13 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
+                VerifyOrReturn(CheckValue("LabelList", [actualValue count], static_cast<uint32_t>(2)));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
                 VerifyOrReturn(
-                    CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 1"));
+                    CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 1"));
                 VerifyOrReturn(
-                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"Orientation"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"east"));
+                    CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"Orientation"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"east"));
             }
 
             NextTest();
@@ -61824,9 +61824,9 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(1)));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @""));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @""));
+                VerifyOrReturn(CheckValue("LabelList", [actualValue count], static_cast<uint32_t>(1)));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @""));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @""));
             }
 
             NextTest();
@@ -100221,18 +100221,18 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
+                VerifyOrReturn(CheckValue("LabelList", [actualValue count], static_cast<uint32_t>(4)));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
                 VerifyOrReturn(
-                    CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 1"));
+                    CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 1"));
                 VerifyOrReturn(
-                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"orientation"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"South"));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"2"));
+                    CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"orientation"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"South"));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"2"));
                 VerifyOrReturn(
-                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"direction"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"down"));
+                    CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"direction"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"down"));
             }
 
             NextTest();
@@ -100279,7 +100279,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(0)));
+                VerifyOrReturn(CheckValue("LabelList", [actualValue count], static_cast<uint32_t>(0)));
             }
 
             NextTest();
@@ -100357,18 +100357,18 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("label list", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
+                VerifyOrReturn(CheckValue("LabelList", [actualValue count], static_cast<uint32_t>(4)));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).label, @"room"));
                 VerifyOrReturn(
-                    CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 2"));
+                    CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[0]).value, @"bedroom 2"));
                 VerifyOrReturn(
-                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"orientation"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"North"));
-                VerifyOrReturn(CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"5"));
+                    CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).label, @"orientation"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[1]).value, @"North"));
+                VerifyOrReturn(CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).label, @"floor"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[2]).value, @"5"));
                 VerifyOrReturn(
-                    CheckValueAsString("label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"direction"));
-                VerifyOrReturn(CheckValueAsString("value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"up"));
+                    CheckValueAsString("Label", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).label, @"direction"));
+                VerifyOrReturn(CheckValueAsString("Value", ((MTRUserLabelClusterLabelStruct *) actualValue[3]).value, @"up"));
             }
 
             NextTest();
