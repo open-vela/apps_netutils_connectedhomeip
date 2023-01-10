@@ -32597,7 +32597,7 @@ public:
         : ClusterCommand("open-commissioning-window")
     {
         AddArgument("CommissioningTimeout", 0, UINT16_MAX, &mRequest.commissioningTimeout);
-        AddArgument("PAKEVerifier", &mRequest.PAKEVerifier);
+        AddArgument("PAKEPasscodeVerifier", &mRequest.PAKEPasscodeVerifier);
         AddArgument("Discriminator", 0, UINT16_MAX, &mRequest.discriminator);
         AddArgument("Iterations", 0, UINT32_MAX, &mRequest.iterations);
         AddArgument("Salt", &mRequest.salt);
@@ -32616,7 +32616,8 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.commissioningTimeout = [NSNumber numberWithUnsignedShort:mRequest.commissioningTimeout];
-        params.pakeVerifier = [NSData dataWithBytes:mRequest.PAKEVerifier.data() length:mRequest.PAKEVerifier.size()];
+        params.pakePasscodeVerifier = [NSData dataWithBytes:mRequest.PAKEPasscodeVerifier.data()
+                                                     length:mRequest.PAKEPasscodeVerifier.size()];
         params.discriminator = [NSNumber numberWithUnsignedShort:mRequest.discriminator];
         params.iterations = [NSNumber numberWithUnsignedInt:mRequest.iterations];
         params.salt = [NSData dataWithBytes:mRequest.salt.data() length:mRequest.salt.size()];

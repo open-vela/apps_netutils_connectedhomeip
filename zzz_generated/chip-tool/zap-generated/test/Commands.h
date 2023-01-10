@@ -91731,7 +91731,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -91782,7 +91782,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -91823,7 +91823,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -91849,7 +91849,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -92297,7 +92297,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -92338,7 +92338,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -92433,7 +92433,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -93339,7 +93339,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 900U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -93376,7 +93376,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 901U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -93621,7 +93621,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -93739,7 +93739,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -93776,7 +93776,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -94345,7 +94345,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -94395,7 +94395,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -94465,7 +94465,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mIncorrectPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mIncorrectPakeVerifier.HasValue()
                 ? mIncorrectPakeVerifier.Value()
                 : chip::ByteSpan(chip::Uint8::from_const_char(
                                      "\x06\xc7\x56\xdf\xfc\xd7\x22\x65\x34\x52\xa1\x2d\xcd\x94\x5d\x8c\x54\xda\x2b\x0f\x3c\xbd\x1b"
@@ -94488,7 +94488,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -94512,7 +94512,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -95089,7 +95089,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 900U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96131,7 +96131,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96168,7 +96168,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96208,7 +96208,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96245,7 +96245,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96269,7 +96269,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96599,7 +96599,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
@@ -96636,7 +96636,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 179U;
-            value.PAKEVerifier         = mPakeVerifier.HasValue()
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
                 ? mPakeVerifier.Value()
                 : chip::ByteSpan(
                       chip::Uint8::from_const_char(
