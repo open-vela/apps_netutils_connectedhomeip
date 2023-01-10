@@ -98396,7 +98396,8 @@ private:
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("Value",
-                    ((MTRModeSelectClusterSemanticTag *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[0]).semanticTags[0])
+                    ((MTRModeSelectClusterSemanticTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[0])
+                            .semanticTags[0])
                         .value,
                     0U));
                 VerifyOrReturn(
@@ -98405,7 +98406,8 @@ private:
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("Value",
-                    ((MTRModeSelectClusterSemanticTag *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[1]).semanticTags[0])
+                    ((MTRModeSelectClusterSemanticTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[1])
+                            .semanticTags[0])
                         .value,
                     0U));
                 VerifyOrReturn(
@@ -98414,7 +98416,8 @@ private:
                 VerifyOrReturn(CheckValue("SemanticTags",
                     [((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags count], static_cast<uint32_t>(1)));
                 VerifyOrReturn(CheckValue("Value",
-                    ((MTRModeSelectClusterSemanticTag *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[2]).semanticTags[0])
+                    ((MTRModeSelectClusterSemanticTagStruct *) ((MTRModeSelectClusterModeOptionStruct *) actualValue[2])
+                            .semanticTags[0])
                         .value,
                     0U));
             }
