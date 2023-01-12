@@ -101170,7 +101170,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("fan mode", actualValue, 3U));
+                VerifyOrReturn(CheckValue("FanMode", actualValue, 3U));
             }
 
             NextTest();
@@ -101214,7 +101214,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("fan mode sequence", actualValue, 5U));
+                VerifyOrReturn(CheckValue("FanModeSequence", actualValue, 5U));
             }
 
             NextTest();
@@ -101258,8 +101258,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 84U));
+                VerifyOrReturn(CheckValueNonNull("PercentSetting", actualValue));
+                VerifyOrReturn(CheckValue("PercentSetting", actualValue, 84U));
             }
 
             NextTest();
@@ -101282,8 +101282,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 84U));
+                VerifyOrReturn(CheckValueNonNull("SpeedSetting", actualValue));
+                VerifyOrReturn(CheckValue("SpeedSetting", actualValue, 84U));
             }
 
             NextTest();
@@ -101306,7 +101306,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("speed current", actualValue, 84U));
+                VerifyOrReturn(CheckValue("SpeedCurrent", actualValue, 84U));
             }
 
             NextTest();
@@ -101350,8 +101350,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 84U));
+                VerifyOrReturn(CheckValueNonNull("PercentSetting", actualValue));
+                VerifyOrReturn(CheckValue("PercentSetting", actualValue, 84U));
             }
 
             NextTest();
@@ -101395,8 +101395,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 73U));
+                VerifyOrReturn(CheckValueNonNull("SpeedSetting", actualValue));
+                VerifyOrReturn(CheckValue("SpeedSetting", actualValue, 73U));
             }
 
             NextTest();
@@ -101419,8 +101419,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 73U));
+                VerifyOrReturn(CheckValueNonNull("PercentSetting", actualValue));
+                VerifyOrReturn(CheckValue("PercentSetting", actualValue, 73U));
             }
 
             NextTest();
@@ -101443,7 +101443,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("percent current", actualValue, 73U));
+                VerifyOrReturn(CheckValue("PercentCurrent", actualValue, 73U));
             }
 
             NextTest();
@@ -101487,8 +101487,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 73U));
+                VerifyOrReturn(CheckValueNonNull("SpeedSetting", actualValue));
+                VerifyOrReturn(CheckValue("SpeedSetting", actualValue, 73U));
             }
 
             NextTest();
@@ -101532,8 +101532,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("percent setting", actualValue));
-                VerifyOrReturn(CheckValue("percent setting", actualValue, 0U));
+                VerifyOrReturn(CheckValueNonNull("PercentSetting", actualValue));
+                VerifyOrReturn(CheckValue("PercentSetting", actualValue, 0U));
             }
 
             NextTest();
@@ -101556,7 +101556,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("percent current", actualValue, 0U));
+                VerifyOrReturn(CheckValue("PercentCurrent", actualValue, 0U));
             }
 
             NextTest();
@@ -101579,8 +101579,8 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNonNull("speed setting", actualValue));
-                VerifyOrReturn(CheckValue("speed setting", actualValue, 0U));
+                VerifyOrReturn(CheckValueNonNull("SpeedSetting", actualValue));
+                VerifyOrReturn(CheckValue("SpeedSetting", actualValue, 0U));
             }
 
             NextTest();
@@ -101603,7 +101603,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("speed current", actualValue, 0U));
+                VerifyOrReturn(CheckValue("SpeedCurrent", actualValue, 0U));
             }
 
             NextTest();
@@ -101647,7 +101647,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNull("percent setting", actualValue));
+                VerifyOrReturn(CheckValueNull("PercentSetting", actualValue));
             }
 
             NextTest();
@@ -101670,7 +101670,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValueNull("speed setting", actualValue));
+                VerifyOrReturn(CheckValueNull("SpeedSetting", actualValue));
             }
 
             NextTest();
