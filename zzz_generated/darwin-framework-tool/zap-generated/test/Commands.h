@@ -58264,7 +58264,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("temperature display mode", actualValue, 1U));
+                VerifyOrReturn(CheckValue("TemperatureDisplayMode", actualValue, 1U));
             }
 
             NextTest();
@@ -58318,7 +58318,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("temperature display mode", actualValue, 1U));
+                VerifyOrReturn(CheckValue("TemperatureDisplayMode", actualValue, 1U));
             }
 
             NextTest();
@@ -58376,7 +58376,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 0U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 0U));
             }
 
             NextTest();
@@ -58434,7 +58434,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 1U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 1U));
             }
 
             NextTest();
@@ -58492,7 +58492,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 2U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 2U));
             }
 
             NextTest();
@@ -58550,7 +58550,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 3U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 3U));
             }
 
             NextTest();
@@ -58608,7 +58608,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 4U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 4U));
             }
 
             NextTest();
@@ -58666,7 +58666,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 5U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 5U));
             }
 
             NextTest();
@@ -58720,7 +58720,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("keypad lockout", actualValue, 5U));
+                VerifyOrReturn(CheckValue("KeypadLockout", actualValue, 5U));
             }
 
             NextTest();
@@ -58780,7 +58780,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("schedule programming visibility", actualValue, 0U));
+                VerifyOrReturn(CheckValue("ScheduleProgrammingVisibility", actualValue, 0U));
             }
 
             NextTest();
@@ -58840,7 +58840,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("schedule programming visibility", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ScheduleProgrammingVisibility", actualValue, 1U));
             }
 
             NextTest();
@@ -58894,7 +58894,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("schedule programming visibility", actualValue, 1U));
+                VerifyOrReturn(CheckValue("ScheduleProgrammingVisibility", actualValue, 1U));
             }
 
             NextTest();
