@@ -72245,7 +72245,7 @@ private:
 
                            {
                                id actualValue = values.setupPIN;
-                               VerifyOrReturn(CheckValueAsString("setupPIN", actualValue, @"tempPin123"));
+                               VerifyOrReturn(CheckValueAsString("SetupPIN", actualValue, @"tempPin123"));
                            }
 
                            NextTest();
