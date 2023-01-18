@@ -67772,7 +67772,7 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
@@ -68559,7 +68559,7 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -68585,7 +68585,7 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
@@ -70380,13 +70380,13 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
@@ -70481,7 +70481,7 @@ private:
             LogStep(5, "Invoke AddTrustedRootCertificate without fail-safe");
             ListFreer listFreer;
             chip::app::Clusters::OperationalCredentials::Commands::AddTrustedRootCertificate::Type value;
-            value.rootCertificate = chip::ByteSpan(chip::Uint8::from_const_char("00000000garbage: not in length on purpose"), 8);
+            value.rootCACertificate = chip::ByteSpan(chip::Uint8::from_const_char("00000000garbage: not in length on purpose"), 8);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
                                OperationalCredentials::Commands::AddTrustedRootCertificate::Id, value, chip::NullOptional
 
@@ -73175,13 +73175,13 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 1));
                 }
@@ -97140,21 +97140,21 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
@@ -97186,21 +97186,21 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
@@ -97731,23 +97731,23 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[2].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
@@ -97774,18 +97774,18 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
@@ -97813,23 +97813,23 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 4U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[2].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
@@ -98162,23 +98162,23 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 2U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[2].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
@@ -98205,18 +98205,18 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
@@ -98240,23 +98240,23 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[1].fabricIndex", iter_0.GetValue().fabricIndex, 4U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckValue("fabrics[2].fabricIndex", iter_0.GetValue().fabricIndex, 3U));
@@ -99204,17 +99204,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
@@ -99226,17 +99226,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
@@ -99626,17 +99626,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
@@ -99648,17 +99648,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 2));
@@ -101688,21 +101688,21 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
@@ -101738,21 +101738,21 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptor::DecodableType>
+                    chip::app::Clusters::OperationalCredentials::Structs::FabricDescriptorStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 0));
-                    VerifyOrReturn(CheckValue("fabrics[0].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[0].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
-                    VerifyOrReturn(CheckValue("fabrics[1].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
-                    VerifyOrReturn(CheckValue("fabrics[2].nodeId", iter_0.GetValue().nodeId,
+                    VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
                                               mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));

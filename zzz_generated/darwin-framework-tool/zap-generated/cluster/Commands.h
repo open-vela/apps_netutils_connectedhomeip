@@ -33392,7 +33392,7 @@ public:
         __auto_type * params = [[MTROperationalCredentialsClusterCertificateChainRequestParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.certificateType = [NSNumber numberWithUnsignedChar:mRequest.certificateType];
+        params.certificateType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.certificateType)];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -33692,7 +33692,7 @@ public:
     OperationalCredentialsAddTrustedRootCertificate()
         : ClusterCommand("add-trusted-root-certificate")
     {
-        AddArgument("RootCertificate", &mRequest.rootCertificate);
+        AddArgument("RootCACertificate", &mRequest.rootCACertificate);
         ClusterCommand::AddArguments();
     }
 
@@ -33707,7 +33707,8 @@ public:
         __auto_type * params = [[MTROperationalCredentialsClusterAddTrustedRootCertificateParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.rootCertificate = [NSData dataWithBytes:mRequest.rootCertificate.data() length:mRequest.rootCertificate.size()];
+        params.rootCACertificate = [NSData dataWithBytes:mRequest.rootCACertificate.data()
+                                                  length:mRequest.rootCACertificate.size()];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
