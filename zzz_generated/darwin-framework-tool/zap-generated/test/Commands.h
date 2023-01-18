@@ -61132,384 +61132,54 @@ public:
             err = TestThReadsFeatureDependentAttributeDGTHREADSF01ERRCNTInAttributeList_8();
             break;
         case 9:
-            ChipLogProgress(chipTool, " ***** Test Step 9 : TH reads optional attribute (DetachedRoleCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A000e")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 9 : TH reads Feature dependent attribute (DGTHREAD.S.F02(MLECNT)) in attributeList\n");
+            if (ShouldSkip("DGTHREAD.S.F02")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeDetachedRoleCountInAttributeList_9();
+            err = TestThReadsFeatureDependentAttributeDgthreadsf02mlecntInAttributeList_9();
             break;
         case 10:
-            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads optional attribute (ChildRoleCount) AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001f")) {
+            ChipLogProgress(
+                chipTool, " ***** Test Step 10 : TH reads Feature dependent attribute (DGTHREAD.S.F03(MACCNT)) in attributeList\n");
+            if (ShouldSkip("DGTHREAD.S.F03")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeChildRoleCountAttributeList_10();
+            err = TestThReadsFeatureDependentAttributeDgthreadsf03maccntInAttributeList_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads optional attribute (RouterRoleCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0010")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRouterRoleCountInAttributeList_11();
-            break;
-        case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads optional attribute (LeaderRoleCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0011")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeLeaderRoleCountInAttributeList_12();
-            break;
-        case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads optional attribute (AttachAttemptCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0012")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeAttachAttemptCountInAttributeList_13();
-            break;
-        case 14:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 14 : TH reads optional attribute (PartitionIdChangeCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0013")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributePartitionIdChangeCountInAttributeList_14();
-            break;
-        case 15:
-            ChipLogProgress(chipTool,
-                " ***** Test Step 15 : TH reads optional attribute (BetterPartitionAttachAttemptCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0014")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeBetterPartitionAttachAttemptCountInAttributeList_15();
-            break;
-        case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH reads optional attribute (ParentChangeCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0015")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeParentChangeCountInAttributeList_16();
-            break;
-        case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH reads optional attribute (TxTotalCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0016")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxTotalCountInAttributeList_17();
-            break;
-        case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : TH reads optional attribute (TxUnicastCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0017")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxUnicastCountInAttributeList_18();
-            break;
-        case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : TH reads optional attribute (TxBroadcastCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0018")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxBroadcastCountInAttributeList_19();
-            break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads optional attribute (TxAckRequestedCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0019")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxAckRequestedCountInAttributeList_20();
-            break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH reads optional attribute (TxAckedCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001a")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxAckedCountInAttributeList_21();
-            break;
-        case 22:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 22 : TH reads optional attribute (TxNoAckRequestedCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001b")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxNoAckRequestedCountInAttributeList_22();
-            break;
-        case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : TH reads optional attributes (TxDataCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001c")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributesTxDataCountInAttributeList_23();
-            break;
-        case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : TH reads optional attribute (TxDataPollCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001d")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxDataPollCountInAttributeList_24();
-            break;
-        case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : TH reads optional attribute (TxBeaconCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001e")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxBeaconCountInAttributeList_25();
-            break;
-        case 26:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 26 : TH reads optional attribute (TxBeaconRequestCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A001f")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxBeaconRequestCountInAttributeList_26();
-            break;
-        case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : TH reads optional attribute (TxOtherCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0020")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxOtherCountInAttributeList_27();
-            break;
-        case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : TH reads optional attribute (TxRetryCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0021")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxRetryCountInAttributeList_28();
-            break;
-        case 29:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 29 : TH reads optional attribute (TxDirectMaxRetryExpiryCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0022")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxDirectMaxRetryExpiryCountInAttributeList_29();
-            break;
-        case 30:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 30 : TH reads optional attribute (TxIndirectMaxRetryExpiryCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0023")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxIndirectMaxRetryExpiryCountInAttributeList_30();
-            break;
-        case 31:
-            ChipLogProgress(chipTool, " ***** Test Step 31 : TH reads optional attribute (TxErrCcaCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0024")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxErrCcaCountInAttributeList_31();
-            break;
-        case 32:
-            ChipLogProgress(chipTool, " ***** Test Step 32 : TH reads optional attribute (TxErrAbortCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0025")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxErrAbortCountInAttributeList_32();
-            break;
-        case 33:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 33 : TH reads optional attribute (TxErrBusyChannelCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0026")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeTxErrBusyChannelCountInAttributeList_33();
-            break;
-        case 34:
-            ChipLogProgress(chipTool, " ***** Test Step 34 : TH reads optional attribute (RxTotalCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0027")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxTotalCountInAttributeList_34();
-            break;
-        case 35:
-            ChipLogProgress(chipTool, " ***** Test Step 35 : TH reads optional attribute (RxUnicastCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0028")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxUnicastCountInAttributeList_35();
-            break;
-        case 36:
-            ChipLogProgress(chipTool, " ***** Test Step 36 : TH reads optional attribute (RxBroadcastCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0029")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxBroadcastCountInAttributeList_36();
-            break;
-        case 37:
-            ChipLogProgress(chipTool, " ***** Test Step 37 : TH reads optional attribute (RxDataCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A002a")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxDataCountInAttributeList_37();
-            break;
-        case 38:
-            ChipLogProgress(chipTool, " ***** Test Step 38 : TH reads optional attribute (RxDataPollCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A002b")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxDataPollCountInAttributeList_38();
-            break;
-        case 39:
-            ChipLogProgress(chipTool, " ***** Test Step 39 : TH reads optional attribute (RxBeaconCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A002c")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxBeaconCountInAttributeList_39();
-            break;
-        case 40:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 40 : TH reads optional attribute (RxBeaconRequestCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A002d")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxBeaconRequestCountInAttributeList_40();
-            break;
-        case 41:
-            ChipLogProgress(chipTool, " ***** Test Step 41 : TH reads optional attribute (RxOtherCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A002e")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxOtherCountInAttributeList_41();
-            break;
-        case 42:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 42 : TH reads optional attribute (RxAddressFilteredCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A002f")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxAddressFilteredCountInAttributeList_42();
-            break;
-        case 43:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 43 : TH reads optional attribute (RxDestAddrFilteredCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0030")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxDestAddrFilteredCountInAttributeList_43();
-            break;
-        case 44:
-            ChipLogProgress(chipTool, " ***** Test Step 44 : TH reads optional attribute (RxDuplicatedCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0031")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxDuplicatedCountInAttributeList_44();
-            break;
-        case 45:
-            ChipLogProgress(chipTool, " ***** Test Step 45 : TH reads optional attribute (RxErrNoFrameCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0032")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxErrNoFrameCountInAttributeList_45();
-            break;
-        case 46:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 46 : TH reads optional attribute (RxErrUnknownNeighborCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0033")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxErrUnknownNeighborCountInAttributeList_46();
-            break;
-        case 47:
-            ChipLogProgress(
-                chipTool, " ***** Test Step 47 : TH reads optional attribute (RxErrInvalidScrAddrCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0034")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxErrInvalidScrAddrCountInAttributeList_47();
-            break;
-        case 48:
-            ChipLogProgress(chipTool, " ***** Test Step 48 : TH reads optional attribute (RxErrSecCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0035")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxErrSecCountInAttributeList_48();
-            break;
-        case 49:
-            ChipLogProgress(chipTool, " ***** Test Step 49 : TH reads optional attribute (RxErrFcsCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0036")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxErrFcsCountInAttributeList_49();
-            break;
-        case 50:
-            ChipLogProgress(chipTool, " ***** Test Step 50 : TH reads optional attribute (RxErrOtherCount) in AttributeList\n");
-            if (ShouldSkip("DGTHREAD.S.A0037")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsOptionalAttributeRxErrOtherCountInAttributeList_50();
-            break;
-        case 51:
-            ChipLogProgress(chipTool, " ***** Test Step 51 : Read the optional attribute (ActiveTimestamp) in AttributeList\n");
+            ChipLogProgress(chipTool, " ***** Test Step 11 : Read the optional attribute (ActiveTimestamp) in AttributeList\n");
             if (ShouldSkip("DGTHREAD.S.A0038")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeActiveTimestampInAttributeList_51();
+            err = TestReadTheOptionalAttributeActiveTimestampInAttributeList_11();
             break;
-        case 52:
-            ChipLogProgress(chipTool, " ***** Test Step 52 : Read the optional attribute (PendingTimestamp) in AttributeList\n");
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Read the optional attribute (PendingTimestamp) in AttributeList\n");
             if (ShouldSkip("DGTHREAD.S.A0039")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributePendingTimestampInAttributeList_52();
+            err = TestReadTheOptionalAttributePendingTimestampInAttributeList_12();
             break;
-        case 53:
-            ChipLogProgress(chipTool, " ***** Test Step 53 : Read the optional attribute (Delay) in AttributeList\n");
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Read the optional attribute (Delay) in AttributeList\n");
             if (ShouldSkip("DGTHREAD.S.A003a")) {
                 NextTest();
                 return;
             }
-            err = TestReadTheOptionalAttributeDelayInAttributeList_53();
+            err = TestReadTheOptionalAttributeDelayInAttributeList_13();
             break;
-        case 54:
-            ChipLogProgress(chipTool, " ***** Test Step 54 : TH reads AcceptedCommandList from DUT\n");
-            err = TestThReadsAcceptedCommandListFromDut_54();
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH reads AcceptedCommandList from DUT\n");
+            err = TestThReadsAcceptedCommandListFromDut_14();
             break;
-        case 55:
-            ChipLogProgress(chipTool, " ***** Test Step 55 : TH reads GeneratedCommandList from DUT\n");
-            err = TestThReadsGeneratedCommandListFromDut_55();
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH reads GeneratedCommandList from DUT\n");
+            err = TestThReadsGeneratedCommandListFromDut_15();
             break;
         }
 
@@ -61570,126 +61240,6 @@ public:
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 17:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 18:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 19:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 22:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 24:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 25:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 26:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 27:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 28:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 29:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 30:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 31:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 32:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 33:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 34:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 35:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 37:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 39:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 40:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 41:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 42:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 43:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 44:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 45:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 46:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 47:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 48:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 50:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 51:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 52:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 53:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 54:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 55:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
         }
 
         // Go on to the next test.
@@ -61703,7 +61253,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 56;
+    const uint16_t mTestCount = 16;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -61929,7 +61479,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeDetachedRoleCountInAttributeList_9()
+    CHIP_ERROR TestThReadsFeatureDependentAttributeDgthreadsf02mlecntInAttributeList_9()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -61940,179 +61490,18 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (DetachedRoleCount) in AttributeList Error: %@", err);
+            NSLog(@"TH reads Feature dependent attribute (DGTHREAD.S.F02(MLECNT)) in attributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 14UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeChildRoleCountAttributeList_10()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (ChildRoleCount) AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 15UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRouterRoleCountInAttributeList_11()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RouterRoleCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 16UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeLeaderRoleCountInAttributeList_12()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (LeaderRoleCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 17UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeAttachAttemptCountInAttributeList_13()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (AttachAttemptCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 18UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributePartitionIdChangeCountInAttributeList_14()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (PartitionIdChangeCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 19UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeBetterPartitionAttachAttemptCountInAttributeList_15()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (BetterPartitionAttachAttemptCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 20UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeParentChangeCountInAttributeList_16()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (ParentChangeCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 21UL));
 
             NextTest();
@@ -62121,7 +61510,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeTxTotalCountInAttributeList_17()
+    CHIP_ERROR TestThReadsFeatureDependentAttributeDgthreadsf03maccntInAttributeList_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -62132,803 +61521,44 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxTotalCount) in AttributeList Error: %@", err);
+            NSLog(@"TH reads Feature dependent attribute (DGTHREAD.S.F03(MACCNT)) in attributeList Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 22UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxUnicastCountInAttributeList_18()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxUnicastCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 23UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxBroadcastCountInAttributeList_19()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxBroadcastCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 24UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxAckRequestedCountInAttributeList_20()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxAckRequestedCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 25UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxAckedCountInAttributeList_21()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxAckedCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 26UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxNoAckRequestedCountInAttributeList_22()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxNoAckRequestedCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 27UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributesTxDataCountInAttributeList_23()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attributes (TxDataCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 28UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxDataPollCountInAttributeList_24()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxDataPollCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 29UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxBeaconCountInAttributeList_25()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxBeaconCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 30UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxBeaconRequestCountInAttributeList_26()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxBeaconRequestCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 31UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxOtherCountInAttributeList_27()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxOtherCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 32UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxRetryCountInAttributeList_28()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxRetryCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 33UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxDirectMaxRetryExpiryCountInAttributeList_29()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxDirectMaxRetryExpiryCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 34UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxIndirectMaxRetryExpiryCountInAttributeList_30()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxIndirectMaxRetryExpiryCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 35UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxErrCcaCountInAttributeList_31()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxErrCcaCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 36UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxErrAbortCountInAttributeList_32()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxErrAbortCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 37UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeTxErrBusyChannelCountInAttributeList_33()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (TxErrBusyChannelCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 38UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxTotalCountInAttributeList_34()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxTotalCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 39UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxUnicastCountInAttributeList_35()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxUnicastCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 40UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxBroadcastCountInAttributeList_36()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxBroadcastCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 41UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxDataCountInAttributeList_37()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxDataCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 42UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxDataPollCountInAttributeList_38()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxDataPollCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 43UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxBeaconCountInAttributeList_39()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxBeaconCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 44UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxBeaconRequestCountInAttributeList_40()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxBeaconRequestCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 45UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxOtherCountInAttributeList_41()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxOtherCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 46UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxAddressFilteredCountInAttributeList_42()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxAddressFilteredCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 47UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxDestAddrFilteredCountInAttributeList_43()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxDestAddrFilteredCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 48UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxDuplicatedCountInAttributeList_44()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxDuplicatedCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 49UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxErrNoFrameCountInAttributeList_45()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxErrNoFrameCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 50UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxErrUnknownNeighborCountInAttributeList_46()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxErrUnknownNeighborCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 51UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxErrInvalidScrAddrCountInAttributeList_47()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxErrInvalidScrAddrCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 52UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxErrSecCountInAttributeList_48()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxErrSecCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 53UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxErrFcsCountInAttributeList_49()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxErrFcsCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 54UL));
-
-            NextTest();
-        }];
-
-        return CHIP_NO_ERROR;
-    }
-
-    CHIP_ERROR TestThReadsOptionalAttributeRxErrOtherCountInAttributeList_50()
-    {
-
-        MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterThreadNetworkDiagnostics alloc] initWithDevice:device
-                                                                                    endpointID:@(0)
-                                                                                         queue:mCallbackQueue];
-        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
-
-        [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-            NSLog(@"TH reads optional attribute (RxErrOtherCount) in AttributeList Error: %@", err);
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            VerifyOrReturn(CheckConstraintType("attributeList", "list", "list"));
             VerifyOrReturn(CheckConstraintContains("attributeList", value, 55UL));
 
             NextTest();
@@ -62937,7 +61567,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeActiveTimestampInAttributeList_51()
+    CHIP_ERROR TestReadTheOptionalAttributeActiveTimestampInAttributeList_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -62961,7 +61591,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributePendingTimestampInAttributeList_52()
+    CHIP_ERROR TestReadTheOptionalAttributePendingTimestampInAttributeList_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -62985,7 +61615,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadTheOptionalAttributeDelayInAttributeList_53()
+    CHIP_ERROR TestReadTheOptionalAttributeDelayInAttributeList_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -63009,7 +61639,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_54()
+    CHIP_ERROR TestThReadsAcceptedCommandListFromDut_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -63033,7 +61663,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_55()
+    CHIP_ERROR TestThReadsGeneratedCommandListFromDut_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
