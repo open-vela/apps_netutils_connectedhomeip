@@ -33,8 +33,8 @@
 using chip::Callback::Callback;
 using chip::Callback::Cancelable;
 using namespace chip::app::Clusters;
-using chip::Messaging::ExchangeManager;
 using chip::SessionHandle;
+using chip::Messaging::ExchangeManager;
 
 // NOLINTBEGIN(clang-analyzer-cplusplus.NewDeleteLeaks): Linter is unable to locate the delete on these objects.
 @implementation MTRBaseClusterIdentify
