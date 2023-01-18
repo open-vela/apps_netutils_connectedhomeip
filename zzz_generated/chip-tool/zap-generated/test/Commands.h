@@ -6601,112 +6601,112 @@ private:
         }
         case 1: {
             LogStep(1, "TH reads the ClusterRevision from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ClusterRevision::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ClusterRevision::Id, true, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "TH reads the FeatureMap from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::FeatureMap::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
             LogStep(3, "TH reads AttributeList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 4: {
             LogStep(4, "TH reads optional attribute(VendorName) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "TH reads optional attribute(VendorID) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "TH reads optional attribute(ProductName) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH reads optional attribute(NodeLabel) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "TH reads optional attribute(HardwareVersion) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "TH reads optional attribute(HardwareVersionString) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 10: {
             LogStep(10, "TH reads optional attribute(SoftwareVersion) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "TH reads optional attribute(SoftwareVersionString) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH reads optional attribute(ManufacturingDate) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "TH reads optional attribute(PartNumber) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "TH reads optional attribute(ProductURL) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "TH reads optional attribute(ProductLabel) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
             LogStep(16, "TH reads optional attribute(SerialNumber) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "TH reads optional attribute(UniqueID) in AttributeList");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AttributeList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "TH1 reads AcceptedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
         case 19: {
             LogStep(19, "TH1 reads GeneratedCommandList from DUT");
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -7274,8 +7274,8 @@ private:
         case 1: {
             LogStep(1, "TH reads VendorName from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::VendorName::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::VendorName::Id, true, chip::NullOptional);
         }
         case 2: {
             LogStep(2, "TH writes VendorName from the DUT.");
@@ -7283,20 +7283,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("samplegarbage: not in length on purpose", 6);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::VendorName::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::VendorName::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 3: {
             LogStep(3, "TH reads VendorName from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::VendorName::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::VendorName::Id, true, chip::NullOptional);
         }
         case 4: {
             LogStep(4, "TH reads VendorID from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::VendorID::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::VendorID::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Verify that VendorID matches the value assigned to this manufacturer");
@@ -7314,20 +7315,21 @@ private:
             ListFreer listFreer;
             chip::VendorId value;
             value = static_cast<chip::VendorId>(17);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::VendorID::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::VendorID::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH reads VendorID from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0002"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::VendorID::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::VendorID::Id, true, chip::NullOptional);
         }
         case 8: {
             LogStep(8, "TH reads ProductName from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ProductName::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ProductName::Id, true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "TH writes ProductName from the DUT.");
@@ -7335,20 +7337,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newproductgarbage: not in length on purpose", 10);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::ProductName::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::ProductName::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 10: {
             LogStep(10, "TH reads ProductName from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ProductName::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ProductName::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "TH reads NodeLabel from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::NodeLabel::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::NodeLabel::Id, true, chip::NullOptional);
         }
         case 12: {
             LogStep(12, "TH writes NodeLabel from the DUT.");
@@ -7373,8 +7376,8 @@ private:
         case 14: {
             LogStep(14, "TH reads HardwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::HardwareVersion::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::HardwareVersion::Id, true, chip::NullOptional);
         }
         case 15: {
             LogStep(15, "TH writes HardwareVersion from the DUT.");
@@ -7382,21 +7385,21 @@ private:
             ListFreer listFreer;
             uint16_t value;
             value = 17713U;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::HardwareVersion::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::HardwareVersion::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 16: {
             LogStep(16, "TH reads HardwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::HardwareVersion::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::HardwareVersion::Id, true, chip::NullOptional);
         }
         case 17: {
             LogStep(17, "TH reads HardwareVersionString from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
         }
         case 18: {
             LogStep(18, "TH writes HardwareVersionString from the DUT.");
@@ -7404,21 +7407,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newhardwareversiongarbage: not in length on purpose", 18);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::HardwareVersionString::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::HardwareVersionString::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 19: {
             LogStep(19, "TH reads HardwareVersionString from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::HardwareVersionString::Id, true, chip::NullOptional);
         }
         case 20: {
             LogStep(20, "TH reads SoftwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
         }
         case 21: {
             LogStep(21, "TH writes SoftwareVersion from the DUT.");
@@ -7426,21 +7429,21 @@ private:
             ListFreer listFreer;
             uint32_t value;
             value = 33299UL;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::SoftwareVersion::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::SoftwareVersion::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 22: {
             LogStep(22, "TH reads SoftwareVersion from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersion::Id, true, chip::NullOptional);
         }
         case 23: {
             LogStep(23, "TH reads SoftwareVersionString from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
         }
         case 24: {
             LogStep(24, "TH writes SoftwareVersionString from the DUT.");
@@ -7448,21 +7451,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("1.0garbage: not in length on purpose", 3);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::SoftwareVersionString::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::SoftwareVersionString::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 25: {
             LogStep(25, "TH reads SoftwareVersionString from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::SoftwareVersionString::Id, true, chip::NullOptional);
         }
         case 26: {
             LogStep(26, "TH reads ManufacturingDate from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
         }
         case 27: {
             LogStep(27, "Verify if the first 8 characters specify date according to ISO 8601, i.e, YYYYMMDD.");
@@ -7480,21 +7483,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("20210814789452INgarbage: not in length on purpose", 16);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::ManufacturingDate::Id, value, chip::NullOptional,
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::ManufacturingDate::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 29: {
             LogStep(29, "TH reads ManufacturingDate from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ManufacturingDate::Id, true, chip::NullOptional);
         }
         case 30: {
             LogStep(30, "TH reads PartNumber from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::PartNumber::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::PartNumber::Id, true, chip::NullOptional);
         }
         case 31: {
             LogStep(31, "TH writes PartNumber from the DUT.");
@@ -7502,20 +7505,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newpartgarbage: not in length on purpose", 7);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::PartNumber::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::PartNumber::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 32: {
             LogStep(32, "TH reads PartNumber from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::PartNumber::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::PartNumber::Id, true, chip::NullOptional);
         }
         case 33: {
             LogStep(33, "TH reads ProductURL from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ProductURL::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ProductURL::Id, true, chip::NullOptional);
         }
         case 34: {
             LogStep(34,
@@ -7535,20 +7539,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("https://www.example.comgarbage: not in length on purpose", 23);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::ProductURL::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::ProductURL::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 36: {
             LogStep(36, "TH reads ProductURL from the DUT");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000d"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ProductURL::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ProductURL::Id, true, chip::NullOptional);
         }
         case 37: {
             LogStep(37, "TH reads ProductLabel from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ProductLabel::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ProductLabel::Id, true, chip::NullOptional);
         }
         case 38: {
             LogStep(38, "Verify that it does not include the name of the vendor as defined within the VendorName attribute");
@@ -7566,20 +7571,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newproductlabelgarbage: not in length on purpose", 15);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::ProductLabel::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::ProductLabel::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 40: {
             LogStep(40, "TH reads ProductLabel from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000e"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::ProductLabel::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::ProductLabel::Id, true, chip::NullOptional);
         }
         case 41: {
             LogStep(41, "TH reads SerialNumber from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::SerialNumber::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::SerialNumber::Id, true, chip::NullOptional);
         }
         case 42: {
             LogStep(42, "TH writes SerialNumber from the DUT.");
@@ -7587,20 +7593,21 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newserialnumbergarbage: not in length on purpose", 15);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::SerialNumber::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::SerialNumber::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 43: {
             LogStep(43, "TH reads SerialNumber from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A000f"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::SerialNumber::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::SerialNumber::Id, true, chip::NullOptional);
         }
         case 44: {
             LogStep(44, "TH reads Reachable from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::Reachable::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::Reachable::Id, true, chip::NullOptional);
         }
         case 45: {
             LogStep(45, "TH sends Write request message to DUT to change value of Reachable to false");
@@ -7608,20 +7615,21 @@ private:
             ListFreer listFreer;
             bool value;
             value = false;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::Reachable::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::Reachable::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 46: {
             LogStep(46, "TH reads Reachable from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::Reachable::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::Reachable::Id, true, chip::NullOptional);
         }
         case 47: {
             LogStep(47, "TH reads UniqueID from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::UniqueID::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::UniqueID::Id, true, chip::NullOptional);
         }
         case 48: {
             LogStep(48, "TH writes UniqueID from the DUT.");
@@ -7629,14 +7637,15 @@ private:
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("newidgarbage: not in length on purpose", 5);
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                  BridgedDeviceBasic::Attributes::UniqueID::Id, value, chip::NullOptional, chip::NullOptional);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                  BridgedDeviceBasicInformation::Attributes::UniqueID::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 49: {
             LogStep(49, "TH reads UniqueID from the DUT.");
             VerifyOrDo(!ShouldSkip("BRBINFO.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasic::Id,
-                                 BridgedDeviceBasic::Attributes::UniqueID::Id, true, chip::NullOptional);
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(3), BridgedDeviceBasicInformation::Id,
+                                 BridgedDeviceBasicInformation::Attributes::UniqueID::Id, true, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;

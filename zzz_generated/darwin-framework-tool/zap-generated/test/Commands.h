@@ -4609,9 +4609,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
@@ -4636,9 +4636,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
@@ -4663,9 +4663,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4692,9 +4692,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4716,9 +4716,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4740,9 +4740,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4764,9 +4764,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4788,9 +4788,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4812,9 +4812,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4836,9 +4836,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4860,9 +4860,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4884,9 +4884,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4908,9 +4908,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4932,9 +4932,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4956,9 +4956,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -4980,9 +4980,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -5004,9 +5004,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -5028,9 +5028,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
@@ -5055,9 +5055,9 @@ private:
 
         MTRBaseDevice * device = GetDevice("alpha");
         commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(3)
-                                                                                   queue:mCallbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(3)
+                                                                                              queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
