@@ -64,7 +64,7 @@
 | WiFiNetworkDiagnostics                                              | 0x0036 |
 | EthernetNetworkDiagnostics                                          | 0x0037 |
 | TimeSynchronization                                                 | 0x0038 |
-| BridgedDeviceBasic                                                  | 0x0039 |
+| BridgedDeviceBasicInformation                                       | 0x0039 |
 | Switch                                                              | 0x003B |
 | AdministratorCommissioning                                          | 0x003C |
 | OperationalCredentials                                              | 0x003E |
@@ -30539,7 +30539,7 @@ public:
 };
 
 /*----------------------------------------------------------------------------*\
-| Cluster BridgedDeviceBasic                                          | 0x0039 |
+| Cluster BridgedDeviceBasicInformation                               | 0x0039 |
 |------------------------------------------------------------------------------|
 | Commands:                                                           |        |
 |------------------------------------------------------------------------------|
@@ -30575,27 +30575,27 @@ public:
 /*
  * Attribute VendorName
  */
-class ReadBridgedDeviceBasicVendorName : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationVendorName : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicVendorName()
+    ReadBridgedDeviceBasicInformationVendorName()
         : ReadAttribute("vendor-name")
     {
     }
 
-    ~ReadBridgedDeviceBasicVendorName() {}
+    ~ReadBridgedDeviceBasicInformationVendorName() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000001) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeVendorNameWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.VendorName response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.VendorName response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic VendorName read Error", error);
+                LogNSError("BridgedDeviceBasicInformation VendorName read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -30603,22 +30603,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicVendorName : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationVendorName : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicVendorName()
+    SubscribeAttributeBridgedDeviceBasicInformationVendorName()
         : SubscribeAttribute("vendor-name")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicVendorName() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationVendorName() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000001) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -30634,7 +30634,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.VendorName response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.VendorName response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -30645,27 +30645,27 @@ public:
 /*
  * Attribute VendorID
  */
-class ReadBridgedDeviceBasicVendorID : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationVendorID : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicVendorID()
+    ReadBridgedDeviceBasicInformationVendorID()
         : ReadAttribute("vendor-id")
     {
     }
 
-    ~ReadBridgedDeviceBasicVendorID() {}
+    ~ReadBridgedDeviceBasicInformationVendorID() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000002) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.VendorID response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.VendorID response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic VendorID read Error", error);
+                LogNSError("BridgedDeviceBasicInformation VendorID read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -30673,22 +30673,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicVendorID : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationVendorID : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicVendorID()
+    SubscribeAttributeBridgedDeviceBasicInformationVendorID()
         : SubscribeAttribute("vendor-id")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicVendorID() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationVendorID() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000002) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -30704,7 +30704,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.VendorID response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.VendorID response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -30715,27 +30715,27 @@ public:
 /*
  * Attribute ProductName
  */
-class ReadBridgedDeviceBasicProductName : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationProductName : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicProductName()
+    ReadBridgedDeviceBasicInformationProductName()
         : ReadAttribute("product-name")
     {
     }
 
-    ~ReadBridgedDeviceBasicProductName() {}
+    ~ReadBridgedDeviceBasicInformationProductName() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000003) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeProductNameWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.ProductName response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.ProductName response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic ProductName read Error", error);
+                LogNSError("BridgedDeviceBasicInformation ProductName read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -30743,22 +30743,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicProductName : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationProductName : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicProductName()
+    SubscribeAttributeBridgedDeviceBasicInformationProductName()
         : SubscribeAttribute("product-name")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicProductName() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationProductName() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000003) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -30774,7 +30774,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.ProductName response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.ProductName response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -30785,27 +30785,27 @@ public:
 /*
  * Attribute NodeLabel
  */
-class ReadBridgedDeviceBasicNodeLabel : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationNodeLabel : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicNodeLabel()
+    ReadBridgedDeviceBasicInformationNodeLabel()
         : ReadAttribute("node-label")
     {
     }
 
-    ~ReadBridgedDeviceBasicNodeLabel() {}
+    ~ReadBridgedDeviceBasicInformationNodeLabel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000005) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeNodeLabelWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.NodeLabel response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.NodeLabel response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic NodeLabel read Error", error);
+                LogNSError("BridgedDeviceBasicInformation NodeLabel read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -30813,9 +30813,9 @@ public:
     }
 };
 
-class WriteBridgedDeviceBasicNodeLabel : public WriteAttribute {
+class WriteBridgedDeviceBasicInformationNodeLabel : public WriteAttribute {
 public:
-    WriteBridgedDeviceBasicNodeLabel()
+    WriteBridgedDeviceBasicInformationNodeLabel()
         : WriteAttribute("node-label")
     {
         AddArgument("attr-name", "node-label");
@@ -30823,15 +30823,15 @@ public:
         WriteAttribute::AddArguments();
     }
 
-    ~WriteBridgedDeviceBasicNodeLabel() {}
+    ~WriteBridgedDeviceBasicInformationNodeLabel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) WriteAttribute (0x00000005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRWriteParams alloc] init];
         params.timedWriteTimeout
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
@@ -30844,7 +30844,7 @@ public:
                                            params:params
                                        completion:^(NSError * _Nullable error) {
                                            if (error != nil) {
-                                               LogNSError("BridgedDeviceBasic NodeLabel write Error", error);
+                                               LogNSError("BridgedDeviceBasicInformation NodeLabel write Error", error);
                                            }
                                            SetCommandExitStatus(error);
                                        }];
@@ -30855,22 +30855,22 @@ private:
     chip::ByteSpan mValue;
 };
 
-class SubscribeAttributeBridgedDeviceBasicNodeLabel : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationNodeLabel : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicNodeLabel()
+    SubscribeAttributeBridgedDeviceBasicInformationNodeLabel()
         : SubscribeAttribute("node-label")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicNodeLabel() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationNodeLabel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000005) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -30886,7 +30886,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.NodeLabel response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.NodeLabel response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -30897,27 +30897,27 @@ public:
 /*
  * Attribute HardwareVersion
  */
-class ReadBridgedDeviceBasicHardwareVersion : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationHardwareVersion : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicHardwareVersion()
+    ReadBridgedDeviceBasicInformationHardwareVersion()
         : ReadAttribute("hardware-version")
     {
     }
 
-    ~ReadBridgedDeviceBasicHardwareVersion() {}
+    ~ReadBridgedDeviceBasicInformationHardwareVersion() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000007) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeHardwareVersionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.HardwareVersion response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.HardwareVersion response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic HardwareVersion read Error", error);
+                LogNSError("BridgedDeviceBasicInformation HardwareVersion read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -30925,22 +30925,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicHardwareVersion : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationHardwareVersion : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicHardwareVersion()
+    SubscribeAttributeBridgedDeviceBasicInformationHardwareVersion()
         : SubscribeAttribute("hardware-version")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicHardwareVersion() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationHardwareVersion() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000007) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -30956,7 +30956,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.HardwareVersion response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.HardwareVersion response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -30967,27 +30967,27 @@ public:
 /*
  * Attribute HardwareVersionString
  */
-class ReadBridgedDeviceBasicHardwareVersionString : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationHardwareVersionString : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicHardwareVersionString()
+    ReadBridgedDeviceBasicInformationHardwareVersionString()
         : ReadAttribute("hardware-version-string")
     {
     }
 
-    ~ReadBridgedDeviceBasicHardwareVersionString() {}
+    ~ReadBridgedDeviceBasicInformationHardwareVersionString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000008) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeHardwareVersionStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.HardwareVersionString response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.HardwareVersionString response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic HardwareVersionString read Error", error);
+                LogNSError("BridgedDeviceBasicInformation HardwareVersionString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -30995,22 +30995,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicHardwareVersionString : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationHardwareVersionString : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicHardwareVersionString()
+    SubscribeAttributeBridgedDeviceBasicInformationHardwareVersionString()
         : SubscribeAttribute("hardware-version-string")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicHardwareVersionString() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationHardwareVersionString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000008) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31026,7 +31026,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.HardwareVersionString response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.HardwareVersionString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31037,27 +31037,27 @@ public:
 /*
  * Attribute SoftwareVersion
  */
-class ReadBridgedDeviceBasicSoftwareVersion : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationSoftwareVersion : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicSoftwareVersion()
+    ReadBridgedDeviceBasicInformationSoftwareVersion()
         : ReadAttribute("software-version")
     {
     }
 
-    ~ReadBridgedDeviceBasicSoftwareVersion() {}
+    ~ReadBridgedDeviceBasicInformationSoftwareVersion() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000009) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeSoftwareVersionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.SoftwareVersion response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.SoftwareVersion response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic SoftwareVersion read Error", error);
+                LogNSError("BridgedDeviceBasicInformation SoftwareVersion read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31065,22 +31065,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicSoftwareVersion : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersion : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicSoftwareVersion()
+    SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersion()
         : SubscribeAttribute("software-version")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicSoftwareVersion() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersion() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000009) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31096,7 +31096,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.SoftwareVersion response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.SoftwareVersion response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31107,27 +31107,27 @@ public:
 /*
  * Attribute SoftwareVersionString
  */
-class ReadBridgedDeviceBasicSoftwareVersionString : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationSoftwareVersionString : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicSoftwareVersionString()
+    ReadBridgedDeviceBasicInformationSoftwareVersionString()
         : ReadAttribute("software-version-string")
     {
     }
 
-    ~ReadBridgedDeviceBasicSoftwareVersionString() {}
+    ~ReadBridgedDeviceBasicInformationSoftwareVersionString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000000A) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeSoftwareVersionStringWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.SoftwareVersionString response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.SoftwareVersionString response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic SoftwareVersionString read Error", error);
+                LogNSError("BridgedDeviceBasicInformation SoftwareVersionString read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31135,22 +31135,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicSoftwareVersionString : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersionString : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicSoftwareVersionString()
+    SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersionString()
         : SubscribeAttribute("software-version-string")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicSoftwareVersionString() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersionString() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000000A) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31166,7 +31166,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.SoftwareVersionString response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.SoftwareVersionString response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31177,27 +31177,27 @@ public:
 /*
  * Attribute ManufacturingDate
  */
-class ReadBridgedDeviceBasicManufacturingDate : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationManufacturingDate : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicManufacturingDate()
+    ReadBridgedDeviceBasicInformationManufacturingDate()
         : ReadAttribute("manufacturing-date")
     {
     }
 
-    ~ReadBridgedDeviceBasicManufacturingDate() {}
+    ~ReadBridgedDeviceBasicInformationManufacturingDate() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000000B) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeManufacturingDateWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.ManufacturingDate response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.ManufacturingDate response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic ManufacturingDate read Error", error);
+                LogNSError("BridgedDeviceBasicInformation ManufacturingDate read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31205,22 +31205,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicManufacturingDate : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationManufacturingDate : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicManufacturingDate()
+    SubscribeAttributeBridgedDeviceBasicInformationManufacturingDate()
         : SubscribeAttribute("manufacturing-date")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicManufacturingDate() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationManufacturingDate() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000000B) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31236,7 +31236,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.ManufacturingDate response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.ManufacturingDate response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31247,27 +31247,27 @@ public:
 /*
  * Attribute PartNumber
  */
-class ReadBridgedDeviceBasicPartNumber : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationPartNumber : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicPartNumber()
+    ReadBridgedDeviceBasicInformationPartNumber()
         : ReadAttribute("part-number")
     {
     }
 
-    ~ReadBridgedDeviceBasicPartNumber() {}
+    ~ReadBridgedDeviceBasicInformationPartNumber() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000000C) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributePartNumberWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.PartNumber response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.PartNumber response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic PartNumber read Error", error);
+                LogNSError("BridgedDeviceBasicInformation PartNumber read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31275,22 +31275,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicPartNumber : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationPartNumber : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicPartNumber()
+    SubscribeAttributeBridgedDeviceBasicInformationPartNumber()
         : SubscribeAttribute("part-number")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicPartNumber() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationPartNumber() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000000C) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31306,7 +31306,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.PartNumber response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.PartNumber response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31317,27 +31317,27 @@ public:
 /*
  * Attribute ProductURL
  */
-class ReadBridgedDeviceBasicProductURL : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationProductURL : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicProductURL()
+    ReadBridgedDeviceBasicInformationProductURL()
         : ReadAttribute("product-url")
     {
     }
 
-    ~ReadBridgedDeviceBasicProductURL() {}
+    ~ReadBridgedDeviceBasicInformationProductURL() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000000D) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeProductURLWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.ProductURL response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.ProductURL response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic ProductURL read Error", error);
+                LogNSError("BridgedDeviceBasicInformation ProductURL read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31345,22 +31345,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicProductURL : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationProductURL : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicProductURL()
+    SubscribeAttributeBridgedDeviceBasicInformationProductURL()
         : SubscribeAttribute("product-url")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicProductURL() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationProductURL() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000000D) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31376,7 +31376,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.ProductURL response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.ProductURL response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31387,27 +31387,27 @@ public:
 /*
  * Attribute ProductLabel
  */
-class ReadBridgedDeviceBasicProductLabel : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationProductLabel : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicProductLabel()
+    ReadBridgedDeviceBasicInformationProductLabel()
         : ReadAttribute("product-label")
     {
     }
 
-    ~ReadBridgedDeviceBasicProductLabel() {}
+    ~ReadBridgedDeviceBasicInformationProductLabel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000000E) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeProductLabelWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.ProductLabel response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.ProductLabel response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic ProductLabel read Error", error);
+                LogNSError("BridgedDeviceBasicInformation ProductLabel read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31415,22 +31415,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicProductLabel : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationProductLabel : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicProductLabel()
+    SubscribeAttributeBridgedDeviceBasicInformationProductLabel()
         : SubscribeAttribute("product-label")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicProductLabel() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationProductLabel() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000000E) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31446,7 +31446,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.ProductLabel response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.ProductLabel response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31457,27 +31457,27 @@ public:
 /*
  * Attribute SerialNumber
  */
-class ReadBridgedDeviceBasicSerialNumber : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationSerialNumber : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicSerialNumber()
+    ReadBridgedDeviceBasicInformationSerialNumber()
         : ReadAttribute("serial-number")
     {
     }
 
-    ~ReadBridgedDeviceBasicSerialNumber() {}
+    ~ReadBridgedDeviceBasicInformationSerialNumber() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000000F) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeSerialNumberWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.SerialNumber response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.SerialNumber response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic SerialNumber read Error", error);
+                LogNSError("BridgedDeviceBasicInformation SerialNumber read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31485,22 +31485,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicSerialNumber : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationSerialNumber : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicSerialNumber()
+    SubscribeAttributeBridgedDeviceBasicInformationSerialNumber()
         : SubscribeAttribute("serial-number")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicSerialNumber() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationSerialNumber() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000000F) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31516,7 +31516,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.SerialNumber response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.SerialNumber response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31527,27 +31527,27 @@ public:
 /*
  * Attribute Reachable
  */
-class ReadBridgedDeviceBasicReachable : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationReachable : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicReachable()
+    ReadBridgedDeviceBasicInformationReachable()
         : ReadAttribute("reachable")
     {
     }
 
-    ~ReadBridgedDeviceBasicReachable() {}
+    ~ReadBridgedDeviceBasicInformationReachable() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000011) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeReachableWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.Reachable response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.Reachable response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic Reachable read Error", error);
+                LogNSError("BridgedDeviceBasicInformation Reachable read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31555,22 +31555,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicReachable : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationReachable : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicReachable()
+    SubscribeAttributeBridgedDeviceBasicInformationReachable()
         : SubscribeAttribute("reachable")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicReachable() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationReachable() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000011) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31586,7 +31586,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.Reachable response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.Reachable response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31597,27 +31597,27 @@ public:
 /*
  * Attribute UniqueID
  */
-class ReadBridgedDeviceBasicUniqueID : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationUniqueID : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicUniqueID()
+    ReadBridgedDeviceBasicInformationUniqueID()
         : ReadAttribute("unique-id")
     {
     }
 
-    ~ReadBridgedDeviceBasicUniqueID() {}
+    ~ReadBridgedDeviceBasicInformationUniqueID() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x00000012) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeUniqueIDWithCompletion:^(NSString * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.UniqueID response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.UniqueID response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic UniqueID read Error", error);
+                LogNSError("BridgedDeviceBasicInformation UniqueID read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31625,22 +31625,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicUniqueID : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationUniqueID : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicUniqueID()
+    SubscribeAttributeBridgedDeviceBasicInformationUniqueID()
         : SubscribeAttribute("unique-id")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicUniqueID() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationUniqueID() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x00000012) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31656,7 +31656,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSString * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.UniqueID response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.UniqueID response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31667,27 +31667,27 @@ public:
 /*
  * Attribute GeneratedCommandList
  */
-class ReadBridgedDeviceBasicGeneratedCommandList : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationGeneratedCommandList : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicGeneratedCommandList()
+    ReadBridgedDeviceBasicInformationGeneratedCommandList()
         : ReadAttribute("generated-command-list")
     {
     }
 
-    ~ReadBridgedDeviceBasicGeneratedCommandList() {}
+    ~ReadBridgedDeviceBasicInformationGeneratedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000FFF8) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeGeneratedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.GeneratedCommandList response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.GeneratedCommandList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic GeneratedCommandList read Error", error);
+                LogNSError("BridgedDeviceBasicInformation GeneratedCommandList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31695,22 +31695,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicGeneratedCommandList : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationGeneratedCommandList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicGeneratedCommandList()
+    SubscribeAttributeBridgedDeviceBasicInformationGeneratedCommandList()
         : SubscribeAttribute("generated-command-list")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicGeneratedCommandList() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationGeneratedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000FFF8) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31726,7 +31726,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.GeneratedCommandList response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.GeneratedCommandList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31737,27 +31737,27 @@ public:
 /*
  * Attribute AcceptedCommandList
  */
-class ReadBridgedDeviceBasicAcceptedCommandList : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationAcceptedCommandList : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicAcceptedCommandList()
+    ReadBridgedDeviceBasicInformationAcceptedCommandList()
         : ReadAttribute("accepted-command-list")
     {
     }
 
-    ~ReadBridgedDeviceBasicAcceptedCommandList() {}
+    ~ReadBridgedDeviceBasicInformationAcceptedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000FFF9) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeAcceptedCommandListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.AcceptedCommandList response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.AcceptedCommandList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic AcceptedCommandList read Error", error);
+                LogNSError("BridgedDeviceBasicInformation AcceptedCommandList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31765,22 +31765,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicAcceptedCommandList : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationAcceptedCommandList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicAcceptedCommandList()
+    SubscribeAttributeBridgedDeviceBasicInformationAcceptedCommandList()
         : SubscribeAttribute("accepted-command-list")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicAcceptedCommandList() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationAcceptedCommandList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000FFF9) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31796,7 +31796,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.AcceptedCommandList response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.AcceptedCommandList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31807,27 +31807,27 @@ public:
 /*
  * Attribute AttributeList
  */
-class ReadBridgedDeviceBasicAttributeList : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationAttributeList : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicAttributeList()
+    ReadBridgedDeviceBasicInformationAttributeList()
         : ReadAttribute("attribute-list")
     {
     }
 
-    ~ReadBridgedDeviceBasicAttributeList() {}
+    ~ReadBridgedDeviceBasicInformationAttributeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000FFFB) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeAttributeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.AttributeList response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.AttributeList response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic AttributeList read Error", error);
+                LogNSError("BridgedDeviceBasicInformation AttributeList read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31835,22 +31835,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicAttributeList : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationAttributeList : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicAttributeList()
+    SubscribeAttributeBridgedDeviceBasicInformationAttributeList()
         : SubscribeAttribute("attribute-list")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicAttributeList() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationAttributeList() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000FFFB) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31866,7 +31866,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSArray * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.AttributeList response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.AttributeList response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31877,27 +31877,27 @@ public:
 /*
  * Attribute FeatureMap
  */
-class ReadBridgedDeviceBasicFeatureMap : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationFeatureMap : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicFeatureMap()
+    ReadBridgedDeviceBasicInformationFeatureMap()
         : ReadAttribute("feature-map")
     {
     }
 
-    ~ReadBridgedDeviceBasicFeatureMap() {}
+    ~ReadBridgedDeviceBasicInformationFeatureMap() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000FFFC) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.FeatureMap response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.FeatureMap response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic FeatureMap read Error", error);
+                LogNSError("BridgedDeviceBasicInformation FeatureMap read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31905,22 +31905,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicFeatureMap : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationFeatureMap : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicFeatureMap()
+    SubscribeAttributeBridgedDeviceBasicInformationFeatureMap()
         : SubscribeAttribute("feature-map")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicFeatureMap() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationFeatureMap() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000FFFC) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -31936,7 +31936,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.FeatureMap response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.FeatureMap response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -31947,27 +31947,27 @@ public:
 /*
  * Attribute ClusterRevision
  */
-class ReadBridgedDeviceBasicClusterRevision : public ReadAttribute {
+class ReadBridgedDeviceBasicInformationClusterRevision : public ReadAttribute {
 public:
-    ReadBridgedDeviceBasicClusterRevision()
+    ReadBridgedDeviceBasicInformationClusterRevision()
         : ReadAttribute("cluster-revision")
     {
     }
 
-    ~ReadBridgedDeviceBasicClusterRevision() {}
+    ~ReadBridgedDeviceBasicInformationClusterRevision() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReadAttribute (0x0000FFFD) on endpoint %u", endpointId);
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         [cluster readAttributeClusterRevisionWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BridgedDeviceBasic.ClusterRevision response %@", [value description]);
+            NSLog(@"BridgedDeviceBasicInformation.ClusterRevision response %@", [value description]);
             if (error != nil) {
-                LogNSError("BridgedDeviceBasic ClusterRevision read Error", error);
+                LogNSError("BridgedDeviceBasicInformation ClusterRevision read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -31975,22 +31975,22 @@ public:
     }
 };
 
-class SubscribeAttributeBridgedDeviceBasicClusterRevision : public SubscribeAttribute {
+class SubscribeAttributeBridgedDeviceBasicInformationClusterRevision : public SubscribeAttribute {
 public:
-    SubscribeAttributeBridgedDeviceBasicClusterRevision()
+    SubscribeAttributeBridgedDeviceBasicInformationClusterRevision()
         : SubscribeAttribute("cluster-revision")
     {
     }
 
-    ~SubscribeAttributeBridgedDeviceBasicClusterRevision() {}
+    ~SubscribeAttributeBridgedDeviceBasicInformationClusterRevision() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
         ChipLogProgress(chipTool, "Sending cluster (0x00000039) ReportAttribute (0x0000FFFD) on endpoint %u", endpointId);
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
-        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasic alloc] initWithDevice:device
-                                                                              endpointID:@(endpointId)
-                                                                                   queue:callbackQueue];
+        __auto_type * cluster = [[MTRBaseClusterBridgedDeviceBasicInformation alloc] initWithDevice:device
+                                                                                         endpointID:@(endpointId)
+                                                                                              queue:callbackQueue];
         __auto_type * params = [[MTRSubscribeParams alloc] initWithMinInterval:@(mMinInterval) maxInterval:@(mMaxInterval)];
         if (mKeepSubscriptions.HasValue()) {
             params.replaceExistingSubscriptions = !mKeepSubscriptions.Value();
@@ -32006,7 +32006,7 @@ public:
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BridgedDeviceBasic.ClusterRevision response %@", [value description]);
+                NSLog(@"BridgedDeviceBasicInformation.ClusterRevision response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -98659,58 +98659,58 @@ void registerClusterEthernetNetworkDiagnostics(Commands & commands)
 
     commands.Register(clusterName, clusterCommands);
 }
-void registerClusterBridgedDeviceBasic(Commands & commands)
+void registerClusterBridgedDeviceBasicInformation(Commands & commands)
 {
-    using namespace chip::app::Clusters::BridgedDeviceBasic;
+    using namespace chip::app::Clusters::BridgedDeviceBasicInformation;
 
-    const char * clusterName = "BridgedDeviceBasic";
+    const char * clusterName = "BridgedDeviceBasicInformation";
 
     commands_list clusterCommands = {
         make_unique<ClusterCommand>(Id), //
         make_unique<ReadAttribute>(Id), //
-        make_unique<ReadBridgedDeviceBasicVendorName>(), //
+        make_unique<ReadBridgedDeviceBasicInformationVendorName>(), //
         make_unique<WriteAttribute>(Id), //
         make_unique<SubscribeAttribute>(Id), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicVendorName>(), //
-        make_unique<ReadBridgedDeviceBasicVendorID>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicVendorID>(), //
-        make_unique<ReadBridgedDeviceBasicProductName>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicProductName>(), //
-        make_unique<ReadBridgedDeviceBasicNodeLabel>(), //
-        make_unique<WriteBridgedDeviceBasicNodeLabel>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicNodeLabel>(), //
-        make_unique<ReadBridgedDeviceBasicHardwareVersion>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicHardwareVersion>(), //
-        make_unique<ReadBridgedDeviceBasicHardwareVersionString>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicHardwareVersionString>(), //
-        make_unique<ReadBridgedDeviceBasicSoftwareVersion>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicSoftwareVersion>(), //
-        make_unique<ReadBridgedDeviceBasicSoftwareVersionString>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicSoftwareVersionString>(), //
-        make_unique<ReadBridgedDeviceBasicManufacturingDate>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicManufacturingDate>(), //
-        make_unique<ReadBridgedDeviceBasicPartNumber>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicPartNumber>(), //
-        make_unique<ReadBridgedDeviceBasicProductURL>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicProductURL>(), //
-        make_unique<ReadBridgedDeviceBasicProductLabel>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicProductLabel>(), //
-        make_unique<ReadBridgedDeviceBasicSerialNumber>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicSerialNumber>(), //
-        make_unique<ReadBridgedDeviceBasicReachable>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicReachable>(), //
-        make_unique<ReadBridgedDeviceBasicUniqueID>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicUniqueID>(), //
-        make_unique<ReadBridgedDeviceBasicGeneratedCommandList>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicGeneratedCommandList>(), //
-        make_unique<ReadBridgedDeviceBasicAcceptedCommandList>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicAcceptedCommandList>(), //
-        make_unique<ReadBridgedDeviceBasicAttributeList>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicAttributeList>(), //
-        make_unique<ReadBridgedDeviceBasicFeatureMap>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicFeatureMap>(), //
-        make_unique<ReadBridgedDeviceBasicClusterRevision>(), //
-        make_unique<SubscribeAttributeBridgedDeviceBasicClusterRevision>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationVendorName>(), //
+        make_unique<ReadBridgedDeviceBasicInformationVendorID>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationVendorID>(), //
+        make_unique<ReadBridgedDeviceBasicInformationProductName>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationProductName>(), //
+        make_unique<ReadBridgedDeviceBasicInformationNodeLabel>(), //
+        make_unique<WriteBridgedDeviceBasicInformationNodeLabel>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationNodeLabel>(), //
+        make_unique<ReadBridgedDeviceBasicInformationHardwareVersion>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationHardwareVersion>(), //
+        make_unique<ReadBridgedDeviceBasicInformationHardwareVersionString>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationHardwareVersionString>(), //
+        make_unique<ReadBridgedDeviceBasicInformationSoftwareVersion>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersion>(), //
+        make_unique<ReadBridgedDeviceBasicInformationSoftwareVersionString>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationSoftwareVersionString>(), //
+        make_unique<ReadBridgedDeviceBasicInformationManufacturingDate>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationManufacturingDate>(), //
+        make_unique<ReadBridgedDeviceBasicInformationPartNumber>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationPartNumber>(), //
+        make_unique<ReadBridgedDeviceBasicInformationProductURL>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationProductURL>(), //
+        make_unique<ReadBridgedDeviceBasicInformationProductLabel>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationProductLabel>(), //
+        make_unique<ReadBridgedDeviceBasicInformationSerialNumber>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationSerialNumber>(), //
+        make_unique<ReadBridgedDeviceBasicInformationReachable>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationReachable>(), //
+        make_unique<ReadBridgedDeviceBasicInformationUniqueID>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationUniqueID>(), //
+        make_unique<ReadBridgedDeviceBasicInformationGeneratedCommandList>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationGeneratedCommandList>(), //
+        make_unique<ReadBridgedDeviceBasicInformationAcceptedCommandList>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationAcceptedCommandList>(), //
+        make_unique<ReadBridgedDeviceBasicInformationAttributeList>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationAttributeList>(), //
+        make_unique<ReadBridgedDeviceBasicInformationFeatureMap>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationFeatureMap>(), //
+        make_unique<ReadBridgedDeviceBasicInformationClusterRevision>(), //
+        make_unique<SubscribeAttributeBridgedDeviceBasicInformationClusterRevision>(), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -101044,7 +101044,7 @@ void registerClusters(Commands & commands)
     registerClusterThreadNetworkDiagnostics(commands);
     registerClusterWiFiNetworkDiagnostics(commands);
     registerClusterEthernetNetworkDiagnostics(commands);
-    registerClusterBridgedDeviceBasic(commands);
+    registerClusterBridgedDeviceBasicInformation(commands);
     registerClusterSwitch(commands);
     registerClusterAdministratorCommissioning(commands);
     registerClusterOperationalCredentials(commands);
