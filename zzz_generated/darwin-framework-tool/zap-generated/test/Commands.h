@@ -47836,9 +47836,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("pirOccupiedToUnoccupiedDelay", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pirOccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("pirOccupiedToUnoccupiedDelay", [value unsignedShortValue], 65535U));
+            VerifyOrReturn(CheckConstraintType("PIROccupiedToUnoccupiedDelay", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("PIROccupiedToUnoccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("PIROccupiedToUnoccupiedDelay", [value unsignedShortValue], 65535U));
 
             NextTest();
         }];
@@ -47859,9 +47859,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedDelay", "int16u", "int16u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("pirUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("pirUnoccupiedToOccupiedDelay", [value unsignedShortValue], 65535U));
+            VerifyOrReturn(CheckConstraintType("PIRUnoccupiedToOccupiedDelay", "int16u", "int16u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("PIRUnoccupiedToOccupiedDelay", [value unsignedShortValue], 0U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint16_t>("PIRUnoccupiedToOccupiedDelay", [value unsignedShortValue], 65535U));
 
             NextTest();
         }];
@@ -47883,9 +47883,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("pirUnoccupiedToOccupiedThreshold", "int8u", "int8u"));
-            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1U));
-            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("pirUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254U));
+            VerifyOrReturn(CheckConstraintType("PIRUnoccupiedToOccupiedThreshold", "int8u", "int8u"));
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("PIRUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("PIRUnoccupiedToOccupiedThreshold", [value unsignedCharValue], 254U));
 
             NextTest();
         }];

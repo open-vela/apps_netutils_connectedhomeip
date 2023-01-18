@@ -66332,9 +66332,9 @@ public:
 | * Occupancy                                                         | 0x0000 |
 | * OccupancySensorType                                               | 0x0001 |
 | * OccupancySensorTypeBitmap                                         | 0x0002 |
-| * PirOccupiedToUnoccupiedDelay                                      | 0x0010 |
-| * PirUnoccupiedToOccupiedDelay                                      | 0x0011 |
-| * PirUnoccupiedToOccupiedThreshold                                  | 0x0012 |
+| * PIROccupiedToUnoccupiedDelay                                      | 0x0010 |
+| * PIRUnoccupiedToOccupiedDelay                                      | 0x0011 |
+| * PIRUnoccupiedToOccupiedThreshold                                  | 0x0012 |
 | * UltrasonicOccupiedToUnoccupiedDelay                               | 0x0020 |
 | * UltrasonicUnoccupiedToOccupiedDelay                               | 0x0021 |
 | * UltrasonicUnoccupiedToOccupiedThreshold                           | 0x0022 |
@@ -66561,16 +66561,16 @@ public:
 };
 
 /*
- * Attribute PirOccupiedToUnoccupiedDelay
+ * Attribute PIROccupiedToUnoccupiedDelay
  */
-class ReadOccupancySensingPirOccupiedToUnoccupiedDelay : public ReadAttribute {
+class ReadOccupancySensingPIROccupiedToUnoccupiedDelay : public ReadAttribute {
 public:
-    ReadOccupancySensingPirOccupiedToUnoccupiedDelay()
-        : ReadAttribute("pir-occupied-to-unoccupied-delay")
+    ReadOccupancySensingPIROccupiedToUnoccupiedDelay()
+        : ReadAttribute("piroccupied-to-unoccupied-delay")
     {
     }
 
-    ~ReadOccupancySensingPirOccupiedToUnoccupiedDelay() {}
+    ~ReadOccupancySensingPIROccupiedToUnoccupiedDelay() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66591,17 +66591,17 @@ public:
     }
 };
 
-class WriteOccupancySensingPirOccupiedToUnoccupiedDelay : public WriteAttribute {
+class WriteOccupancySensingPIROccupiedToUnoccupiedDelay : public WriteAttribute {
 public:
-    WriteOccupancySensingPirOccupiedToUnoccupiedDelay()
-        : WriteAttribute("pir-occupied-to-unoccupied-delay")
+    WriteOccupancySensingPIROccupiedToUnoccupiedDelay()
+        : WriteAttribute("piroccupied-to-unoccupied-delay")
     {
-        AddArgument("attr-name", "pir-occupied-to-unoccupied-delay");
+        AddArgument("attr-name", "piroccupied-to-unoccupied-delay");
         AddArgument("attr-value", 0, UINT16_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteOccupancySensingPirOccupiedToUnoccupiedDelay() {}
+    ~WriteOccupancySensingPIROccupiedToUnoccupiedDelay() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66633,14 +66633,14 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeOccupancySensingPirOccupiedToUnoccupiedDelay : public SubscribeAttribute {
+class SubscribeAttributeOccupancySensingPIROccupiedToUnoccupiedDelay : public SubscribeAttribute {
 public:
-    SubscribeAttributeOccupancySensingPirOccupiedToUnoccupiedDelay()
-        : SubscribeAttribute("pir-occupied-to-unoccupied-delay")
+    SubscribeAttributeOccupancySensingPIROccupiedToUnoccupiedDelay()
+        : SubscribeAttribute("piroccupied-to-unoccupied-delay")
     {
     }
 
-    ~SubscribeAttributeOccupancySensingPirOccupiedToUnoccupiedDelay() {}
+    ~SubscribeAttributeOccupancySensingPIROccupiedToUnoccupiedDelay() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66673,16 +66673,16 @@ public:
 };
 
 /*
- * Attribute PirUnoccupiedToOccupiedDelay
+ * Attribute PIRUnoccupiedToOccupiedDelay
  */
-class ReadOccupancySensingPirUnoccupiedToOccupiedDelay : public ReadAttribute {
+class ReadOccupancySensingPIRUnoccupiedToOccupiedDelay : public ReadAttribute {
 public:
-    ReadOccupancySensingPirUnoccupiedToOccupiedDelay()
-        : ReadAttribute("pir-unoccupied-to-occupied-delay")
+    ReadOccupancySensingPIRUnoccupiedToOccupiedDelay()
+        : ReadAttribute("pirunoccupied-to-occupied-delay")
     {
     }
 
-    ~ReadOccupancySensingPirUnoccupiedToOccupiedDelay() {}
+    ~ReadOccupancySensingPIRUnoccupiedToOccupiedDelay() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66703,17 +66703,17 @@ public:
     }
 };
 
-class WriteOccupancySensingPirUnoccupiedToOccupiedDelay : public WriteAttribute {
+class WriteOccupancySensingPIRUnoccupiedToOccupiedDelay : public WriteAttribute {
 public:
-    WriteOccupancySensingPirUnoccupiedToOccupiedDelay()
-        : WriteAttribute("pir-unoccupied-to-occupied-delay")
+    WriteOccupancySensingPIRUnoccupiedToOccupiedDelay()
+        : WriteAttribute("pirunoccupied-to-occupied-delay")
     {
-        AddArgument("attr-name", "pir-unoccupied-to-occupied-delay");
+        AddArgument("attr-name", "pirunoccupied-to-occupied-delay");
         AddArgument("attr-value", 0, UINT16_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteOccupancySensingPirUnoccupiedToOccupiedDelay() {}
+    ~WriteOccupancySensingPIRUnoccupiedToOccupiedDelay() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66745,14 +66745,14 @@ private:
     uint16_t mValue;
 };
 
-class SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedDelay : public SubscribeAttribute {
+class SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedDelay : public SubscribeAttribute {
 public:
-    SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedDelay()
-        : SubscribeAttribute("pir-unoccupied-to-occupied-delay")
+    SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedDelay()
+        : SubscribeAttribute("pirunoccupied-to-occupied-delay")
     {
     }
 
-    ~SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedDelay() {}
+    ~SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedDelay() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66785,16 +66785,16 @@ public:
 };
 
 /*
- * Attribute PirUnoccupiedToOccupiedThreshold
+ * Attribute PIRUnoccupiedToOccupiedThreshold
  */
-class ReadOccupancySensingPirUnoccupiedToOccupiedThreshold : public ReadAttribute {
+class ReadOccupancySensingPIRUnoccupiedToOccupiedThreshold : public ReadAttribute {
 public:
-    ReadOccupancySensingPirUnoccupiedToOccupiedThreshold()
-        : ReadAttribute("pir-unoccupied-to-occupied-threshold")
+    ReadOccupancySensingPIRUnoccupiedToOccupiedThreshold()
+        : ReadAttribute("pirunoccupied-to-occupied-threshold")
     {
     }
 
-    ~ReadOccupancySensingPirUnoccupiedToOccupiedThreshold() {}
+    ~ReadOccupancySensingPIRUnoccupiedToOccupiedThreshold() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66816,17 +66816,17 @@ public:
     }
 };
 
-class WriteOccupancySensingPirUnoccupiedToOccupiedThreshold : public WriteAttribute {
+class WriteOccupancySensingPIRUnoccupiedToOccupiedThreshold : public WriteAttribute {
 public:
-    WriteOccupancySensingPirUnoccupiedToOccupiedThreshold()
-        : WriteAttribute("pir-unoccupied-to-occupied-threshold")
+    WriteOccupancySensingPIRUnoccupiedToOccupiedThreshold()
+        : WriteAttribute("pirunoccupied-to-occupied-threshold")
     {
-        AddArgument("attr-name", "pir-unoccupied-to-occupied-threshold");
+        AddArgument("attr-name", "pirunoccupied-to-occupied-threshold");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteOccupancySensingPirUnoccupiedToOccupiedThreshold() {}
+    ~WriteOccupancySensingPIRUnoccupiedToOccupiedThreshold() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -66858,14 +66858,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedThreshold : public SubscribeAttribute {
+class SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedThreshold : public SubscribeAttribute {
 public:
-    SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedThreshold()
-        : SubscribeAttribute("pir-unoccupied-to-occupied-threshold")
+    SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedThreshold()
+        : SubscribeAttribute("pirunoccupied-to-occupied-threshold")
     {
     }
 
-    ~SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedThreshold() {}
+    ~SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedThreshold() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -99982,15 +99982,15 @@ void registerClusterOccupancySensing(Commands & commands)
         make_unique<SubscribeAttributeOccupancySensingOccupancySensorType>(), //
         make_unique<ReadOccupancySensingOccupancySensorTypeBitmap>(), //
         make_unique<SubscribeAttributeOccupancySensingOccupancySensorTypeBitmap>(), //
-        make_unique<ReadOccupancySensingPirOccupiedToUnoccupiedDelay>(), //
-        make_unique<WriteOccupancySensingPirOccupiedToUnoccupiedDelay>(), //
-        make_unique<SubscribeAttributeOccupancySensingPirOccupiedToUnoccupiedDelay>(), //
-        make_unique<ReadOccupancySensingPirUnoccupiedToOccupiedDelay>(), //
-        make_unique<WriteOccupancySensingPirUnoccupiedToOccupiedDelay>(), //
-        make_unique<SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedDelay>(), //
-        make_unique<ReadOccupancySensingPirUnoccupiedToOccupiedThreshold>(), //
-        make_unique<WriteOccupancySensingPirUnoccupiedToOccupiedThreshold>(), //
-        make_unique<SubscribeAttributeOccupancySensingPirUnoccupiedToOccupiedThreshold>(), //
+        make_unique<ReadOccupancySensingPIROccupiedToUnoccupiedDelay>(), //
+        make_unique<WriteOccupancySensingPIROccupiedToUnoccupiedDelay>(), //
+        make_unique<SubscribeAttributeOccupancySensingPIROccupiedToUnoccupiedDelay>(), //
+        make_unique<ReadOccupancySensingPIRUnoccupiedToOccupiedDelay>(), //
+        make_unique<WriteOccupancySensingPIRUnoccupiedToOccupiedDelay>(), //
+        make_unique<SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedDelay>(), //
+        make_unique<ReadOccupancySensingPIRUnoccupiedToOccupiedThreshold>(), //
+        make_unique<WriteOccupancySensingPIRUnoccupiedToOccupiedThreshold>(), //
+        make_unique<SubscribeAttributeOccupancySensingPIRUnoccupiedToOccupiedThreshold>(), //
         make_unique<ReadOccupancySensingUltrasonicOccupiedToUnoccupiedDelay>(), //
         make_unique<WriteOccupancySensingUltrasonicOccupiedToUnoccupiedDelay>(), //
         make_unique<SubscribeAttributeOccupancySensingUltrasonicOccupiedToUnoccupiedDelay>(), //
