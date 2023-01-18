@@ -80155,7 +80155,7 @@ using chip::Messaging::ExchangeManager;
                                                                     NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = OccupancySensing::Attributes::PirOccupiedToUnoccupiedDelay::TypeInfo;
+    using TypeInfo = OccupancySensing::Attributes::PIROccupiedToUnoccupiedDelay::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -80187,7 +80187,7 @@ using chip::Messaging::ExchangeManager;
             }
 
             ListFreer listFreer;
-            using TypeInfo = OccupancySensing::Attributes::PirOccupiedToUnoccupiedDelay::TypeInfo;
+            using TypeInfo = OccupancySensing::Attributes::PIROccupiedToUnoccupiedDelay::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
@@ -80203,7 +80203,7 @@ using chip::Messaging::ExchangeManager;
                                                    reportHandler:(void (^)(NSNumber * _Nullable value,
                                                                      NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = OccupancySensing::Attributes::PirOccupiedToUnoccupiedDelay::TypeInfo;
+    using TypeInfo = OccupancySensing::Attributes::PIROccupiedToUnoccupiedDelay::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -80220,7 +80220,7 @@ using chip::Messaging::ExchangeManager;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = OccupancySensing::Attributes::PirOccupiedToUnoccupiedDelay::TypeInfo;
+                using TypeInfo = OccupancySensing::Attributes::PIROccupiedToUnoccupiedDelay::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -80239,7 +80239,7 @@ using chip::Messaging::ExchangeManager;
                                                                     NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedDelay::TypeInfo;
+    using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedDelay::TypeInfo;
     return MTRReadAttribute<MTRInt16uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -80271,7 +80271,7 @@ using chip::Messaging::ExchangeManager;
             }
 
             ListFreer listFreer;
-            using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedDelay::TypeInfo;
+            using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedDelay::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedShortValue;
 
@@ -80287,7 +80287,7 @@ using chip::Messaging::ExchangeManager;
                                                    reportHandler:(void (^)(NSNumber * _Nullable value,
                                                                      NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedDelay::TypeInfo;
+    using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedDelay::TypeInfo;
     MTRSubscribeAttribute<MTRInt16uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -80304,7 +80304,7 @@ using chip::Messaging::ExchangeManager;
         clusterStateCacheContainer.baseDevice, ^(Int16uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedDelay::TypeInfo;
+                using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedDelay::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -80323,7 +80323,7 @@ using chip::Messaging::ExchangeManager;
                                                                         NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedThreshold::TypeInfo;
+    using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedThreshold::TypeInfo;
     return MTRReadAttribute<MTRInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -80356,7 +80356,7 @@ using chip::Messaging::ExchangeManager;
             }
 
             ListFreer listFreer;
-            using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedThreshold::TypeInfo;
+            using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedThreshold::TypeInfo;
             TypeInfo::Type cppValue;
             cppValue = value.unsignedCharValue;
 
@@ -80372,7 +80372,7 @@ using chip::Messaging::ExchangeManager;
                                                        reportHandler:(void (^)(NSNumber * _Nullable value,
                                                                          NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedThreshold::TypeInfo;
+    using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedThreshold::TypeInfo;
     MTRSubscribeAttribute<MTRInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
@@ -80390,7 +80390,7 @@ using chip::Messaging::ExchangeManager;
         clusterStateCacheContainer.baseDevice, ^(Int8uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = OccupancySensing::Attributes::PirUnoccupiedToOccupiedThreshold::TypeInfo;
+                using TypeInfo = OccupancySensing::Attributes::PIRUnoccupiedToOccupiedThreshold::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();

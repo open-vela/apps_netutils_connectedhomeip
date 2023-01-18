@@ -35163,19 +35163,19 @@ private:
             LogStep(4, "Reads optional attribute: PIROccupiedToUnoccupiedDelay");
             VerifyOrDo(!ShouldSkip("OCC.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
-                                 OccupancySensing::Attributes::PirOccupiedToUnoccupiedDelay::Id, true, chip::NullOptional);
+                                 OccupancySensing::Attributes::PIROccupiedToUnoccupiedDelay::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Reads optional attribute constrains: PIRUnoccupiedToOccupiedDelay");
             VerifyOrDo(!ShouldSkip("OCC.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
-                                 OccupancySensing::Attributes::PirUnoccupiedToOccupiedDelay::Id, true, chip::NullOptional);
+                                 OccupancySensing::Attributes::PIRUnoccupiedToOccupiedDelay::Id, true, chip::NullOptional);
         }
         case 6: {
             LogStep(6, "Reads optional attribute constrains: PIRUnoccupiedToOccupiedThreshold");
             VerifyOrDo(!ShouldSkip("OCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), OccupancySensing::Id,
-                                 OccupancySensing::Attributes::PirUnoccupiedToOccupiedThreshold::Id, true, chip::NullOptional);
+                                 OccupancySensing::Attributes::PIRUnoccupiedToOccupiedThreshold::Id, true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "Read optional attribute: UltrasonicOccupiedToUnoccupiedDelay");
