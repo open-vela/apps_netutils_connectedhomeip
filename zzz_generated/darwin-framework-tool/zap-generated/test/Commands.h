@@ -53282,165 +53282,225 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : TH reads the FeatureMap attribute from the DUT\n");
+            if (ShouldSkip(" !PCC.S.F00 && !PCC.S.F01 && !PCC.S.F02 && !PCC.S.F03 && !PCC.S.F04 && !PCC.S.F05 && !PCC.S.F06 ")) {
+                NextTest();
+                return;
+            }
             err = TestThReadsTheFeatureMapAttributeFromTheDut_2();
             break;
         case 3:
-            ChipLogProgress(chipTool, " ***** Test Step 3 : TH reads the AttributeList attribute from the DUT\n");
-            err = TestThReadsTheAttributeListAttributeFromTheDut_3();
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Given PCC.S.F00(PRSCONST) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf00prsconstEnsureFeaturemapHasTheCorrectBitSet_3();
             break;
         case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Given PCC.S.F01(PRSCOMP) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F01")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf01prscompEnsureFeaturemapHasTheCorrectBitSet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : Given PCC.S.F02(FLW) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F02")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf02flwEnsureFeaturemapHasTheCorrectBitSet_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : Given PCC.S.F03(SPD) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F03")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf03spdEnsureFeaturemapHasTheCorrectBitSet_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : Given PCC.S.F04(TEMP) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F04")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf04tempEnsureFeaturemapHasTheCorrectBitSet_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : Given PCC.S.F05(AUTO) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F05")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf05autoEnsureFeaturemapHasTheCorrectBitSet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : Given PCC.S.F06(LOCAL) ensure featuremap has the correct bit set\n");
+            if (ShouldSkip("PCC.S.F06")) {
+                NextTest();
+                return;
+            }
+            err = TestGivenPccsf06localEnsureFeaturemapHasTheCorrectBitSet_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads the AttributeList attribute from the DUT\n");
+            err = TestThReadsTheAttributeListAttributeFromTheDut_10();
+            break;
+        case 11:
             ChipLogProgress(chipTool,
-                " ***** Test Step 4 : TH reads optional attribute(MinConstPressure) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 11 : TH reads optional attribute(MinConstPressure) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0003")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMinConstPressureAttributeInAttributeListFromTheDut_4();
+            err = TestThReadsOptionalAttributeMinConstPressureAttributeInAttributeListFromTheDut_11();
             break;
-        case 5:
+        case 12:
             ChipLogProgress(chipTool,
-                " ***** Test Step 5 : TH reads optional attribute(MaxConstPressure) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 12 : TH reads optional attribute(MaxConstPressure) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0004")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMaxConstPressureAttributeInAttributeListFromTheDut_5();
+            err = TestThReadsOptionalAttributeMaxConstPressureAttributeInAttributeListFromTheDut_12();
             break;
-        case 6:
+        case 13:
             ChipLogProgress(chipTool,
-                " ***** Test Step 6 : TH reads optional attribute(MinCompPressure) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 13 : TH reads optional attribute(MinCompPressure) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0005")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMinCompPressureAttributeInAttributeListFromTheDut_6();
+            err = TestThReadsOptionalAttributeMinCompPressureAttributeInAttributeListFromTheDut_13();
             break;
-        case 7:
+        case 14:
             ChipLogProgress(chipTool,
-                " ***** Test Step 7 : TH reads optional attribute(MaxCompPressure) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 14 : TH reads optional attribute(MaxCompPressure) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0006")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMaxCompPressureAttributeInAttributeListFromTheDut_7();
+            err = TestThReadsOptionalAttributeMaxCompPressureAttributeInAttributeListFromTheDut_14();
             break;
-        case 8:
+        case 15:
             ChipLogProgress(chipTool,
-                " ***** Test Step 8 : TH reads optional attribute(MinConstSpeed) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 15 : TH reads optional attribute(MinConstSpeed) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0007")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMinConstSpeedAttributeInAttributeListFromTheDut_8();
+            err = TestThReadsOptionalAttributeMinConstSpeedAttributeInAttributeListFromTheDut_15();
             break;
-        case 9:
+        case 16:
             ChipLogProgress(chipTool,
-                " ***** Test Step 9 : TH reads optional attribute(MaxConstSpeed) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 16 : TH reads optional attribute(MaxConstSpeed) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0008")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMaxConstSpeedAttributeInAttributeListFromTheDut_9();
+            err = TestThReadsOptionalAttributeMaxConstSpeedAttributeInAttributeListFromTheDut_16();
             break;
-        case 10:
+        case 17:
             ChipLogProgress(chipTool,
-                " ***** Test Step 10 : TH reads optional attribute(MinConstFlow) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 17 : TH reads optional attribute(MinConstFlow) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0009")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMinConstFlowAttributeInAttributeListFromTheDut_10();
+            err = TestThReadsOptionalAttributeMinConstFlowAttributeInAttributeListFromTheDut_17();
             break;
-        case 11:
+        case 18:
             ChipLogProgress(chipTool,
-                " ***** Test Step 11 : TH reads optional attribute(MaxConstFlow) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 18 : TH reads optional attribute(MaxConstFlow) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A000a")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMaxConstFlowAttributeInAttributeListFromTheDut_11();
+            err = TestThReadsOptionalAttributeMaxConstFlowAttributeInAttributeListFromTheDut_18();
             break;
-        case 12:
+        case 19:
             ChipLogProgress(chipTool,
-                " ***** Test Step 12 : TH reads optional attribute(MinConstTemp) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 19 : TH reads optional attribute(MinConstTemp) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A000b")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMinConstTempAttributeInAttributeListFromTheDut_12();
+            err = TestThReadsOptionalAttributeMinConstTempAttributeInAttributeListFromTheDut_19();
             break;
-        case 13:
+        case 20:
             ChipLogProgress(chipTool,
-                " ***** Test Step 13 : TH reads optional attribute(MaxConstTemp) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 20 : TH reads optional attribute(MaxConstTemp) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A000c")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeMaxConstTempAttributeInAttributeListFromTheDut_13();
+            err = TestThReadsOptionalAttributeMaxConstTempAttributeInAttributeListFromTheDut_20();
             break;
-        case 14:
+        case 21:
             ChipLogProgress(chipTool,
-                " ***** Test Step 14 : TH reads optional attribute(PumpStatus) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 21 : TH reads optional attribute(PumpStatus) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0010")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributePumpStatusAttributeInAttributeListFromTheDut_14();
+            err = TestThReadsOptionalAttributePumpStatusAttributeInAttributeListFromTheDut_21();
             break;
-        case 15:
+        case 22:
             ChipLogProgress(
-                chipTool, " ***** Test Step 15 : TH reads optional attribute(Speed) attribute in AttributeList from the DUT\n");
+                chipTool, " ***** Test Step 22 : TH reads optional attribute(Speed) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0014")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeSpeedAttributeInAttributeListFromTheDut_15();
+            err = TestThReadsOptionalAttributeSpeedAttributeInAttributeListFromTheDut_22();
             break;
-        case 16:
+        case 23:
             ChipLogProgress(chipTool,
-                " ***** Test Step 16 : TH reads optional attribute(LifetimeRunningHours) attribute in AttributeList from the "
+                " ***** Test Step 23 : TH reads optional attribute(LifetimeRunningHours) attribute in AttributeList from the "
                 "DUT\n");
             if (ShouldSkip("PCC.S.A0015")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeLifetimeRunningHoursAttributeInAttributeListFromTheDut_16();
+            err = TestThReadsOptionalAttributeLifetimeRunningHoursAttributeInAttributeListFromTheDut_23();
             break;
-        case 17:
+        case 24:
             ChipLogProgress(
-                chipTool, " ***** Test Step 17 : TH reads optional attribute(Power) attribute in AttributeList from the DUT\n");
+                chipTool, " ***** Test Step 24 : TH reads optional attribute(Power) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0016")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributePowerAttributeInAttributeListFromTheDut_17();
+            err = TestThReadsOptionalAttributePowerAttributeInAttributeListFromTheDut_24();
             break;
-        case 18:
+        case 25:
             ChipLogProgress(chipTool,
-                " ***** Test Step 18 : TH reads optional attribute(LifetimeEnergyConsumed) attribute in AttributeList from the "
+                " ***** Test Step 25 : TH reads optional attribute(LifetimeEnergyConsumed) attribute in AttributeList from the "
                 "DUT\n");
             if (ShouldSkip("PCC.S.A0017")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeLifetimeEnergyConsumedAttributeInAttributeListFromTheDut_18();
+            err = TestThReadsOptionalAttributeLifetimeEnergyConsumedAttributeInAttributeListFromTheDut_25();
             break;
-        case 19:
+        case 26:
             ChipLogProgress(chipTool,
-                " ***** Test Step 19 : TH reads optional attribute(ControlMode) attribute in AttributeList from the DUT\n");
+                " ***** Test Step 26 : TH reads optional attribute(ControlMode) attribute in AttributeList from the DUT\n");
             if (ShouldSkip("PCC.S.A0021")) {
                 NextTest();
                 return;
             }
-            err = TestThReadsOptionalAttributeControlModeAttributeInAttributeListFromTheDut_19();
+            err = TestThReadsOptionalAttributeControlModeAttributeInAttributeListFromTheDut_26();
             break;
-        case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : TH reads the AcceptedCommandList attribute from the DUT\n");
-            err = TestThReadsTheAcceptedCommandListAttributeFromTheDut_20();
+        case 27:
+            ChipLogProgress(chipTool, " ***** Test Step 27 : TH reads the AcceptedCommandList attribute from the DUT\n");
+            err = TestThReadsTheAcceptedCommandListAttributeFromTheDut_27();
             break;
-        case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : TH reads the GeneratedCommandList attribute from the DUT\n");
-            err = TestThReadsTheGeneratedCommandListAttributeFromTheDut_21();
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : TH reads the GeneratedCommandList attribute from the DUT\n");
+            err = TestThReadsTheGeneratedCommandListAttributeFromTheDut_28();
             break;
         }
 
@@ -53519,6 +53579,27 @@ public:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -53532,7 +53613,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 22;
+    const uint16_t mTestCount = 29;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -53564,7 +53645,7 @@ private:
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 3U));
+                VerifyOrReturn(CheckValue("ClusterRevision", actualValue, 4U));
             }
 
             VerifyOrReturn(CheckConstraintType("clusterRevision", "int16u", "int16u"));
@@ -53601,7 +53682,161 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheAttributeListAttributeFromTheDut_3()
+    CHIP_ERROR TestGivenPccsf00prsconstEnsureFeaturemapHasTheCorrectBitSet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F00(PRSCONST) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPccsf01prscompEnsureFeaturemapHasTheCorrectBitSet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F01(PRSCOMP) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPccsf02flwEnsureFeaturemapHasTheCorrectBitSet_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F02(FLW) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPccsf03spdEnsureFeaturemapHasTheCorrectBitSet_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F03(SPD) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPccsf04tempEnsureFeaturemapHasTheCorrectBitSet_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F04(TEMP) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPccsf05autoEnsureFeaturemapHasTheCorrectBitSet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F05(AUTO) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestGivenPccsf06localEnsureFeaturemapHasTheCorrectBitSet_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterPumpConfigurationAndControl alloc] initWithDevice:device
+                                                                                       endpointID:@(1)
+                                                                                            queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeFeatureMapWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Given PCC.S.F06(LOCAL) ensure featuremap has the correct bit set Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintType("featureMap", "bitmap32", "bitmap32"));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsTheAttributeListAttributeFromTheDut_10()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53636,7 +53871,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMinConstPressureAttributeInAttributeListFromTheDut_4()
+    CHIP_ERROR TestThReadsOptionalAttributeMinConstPressureAttributeInAttributeListFromTheDut_11()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53660,7 +53895,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMaxConstPressureAttributeInAttributeListFromTheDut_5()
+    CHIP_ERROR TestThReadsOptionalAttributeMaxConstPressureAttributeInAttributeListFromTheDut_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53684,7 +53919,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMinCompPressureAttributeInAttributeListFromTheDut_6()
+    CHIP_ERROR TestThReadsOptionalAttributeMinCompPressureAttributeInAttributeListFromTheDut_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53708,7 +53943,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMaxCompPressureAttributeInAttributeListFromTheDut_7()
+    CHIP_ERROR TestThReadsOptionalAttributeMaxCompPressureAttributeInAttributeListFromTheDut_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53732,7 +53967,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMinConstSpeedAttributeInAttributeListFromTheDut_8()
+    CHIP_ERROR TestThReadsOptionalAttributeMinConstSpeedAttributeInAttributeListFromTheDut_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53756,7 +53991,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMaxConstSpeedAttributeInAttributeListFromTheDut_9()
+    CHIP_ERROR TestThReadsOptionalAttributeMaxConstSpeedAttributeInAttributeListFromTheDut_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53780,7 +54015,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMinConstFlowAttributeInAttributeListFromTheDut_10()
+    CHIP_ERROR TestThReadsOptionalAttributeMinConstFlowAttributeInAttributeListFromTheDut_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53804,7 +54039,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMaxConstFlowAttributeInAttributeListFromTheDut_11()
+    CHIP_ERROR TestThReadsOptionalAttributeMaxConstFlowAttributeInAttributeListFromTheDut_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53828,7 +54063,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMinConstTempAttributeInAttributeListFromTheDut_12()
+    CHIP_ERROR TestThReadsOptionalAttributeMinConstTempAttributeInAttributeListFromTheDut_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53852,7 +54087,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeMaxConstTempAttributeInAttributeListFromTheDut_13()
+    CHIP_ERROR TestThReadsOptionalAttributeMaxConstTempAttributeInAttributeListFromTheDut_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53876,7 +54111,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributePumpStatusAttributeInAttributeListFromTheDut_14()
+    CHIP_ERROR TestThReadsOptionalAttributePumpStatusAttributeInAttributeListFromTheDut_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53900,7 +54135,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeSpeedAttributeInAttributeListFromTheDut_15()
+    CHIP_ERROR TestThReadsOptionalAttributeSpeedAttributeInAttributeListFromTheDut_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53924,7 +54159,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeLifetimeRunningHoursAttributeInAttributeListFromTheDut_16()
+    CHIP_ERROR TestThReadsOptionalAttributeLifetimeRunningHoursAttributeInAttributeListFromTheDut_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53948,7 +54183,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributePowerAttributeInAttributeListFromTheDut_17()
+    CHIP_ERROR TestThReadsOptionalAttributePowerAttributeInAttributeListFromTheDut_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53972,7 +54207,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeLifetimeEnergyConsumedAttributeInAttributeListFromTheDut_18()
+    CHIP_ERROR TestThReadsOptionalAttributeLifetimeEnergyConsumedAttributeInAttributeListFromTheDut_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -53996,7 +54231,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsOptionalAttributeControlModeAttributeInAttributeListFromTheDut_19()
+    CHIP_ERROR TestThReadsOptionalAttributeControlModeAttributeInAttributeListFromTheDut_26()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -54020,7 +54255,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheAcceptedCommandListAttributeFromTheDut_20()
+    CHIP_ERROR TestThReadsTheAcceptedCommandListAttributeFromTheDut_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -54047,7 +54282,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsTheGeneratedCommandListAttributeFromTheDut_21()
+    CHIP_ERROR TestThReadsTheGeneratedCommandListAttributeFromTheDut_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -55116,7 +55351,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : TH write 1 (Minimum) to the OperationMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0020 && PCC.M.ControlModeConstSpeed")) {
+            if (ShouldSkip("PCC.S.F03 && PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -55124,7 +55359,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : TH reads from the DUT the EffectiveOperationMode attribute\n");
-            if (ShouldSkip("PCC.S.A0011 && PCC.M.ControlModeConstSpeed")) {
+            if (ShouldSkip("PCC.S.F03 && PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -55133,7 +55368,7 @@ public:
         case 5:
             ChipLogProgress(
                 chipTool, " ***** Test Step 5 : TH write 2 (Maximum) to the OperationMode attribute to DUT one at a time.\n");
-            if (ShouldSkip("PCC.S.A0020 && PCC.M.ControlModeConstSpeed")) {
+            if (ShouldSkip("PCC.S.F03 && PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -55141,7 +55376,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : TH reads from the DUT the EffectiveOperationMode attribute\n");
-            if (ShouldSkip("PCC.S.A0011 && PCC.M.ControlModeConstSpeed")) {
+            if (ShouldSkip("PCC.S.F03 && PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -55149,7 +55384,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : TH write 3 (Local) to the OperationMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0020")) {
+            if (ShouldSkip("PCC.S.F06 && PCC.S.A0020")) {
                 NextTest();
                 return;
             }
@@ -55157,7 +55392,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : TH reads from the DUT the EffectiveOperationMode attribute\n");
-            if (ShouldSkip("PCC.S.A0011")) {
+            if (ShouldSkip("PCC.S.F06 && PCC.S.A0011")) {
                 NextTest();
                 return;
             }
@@ -55499,7 +55734,7 @@ public:
             break;
         case 3:
             ChipLogProgress(chipTool, " ***** Test Step 3 : Write 0 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstSpeed")) {
+            if (ShouldSkip("PCC.S.F03 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -55507,7 +55742,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstSpeed")) {
+            if (ShouldSkip("PCC.S.F03 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -55515,7 +55750,7 @@ public:
             break;
         case 5:
             ChipLogProgress(chipTool, " ***** Test Step 5 : Write 1 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstPressure")) {
+            if (ShouldSkip("PCC.S.F00 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -55523,7 +55758,7 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstPressure")) {
+            if (ShouldSkip("PCC.S.F00 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -55531,7 +55766,7 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Write 2 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeCompPressure")) {
+            if (ShouldSkip("PCC.S.F01 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -55539,7 +55774,7 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeCompPressure")) {
+            if (ShouldSkip("PCC.S.F01 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -55547,7 +55782,7 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Write 3 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstFlow")) {
+            if (ShouldSkip("PCC.S.F02 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -55555,7 +55790,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstFlow")) {
+            if (ShouldSkip("PCC.S.F02 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -55563,7 +55798,7 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Write 5 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstTemp")) {
+            if (ShouldSkip("PCC.S.F04 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -55571,7 +55806,7 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstTemp")) {
+            if (ShouldSkip("PCC.S.F04 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
@@ -55579,7 +55814,7 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Write 7 to the ControlMode attribute to DUT\n");
-            if (ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeAuto")) {
+            if (ShouldSkip("PCC.S.F05 && PCC.S.A0021")) {
                 NextTest();
                 return;
             }
@@ -55587,7 +55822,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeAuto")) {
+            if (ShouldSkip("PCC.S.F02 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }

@@ -38004,7 +38004,7 @@ private:
 class Test_TC_PCC_1_1Suite : public TestCommand
 {
 public:
-    Test_TC_PCC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PCC_1_1", 22, credsIssuerConfig)
+    Test_TC_PCC_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_PCC_1_1", 29, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -38054,7 +38054,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("clusterRevision", value, 3U));
+                VerifyOrReturn(CheckValue("clusterRevision", value, 4U));
                 VerifyOrReturn(CheckConstraintType("value", "int16u", "int16u"));
             }
             break;
@@ -38068,6 +38068,69 @@ private:
             }
             break;
         case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 1UL));
+            }
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 2UL));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 4UL));
+            }
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 8UL));
+            }
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 16UL));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 32UL));
+            }
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                uint32_t value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintType("value", "bitmap32", "bitmap32"));
+                VerifyOrReturn(CheckConstraintHasMasksSet("value", value, 64UL));
+            }
+            break;
+        case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38087,7 +38150,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 65533UL));
             }
             break;
-        case 4:
+        case 11:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38096,7 +38159,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 3UL));
             }
             break;
-        case 5:
+        case 12:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38105,7 +38168,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 4UL));
             }
             break;
-        case 6:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38114,7 +38177,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 5UL));
             }
             break;
-        case 7:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38123,7 +38186,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 6UL));
             }
             break;
-        case 8:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38132,7 +38195,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 7UL));
             }
             break;
-        case 9:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38141,7 +38204,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 8UL));
             }
             break;
-        case 10:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38150,7 +38213,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 9UL));
             }
             break;
-        case 11:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38159,7 +38222,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 10UL));
             }
             break;
-        case 12:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38168,7 +38231,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 11UL));
             }
             break;
-        case 13:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38177,7 +38240,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 12UL));
             }
             break;
-        case 14:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38186,7 +38249,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 16UL));
             }
             break;
-        case 15:
+        case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38195,7 +38258,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 20UL));
             }
             break;
-        case 16:
+        case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38204,7 +38267,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 21UL));
             }
             break;
-        case 17:
+        case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38213,7 +38276,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 22UL));
             }
             break;
-        case 18:
+        case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38222,7 +38285,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 23UL));
             }
             break;
-        case 19:
+        case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::AttributeId> value;
@@ -38231,7 +38294,7 @@ private:
                 VerifyOrReturn(CheckConstraintContains("value", value, 33UL));
             }
             break;
-        case 20:
+        case 27:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -38243,7 +38306,7 @@ private:
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
             break;
-        case 21:
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<chip::CommandId> value;
@@ -38290,117 +38353,162 @@ private:
         }
         case 2: {
             LogStep(2, "TH reads the FeatureMap attribute from the DUT");
+            VerifyOrDo(
+                !ShouldSkip(" !PCC.S.F00 && !PCC.S.F01 && !PCC.S.F02 && !PCC.S.F03 && !PCC.S.F04 && !PCC.S.F05 && !PCC.S.F06 "),
+                return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "TH reads the AttributeList attribute from the DUT");
+            LogStep(3, "Given PCC.S.F00(PRSCONST) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 4: {
-            LogStep(4, "TH reads optional attribute(MinConstPressure) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(4, "Given PCC.S.F01(PRSCOMP) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 5: {
-            LogStep(5, "TH reads optional attribute(MaxConstPressure) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(5, "Given PCC.S.F02(FLW) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 6: {
-            LogStep(6, "TH reads optional attribute(MinCompPressure) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(6, "Given PCC.S.F03(SPD) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 7: {
-            LogStep(7, "TH reads optional attribute(MaxCompPressure) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(7, "Given PCC.S.F04(TEMP) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 8: {
-            LogStep(8, "TH reads optional attribute(MinConstSpeed) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(8, "Given PCC.S.F05(AUTO) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F05"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 9: {
-            LogStep(9, "TH reads optional attribute(MaxConstSpeed) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(9, "Given PCC.S.F06(LOCAL) ensure featuremap has the correct bit set");
+            VerifyOrDo(!ShouldSkip("PCC.S.F06"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
-                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+                                 PumpConfigurationAndControl::Attributes::FeatureMap::Id, true, chip::NullOptional);
         }
         case 10: {
-            LogStep(10, "TH reads optional attribute(MinConstFlow) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(10, "TH reads the AttributeList attribute from the DUT");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 11: {
-            LogStep(11, "TH reads optional attribute(MaxConstFlow) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(11, "TH reads optional attribute(MinConstPressure) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0003"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 12: {
-            LogStep(12, "TH reads optional attribute(MinConstTemp) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(12, "TH reads optional attribute(MaxConstPressure) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0004"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 13: {
-            LogStep(13, "TH reads optional attribute(MaxConstTemp) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(13, "TH reads optional attribute(MinCompPressure) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 14: {
-            LogStep(14, "TH reads optional attribute(PumpStatus) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "TH reads optional attribute(MaxCompPressure) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0006"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 15: {
-            LogStep(15, "TH reads optional attribute(Speed) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0014"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(15, "TH reads optional attribute(MinConstSpeed) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0007"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 16: {
-            LogStep(16, "TH reads optional attribute(LifetimeRunningHours) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(16, "TH reads optional attribute(MaxConstSpeed) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 17: {
-            LogStep(17, "TH reads optional attribute(Power) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(17, "TH reads optional attribute(MinConstFlow) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0009"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 18: {
-            LogStep(18, "TH reads optional attribute(LifetimeEnergyConsumed) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(18, "TH reads optional attribute(MaxConstFlow) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A000a"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 19: {
-            LogStep(19, "TH reads optional attribute(ControlMode) attribute in AttributeList from the DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(19, "TH reads optional attribute(MinConstTemp) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A000b"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
         }
         case 20: {
-            LogStep(20, "TH reads the AcceptedCommandList attribute from the DUT");
+            LogStep(20, "TH reads optional attribute(MaxConstTemp) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A000c"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 21: {
+            LogStep(21, "TH reads optional attribute(PumpStatus) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0010"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "TH reads optional attribute(Speed) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0014"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "TH reads optional attribute(LifetimeRunningHours) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "TH reads optional attribute(Power) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "TH reads optional attribute(LifetimeEnergyConsumed) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 26: {
+            LogStep(26, "TH reads optional attribute(ControlMode) attribute in AttributeList from the DUT");
+            VerifyOrDo(!ShouldSkip("PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
+                                 PumpConfigurationAndControl::Attributes::AttributeList::Id, true, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "TH reads the AcceptedCommandList attribute from the DUT");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
-        case 21: {
-            LogStep(21, "TH reads the GeneratedCommandList attribute from the DUT");
+        case 28: {
+            LogStep(28, "TH reads the GeneratedCommandList attribute from the DUT");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::GeneratedCommandList::Id, true, chip::NullOptional);
         }
@@ -38996,7 +39104,7 @@ private:
         }
         case 3: {
             LogStep(3, "TH write 1 (Minimum) to the OperationMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0020 && PCC.M.ControlModeConstSpeed"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(1);
@@ -39006,13 +39114,13 @@ private:
         }
         case 4: {
             LogStep(4, "TH reads from the DUT the EffectiveOperationMode attribute");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0011 && PCC.M.ControlModeConstSpeed"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveOperationMode::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "TH write 2 (Maximum) to the OperationMode attribute to DUT one at a time.");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0020 && PCC.M.ControlModeConstSpeed"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(2);
@@ -39022,13 +39130,13 @@ private:
         }
         case 6: {
             LogStep(6, "TH reads from the DUT the EffectiveOperationMode attribute");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0011 && PCC.M.ControlModeConstSpeed"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveOperationMode::Id, true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "TH write 3 (Local) to the OperationMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F06 && PCC.S.A0020"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpOperationMode>(3);
@@ -39038,7 +39146,7 @@ private:
         }
         case 8: {
             LogStep(8, "TH reads from the DUT the EffectiveOperationMode attribute");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F06 && PCC.S.A0011"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveOperationMode::Id, true, chip::NullOptional);
         }
@@ -39218,7 +39326,7 @@ private:
         }
         case 3: {
             LogStep(3, "Write 0 to the ControlMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstSpeed"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(0);
@@ -39228,14 +39336,13 @@ private:
         }
         case 4: {
             LogStep(4, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstSpeed"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F03 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
         case 5: {
             LogStep(5, "Write 1 to the ControlMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstPressure"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F00 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(1);
@@ -39245,14 +39352,13 @@ private:
         }
         case 6: {
             LogStep(6, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstPressure"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F00 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
         case 7: {
             LogStep(7, "Write 2 to the ControlMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeCompPressure"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F01 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(2);
@@ -39262,13 +39368,13 @@ private:
         }
         case 8: {
             LogStep(8, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeCompPressure"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F01 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
         case 9: {
             LogStep(9, "Write 3 to the ControlMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstFlow"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F02 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(3);
@@ -39278,13 +39384,13 @@ private:
         }
         case 10: {
             LogStep(10, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstFlow"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F02 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
         case 11: {
             LogStep(11, "Write 5 to the ControlMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeConstTemp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F04 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(5);
@@ -39294,13 +39400,13 @@ private:
         }
         case 12: {
             LogStep(12, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeConstTemp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F04 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
         case 13: {
             LogStep(13, "Write 7 to the ControlMode attribute to DUT");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0021 && PCC.M.ControlModeAuto"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F05 && PCC.S.A0021"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode value;
             value = static_cast<chip::app::Clusters::PumpConfigurationAndControl::PumpControlMode>(7);
@@ -39310,7 +39416,7 @@ private:
         }
         case 14: {
             LogStep(14, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.A0012 && PCC.M.ControlModeAuto"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F02 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
