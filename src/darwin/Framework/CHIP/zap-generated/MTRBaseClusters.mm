@@ -40308,7 +40308,8 @@ using chip::Messaging::ExchangeManager;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.certificateType = params.certificateType.unsignedCharValue;
+            request.certificateType
+                = static_cast<std::remove_reference_t<decltype(request.certificateType)>>(params.certificateType.unsignedCharValue);
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
@@ -40488,7 +40489,7 @@ using chip::Messaging::ExchangeManager;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.rootCertificate = [self asByteSpan:params.rootCertificate];
+            request.rootCACertificate = [self asByteSpan:params.rootCACertificate];
 
             return MTRStartInvokeInteraction(
                 typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);

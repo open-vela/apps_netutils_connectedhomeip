@@ -101434,24 +101434,26 @@ private:
 
         __auto_type * params = [[MTRReadParams alloc] init];
         params.filterByFabric = true;
-        [cluster readAttributeFabricsWithParams:params
-                                     completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-                                         NSLog(@"Read fabric list before setting label Error: %@", err);
+        [cluster
+            readAttributeFabricsWithParams:params
+                                completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                    NSLog(@"Read fabric list before setting label Error: %@", err);
 
-                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                         {
-                                             id actualValue = value;
-                                             VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
-                                             VerifyOrReturn(CheckValueAsString("Label",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).label, @""));
-                                             VerifyOrReturn(CheckValue("FabricIndex",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).fabricIndex,
-                                                 ourFabricIndex));
-                                         }
+                                    {
+                                        id actualValue = value;
+                                        VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
+                                        VerifyOrReturn(CheckValueAsString("Label",
+                                            ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).label,
+                                            @""));
+                                        VerifyOrReturn(CheckValue("FabricIndex",
+                                            ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).fabricIndex,
+                                            ourFabricIndex));
+                                    }
 
-                                         NextTest();
-                                     }];
+                                    NextTest();
+                                }];
 
         return CHIP_NO_ERROR;
     }
@@ -101503,25 +101505,26 @@ private:
 
         __auto_type * params = [[MTRReadParams alloc] init];
         params.filterByFabric = true;
-        [cluster readAttributeFabricsWithParams:params
-                                     completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
-                                         NSLog(@"Read fabric list after setting label Error: %@", err);
+        [cluster
+            readAttributeFabricsWithParams:params
+                                completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                    NSLog(@"Read fabric list after setting label Error: %@", err);
 
-                                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                    VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                         {
-                                             id actualValue = value;
-                                             VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
-                                             VerifyOrReturn(CheckValueAsString("Label",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).label,
-                                                 @"Batcave"));
-                                             VerifyOrReturn(CheckValue("FabricIndex",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).fabricIndex,
-                                                 ourFabricIndex));
-                                         }
+                                    {
+                                        id actualValue = value;
+                                        VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
+                                        VerifyOrReturn(CheckValueAsString("Label",
+                                            ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).label,
+                                            @"Batcave"));
+                                        VerifyOrReturn(CheckValue("FabricIndex",
+                                            ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).fabricIndex,
+                                            ourFabricIndex));
+                                    }
 
-                                         NextTest();
-                                     }];
+                                    NextTest();
+                                }];
 
         return CHIP_NO_ERROR;
     }
@@ -104303,11 +104306,12 @@ private:
                                          {
                                              id actualValue = value;
                                              VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
-                                             VerifyOrReturn(CheckValue("NodeId",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).nodeId,
+                                             VerifyOrReturn(CheckValue("NodeID",
+                                                 ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).nodeID,
                                                  mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                                              VerifyOrReturn(CheckValueAsString("Label",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).label, @""));
+                                                 ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).label,
+                                                 @""));
                                          }
 
                                          VerifyOrReturn(CheckConstraintType("fabrics", "list", "list"));
@@ -104383,7 +104387,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTROperationalCredentialsClusterAddTrustedRootCertificateParams alloc] init];
-        params.rootCertificate = [[NSData alloc] initWithBytes:"00000000" length:8];
+        params.rootCACertificate = [[NSData alloc] initWithBytes:"00000000" length:8];
         [cluster addTrustedRootCertificateWithParams:params
                                           completion:^(NSError * _Nullable err) {
                                               NSLog(@"Invoke AddTrustedRootCertificate without fail-safe Error: %@", err);
@@ -108895,8 +108899,8 @@ private:
                                          {
                                              id actualValue = value;
                                              VerifyOrReturn(CheckValue("Fabrics", [actualValue count], static_cast<uint32_t>(1)));
-                                             VerifyOrReturn(CheckValue("NodeId",
-                                                 ((MTROperationalCredentialsClusterFabricDescriptor *) actualValue[0]).nodeId,
+                                             VerifyOrReturn(CheckValue("NodeID",
+                                                 ((MTROperationalCredentialsClusterFabricDescriptorStruct *) actualValue[0]).nodeID,
                                                  mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL));
                                          }
 
