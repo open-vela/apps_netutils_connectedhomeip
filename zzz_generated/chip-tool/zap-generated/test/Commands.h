@@ -2674,13 +2674,13 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDOkSingle.HasValue()
-                    ? mDOkSingle.Value()
-                    : chip::ByteSpan(
+                listHolder_0->mList[0].data        = mDOkSingle.HasValue()
+                           ? mDOkSingle.Value()
+                           : chip::ByteSpan(
                           chip::Uint8::from_const_char(
                               "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69"
-                              "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
-                              "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                     "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                                     "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
                           71);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
@@ -2712,16 +2712,16 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDOkFull.HasValue()
-                    ? mDOkFull.Value()
-                    : chip::ByteSpan(chip::Uint8::from_const_char(
+                listHolder_0->mList[0].data        = mDOkFull.HasValue()
+                           ? mDOkFull.Value()
+                           : chip::ByteSpan(chip::Uint8::from_const_char(
                                          "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20"
-                                         "\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65"
-                                         "\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72"
-                                         "\x69\x6E\x67\x00\xD0\x00\x00\xF1\xFF\x02\x00\x31\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C"
-                                         "\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C"
-                                         "\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x00\x18"),
-                                     128);
+                                                "\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65"
+                                                "\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72"
+                                                "\x69\x6E\x67\x00\xD0\x00\x00\xF1\xFF\x02\x00\x31\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C"
+                                                "\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C"
+                                                "\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x00\x18"),
+                                            128);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
                 value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
@@ -2752,16 +2752,16 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDBadLength.HasValue()
-                    ? mDBadLength.Value()
-                    : chip::ByteSpan(chip::Uint8::from_const_char(
+                listHolder_0->mList[0].data        = mDBadLength.HasValue()
+                           ? mDBadLength.Value()
+                           : chip::ByteSpan(chip::Uint8::from_const_char(
                                          "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20"
-                                         "\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65"
-                                         "\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72"
-                                         "\x69\x6E\x67\x00\xD0\x00\x00\xF1\xFF\x02\x00\x32\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C"
-                                         "\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C"
-                                         "\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x2E\x00\x18"),
-                                     129);
+                                                "\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65"
+                                                "\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72"
+                                                "\x69\x6E\x67\x00\xD0\x00\x00\xF1\xFF\x02\x00\x32\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C"
+                                                "\x64\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C"
+                                                "\x65\x6D\x65\x6E\x74\x20\x61\x67\x61\x69\x6E\x2E\x2E\x2E\x2E\x2E\x2E\x00\x18"),
+                                            129);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
                 value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
@@ -2808,13 +2808,13 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDBadList.HasValue()
-                    ? mDBadList.Value()
-                    : chip::ByteSpan(
+                listHolder_0->mList[0].data        = mDBadList.HasValue()
+                           ? mDBadList.Value()
+                           : chip::ByteSpan(
                           chip::Uint8::from_const_char(
                               "\x37\x01\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68"
-                              "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69"
-                              "\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                     "\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69"
+                                     "\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
                           72);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
@@ -2839,13 +2839,13 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDBadElem.HasValue()
-                    ? mDBadElem.Value()
-                    : chip::ByteSpan(chip::Uint8::from_const_char(
+                listHolder_0->mList[0].data        = mDBadElem.HasValue()
+                           ? mDBadElem.Value()
+                           : chip::ByteSpan(chip::Uint8::from_const_char(
                                          "\x17\x10\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69\x73\x20\x69"
-                                         "\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
-                                         "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
-                                     65);
+                                                "\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                                                "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                            65);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
                 value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(
@@ -2869,13 +2869,13 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDBadOverflow.HasValue()
-                    ? mDBadOverflow.Value()
-                    : chip::ByteSpan(
+                listHolder_0->mList[0].data        = mDBadOverflow.HasValue()
+                           ? mDBadOverflow.Value()
+                           : chip::ByteSpan(
                           chip::Uint8::from_const_char(
                               "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69"
-                              "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
-                              "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18\xFF"),
+                                     "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                                     "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18\xFF"),
                           72);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
@@ -2900,13 +2900,13 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDBadUnderflow.HasValue()
-                    ? mDBadUnderflow.Value()
-                    : chip::ByteSpan(
+                listHolder_0->mList[0].data        = mDBadUnderflow.HasValue()
+                           ? mDBadUnderflow.Value()
+                           : chip::ByteSpan(
                           chip::Uint8::from_const_char(
                               "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69"
-                              "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
-                              "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00"),
+                                     "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                                     "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00"),
                           70);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
@@ -2960,13 +2960,13 @@ private:
                     mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2);
                 listHolder_0->mList[0].fabricIndex = CurrentFabricIndex;
 
-                listHolder_0->mList[1].data = mDOkSingle.HasValue()
-                    ? mDOkSingle.Value()
-                    : chip::ByteSpan(
+                listHolder_0->mList[1].data        = mDOkSingle.HasValue()
+                           ? mDOkSingle.Value()
+                           : chip::ByteSpan(
                           chip::Uint8::from_const_char(
                               "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69"
-                              "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
-                              "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                     "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                                     "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
                           71);
                 listHolder_0->mList[1].fabricIndex = CurrentFabricIndex;
 
@@ -5753,13 +5753,13 @@ private:
                     new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::Type>(1);
                 listFreer.add(listHolder_0);
 
-                listHolder_0->mList[0].data = mDOkSingle.HasValue()
-                    ? mDOkSingle.Value()
-                    : chip::ByteSpan(
+                listHolder_0->mList[0].data        = mDOkSingle.HasValue()
+                           ? mDOkSingle.Value()
+                           : chip::ByteSpan(
                           chip::Uint8::from_const_char(
                               "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64\x2E\x20\x54\x68\x69"
-                              "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
-                              "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                     "\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76"
+                                     "\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
                           71);
                 listHolder_0->mList[0].fabricIndex = TH2FabricIndex;
 
@@ -29435,8 +29435,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -86926,8 +86925,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -86996,8 +86994,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87066,8 +87063,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87136,8 +87132,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87206,8 +87201,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87276,8 +87270,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87346,8 +87339,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87416,8 +87408,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87486,8 +87477,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87556,8 +87546,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87626,8 +87615,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87696,8 +87684,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87766,8 +87753,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87836,8 +87822,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87906,8 +87891,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -87976,8 +87960,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88046,8 +88029,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88116,8 +88098,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88186,8 +88167,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88256,8 +88236,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88326,8 +88305,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88396,8 +88374,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88466,8 +88443,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88536,8 +88512,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88606,8 +88581,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88676,8 +88650,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88746,8 +88719,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88816,8 +88788,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88886,8 +88857,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -88956,8 +88926,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89026,8 +88995,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89096,8 +89064,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89166,8 +89133,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89236,8 +89202,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89791,8 +89756,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89861,8 +89825,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -89931,8 +89894,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90001,8 +89963,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90071,8 +90032,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90141,8 +90101,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90211,8 +90170,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90281,8 +90239,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90351,8 +90308,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90421,8 +90377,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90491,8 +90446,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90561,8 +90515,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90631,8 +90584,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90701,8 +90653,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90771,8 +90722,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90841,8 +90791,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90911,8 +90860,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -90981,8 +90929,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91051,8 +90998,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91121,8 +91067,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91191,8 +91136,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91261,8 +91205,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91331,8 +91274,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91401,8 +91343,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91471,8 +91412,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91541,8 +91481,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91611,8 +91550,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91682,8 +91620,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91753,8 +91690,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91824,8 +91760,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91895,8 +91830,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -91965,8 +91899,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92035,8 +91968,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92105,8 +92037,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92175,8 +92106,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92245,8 +92175,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92315,8 +92244,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92385,8 +92313,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92455,8 +92382,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92525,8 +92451,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92595,8 +92520,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92665,8 +92589,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92735,8 +92658,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92805,8 +92727,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92875,8 +92796,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -92945,8 +92865,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93015,8 +92934,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93085,8 +93003,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93155,8 +93072,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93225,8 +93141,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93295,8 +93210,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93365,8 +93279,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93435,8 +93348,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93505,8 +93417,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93575,8 +93486,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93645,8 +93555,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93715,8 +93624,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93785,8 +93693,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93855,8 +93762,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93925,8 +93831,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -93995,8 +93900,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94065,8 +93969,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94135,8 +94038,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94205,8 +94107,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94275,8 +94176,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94345,8 +94245,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94415,8 +94314,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94485,8 +94383,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94555,8 +94452,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94625,8 +94521,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94695,8 +94590,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94765,8 +94659,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94835,8 +94728,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94905,8 +94797,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -94975,8 +94866,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95045,8 +94935,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95115,8 +95004,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95185,8 +95073,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95255,8 +95142,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95326,8 +95212,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95397,8 +95282,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95468,8 +95352,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95539,8 +95422,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95610,8 +95492,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95681,8 +95562,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95752,8 +95632,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95823,8 +95702,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95894,8 +95772,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -95965,8 +95842,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96036,8 +95912,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96107,8 +95982,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96178,8 +96052,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96249,8 +96122,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96320,8 +96192,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96391,8 +96262,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96462,8 +96332,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96533,8 +96402,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96604,8 +96472,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96675,8 +96542,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96745,8 +96611,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96815,8 +96680,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96886,8 +96750,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -96956,8 +96819,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -97026,8 +96888,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -97096,8 +96957,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -97166,8 +97026,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -97410,8 +97269,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -97461,8 +97320,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -97502,8 +97361,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -97528,8 +97387,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -97697,8 +97556,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -97768,8 +97626,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -98034,8 +97891,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -98075,8 +97932,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -98170,8 +98027,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -98652,8 +98509,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -98723,8 +98579,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -98794,8 +98649,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -98865,8 +98719,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -99190,8 +99043,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -99227,8 +99080,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -99494,8 +99347,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -99612,8 +99465,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -99649,8 +99502,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -100254,8 +100107,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -100304,8 +100157,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -100373,8 +100226,8 @@ private:
                                      "\xb4\xae\x30\xcd\xf2\xfd\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19"
                                      "\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a"),
                                  89);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -100397,8 +100250,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -100421,8 +100274,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -101026,8 +100879,8 @@ private:
                           "\xb3\x2b\xd8\xa2\x11\xb8\x37\xdc\x94\xed\xcd\x56\xf4\xd1\x43\x77\x19\x10\x76\xbf\xc5\x9d\x99\xb7\xdd\x30"
                           "\x53\xef\xd6\xf0\x2c\x44\x34\xf2\xbd\xd2\x7a\xa4\xf9\xce\xa7\x0d\x73\x8e\x4c"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102108,8 +101961,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102145,8 +101998,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102185,8 +102038,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityGamma, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102222,8 +102075,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102246,8 +102099,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityBeta, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102604,8 +102457,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102641,8 +102494,8 @@ private:
                           "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
                           "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
                       97);
-            value.discriminator = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
-            value.iterations    = 1000UL;
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
             value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
                                AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
@@ -102725,8 +102578,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -102795,8 +102647,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -102865,8 +102716,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -102935,8 +102785,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103005,8 +102854,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103075,8 +102923,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103145,8 +102992,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103215,8 +103061,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103285,8 +103130,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103355,8 +103199,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103425,8 +103268,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103495,8 +103337,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103565,8 +103406,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103635,8 +103475,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103705,8 +103544,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103775,8 +103613,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103845,8 +103682,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103915,8 +103751,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -103985,8 +103820,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104055,8 +103889,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104125,8 +103958,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104195,8 +104027,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104265,8 +104096,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104335,8 +104165,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104405,8 +104234,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104475,8 +104303,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104545,8 +104372,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104615,8 +104441,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104685,8 +104510,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104755,8 +104579,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104825,8 +104648,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104895,8 +104717,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -104965,8 +104786,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105035,8 +104855,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105105,8 +104924,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105175,8 +104993,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105245,8 +105062,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105315,8 +105131,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105385,8 +105200,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105455,8 +105269,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105525,8 +105338,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105595,8 +105407,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105665,8 +105476,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105735,8 +105545,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105805,8 +105614,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105875,8 +105683,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -105945,8 +105752,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106015,8 +105821,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106085,8 +105890,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106155,8 +105959,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106225,8 +106028,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106295,8 +106097,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106365,8 +106166,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106435,8 +106235,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106505,8 +106304,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106575,8 +106373,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106645,8 +106442,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -106971,8 +106767,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107041,8 +106836,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107111,8 +106905,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107181,8 +106974,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107251,8 +107043,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107321,8 +107112,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107391,8 +107181,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107461,8 +107250,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -107531,8 +107319,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111453,8 +111240,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111523,8 +111309,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111593,8 +111378,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111663,8 +111447,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111733,8 +111516,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111803,8 +111585,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111873,8 +111654,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -111943,8 +111723,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -112013,8 +111792,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -112083,8 +111861,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -113998,8 +113775,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114068,8 +113844,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114299,8 +114074,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114369,8 +114143,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114602,8 +114375,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114672,8 +114444,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114742,8 +114513,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114812,8 +114582,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114883,8 +114652,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -114954,8 +114722,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115025,8 +114792,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115096,8 +114862,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115167,8 +114932,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115238,8 +115002,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115308,8 +115071,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115378,8 +115140,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115448,8 +115209,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115518,8 +115278,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115588,8 +115347,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115658,8 +115416,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115728,8 +115485,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115798,8 +115554,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115868,8 +115623,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -115938,8 +115692,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116008,8 +115761,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116078,8 +115830,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116148,8 +115899,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116218,8 +115968,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116288,8 +116037,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116358,8 +116106,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116428,8 +116175,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116498,8 +116244,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116568,8 +116313,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116639,8 +116383,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116710,8 +116453,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116780,8 +116522,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
@@ -116850,8 +116591,7 @@ private:
         chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         (void) commissionerNodeId;
         switch (testIndex)
-        {
-        }
+        {}
         return CHIP_NO_ERROR;
     }
 };
