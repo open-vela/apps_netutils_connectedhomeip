@@ -14215,10 +14215,10 @@ private:
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToColorTemperature::Type value;
-            value.colorTemperature = 310U;
-            value.transitionTime   = 0U;
-            value.optionsMask      = 0U;
-            value.optionsOverride  = 0U;
+            value.colorTemperatureMireds = 310U;
+            value.transitionTime         = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Commands::MoveToColorTemperature::Id,
                                value, chip::NullOptional
 
@@ -14237,10 +14237,10 @@ private:
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToColorTemperature::Type value;
-            value.colorTemperature = 250U;
-            value.transitionTime   = 300U;
-            value.optionsMask      = 0U;
-            value.optionsOverride  = 0U;
+            value.colorTemperatureMireds = 250U;
+            value.transitionTime         = 300U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Commands::MoveToColorTemperature::Id,
                                value, chip::NullOptional
 
@@ -14645,10 +14645,11 @@ private:
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToColorTemperature::Type value;
-            value.colorTemperature = static_cast<uint16_t>((ColorTempPhysicalMinMiredsValue + ColorTempPhysicalMaxMiredsValue) / 2);
-            value.transitionTime   = 0U;
-            value.optionsMask      = 0U;
-            value.optionsOverride  = 0U;
+            value.colorTemperatureMireds =
+                static_cast<uint16_t>((ColorTempPhysicalMinMiredsValue + ColorTempPhysicalMaxMiredsValue) / 2);
+            value.transitionTime  = 0U;
+            value.optionsMask     = 0U;
+            value.optionsOverride = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Commands::MoveToColorTemperature::Id,
                                value, chip::NullOptional
 
@@ -15152,10 +15153,11 @@ private:
             VerifyOrDo(!ShouldSkip("CC.S.F04 && CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToColorTemperature::Type value;
-            value.colorTemperature = static_cast<uint16_t>((ColorTempPhysicalMinMiredsValue + ColorTempPhysicalMaxMiredsValue) / 2);
-            value.transitionTime   = 0U;
-            value.optionsMask      = 0U;
-            value.optionsOverride  = 0U;
+            value.colorTemperatureMireds =
+                static_cast<uint16_t>((ColorTempPhysicalMinMiredsValue + ColorTempPhysicalMaxMiredsValue) / 2);
+            value.transitionTime  = 0U;
+            value.optionsMask     = 0U;
+            value.optionsOverride = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Commands::MoveToColorTemperature::Id,
                                value, chip::NullOptional
 
@@ -17113,10 +17115,10 @@ private:
             VerifyOrDo(!ShouldSkip("CC.S.C0a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ColorControl::Commands::MoveToColorTemperature::Type value;
-            value.colorTemperature = static_cast<uint16_t>((ColorTempPhysicalMinMireds + ColorTempPhysicalMaxMireds) / 2);
-            value.transitionTime   = 0U;
-            value.optionsMask      = 0U;
-            value.optionsOverride  = 0U;
+            value.colorTemperatureMireds = static_cast<uint16_t>((ColorTempPhysicalMinMireds + ColorTempPhysicalMaxMireds) / 2);
+            value.transitionTime         = 0U;
+            value.optionsMask            = 0U;
+            value.optionsOverride        = 0U;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ColorControl::Id, ColorControl::Commands::MoveToColorTemperature::Id,
                                value, chip::NullOptional
 

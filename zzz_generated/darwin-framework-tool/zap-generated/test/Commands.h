@@ -17643,7 +17643,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRColorControlClusterMoveToColorTemperatureParams alloc] init];
-        params.colorTemperature = [NSNumber numberWithUnsignedShort:310U];
+        params.colorTemperatureMireds = [NSNumber numberWithUnsignedShort:310U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:0U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
@@ -17678,7 +17678,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRColorControlClusterMoveToColorTemperatureParams alloc] init];
-        params.colorTemperature = [NSNumber numberWithUnsignedShort:250U];
+        params.colorTemperatureMireds = [NSNumber numberWithUnsignedShort:250U];
         params.transitionTime = [NSNumber numberWithUnsignedShort:300U];
         params.optionsMask = [NSNumber numberWithUnsignedChar:0U];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:0U];
