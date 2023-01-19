@@ -73724,7 +73724,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -73760,7 +73760,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73789,7 +73789,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("new_user", 8)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73815,8 +73815,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("new_user", 8)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 305441741UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 305441741UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73842,8 +73842,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("new_user", 8)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 305441741UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 305441741UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 3U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73869,8 +73869,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("new_user", 8)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 305441741UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 305441741UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 3U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73896,8 +73896,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("new_user", 8)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 305441741UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 305441741UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 3U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73923,8 +73923,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("test_user", 9)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 466460832UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 466460832UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73950,8 +73950,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 2U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("test_user2", 10)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 12648430UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 12648430UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -73976,7 +73976,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 3U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -73996,7 +73996,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 3U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74017,8 +74017,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 3U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("test_user3", 10)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 47802UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 47802UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 3U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74044,7 +74044,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, NumberOfTotalUsersSupported));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("last_user", 9)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74075,7 +74075,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74097,7 +74097,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74129,7 +74129,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 2U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74146,7 +74146,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, NumberOfTotalUsersSupported));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74243,7 +74243,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74364,7 +74364,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74577,7 +74577,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74625,7 +74625,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74681,7 +74681,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74733,7 +74733,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 2U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74805,7 +74805,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -74834,7 +74834,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 2U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74926,7 +74926,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74943,7 +74943,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 2U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74960,7 +74960,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 3U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -74977,7 +74977,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 4U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -75016,7 +75016,7 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("", 0)));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -75091,7 +75091,7 @@ private:
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNull("userName", value.userName));
-                VerifyOrReturn(CheckValueNull("userUniqueId", value.userUniqueId));
+                VerifyOrReturn(CheckValueNull("userUniqueID", value.userUniqueID));
                 VerifyOrReturn(CheckValueNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValueNull("userType", value.userType));
                 VerifyOrReturn(CheckValueNull("credentialRule", value.credentialRule));
@@ -75250,10 +75250,10 @@ private:
             LogStep(5, "Create new user with default parameters");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75276,10 +75276,10 @@ private:
             LogStep(7, "Set user at the occupied index fails with appropriate response");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75292,11 +75292,11 @@ private:
             LogStep(8, "Modify userName for existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("new_usergarbage: not in length on purpose", 8);
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75319,11 +75319,11 @@ private:
             LogStep(10, "Modify userUniqueId for existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 305441741UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 305441741UL;
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75346,12 +75346,12 @@ private:
             LogStep(12, "Modify userStatus for existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(3);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(3);
             value.userType.SetNull();
             value.credentialRule.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
@@ -75373,13 +75373,13 @@ private:
             LogStep(14, "Modify userType for existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(6);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(6);
             value.credentialRule.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
@@ -75400,14 +75400,14 @@ private:
             LogStep(16, "Modify credentialRule for existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(2);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(2);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -75427,18 +75427,18 @@ private:
             LogStep(18, "Modify all fields for existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("test_usergarbage: not in length on purpose", 9);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 466460832UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 466460832UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(1);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(1);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -75458,18 +75458,18 @@ private:
             LogStep(20, "Add another user with non-default fields");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 2U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("test_user2garbage: not in length on purpose", 10);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 12648430UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 12648430UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(1);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(1);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(2);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(2);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -75489,14 +75489,14 @@ private:
             LogStep(22, "Try to add a user with userStatus 0");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 3U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("test_user3garbage: not in length on purpose", 10);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 47802UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 47802UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(0);
             value.userType.SetNull();
             value.credentialRule.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
@@ -75518,14 +75518,14 @@ private:
             LogStep(24, "Try to add a user with userStatus 2");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 3U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("test_user3garbage: not in length on purpose", 10);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 47802UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 47802UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(2);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(2);
             value.userType.SetNull();
             value.credentialRule.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
@@ -75547,14 +75547,14 @@ private:
             LogStep(26, "Try to add a user with userStatus 3");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 3U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("test_user3garbage: not in length on purpose", 10);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 47802UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 47802UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(3);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(3);
             value.userType.SetNull();
             value.credentialRule.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
@@ -75576,11 +75576,11 @@ private:
             LogStep(28, "Create user in the last slot");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = NumberOfTotalUsersSupported;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("last_usergarbage: not in length on purpose", 9);
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75603,10 +75603,10 @@ private:
             LogStep(30, "User creation in the 0 slot fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 0U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75619,10 +75619,10 @@ private:
             LogStep(31, "User creation in the out-of-bounds slot fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = static_cast<uint16_t>(NumberOfTotalUsersSupported + 1);
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75655,10 +75655,10 @@ private:
             LogStep(34, "Create new user in the cleared slot");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -75737,7 +75737,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75750,7 +75750,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75763,7 +75763,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = static_cast<uint16_t>(NumberOfPINUsersSupported + 1);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75775,15 +75775,15 @@ private:
             LogStep(45, "Verify that a user with UserStatus = 0 cannot be added via SetCredential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             value.userIndex.SetNull();
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(0);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(0);
             value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
@@ -75794,15 +75794,15 @@ private:
             LogStep(46, "Verify that a user with UserStatus = 2 cannot be added via SetCredential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             value.userIndex.SetNull();
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(2);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(2);
             value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
@@ -75813,9 +75813,9 @@ private:
             LogStep(47, "Create new PIN credential and user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
@@ -75842,7 +75842,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75854,9 +75854,9 @@ private:
             LogStep(50, "Create new PIN credential and user with index 0 fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 0U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -75872,9 +75872,9 @@ private:
             LogStep(51, "Create new PIN credential and user with out-of-bounds index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = static_cast<uint16_t>(NumberOfPINUsersSupported + 1);
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -75896,7 +75896,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75909,7 +75909,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = static_cast<uint16_t>(NumberOfRFIDUsersSupported + 1);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75922,7 +75922,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 2U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75934,9 +75934,9 @@ private:
             LogStep(56, "Create new RFID credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 2U;
 
             value.credentialData =
@@ -75965,7 +75965,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 2U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -75977,9 +75977,9 @@ private:
             LogStep(59, "Create new RFID credential and user with index 0 fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 0U;
 
             value.credentialData =
@@ -75996,9 +75996,9 @@ private:
             LogStep(60, "Create new RFID credential and user with out-of-bounds index fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = static_cast<uint16_t>(NumberOfRFIDUsersSupported + 1);
 
             value.credentialData =
@@ -76015,9 +76015,9 @@ private:
             LogStep(61, "Create new credential and try to add it to 0 user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123465garbage: not in length on purpose"), 6);
@@ -76034,9 +76034,9 @@ private:
             LogStep(62, "Create new credential and try to add it to out-of-bounds user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123465garbage: not in length on purpose"), 6);
@@ -76053,9 +76053,9 @@ private:
             LogStep(63, "Create new PIN with too short data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("12345garbage: not in length on purpose"), 5);
@@ -76072,9 +76072,9 @@ private:
             LogStep(64, "Create new PIN with too long data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456789garbage: not in length on purpose"), 9);
@@ -76091,9 +76091,9 @@ private:
             LogStep(65, "Create new RFID with too short data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("rfid_datagarbage: not in length on purpose"), 9);
@@ -76110,9 +76110,9 @@ private:
             LogStep(66, "Create new PIN with Programming user type fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -76120,7 +76120,7 @@ private:
             value.userIndex.Value() = 0U;
             value.userStatus.SetNull();
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(3);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(3);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -76130,9 +76130,9 @@ private:
             LogStep(67, "Create new RFID with too short data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(
@@ -76150,9 +76150,9 @@ private:
             LogStep(68, "Create new PIN credential with data the would cause duplicate");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 4U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
@@ -76168,9 +76168,9 @@ private:
             LogStep(69, "Create new RFID credential with data the would cause duplicate");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 4U;
 
             value.credentialData =
@@ -76187,9 +76187,9 @@ private:
             LogStep(70, "Modify credentialData of existing PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -76206,9 +76206,9 @@ private:
             LogStep(71, "Verify that credential was changed by creating new credential with old data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
@@ -76224,9 +76224,9 @@ private:
             LogStep(72, "Verify that credential was changed by creating new credential with new data");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 4U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -76242,9 +76242,9 @@ private:
             LogStep(73, "Create new RFID credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 4U;
 
             value.credentialData =
@@ -76272,9 +76272,9 @@ private:
             LogStep(75, "Create new RFID credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 5U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("789012garbage: not in length on purpose"), 6);
@@ -76303,7 +76303,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76316,7 +76316,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76340,7 +76340,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 3U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76353,7 +76353,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76375,9 +76375,9 @@ private:
             LogStep(83, "Create new RFID credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 1U;
 
             value.credentialData =
@@ -76396,7 +76396,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.Value().credentialIndex = 65534U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76409,7 +76409,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76422,7 +76422,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 2U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76435,7 +76435,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 4U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76467,9 +76467,9 @@ private:
             LogStep(90, "Create new PIN credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -76485,9 +76485,9 @@ private:
             LogStep(91, "Create new RFID credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 2U;
 
             value.credentialData =
@@ -76504,9 +76504,9 @@ private:
             LogStep(92, "Create another RFID credential with user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 6U;
 
             value.credentialData =
@@ -76534,7 +76534,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76547,7 +76547,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.credentialIndex = 2U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76560,7 +76560,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 6U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76612,9 +76612,9 @@ private:
             LogStep(101, "Create new Programming PIN credential with invalid index");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -76630,9 +76630,9 @@ private:
             LogStep(102, "Create new Programming PIN credential with valid index");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.credentialIndex = 0U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -76659,7 +76659,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76671,9 +76671,9 @@ private:
             LogStep(105, "Modify the Programming PIN credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(2);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(2);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.credentialIndex = 0U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("654321garbage: not in length on purpose"), 6);
@@ -76691,7 +76691,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.Value().credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76705,7 +76705,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.Value().credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76719,7 +76719,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76733,7 +76733,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = static_cast<uint16_t>(NumberOfPINUsersSupported + 1);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76747,7 +76747,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.Value().credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76761,7 +76761,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(2);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(2);
             value.credential.Value().credentialIndex = static_cast<uint16_t>(NumberOfRFIDUsersSupported + 1);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -76794,7 +76794,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(0);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(0);
             value.credential.credentialIndex = 0U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -76806,9 +76806,9 @@ private:
             LogStep(115, "Create new PIN credential and user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
@@ -76824,9 +76824,9 @@ private:
             LogStep(116, "Create second PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 2U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000001garbage: not in length on purpose"), 6);
@@ -76843,9 +76843,9 @@ private:
             LogStep(117, "Create third PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 3U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000002garbage: not in length on purpose"), 6);
@@ -76862,9 +76862,9 @@ private:
             LogStep(118, "Create fourth PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 4U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000003garbage: not in length on purpose"), 6);
@@ -76881,9 +76881,9 @@ private:
             LogStep(119, "Create fifth PIN credential and add it to existing user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 5U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000004garbage: not in length on purpose"), 6);
@@ -76900,9 +76900,9 @@ private:
             LogStep(120, "Try to create sixth PIN credential and make sure it fails");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 6U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("000005garbage: not in length on purpose"), 6);
@@ -77239,9 +77239,9 @@ private:
             LogStep(5, "Create new PIN credential and lock/unlock user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -77265,8 +77265,8 @@ private:
             LogStep(7, "Try to unlock the door with invalid PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77281,8 +77281,8 @@ private:
             LogStep(9, "Try to unlock the door with valid PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77297,8 +77297,8 @@ private:
             LogStep(11, "Try to lock the door with invalid PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77313,8 +77313,8 @@ private:
             LogStep(13, "Try to lock the door with valid PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77328,8 +77328,8 @@ private:
         case 15: {
             LogStep(15, "Set OperatingMode to NoRemoteLockUnlock");
             ListFreer listFreer;
-            chip::app::Clusters::DoorLock::DlOperatingMode value;
-            value = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(3);
+            chip::app::Clusters::DoorLock::OperatingModeEnum value;
+            value = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(3);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::OperatingMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -77345,8 +77345,8 @@ private:
         case 17: {
             LogStep(17, "Set OperatingMode to Normal");
             ListFreer listFreer;
-            chip::app::Clusters::DoorLock::DlOperatingMode value;
-            value = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(0);
+            chip::app::Clusters::DoorLock::OperatingModeEnum value;
+            value = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(0);
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Attributes::OperatingMode::Id, value,
                                   chip::NullOptional, chip::NullOptional);
         }
@@ -77367,8 +77367,8 @@ private:
             LogStep(20, "Try to unlock the door with invalid PIN for the first time");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77378,8 +77378,8 @@ private:
             LogStep(21, "Try to unlock the door with invalid PIN for the second time");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77389,8 +77389,8 @@ private:
             LogStep(22, "Try to unlock the door with invalid PIN for the third time");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("000000garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77400,8 +77400,8 @@ private:
             LogStep(23, "Try to unlock the door with valid PIN and make sure it fails due to lockout");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77418,8 +77418,8 @@ private:
             LogStep(25, "Try to unlock the door with valid PIN and make sure it succeeds");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77434,8 +77434,8 @@ private:
             LogStep(27, "Lock the door back prior to next tests");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77445,15 +77445,15 @@ private:
             LogStep(28, "Create a disabled user and credential");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 2U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("654321garbage: not in length on purpose"), 6);
             value.userIndex.SetNull();
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(3);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(3);
             value.userType.SetNull();
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
@@ -77464,8 +77464,8 @@ private:
             LogStep(29, "Try to unlock the door with disabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("654321garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("654321garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77480,8 +77480,8 @@ private:
             LogStep(31, "Unlock the door with enabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77496,8 +77496,8 @@ private:
             LogStep(33, "Try to lock the door with disabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("654321garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("654321garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -77512,8 +77512,8 @@ private:
             LogStep(35, "Lock the door with enabled user PIN");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -78664,9 +78664,9 @@ private:
             LogStep(1, "Create new PIN credential and schedule user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -78704,7 +78704,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 0U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78720,7 +78720,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = static_cast<uint8_t>(NumberOfWeekDaySchedulesSupportedPerUser + 1);
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78736,7 +78736,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 0U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78752,7 +78752,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = static_cast<uint16_t>(NumberOfTotalUsersSupported + 1);
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78768,7 +78768,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 2U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78784,7 +78784,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(0U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(0U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78800,7 +78800,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(3U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(3U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78816,7 +78816,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(73U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(73U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78832,7 +78832,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 24U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78848,7 +78848,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 60U;
             value.endHour      = 18U;
@@ -78864,7 +78864,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 24U;
@@ -78880,7 +78880,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78896,7 +78896,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 19U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -78912,7 +78912,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 50U;
             value.endHour      = 15U;
@@ -79139,7 +79139,7 @@ private:
             value.holidayIndex   = 0U;
             value.localStartTime = 12345UL;
             value.localEndTime   = 12345689UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(0);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79152,7 +79152,7 @@ private:
             value.holidayIndex   = static_cast<uint8_t>(NumberOfHolidaySchedulesSupported + 1);
             value.localStartTime = 12345UL;
             value.localEndTime   = 12345689UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(0);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79165,7 +79165,7 @@ private:
             value.holidayIndex   = 1U;
             value.localStartTime = 12345689UL;
             value.localEndTime   = 12345688UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(0);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79178,7 +79178,7 @@ private:
             value.holidayIndex   = 1U;
             value.localStartTime = 12345UL;
             value.localEndTime   = 12345689UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(5);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(5);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79221,7 +79221,7 @@ private:
             value.holidayIndex   = 1U;
             value.localStartTime = 12345UL;
             value.localEndTime   = 12345689UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(0);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79243,7 +79243,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 15U;
             value.startMinute  = 16U;
             value.endHour      = 18U;
@@ -79520,7 +79520,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 2U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(2U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(2U);
             value.startHour    = 0U;
             value.startMinute  = 0U;
             value.endHour      = 23U;
@@ -79572,7 +79572,7 @@ private:
             value.holidayIndex   = 2U;
             value.localStartTime = 123456UL;
             value.localEndTime   = 1234567UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(1);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(1);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79680,7 +79680,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(2U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(2U);
             value.startHour    = 0U;
             value.startMinute  = 0U;
             value.endHour      = 23U;
@@ -79760,10 +79760,10 @@ private:
             LogStep(93, "Create new user without credential so we can add more schedules to it");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 2U;
             value.userName.SetNull();
-            value.userUniqueId.SetNull();
+            value.userUniqueID.SetNull();
             value.userStatus.SetNull();
             value.userType.SetNull();
             value.credentialRule.SetNull();
@@ -79778,7 +79778,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 0U;
             value.startMinute  = 0U;
             value.endHour      = 23U;
@@ -79829,7 +79829,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 4U;
             value.userIndex    = 2U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(64U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(64U);
             value.startHour    = 23U;
             value.startMinute  = 0U;
             value.endHour      = 23U;
@@ -79955,7 +79955,7 @@ private:
             value.holidayIndex   = NumberOfHolidaySchedulesSupported;
             value.localStartTime = 1UL;
             value.localEndTime   = 100UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(4);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(4);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -79975,9 +79975,9 @@ private:
             LogStep(111, "Create new PIN credential and schedule user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -79995,7 +79995,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(1U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(1U);
             value.startHour    = 0U;
             value.startMinute  = 0U;
             value.endHour      = 23U;
@@ -80956,8 +80956,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("xxx", 3)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 6452UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 6452UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -81117,18 +81117,18 @@ private:
             LogStep(1, "Create new user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81148,9 +81148,9 @@ private:
             LogStep(3, "Create new PIN credential and lock/unlock user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -81168,7 +81168,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -81219,8 +81219,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81259,8 +81259,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C00.Rsp && DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81271,8 +81271,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C00.Rsp && DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::LockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("645321garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("645321garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::LockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81397,7 +81397,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -81466,8 +81466,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("xxx", 3)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 6452UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 6452UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -81660,18 +81660,18 @@ private:
             LogStep(1, "Create new user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81691,9 +81691,9 @@ private:
             LogStep(3, "Create new PIN credential and lock/unlock user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -81711,7 +81711,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -81762,8 +81762,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81802,8 +81802,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp && DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81814,8 +81814,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp && DRLK.S.A0033"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81880,8 +81880,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81892,8 +81892,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81904,8 +81904,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81916,8 +81916,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("1234568garbage: not in length on purpose"), 7);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -81934,8 +81934,8 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockDoor::Type value;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockDoor::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -82028,7 +82028,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -82100,8 +82100,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("xxx", 3)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 6452UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 6452UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -82202,18 +82202,18 @@ private:
             LogStep(1, "Create new user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -82233,9 +82233,9 @@ private:
             LogStep(3, "Create new PIN credential and lock/unlock user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -82253,7 +82253,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -82285,8 +82285,8 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::UnlockWithTimeout::Type value;
             value.timeout = 60U;
-            value.pinCode.Emplace();
-            value.pinCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
+            value.PINCode.Emplace();
+            value.PINCode.Value() = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::UnlockWithTimeout::Id, value,
                                chip::Optional<uint16_t>(1000), chip::NullOptional
 
@@ -82323,7 +82323,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -82398,8 +82398,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("xxx", 3)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 6452UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 6452UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -82528,18 +82528,18 @@ private:
             LogStep(1, "Create new user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -82574,7 +82574,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 1U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(2U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(2U);
             value.startHour    = 15U;
             value.startMinute  = 45U;
             value.endHour      = 16U;
@@ -82604,7 +82604,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::SetWeekDaySchedule::Type value;
             value.weekDayIndex = 0U;
             value.userIndex    = 1U;
-            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DlDaysMaskMap>>(7U);
+            value.daysMask     = static_cast<chip::BitMask<chip::app::Clusters::DoorLock::DaysMaskMap>>(7U);
             value.startHour    = 15U;
             value.startMinute  = 45U;
             value.endHour      = 16U;
@@ -82827,7 +82827,7 @@ private:
             value.holidayIndex   = 1U;
             value.localStartTime = 20UL;
             value.localEndTime   = 30UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(0);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -82853,7 +82853,7 @@ private:
             value.holidayIndex   = 1U;
             value.localStartTime = 20UL;
             value.localEndTime   = 30UL;
-            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::DlOperatingMode>(5);
+            value.operatingMode  = static_cast<chip::app::Clusters::DoorLock::OperatingModeEnum>(5);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetHolidaySchedule::Id, value,
                                chip::NullOptional
 
@@ -82983,8 +82983,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("xxx", 3)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 6452UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 6452UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -83147,18 +83147,18 @@ private:
             LogStep(1, "Create new user");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -83244,18 +83244,18 @@ private:
             LogStep(9, "Create a user with userIndex as 5");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 5U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -83426,8 +83426,8 @@ private:
                 VerifyOrReturn(CheckValue("userIndex", value.userIndex, 1U));
                 VerifyOrReturn(CheckValueNonNull("userName", value.userName));
                 VerifyOrReturn(CheckValueAsString("userName.Value()", value.userName.Value(), chip::CharSpan("xxx", 3)));
-                VerifyOrReturn(CheckValueNonNull("userUniqueId", value.userUniqueId));
-                VerifyOrReturn(CheckValue("userUniqueId.Value()", value.userUniqueId.Value(), 6452UL));
+                VerifyOrReturn(CheckValueNonNull("userUniqueID", value.userUniqueID));
+                VerifyOrReturn(CheckValue("userUniqueID.Value()", value.userUniqueID.Value(), 6452UL));
                 VerifyOrReturn(CheckValueNonNull("userStatus", value.userStatus));
                 VerifyOrReturn(CheckValue("userStatus.Value()", value.userStatus.Value(), 1U));
                 VerifyOrReturn(CheckValueNonNull("userType", value.userType));
@@ -83609,18 +83609,18 @@ private:
             LogStep(1, "Create new user with default parameters");
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 1U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -83648,9 +83648,9 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -83670,7 +83670,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -83684,17 +83684,17 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 2U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("4321garbage: not in length on purpose"), 4);
             value.userIndex.SetNull();
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(5);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(5);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(10);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(10);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetCredential::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -83706,9 +83706,9 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 2U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -83766,7 +83766,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -83781,7 +83781,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -83794,18 +83794,18 @@ private:
             VerifyOrDo(!ShouldSkip("DRLK.S.F08 && DRLK.S.C1a.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetUser::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
             value.userIndex     = 2U;
             value.userName.SetNonNull();
             value.userName.Value() = chip::Span<const char>("xxxgarbage: not in length on purpose", 3);
-            value.userUniqueId.SetNonNull();
-            value.userUniqueId.Value() = 6452UL;
+            value.userUniqueID.SetNonNull();
+            value.userUniqueID.Value() = 6452UL;
             value.userStatus.SetNonNull();
-            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserStatus>(1);
+            value.userStatus.Value() = static_cast<chip::app::Clusters::DoorLock::UserStatusEnum>(1);
             value.userType.SetNonNull();
-            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::DlUserType>(0);
+            value.userType.Value() = static_cast<chip::app::Clusters::DoorLock::UserTypeEnum>(0);
             value.credentialRule.SetNonNull();
-            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::DlCredentialRule>(0);
+            value.credentialRule.Value() = static_cast<chip::app::Clusters::DoorLock::CredentialRuleEnum>(0);
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::SetUser::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
@@ -83817,9 +83817,9 @@ private:
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::SetCredential::Type value;
-            value.operationType = static_cast<chip::app::Clusters::DoorLock::DlDataOperationType>(0);
+            value.operationType = static_cast<chip::app::Clusters::DoorLock::DataOperationTypeEnum>(0);
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             value.credentialData = chip::ByteSpan(chip::Uint8::from_const_char("123456garbage: not in length on purpose"), 6);
@@ -83839,7 +83839,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.Value().credentialIndex = 65534U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
@@ -83854,7 +83854,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 65534U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -83869,7 +83869,7 @@ private:
             ListFreer listFreer;
             chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type value;
 
-            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(1);
+            value.credential.credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(1);
             value.credential.credentialIndex = 1U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::GetCredentialStatus::Id, value,
@@ -83884,7 +83884,7 @@ private:
             chip::app::Clusters::DoorLock::Commands::ClearCredential::Type value;
             value.credential.SetNonNull();
 
-            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::DlCredentialType>(8);
+            value.credential.Value().credentialType  = static_cast<chip::app::Clusters::DoorLock::CredentialTypeEnum>(8);
             value.credential.Value().credentialIndex = 2U;
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), DoorLock::Id, DoorLock::Commands::ClearCredential::Id, value,
