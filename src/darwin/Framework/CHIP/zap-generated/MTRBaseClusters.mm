@@ -39516,7 +39516,7 @@ using chip::Messaging::ExchangeManager;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = AdministratorCommissioning::Attributes::WindowStatus::TypeInfo;
-    return MTRReadAttribute<MTRAdministratorCommissioningClusterCommissioningWindowStatusAttributeCallbackBridge, NSNumber,
+    return MTRReadAttribute<MTRAdministratorCommissioningClusterCommissioningWindowStatusEnumAttributeCallbackBridge, NSNumber,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -39526,7 +39526,7 @@ using chip::Messaging::ExchangeManager;
                                    reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = AdministratorCommissioning::Attributes::WindowStatus::TypeInfo;
-    MTRSubscribeAttribute<MTRAdministratorCommissioningClusterCommissioningWindowStatusAttributeCallbackSubscriptionBridge,
+    MTRSubscribeAttribute<MTRAdministratorCommissioningClusterCommissioningWindowStatusEnumAttributeCallbackSubscriptionBridge,
         NSNumber, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device,
         self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -39536,9 +39536,9 @@ using chip::Messaging::ExchangeManager;
                                                  queue:(dispatch_queue_t)queue
                                             completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRAdministratorCommissioningClusterCommissioningWindowStatusAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRAdministratorCommissioningClusterCommissioningWindowStatusEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(AdministratorCommissioningClusterCommissioningWindowStatusAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(AdministratorCommissioningClusterCommissioningWindowStatusEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = AdministratorCommissioning::Attributes::WindowStatus::TypeInfo;
