@@ -37833,7 +37833,7 @@ public:
     DoorLockLockDoor()
         : ClusterCommand("lock-door")
     {
-        AddArgument("PinCode", &mRequest.pinCode);
+        AddArgument("PINCode", &mRequest.PINCode);
         ClusterCommand::AddArguments();
     }
 
@@ -37846,8 +37846,8 @@ public:
         __auto_type * params = [[MTRDoorLockClusterLockDoorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mRequest.pinCode.HasValue()) {
-            params.pinCode = [NSData dataWithBytes:mRequest.pinCode.Value().data() length:mRequest.pinCode.Value().size()];
+        if (mRequest.PINCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.PINCode.Value().data() length:mRequest.PINCode.Value().size()];
         } else {
             params.pinCode = nil;
         }
@@ -37881,7 +37881,7 @@ public:
     DoorLockUnlockDoor()
         : ClusterCommand("unlock-door")
     {
-        AddArgument("PinCode", &mRequest.pinCode);
+        AddArgument("PINCode", &mRequest.PINCode);
         ClusterCommand::AddArguments();
     }
 
@@ -37894,8 +37894,8 @@ public:
         __auto_type * params = [[MTRDoorLockClusterUnlockDoorParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        if (mRequest.pinCode.HasValue()) {
-            params.pinCode = [NSData dataWithBytes:mRequest.pinCode.Value().data() length:mRequest.pinCode.Value().size()];
+        if (mRequest.PINCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.PINCode.Value().data() length:mRequest.PINCode.Value().size()];
         } else {
             params.pinCode = nil;
         }
@@ -37930,7 +37930,7 @@ public:
         : ClusterCommand("unlock-with-timeout")
     {
         AddArgument("Timeout", 0, UINT16_MAX, &mRequest.timeout);
-        AddArgument("PinCode", &mRequest.pinCode);
+        AddArgument("PINCode", &mRequest.PINCode);
         ClusterCommand::AddArguments();
     }
 
@@ -37944,8 +37944,8 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.timeout = [NSNumber numberWithUnsignedShort:mRequest.timeout];
-        if (mRequest.pinCode.HasValue()) {
-            params.pinCode = [NSData dataWithBytes:mRequest.pinCode.Value().data() length:mRequest.pinCode.Value().size()];
+        if (mRequest.PINCode.HasValue()) {
+            params.pinCode = [NSData dataWithBytes:mRequest.PINCode.Value().data() length:mRequest.PINCode.Value().size()];
         } else {
             params.pinCode = nil;
         }
@@ -38416,7 +38416,7 @@ public:
         AddArgument("OperationType", 0, UINT8_MAX, &mRequest.operationType);
         AddArgument("UserIndex", 0, UINT16_MAX, &mRequest.userIndex);
         AddArgument("UserName", &mRequest.userName);
-        AddArgument("UserUniqueId", 0, UINT32_MAX, &mRequest.userUniqueId);
+        AddArgument("UserUniqueID", 0, UINT32_MAX, &mRequest.userUniqueID);
         AddArgument("UserStatus", 0, UINT8_MAX, &mRequest.userStatus);
         AddArgument("UserType", 0, UINT8_MAX, &mRequest.userType);
         AddArgument("CredentialRule", 0, UINT8_MAX, &mRequest.credentialRule);
@@ -38441,10 +38441,10 @@ public:
                                                        length:mRequest.userName.Value().size()
                                                      encoding:NSUTF8StringEncoding];
         }
-        if (mRequest.userUniqueId.IsNull()) {
-            params.userUniqueId = nil;
+        if (mRequest.userUniqueID.IsNull()) {
+            params.userUniqueID = nil;
         } else {
-            params.userUniqueId = [NSNumber numberWithUnsignedInt:mRequest.userUniqueId.Value()];
+            params.userUniqueID = [NSNumber numberWithUnsignedInt:mRequest.userUniqueID.Value()];
         }
         if (mRequest.userStatus.IsNull()) {
             params.userStatus = nil;
@@ -38600,7 +38600,7 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.operationType = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.operationType)];
-        params.credential = [MTRDoorLockClusterDlCredential new];
+        params.credential = [MTRDoorLockClusterCredentialStruct new];
         params.credential.credentialType =
             [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.credential.credentialType)];
         params.credential.credentialIndex = [NSNumber numberWithUnsignedShort:mRequest.credential.credentialIndex];
@@ -38642,7 +38642,7 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::SetCredential::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::DoorLock::Structs::DlCredential::Type> mComplex_Credential;
+    TypedComplexArgument<chip::app::Clusters::DoorLock::Structs::CredentialStruct::Type> mComplex_Credential;
 };
 
 /*
@@ -38667,7 +38667,7 @@ public:
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.credential = [MTRDoorLockClusterDlCredential new];
+        params.credential = [MTRDoorLockClusterCredentialStruct new];
         params.credential.credentialType =
             [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.credential.credentialType)];
         params.credential.credentialIndex = [NSNumber numberWithUnsignedShort:mRequest.credential.credentialIndex];
@@ -38693,7 +38693,7 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::GetCredentialStatus::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::DoorLock::Structs::DlCredential::Type> mComplex_Credential;
+    TypedComplexArgument<chip::app::Clusters::DoorLock::Structs::CredentialStruct::Type> mComplex_Credential;
 };
 
 /*
@@ -38721,7 +38721,7 @@ public:
         if (mRequest.credential.IsNull()) {
             params.credential = nil;
         } else {
-            params.credential = [MTRDoorLockClusterDlCredential new];
+            params.credential = [MTRDoorLockClusterCredentialStruct new];
             params.credential.credentialType =
                 [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.credential.Value().credentialType)];
             params.credential.credentialIndex = [NSNumber numberWithUnsignedShort:mRequest.credential.Value().credentialIndex];
@@ -38746,7 +38746,7 @@ public:
 
 private:
     chip::app::Clusters::DoorLock::Commands::ClearCredential::Type mRequest;
-    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::Structs::DlCredential::Type>>
+    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::DoorLock::Structs::CredentialStruct::Type>>
         mComplex_Credential;
 };
 

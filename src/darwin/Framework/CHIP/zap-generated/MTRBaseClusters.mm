@@ -45537,7 +45537,7 @@ using chip::Messaging::ExchangeManager;
             }
             if (params != nil) {
                 if (params.pinCode != nil) {
-                    auto & definedValue_0 = request.pinCode.Emplace();
+                    auto & definedValue_0 = request.PINCode.Emplace();
                     definedValue_0 = [self asByteSpan:params.pinCode];
                 }
             }
@@ -45573,7 +45573,7 @@ using chip::Messaging::ExchangeManager;
             }
             if (params != nil) {
                 if (params.pinCode != nil) {
-                    auto & definedValue_0 = request.pinCode.Emplace();
+                    auto & definedValue_0 = request.PINCode.Emplace();
                     definedValue_0 = [self asByteSpan:params.pinCode];
                 }
             }
@@ -45609,7 +45609,7 @@ using chip::Messaging::ExchangeManager;
             }
             request.timeout = params.timeout.unsignedShortValue;
             if (params.pinCode != nil) {
-                auto & definedValue_0 = request.pinCode.Emplace();
+                auto & definedValue_0 = request.PINCode.Emplace();
                 definedValue_0 = [self asByteSpan:params.pinCode];
             }
 
@@ -45920,11 +45920,11 @@ using chip::Messaging::ExchangeManager;
                 auto & nonNullValue_0 = request.userName.SetNonNull();
                 nonNullValue_0 = [self asCharSpan:params.userName];
             }
-            if (params.userUniqueId == nil) {
-                request.userUniqueId.SetNull();
+            if (params.userUniqueID == nil) {
+                request.userUniqueID.SetNull();
             } else {
-                auto & nonNullValue_0 = request.userUniqueId.SetNonNull();
-                nonNullValue_0 = params.userUniqueId.unsignedIntValue;
+                auto & nonNullValue_0 = request.userUniqueID.SetNonNull();
+                nonNullValue_0 = params.userUniqueID.unsignedIntValue;
             }
             if (params.userStatus == nil) {
                 request.userStatus.SetNull();
@@ -46264,7 +46264,7 @@ using chip::Messaging::ExchangeManager;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = DoorLock::Attributes::DoorState::TypeInfo;
-    return MTRReadAttribute<MTRNullableDoorLockClusterDlDoorStateAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRNullableDoorLockClusterDoorStateEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -46273,7 +46273,7 @@ using chip::Messaging::ExchangeManager;
                                 reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = DoorLock::Attributes::DoorState::TypeInfo;
-    MTRSubscribeAttribute<MTRNullableDoorLockClusterDlDoorStateAttributeCallbackSubscriptionBridge, NSNumber,
+    MTRSubscribeAttribute<MTRNullableDoorLockClusterDoorStateEnumAttributeCallbackSubscriptionBridge, NSNumber,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -46283,9 +46283,9 @@ using chip::Messaging::ExchangeManager;
                                               queue:(dispatch_queue_t)queue
                                          completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRNullableDoorLockClusterDlDoorStateAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRNullableDoorLockClusterDoorStateEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(NullableDoorLockClusterDlDoorStateAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(NullableDoorLockClusterDoorStateEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = DoorLock::Attributes::DoorState::TypeInfo;
@@ -47420,7 +47420,7 @@ using chip::Messaging::ExchangeManager;
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = DoorLock::Attributes::OperatingMode::TypeInfo;
-    return MTRReadAttribute<MTRDoorLockClusterDlOperatingModeAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRDoorLockClusterOperatingModeEnumAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
@@ -47466,9 +47466,9 @@ using chip::Messaging::ExchangeManager;
                                     reportHandler:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
     using TypeInfo = DoorLock::Attributes::OperatingMode::TypeInfo;
-    MTRSubscribeAttribute<MTRDoorLockClusterDlOperatingModeAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(
-        params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
-        TypeInfo::GetAttributeId());
+    MTRSubscribeAttribute<MTRDoorLockClusterOperatingModeEnumAttributeCallbackSubscriptionBridge, NSNumber,
+        TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
+        TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeOperatingModeWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
@@ -47476,9 +47476,9 @@ using chip::Messaging::ExchangeManager;
                                                   queue:(dispatch_queue_t)queue
                                              completion:(void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
-    auto * bridge = new MTRDoorLockClusterDlOperatingModeAttributeCallbackBridge(queue, completion);
+    auto * bridge = new MTRDoorLockClusterOperatingModeEnumAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
-        ^(DoorLockClusterDlOperatingModeAttributeCallback successCb, MTRErrorCallback failureCb) {
+        ^(DoorLockClusterOperatingModeEnumAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
                 using TypeInfo = DoorLock::Attributes::OperatingMode::TypeInfo;

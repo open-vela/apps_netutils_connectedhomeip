@@ -110484,52 +110484,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -110626,7 +110626,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -110660,58 +110660,58 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -110732,7 +110732,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -110762,7 +110762,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"new_user";
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -110796,58 +110796,58 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"new_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -110868,7 +110868,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:305441741UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:305441741UL];
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -110902,59 +110902,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"new_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 305441741UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -110975,7 +110975,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = [NSNumber numberWithUnsignedChar:3U];
         params.userType = nil;
         params.credentialRule = nil;
@@ -111009,59 +111009,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"new_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 305441741UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111082,7 +111082,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = [NSNumber numberWithUnsignedChar:6U];
         params.credentialRule = nil;
@@ -111116,59 +111116,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"new_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 305441741UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 6U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 6U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111189,7 +111189,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = [NSNumber numberWithUnsignedChar:2U];
@@ -111223,59 +111223,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"new_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"new_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 305441741UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 305441741UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 6U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 6U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111296,7 +111296,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"test_user";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:466460832UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:466460832UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:1U];
@@ -111330,59 +111330,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"test_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 466460832UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 466460832UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111403,7 +111403,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userName = @"test_user2";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:12648430UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:12648430UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:1U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:2U];
@@ -111437,59 +111437,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user2"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"test_user2"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 12648430UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 12648430UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111510,7 +111510,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:3U];
         params.userName = @"test_user3";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:47802UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:47802UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:0U];
         params.userType = nil;
         params.credentialRule = nil;
@@ -111546,52 +111546,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111612,7 +111612,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:3U];
         params.userName = @"test_user3";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:47802UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:47802UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:2U];
         params.userType = nil;
         params.credentialRule = nil;
@@ -111648,52 +111648,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111714,7 +111714,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:3U];
         params.userName = @"test_user3";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:47802UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:47802UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:3U];
         params.userType = nil;
         params.credentialRule = nil;
@@ -111748,59 +111748,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"test_user3"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"test_user3"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 47802UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 47802UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 3U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111821,7 +111821,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NumberOfTotalUsersSupported copy];
         params.userName = @"last_user";
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -111855,58 +111855,58 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, NumberOfTotalUsersSupported));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, NumberOfTotalUsersSupported));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"last_user"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"last_user"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -111927,7 +111927,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -111957,7 +111957,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -112015,53 +112015,53 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                                VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("NextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValue("NextUserIndex", actualValue, 2U));
                             }
 
                             NextTest();
@@ -112082,7 +112082,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -112116,59 +112116,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                                VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("NextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValue("NextUserIndex", actualValue, 2U));
                             }
 
                             NextTest();
@@ -112267,52 +112267,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -112339,52 +112339,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, NumberOfTotalUsersSupported));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, NumberOfTotalUsersSupported));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -112430,9 +112430,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -112443,27 +112443,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -112481,9 +112481,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -112494,27 +112494,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -112532,9 +112532,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
         [cluster
@@ -112547,27 +112547,27 @@ private:
 
                                    {
                                        id actualValue = values.credentialExists;
-                                       VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                       VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                    }
 
                                    {
                                        id actualValue = values.userIndex;
-                                       VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                    }
 
                                    {
                                        id actualValue = values.creatorFabricIndex;
-                                       VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                    }
 
                                    {
                                        id actualValue = values.lastModifiedFabricIndex;
-                                       VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                    }
 
                                    {
                                        id actualValue = values.nextCredentialIndex;
-                                       VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                    }
 
                                    NextTest();
@@ -112586,9 +112586,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
         params.userIndex = nil;
@@ -112603,18 +112603,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -112633,9 +112633,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
         params.userIndex = nil;
@@ -112650,18 +112650,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -112680,9 +112680,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
         params.userIndex = nil;
@@ -112697,19 +112697,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -112736,63 +112736,63 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                                VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(1)));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 1U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 1U));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -112810,9 +112810,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -112823,30 +112823,30 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, true));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -112865,9 +112865,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -112882,18 +112882,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -112912,9 +112912,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
@@ -112930,17 +112930,17 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                              }
 
                              NextTest();
@@ -112986,9 +112986,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -113001,22 +113001,22 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -113034,9 +113034,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
         [cluster
@@ -113049,27 +113049,27 @@ private:
 
                                    {
                                        id actualValue = values.credentialExists;
-                                       VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                       VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                    }
 
                                    {
                                        id actualValue = values.userIndex;
-                                       VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                    }
 
                                    {
                                        id actualValue = values.creatorFabricIndex;
-                                       VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                    }
 
                                    {
                                        id actualValue = values.lastModifiedFabricIndex;
-                                       VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                    }
 
                                    {
                                        id actualValue = values.nextCredentialIndex;
-                                       VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                       VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                    }
 
                                    NextTest();
@@ -113087,9 +113087,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -113100,27 +113100,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -113139,9 +113139,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -113156,18 +113156,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -113194,67 +113194,67 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                                VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(2)));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(2)));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 1U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 1U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialIndex, 2U));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -113272,9 +113272,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -113285,30 +113285,30 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, true));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -113327,9 +113327,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
         params.userIndex = nil;
@@ -113344,18 +113344,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -113374,9 +113374,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"new_rfid_data_field" length:19];
@@ -113392,17 +113392,17 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                              }
 
                              NextTest();
@@ -113421,9 +113421,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
@@ -113438,18 +113438,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113468,9 +113468,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123465" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:[NumberOfTotalUsersSupported unsignedShortValue] + 1U];
@@ -113485,18 +113485,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113515,9 +113515,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"12345" length:5];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
@@ -113532,18 +113532,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113562,9 +113562,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456789" length:9];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
@@ -113579,18 +113579,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113609,9 +113609,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data" length:9];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
@@ -113626,18 +113626,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113656,9 +113656,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
@@ -113673,18 +113673,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113703,9 +113703,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"very_long_rfid_data_to_test_boundaries" length:38];
         params.userIndex = [NSNumber numberWithUnsignedShort:0U];
@@ -113720,18 +113720,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113750,9 +113750,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
         params.userIndex = nil;
@@ -113767,18 +113767,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                              }
 
                              NextTest();
@@ -113797,9 +113797,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_123456" length:16];
         params.userIndex = nil;
@@ -113814,18 +113814,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                              }
 
                              NextTest();
@@ -113844,9 +113844,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -113861,18 +113861,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -113891,9 +113891,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
         params.userIndex = nil;
@@ -113908,19 +113908,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -113939,9 +113939,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -113956,18 +113956,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                              }
 
                              NextTest();
@@ -113986,9 +113986,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_7890" length:14];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -114003,18 +114003,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                              }
 
                              NextTest();
@@ -114041,72 +114041,72 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                                VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(3)));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(3)));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 1U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 1U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialIndex, 2U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 4U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[2]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[2]).credentialIndex, 4U));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                                VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("NextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValue("NextUserIndex", actualValue, 2U));
                             }
 
                             NextTest();
@@ -114125,9 +114125,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"789012" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -114142,18 +114142,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 6U));
                              }
 
                              NextTest();
@@ -114180,76 +114180,76 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                                VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(4)));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(4)));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 1U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 1U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 1U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialIndex, 2U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[2]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[2]).credentialIndex, 4U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialType, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 4U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[3]).credentialType, 1U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[3]).credentialIndex, 5U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[3]).credentialType, 1U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[3]).credentialIndex, 5U));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                                VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("NextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValue("NextUserIndex", actualValue, 2U));
                             }
 
                             NextTest();
@@ -114267,9 +114267,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -114292,9 +114292,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -114305,28 +114305,28 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                            VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                                         }
 
                                         NextTest();
@@ -114353,72 +114353,72 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                                VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(3)));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(3)));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 2U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 2U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 2U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialType, 2U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[1]).credentialIndex, 4U));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialType, 2U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[1]).credentialIndex, 4U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialType, 1U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[2]).credentialIndex, 5U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[2]).credentialType, 1U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[2]).credentialIndex, 5U));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNonNull("nextUserIndex", actualValue));
-                                VerifyOrReturn(CheckValue("nextUserIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValueNonNull("NextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValue("NextUserIndex", actualValue, 2U));
                             }
 
                             NextTest();
@@ -114436,9 +114436,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -114461,9 +114461,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -114474,28 +114474,28 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                            VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                                         }
 
                                         NextTest();
@@ -114522,52 +114522,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -114586,9 +114586,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_12345" length:15];
         params.userIndex = nil;
@@ -114603,19 +114603,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -114633,9 +114633,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -114658,9 +114658,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -114671,28 +114671,28 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                            VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                                         }
 
                                         NextTest();
@@ -114710,9 +114710,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -114723,28 +114723,28 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                            VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                                         }
 
                                         NextTest();
@@ -114762,9 +114762,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -114775,28 +114775,28 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                            VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                                         }
 
                                         NextTest();
@@ -114824,63 +114824,63 @@ private:
 
                        {
                            id actualValue = values.userIndex;
-                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                        }
 
                        {
                            id actualValue = values.userName;
-                           VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                           VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                           VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                           VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                        }
 
                        {
-                           id actualValue = values.userUniqueId;
-                           VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                           id actualValue = values.userUniqueID;
+                           VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                        }
 
                        {
                            id actualValue = values.userStatus;
-                           VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                           VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                           VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                           VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                        }
 
                        {
                            id actualValue = values.userType;
-                           VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                           VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                           VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                           VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                        }
 
                        {
                            id actualValue = values.credentialRule;
-                           VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                           VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                           VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                           VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                        }
 
                        {
                            id actualValue = values.credentials;
-                           VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                           VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                           VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                           VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(1)));
                            VerifyOrReturn(CheckValue(
-                               "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 1U));
+                               "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 1U));
                            VerifyOrReturn(CheckValue(
-                               "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 5U));
+                               "CredentialIndex", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 5U));
                        }
 
                        {
                            id actualValue = values.creatorFabricIndex;
-                           VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                           VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                           VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                           VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                        }
 
                        {
                            id actualValue = values.lastModifiedFabricIndex;
-                           VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                           VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                           VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                           VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                        }
 
                        {
                            id actualValue = values.nextUserIndex;
-                           VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                           VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                        }
 
                        NextTest();
@@ -114907,52 +114907,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -114971,9 +114971,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -114988,19 +114988,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -115019,9 +115019,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_1234" length:14];
         params.userIndex = nil;
@@ -115036,19 +115036,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 3U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -115067,9 +115067,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"rfid_data_9876" length:14];
         params.userIndex = nil;
@@ -115084,19 +115084,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 4U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 7U));
                              }
 
                              NextTest();
@@ -115136,9 +115136,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -115149,27 +115149,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -115187,9 +115187,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -115200,27 +115200,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -115238,9 +115238,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -115251,27 +115251,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -115298,52 +115298,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -115370,52 +115370,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -115442,52 +115442,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 3U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 3U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -115514,52 +115514,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 4U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 4U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -115578,9 +115578,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -115595,17 +115595,17 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                              }
 
                              NextTest();
@@ -115624,9 +115624,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -115641,18 +115641,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                              }
 
                              NextTest();
@@ -115679,63 +115679,63 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @""));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @""));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNonNull("credentials", actualValue));
-                                VerifyOrReturn(CheckValue("credentials", [actualValue count], static_cast<uint32_t>(1)));
+                                VerifyOrReturn(CheckValueNonNull("Credentials", actualValue));
+                                VerifyOrReturn(CheckValue("Credentials", [actualValue count], static_cast<uint32_t>(1)));
                                 VerifyOrReturn(CheckValue(
-                                    "CredentialType", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialType, 0U));
-                                VerifyOrReturn(CheckValue(
-                                    "CredentialIndex", ((MTRDoorLockClusterDlCredential *) actualValue[0]).credentialIndex, 0U));
+                                    "CredentialType", ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialType, 0U));
+                                VerifyOrReturn(CheckValue("CredentialIndex",
+                                    ((MTRDoorLockClusterCredentialStruct *) actualValue[0]).credentialIndex, 0U));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -115753,9 +115753,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -115766,30 +115766,30 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, true));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -115808,9 +115808,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:2U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"654321" length:6];
         params.userIndex = nil;
@@ -115825,17 +115825,17 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                              }
 
                              NextTest();
@@ -115853,9 +115853,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -115881,9 +115881,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -115909,9 +115909,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -115937,9 +115937,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfPINUsersSupported unsignedShortValue] + 1U];
 
         [cluster clearCredentialWithParams:params
@@ -115966,9 +115966,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -115994,9 +115994,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex =
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:2U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex =
             [NSNumber numberWithUnsignedShort:[NumberOfRFIDUsersSupported unsignedShortValue] + 1U];
 
         [cluster clearCredentialWithParams:params
@@ -116054,52 +116054,52 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNull("userName", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserName", actualValue));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNull("userUniqueId", actualValue));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNull("UserUniqueID", actualValue));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNull("userStatus", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserStatus", actualValue));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNull("userType", actualValue));
+                                VerifyOrReturn(CheckValueNull("UserType", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNull("credentialRule", actualValue));
+                                VerifyOrReturn(CheckValueNull("CredentialRule", actualValue));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -116117,9 +116117,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:0U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:0U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -116130,27 +116130,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -116169,9 +116169,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000000" length:6];
         params.userIndex = nil;
@@ -116186,19 +116186,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -116217,9 +116217,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000001" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -116234,18 +116234,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -116264,9 +116264,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:3U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000002" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -116281,18 +116281,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 4U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 4U));
                              }
 
                              NextTest();
@@ -116311,9 +116311,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:4U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000003" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -116328,18 +116328,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 5U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 5U));
                              }
 
                              NextTest();
@@ -116358,9 +116358,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:5U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000004" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -116375,18 +116375,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 6U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 6U));
                              }
 
                              NextTest();
@@ -116405,9 +116405,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:6U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"000005" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -116422,18 +116422,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 137U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 137U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 7U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 7U));
                              }
 
                              NextTest();
@@ -116919,9 +116919,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -116936,19 +116936,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -117479,9 +117479,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"654321" length:6];
         params.userIndex = nil;
@@ -117496,19 +117496,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -118725,9 +118725,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -118742,19 +118742,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -119334,17 +119334,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -119373,17 +119373,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119412,18 +119412,18 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue,
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue,
                                                [NumberOfWeekDaySchedulesSupportedPerUser unsignedCharValue] + 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119452,17 +119452,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119491,18 +119491,18 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
                                            VerifyOrReturn(CheckValue(
-                                               "userIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
+                                               "UserIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119531,17 +119531,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -119738,17 +119738,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -119777,17 +119777,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119816,18 +119816,18 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue,
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue,
                                                [NumberOfYearDaySchedulesSupportedPerUser unsignedCharValue] + 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119856,17 +119856,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119895,18 +119895,18 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
                                            VerifyOrReturn(CheckValue(
-                                               "userIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
+                                               "UserIndex", actualValue, [NumberOfTotalUsersSupported unsignedShortValue] + 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -119935,17 +119935,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -120085,12 +120085,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -120118,12 +120118,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -120151,13 +120151,13 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue,
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue,
                                                [NumberOfHolidaySchedulesSupported unsignedCharValue] + 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -120210,27 +120210,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -120287,42 +120287,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 15U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 16U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 18U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -120376,27 +120376,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        NextTest();
@@ -120560,42 +120560,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 15U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 16U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 18U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -120624,27 +120624,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        NextTest();
@@ -120672,27 +120672,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -120856,42 +120856,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 15U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 16U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 18U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -120920,27 +120920,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        NextTest();
@@ -120968,27 +120968,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -121069,42 +121069,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 15U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 16U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 16U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 18U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 18U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -121133,27 +121133,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        NextTest();
@@ -121181,27 +121181,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -121258,42 +121258,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 59U));
                                        }
 
                                        NextTest();
@@ -121347,27 +121347,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 9000UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 888888888UL));
                                        }
 
                                        NextTest();
@@ -121420,27 +121420,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 123456UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 123456UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 1234567UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 1234567UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -121492,17 +121492,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -121554,17 +121554,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -121593,27 +121593,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        NextTest();
@@ -121642,27 +121642,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 9000UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 888888888UL));
                                        }
 
                                        NextTest();
@@ -121690,27 +121690,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -121738,27 +121738,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 123456UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 123456UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 1234567UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 1234567UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -121838,17 +121838,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -121900,17 +121900,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -121939,42 +121939,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 59U));
                                        }
 
                                        NextTest();
@@ -122018,7 +122018,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userName = nil;
-        params.userUniqueId = nil;
+        params.userUniqueID = nil;
         params.userStatus = nil;
         params.userType = nil;
         params.credentialRule = nil;
@@ -122082,42 +122082,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 59U));
                                        }
 
                                        NextTest();
@@ -122171,27 +122171,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 4U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 9000UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 888888888UL));
                                        }
 
                                        NextTest();
@@ -122248,42 +122248,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 4U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 64U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 64U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 59U));
                                        }
 
                                        NextTest();
@@ -122337,27 +122337,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 55555UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 55555UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 7777777UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 7777777UL));
                                        }
 
                                        NextTest();
@@ -122408,17 +122408,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -122447,17 +122447,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 4U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 4U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -122486,17 +122486,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 4U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 4U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -122525,17 +122525,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -122563,27 +122563,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -122611,27 +122611,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 123456UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 123456UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 1234567UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 1234567UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 1U));
                                        }
 
                                        NextTest();
@@ -122685,27 +122685,27 @@ private:
 
                                   {
                                       id actualValue = values.holidayIndex;
-                                      VerifyOrReturn(CheckValue("holidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
+                                      VerifyOrReturn(CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
                                   }
 
                                   {
                                       id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                      VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                   }
 
                                   {
                                       id actualValue = values.localStartTime;
-                                      VerifyOrReturn(CheckValue("localStartTime", actualValue, 1UL));
+                                      VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1UL));
                                   }
 
                                   {
                                       id actualValue = values.localEndTime;
-                                      VerifyOrReturn(CheckValue("localEndTime", actualValue, 100UL));
+                                      VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 100UL));
                                   }
 
                                   {
                                       id actualValue = values.operatingMode;
-                                      VerifyOrReturn(CheckValue("operatingMode", actualValue, 4U));
+                                      VerifyOrReturn(CheckValue("OperatingMode", actualValue, 4U));
                                   }
 
                                   NextTest();
@@ -122724,9 +122724,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -122741,19 +122741,19 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                 VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -122856,27 +122856,27 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 12345UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 12345UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 12345689UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 12345689UL));
                                        }
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -122904,12 +122904,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -122938,27 +122938,27 @@ private:
 
                                   {
                                       id actualValue = values.holidayIndex;
-                                      VerifyOrReturn(CheckValue("holidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
+                                      VerifyOrReturn(CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
                                   }
 
                                   {
                                       id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                      VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                   }
 
                                   {
                                       id actualValue = values.localStartTime;
-                                      VerifyOrReturn(CheckValue("localStartTime", actualValue, 1UL));
+                                      VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1UL));
                                   }
 
                                   {
                                       id actualValue = values.localEndTime;
-                                      VerifyOrReturn(CheckValue("localEndTime", actualValue, 100UL));
+                                      VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 100UL));
                                   }
 
                                   {
                                       id actualValue = values.operatingMode;
-                                      VerifyOrReturn(CheckValue("operatingMode", actualValue, 4U));
+                                      VerifyOrReturn(CheckValue("OperatingMode", actualValue, 4U));
                                   }
 
                                   NextTest();
@@ -122987,42 +122987,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 59U));
                                        }
 
                                        NextTest();
@@ -123051,27 +123051,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 9000UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 888888888UL));
                                        }
 
                                        NextTest();
@@ -123121,12 +123121,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -123154,12 +123154,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 2U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 2U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -123188,12 +123188,12 @@ private:
 
                                   {
                                       id actualValue = values.holidayIndex;
-                                      VerifyOrReturn(CheckValue("holidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
+                                      VerifyOrReturn(CheckValue("HolidayIndex", actualValue, NumberOfHolidaySchedulesSupported));
                                   }
 
                                   {
                                       id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                      VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                   }
 
                                   NextTest();
@@ -123222,42 +123222,42 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.daysMask;
-                                           VerifyOrReturn(CheckValue("daysMask", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("DaysMask", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.startHour;
-                                           VerifyOrReturn(CheckValue("startHour", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartHour", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.startMinute;
-                                           VerifyOrReturn(CheckValue("startMinute", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("StartMinute", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.endHour;
-                                           VerifyOrReturn(CheckValue("endHour", actualValue, 23U));
+                                           VerifyOrReturn(CheckValue("EndHour", actualValue, 23U));
                                        }
 
                                        {
                                            id actualValue = values.endMinute;
-                                           VerifyOrReturn(CheckValue("endMinute", actualValue, 59U));
+                                           VerifyOrReturn(CheckValue("EndMinute", actualValue, 59U));
                                        }
 
                                        NextTest();
@@ -123286,27 +123286,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 9000UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 9000UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 888888888UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 888888888UL));
                                        }
 
                                        NextTest();
@@ -125226,7 +125226,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -125260,59 +125260,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"xxx"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 6452UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -125331,9 +125331,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -125348,18 +125348,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -125377,9 +125377,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -125390,30 +125390,30 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, true));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -125901,9 +125901,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -126403,7 +126403,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -126437,59 +126437,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"xxx"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 6452UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -126508,9 +126508,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -126525,18 +126525,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -126554,9 +126554,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -126567,30 +126567,30 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, true));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -127328,9 +127328,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -127549,7 +127549,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -127583,59 +127583,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"xxx"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 6452UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -127654,9 +127654,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -127671,18 +127671,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -127700,9 +127700,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -127713,30 +127713,30 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, true));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, true));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -127884,9 +127884,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -128113,7 +128113,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -128147,59 +128147,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"xxx"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 6452UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -128312,32 +128312,32 @@ private:
 
                                   {
                                       id actualValue = values.weekDayIndex;
-                                      VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                      VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                   }
 
                                   {
                                       id actualValue = values.userIndex;
-                                      VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                      VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                   }
 
                                   {
                                       id actualValue = values.status;
-                                      VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                      VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                   }
 
                                   {
                                       id actualValue = values.daysMask;
-                                      VerifyOrReturn(CheckValue("daysMask", actualValue, 2U));
+                                      VerifyOrReturn(CheckValue("DaysMask", actualValue, 2U));
                                   }
 
                                   {
                                       id actualValue = values.startHour;
-                                      VerifyOrReturn(CheckValue("startHour", actualValue, 15U));
+                                      VerifyOrReturn(CheckValue("StartHour", actualValue, 15U));
                                   }
 
                                   {
                                       id actualValue = values.startMinute;
-                                      VerifyOrReturn(CheckValue("startMinute", actualValue, 45U));
+                                      VerifyOrReturn(CheckValue("StartMinute", actualValue, 45U));
                                   }
 
                                   VerifyOrReturn(CheckConstraintHasValue("endHour", values.endHour, true));
@@ -128411,17 +128411,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, false));
@@ -128493,17 +128493,17 @@ private:
 
                                        {
                                            id actualValue = values.weekDayIndex;
-                                           VerifyOrReturn(CheckValue("weekDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("WeekDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        VerifyOrReturn(CheckConstraintHasValue("daysMask", values.daysMask, false));
@@ -128813,22 +128813,22 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 20UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 20UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 30UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 30UL));
                                        }
 
                                        if (values.localEndTime != nil) {
@@ -128839,7 +128839,7 @@ private:
 
                                        {
                                            id actualValue = values.operatingMode;
-                                           VerifyOrReturn(CheckValue("operatingMode", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("OperatingMode", actualValue, 0U));
                                        }
 
                                        NextTest();
@@ -128895,12 +128895,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 15U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 15U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        NextTest();
@@ -128928,12 +128928,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 10U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 10U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -128983,12 +128983,12 @@ private:
 
                                        {
                                            id actualValue = values.holidayIndex;
-                                           VerifyOrReturn(CheckValue("holidayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("HolidayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        NextTest();
@@ -129294,7 +129294,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -129328,59 +129328,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"xxx"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 6452UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -129489,27 +129489,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 960UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 960UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 1980UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 1980UL));
                                        }
 
                                        if (values.localEndTime != nil) {
@@ -129572,17 +129572,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 15U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 15U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                                        }
 
                                        VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -129611,7 +129611,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:5U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -129648,17 +129648,17 @@ private:
                                        {
                                            id actualValue = values.yearDayIndex;
                                            VerifyOrReturn(
-                                               CheckValue("yearDayIndex", actualValue, NumberOfYearDaySchedulesSupportedPerUser));
+                                               CheckValue("YearDayIndex", actualValue, NumberOfYearDaySchedulesSupportedPerUser));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 5U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 5U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -129718,17 +129718,17 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 139U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 139U));
                                        }
 
                                        VerifyOrReturn(CheckConstraintHasValue("localStartTime", values.localStartTime, false));
@@ -129790,27 +129790,27 @@ private:
 
                                        {
                                            id actualValue = values.yearDayIndex;
-                                           VerifyOrReturn(CheckValue("yearDayIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("YearDayIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.userIndex;
-                                           VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                           VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                        }
 
                                        {
                                            id actualValue = values.status;
-                                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                        }
 
                                        {
                                            id actualValue = values.localStartTime;
-                                           VerifyOrReturn(CheckValue("localStartTime", actualValue, 1080UL));
+                                           VerifyOrReturn(CheckValue("LocalStartTime", actualValue, 1080UL));
                                        }
 
                                        {
                                            id actualValue = values.localEndTime;
-                                           VerifyOrReturn(CheckValue("localEndTime", actualValue, 2100UL));
+                                           VerifyOrReturn(CheckValue("LocalEndTime", actualValue, 2100UL));
                                        }
 
                                        if (values.localEndTime != nil) {
@@ -130212,7 +130212,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -130246,59 +130246,59 @@ private:
 
                             {
                                 id actualValue = values.userIndex;
-                                VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userName;
-                                VerifyOrReturn(CheckValueNonNull("userName", actualValue));
-                                VerifyOrReturn(CheckValueAsString("userName", actualValue, @"xxx"));
+                                VerifyOrReturn(CheckValueNonNull("UserName", actualValue));
+                                VerifyOrReturn(CheckValueAsString("UserName", actualValue, @"xxx"));
                             }
 
                             {
-                                id actualValue = values.userUniqueId;
-                                VerifyOrReturn(CheckValueNonNull("userUniqueId", actualValue));
-                                VerifyOrReturn(CheckValue("userUniqueId", actualValue, 6452UL));
+                                id actualValue = values.userUniqueID;
+                                VerifyOrReturn(CheckValueNonNull("UserUniqueID", actualValue));
+                                VerifyOrReturn(CheckValue("UserUniqueID", actualValue, 6452UL));
                             }
 
                             {
                                 id actualValue = values.userStatus;
-                                VerifyOrReturn(CheckValueNonNull("userStatus", actualValue));
-                                VerifyOrReturn(CheckValue("userStatus", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("UserStatus", actualValue));
+                                VerifyOrReturn(CheckValue("UserStatus", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.userType;
-                                VerifyOrReturn(CheckValueNonNull("userType", actualValue));
-                                VerifyOrReturn(CheckValue("userType", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("UserType", actualValue));
+                                VerifyOrReturn(CheckValue("UserType", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentialRule;
-                                VerifyOrReturn(CheckValueNonNull("credentialRule", actualValue));
-                                VerifyOrReturn(CheckValue("credentialRule", actualValue, 0U));
+                                VerifyOrReturn(CheckValueNonNull("CredentialRule", actualValue));
+                                VerifyOrReturn(CheckValue("CredentialRule", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.credentials;
-                                VerifyOrReturn(CheckValueNull("credentials", actualValue));
+                                VerifyOrReturn(CheckValueNull("Credentials", actualValue));
                             }
 
                             {
                                 id actualValue = values.creatorFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.lastModifiedFabricIndex;
-                                VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                             }
 
                             {
                                 id actualValue = values.nextUserIndex;
-                                VerifyOrReturn(CheckValueNull("nextUserIndex", actualValue));
+                                VerifyOrReturn(CheckValueNull("NextUserIndex", actualValue));
                             }
 
                             NextTest();
@@ -130343,9 +130343,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:1U];
@@ -130360,18 +130360,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -130389,9 +130389,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -130403,25 +130403,25 @@ private:
                                         VerifyOrReturn(CheckConstraintType("credentialExists", "boolean", "boolean"));
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNonNull("userIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("userIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("UserIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("UserIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("creatorFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("creatorFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("CreatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("CreatorFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNonNull("lastModifiedFabricIndex", actualValue));
-                                            VerifyOrReturn(CheckValue("lastModifiedFabricIndex", actualValue, 1U));
+                                            VerifyOrReturn(CheckValueNonNull("LastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValue("LastModifiedFabricIndex", actualValue, 1U));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -130440,9 +130440,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"4321" length:4];
         params.userIndex = nil;
@@ -130457,18 +130457,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 133U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 133U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -130487,9 +130487,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = nil;
@@ -130504,18 +130504,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 2U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 2U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 3U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 3U));
                              }
 
                              NextTest();
@@ -130566,9 +130566,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -130591,9 +130591,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -130604,27 +130604,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -130645,7 +130645,7 @@ private:
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
         params.userName = @"xxx";
-        params.userUniqueId = [NSNumber numberWithUnsignedInt:6452UL];
+        params.userUniqueID = [NSNumber numberWithUnsignedInt:6452UL];
         params.userStatus = [NSNumber numberWithUnsignedChar:1U];
         params.userType = [NSNumber numberWithUnsignedChar:0U];
         params.credentialRule = [NSNumber numberWithUnsignedChar:0U];
@@ -130671,9 +130671,9 @@ private:
 
         __auto_type * params = [[MTRDoorLockClusterSetCredentialParams alloc] init];
         params.operationType = [NSNumber numberWithUnsignedChar:0U];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         params.credentialData = [[NSData alloc] initWithBytes:"123456" length:6];
         params.userIndex = [NSNumber numberWithUnsignedShort:2U];
@@ -130688,18 +130688,18 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.userIndex;
-                                 VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                 VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                              }
 
                              {
                                  id actualValue = values.nextCredentialIndex;
-                                 VerifyOrReturn(CheckValueNonNull("nextCredentialIndex", actualValue));
-                                 VerifyOrReturn(CheckValue("nextCredentialIndex", actualValue, 2U));
+                                 VerifyOrReturn(CheckValueNonNull("NextCredentialIndex", actualValue));
+                                 VerifyOrReturn(CheckValue("NextCredentialIndex", actualValue, 2U));
                              }
 
                              NextTest();
@@ -130717,9 +130717,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
@@ -130742,9 +130742,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:65534U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -130755,27 +130755,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -130793,9 +130793,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterGetCredentialStatusParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:1U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:1U];
 
         [cluster getCredentialStatusWithParams:params
                                     completion:^(MTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable values,
@@ -130806,27 +130806,27 @@ private:
 
                                         {
                                             id actualValue = values.credentialExists;
-                                            VerifyOrReturn(CheckValue("credentialExists", actualValue, false));
+                                            VerifyOrReturn(CheckValue("CredentialExists", actualValue, false));
                                         }
 
                                         {
                                             id actualValue = values.userIndex;
-                                            VerifyOrReturn(CheckValueNull("userIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("UserIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.creatorFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("creatorFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("CreatorFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.lastModifiedFabricIndex;
-                                            VerifyOrReturn(CheckValueNull("lastModifiedFabricIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("LastModifiedFabricIndex", actualValue));
                                         }
 
                                         {
                                             id actualValue = values.nextCredentialIndex;
-                                            VerifyOrReturn(CheckValueNull("nextCredentialIndex", actualValue));
+                                            VerifyOrReturn(CheckValueNull("NextCredentialIndex", actualValue));
                                         }
 
                                         NextTest();
@@ -130844,9 +130844,9 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRDoorLockClusterClearCredentialParams alloc] init];
-        params.credential = [[MTRDoorLockClusterDlCredential alloc] init];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:8U];
-        ((MTRDoorLockClusterDlCredential *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
+        params.credential = [[MTRDoorLockClusterCredentialStruct alloc] init];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialType = [NSNumber numberWithUnsignedChar:8U];
+        ((MTRDoorLockClusterCredentialStruct *) params.credential).credentialIndex = [NSNumber numberWithUnsignedShort:2U];
 
         [cluster clearCredentialWithParams:params
                                 completion:^(NSError * _Nullable err) {
