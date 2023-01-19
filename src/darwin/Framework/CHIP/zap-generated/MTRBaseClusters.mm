@@ -67216,7 +67216,7 @@ using chip::Messaging::ExchangeManager;
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
                 }
             }
-            request.colorTemperature = params.colorTemperature.unsignedShortValue;
+            request.colorTemperatureMireds = params.colorTemperatureMireds.unsignedShortValue;
             request.transitionTime = params.transitionTime.unsignedShortValue;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;

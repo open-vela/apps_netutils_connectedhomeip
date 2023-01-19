@@ -55896,7 +55896,7 @@ public:
     ColorControlMoveToColorTemperature()
         : ClusterCommand("move-to-color-temperature")
     {
-        AddArgument("ColorTemperature", 0, UINT16_MAX, &mRequest.colorTemperature);
+        AddArgument("ColorTemperatureMireds", 0, UINT16_MAX, &mRequest.colorTemperatureMireds);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         AddArgument("OptionsMask", 0, UINT8_MAX, &mRequest.optionsMask);
         AddArgument("OptionsOverride", 0, UINT8_MAX, &mRequest.optionsOverride);
@@ -55914,7 +55914,7 @@ public:
         __auto_type * params = [[MTRColorControlClusterMoveToColorTemperatureParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.colorTemperature = [NSNumber numberWithUnsignedShort:mRequest.colorTemperature];
+        params.colorTemperatureMireds = [NSNumber numberWithUnsignedShort:mRequest.colorTemperatureMireds];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         params.optionsMask = [NSNumber numberWithUnsignedChar:mRequest.optionsMask];
         params.optionsOverride = [NSNumber numberWithUnsignedChar:mRequest.optionsOverride];
