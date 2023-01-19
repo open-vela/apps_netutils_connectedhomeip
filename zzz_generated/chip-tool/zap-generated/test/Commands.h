@@ -71576,7 +71576,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -71603,7 +71603,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 2U));
             }
@@ -71631,7 +71631,7 @@ private:
         case 10:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -71666,7 +71666,7 @@ private:
         case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -71701,7 +71701,7 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 2U));
             }
@@ -71734,7 +71734,7 @@ private:
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 2U));
             }
@@ -73425,7 +73425,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -73436,7 +73436,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 2U));
             }
@@ -73448,7 +73448,7 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -98343,7 +98343,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -98354,7 +98354,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -98520,7 +98520,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -98531,7 +98531,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -98826,7 +98826,7 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -99248,7 +99248,7 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -101186,7 +101186,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 2U));
             }
@@ -101266,7 +101266,7 @@ private:
         case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 1U));
             }
@@ -101325,7 +101325,7 @@ private:
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -101757,7 +101757,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -101768,7 +101768,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -101934,7 +101934,7 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
@@ -101945,7 +101945,7 @@ private:
         case 7:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatus value;
+                chip::app::Clusters::AdministratorCommissioning::CommissioningWindowStatusEnum value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("windowStatus", value, 0U));
             }
