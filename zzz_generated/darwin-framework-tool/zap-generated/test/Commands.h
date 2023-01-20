@@ -76105,16 +76105,18 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("InputList", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValue("index", ((MTRMediaInputClusterInputInfo *) actualValue[0]).index, 1U));
-                VerifyOrReturn(CheckValue("inputType", ((MTRMediaInputClusterInputInfo *) actualValue[0]).inputType, 4U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRMediaInputClusterInputInfo *) actualValue[0]).name, @"HDMI"));
-                VerifyOrReturn(CheckValueAsString("description",
-                    ((MTRMediaInputClusterInputInfo *) actualValue[0]).descriptionString, @"High-Definition Multimedia Interface"));
-                VerifyOrReturn(CheckValue("index", ((MTRMediaInputClusterInputInfo *) actualValue[1]).index, 2U));
-                VerifyOrReturn(CheckValue("inputType", ((MTRMediaInputClusterInputInfo *) actualValue[1]).inputType, 4U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRMediaInputClusterInputInfo *) actualValue[1]).name, @"HDMI"));
-                VerifyOrReturn(CheckValueAsString("description",
-                    ((MTRMediaInputClusterInputInfo *) actualValue[1]).descriptionString, @"High-Definition Multimedia Interface"));
+                VerifyOrReturn(CheckValue("Index", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("InputType", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).inputType, 4U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).name, @"HDMI"));
+                VerifyOrReturn(
+                    CheckValueAsString("Description", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).descriptionString,
+                        @"High-Definition Multimedia Interface"));
+                VerifyOrReturn(CheckValue("Index", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("InputType", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).inputType, 4U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).name, @"HDMI"));
+                VerifyOrReturn(
+                    CheckValueAsString("Description", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).descriptionString,
+                        @"High-Definition Multimedia Interface"));
             }
 
             NextTest();
@@ -76246,16 +76248,19 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("InputList", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValue("index", ((MTRMediaInputClusterInputInfo *) actualValue[0]).index, 1U));
-                VerifyOrReturn(CheckValue("inputType", ((MTRMediaInputClusterInputInfo *) actualValue[0]).inputType, 4U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRMediaInputClusterInputInfo *) actualValue[0]).name, @"HDMI Test"));
-                VerifyOrReturn(CheckValueAsString("description",
-                    ((MTRMediaInputClusterInputInfo *) actualValue[0]).descriptionString, @"High-Definition Multimedia Interface"));
-                VerifyOrReturn(CheckValue("index", ((MTRMediaInputClusterInputInfo *) actualValue[1]).index, 2U));
-                VerifyOrReturn(CheckValue("inputType", ((MTRMediaInputClusterInputInfo *) actualValue[1]).inputType, 4U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRMediaInputClusterInputInfo *) actualValue[1]).name, @"HDMI"));
-                VerifyOrReturn(CheckValueAsString("description",
-                    ((MTRMediaInputClusterInputInfo *) actualValue[1]).descriptionString, @"High-Definition Multimedia Interface"));
+                VerifyOrReturn(CheckValue("Index", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("InputType", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).inputType, 4U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).name, @"HDMI Test"));
+                VerifyOrReturn(
+                    CheckValueAsString("Description", ((MTRMediaInputClusterInputInfoStruct *) actualValue[0]).descriptionString,
+                        @"High-Definition Multimedia Interface"));
+                VerifyOrReturn(CheckValue("Index", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("InputType", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).inputType, 4U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).name, @"HDMI"));
+                VerifyOrReturn(
+                    CheckValueAsString("Description", ((MTRMediaInputClusterInputInfoStruct *) actualValue[1]).descriptionString,
+                        @"High-Definition Multimedia Interface"));
             }
 
             NextTest();
