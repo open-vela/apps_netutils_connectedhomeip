@@ -762,7 +762,58 @@ private:
                             CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_3, 3));
                     }
                     VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 3));
+                    VerifyOrReturn(CheckValue("acl[3].privilege", iter_0.GetValue().privilege, 3U));
+                    VerifyOrReturn(CheckValue("acl[3].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[3].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[0]", iter_3.GetValue(), 20ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[1]", iter_3.GetValue(), 21ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[2]", iter_3.GetValue(), 22ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[3]", iter_3.GetValue(), 23ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[3].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[3].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[3].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 24U));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[3].targets.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[1].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[1].cluster.Value()", iter_3.GetValue().cluster.Value(), 25UL));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[1].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[1].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[3].targets.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[2].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[2].cluster.Value()", iter_3.GetValue().cluster.Value(), 26UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[2].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[2].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 27U));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[2].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[3].targets.Value()", iter_3, 3));
+                    }
+                    VerifyOrReturn(CheckValue("acl[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 4));
                 }
             }
             break;
@@ -1074,7 +1125,58 @@ private:
                             CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[2].targets.Value()", iter_3, 3));
                     }
                     VerifyOrReturn(CheckValue("acl[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 3));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 3));
+                    VerifyOrReturn(CheckValue("acl[3].privilege", iter_0.GetValue().privilege, 1U));
+                    VerifyOrReturn(CheckValue("acl[3].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[3].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[0]", iter_3.GetValue(), 20ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[1]", iter_3.GetValue(), 21ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[2]", iter_3.GetValue(), 22ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[3].subjects.Value()", iter_3, 3));
+                        VerifyOrReturn(CheckValue("acl[3].subjects.Value()[3]", iter_3.GetValue(), 23ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[3].subjects.Value()",
+                                                                                                          iter_3, 4));
+                    }
+                    VerifyOrReturn(CheckValueNonNull("acl[3].targets", iter_0.GetValue().targets));
+                    {
+                        auto iter_3 = iter_0.GetValue().targets.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[3].targets.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[0].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[0].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[0].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 24U));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[0].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[3].targets.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[1].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[1].cluster.Value()", iter_3.GetValue().cluster.Value(), 25UL));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[1].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[1].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().targets.Value())>(
+                            "acl[3].targets.Value()", iter_3, 2));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[2].cluster", iter_3.GetValue().cluster));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[2].cluster.Value()", iter_3.GetValue().cluster.Value(), 26UL));
+                        VerifyOrReturn(CheckValueNonNull("acl[3].targets.Value()[2].endpoint", iter_3.GetValue().endpoint));
+                        VerifyOrReturn(
+                            CheckValue("acl[3].targets.Value()[2].endpoint.Value()", iter_3.GetValue().endpoint.Value(), 27U));
+                        VerifyOrReturn(CheckValueNull("acl[3].targets.Value()[2].deviceType", iter_3.GetValue().deviceType));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().targets.Value())>("acl[3].targets.Value()", iter_3, 3));
+                    }
+                    VerifyOrReturn(CheckValue("acl[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 4));
                 }
             }
             break;
@@ -1121,7 +1223,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 3U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 4U));
             }
             break;
         default:
@@ -1159,7 +1261,7 @@ private:
 
             {
                 auto * listHolder_0 =
-                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(3);
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(4);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].privilege =
@@ -1281,8 +1383,51 @@ private:
                 }
                 listHolder_0->mList[2].fabricIndex = 0U;
 
+                listHolder_0->mList[3].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[3].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[3].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 20ULL;
+                    listHolder_3->mList[1]                  = 21ULL;
+                    listHolder_3->mList[2]                  = 22ULL;
+                    listHolder_3->mList[3]                  = 23ULL;
+                    listHolder_0->mList[3].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[3].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 24U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_3->mList[1].cluster.SetNonNull();
+                    listHolder_3->mList[1].cluster.Value() = 25UL;
+                    listHolder_3->mList[1].endpoint.SetNull();
+                    listHolder_3->mList[1].deviceType.SetNull();
+
+                    listHolder_3->mList[2].cluster.SetNonNull();
+                    listHolder_3->mList[2].cluster.Value() = 26UL;
+                    listHolder_3->mList[2].endpoint.SetNonNull();
+                    listHolder_3->mList[2].endpoint.Value() = 27U;
+                    listHolder_3->mList[2].deviceType.SetNull();
+
+                    listHolder_0->mList[3].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              3);
+                }
+                listHolder_0->mList[3].fabricIndex = 0U;
+
                 value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
-                    listHolder_0->mList, 3);
+                    listHolder_0->mList, 4);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
@@ -1718,7 +1863,7 @@ private:
 
             {
                 auto * listHolder_0 =
-                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(4);
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(5);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].privilege =
@@ -1883,8 +2028,51 @@ private:
                 }
                 listHolder_0->mList[3].fabricIndex = 0U;
 
+                listHolder_0->mList[4].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[4].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[4].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(4);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 28ULL;
+                    listHolder_3->mList[1]                  = 29ULL;
+                    listHolder_3->mList[2]                  = 30ULL;
+                    listHolder_3->mList[3]                  = 31ULL;
+                    listHolder_0->mList[4].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 4);
+                }
+                listHolder_0->mList[4].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(3);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 32U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_3->mList[1].cluster.SetNonNull();
+                    listHolder_3->mList[1].cluster.Value() = 33UL;
+                    listHolder_3->mList[1].endpoint.SetNull();
+                    listHolder_3->mList[1].deviceType.SetNull();
+
+                    listHolder_3->mList[2].cluster.SetNonNull();
+                    listHolder_3->mList[2].cluster.Value() = 34UL;
+                    listHolder_3->mList[2].endpoint.SetNonNull();
+                    listHolder_3->mList[2].endpoint.Value() = 35U;
+                    listHolder_3->mList[2].deviceType.SetNull();
+
+                    listHolder_0->mList[4].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              3);
+                }
+                listHolder_0->mList[4].fabricIndex = 0U;
+
                 value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
-                    listHolder_0->mList, 4);
+                    listHolder_0->mList, 5);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
                                   chip::NullOptional, chip::NullOptional);
@@ -85368,7 +85556,7 @@ class TestGroupKeyManagementClusterSuite : public TestCommand
 {
 public:
     TestGroupKeyManagementClusterSuite(CredentialIssuerCommands * credsIssuerConfig) :
-        TestCommand("TestGroupKeyManagementCluster", 29, credsIssuerConfig)
+        TestCommand("TestGroupKeyManagementCluster", 31, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -85418,7 +85606,7 @@ private:
             {
                 uint16_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintMinValue("value", value, 2U));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 4U));
             }
             break;
         case 2:
@@ -85480,13 +85668,17 @@ private:
                     VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 1));
                     VerifyOrReturn(CheckValue("groupKeyMap[1].groupId", iter_0.GetValue().groupId, 258U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[1].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
                     VerifyOrReturn(CheckValue("groupKeyMap[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 2));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 258U));
-                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[2].groupKeySetID", iter_0.GetValue().groupKeySetID, 417U));
                     VerifyOrReturn(CheckValue("groupKeyMap[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 3));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 3));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].groupKeySetID", iter_0.GetValue().groupKeySetID, 418U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 4));
                 }
             }
             break;
@@ -85509,6 +85701,24 @@ private:
             }
             break;
         case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 259U));
+            }
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::Groups::Commands::AddGroupResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("status", value.status, 0U));
+                VerifyOrReturn(CheckValue("groupID", value.groupID, 260U));
+            }
+            break;
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -85545,17 +85755,29 @@ private:
                     VerifyOrReturn(CheckValueAsString("groupTable[1].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                                       chip::CharSpan("Group #2", 8)));
                     VerifyOrReturn(CheckValue("groupTable[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 2));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 2));
+                    VerifyOrReturn(CheckValue("groupTable[2].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValuePresent("groupTable[2].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[2].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #3", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 3));
+                    VerifyOrReturn(CheckValue("groupTable[3].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValuePresent("groupTable[3].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[3].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #4", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[3].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 4));
                 }
             }
             break;
-        case 13:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 14:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
-        case 15:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::GroupKeyManagement::Commands::KeySetReadResponse::DecodableType value;
@@ -85576,7 +85798,7 @@ private:
                     CheckValue("groupKeySet.epochStartTime2.Value()", value.groupKeySet.epochStartTime2.Value(), 2110002ULL));
             }
             break;
-        case 16:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::Clusters::Groups::Commands::RemoveGroupResponse::DecodableType value;
@@ -85585,7 +85807,7 @@ private:
                 VerifyOrReturn(CheckValue("groupID", value.groupID, 257U));
             }
             break;
-        case 17:
+        case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -85608,14 +85830,26 @@ private:
                     VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                                       chip::CharSpan("Group #2", 8)));
                     VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
-                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 1));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 1));
+                    VerifyOrReturn(CheckValue("groupTable[1].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValuePresent("groupTable[1].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[1].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #3", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[1].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 2));
+                    VerifyOrReturn(CheckValue("groupTable[2].groupId", iter_0.GetValue().groupId, 260U));
+                    VerifyOrReturn(CheckValuePresent("groupTable[2].groupName", iter_0.GetValue().groupName));
+                    VerifyOrReturn(CheckValueAsString("groupTable[2].groupName.Value()", iter_0.GetValue().groupName.Value(),
+                                                      chip::CharSpan("Group #4", 8)));
+                    VerifyOrReturn(CheckValue("groupTable[2].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupTable", iter_0, 3));
                 }
             }
             break;
-        case 18:
+        case 20:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 19:
+        case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -85628,17 +85862,11 @@ private:
                 }
             }
             break;
-        case 20:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            break;
-        case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
-            break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -85647,6 +85875,12 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -85663,10 +85897,10 @@ private:
                 }
             }
             break;
-        case 27:
+        case 29:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 28:
+        case 30:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -85822,7 +86056,7 @@ private:
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(4);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(6);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].groupId       = 257U;
@@ -85841,8 +86075,16 @@ private:
                 listHolder_0->mList[3].groupKeySetID = 418U;
                 listHolder_0->mList[3].fabricIndex   = 1U;
 
+                listHolder_0->mList[4].groupId       = 259U;
+                listHolder_0->mList[4].groupKeySetID = 417U;
+                listHolder_0->mList[4].fabricIndex   = 1U;
+
+                listHolder_0->mList[5].groupId       = 259U;
+                listHolder_0->mList[5].groupKeySetID = 418U;
+                listHolder_0->mList[5].fabricIndex   = 1U;
+
                 value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 4);
+                    listHolder_0->mList, 6);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
@@ -85853,7 +86095,7 @@ private:
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
             {
-                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(3);
+                auto * listHolder_0 = new ListHolder<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(4);
                 listFreer.add(listHolder_0);
 
                 listHolder_0->mList[0].groupId       = 257U;
@@ -85861,15 +86103,19 @@ private:
                 listHolder_0->mList[0].fabricIndex   = 1U;
 
                 listHolder_0->mList[1].groupId       = 258U;
-                listHolder_0->mList[1].groupKeySetID = 417U;
+                listHolder_0->mList[1].groupKeySetID = 418U;
                 listHolder_0->mList[1].fabricIndex   = 1U;
 
-                listHolder_0->mList[2].groupId       = 258U;
-                listHolder_0->mList[2].groupKeySetID = 418U;
+                listHolder_0->mList[2].groupId       = 259U;
+                listHolder_0->mList[2].groupKeySetID = 417U;
                 listHolder_0->mList[2].fabricIndex   = 1U;
 
+                listHolder_0->mList[3].groupId       = 260U;
+                listHolder_0->mList[3].groupKeySetID = 418U;
+                listHolder_0->mList[3].fabricIndex   = 1U;
+
                 value = chip::app::DataModel::List<chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type>(
-                    listHolder_0->mList, 3);
+                    listHolder_0->mList, 4);
             }
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
@@ -85900,12 +86146,32 @@ private:
             );
         }
         case 12: {
-            LogStep(12, "Read GroupTable");
+            LogStep(12, "Add Group 3");
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = 259U;
+            value.groupName = chip::Span<const char>("Group #3garbage: not in length on purpose", 8);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
+        case 13: {
+            LogStep(13, "Add Group 4");
+            ListFreer listFreer;
+            chip::app::Clusters::Groups::Commands::AddGroup::Type value;
+            value.groupID   = 260U;
+            value.groupName = chip::Span<const char>("Group #4garbage: not in length on purpose", 8);
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::AddGroup::Id, value, chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "Read GroupTable");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "KeySet Remove 1");
+        case 15: {
+            LogStep(15, "KeySet Remove 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 417U;
@@ -85914,8 +86180,8 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "KeySet Read (removed)");
+        case 16: {
+            LogStep(16, "KeySet Read (removed)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 417U;
@@ -85924,8 +86190,8 @@ private:
 
             );
         }
-        case 15: {
-            LogStep(15, "KeySet Read (not removed)");
+        case 17: {
+            LogStep(17, "KeySet Read (not removed)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 418U;
@@ -85934,8 +86200,8 @@ private:
 
             );
         }
-        case 16: {
-            LogStep(16, "Remove Group 1");
+        case 18: {
+            LogStep(18, "Remove Group 1");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveGroup::Type value;
             value.groupID = 257U;
@@ -85944,13 +86210,13 @@ private:
 
             );
         }
-        case 17: {
-            LogStep(17, "Read GroupTable 2");
+        case 19: {
+            LogStep(19, "Read GroupTable 2");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 18: {
-            LogStep(18, "Remove All");
+        case 20: {
+            LogStep(20, "Remove All");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -85958,13 +86224,13 @@ private:
 
             );
         }
-        case 19: {
-            LogStep(19, "Read GroupTable 3");
+        case 21: {
+            LogStep(21, "Read GroupTable 3");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 20: {
-            LogStep(20, "KeySet Remove 2");
+        case 22: {
+            LogStep(22, "KeySet Remove 2");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 418U;
@@ -85973,8 +86239,8 @@ private:
 
             );
         }
-        case 21: {
-            LogStep(21, "KeySet Read (also removed)");
+        case 23: {
+            LogStep(23, "KeySet Read (also removed)");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRead::Type value;
             value.groupKeySetID = 418U;
@@ -85983,8 +86249,8 @@ private:
 
             );
         }
-        case 22: {
-            LogStep(22, "KeySet Write 1");
+        case 24: {
+            LogStep(24, "KeySet Write 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -86018,8 +86284,8 @@ private:
 
             );
         }
-        case 23: {
-            LogStep(23, "KeySet Write 2");
+        case 25: {
+            LogStep(25, "KeySet Write 2");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetWrite::Type value;
 
@@ -86053,8 +86319,8 @@ private:
 
             );
         }
-        case 24: {
-            LogStep(24, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
+        case 26: {
+            LogStep(26, "Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::Type> value;
 
@@ -86080,8 +86346,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                   GroupKeyManagement::Attributes::GroupKeyMap::Id, value, chip::NullOptional, chip::NullOptional);
         }
-        case 25: {
-            LogStep(25, "Remove keyset 1");
+        case 27: {
+            LogStep(27, "Remove keyset 1");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 417U;
@@ -86090,13 +86356,13 @@ private:
 
             );
         }
-        case 26: {
-            LogStep(26, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
+        case 28: {
+            LogStep(28, "TH verifies GroupKeyMap entries for KeySet 1 have been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 27: {
-            LogStep(27, "Remove keyset 2");
+        case 29: {
+            LogStep(29, "Remove keyset 2");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 418U;
@@ -86105,8 +86371,8 @@ private:
 
             );
         }
-        case 28: {
-            LogStep(28, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
+        case 30: {
+            LogStep(30, "TH verifies GroupKeyMap entries for KeySet 2 have been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
