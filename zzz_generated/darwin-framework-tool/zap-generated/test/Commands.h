@@ -72836,12 +72836,14 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("TargetList", [actualValue count], static_cast<uint32_t>(2)));
-                VerifyOrReturn(CheckValue("identifier", ((MTRTargetNavigatorClusterTargetInfo *) actualValue[0]).identifier, 1U));
                 VerifyOrReturn(
-                    CheckValueAsString("name", ((MTRTargetNavigatorClusterTargetInfo *) actualValue[0]).name, @"exampleName"));
-                VerifyOrReturn(CheckValue("identifier", ((MTRTargetNavigatorClusterTargetInfo *) actualValue[1]).identifier, 2U));
+                    CheckValue("Identifier", ((MTRTargetNavigatorClusterTargetInfoStruct *) actualValue[0]).identifier, 1U));
+                VerifyOrReturn(CheckValueAsString(
+                    "Name", ((MTRTargetNavigatorClusterTargetInfoStruct *) actualValue[0]).name, @"exampleName"));
                 VerifyOrReturn(
-                    CheckValueAsString("name", ((MTRTargetNavigatorClusterTargetInfo *) actualValue[1]).name, @"exampleName"));
+                    CheckValue("Identifier", ((MTRTargetNavigatorClusterTargetInfoStruct *) actualValue[1]).identifier, 2U));
+                VerifyOrReturn(CheckValueAsString(
+                    "Name", ((MTRTargetNavigatorClusterTargetInfoStruct *) actualValue[1]).name, @"exampleName"));
             }
 
             NextTest();
@@ -72894,12 +72896,12 @@ private:
 
                                    {
                                        id actualValue = values.status;
-                                       VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                       VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                                    }
 
                                    {
                                        id actualValue = values.data;
-                                       VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                                       VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                                    }
 
                                    NextTest();
