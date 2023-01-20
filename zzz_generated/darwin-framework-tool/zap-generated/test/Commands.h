@@ -603,6 +603,38 @@ private:
             }
             ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
+            temp_0[3] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:20ULL];
+                temp_3[1] = [NSNumber numberWithUnsignedLongLong:21ULL];
+                temp_3[2] = [NSNumber numberWithUnsignedLongLong:22ULL];
+                temp_3[3] = [NSNumber numberWithUnsignedLongLong:23ULL];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:24U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                temp_3[1] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[1]).cluster = [NSNumber numberWithUnsignedInt:25UL];
+                ((MTRAccessControlClusterTarget *) temp_3[1]).endpoint = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[1]).deviceType = nil;
+
+                temp_3[2] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[2]).cluster = [NSNumber numberWithUnsignedInt:26UL];
+                ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:27U];
+                ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
             aclArgument = temp_0;
         }
         [cluster writeAttributeACLWithValue:aclArgument
@@ -636,7 +668,7 @@ private:
 
                                 {
                                     id actualValue = value;
-                                    VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(4)));
                                     VerifyOrReturn(CheckValue("Privilege",
                                         ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                     VerifyOrReturn(CheckValue("AuthMode",
@@ -905,6 +937,99 @@ private:
                                             .deviceType));
                                     VerifyOrReturn(CheckValue("FabricIndex",
                                         ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).fabricIndex, 1U));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).privilege, 3U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).authMode, 2U));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects));
+                                    VerifyOrReturn(CheckValue("Subjects",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects count],
+                                        static_cast<uint32_t>(4)));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[0], 20ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[1], 21ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[2], 22ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[3], 23ULL));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .endpoint,
+                                        24U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .cluster,
+                                        25UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .cluster,
+                                        26UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .endpoint,
+                                        27U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).fabricIndex, 1U));
                                 }
 
                                 NextTest();
@@ -1749,6 +1874,38 @@ private:
             }
             ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
 
+            temp_0[4] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[4]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[4]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:28ULL];
+                temp_3[1] = [NSNumber numberWithUnsignedLongLong:29ULL];
+                temp_3[2] = [NSNumber numberWithUnsignedLongLong:30ULL];
+                temp_3[3] = [NSNumber numberWithUnsignedLongLong:31ULL];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[4]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:32U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                temp_3[1] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[1]).cluster = [NSNumber numberWithUnsignedInt:33UL];
+                ((MTRAccessControlClusterTarget *) temp_3[1]).endpoint = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[1]).deviceType = nil;
+
+                temp_3[2] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[2]).cluster = [NSNumber numberWithUnsignedInt:34UL];
+                ((MTRAccessControlClusterTarget *) temp_3[2]).endpoint = [NSNumber numberWithUnsignedShort:35U];
+                ((MTRAccessControlClusterTarget *) temp_3[2]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[4]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[4]).fabricIndex = [NSNumber numberWithUnsignedChar:0U];
+
             aclArgument = temp_0;
         }
         [cluster writeAttributeACLWithValue:aclArgument
@@ -1785,7 +1942,7 @@ private:
 
                                 {
                                     id actualValue = value;
-                                    VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValue("ACL", [actualValue count], static_cast<uint32_t>(4)));
                                     VerifyOrReturn(CheckValue("Privilege",
                                         ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[0]).privilege, 5U));
                                     VerifyOrReturn(CheckValue("AuthMode",
@@ -2054,6 +2211,99 @@ private:
                                             .deviceType));
                                     VerifyOrReturn(CheckValue("FabricIndex",
                                         ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[2]).fabricIndex, 1U));
+                                    VerifyOrReturn(CheckValue("Privilege",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).privilege, 1U));
+                                    VerifyOrReturn(CheckValue("AuthMode",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).authMode, 2U));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Subjects", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects));
+                                    VerifyOrReturn(CheckValue("Subjects",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects count],
+                                        static_cast<uint32_t>(4)));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[0], 20ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[1], 21ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[2], 22ULL));
+                                    VerifyOrReturn(CheckValue("",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).subjects[3], 23ULL));
+                                    VerifyOrReturn(CheckValueNonNull(
+                                        "Targets", ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).targets));
+                                    VerifyOrReturn(CheckValue("Targets",
+                                        [((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).targets count],
+                                        static_cast<uint32_t>(3)));
+                                    VerifyOrReturn(CheckValueNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .endpoint,
+                                        24U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[0])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .cluster,
+                                        25UL));
+                                    VerifyOrReturn(CheckValueNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[1])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValueNonNull("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .cluster));
+                                    VerifyOrReturn(CheckValue("Cluster",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .cluster,
+                                        26UL));
+                                    VerifyOrReturn(CheckValueNonNull("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .endpoint));
+                                    VerifyOrReturn(CheckValue("Endpoint",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .endpoint,
+                                        27U));
+                                    VerifyOrReturn(CheckValueNull("DeviceType",
+                                        ((MTRAccessControlClusterTarget *) ((MTRAccessControlClusterAccessControlEntryStruct *)
+                                                                                actualValue[3])
+                                                .targets[2])
+                                            .deviceType));
+                                    VerifyOrReturn(CheckValue("FabricIndex",
+                                        ((MTRAccessControlClusterAccessControlEntryStruct *) actualValue[3]).fabricIndex, 1U));
                                 }
 
                                 NextTest();
@@ -2186,7 +2436,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("accessControlEntriesPerFabric", [value unsignedShortValue], 3U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("accessControlEntriesPerFabric", [value unsignedShortValue], 4U));
 
             NextTest();
         }];
@@ -132181,72 +132431,80 @@ public:
             err = TestAddGroup2_11();
             break;
         case 12:
-            ChipLogProgress(chipTool, " ***** Test Step 12 : Read GroupTable\n");
-            err = TestReadGroupTable_12();
+            ChipLogProgress(chipTool, " ***** Test Step 12 : Add Group 3\n");
+            err = TestAddGroup3_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : KeySet Remove 1\n");
-            err = TestKeySetRemove1_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : Add Group 4\n");
+            err = TestAddGroup4_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : KeySet Read (removed)\n");
-            err = TestKeySetReadRemoved_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : Read GroupTable\n");
+            err = TestReadGroupTable_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : KeySet Read (not removed)\n");
-            err = TestKeySetReadNotRemoved_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : KeySet Remove 1\n");
+            err = TestKeySetRemove1_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : Remove Group 1\n");
-            err = TestRemoveGroup1_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : KeySet Read (removed)\n");
+            err = TestKeySetReadRemoved_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : Read GroupTable 2\n");
-            err = TestReadGroupTable2_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : KeySet Read (not removed)\n");
+            err = TestKeySetReadNotRemoved_17();
             break;
         case 18:
-            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove All\n");
-            err = TestRemoveAll_18();
+            ChipLogProgress(chipTool, " ***** Test Step 18 : Remove Group 1\n");
+            err = TestRemoveGroup1_18();
             break;
         case 19:
-            ChipLogProgress(chipTool, " ***** Test Step 19 : Read GroupTable 3\n");
-            err = TestReadGroupTable3_19();
+            ChipLogProgress(chipTool, " ***** Test Step 19 : Read GroupTable 2\n");
+            err = TestReadGroupTable2_19();
             break;
         case 20:
-            ChipLogProgress(chipTool, " ***** Test Step 20 : KeySet Remove 2\n");
-            err = TestKeySetRemove2_20();
+            ChipLogProgress(chipTool, " ***** Test Step 20 : Remove All\n");
+            err = TestRemoveAll_20();
             break;
         case 21:
-            ChipLogProgress(chipTool, " ***** Test Step 21 : KeySet Read (also removed)\n");
-            err = TestKeySetReadAlsoRemoved_21();
+            ChipLogProgress(chipTool, " ***** Test Step 21 : Read GroupTable 3\n");
+            err = TestReadGroupTable3_21();
             break;
         case 22:
-            ChipLogProgress(chipTool, " ***** Test Step 22 : KeySet Write 1\n");
-            err = TestKeySetWrite1_22();
+            ChipLogProgress(chipTool, " ***** Test Step 22 : KeySet Remove 2\n");
+            err = TestKeySetRemove2_22();
             break;
         case 23:
-            ChipLogProgress(chipTool, " ***** Test Step 23 : KeySet Write 2\n");
-            err = TestKeySetWrite2_23();
+            ChipLogProgress(chipTool, " ***** Test Step 23 : KeySet Read (also removed)\n");
+            err = TestKeySetReadAlsoRemoved_23();
             break;
         case 24:
-            ChipLogProgress(chipTool, " ***** Test Step 24 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
-            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_24();
+            ChipLogProgress(chipTool, " ***** Test Step 24 : KeySet Write 1\n");
+            err = TestKeySetWrite1_24();
             break;
         case 25:
-            ChipLogProgress(chipTool, " ***** Test Step 25 : Remove keyset 1\n");
-            err = TestRemoveKeyset1_25();
+            ChipLogProgress(chipTool, " ***** Test Step 25 : KeySet Write 2\n");
+            err = TestKeySetWrite2_25();
             break;
         case 26:
-            ChipLogProgress(chipTool, " ***** Test Step 26 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_26();
+            ChipLogProgress(chipTool, " ***** Test Step 26 : Map Group 1 and Group 2 to KeySet 1 and group 2 to KeySet 2\n");
+            err = TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_26();
             break;
         case 27:
-            ChipLogProgress(chipTool, " ***** Test Step 27 : Remove keyset 2\n");
-            err = TestRemoveKeyset2_27();
+            ChipLogProgress(chipTool, " ***** Test Step 27 : Remove keyset 1\n");
+            err = TestRemoveKeyset1_27();
             break;
         case 28:
-            ChipLogProgress(chipTool, " ***** Test Step 28 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
-            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_28();
+            ChipLogProgress(chipTool, " ***** Test Step 28 : TH verifies GroupKeyMap entries for KeySet 1 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : Remove keyset 2\n");
+            err = TestRemoveKeyset2_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool, " ***** Test Step 30 : TH verifies GroupKeyMap entries for KeySet 2 have been removed\n");
+            err = TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_30();
             break;
         }
 
@@ -132302,13 +132560,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 14:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 16:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -132323,13 +132581,13 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 21:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 22:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 23:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_NOT_FOUND));
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -132346,6 +132604,12 @@ public:
         case 28:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -132359,7 +132623,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 29;
+    const uint16_t mTestCount = 31;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -132389,7 +132653,7 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxGroupsPerFabric", [value unsignedShortValue], 2U));
+            VerifyOrReturn(CheckConstraintMinValue<uint16_t>("maxGroupsPerFabric", [value unsignedShortValue], 4U));
 
             NextTest();
         }];
@@ -132623,6 +132887,16 @@ private:
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
+            temp_0[4] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[4]).groupId = [NSNumber numberWithUnsignedShort:259U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[4]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[4]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[5] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[5]).groupId = [NSNumber numberWithUnsignedShort:259U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[5]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[5]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
             groupKeyMapArgument = temp_0;
         }
         [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
@@ -132661,13 +132935,18 @@ private:
 
             temp_0[1] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupId = [NSNumber numberWithUnsignedShort:258U];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             temp_0[2] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupId = [NSNumber numberWithUnsignedShort:258U];
-            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupId = [NSNumber numberWithUnsignedShort:259U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).groupKeySetID = [NSNumber numberWithUnsignedShort:417U];
             ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[2]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[3] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupId = [NSNumber numberWithUnsignedShort:260U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).groupKeySetID = [NSNumber numberWithUnsignedShort:418U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[3]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             groupKeyMapArgument = temp_0;
         }
@@ -132705,7 +132984,7 @@ private:
                                         {
                                             id actualValue = value;
                                             VerifyOrReturn(
-                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(3)));
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(4)));
                                             VerifyOrReturn(CheckValue("GroupId",
                                                 ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 257U));
                                             VerifyOrReturn(CheckValue("GroupKeySetID",
@@ -132718,17 +132997,25 @@ private:
                                                 ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupId, 258U));
                                             VerifyOrReturn(CheckValue("GroupKeySetID",
                                                 ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).groupKeySetID,
-                                                417U));
+                                                418U));
                                             VerifyOrReturn(CheckValue("FabricIndex",
                                                 ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[1]).fabricIndex,
                                                 1U));
                                             VerifyOrReturn(CheckValue("GroupId",
-                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupId, 258U));
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupId, 259U));
                                             VerifyOrReturn(CheckValue("GroupKeySetID",
                                                 ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).groupKeySetID,
-                                                418U));
+                                                417U));
                                             VerifyOrReturn(CheckValue("FabricIndex",
                                                 ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[2]).fabricIndex,
+                                                1U));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupId, 260U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).groupKeySetID,
+                                                418U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[3]).fabricIndex,
                                                 1U));
                                         }
 
@@ -132804,7 +133091,73 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable_12()
+    CHIP_ERROR TestAddGroup3_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        params.groupName = @"Group #3";
+        [cluster addGroupWithParams:params
+                         completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Add Group 3 Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             {
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 259U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestAddGroup4_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:260U];
+        params.groupName = @"Group #4";
+        [cluster addGroupWithParams:params
+                         completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"Add Group 4 Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             {
+                                 id actualValue = values.status;
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                             }
+
+                             {
+                                 id actualValue = values.groupID;
+                                 VerifyOrReturn(CheckValue("GroupID", actualValue, 260U));
+                             }
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestReadGroupTable_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132825,7 +133178,7 @@ private:
 
                                        {
                                            id actualValue = value;
-                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(2)));
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(4)));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 257U));
                                            VerifyOrReturn(CheckValue("Endpoints",
@@ -132856,6 +133209,22 @@ private:
                                            VerifyOrReturn(CheckValue("FabricIndex",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).fabricIndex,
                                                1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupId, 259U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupName,
+                                               @"Group #3"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupId, 260U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupName,
+                                               @"Group #4"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).fabricIndex,
+                                               1U));
                                        }
 
                                        NextTest();
@@ -132864,7 +133233,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove1_13()
+    CHIP_ERROR TestKeySetRemove1_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132888,7 +133257,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadRemoved_14()
+    CHIP_ERROR TestKeySetReadRemoved_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132916,7 +133285,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadNotRemoved_15()
+    CHIP_ERROR TestKeySetReadNotRemoved_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -132968,7 +133337,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveGroup1_16()
+    CHIP_ERROR TestRemoveGroup1_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133000,7 +133369,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable2_17()
+    CHIP_ERROR TestReadGroupTable2_19()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133021,7 +133390,7 @@ private:
 
                                        {
                                            id actualValue = value;
-                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(3)));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 258U));
                                            VerifyOrReturn(CheckValue("Endpoints",
@@ -133037,6 +133406,22 @@ private:
                                            VerifyOrReturn(CheckValue("FabricIndex",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).fabricIndex,
                                                1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupId, 259U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupName,
+                                               @"Group #3"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).fabricIndex,
+                                               1U));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupId, 260U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupName,
+                                               @"Group #4"));
+                                           VerifyOrReturn(CheckValue("FabricIndex",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).fabricIndex,
+                                               1U));
                                        }
 
                                        NextTest();
@@ -133045,7 +133430,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveAll_18()
+    CHIP_ERROR TestRemoveAll_20()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133064,7 +133449,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestReadGroupTable3_19()
+    CHIP_ERROR TestReadGroupTable3_21()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133094,7 +133479,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetRemove2_20()
+    CHIP_ERROR TestKeySetRemove2_22()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133118,7 +133503,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetReadAlsoRemoved_21()
+    CHIP_ERROR TestKeySetReadAlsoRemoved_23()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133146,7 +133531,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite1_22()
+    CHIP_ERROR TestKeySetWrite1_24()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133187,7 +133572,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestKeySetWrite2_23()
+    CHIP_ERROR TestKeySetWrite2_25()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133228,7 +133613,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_24()
+    CHIP_ERROR TestMapGroup1AndGroup2ToKeySet1AndGroup2ToKeySet2_26()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133270,7 +133655,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset1_25()
+    CHIP_ERROR TestRemoveKeyset1_27()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133294,7 +133679,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_26()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet1HaveBeenRemoved_28()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133333,7 +133718,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestRemoveKeyset2_27()
+    CHIP_ERROR TestRemoveKeyset2_29()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -133357,7 +133742,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_28()
+    CHIP_ERROR TestThVerifiesGroupKeyMapEntriesForKeySet2HaveBeenRemoved_30()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
