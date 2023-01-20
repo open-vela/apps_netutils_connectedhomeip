@@ -125712,6 +125712,9 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("wrongCodeEntryLimit", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("wrongCodeEntryLimit", [value unsignedCharValue], 255U));
+
             NextTest();
         }];
 
@@ -125814,6 +125817,9 @@ private:
             NSLog(@"TH reads the UserCodeTemporaryDisableTime attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            VerifyOrReturn(CheckConstraintMinValue<uint8_t>("userCodeTemporaryDisableTime", [value unsignedCharValue], 1U));
+            VerifyOrReturn(CheckConstraintMaxValue<uint8_t>("userCodeTemporaryDisableTime", [value unsignedCharValue], 255U));
 
             NextTest();
         }];
@@ -132822,6 +132828,13 @@ private:
                                            VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(2)));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 257U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
                                                @"Group #1"));
@@ -132830,6 +132843,13 @@ private:
                                                1U));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupId, 258U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[1]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupName,
                                                @"Group #2"));
@@ -133004,6 +133024,13 @@ private:
                                            VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(1)));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 258U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
                                                @"Group #2"));

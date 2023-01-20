@@ -81051,6 +81051,8 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
             break;
         case 17:
@@ -81076,6 +81078,8 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinValue("value", value, 1U));
+                VerifyOrReturn(CheckConstraintMaxValue("value", value, 255U));
             }
             break;
         case 23:
@@ -85515,12 +85519,28 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 0));
                     VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 257U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[0].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 1));
+                    }
                     VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
                     VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                                       chip::CharSpan("Group #1", 8)));
                     VerifyOrReturn(CheckValue("groupTable[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 1));
                     VerifyOrReturn(CheckValue("groupTable[1].groupId", iter_0.GetValue().groupId, 258U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[1].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[1].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[1].endpoints", iter_2, 1));
+                    }
                     VerifyOrReturn(CheckValuePresent("groupTable[1].groupName", iter_0.GetValue().groupName));
                     VerifyOrReturn(CheckValueAsString("groupTable[1].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                                       chip::CharSpan("Group #2", 8)));
@@ -85576,6 +85596,14 @@ private:
                     auto iter_0 = value.begin();
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupTable", iter_0, 0));
                     VerifyOrReturn(CheckValue("groupTable[0].groupId", iter_0.GetValue().groupId, 258U));
+                    {
+                        auto iter_2 = iter_0.GetValue().endpoints.begin();
+                        VerifyOrReturn(
+                            CheckNextListItemDecodes<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 0));
+                        VerifyOrReturn(CheckValue("groupTable[0].endpoints[0]", iter_2.GetValue(), 1U));
+                        VerifyOrReturn(
+                            CheckNoMoreListItems<decltype(iter_0.GetValue().endpoints)>("groupTable[0].endpoints", iter_2, 1));
+                    }
                     VerifyOrReturn(CheckValuePresent("groupTable[0].groupName", iter_0.GetValue().groupName));
                     VerifyOrReturn(CheckValueAsString("groupTable[0].groupName.Value()", iter_0.GetValue().groupName.Value(),
                                                       chip::CharSpan("Group #2", 8)));
