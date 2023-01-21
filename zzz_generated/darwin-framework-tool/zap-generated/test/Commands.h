@@ -73303,15 +73303,18 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("OutputList", [actualValue count], static_cast<uint32_t>(3)));
-                VerifyOrReturn(CheckValue("index", ((MTRAudioOutputClusterOutputInfo *) actualValue[0]).index, 1U));
-                VerifyOrReturn(CheckValue("outputType", ((MTRAudioOutputClusterOutputInfo *) actualValue[0]).outputType, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRAudioOutputClusterOutputInfo *) actualValue[0]).name, @"HDMI"));
-                VerifyOrReturn(CheckValue("index", ((MTRAudioOutputClusterOutputInfo *) actualValue[1]).index, 2U));
-                VerifyOrReturn(CheckValue("outputType", ((MTRAudioOutputClusterOutputInfo *) actualValue[1]).outputType, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRAudioOutputClusterOutputInfo *) actualValue[1]).name, @"HDMI"));
-                VerifyOrReturn(CheckValue("index", ((MTRAudioOutputClusterOutputInfo *) actualValue[2]).index, 3U));
-                VerifyOrReturn(CheckValue("outputType", ((MTRAudioOutputClusterOutputInfo *) actualValue[2]).outputType, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRAudioOutputClusterOutputInfo *) actualValue[2]).name, @"HDMI"));
+                VerifyOrReturn(CheckValue("Index", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("OutputType", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[0]).outputType, 0U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[0]).name, @"HDMI"));
+                VerifyOrReturn(CheckValue("Index", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("OutputType", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[1]).outputType, 0U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[1]).name, @"HDMI"));
+                VerifyOrReturn(CheckValue("Index", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[2]).index, 3U));
+                VerifyOrReturn(CheckValue("OutputType", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[2]).outputType, 0U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[2]).name, @"HDMI"));
             }
 
             NextTest();
@@ -73405,15 +73408,18 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("OutputList", [actualValue count], static_cast<uint32_t>(3)));
-                VerifyOrReturn(CheckValue("index", ((MTRAudioOutputClusterOutputInfo *) actualValue[0]).index, 1U));
-                VerifyOrReturn(CheckValue("outputType", ((MTRAudioOutputClusterOutputInfo *) actualValue[0]).outputType, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRAudioOutputClusterOutputInfo *) actualValue[0]).name, @"HDMI Test"));
-                VerifyOrReturn(CheckValue("index", ((MTRAudioOutputClusterOutputInfo *) actualValue[1]).index, 2U));
-                VerifyOrReturn(CheckValue("outputType", ((MTRAudioOutputClusterOutputInfo *) actualValue[1]).outputType, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRAudioOutputClusterOutputInfo *) actualValue[1]).name, @"HDMI"));
-                VerifyOrReturn(CheckValue("index", ((MTRAudioOutputClusterOutputInfo *) actualValue[2]).index, 3U));
-                VerifyOrReturn(CheckValue("outputType", ((MTRAudioOutputClusterOutputInfo *) actualValue[2]).outputType, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRAudioOutputClusterOutputInfo *) actualValue[2]).name, @"HDMI"));
+                VerifyOrReturn(CheckValue("Index", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[0]).index, 1U));
+                VerifyOrReturn(CheckValue("OutputType", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[0]).outputType, 0U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[0]).name, @"HDMI Test"));
+                VerifyOrReturn(CheckValue("Index", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[1]).index, 2U));
+                VerifyOrReturn(CheckValue("OutputType", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[1]).outputType, 0U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[1]).name, @"HDMI"));
+                VerifyOrReturn(CheckValue("Index", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[2]).index, 3U));
+                VerifyOrReturn(CheckValue("OutputType", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[2]).outputType, 0U));
+                VerifyOrReturn(
+                    CheckValueAsString("Name", ((MTRAudioOutputClusterOutputInfoStruct *) actualValue[2]).name, @"HDMI"));
             }
 
             NextTest();
