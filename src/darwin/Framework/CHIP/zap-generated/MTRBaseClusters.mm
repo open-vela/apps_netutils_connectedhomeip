@@ -83816,22 +83816,23 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeLineupWithCompletion:(void (^)(
-                                              MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error))completion
+- (void)readAttributeLineupWithCompletion:(void (^)(MTRChannelClusterLineupInfoStruct * _Nullable value,
+                                              NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = Channel::Attributes::Lineup::TypeInfo;
-    return MTRReadAttribute<MTRChannelLineupStructAttributeCallbackBridge, MTRChannelClusterLineupInfo, TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRChannelLineupStructAttributeCallbackBridge, MTRChannelClusterLineupInfoStruct,
+        TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeLineupWithParams:(MTRSubscribeParams * _Nonnull)params
                    subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                             reportHandler:
-                                 (void (^)(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error))reportHandler
+                             reportHandler:(void (^)(MTRChannelClusterLineupInfoStruct * _Nullable value,
+                                               NSError * _Nullable error))reportHandler
 {
     using TypeInfo = Channel::Attributes::Lineup::TypeInfo;
-    MTRSubscribeAttribute<MTRChannelLineupStructAttributeCallbackSubscriptionBridge, MTRChannelClusterLineupInfo,
+    MTRSubscribeAttribute<MTRChannelLineupStructAttributeCallbackSubscriptionBridge, MTRChannelClusterLineupInfoStruct,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -83839,7 +83840,7 @@ using chip::System::Clock::Timeout;
 + (void)readAttributeLineupWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                         endpoint:(NSNumber *)endpoint
                                            queue:(dispatch_queue_t)queue
-                                      completion:(void (^)(MTRChannelClusterLineupInfo * _Nullable value,
+                                      completion:(void (^)(MTRChannelClusterLineupInfoStruct * _Nullable value,
                                                      NSError * _Nullable error))completion
 {
     auto * bridge = new MTRChannelLineupStructAttributeCallbackBridge(queue, completion);
@@ -83862,23 +83863,23 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeCurrentChannelWithCompletion:(void (^)(MTRChannelClusterChannelInfo * _Nullable value,
+- (void)readAttributeCurrentChannelWithCompletion:(void (^)(MTRChannelClusterChannelInfoStruct * _Nullable value,
                                                       NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = Channel::Attributes::CurrentChannel::TypeInfo;
-    return MTRReadAttribute<MTRChannelCurrentChannelStructAttributeCallbackBridge, MTRChannelClusterChannelInfo,
+    return MTRReadAttribute<MTRChannelCurrentChannelStructAttributeCallbackBridge, MTRChannelClusterChannelInfoStruct,
         TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeCurrentChannelWithParams:(MTRSubscribeParams * _Nonnull)params
                            subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                     reportHandler:(void (^)(MTRChannelClusterChannelInfo * _Nullable value,
+                                     reportHandler:(void (^)(MTRChannelClusterChannelInfoStruct * _Nullable value,
                                                        NSError * _Nullable error))reportHandler
 {
     using TypeInfo = Channel::Attributes::CurrentChannel::TypeInfo;
-    MTRSubscribeAttribute<MTRChannelCurrentChannelStructAttributeCallbackSubscriptionBridge, MTRChannelClusterChannelInfo,
+    MTRSubscribeAttribute<MTRChannelCurrentChannelStructAttributeCallbackSubscriptionBridge, MTRChannelClusterChannelInfoStruct,
         TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint,
         TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
@@ -83886,7 +83887,7 @@ using chip::System::Clock::Timeout;
 + (void)readAttributeCurrentChannelWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                 endpoint:(NSNumber *)endpoint
                                                    queue:(dispatch_queue_t)queue
-                                              completion:(void (^)(MTRChannelClusterChannelInfo * _Nullable value,
+                                              completion:(void (^)(MTRChannelClusterChannelInfoStruct * _Nullable value,
                                                              NSError * _Nullable error))completion
 {
     auto * bridge = new MTRChannelCurrentChannelStructAttributeCallbackBridge(queue, completion);
@@ -84198,7 +84199,7 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeLineupWithCompletionHandler:(void (^)(MTRChannelClusterLineupInfo * _Nullable value,
                                                      NSError * _Nullable error))completionHandler
 {
-    [self readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<MTRChannelClusterLineupInfo *>(value), error);
     }];
@@ -84219,7 +84220,7 @@ using chip::System::Clock::Timeout;
     }
     [self subscribeAttributeLineupWithParams:subscribeParams
                      subscriptionEstablished:subscriptionEstablishedHandler
-                               reportHandler:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error) {
+                               reportHandler:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable error) {
                                    // Cast is safe because subclass does not add any selectors.
                                    reportHandler(static_cast<MTRChannelClusterLineupInfo *>(value), error);
                                }];
@@ -84230,19 +84231,21 @@ using chip::System::Clock::Timeout;
                             completionHandler:(void (^)(MTRChannelClusterLineupInfo * _Nullable value,
                                                   NSError * _Nullable error))completionHandler
 {
-    [self readAttributeLineupWithClusterStateCache:attributeCacheContainer.realContainer
-                                          endpoint:endpoint
-                                             queue:queue
-                                        completion:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error) {
-                                            // Cast is safe because subclass does not add any selectors.
-                                            completionHandler(static_cast<MTRChannelClusterLineupInfo *>(value), error);
-                                        }];
+    [self
+        readAttributeLineupWithClusterStateCache:attributeCacheContainer.realContainer
+                                        endpoint:endpoint
+                                           queue:queue
+                                      completion:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable error) {
+                                          // Cast is safe because subclass does not add any selectors.
+                                          completionHandler(static_cast<MTRChannelClusterLineupInfo *>(value), error);
+                                      }];
 }
 
 - (void)readAttributeCurrentChannelWithCompletionHandler:(void (^)(MTRChannelClusterChannelInfo * _Nullable value,
                                                              NSError * _Nullable error))completionHandler
 {
-    [self readAttributeCurrentChannelWithCompletion:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeCurrentChannelWithCompletion:^(
+        MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<MTRChannelClusterChannelInfo *>(value), error);
     }];
@@ -84263,7 +84266,8 @@ using chip::System::Clock::Timeout;
     }
     [self subscribeAttributeCurrentChannelWithParams:subscribeParams
                              subscriptionEstablished:subscriptionEstablishedHandler
-                                       reportHandler:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable error) {
+                                       reportHandler:^(
+                                           MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable error) {
                                            // Cast is safe because subclass does not add any selectors.
                                            reportHandler(static_cast<MTRChannelClusterChannelInfo *>(value), error);
                                        }];
@@ -84277,8 +84281,8 @@ using chip::System::Clock::Timeout;
     [self readAttributeCurrentChannelWithClusterStateCache:attributeCacheContainer.realContainer
                                                   endpoint:endpoint
                                                      queue:queue
-                                                completion:^(
-                                                    MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable error) {
+                                                completion:^(MTRChannelClusterChannelInfoStruct * _Nullable value,
+                                                    NSError * _Nullable error) {
                                                     // Cast is safe because subclass does not add any selectors.
                                                     completionHandler(static_cast<MTRChannelClusterChannelInfo *>(value), error);
                                                 }];

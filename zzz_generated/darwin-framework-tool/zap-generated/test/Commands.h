@@ -43211,19 +43211,19 @@ private:
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributeCurrentChannelWithCompletion:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads the CurrentChannel attribute Error: %@", err);
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentChannel attribute Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
-                }
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+            }
 
-                NextTest();
-            }];
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -43401,7 +43401,7 @@ private:
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads the Lineup attribute from the DUT to show list of Inputs available and Verify that the response "
                   @"contains a lineup info object Error: %@",
                 err);
@@ -43442,19 +43442,19 @@ private:
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributeCurrentChannelWithCompletion:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads the CurrentChannel attribute from the DUT Error: %@", err);
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentChannel attribute from the DUT Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
-                }
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+            }
 
-                NextTest();
-            }];
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -43500,23 +43500,23 @@ private:
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster
-            readAttributeCurrentChannelWithCompletion:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
-                NSLog(@"Reads the CurrentChannel attribute from the DUT Error: %@", err);
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"Reads the CurrentChannel attribute from the DUT Error: %@", err);
 
-                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                {
-                    id actualValue = value;
-                    VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
-                }
-                if (value != nil) {
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+            }
+            if (value != nil) {
 
-                    VerifyOrReturn(CheckConstraintType("currentChannel", "ChannelInfo", "ChannelInfo"));
-                }
+                VerifyOrReturn(CheckConstraintType("currentChannel", "ChannelInfoStruct", "ChannelInfoStruct"));
+            }
 
-                NextTest();
-            }];
+            NextTest();
+        }];
 
         return CHIP_NO_ERROR;
     }
@@ -75487,35 +75487,36 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValue("ChannelList", [actualValue count], static_cast<uint32_t>(4)));
-                VerifyOrReturn(CheckValue("majorNumber", ((MTRChannelClusterChannelInfo *) actualValue[0]).majorNumber, 6U));
-                VerifyOrReturn(CheckValue("minorNumber", ((MTRChannelClusterChannelInfo *) actualValue[0]).minorNumber, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRChannelClusterChannelInfo *) actualValue[0]).name, @"ABC"));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[0]).majorNumber, 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[0]).minorNumber, 0U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue[0]).name, @"ABC"));
                 VerifyOrReturn(
-                    CheckValueAsString("callSign", ((MTRChannelClusterChannelInfo *) actualValue[0]).callSign, @"KAAL-TV"));
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[0]).callSign, @"KAAL-TV"));
                 VerifyOrReturn(CheckValueAsString(
-                    "affiliateCallSign", ((MTRChannelClusterChannelInfo *) actualValue[0]).affiliateCallSign, @"KAAL"));
-                VerifyOrReturn(CheckValue("majorNumber", ((MTRChannelClusterChannelInfo *) actualValue[1]).majorNumber, 9U));
-                VerifyOrReturn(CheckValue("minorNumber", ((MTRChannelClusterChannelInfo *) actualValue[1]).minorNumber, 1U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRChannelClusterChannelInfo *) actualValue[1]).name, @"PBS"));
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[0]).affiliateCallSign, @"KAAL"));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[1]).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[1]).minorNumber, 1U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue[1]).name, @"PBS"));
                 VerifyOrReturn(
-                    CheckValueAsString("callSign", ((MTRChannelClusterChannelInfo *) actualValue[1]).callSign, @"KCTS-TV"));
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[1]).callSign, @"KCTS-TV"));
                 VerifyOrReturn(CheckValueAsString(
-                    "affiliateCallSign", ((MTRChannelClusterChannelInfo *) actualValue[1]).affiliateCallSign, @"KCTS"));
-                VerifyOrReturn(CheckValue("majorNumber", ((MTRChannelClusterChannelInfo *) actualValue[2]).majorNumber, 9U));
-                VerifyOrReturn(CheckValue("minorNumber", ((MTRChannelClusterChannelInfo *) actualValue[2]).minorNumber, 2U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRChannelClusterChannelInfo *) actualValue[2]).name, @"PBS Kids"));
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[1]).affiliateCallSign, @"KCTS"));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[2]).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[2]).minorNumber, 2U));
                 VerifyOrReturn(
-                    CheckValueAsString("callSign", ((MTRChannelClusterChannelInfo *) actualValue[2]).callSign, @"KCTS-TV"));
+                    CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue[2]).name, @"PBS Kids"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[2]).callSign, @"KCTS-TV"));
                 VerifyOrReturn(CheckValueAsString(
-                    "affiliateCallSign", ((MTRChannelClusterChannelInfo *) actualValue[2]).affiliateCallSign, @"KCTS"));
-                VerifyOrReturn(CheckValue("majorNumber", ((MTRChannelClusterChannelInfo *) actualValue[3]).majorNumber, 9U));
-                VerifyOrReturn(CheckValue("minorNumber", ((MTRChannelClusterChannelInfo *) actualValue[3]).minorNumber, 3U));
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[2]).affiliateCallSign, @"KCTS"));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[3]).majorNumber, 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue[3]).minorNumber, 3U));
                 VerifyOrReturn(
-                    CheckValueAsString("name", ((MTRChannelClusterChannelInfo *) actualValue[3]).name, @"World Channel"));
+                    CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue[3]).name, @"World Channel"));
                 VerifyOrReturn(
-                    CheckValueAsString("callSign", ((MTRChannelClusterChannelInfo *) actualValue[3]).callSign, @"KCTS-TV"));
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[3]).callSign, @"KCTS-TV"));
                 VerifyOrReturn(CheckValueAsString(
-                    "affiliateCallSign", ((MTRChannelClusterChannelInfo *) actualValue[3]).affiliateCallSign, @"KCTS"));
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue[3]).affiliateCallSign, @"KCTS"));
             }
 
             NextTest();
@@ -75532,7 +75533,7 @@ private:
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable err) {
+        [cluster readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute channel lineup Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -75540,13 +75541,14 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("Lineup", actualValue));
-                VerifyOrReturn(
-                    CheckValueAsString("operatorName", ((MTRChannelClusterLineupInfo *) actualValue).operatorName, @"Comcast"));
                 VerifyOrReturn(CheckValueAsString(
-                    "lineupName", ((MTRChannelClusterLineupInfo *) actualValue).lineupName, @"Comcast King County"));
+                    "OperatorName", ((MTRChannelClusterLineupInfoStruct *) actualValue).operatorName, @"Comcast"));
+                VerifyOrReturn(CheckValueAsString(
+                    "LineupName", ((MTRChannelClusterLineupInfoStruct *) actualValue).lineupName, @"Comcast King County"));
                 VerifyOrReturn(
-                    CheckValueAsString("postalCode", ((MTRChannelClusterLineupInfo *) actualValue).postalCode, @"98052"));
-                VerifyOrReturn(CheckValue("lineupInfoType", ((MTRChannelClusterLineupInfo *) actualValue).lineupInfoType, 0U));
+                    CheckValueAsString("PostalCode", ((MTRChannelClusterLineupInfoStruct *) actualValue).postalCode, @"98052"));
+                VerifyOrReturn(
+                    CheckValue("LineupInfoType", ((MTRChannelClusterLineupInfoStruct *) actualValue).lineupInfoType, 0U));
             }
 
             NextTest();
@@ -75564,7 +75566,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentChannelWithCompletion:^(
-            MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable err) {
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute current channel Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -75572,12 +75574,13 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
-                VerifyOrReturn(CheckValue("majorNumber", ((MTRChannelClusterChannelInfo *) actualValue).majorNumber, 6U));
-                VerifyOrReturn(CheckValue("minorNumber", ((MTRChannelClusterChannelInfo *) actualValue).minorNumber, 0U));
-                VerifyOrReturn(CheckValueAsString("name", ((MTRChannelClusterChannelInfo *) actualValue).name, @"ABC"));
-                VerifyOrReturn(CheckValueAsString("callSign", ((MTRChannelClusterChannelInfo *) actualValue).callSign, @"KAAL-TV"));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber, 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber, 0U));
+                VerifyOrReturn(CheckValueAsString("Name", ((MTRChannelClusterChannelInfoStruct *) actualValue).name, @"ABC"));
+                VerifyOrReturn(
+                    CheckValueAsString("CallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).callSign, @"KAAL-TV"));
                 VerifyOrReturn(CheckValueAsString(
-                    "affiliateCallSign", ((MTRChannelClusterChannelInfo *) actualValue).affiliateCallSign, @"KAAL"));
+                    "AffiliateCallSign", ((MTRChannelClusterChannelInfoStruct *) actualValue).affiliateCallSign, @"KAAL"));
             }
 
             NextTest();
@@ -75605,12 +75608,12 @@ private:
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.data;
-                                 VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                                 VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                              }
 
                              NextTest();

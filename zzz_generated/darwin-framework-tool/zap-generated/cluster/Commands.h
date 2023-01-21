@@ -68614,13 +68614,14 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
-        [cluster readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"Channel.Lineup response %@", [value description]);
-            if (error != nil) {
-                LogNSError("Channel Lineup read Error", error);
-            }
-            SetCommandExitStatus(error);
-        }];
+        [cluster
+            readAttributeLineupWithCompletion:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable error) {
+                NSLog(@"Channel.Lineup response %@", [value description]);
+                if (error != nil) {
+                    LogNSError("Channel Lineup read Error", error);
+                }
+                SetCommandExitStatus(error);
+            }];
         return CHIP_NO_ERROR;
     }
 };
@@ -68653,7 +68654,7 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRChannelClusterLineupInfo * _Nullable value, NSError * _Nullable error) {
+            reportHandler:^(MTRChannelClusterLineupInfoStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.Lineup response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
@@ -68680,14 +68681,14 @@ public:
 
         dispatch_queue_t callbackQueue = dispatch_queue_create("com.chip.command", DISPATCH_QUEUE_SERIAL);
         __auto_type * cluster = [[MTRBaseClusterChannel alloc] initWithDevice:device endpointID:@(endpointId) queue:callbackQueue];
-        [cluster
-            readAttributeCurrentChannelWithCompletion:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"Channel.CurrentChannel response %@", [value description]);
-                if (error != nil) {
-                    LogNSError("Channel CurrentChannel read Error", error);
-                }
-                SetCommandExitStatus(error);
-            }];
+        [cluster readAttributeCurrentChannelWithCompletion:^(
+            MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"Channel.CurrentChannel response %@", [value description]);
+            if (error != nil) {
+                LogNSError("Channel CurrentChannel read Error", error);
+            }
+            SetCommandExitStatus(error);
+        }];
         return CHIP_NO_ERROR;
     }
 };
@@ -68720,7 +68721,7 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRChannelClusterChannelInfo * _Nullable value, NSError * _Nullable error) {
+            reportHandler:^(MTRChannelClusterChannelInfoStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"Channel.CurrentChannel response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
