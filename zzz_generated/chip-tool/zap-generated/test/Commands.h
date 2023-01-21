@@ -32110,7 +32110,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
@@ -32213,7 +32213,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
@@ -32228,7 +32228,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
             }
@@ -32357,14 +32357,14 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::LineupInfo::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::LineupInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
             break;
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckConstraintType("value", "list", "list"));
             }
@@ -32372,7 +32372,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
             }
@@ -32387,10 +32387,10 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
-                VerifyOrReturn(CheckConstraintType("value", "ChannelInfo", "ChannelInfo"));
+                VerifyOrReturn(CheckConstraintType("value", "ChannelInfoStruct", "ChannelInfoStruct"));
             }
             break;
         default:
@@ -55072,7 +55072,7 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::DecodableList<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 {
                     auto iter_0 = value.begin();
@@ -55131,7 +55131,7 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::LineupInfo::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::LineupInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("lineup", value));
                 VerifyOrReturn(
@@ -55148,7 +55148,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfo::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
                 VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber, 6U));
