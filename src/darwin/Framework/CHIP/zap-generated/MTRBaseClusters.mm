@@ -24,6 +24,7 @@
 #import "MTRClusterStateCacheContainer_Internal.h"
 #import "MTRCluster_Internal.h"
 #import "MTRCommandPayloadsObjc.h"
+#import "MTRDevice_Internal.h"
 #import "MTRStructsObjc.h"
 
 #include <lib/support/CHIPListUtils.h>
@@ -33,8 +34,11 @@
 using chip::Callback::Callback;
 using chip::Callback::Cancelable;
 using namespace chip::app::Clusters;
+using chip::Optional;
 using chip::SessionHandle;
 using chip::Messaging::ExchangeManager;
+using chip::System::Clock::Seconds16;
+using chip::System::Clock::Timeout;
 
 // NOLINTBEGIN(clang-analyzer-cplusplus.NewDeleteLeaks): Linter is unable to locate the delete on these objects.
 @implementation MTRBaseClusterIdentify
@@ -64,18 +68,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Identify::Commands::Identify::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.identifyTime = params.identifyTime.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -92,12 +104,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Identify::Commands::TriggerEffect::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.effectIdentifier = static_cast<std::remove_reference_t<decltype(request.effectIdentifier)>>(
@@ -105,8 +125,8 @@ using chip::Messaging::ExchangeManager;
             request.effectVariant
                 = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -814,19 +834,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterAddGroupResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGroupsClusterAddGroupResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Groups::Commands::AddGroup::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupID = params.groupID.unsignedShortValue;
             request.groupName = [self asCharSpan:params.groupName];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -841,18 +869,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterViewGroupResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGroupsClusterViewGroupResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Groups::Commands::ViewGroup::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupID = params.groupID.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -868,12 +904,20 @@ using chip::Messaging::ExchangeManager;
             GroupsClusterGetGroupMembershipResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGroupsClusterGetGroupMembershipResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Groups::Commands::GetGroupMembership::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -899,8 +943,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -915,18 +959,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, GroupsClusterRemoveGroupResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGroupsClusterRemoveGroupResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Groups::Commands::RemoveGroup::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupID = params.groupID.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -948,17 +1000,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Groups::Commands::RemoveAllGroups::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -976,19 +1036,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Groups::Commands::AddGroupIfIdentifying::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupID = params.groupID.unsignedShortValue;
             request.groupName = [self asCharSpan:params.groupName];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1609,12 +1677,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterAddSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterAddSceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::AddScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
@@ -1695,8 +1771,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1711,19 +1787,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterViewSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterViewSceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::ViewScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1738,19 +1822,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterRemoveSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterRemoveSceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::RemoveScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1766,18 +1858,26 @@ using chip::Messaging::ExchangeManager;
             ScenesClusterRemoveAllScenesResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterRemoveAllScenesResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::RemoveAllScenes::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1792,19 +1892,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterStoreSceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterStoreSceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::StoreScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1821,12 +1929,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::RecallScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
@@ -1841,8 +1957,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1858,18 +1974,26 @@ using chip::Messaging::ExchangeManager;
             ScenesClusterGetSceneMembershipResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterGetSceneMembershipResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::GetSceneMembership::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1885,12 +2009,20 @@ using chip::Messaging::ExchangeManager;
             ScenesClusterEnhancedAddSceneResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterEnhancedAddSceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::EnhancedAddScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
@@ -1971,8 +2103,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -1988,19 +2120,27 @@ using chip::Messaging::ExchangeManager;
             ScenesClusterEnhancedViewSceneResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterEnhancedViewSceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::EnhancedViewScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupId = params.groupId.unsignedShortValue;
             request.sceneId = params.sceneId.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -2015,12 +2155,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, ScenesClusterCopySceneResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRScenesClusterCopySceneResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Scenes::Commands::CopyScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.mode = static_cast<std::remove_reference_t<decltype(request.mode)>>(params.mode.unsignedCharValue);
@@ -2029,8 +2177,8 @@ using chip::Messaging::ExchangeManager;
             request.groupIdTo = params.groupIdTo.unsignedShortValue;
             request.sceneIdTo = params.sceneIdTo.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3129,17 +3277,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OnOff::Commands::Off::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3160,17 +3316,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OnOff::Commands::On::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3191,17 +3355,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OnOff::Commands::Toggle::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3218,12 +3390,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OnOff::Commands::OffWithEffect::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.effectIdentifier = static_cast<std::remove_reference_t<decltype(request.effectIdentifier)>>(
@@ -3231,8 +3411,8 @@ using chip::Messaging::ExchangeManager;
             request.effectVariant
                 = static_cast<std::remove_reference_t<decltype(request.effectVariant)>>(params.effectVariant.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3254,17 +3434,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OnOff::Commands::OnWithRecallGlobalScene::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -3281,12 +3469,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OnOff::Commands::OnWithTimedOff::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.onOffControl
@@ -3294,8 +3490,8 @@ using chip::Messaging::ExchangeManager;
             request.onTime = params.onTime.unsignedShortValue;
             request.offWaitTime = params.offWaitTime.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5083,12 +5279,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::MoveToLevel::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.level = params.level.unsignedCharValue;
@@ -5103,8 +5307,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5121,12 +5325,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::Move::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
@@ -5141,8 +5353,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5159,12 +5371,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::Step::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
@@ -5180,8 +5400,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5198,12 +5418,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::Stop::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.optionsMask
@@ -5211,8 +5439,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5230,12 +5458,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::MoveToLevelWithOnOff::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.level = params.level.unsignedCharValue;
@@ -5250,8 +5486,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5268,12 +5504,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::MoveWithOnOff::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
@@ -5288,8 +5532,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5306,12 +5550,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::StepWithOnOff::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
@@ -5327,8 +5579,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5345,12 +5597,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::StopWithOnOff::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.optionsMask
@@ -5358,8 +5618,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsOverride
                 = static_cast<std::remove_reference_t<decltype(request.optionsOverride)>>(params.optionsOverride.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -5377,18 +5637,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LevelControl::Commands::MoveToClosestFrequency::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.frequency = params.frequency.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11577,12 +11845,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::InstantAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11591,8 +11867,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11610,12 +11886,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::InstantActionWithTransition::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11625,8 +11909,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.transitionTime = params.transitionTime.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11643,12 +11927,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::StartAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11657,8 +11949,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11676,12 +11968,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::StartActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11691,8 +11991,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11709,12 +12009,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::StopAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11723,8 +12031,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11741,12 +12049,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::PauseAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11755,8 +12071,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11774,12 +12090,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::PauseActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11789,8 +12113,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11807,12 +12131,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::ResumeAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11821,8 +12153,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11839,12 +12171,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::EnableAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11853,8 +12193,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11872,12 +12212,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::EnableActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11887,8 +12235,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11905,12 +12253,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::DisableAction::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11919,8 +12275,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.invokeID.unsignedIntValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -11938,12 +12294,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Actions::Commands::DisableActionWithDuration::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.actionID = params.actionID.unsignedShortValue;
@@ -11953,8 +12317,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.duration = params.duration.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -12755,17 +13119,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             BasicInformation::Commands::MfgSpecificPing::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15145,12 +15517,20 @@ using chip::Messaging::ExchangeManager;
             OTASoftwareUpdateProviderClusterQueryImageResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROTASoftwareUpdateProviderClusterQueryImageResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::QueryImage::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.vendorID = static_cast<std::remove_reference_t<decltype(request.vendorID)>>(params.vendorID.unsignedShortValue);
@@ -15196,8 +15576,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = [self asByteSpan:params.metadataForProvider];
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15213,19 +15593,27 @@ using chip::Messaging::ExchangeManager;
             OTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROTASoftwareUpdateProviderClusterApplyUpdateResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::ApplyUpdateRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.updateToken = [self asByteSpan:params.updateToken];
             request.newVersion = params.newVersion.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15243,19 +15631,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OtaSoftwareUpdateProvider::Commands::NotifyUpdateApplied::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.updateToken = [self asByteSpan:params.updateToken];
             request.softwareVersion = params.softwareVersion.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -15772,12 +16168,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OtaSoftwareUpdateRequestor::Commands::AnnounceOTAProvider::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.providerNodeID = params.providerNodeID.unsignedLongLongValue;
@@ -15790,8 +16194,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.endpoint = params.endpoint.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -22584,19 +22988,27 @@ using chip::Messaging::ExchangeManager;
             GeneralCommissioningClusterArmFailSafeResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGeneralCommissioningClusterArmFailSafeResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GeneralCommissioning::Commands::ArmFailSafe::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.expiryLengthSeconds = params.expiryLengthSeconds.unsignedShortValue;
             request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -22612,12 +23024,20 @@ using chip::Messaging::ExchangeManager;
             GeneralCommissioningClusterSetRegulatoryConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGeneralCommissioningClusterSetRegulatoryConfigResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GeneralCommissioning::Commands::SetRegulatoryConfig::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.newRegulatoryConfig = static_cast<std::remove_reference_t<decltype(request.newRegulatoryConfig)>>(
@@ -22625,8 +23045,8 @@ using chip::Messaging::ExchangeManager;
             request.countryCode = [self asCharSpan:params.countryCode];
             request.breadcrumb = params.breadcrumb.unsignedLongLongValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -22649,17 +23069,25 @@ using chip::Messaging::ExchangeManager;
             GeneralCommissioningClusterCommissioningCompleteResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGeneralCommissioningClusterCommissioningCompleteResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GeneralCommissioning::Commands::CommissioningComplete::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23699,12 +24127,20 @@ using chip::Messaging::ExchangeManager;
             NetworkCommissioningClusterScanNetworksResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRNetworkCommissioningClusterScanNetworksResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             NetworkCommissioning::Commands::ScanNetworks::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (params != nil) {
@@ -23723,8 +24159,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23740,12 +24176,20 @@ using chip::Messaging::ExchangeManager;
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             NetworkCommissioning::Commands::AddOrUpdateWiFiNetwork::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.ssid = [self asByteSpan:params.ssid];
@@ -23755,8 +24199,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23772,12 +24216,20 @@ using chip::Messaging::ExchangeManager;
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             NetworkCommissioning::Commands::AddOrUpdateThreadNetwork::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.operationalDataset = [self asByteSpan:params.operationalDataset];
@@ -23786,8 +24238,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23803,12 +24255,20 @@ using chip::Messaging::ExchangeManager;
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             NetworkCommissioning::Commands::RemoveNetwork::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.networkID = [self asByteSpan:params.networkID];
@@ -23817,8 +24277,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23834,12 +24294,20 @@ using chip::Messaging::ExchangeManager;
             NetworkCommissioningClusterConnectNetworkResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRNetworkCommissioningClusterConnectNetworkResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             NetworkCommissioning::Commands::ConnectNetwork::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.networkID = [self asByteSpan:params.networkID];
@@ -23848,8 +24316,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -23865,12 +24333,20 @@ using chip::Messaging::ExchangeManager;
             NetworkCommissioningClusterNetworkConfigResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRNetworkCommissioningClusterNetworkConfigResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             NetworkCommissioning::Commands::ReorderNetwork::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.networkID = [self asByteSpan:params.networkID];
@@ -23880,8 +24356,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.breadcrumb.unsignedLongLongValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -25187,12 +25663,20 @@ using chip::Messaging::ExchangeManager;
             DiagnosticLogsClusterRetrieveLogsResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDiagnosticLogsClusterRetrieveLogsResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DiagnosticLogs::Commands::RetrieveLogsRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.intent = static_cast<std::remove_reference_t<decltype(request.intent)>>(params.intent.unsignedCharValue);
@@ -25200,8 +25684,8 @@ using chip::Messaging::ExchangeManager;
                 params.requestedProtocol.unsignedCharValue);
             request.transferFileDesignator = [self asByteSpan:params.transferFileDesignator];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -25696,19 +26180,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GeneralDiagnostics::Commands::TestEventTrigger::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.enableKey = [self asByteSpan:params.enableKey];
             request.eventTrigger = params.eventTrigger.unsignedLongLongValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -26994,17 +27486,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             SoftwareDiagnostics::Commands::ResetWatermarks::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -27855,17 +28355,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ThreadNetworkDiagnostics::Commands::ResetCounts::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -33947,17 +34455,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WiFiNetworkDiagnostics::Commands::ResetCounts::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -35595,17 +36111,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             EthernetNetworkDiagnostics::Commands::ResetCounts::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39422,12 +39946,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AdministratorCommissioning::Commands::OpenCommissioningWindow::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -39439,8 +39971,8 @@ using chip::Messaging::ExchangeManager;
             request.iterations = params.iterations.unsignedIntValue;
             request.salt = [self asByteSpan:params.salt];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39458,12 +39990,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -39471,8 +40011,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.commissioningTimeout = params.commissioningTimeout.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -39494,20 +40034,28 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AdministratorCommissioning::Commands::RevokeCommissioning::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40273,18 +40821,26 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterAttestationResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterAttestationResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::AttestationRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.attestationNonce = [self asByteSpan:params.attestationNonce];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40300,19 +40856,27 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterCertificateChainResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterCertificateChainResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::CertificateChainRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.certificateType
                 = static_cast<std::remove_reference_t<decltype(request.certificateType)>>(params.certificateType.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40328,12 +40892,20 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterCSRResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterCSRResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::CSRRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.CSRNonce = [self asByteSpan:params.csrNonce];
@@ -40342,8 +40914,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = params.isForUpdateNOC.boolValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40359,12 +40931,20 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::AddNOC::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.NOCValue = [self asByteSpan:params.nocValue];
@@ -40377,8 +40957,8 @@ using chip::Messaging::ExchangeManager;
             request.adminVendorId
                 = static_cast<std::remove_reference_t<decltype(request.adminVendorId)>>(params.adminVendorId.unsignedShortValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40394,12 +40974,20 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::UpdateNOC::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.NOCValue = [self asByteSpan:params.nocValue];
@@ -40408,8 +40996,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = [self asByteSpan:params.icacValue];
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40425,18 +41013,26 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::UpdateFabricLabel::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.label = [self asCharSpan:params.label];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40452,18 +41048,26 @@ using chip::Messaging::ExchangeManager;
             OperationalCredentialsClusterNOCResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTROperationalCredentialsClusterNOCResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::RemoveFabric::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.fabricIndex = params.fabricIndex.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -40481,18 +41085,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             OperationalCredentials::Commands::AddTrustedRootCertificate::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.rootCACertificate = [self asByteSpan:params.rootCACertificate];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41592,12 +42204,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetWrite::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupKeySet.groupKeySetID = params.groupKeySet.groupKeySetID.unsignedShortValue;
@@ -41641,8 +42261,8 @@ using chip::Messaging::ExchangeManager;
                 nonNullValue_1 = params.groupKeySet.epochStartTime2.unsignedLongLongValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41658,18 +42278,26 @@ using chip::Messaging::ExchangeManager;
             GroupKeyManagementClusterKeySetReadResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGroupKeyManagementClusterKeySetReadResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetRead::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupKeySetID = params.groupKeySetID.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41686,18 +42314,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetRemove::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.groupKeySetID = params.groupKeySetID.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -41713,12 +42349,20 @@ using chip::Messaging::ExchangeManager;
             GroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             GroupKeyManagement::Commands::KeySetReadAllIndices::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -41744,8 +42388,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -44403,18 +45047,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ModeSelect::Commands::ChangeToMode::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.newMode = params.newMode.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45524,12 +46176,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::LockDoor::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -45542,8 +46202,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45560,12 +46220,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::UnlockDoor::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -45578,8 +46246,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45596,12 +46264,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::UnlockWithTimeout::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -45613,8 +46289,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = [self asByteSpan:params.pinCode];
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45631,12 +46307,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::SetWeekDaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
@@ -45647,8 +46331,8 @@ using chip::Messaging::ExchangeManager;
             request.endHour = params.endHour.unsignedCharValue;
             request.endMinute = params.endMinute.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45664,19 +46348,27 @@ using chip::Messaging::ExchangeManager;
             DoorLockClusterGetWeekDayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDoorLockClusterGetWeekDayScheduleResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::GetWeekDaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45694,19 +46386,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::ClearWeekDaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.weekDayIndex = params.weekDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45723,12 +46423,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::SetYearDaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
@@ -45736,8 +46444,8 @@ using chip::Messaging::ExchangeManager;
             request.localStartTime = params.localStartTime.unsignedIntValue;
             request.localEndTime = params.localEndTime.unsignedIntValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45753,19 +46461,27 @@ using chip::Messaging::ExchangeManager;
             DoorLockClusterGetYearDayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDoorLockClusterGetYearDayScheduleResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::GetYearDaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45783,19 +46499,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::ClearYearDaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.yearDayIndex = params.yearDayIndex.unsignedCharValue;
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45812,12 +46536,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::SetHolidaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.holidayIndex = params.holidayIndex.unsignedCharValue;
@@ -45826,8 +46558,8 @@ using chip::Messaging::ExchangeManager;
             request.operatingMode
                 = static_cast<std::remove_reference_t<decltype(request.operatingMode)>>(params.operatingMode.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45843,18 +46575,26 @@ using chip::Messaging::ExchangeManager;
             DoorLockClusterGetHolidayScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDoorLockClusterGetHolidayScheduleResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::GetHolidaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.holidayIndex = params.holidayIndex.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45872,18 +46612,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::ClearHolidaySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.holidayIndex = params.holidayIndex.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45900,12 +46648,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::SetUser::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -45947,8 +46703,8 @@ using chip::Messaging::ExchangeManager;
                     = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.credentialRule.unsignedCharValue);
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45962,18 +46718,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, DoorLockClusterGetUserResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDoorLockClusterGetUserResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::GetUser::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -45990,12 +46754,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::ClearUser::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -46003,8 +46775,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.userIndex = params.userIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -46020,12 +46792,20 @@ using chip::Messaging::ExchangeManager;
             DoorLockClusterSetCredentialResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDoorLockClusterSetCredentialResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::SetCredential::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -46057,8 +46837,8 @@ using chip::Messaging::ExchangeManager;
                 nonNullValue_0 = static_cast<std::remove_reference_t<decltype(nonNullValue_0)>>(params.userType.unsignedCharValue);
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -46074,20 +46854,28 @@ using chip::Messaging::ExchangeManager;
             DoorLockClusterGetCredentialStatusResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRDoorLockClusterGetCredentialStatusResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::GetCredentialStatus::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.credential.credentialType = static_cast<std::remove_reference_t<decltype(request.credential.credentialType)>>(
                 params.credential.credentialType.unsignedCharValue);
             request.credential.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -46104,12 +46892,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             DoorLock::Commands::ClearCredential::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -46124,8 +46920,8 @@ using chip::Messaging::ExchangeManager;
                 nonNullValue_0.credentialIndex = params.credential.credentialIndex.unsignedShortValue;
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50817,17 +51613,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::UpOrOpen::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50849,17 +51653,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::DownOrClose::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50880,17 +51692,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::StopMotion::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50907,18 +51727,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::GoToLiftValue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.liftValue = params.liftValue.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50936,18 +51764,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::GoToLiftPercentage::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.liftPercent100thsValue = params.liftPercent100thsValue.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50964,18 +51800,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::GoToTiltValue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.tiltValue = params.tiltValue.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -50993,18 +51837,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             WindowCovering::Commands::GoToTiltPercentage::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.tiltPercent100thsValue = params.tiltPercent100thsValue.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -53566,18 +54418,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             BarrierControl::Commands::BarrierControlGoToPercent::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.percentOpen = params.percentOpen.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -53599,17 +54459,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             BarrierControl::Commands::BarrierControlStop::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -57961,19 +58829,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Thermostat::Commands::SetpointRaiseLower::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.mode = static_cast<std::remove_reference_t<decltype(request.mode)>>(params.mode.unsignedCharValue);
             request.amount = params.amount.charValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -57990,12 +58866,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Thermostat::Commands::SetWeeklySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.numberOfTransitionsForSequence = params.numberOfTransitionsForSequence.unsignedCharValue;
@@ -58038,8 +58922,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -58055,12 +58939,20 @@ using chip::Messaging::ExchangeManager;
             ThermostatClusterGetWeeklyScheduleResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRThermostatClusterGetWeeklyScheduleResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Thermostat::Commands::GetWeeklySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.daysToReturn
@@ -58068,8 +58960,8 @@ using chip::Messaging::ExchangeManager;
             request.modeToReturn
                 = static_cast<std::remove_reference_t<decltype(request.modeToReturn)>>(params.modeToReturn.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -58091,17 +58983,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Thermostat::Commands::ClearWeeklySchedule::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66889,12 +67789,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveToHue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.hue = params.hue.unsignedCharValue;
@@ -66904,8 +67812,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66922,12 +67830,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveHue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
@@ -66935,8 +67851,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66953,12 +67869,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::StepHue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
@@ -66967,8 +67891,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -66985,12 +67909,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveToSaturation::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.saturation = params.saturation.unsignedCharValue;
@@ -66998,8 +67930,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67016,12 +67948,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveSaturation::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
@@ -67029,8 +67969,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67047,12 +67987,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::StepSaturation::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
@@ -67061,8 +68009,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67080,12 +68028,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveToHueAndSaturation::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.hue = params.hue.unsignedCharValue;
@@ -67094,8 +68050,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67112,12 +68068,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveToColor::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.colorX = params.colorX.unsignedShortValue;
@@ -67126,8 +68090,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67144,12 +68108,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveColor::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.rateX = params.rateX.shortValue;
@@ -67157,8 +68129,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67175,12 +68147,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::StepColor::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepX = params.stepX.shortValue;
@@ -67189,8 +68169,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67208,12 +68188,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveToColorTemperature::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.colorTemperatureMireds = params.colorTemperatureMireds.unsignedShortValue;
@@ -67221,8 +68209,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67240,12 +68228,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedMoveToHue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.enhancedHue = params.enhancedHue.unsignedShortValue;
@@ -67255,8 +68251,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67273,12 +68269,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedMoveHue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
@@ -67286,8 +68290,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67304,12 +68308,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedStepHue::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
@@ -67318,8 +68330,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67337,12 +68349,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::EnhancedMoveToHueAndSaturation::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.enhancedHue = params.enhancedHue.unsignedShortValue;
@@ -67351,8 +68371,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67369,12 +68389,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::ColorLoopSet::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.updateFlags
@@ -67387,8 +68415,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67405,19 +68433,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::StopMoveStep::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67435,12 +68471,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::MoveColorTemperature::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.moveMode = static_cast<std::remove_reference_t<decltype(request.moveMode)>>(params.moveMode.unsignedCharValue);
@@ -67450,8 +68494,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -67469,12 +68513,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ColorControl::Commands::StepColorTemperature::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.stepMode = static_cast<std::remove_reference_t<decltype(request.stepMode)>>(params.stepMode.unsignedCharValue);
@@ -67485,8 +68537,8 @@ using chip::Messaging::ExchangeManager;
             request.optionsMask = params.optionsMask.unsignedCharValue;
             request.optionsOverride = params.optionsOverride.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -82623,18 +83675,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             ChannelClusterChangeChannelResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRChannelClusterChangeChannelResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Channel::Commands::ChangeChannel::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.match = [self asCharSpan:params.match];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -82652,19 +83712,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Channel::Commands::ChangeChannelByNumber::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.majorNumber = params.majorNumber.unsignedShortValue;
             request.minorNumber = params.minorNumber.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -82681,18 +83749,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             Channel::Commands::SkipChannel::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.count = params.count.unsignedShortValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -83460,12 +84536,20 @@ using chip::Messaging::ExchangeManager;
             TargetNavigatorClusterNavigateTargetResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRTargetNavigatorClusterNavigateTargetResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             TargetNavigator::Commands::NavigateTarget::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.target = params.target.unsignedCharValue;
@@ -83474,8 +84558,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = [self asCharSpan:params.data];
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84145,17 +85229,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::Play::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84176,17 +85268,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::Pause::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84207,17 +85307,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::StopPlayback::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84238,17 +85346,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::StartOver::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84269,17 +85385,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::Previous::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84300,17 +85424,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::Next::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84331,17 +85463,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::Rewind::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84362,17 +85502,25 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::FastForward::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84388,18 +85536,26 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::SkipForward::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.deltaPositionMilliseconds = params.deltaPositionMilliseconds.unsignedLongLongValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84415,18 +85571,26 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::SkipBackward::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.deltaPositionMilliseconds = params.deltaPositionMilliseconds.unsignedLongLongValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -84442,18 +85606,26 @@ using chip::Messaging::ExchangeManager;
             MediaPlaybackClusterPlaybackResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRMediaPlaybackClusterPlaybackResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaPlayback::Commands::Seek::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.position = params.position.unsignedLongLongValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -85697,18 +86869,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaInput::Commands::SelectInput::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.index = params.index.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -85730,17 +86910,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaInput::Commands::ShowInputStatus::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -85762,17 +86950,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaInput::Commands::HideInputStatus::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -85789,19 +86985,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             MediaInput::Commands::RenameInput::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.index = params.index.unsignedCharValue;
             request.name = [self asCharSpan:params.name];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -86487,17 +87691,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             LowPower::Commands::Sleep::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -86986,18 +88198,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, KeypadInputClusterSendKeyResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRKeypadInputClusterSendKeyResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             KeypadInput::Commands::SendKey::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.keyCode = static_cast<std::remove_reference_t<decltype(request.keyCode)>>(params.keyCode.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -87489,12 +88709,20 @@ using chip::Messaging::ExchangeManager;
             ContentLauncherClusterLaunchResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRContentLauncherClusterLaunchResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ContentLauncher::Commands::LaunchContent::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -87555,8 +88783,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = [self asCharSpan:params.data];
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -87572,12 +88800,20 @@ using chip::Messaging::ExchangeManager;
             ContentLauncherClusterLaunchResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRContentLauncherClusterLaunchResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ContentLauncher::Commands::LaunchURL::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.contentURL = [self asCharSpan:params.contentURL];
@@ -87680,8 +88916,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -88409,18 +89645,26 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AudioOutput::Commands::SelectOutput::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.index = params.index.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -88437,19 +89681,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AudioOutput::Commands::RenameOutput::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.index = params.index.unsignedCharValue;
             request.name = [self asCharSpan:params.name];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -89113,12 +90365,20 @@ using chip::Messaging::ExchangeManager;
             ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ApplicationLauncher::Commands::LaunchApp::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
@@ -89128,8 +90388,8 @@ using chip::Messaging::ExchangeManager;
                 definedValue_0 = [self asByteSpan:params.data];
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -89145,19 +90405,27 @@ using chip::Messaging::ExchangeManager;
             ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ApplicationLauncher::Commands::StopApp::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
             request.application.applicationId = [self asCharSpan:params.application.applicationId];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -89173,19 +90441,27 @@ using chip::Messaging::ExchangeManager;
             ApplicationLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRApplicationLauncherClusterLauncherResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ApplicationLauncher::Commands::HideApp::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
             request.application.applicationId = [self asCharSpan:params.application.applicationId];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -91110,12 +92386,20 @@ using chip::Messaging::ExchangeManager;
             AccountLoginClusterGetSetupPINResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRAccountLoginClusterGetSetupPINResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AccountLogin::Commands::GetSetupPIN::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -91123,8 +92407,8 @@ using chip::Messaging::ExchangeManager;
             }
             request.tempAccountIdentifier = [self asCharSpan:params.tempAccountIdentifier];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -91141,12 +92425,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AccountLogin::Commands::Login::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
@@ -91155,8 +92447,8 @@ using chip::Messaging::ExchangeManager;
             request.tempAccountIdentifier = [self asCharSpan:params.tempAccountIdentifier];
             request.setupPIN = [self asCharSpan:params.setupPIN];
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -91177,20 +92469,28 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             AccountLogin::Commands::Logout::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -91701,17 +93001,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ElectricalMeasurement::Commands::GetProfileInfoCommand::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -91729,20 +93037,28 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             ElectricalMeasurement::Commands::GetMeasurementProfileCommand::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.attributeId = params.attributeId.unsignedShortValue;
             request.startTime = params.startTime.unsignedIntValue;
             request.numberOfIntervals = params.numberOfIntervals.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104108,17 +105424,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::Test::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104140,17 +105464,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestNotHandled::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104171,17 +105503,25 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestSpecificResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestSpecificResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestSpecific::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104203,17 +105543,25 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestUnknownCommand::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104229,19 +105577,27 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestAddArgumentsResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestAddArgumentsResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestAddArguments::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1 = params.arg1.unsignedCharValue;
             request.arg2 = params.arg2.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104257,18 +105613,26 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestSimpleArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestSimpleArgumentResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestSimpleArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1 = params.arg1.boolValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104285,12 +105649,20 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestStructArrayArgumentResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestStructArrayArgumentResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestStructArrayArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -104504,8 +105876,8 @@ using chip::Messaging::ExchangeManager;
             request.arg5 = static_cast<std::remove_reference_t<decltype(request.arg5)>>(params.arg5.unsignedCharValue);
             request.arg6 = params.arg6.boolValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104520,12 +105892,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestStructArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1.a = params.arg1.a.unsignedCharValue;
@@ -104537,8 +105917,8 @@ using chip::Messaging::ExchangeManager;
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104553,12 +105933,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestNestedStructArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1.a = params.arg1.a.unsignedCharValue;
@@ -104572,8 +105960,8 @@ using chip::Messaging::ExchangeManager;
             request.arg1.c.g = params.arg1.c.g.floatValue;
             request.arg1.c.h = params.arg1.c.h.doubleValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104588,12 +105976,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestListStructArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -104628,8 +106024,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104644,12 +106040,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestListInt8UArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -104675,8 +106079,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104691,12 +106095,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestNestedStructListArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1.a = params.arg1.a.unsignedCharValue;
@@ -104807,8 +106219,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104824,12 +106236,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, UnitTestingClusterBooleanResponseCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterBooleanResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestListNestedStructListArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -104965,8 +106385,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -104982,12 +106402,20 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestListInt8UReverseResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestListInt8UReverseResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestListInt8UReverseRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             {
@@ -105013,8 +106441,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105029,19 +106457,27 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
             UnitTestingClusterTestEnumsResponseCallbackType successCb, MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestEnumsResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestEnumsRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1 = static_cast<std::remove_reference_t<decltype(request.arg1)>>(params.arg1.unsignedShortValue);
             request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105057,12 +106493,20 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestNullableOptionalResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestNullableOptionalRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (params != nil) {
@@ -105077,8 +106521,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105096,12 +106540,20 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestComplexNullableOptionalResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestComplexNullableOptionalResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestComplexNullableOptionalRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (params.nullableInt == nil) {
@@ -105274,8 +106726,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105291,12 +106743,20 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterSimpleStructResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterSimpleStructResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::SimpleStructEchoRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1.a = params.arg1.a.unsignedCharValue;
@@ -105308,8 +106768,8 @@ using chip::Messaging::ExchangeManager;
             request.arg1.g = params.arg1.g.floatValue;
             request.arg1.h = params.arg1.h.doubleValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105331,20 +106791,28 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TimedInvokeRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (!timedInvokeTimeoutMs.HasValue()) {
                 timedInvokeTimeoutMs.SetValue(10000);
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105362,12 +106830,20 @@ using chip::Messaging::ExchangeManager;
         ^(ExchangeManager & exchangeManager, const SessionHandle & session, CommandSuccessCallbackType successCb,
             MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRCommandSuccessCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestSimpleOptionalArgumentRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             if (params != nil) {
@@ -105377,8 +106853,8 @@ using chip::Messaging::ExchangeManager;
                 }
             }
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105394,20 +106870,28 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestEmitTestEventResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestEmitTestEventResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestEmitTestEventRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1 = params.arg1.unsignedCharValue;
             request.arg2 = static_cast<std::remove_reference_t<decltype(request.arg2)>>(params.arg2.unsignedCharValue);
             request.arg3 = params.arg3.boolValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
@@ -105426,18 +106910,26 @@ using chip::Messaging::ExchangeManager;
             UnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
             auto * typedBridge = static_cast<MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseCallbackBridge *>(bridge);
-            chip::Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<uint16_t> timedInvokeTimeoutMs;
+            Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
             UnitTesting::Commands::TestEmitTestFabricScopedEventRequest::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
+                    params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
                     timedInvokeTimeoutMs.SetValue(params.timedInvokeTimeoutMs.unsignedShortValue);
+                }
+                if (params.serverSideProcessingTimeout != nil) {
+                    // Clamp to a number of seconds that will not overflow 32-bit
+                    // int when converted to ms.
+                    auto * serverSideProcessingTimeout = MTRClampedNumber(params.serverSideProcessingTimeout, @(0), @(UINT16_MAX));
+                    invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
             request.arg1 = params.arg1.unsignedCharValue;
 
-            return MTRStartInvokeInteraction(
-                typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint, timedInvokeTimeoutMs);
+            return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
+                timedInvokeTimeoutMs, invokeTimeout);
         });
     std::move(*bridge).DispatchAction(self.device);
 }
