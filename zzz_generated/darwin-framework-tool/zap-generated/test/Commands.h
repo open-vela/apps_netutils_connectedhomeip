@@ -43750,7 +43750,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -43798,7 +43798,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -43856,7 +43856,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -43907,15 +43907,14 @@ private:
         __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster stopPlaybackWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+        [cluster stopWithCompletion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
             NSLog(@"Sends a Stop command Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -44253,7 +44252,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -44301,7 +44300,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -44360,7 +44359,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 NextTest();
@@ -44394,7 +44393,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -44430,7 +44429,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 NextTest();
@@ -44469,7 +44468,7 @@ private:
 
                            {
                                id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                               VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                            }
 
                            NextTest();
@@ -44498,7 +44497,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads the SampledPosition attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -44533,7 +44532,7 @@ private:
 
                             {
                                 id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                             }
 
                             NextTest();
@@ -44562,7 +44561,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads the SampledPosition attribute from the DUT Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -44800,7 +44799,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -44827,7 +44826,7 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                          }
 
                          NextTest();
@@ -44856,7 +44855,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads the SampledPosition attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -44931,7 +44930,7 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 5U));
+                             VerifyOrReturn(CheckValue("Status", actualValue, 5U));
                          }
 
                          NextTest();
@@ -45302,7 +45301,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -45375,7 +45374,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 NextTest();
@@ -45458,7 +45457,7 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 NextTest();
@@ -45517,7 +45516,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -45587,7 +45586,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -45633,7 +45632,7 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             NextTest();
@@ -74826,7 +74825,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute position Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -74834,9 +74833,12 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
-                VerifyOrReturn(CheckValue("updatedAt", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).updatedAt, 0ULL));
-                VerifyOrReturn(CheckValueNonNull("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position));
-                VerifyOrReturn(CheckValue("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position, 0ULL));
+                VerifyOrReturn(
+                    CheckValue("UpdatedAt", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).updatedAt, 0ULL));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 0ULL));
             }
 
             NextTest();
@@ -74934,12 +74936,12 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             {
                 id actualValue = values.data;
-                VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
             }
 
             NextTest();
@@ -74963,12 +74965,12 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             {
                 id actualValue = values.data;
-                VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
             }
 
             NextTest();
@@ -74985,20 +74987,19 @@ private:
         __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device endpointID:@(3) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        [cluster stopPlaybackWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
+        [cluster stopWithCompletion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable err) {
             NSLog(@"Media Playback Stop Command Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             {
                 id actualValue = values.data;
-                VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
             }
 
             NextTest();
@@ -75023,12 +75024,12 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 {
                     id actualValue = values.data;
-                    VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                    VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                 }
 
                 NextTest();
@@ -75053,12 +75054,12 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 {
                     id actualValue = values.data;
-                    VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                    VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                 }
 
                 NextTest();
@@ -75082,12 +75083,12 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             {
                 id actualValue = values.data;
-                VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
             }
 
             NextTest();
@@ -75111,12 +75112,12 @@ private:
 
             {
                 id actualValue = values.status;
-                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
             }
 
             {
                 id actualValue = values.data;
-                VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
             }
 
             NextTest();
@@ -75141,12 +75142,12 @@ private:
 
                 {
                     id actualValue = values.status;
-                    VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                    VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                 }
 
                 {
                     id actualValue = values.data;
-                    VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                    VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                 }
 
                 NextTest();
@@ -75174,12 +75175,12 @@ private:
 
                            {
                                id actualValue = values.status;
-                               VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                               VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                            }
 
                            {
                                id actualValue = values.data;
-                               VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                               VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                            }
 
                            NextTest();
@@ -75197,7 +75198,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute position after skip forward Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -75205,9 +75206,12 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
-                VerifyOrReturn(CheckValue("updatedAt", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).updatedAt, 0ULL));
-                VerifyOrReturn(CheckValueNonNull("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position));
-                VerifyOrReturn(CheckValue("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position, 500ULL));
+                VerifyOrReturn(
+                    CheckValue("UpdatedAt", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).updatedAt, 0ULL));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 500ULL));
             }
 
             NextTest();
@@ -75235,12 +75239,12 @@ private:
 
                             {
                                 id actualValue = values.status;
-                                VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                             }
 
                             {
                                 id actualValue = values.data;
-                                VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                                VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                             }
 
                             NextTest();
@@ -75258,7 +75262,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute position after skip backward Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -75266,9 +75270,12 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
-                VerifyOrReturn(CheckValue("updatedAt", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).updatedAt, 0ULL));
-                VerifyOrReturn(CheckValueNonNull("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position));
-                VerifyOrReturn(CheckValue("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position, 400ULL));
+                VerifyOrReturn(
+                    CheckValue("UpdatedAt", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).updatedAt, 0ULL));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 400ULL));
             }
 
             NextTest();
@@ -75295,12 +75302,12 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                          }
 
                          {
                              id actualValue = values.data;
-                             VerifyOrReturn(CheckValueAsString("data", actualValue, @"data response"));
+                             VerifyOrReturn(CheckValueAsString("Data", actualValue, @"data response"));
                          }
 
                          NextTest();
@@ -75318,7 +75325,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable err) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute position after seek Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -75326,9 +75333,12 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
-                VerifyOrReturn(CheckValue("updatedAt", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).updatedAt, 0ULL));
-                VerifyOrReturn(CheckValueNonNull("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position));
-                VerifyOrReturn(CheckValue("position", ((MTRMediaPlaybackClusterPlaybackPosition *) actualValue).position, 1000ULL));
+                VerifyOrReturn(
+                    CheckValue("UpdatedAt", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).updatedAt, 0ULL));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 1000ULL));
             }
 
             NextTest();

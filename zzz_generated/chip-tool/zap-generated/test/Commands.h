@@ -33212,8 +33212,8 @@ private:
             LogStep(9, "Sends a Stop command");
             VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
-            chip::app::Clusters::MediaPlayback::Commands::StopPlayback::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(1), MediaPlayback::Id, MediaPlayback::Commands::StopPlayback::Id, value,
+            chip::app::Clusters::MediaPlayback::Commands::Stop::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(1), MediaPlayback::Id, MediaPlayback::Commands::Stop::Id, value,
                                chip::NullOptional
 
             );
@@ -33377,7 +33377,8 @@ private:
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
             }
@@ -33397,7 +33398,8 @@ private:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
             }
@@ -33675,7 +33677,8 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
             }
@@ -55167,7 +55170,8 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
                 VerifyOrReturn(CheckValue("sampledPosition.Value().updatedAt", value.Value().updatedAt, 0ULL));
@@ -55294,7 +55298,8 @@ private:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
                 VerifyOrReturn(CheckValue("sampledPosition.Value().updatedAt", value.Value().updatedAt, 0ULL));
@@ -55315,7 +55320,8 @@ private:
         case 19:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
                 VerifyOrReturn(CheckValue("sampledPosition.Value().updatedAt", value.Value().updatedAt, 0ULL));
@@ -55336,7 +55342,8 @@ private:
         case 21:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPosition::DecodableType> value;
+                chip::app::DataModel::Nullable<chip::app::Clusters::MediaPlayback::Structs::PlaybackPositionStruct::DecodableType>
+                    value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
                 VerifyOrReturn(CheckValue("sampledPosition.Value().updatedAt", value.Value().updatedAt, 0ULL));
@@ -55428,8 +55435,8 @@ private:
         case 10: {
             LogStep(10, "Media Playback Stop Command");
             ListFreer listFreer;
-            chip::app::Clusters::MediaPlayback::Commands::StopPlayback::Type value;
-            return SendCommand(kIdentityAlpha, GetEndpoint(3), MediaPlayback::Id, MediaPlayback::Commands::StopPlayback::Id, value,
+            chip::app::Clusters::MediaPlayback::Commands::Stop::Type value;
+            return SendCommand(kIdentityAlpha, GetEndpoint(3), MediaPlayback::Id, MediaPlayback::Commands::Stop::Id, value,
                                chip::NullOptional
 
             );
