@@ -55427,7 +55427,7 @@ private:
         case 3:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::ContentLauncher::Commands::LaunchResponse::DecodableType value;
+                chip::app::Clusters::ContentLauncher::Commands::LauncherResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
                 VerifyOrReturn(CheckValuePresent("data", value.data));
@@ -55437,7 +55437,7 @@ private:
         case 4:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::ContentLauncher::Commands::LaunchResponse::DecodableType value;
+                chip::app::Clusters::ContentLauncher::Commands::LauncherResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
                 VerifyOrReturn(CheckValuePresent("data", value.data));
@@ -55488,7 +55488,7 @@ private:
             chip::app::Clusters::ContentLauncher::Commands::LaunchContent::Type value;
 
             {
-                auto * listHolder_1 = new ListHolder<chip::app::Clusters::ContentLauncher::Structs::Parameter::Type>(1);
+                auto * listHolder_1 = new ListHolder<chip::app::Clusters::ContentLauncher::Structs::ParameterStruct::Type>(1);
                 listFreer.add(listHolder_1);
 
                 listHolder_1->mList[0].type  = static_cast<chip::app::Clusters::ContentLauncher::ParameterEnum>(1);
@@ -55496,20 +55496,21 @@ private:
                 listHolder_1->mList[0].externalIDList.Emplace();
 
                 {
-                    auto * listHolder_4 = new ListHolder<chip::app::Clusters::ContentLauncher::Structs::AdditionalInfo::Type>(1);
+                    auto * listHolder_4 =
+                        new ListHolder<chip::app::Clusters::ContentLauncher::Structs::AdditionalInfoStruct::Type>(1);
                     listFreer.add(listHolder_4);
 
                     listHolder_4->mList[0].name  = chip::Span<const char>("namegarbage: not in length on purpose", 4);
                     listHolder_4->mList[0].value = chip::Span<const char>("valuegarbage: not in length on purpose", 5);
 
                     listHolder_1->mList[0].externalIDList.Value() =
-                        chip::app::DataModel::List<chip::app::Clusters::ContentLauncher::Structs::AdditionalInfo::Type>(
+                        chip::app::DataModel::List<chip::app::Clusters::ContentLauncher::Structs::AdditionalInfoStruct::Type>(
                             listHolder_4->mList, 1);
                 }
 
                 value.search.parameterList =
-                    chip::app::DataModel::List<chip::app::Clusters::ContentLauncher::Structs::Parameter::Type>(listHolder_1->mList,
-                                                                                                               1);
+                    chip::app::DataModel::List<chip::app::Clusters::ContentLauncher::Structs::ParameterStruct::Type>(
+                        listHolder_1->mList, 1);
             }
 
             value.autoPlay = true;
@@ -55533,8 +55534,8 @@ private:
                 chip::Span<const char>("exampleNamegarbage: not in length on purpose", 11);
             value.brandingInformation.Value().background.Emplace();
 
-            value.brandingInformation.Value().background.Value().imageUrl.Emplace();
-            value.brandingInformation.Value().background.Value().imageUrl.Value() =
+            value.brandingInformation.Value().background.Value().imageURL.Emplace();
+            value.brandingInformation.Value().background.Value().imageURL.Value() =
                 chip::Span<const char>("exampleUrlgarbage: not in length on purpose", 10);
             value.brandingInformation.Value().background.Value().color.Emplace();
             value.brandingInformation.Value().background.Value().color.Value() =
@@ -55548,8 +55549,8 @@ private:
 
             value.brandingInformation.Value().logo.Emplace();
 
-            value.brandingInformation.Value().logo.Value().imageUrl.Emplace();
-            value.brandingInformation.Value().logo.Value().imageUrl.Value() =
+            value.brandingInformation.Value().logo.Value().imageURL.Emplace();
+            value.brandingInformation.Value().logo.Value().imageURL.Value() =
                 chip::Span<const char>("exampleUrlgarbage: not in length on purpose", 10);
             value.brandingInformation.Value().logo.Value().color.Emplace();
             value.brandingInformation.Value().logo.Value().color.Value() =
@@ -55563,8 +55564,8 @@ private:
 
             value.brandingInformation.Value().progressBar.Emplace();
 
-            value.brandingInformation.Value().progressBar.Value().imageUrl.Emplace();
-            value.brandingInformation.Value().progressBar.Value().imageUrl.Value() =
+            value.brandingInformation.Value().progressBar.Value().imageURL.Emplace();
+            value.brandingInformation.Value().progressBar.Value().imageURL.Value() =
                 chip::Span<const char>("exampleUrlgarbage: not in length on purpose", 10);
             value.brandingInformation.Value().progressBar.Value().color.Emplace();
             value.brandingInformation.Value().progressBar.Value().color.Value() =
@@ -55578,8 +55579,8 @@ private:
 
             value.brandingInformation.Value().splash.Emplace();
 
-            value.brandingInformation.Value().splash.Value().imageUrl.Emplace();
-            value.brandingInformation.Value().splash.Value().imageUrl.Value() =
+            value.brandingInformation.Value().splash.Value().imageURL.Emplace();
+            value.brandingInformation.Value().splash.Value().imageURL.Value() =
                 chip::Span<const char>("exampleUrlgarbage: not in length on purpose", 10);
             value.brandingInformation.Value().splash.Value().color.Emplace();
             value.brandingInformation.Value().splash.Value().color.Value() =
@@ -55593,8 +55594,8 @@ private:
 
             value.brandingInformation.Value().waterMark.Emplace();
 
-            value.brandingInformation.Value().waterMark.Value().imageUrl.Emplace();
-            value.brandingInformation.Value().waterMark.Value().imageUrl.Value() =
+            value.brandingInformation.Value().waterMark.Value().imageURL.Emplace();
+            value.brandingInformation.Value().waterMark.Value().imageURL.Value() =
                 chip::Span<const char>("exampleUrlgarbage: not in length on purpose", 10);
             value.brandingInformation.Value().waterMark.Value().color.Emplace();
             value.brandingInformation.Value().waterMark.Value().color.Value() =

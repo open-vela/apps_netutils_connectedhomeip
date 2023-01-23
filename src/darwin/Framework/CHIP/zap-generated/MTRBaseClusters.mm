@@ -88703,16 +88703,16 @@ using chip::System::Clock::Timeout;
 }
 
 - (void)launchContentWithParams:(MTRContentLauncherClusterLaunchContentParams *)params
-                     completion:(void (^)(MTRContentLauncherClusterLaunchResponseParams * _Nullable data,
+                     completion:(void (^)(MTRContentLauncherClusterLauncherResponseParams * _Nullable data,
                                     NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRContentLauncherClusterLaunchResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRContentLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            ContentLauncherClusterLaunchResponseCallbackType successCb, MTRErrorCallback failureCb,
+            ContentLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRContentLauncherClusterLaunchResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRContentLauncherClusterLauncherResponseCallbackBridge *>(bridge);
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
@@ -88739,11 +88739,11 @@ using chip::System::Clock::Timeout;
                     }
                     listFreer.add(listHolder_1);
                     for (size_t i_1 = 0; i_1 < params.search.parameterList.count; ++i_1) {
-                        if (![params.search.parameterList[i_1] isKindOfClass:[MTRContentLauncherClusterParameter class]]) {
+                        if (![params.search.parameterList[i_1] isKindOfClass:[MTRContentLauncherClusterParameterStruct class]]) {
                             // Wrong kind of value.
                             return CHIP_ERROR_INVALID_ARGUMENT;
                         }
-                        auto element_1 = (MTRContentLauncherClusterParameter *) params.search.parameterList[i_1];
+                        auto element_1 = (MTRContentLauncherClusterParameterStruct *) params.search.parameterList[i_1];
                         listHolder_1->mList[i_1].type
                             = static_cast<std::remove_reference_t<decltype(listHolder_1->mList[i_1].type)>>(
                                 element_1.type.unsignedCharValue);
@@ -88761,11 +88761,12 @@ using chip::System::Clock::Timeout;
                                     listFreer.add(listHolder_4);
                                     for (size_t i_4 = 0; i_4 < element_1.externalIDList.count; ++i_4) {
                                         if (![element_1.externalIDList[i_4]
-                                                isKindOfClass:[MTRContentLauncherClusterAdditionalInfo class]]) {
+                                                isKindOfClass:[MTRContentLauncherClusterAdditionalInfoStruct class]]) {
                                             // Wrong kind of value.
                                             return CHIP_ERROR_INVALID_ARGUMENT;
                                         }
-                                        auto element_4 = (MTRContentLauncherClusterAdditionalInfo *) element_1.externalIDList[i_4];
+                                        auto element_4
+                                            = (MTRContentLauncherClusterAdditionalInfoStruct *) element_1.externalIDList[i_4];
                                         listHolder_4->mList[i_4].name = [self asCharSpan:element_4.name];
                                         listHolder_4->mList[i_4].value = [self asCharSpan:element_4.value];
                                     }
@@ -88794,16 +88795,16 @@ using chip::System::Clock::Timeout;
 }
 
 - (void)launchURLWithParams:(MTRContentLauncherClusterLaunchURLParams *)params
-                 completion:
-                     (void (^)(MTRContentLauncherClusterLaunchResponseParams * _Nullable data, NSError * _Nullable error))completion
+                 completion:(void (^)(MTRContentLauncherClusterLauncherResponseParams * _Nullable data,
+                                NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
-    auto * bridge = new MTRContentLauncherClusterLaunchResponseCallbackBridge(self.callbackQueue, completion,
+    auto * bridge = new MTRContentLauncherClusterLauncherResponseCallbackBridge(self.callbackQueue, completion,
         ^(ExchangeManager & exchangeManager, const SessionHandle & session,
-            ContentLauncherClusterLaunchResponseCallbackType successCb, MTRErrorCallback failureCb,
+            ContentLauncherClusterLauncherResponseCallbackType successCb, MTRErrorCallback failureCb,
             MTRCallbackBridgeBase * bridge) {
-            auto * typedBridge = static_cast<MTRContentLauncherClusterLaunchResponseCallbackBridge *>(bridge);
+            auto * typedBridge = static_cast<MTRContentLauncherClusterLauncherResponseCallbackBridge *>(bridge);
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
@@ -88830,9 +88831,9 @@ using chip::System::Clock::Timeout;
                 definedValue_0.providerName = [self asCharSpan:params.brandingInformation.providerName];
                 if (params.brandingInformation.background != nil) {
                     auto & definedValue_2 = definedValue_0.background.Emplace();
-                    if (params.brandingInformation.background.imageUrl != nil) {
-                        auto & definedValue_4 = definedValue_2.imageUrl.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.background.imageUrl];
+                    if (params.brandingInformation.background.imageURL != nil) {
+                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
+                        definedValue_4 = [self asCharSpan:params.brandingInformation.background.imageURL];
                     }
                     if (params.brandingInformation.background.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
@@ -88848,9 +88849,9 @@ using chip::System::Clock::Timeout;
                 }
                 if (params.brandingInformation.logo != nil) {
                     auto & definedValue_2 = definedValue_0.logo.Emplace();
-                    if (params.brandingInformation.logo.imageUrl != nil) {
-                        auto & definedValue_4 = definedValue_2.imageUrl.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.logo.imageUrl];
+                    if (params.brandingInformation.logo.imageURL != nil) {
+                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
+                        definedValue_4 = [self asCharSpan:params.brandingInformation.logo.imageURL];
                     }
                     if (params.brandingInformation.logo.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
@@ -88866,9 +88867,9 @@ using chip::System::Clock::Timeout;
                 }
                 if (params.brandingInformation.progressBar != nil) {
                     auto & definedValue_2 = definedValue_0.progressBar.Emplace();
-                    if (params.brandingInformation.progressBar.imageUrl != nil) {
-                        auto & definedValue_4 = definedValue_2.imageUrl.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.progressBar.imageUrl];
+                    if (params.brandingInformation.progressBar.imageURL != nil) {
+                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
+                        definedValue_4 = [self asCharSpan:params.brandingInformation.progressBar.imageURL];
                     }
                     if (params.brandingInformation.progressBar.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
@@ -88884,9 +88885,9 @@ using chip::System::Clock::Timeout;
                 }
                 if (params.brandingInformation.splash != nil) {
                     auto & definedValue_2 = definedValue_0.splash.Emplace();
-                    if (params.brandingInformation.splash.imageUrl != nil) {
-                        auto & definedValue_4 = definedValue_2.imageUrl.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.splash.imageUrl];
+                    if (params.brandingInformation.splash.imageURL != nil) {
+                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
+                        definedValue_4 = [self asCharSpan:params.brandingInformation.splash.imageURL];
                     }
                     if (params.brandingInformation.splash.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
@@ -88902,9 +88903,9 @@ using chip::System::Clock::Timeout;
                 }
                 if (params.brandingInformation.waterMark != nil) {
                     auto & definedValue_2 = definedValue_0.waterMark.Emplace();
-                    if (params.brandingInformation.waterMark.imageUrl != nil) {
-                        auto & definedValue_4 = definedValue_2.imageUrl.Emplace();
-                        definedValue_4 = [self asCharSpan:params.brandingInformation.waterMark.imageUrl];
+                    if (params.brandingInformation.waterMark.imageURL != nil) {
+                        auto & definedValue_4 = definedValue_2.imageURL.Emplace();
+                        definedValue_4 = [self asCharSpan:params.brandingInformation.waterMark.imageURL];
                     }
                     if (params.brandingInformation.waterMark.color != nil) {
                         auto & definedValue_4 = definedValue_2.color.Emplace();
@@ -89281,7 +89282,7 @@ using chip::System::Clock::Timeout;
                                     NSError * _Nullable error))completionHandler
 {
     [self launchContentWithParams:params
-                       completion:^(MTRContentLauncherClusterLaunchResponseParams * _Nullable data, NSError * _Nullable error) {
+                       completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error) {
                            // Cast is safe because subclass does not add any selectors.
                            completionHandler(static_cast<MTRContentLauncherClusterLaunchResponseParams *>(data), error);
                        }];
@@ -89291,7 +89292,7 @@ using chip::System::Clock::Timeout;
               (void (^)(MTRContentLauncherClusterLaunchResponseParams * _Nullable data, NSError * _Nullable error))completionHandler
 {
     [self launchURLWithParams:params
-                   completion:^(MTRContentLauncherClusterLaunchResponseParams * _Nullable data, NSError * _Nullable error) {
+                   completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error) {
                        // Cast is safe because subclass does not add any selectors.
                        completionHandler(static_cast<MTRContentLauncherClusterLaunchResponseParams *>(data), error);
                    }];

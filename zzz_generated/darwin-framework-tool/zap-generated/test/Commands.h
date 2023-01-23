@@ -75964,41 +75964,41 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
-        params.search = [[MTRContentLauncherClusterContentSearch alloc] init];
+        params.search = [[MTRContentLauncherClusterContentSearchStruct alloc] init];
         {
             NSMutableArray * temp_1 = [[NSMutableArray alloc] init];
-            temp_1[0] = [[MTRContentLauncherClusterParameter alloc] init];
-            ((MTRContentLauncherClusterParameter *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:1U];
-            ((MTRContentLauncherClusterParameter *) temp_1[0]).value = @"exampleValue";
+            temp_1[0] = [[MTRContentLauncherClusterParameterStruct alloc] init];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).type = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).value = @"exampleValue";
             {
                 NSMutableArray * temp_4 = [[NSMutableArray alloc] init];
-                temp_4[0] = [[MTRContentLauncherClusterAdditionalInfo alloc] init];
-                ((MTRContentLauncherClusterAdditionalInfo *) temp_4[0]).name = @"name";
-                ((MTRContentLauncherClusterAdditionalInfo *) temp_4[0]).value = @"value";
+                temp_4[0] = [[MTRContentLauncherClusterAdditionalInfoStruct alloc] init];
+                ((MTRContentLauncherClusterAdditionalInfoStruct *) temp_4[0]).name = @"name";
+                ((MTRContentLauncherClusterAdditionalInfoStruct *) temp_4[0]).value = @"value";
 
-                ((MTRContentLauncherClusterParameter *) temp_1[0]).externalIDList = temp_4;
+                ((MTRContentLauncherClusterParameterStruct *) temp_1[0]).externalIDList = temp_4;
             }
 
-            ((MTRContentLauncherClusterContentSearch *) params.search).parameterList = temp_1;
+            ((MTRContentLauncherClusterContentSearchStruct *) params.search).parameterList = temp_1;
         }
 
         params.autoPlay = [NSNumber numberWithBool:true];
         params.data = @"exampleData";
         [cluster
             launchContentWithParams:params
-                         completion:^(MTRContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable err) {
+                         completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
                              NSLog(@"Launch Content Command Error: %@", err);
 
                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
                              {
                                  id actualValue = values.status;
-                                 VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                                 VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                              }
 
                              {
                                  id actualValue = values.data;
-                                 VerifyOrReturn(CheckValueAsString("data", actualValue, @"exampleData"));
+                                 VerifyOrReturn(CheckValueAsString("Data", actualValue, @"exampleData"));
                              }
 
                              NextTest();
@@ -76018,191 +76018,222 @@ private:
         __auto_type * params = [[MTRContentLauncherClusterLaunchURLParams alloc] init];
         params.contentURL = @"exampleUrl";
         params.displayString = @"exampleDisplayString";
-        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformation alloc] init];
-        ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation).providerName = @"exampleName";
-        ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation).background =
-            [[MTRContentLauncherClusterStyleInformation alloc] init];
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        params.brandingInformation = [[MTRContentLauncherClusterBrandingInformationStruct alloc] init];
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).providerName = @"exampleName";
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).background =
+            [[MTRContentLauncherClusterStyleInformationStruct alloc] init];
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .background)
-            .imageUrl
+            .imageURL
             = @"exampleUrl";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .background)
             .color
             = @"exampleColor";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .background)
             .size
-            = [[MTRContentLauncherClusterDimension alloc] init];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .background)
+            = [[MTRContentLauncherClusterDimensionStruct alloc] init];
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .background)
                 .size)
             .width
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .background)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .background)
                 .size)
             .height
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .background)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .background)
                 .size)
             .metric
             = [NSNumber numberWithUnsignedChar:0U];
 
-        ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation).logo =
-            [[MTRContentLauncherClusterStyleInformation alloc] init];
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).logo =
+            [[MTRContentLauncherClusterStyleInformationStruct alloc] init];
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .logo)
-            .imageUrl
+            .imageURL
             = @"exampleUrl";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .logo)
             .color
             = @"exampleColor";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .logo)
             .size
-            = [[MTRContentLauncherClusterDimension alloc] init];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .logo)
+            = [[MTRContentLauncherClusterDimensionStruct alloc] init];
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .logo)
                 .size)
             .width
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .logo)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .logo)
                 .size)
             .height
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .logo)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .logo)
                 .size)
             .metric
             = [NSNumber numberWithUnsignedChar:0U];
 
-        ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation).progressBar =
-            [[MTRContentLauncherClusterStyleInformation alloc] init];
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).progressBar =
+            [[MTRContentLauncherClusterStyleInformationStruct alloc] init];
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .progressBar)
-            .imageUrl
+            .imageURL
             = @"exampleUrl";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .progressBar)
             .color
             = @"exampleColor";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .progressBar)
             .size
-            = [[MTRContentLauncherClusterDimension alloc] init];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .progressBar)
+            = [[MTRContentLauncherClusterDimensionStruct alloc] init];
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .progressBar)
                 .size)
             .width
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .progressBar)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .progressBar)
                 .size)
             .height
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .progressBar)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .progressBar)
                 .size)
             .metric
             = [NSNumber numberWithUnsignedChar:0U];
 
-        ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation).splash =
-            [[MTRContentLauncherClusterStyleInformation alloc] init];
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).splash =
+            [[MTRContentLauncherClusterStyleInformationStruct alloc] init];
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .splash)
-            .imageUrl
+            .imageURL
             = @"exampleUrl";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .splash)
             .color
             = @"exampleColor";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .splash)
             .size
-            = [[MTRContentLauncherClusterDimension alloc] init];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .splash)
+            = [[MTRContentLauncherClusterDimensionStruct alloc] init];
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .splash)
                 .size)
             .width
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .splash)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .splash)
                 .size)
             .height
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .splash)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .splash)
                 .size)
             .metric
             = [NSNumber numberWithUnsignedChar:0U];
 
-        ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation).waterMark =
-            [[MTRContentLauncherClusterStyleInformation alloc] init];
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterBrandingInformationStruct *) params.brandingInformation).waterMark =
+            [[MTRContentLauncherClusterStyleInformationStruct alloc] init];
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .waterMark)
-            .imageUrl
+            .imageURL
             = @"exampleUrl";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .waterMark)
             .color
             = @"exampleColor";
-        ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *) params.brandingInformation)
+        ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                  params.brandingInformation)
                 .waterMark)
             .size
-            = [[MTRContentLauncherClusterDimension alloc] init];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .waterMark)
+            = [[MTRContentLauncherClusterDimensionStruct alloc] init];
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .waterMark)
                 .size)
             .width
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .waterMark)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .waterMark)
                 .size)
             .height
             = [NSNumber numberWithDouble:0];
-        ((MTRContentLauncherClusterDimension *) ((MTRContentLauncherClusterStyleInformation *) ((MTRContentLauncherClusterBrandingInformation *)
-                                                                                                    params.brandingInformation)
-                                                     .waterMark)
+        ((MTRContentLauncherClusterDimensionStruct *) ((MTRContentLauncherClusterStyleInformationStruct *) ((MTRContentLauncherClusterBrandingInformationStruct *)
+                                                                                                                params
+                                                                                                                    .brandingInformation)
+                                                           .waterMark)
                 .size)
             .metric
             = [NSNumber numberWithUnsignedChar:0U];
 
-        [cluster launchURLWithParams:params
-                          completion:^(MTRContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable err) {
-                              NSLog(@"Launch URL Command Error: %@", err);
+        [cluster
+            launchURLWithParams:params
+                     completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable err) {
+                         NSLog(@"Launch URL Command Error: %@", err);
 
-                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                         VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                              {
-                                  id actualValue = values.status;
-                                  VerifyOrReturn(CheckValue("status", actualValue, 0U));
-                              }
+                         {
+                             id actualValue = values.status;
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                         }
 
-                              {
-                                  id actualValue = values.data;
-                                  VerifyOrReturn(CheckValueAsString("data", actualValue, @"exampleData"));
-                              }
+                         {
+                             id actualValue = values.data;
+                             VerifyOrReturn(CheckValueAsString("Data", actualValue, @"exampleData"));
+                         }
 
-                              NextTest();
-                          }];
+                         NextTest();
+                     }];
 
         return CHIP_NO_ERROR;
     }
