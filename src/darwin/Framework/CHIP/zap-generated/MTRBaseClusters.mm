@@ -74577,20 +74577,20 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeIntrinsicBalanceFactorWithCompletion:(void (^)(
+- (void)readAttributeIntrinsicBallastFactorWithCompletion:(void (^)(
                                                               NSNumber * _Nullable value, NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
-    using TypeInfo = BallastConfiguration::Attributes::IntrinsicBalanceFactor::TypeInfo;
+    using TypeInfo = BallastConfiguration::Attributes::IntrinsicBallastFactor::TypeInfo;
     return MTRReadAttribute<MTRNullableInt8uAttributeCallbackBridge, NSNumber, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSNumber * _Nullable)value completion:(MTRStatusCompletion)completion
+- (void)writeAttributeIntrinsicBallastFactorWithValue:(NSNumber * _Nullable)value completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeIntrinsicBalanceFactorWithValue:(NSNumber * _Nullable) value params:nil completion:completion];
+    [self writeAttributeIntrinsicBallastFactorWithValue:(NSNumber * _Nullable) value params:nil completion:completion];
 }
-- (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSNumber * _Nullable)value
+- (void)writeAttributeIntrinsicBallastFactorWithValue:(NSNumber * _Nullable)value
                                                params:(MTRWriteParams * _Nullable)params
                                            completion:(MTRStatusCompletion)completion
 {
@@ -74613,7 +74613,7 @@ using chip::System::Clock::Timeout;
             }
 
             ListFreer listFreer;
-            using TypeInfo = BallastConfiguration::Attributes::IntrinsicBalanceFactor::TypeInfo;
+            using TypeInfo = BallastConfiguration::Attributes::IntrinsicBallastFactor::TypeInfo;
             TypeInfo::Type cppValue;
             if (value == nil) {
                 cppValue.SetNull();
@@ -74628,18 +74628,18 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)subscribeAttributeIntrinsicBalanceFactorWithParams:(MTRSubscribeParams * _Nonnull)params
+- (void)subscribeAttributeIntrinsicBallastFactorWithParams:(MTRSubscribeParams * _Nonnull)params
                                    subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
                                              reportHandler:
                                                  (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))reportHandler
 {
-    using TypeInfo = BallastConfiguration::Attributes::IntrinsicBalanceFactor::TypeInfo;
+    using TypeInfo = BallastConfiguration::Attributes::IntrinsicBallastFactor::TypeInfo;
     MTRSubscribeAttribute<MTRNullableInt8uAttributeCallbackSubscriptionBridge, NSNumber, TypeInfo::DecodableType>(params,
         subscriptionEstablished, reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(),
         TypeInfo::GetAttributeId());
 }
 
-+ (void)readAttributeIntrinsicBalanceFactorWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
++ (void)readAttributeIntrinsicBallastFactorWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                         endpoint:(NSNumber *)endpoint
                                                            queue:(dispatch_queue_t)queue
                                                       completion:(void (^)(NSNumber * _Nullable value,
@@ -74650,7 +74650,7 @@ using chip::System::Clock::Timeout;
         clusterStateCacheContainer.baseDevice, ^(NullableInt8uAttributeCallback successCb, MTRErrorCallback failureCb) {
             if (clusterStateCacheContainer.cppClusterStateCache) {
                 chip::app::ConcreteAttributePath path;
-                using TypeInfo = BallastConfiguration::Attributes::IntrinsicBalanceFactor::TypeInfo;
+                using TypeInfo = BallastConfiguration::Attributes::IntrinsicBallastFactor::TypeInfo;
                 path.mEndpointId = static_cast<chip::EndpointId>([endpoint unsignedShortValue]);
                 path.mClusterId = TypeInfo::GetClusterId();
                 path.mAttributeId = TypeInfo::GetAttributeId();
@@ -75760,7 +75760,7 @@ using chip::System::Clock::Timeout;
 - (void)readAttributeIntrinsicBalanceFactorWithCompletionHandler:(void (^)(NSNumber * _Nullable value,
                                                                      NSError * _Nullable error))completionHandler
 {
-    [self readAttributeIntrinsicBalanceFactorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+    [self readAttributeIntrinsicBallastFactorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<NSNumber *>(value), error);
     }];
@@ -75768,13 +75768,13 @@ using chip::System::Clock::Timeout;
 - (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSNumber * _Nullable)value
                                     completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributeIntrinsicBalanceFactorWithValue:value params:nil completion:completionHandler];
+    [self writeAttributeIntrinsicBallastFactorWithValue:value params:nil completion:completionHandler];
 }
 - (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSNumber * _Nullable)value
                                                params:(MTRWriteParams * _Nullable)params
                                     completionHandler:(MTRStatusCompletion)completionHandler
 {
-    [self writeAttributeIntrinsicBalanceFactorWithValue:value params:params completion:completionHandler];
+    [self writeAttributeIntrinsicBallastFactorWithValue:value params:params completion:completionHandler];
 }
 - (void)subscribeAttributeIntrinsicBalanceFactorWithMinInterval:(NSNumber * _Nonnull)minInterval
                                                     maxInterval:(NSNumber * _Nonnull)maxInterval
@@ -75791,7 +75791,7 @@ using chip::System::Clock::Timeout;
         subscribeParams.minInterval = minInterval;
         subscribeParams.maxInterval = maxInterval;
     }
-    [self subscribeAttributeIntrinsicBalanceFactorWithParams:subscribeParams
+    [self subscribeAttributeIntrinsicBallastFactorWithParams:subscribeParams
                                      subscriptionEstablished:subscriptionEstablishedHandler
                                                reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                                                    // Cast is safe because subclass does not add any selectors.
@@ -75804,7 +75804,7 @@ using chip::System::Clock::Timeout;
                                             completionHandler:
                                                 (void (^)(NSNumber * _Nullable value, NSError * _Nullable error))completionHandler
 {
-    [self readAttributeIntrinsicBalanceFactorWithClusterStateCache:attributeCacheContainer.realContainer
+    [self readAttributeIntrinsicBallastFactorWithClusterStateCache:attributeCacheContainer.realContainer
                                                           endpoint:endpoint
                                                              queue:queue
                                                         completion:^(NSNumber * _Nullable value, NSError * _Nullable error) {

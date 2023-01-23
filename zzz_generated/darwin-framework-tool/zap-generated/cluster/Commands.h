@@ -60898,7 +60898,7 @@ public:
 | * BallastStatus                                                     | 0x0002 |
 | * MinLevel                                                          | 0x0010 |
 | * MaxLevel                                                          | 0x0011 |
-| * IntrinsicBalanceFactor                                            | 0x0014 |
+| * IntrinsicBallastFactor                                            | 0x0014 |
 | * BallastFactorAdjustment                                           | 0x0015 |
 | * LampQuantity                                                      | 0x0020 |
 | * LampType                                                          | 0x0030 |
@@ -61347,16 +61347,16 @@ public:
 };
 
 /*
- * Attribute IntrinsicBalanceFactor
+ * Attribute IntrinsicBallastFactor
  */
-class ReadBallastConfigurationIntrinsicBalanceFactor : public ReadAttribute {
+class ReadBallastConfigurationIntrinsicBallastFactor : public ReadAttribute {
 public:
-    ReadBallastConfigurationIntrinsicBalanceFactor()
-        : ReadAttribute("intrinsic-balance-factor")
+    ReadBallastConfigurationIntrinsicBallastFactor()
+        : ReadAttribute("intrinsic-ballast-factor")
     {
     }
 
-    ~ReadBallastConfigurationIntrinsicBalanceFactor() {}
+    ~ReadBallastConfigurationIntrinsicBallastFactor() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -61366,10 +61366,10 @@ public:
         __auto_type * cluster = [[MTRBaseClusterBallastConfiguration alloc] initWithDevice:device
                                                                                 endpointID:@(endpointId)
                                                                                      queue:callbackQueue];
-        [cluster readAttributeIntrinsicBalanceFactorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-            NSLog(@"BallastConfiguration.IntrinsicBalanceFactor response %@", [value description]);
+        [cluster readAttributeIntrinsicBallastFactorWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable error) {
+            NSLog(@"BallastConfiguration.IntrinsicBallastFactor response %@", [value description]);
             if (error != nil) {
-                LogNSError("BallastConfiguration IntrinsicBalanceFactor read Error", error);
+                LogNSError("BallastConfiguration IntrinsicBallastFactor read Error", error);
             }
             SetCommandExitStatus(error);
         }];
@@ -61377,17 +61377,17 @@ public:
     }
 };
 
-class WriteBallastConfigurationIntrinsicBalanceFactor : public WriteAttribute {
+class WriteBallastConfigurationIntrinsicBallastFactor : public WriteAttribute {
 public:
-    WriteBallastConfigurationIntrinsicBalanceFactor()
-        : WriteAttribute("intrinsic-balance-factor")
+    WriteBallastConfigurationIntrinsicBallastFactor()
+        : WriteAttribute("intrinsic-ballast-factor")
     {
-        AddArgument("attr-name", "intrinsic-balance-factor");
+        AddArgument("attr-name", "intrinsic-ballast-factor");
         AddArgument("attr-value", 0, UINT8_MAX, &mValue);
         WriteAttribute::AddArguments();
     }
 
-    ~WriteBallastConfigurationIntrinsicBalanceFactor() {}
+    ~WriteBallastConfigurationIntrinsicBallastFactor() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -61403,11 +61403,11 @@ public:
         NSNumber * _Nullable value = [NSNumber numberWithUnsignedChar:mValue];
 
         [cluster
-            writeAttributeIntrinsicBalanceFactorWithValue:value
+            writeAttributeIntrinsicBallastFactorWithValue:value
                                                    params:params
                                                completion:^(NSError * _Nullable error) {
                                                    if (error != nil) {
-                                                       LogNSError("BallastConfiguration IntrinsicBalanceFactor write Error", error);
+                                                       LogNSError("BallastConfiguration IntrinsicBallastFactor write Error", error);
                                                    }
                                                    SetCommandExitStatus(error);
                                                }];
@@ -61418,14 +61418,14 @@ private:
     uint8_t mValue;
 };
 
-class SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor : public SubscribeAttribute {
+class SubscribeAttributeBallastConfigurationIntrinsicBallastFactor : public SubscribeAttribute {
 public:
-    SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor()
-        : SubscribeAttribute("intrinsic-balance-factor")
+    SubscribeAttributeBallastConfigurationIntrinsicBallastFactor()
+        : SubscribeAttribute("intrinsic-ballast-factor")
     {
     }
 
-    ~SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor() {}
+    ~SubscribeAttributeBallastConfigurationIntrinsicBallastFactor() {}
 
     CHIP_ERROR SendCommand(MTRBaseDevice * device, chip::EndpointId endpointId) override
     {
@@ -61444,12 +61444,12 @@ public:
         if (mAutoResubscribe.HasValue()) {
             params.resubscribeIfLost = mAutoResubscribe.Value();
         }
-        [cluster subscribeAttributeIntrinsicBalanceFactorWithParams:params
+        [cluster subscribeAttributeIntrinsicBallastFactorWithParams:params
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
             reportHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
-                NSLog(@"BallastConfiguration.IntrinsicBalanceFactor response %@", [value description]);
+                NSLog(@"BallastConfiguration.IntrinsicBallastFactor response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
 
@@ -99750,9 +99750,9 @@ void registerClusterBallastConfiguration(Commands & commands)
         make_unique<ReadBallastConfigurationMaxLevel>(), //
         make_unique<WriteBallastConfigurationMaxLevel>(), //
         make_unique<SubscribeAttributeBallastConfigurationMaxLevel>(), //
-        make_unique<ReadBallastConfigurationIntrinsicBalanceFactor>(), //
-        make_unique<WriteBallastConfigurationIntrinsicBalanceFactor>(), //
-        make_unique<SubscribeAttributeBallastConfigurationIntrinsicBalanceFactor>(), //
+        make_unique<ReadBallastConfigurationIntrinsicBallastFactor>(), //
+        make_unique<WriteBallastConfigurationIntrinsicBallastFactor>(), //
+        make_unique<SubscribeAttributeBallastConfigurationIntrinsicBallastFactor>(), //
         make_unique<ReadBallastConfigurationBallastFactorAdjustment>(), //
         make_unique<WriteBallastConfigurationBallastFactorAdjustment>(), //
         make_unique<SubscribeAttributeBallastConfigurationBallastFactorAdjustment>(), //
