@@ -133251,6 +133251,13 @@ private:
                                                1U));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupId, 259U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[2]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupName,
                                                @"Group #3"));
@@ -133259,6 +133266,13 @@ private:
                                                1U));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupId, 260U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[3]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[3]).groupName,
                                                @"Group #4"));
@@ -133448,6 +133462,13 @@ private:
                                                1U));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupId, 259U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[1]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[1]).groupName,
                                                @"Group #3"));
@@ -133456,6 +133477,13 @@ private:
                                                1U));
                                            VerifyOrReturn(CheckValue("GroupId",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupId, 260U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[2]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).endpoints[0],
+                                               1U));
                                            VerifyOrReturn(CheckValueAsString("GroupName",
                                                ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[2]).groupName,
                                                @"Group #4"));
