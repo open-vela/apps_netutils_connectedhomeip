@@ -72537,12 +72537,12 @@ public:
         __auto_type * params = [[MTRContentLauncherClusterLaunchContentParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.search = [MTRContentLauncherClusterContentSearch new];
+        params.search = [MTRContentLauncherClusterContentSearchStruct new];
         { // Scope for our temporary variables
             auto * array_1 = [NSMutableArray new];
             for (auto & entry_1 : mRequest.search.parameterList) {
-                MTRContentLauncherClusterParameter * newElement_1;
-                newElement_1 = [MTRContentLauncherClusterParameter new];
+                MTRContentLauncherClusterParameterStruct * newElement_1;
+                newElement_1 = [MTRContentLauncherClusterParameterStruct new];
                 newElement_1.type = [NSNumber numberWithUnsignedChar:chip::to_underlying(entry_1.type)];
                 newElement_1.value = [[NSString alloc] initWithBytes:entry_1.value.data()
                                                               length:entry_1.value.size()
@@ -72551,8 +72551,8 @@ public:
                     { // Scope for our temporary variables
                         auto * array_4 = [NSMutableArray new];
                         for (auto & entry_4 : entry_1.externalIDList.Value()) {
-                            MTRContentLauncherClusterAdditionalInfo * newElement_4;
-                            newElement_4 = [MTRContentLauncherClusterAdditionalInfo new];
+                            MTRContentLauncherClusterAdditionalInfoStruct * newElement_4;
+                            newElement_4 = [MTRContentLauncherClusterAdditionalInfoStruct new];
                             newElement_4.name = [[NSString alloc] initWithBytes:entry_4.name.data()
                                                                          length:entry_4.name.size()
                                                                        encoding:NSUTF8StringEncoding];
@@ -72582,8 +72582,8 @@ public:
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
             [cluster launchContentWithParams:params
-                                  completion:^(
-                                      MTRContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable error) {
+                                  completion:^(MTRContentLauncherClusterLauncherResponseParams * _Nullable values,
+                                      NSError * _Nullable error) {
                                       NSLog(@"Values: %@", values);
                                       responsesNeeded--;
                                       if (error != nil) {
@@ -72600,7 +72600,7 @@ public:
 
 private:
     chip::app::Clusters::ContentLauncher::Commands::LaunchContent::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::ContentLauncher::Structs::ContentSearch::Type> mComplex_Search;
+    TypedComplexArgument<chip::app::Clusters::ContentLauncher::Structs::ContentSearchStruct::Type> mComplex_Search;
 };
 
 /*
@@ -72640,20 +72640,20 @@ public:
             params.displayString = nil;
         }
         if (mRequest.brandingInformation.HasValue()) {
-            params.brandingInformation = [MTRContentLauncherClusterBrandingInformation new];
+            params.brandingInformation = [MTRContentLauncherClusterBrandingInformationStruct new];
             params.brandingInformation.providerName =
                 [[NSString alloc] initWithBytes:mRequest.brandingInformation.Value().providerName.data()
                                          length:mRequest.brandingInformation.Value().providerName.size()
                                        encoding:NSUTF8StringEncoding];
             if (mRequest.brandingInformation.Value().background.HasValue()) {
-                params.brandingInformation.background = [MTRContentLauncherClusterStyleInformation new];
-                if (mRequest.brandingInformation.Value().background.Value().imageUrl.HasValue()) {
-                    params.brandingInformation.background.imageUrl = [[NSString alloc]
-                        initWithBytes:mRequest.brandingInformation.Value().background.Value().imageUrl.Value().data()
-                               length:mRequest.brandingInformation.Value().background.Value().imageUrl.Value().size()
+                params.brandingInformation.background = [MTRContentLauncherClusterStyleInformationStruct new];
+                if (mRequest.brandingInformation.Value().background.Value().imageURL.HasValue()) {
+                    params.brandingInformation.background.imageURL = [[NSString alloc]
+                        initWithBytes:mRequest.brandingInformation.Value().background.Value().imageURL.Value().data()
+                               length:mRequest.brandingInformation.Value().background.Value().imageURL.Value().size()
                              encoding:NSUTF8StringEncoding];
                 } else {
-                    params.brandingInformation.background.imageUrl = nil;
+                    params.brandingInformation.background.imageURL = nil;
                 }
                 if (mRequest.brandingInformation.Value().background.Value().color.HasValue()) {
                     params.brandingInformation.background.color =
@@ -72664,7 +72664,7 @@ public:
                     params.brandingInformation.background.color = nil;
                 }
                 if (mRequest.brandingInformation.Value().background.Value().size.HasValue()) {
-                    params.brandingInformation.background.size = [MTRContentLauncherClusterDimension new];
+                    params.brandingInformation.background.size = [MTRContentLauncherClusterDimensionStruct new];
                     params.brandingInformation.background.size.width =
                         [NSNumber numberWithDouble:mRequest.brandingInformation.Value().background.Value().size.Value().width];
                     params.brandingInformation.background.size.height =
@@ -72679,14 +72679,14 @@ public:
                 params.brandingInformation.background = nil;
             }
             if (mRequest.brandingInformation.Value().logo.HasValue()) {
-                params.brandingInformation.logo = [MTRContentLauncherClusterStyleInformation new];
-                if (mRequest.brandingInformation.Value().logo.Value().imageUrl.HasValue()) {
-                    params.brandingInformation.logo.imageUrl =
-                        [[NSString alloc] initWithBytes:mRequest.brandingInformation.Value().logo.Value().imageUrl.Value().data()
-                                                 length:mRequest.brandingInformation.Value().logo.Value().imageUrl.Value().size()
+                params.brandingInformation.logo = [MTRContentLauncherClusterStyleInformationStruct new];
+                if (mRequest.brandingInformation.Value().logo.Value().imageURL.HasValue()) {
+                    params.brandingInformation.logo.imageURL =
+                        [[NSString alloc] initWithBytes:mRequest.brandingInformation.Value().logo.Value().imageURL.Value().data()
+                                                 length:mRequest.brandingInformation.Value().logo.Value().imageURL.Value().size()
                                                encoding:NSUTF8StringEncoding];
                 } else {
-                    params.brandingInformation.logo.imageUrl = nil;
+                    params.brandingInformation.logo.imageURL = nil;
                 }
                 if (mRequest.brandingInformation.Value().logo.Value().color.HasValue()) {
                     params.brandingInformation.logo.color =
@@ -72697,7 +72697,7 @@ public:
                     params.brandingInformation.logo.color = nil;
                 }
                 if (mRequest.brandingInformation.Value().logo.Value().size.HasValue()) {
-                    params.brandingInformation.logo.size = [MTRContentLauncherClusterDimension new];
+                    params.brandingInformation.logo.size = [MTRContentLauncherClusterDimensionStruct new];
                     params.brandingInformation.logo.size.width =
                         [NSNumber numberWithDouble:mRequest.brandingInformation.Value().logo.Value().size.Value().width];
                     params.brandingInformation.logo.size.height =
@@ -72712,14 +72712,14 @@ public:
                 params.brandingInformation.logo = nil;
             }
             if (mRequest.brandingInformation.Value().progressBar.HasValue()) {
-                params.brandingInformation.progressBar = [MTRContentLauncherClusterStyleInformation new];
-                if (mRequest.brandingInformation.Value().progressBar.Value().imageUrl.HasValue()) {
-                    params.brandingInformation.progressBar.imageUrl = [[NSString alloc]
-                        initWithBytes:mRequest.brandingInformation.Value().progressBar.Value().imageUrl.Value().data()
-                               length:mRequest.brandingInformation.Value().progressBar.Value().imageUrl.Value().size()
+                params.brandingInformation.progressBar = [MTRContentLauncherClusterStyleInformationStruct new];
+                if (mRequest.brandingInformation.Value().progressBar.Value().imageURL.HasValue()) {
+                    params.brandingInformation.progressBar.imageURL = [[NSString alloc]
+                        initWithBytes:mRequest.brandingInformation.Value().progressBar.Value().imageURL.Value().data()
+                               length:mRequest.brandingInformation.Value().progressBar.Value().imageURL.Value().size()
                              encoding:NSUTF8StringEncoding];
                 } else {
-                    params.brandingInformation.progressBar.imageUrl = nil;
+                    params.brandingInformation.progressBar.imageURL = nil;
                 }
                 if (mRequest.brandingInformation.Value().progressBar.Value().color.HasValue()) {
                     params.brandingInformation.progressBar.color = [[NSString alloc]
@@ -72730,7 +72730,7 @@ public:
                     params.brandingInformation.progressBar.color = nil;
                 }
                 if (mRequest.brandingInformation.Value().progressBar.Value().size.HasValue()) {
-                    params.brandingInformation.progressBar.size = [MTRContentLauncherClusterDimension new];
+                    params.brandingInformation.progressBar.size = [MTRContentLauncherClusterDimensionStruct new];
                     params.brandingInformation.progressBar.size.width =
                         [NSNumber numberWithDouble:mRequest.brandingInformation.Value().progressBar.Value().size.Value().width];
                     params.brandingInformation.progressBar.size.height =
@@ -72745,14 +72745,14 @@ public:
                 params.brandingInformation.progressBar = nil;
             }
             if (mRequest.brandingInformation.Value().splash.HasValue()) {
-                params.brandingInformation.splash = [MTRContentLauncherClusterStyleInformation new];
-                if (mRequest.brandingInformation.Value().splash.Value().imageUrl.HasValue()) {
-                    params.brandingInformation.splash.imageUrl =
-                        [[NSString alloc] initWithBytes:mRequest.brandingInformation.Value().splash.Value().imageUrl.Value().data()
-                                                 length:mRequest.brandingInformation.Value().splash.Value().imageUrl.Value().size()
+                params.brandingInformation.splash = [MTRContentLauncherClusterStyleInformationStruct new];
+                if (mRequest.brandingInformation.Value().splash.Value().imageURL.HasValue()) {
+                    params.brandingInformation.splash.imageURL =
+                        [[NSString alloc] initWithBytes:mRequest.brandingInformation.Value().splash.Value().imageURL.Value().data()
+                                                 length:mRequest.brandingInformation.Value().splash.Value().imageURL.Value().size()
                                                encoding:NSUTF8StringEncoding];
                 } else {
-                    params.brandingInformation.splash.imageUrl = nil;
+                    params.brandingInformation.splash.imageURL = nil;
                 }
                 if (mRequest.brandingInformation.Value().splash.Value().color.HasValue()) {
                     params.brandingInformation.splash.color =
@@ -72763,7 +72763,7 @@ public:
                     params.brandingInformation.splash.color = nil;
                 }
                 if (mRequest.brandingInformation.Value().splash.Value().size.HasValue()) {
-                    params.brandingInformation.splash.size = [MTRContentLauncherClusterDimension new];
+                    params.brandingInformation.splash.size = [MTRContentLauncherClusterDimensionStruct new];
                     params.brandingInformation.splash.size.width =
                         [NSNumber numberWithDouble:mRequest.brandingInformation.Value().splash.Value().size.Value().width];
                     params.brandingInformation.splash.size.height =
@@ -72778,14 +72778,14 @@ public:
                 params.brandingInformation.splash = nil;
             }
             if (mRequest.brandingInformation.Value().waterMark.HasValue()) {
-                params.brandingInformation.waterMark = [MTRContentLauncherClusterStyleInformation new];
-                if (mRequest.brandingInformation.Value().waterMark.Value().imageUrl.HasValue()) {
-                    params.brandingInformation.waterMark.imageUrl = [[NSString alloc]
-                        initWithBytes:mRequest.brandingInformation.Value().waterMark.Value().imageUrl.Value().data()
-                               length:mRequest.brandingInformation.Value().waterMark.Value().imageUrl.Value().size()
+                params.brandingInformation.waterMark = [MTRContentLauncherClusterStyleInformationStruct new];
+                if (mRequest.brandingInformation.Value().waterMark.Value().imageURL.HasValue()) {
+                    params.brandingInformation.waterMark.imageURL = [[NSString alloc]
+                        initWithBytes:mRequest.brandingInformation.Value().waterMark.Value().imageURL.Value().data()
+                               length:mRequest.brandingInformation.Value().waterMark.Value().imageURL.Value().size()
                              encoding:NSUTF8StringEncoding];
                 } else {
-                    params.brandingInformation.waterMark.imageUrl = nil;
+                    params.brandingInformation.waterMark.imageURL = nil;
                 }
                 if (mRequest.brandingInformation.Value().waterMark.Value().color.HasValue()) {
                     params.brandingInformation.waterMark.color =
@@ -72796,7 +72796,7 @@ public:
                     params.brandingInformation.waterMark.color = nil;
                 }
                 if (mRequest.brandingInformation.Value().waterMark.Value().size.HasValue()) {
-                    params.brandingInformation.waterMark.size = [MTRContentLauncherClusterDimension new];
+                    params.brandingInformation.waterMark.size = [MTRContentLauncherClusterDimensionStruct new];
                     params.brandingInformation.waterMark.size.width =
                         [NSNumber numberWithDouble:mRequest.brandingInformation.Value().waterMark.Value().size.Value().width];
                     params.brandingInformation.waterMark.size.height =
@@ -72816,26 +72816,26 @@ public:
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster
-                launchURLWithParams:params
-                         completion:^(MTRContentLauncherClusterLaunchResponseParams * _Nullable values, NSError * _Nullable error) {
-                             NSLog(@"Values: %@", values);
-                             responsesNeeded--;
-                             if (error != nil) {
-                                 mError = error;
-                                 LogNSError("Error", error);
-                             }
-                             if (responsesNeeded == 0) {
-                                 SetCommandExitStatus(mError);
-                             }
-                         }];
+            [cluster launchURLWithParams:params
+                              completion:^(
+                                  MTRContentLauncherClusterLauncherResponseParams * _Nullable values, NSError * _Nullable error) {
+                                  NSLog(@"Values: %@", values);
+                                  responsesNeeded--;
+                                  if (error != nil) {
+                                      mError = error;
+                                      LogNSError("Error", error);
+                                  }
+                                  if (responsesNeeded == 0) {
+                                      SetCommandExitStatus(mError);
+                                  }
+                              }];
         }
         return CHIP_NO_ERROR;
     }
 
 private:
     chip::app::Clusters::ContentLauncher::Commands::LaunchURL::Type mRequest;
-    TypedComplexArgument<chip::Optional<chip::app::Clusters::ContentLauncher::Structs::BrandingInformation::Type>>
+    TypedComplexArgument<chip::Optional<chip::app::Clusters::ContentLauncher::Structs::BrandingInformationStruct::Type>>
         mComplex_BrandingInformation;
 };
 
