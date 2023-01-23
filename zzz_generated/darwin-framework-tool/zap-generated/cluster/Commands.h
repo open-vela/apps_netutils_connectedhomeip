@@ -69630,7 +69630,7 @@ public:
 | Commands:                                                           |        |
 | * Play                                                              |   0x00 |
 | * Pause                                                             |   0x01 |
-| * StopPlayback                                                      |   0x02 |
+| * Stop                                                              |   0x02 |
 | * StartOver                                                         |   0x03 |
 | * Previous                                                          |   0x04 |
 | * Next                                                              |   0x05 |
@@ -69747,12 +69747,12 @@ private:
 };
 
 /*
- * Command StopPlayback
+ * Command Stop
  */
-class MediaPlaybackStopPlayback : public ClusterCommand {
+class MediaPlaybackStop : public ClusterCommand {
 public:
-    MediaPlaybackStopPlayback()
-        : ClusterCommand("stop-playback")
+    MediaPlaybackStop()
+        : ClusterCommand("stop")
     {
         ClusterCommand::AddArguments();
     }
@@ -69765,25 +69765,24 @@ public:
         __auto_type * cluster = [[MTRBaseClusterMediaPlayback alloc] initWithDevice:device
                                                                          endpointID:@(endpointId)
                                                                               queue:callbackQueue];
-        __auto_type * params = [[MTRMediaPlaybackClusterStopPlaybackParams alloc] init];
+        __auto_type * params = [[MTRMediaPlaybackClusterStopParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
-            [cluster stopPlaybackWithParams:params
-                                 completion:^(
-                                     MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
-                                     NSLog(@"Values: %@", values);
-                                     responsesNeeded--;
-                                     if (error != nil) {
-                                         mError = error;
-                                         LogNSError("Error", error);
-                                     }
-                                     if (responsesNeeded == 0) {
-                                         SetCommandExitStatus(mError);
-                                     }
-                                 }];
+            [cluster stopWithParams:params
+                         completion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable values, NSError * _Nullable error) {
+                             NSLog(@"Values: %@", values);
+                             responsesNeeded--;
+                             if (error != nil) {
+                                 mError = error;
+                                 LogNSError("Error", error);
+                             }
+                             if (responsesNeeded == 0) {
+                                 SetCommandExitStatus(mError);
+                             }
+                         }];
         }
         return CHIP_NO_ERROR;
     }
@@ -70389,7 +70388,7 @@ public:
                                                                          endpointID:@(endpointId)
                                                                               queue:callbackQueue];
         [cluster readAttributeSampledPositionWithCompletion:^(
-            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable error) {
+            MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable error) {
             NSLog(@"MediaPlayback.SampledPosition response %@", [value description]);
             if (error != nil) {
                 LogNSError("MediaPlayback SampledPosition read Error", error);
@@ -70430,7 +70429,7 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable error) {
+            reportHandler:^(MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"MediaPlayback.SampledPosition response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
@@ -100126,7 +100125,7 @@ void registerClusterMediaPlayback(Commands & commands)
         make_unique<ClusterCommand>(Id), //
         make_unique<MediaPlaybackPlay>(), //
         make_unique<MediaPlaybackPause>(), //
-        make_unique<MediaPlaybackStopPlayback>(), //
+        make_unique<MediaPlaybackStop>(), //
         make_unique<MediaPlaybackStartOver>(), //
         make_unique<MediaPlaybackPrevious>(), //
         make_unique<MediaPlaybackNext>(), //

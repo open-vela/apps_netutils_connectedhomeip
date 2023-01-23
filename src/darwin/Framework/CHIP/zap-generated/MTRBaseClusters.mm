@@ -85295,14 +85295,14 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)stopPlaybackWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data,
-                                       NSError * _Nullable error))completion
+- (void)stopWithCompletion:(void (^)(
+                               MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
-    [self stopPlaybackWithParams:nil completion:completion];
+    [self stopWithParams:nil completion:completion];
 }
-- (void)stopPlaybackWithParams:(MTRMediaPlaybackClusterStopPlaybackParams * _Nullable)params
-                    completion:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data,
-                                   NSError * _Nullable error))completion
+- (void)stopWithParams:(MTRMediaPlaybackClusterStopParams * _Nullable)params
+            completion:
+                (void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion
 {
     // Make a copy of params before we go async.
     params = [params copy];
@@ -85314,7 +85314,7 @@ using chip::System::Clock::Timeout;
             Optional<uint16_t> timedInvokeTimeoutMs;
             Optional<Timeout> invokeTimeout;
             ListFreer listFreer;
-            MediaPlayback::Commands::StopPlayback::Type request;
+            MediaPlayback::Commands::Stop::Type request;
             if (params != nil) {
                 if (params.timedInvokeTimeoutMs != nil) {
                     params.timedInvokeTimeoutMs = MTRClampedNumber(params.timedInvokeTimeoutMs, @(1), @(UINT16_MAX));
@@ -85763,31 +85763,31 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeSampledPositionWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackPosition * _Nullable value,
+- (void)readAttributeSampledPositionWithCompletion:(void (^)(MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value,
                                                        NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = MediaPlayback::Attributes::SampledPosition::TypeInfo;
-    return MTRReadAttribute<MTRMediaPlaybackSampledPositionStructAttributeCallbackBridge, MTRMediaPlaybackClusterPlaybackPosition,
-        TypeInfo::DecodableType>(
+    return MTRReadAttribute<MTRMediaPlaybackSampledPositionStructAttributeCallbackBridge,
+        MTRMediaPlaybackClusterPlaybackPositionStruct, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeSampledPositionWithParams:(MTRSubscribeParams * _Nonnull)params
                             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                      reportHandler:(void (^)(MTRMediaPlaybackClusterPlaybackPosition * _Nullable value,
+                                      reportHandler:(void (^)(MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value,
                                                         NSError * _Nullable error))reportHandler
 {
     using TypeInfo = MediaPlayback::Attributes::SampledPosition::TypeInfo;
     MTRSubscribeAttribute<MTRMediaPlaybackSampledPositionStructAttributeCallbackSubscriptionBridge,
-        MTRMediaPlaybackClusterPlaybackPosition, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        MTRMediaPlaybackClusterPlaybackPositionStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
         self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeSampledPositionWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                                  endpoint:(NSNumber *)endpoint
                                                     queue:(dispatch_queue_t)queue
-                                               completion:(void (^)(MTRMediaPlaybackClusterPlaybackPosition * _Nullable value,
+                                               completion:(void (^)(MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value,
                                                               NSError * _Nullable error))completion
 {
     auto * bridge = new MTRMediaPlaybackSampledPositionStructAttributeCallbackBridge(queue, completion);
@@ -86197,11 +86197,11 @@ using chip::System::Clock::Timeout;
              completionHandler:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data,
                                    NSError * _Nullable error))completionHandler
 {
-    [self stopPlaybackWithParams:params
-                      completion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error) {
-                          // Cast is safe because subclass does not add any selectors.
-                          completionHandler(static_cast<MTRMediaPlaybackClusterPlaybackResponseParams *>(data), error);
-                      }];
+    [self stopWithParams:params
+              completion:^(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error) {
+                  // Cast is safe because subclass does not add any selectors.
+                  completionHandler(static_cast<MTRMediaPlaybackClusterPlaybackResponseParams *>(data), error);
+              }];
 }
 - (void)stopPlaybackWithCompletionHandler:(void (^)(MTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data,
                                               NSError * _Nullable error))completionHandler
@@ -86445,7 +86445,7 @@ using chip::System::Clock::Timeout;
                                                               NSError * _Nullable error))completionHandler
 {
     [self readAttributeSampledPositionWithCompletion:^(
-        MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable error) {
+        MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<MTRMediaPlaybackClusterPlaybackPosition *>(value), error);
     }];
@@ -86466,8 +86466,8 @@ using chip::System::Clock::Timeout;
     }
     [self subscribeAttributeSampledPositionWithParams:subscribeParams
                               subscriptionEstablished:subscriptionEstablishedHandler
-                                        reportHandler:^(
-                                            MTRMediaPlaybackClusterPlaybackPosition * _Nullable value, NSError * _Nullable error) {
+                                        reportHandler:^(MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value,
+                                            NSError * _Nullable error) {
                                             // Cast is safe because subclass does not add any selectors.
                                             reportHandler(static_cast<MTRMediaPlaybackClusterPlaybackPosition *>(value), error);
                                         }];
@@ -86481,7 +86481,7 @@ using chip::System::Clock::Timeout;
     [self readAttributeSampledPositionWithClusterStateCache:attributeCacheContainer.realContainer
                                                    endpoint:endpoint
                                                       queue:queue
-                                                 completion:^(MTRMediaPlaybackClusterPlaybackPosition * _Nullable value,
+                                                 completion:^(MTRMediaPlaybackClusterPlaybackPositionStruct * _Nullable value,
                                                      NSError * _Nullable error) {
                                                      // Cast is safe because subclass does not add any selectors.
                                                      completionHandler(
