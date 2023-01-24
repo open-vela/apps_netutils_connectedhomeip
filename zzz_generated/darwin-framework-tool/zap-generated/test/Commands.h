@@ -40912,11 +40912,11 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRApplicationLauncherClusterLaunchAppParams alloc] init];
-        params.application = [[MTRApplicationLauncherClusterApplication alloc] init];
-        ((MTRApplicationLauncherClusterApplication *) params.application).catalogVendorId = mCatalogVendorId.HasValue()
+        params.application = [[MTRApplicationLauncherClusterApplicationStruct alloc] init];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).catalogVendorID = mCatalogVendorId.HasValue()
             ? [NSNumber numberWithUnsignedShort:mCatalogVendorId.Value()]
             : [NSNumber numberWithUnsignedShort:123U];
-        ((MTRApplicationLauncherClusterApplication *) params.application).applicationId = mApplicationId.HasValue()
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).applicationID = mApplicationId.HasValue()
             ? [[NSString alloc] initWithBytes:mApplicationId.Value().data()
                                        length:mApplicationId.Value().size()
                                      encoding:NSUTF8StringEncoding]
@@ -40932,7 +40932,7 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                          }
 
                          NextTest();
@@ -41993,7 +41993,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentAppWithCompletion:^(
-            MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable err) {
+            MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"TH reads CurrentApp attribute from the DUT and Verify the in-focus application attributes, which should "
                   @"include the display Application ID(type:uint16) Catalog Vendor ID(type:string) or Null if there is no current "
                   @"in-focus application Error: %@",
@@ -73593,7 +73593,7 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeCurrentAppWithCompletion:^(
-            MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable err) {
+            MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute application launcher app Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
@@ -73620,9 +73620,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRApplicationLauncherClusterLaunchAppParams alloc] init];
-        params.application = [[MTRApplicationLauncherClusterApplication alloc] init];
-        ((MTRApplicationLauncherClusterApplication *) params.application).catalogVendorId = [NSNumber numberWithUnsignedShort:123U];
-        ((MTRApplicationLauncherClusterApplication *) params.application).applicationId = @"applicationId";
+        params.application = [[MTRApplicationLauncherClusterApplicationStruct alloc] init];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).catalogVendorID =
+            [NSNumber numberWithUnsignedShort:123U];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).applicationID = @"applicationId";
 
         params.data = [[NSData alloc] initWithBytes:"data" length:4];
         [cluster
@@ -73634,13 +73635,13 @@ private:
 
                          {
                              id actualValue = values.status;
-                             VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                             VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                          }
 
                          {
                              id actualValue = values.data;
                              VerifyOrReturn(
-                                 CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"data" length:4]));
+                                 CheckValueAsString("Data", actualValue, [[NSData alloc] initWithBytes:"data" length:4]));
                          }
 
                          NextTest();
@@ -73660,9 +73661,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRApplicationLauncherClusterStopAppParams alloc] init];
-        params.application = [[MTRApplicationLauncherClusterApplication alloc] init];
-        ((MTRApplicationLauncherClusterApplication *) params.application).catalogVendorId = [NSNumber numberWithUnsignedShort:123U];
-        ((MTRApplicationLauncherClusterApplication *) params.application).applicationId = @"applicationId";
+        params.application = [[MTRApplicationLauncherClusterApplicationStruct alloc] init];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).catalogVendorID =
+            [NSNumber numberWithUnsignedShort:123U];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).applicationID = @"applicationId";
 
         [cluster
             stopAppWithParams:params
@@ -73673,12 +73675,12 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                        }
 
                        {
                            id actualValue = values.data;
-                           VerifyOrReturn(CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"data" length:4]));
+                           VerifyOrReturn(CheckValueAsString("Data", actualValue, [[NSData alloc] initWithBytes:"data" length:4]));
                        }
 
                        NextTest();
@@ -73698,9 +73700,10 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         __auto_type * params = [[MTRApplicationLauncherClusterHideAppParams alloc] init];
-        params.application = [[MTRApplicationLauncherClusterApplication alloc] init];
-        ((MTRApplicationLauncherClusterApplication *) params.application).catalogVendorId = [NSNumber numberWithUnsignedShort:123U];
-        ((MTRApplicationLauncherClusterApplication *) params.application).applicationId = @"applicationId";
+        params.application = [[MTRApplicationLauncherClusterApplicationStruct alloc] init];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).catalogVendorID =
+            [NSNumber numberWithUnsignedShort:123U];
+        ((MTRApplicationLauncherClusterApplicationStruct *) params.application).applicationID = @"applicationId";
 
         [cluster
             hideAppWithParams:params
@@ -73711,12 +73714,12 @@ private:
 
                        {
                            id actualValue = values.status;
-                           VerifyOrReturn(CheckValue("status", actualValue, 0U));
+                           VerifyOrReturn(CheckValue("Status", actualValue, 0U));
                        }
 
                        {
                            id actualValue = values.data;
-                           VerifyOrReturn(CheckValueAsString("data", actualValue, [[NSData alloc] initWithBytes:"data" length:4]));
+                           VerifyOrReturn(CheckValueAsString("Data", actualValue, [[NSData alloc] initWithBytes:"data" length:4]));
                        }
 
                        NextTest();

@@ -30874,9 +30874,10 @@ private:
             VerifyOrDo(!ShouldSkip("APPLAUNCHER.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
-            value.application.applicationId =
+            value.application.Value().catalogVendorID = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
+            value.application.Value().applicationID =
                 mApplicationId.HasValue() ? mApplicationId.Value() : chip::Span<const char>("exampleid", 9);
 
             value.data.Emplace();
@@ -31543,7 +31544,8 @@ private:
         case 1:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEP::DecodableType>
+                chip::app::DataModel::Nullable<
+                    chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEPStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
             }
@@ -31692,9 +31694,10 @@ private:
             VerifyOrDo(!ShouldSkip("APPLAUNCHER.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
-            value.application.applicationId =
+            value.application.Value().catalogVendorID = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
+            value.application.Value().applicationID =
                 mApplicationId.HasValue() ? mApplicationId.Value() : chip::Span<const char>("exampleid", 9);
 
             value.data.Emplace();
@@ -31709,9 +31712,11 @@ private:
             VerifyOrDo(!ShouldSkip("APPLAUNCHER.S.C00.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
-            value.application.applicationId   = chip::Span<const char>("NonAvailableAppgarbage: not in length on purpose", 15);
+            value.application.Value().catalogVendorID = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
+            value.application.Value().applicationID =
+                chip::Span<const char>("NonAvailableAppgarbage: not in length on purpose", 15);
 
             value.data.Emplace();
             value.data.Value() = chip::ByteSpan(chip::Uint8::from_const_char("Hello Worldgarbage: not in length on purpose"), 11);
@@ -31823,9 +31828,10 @@ private:
             VerifyOrDo(!ShouldSkip("APPLAUNCHER.S.C01.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::StopApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
-            value.application.applicationId =
+            value.application.Value().catalogVendorID = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
+            value.application.Value().applicationID =
                 mApplicationId.HasValue() ? mApplicationId.Value() : chip::Span<const char>("exampleid", 9);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ApplicationLauncher::Id, ApplicationLauncher::Commands::StopApp::Id,
@@ -31945,9 +31951,10 @@ private:
             VerifyOrDo(!ShouldSkip("APPLAUNCHER.S.C02.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::HideApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
-            value.application.applicationId =
+            value.application.Value().catalogVendorID = mCatalogVendorId.HasValue() ? mCatalogVendorId.Value() : 123U;
+            value.application.Value().applicationID =
                 mApplicationId.HasValue() ? mApplicationId.Value() : chip::Span<const char>("exampleid", 9);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ApplicationLauncher::Id, ApplicationLauncher::Commands::HideApp::Id,
@@ -54459,7 +54466,8 @@ private:
         case 2:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEP::DecodableType>
+                chip::app::DataModel::Nullable<
+                    chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEPStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNull("currentApp", value));
@@ -54471,7 +54479,9 @@ private:
                 chip::app::Clusters::ApplicationLauncher::Commands::LauncherResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueAsString("data", value.data, chip::ByteSpan(chip::Uint8::from_const_char("data"), 4)));
+                VerifyOrReturn(CheckValuePresent("data", value.data));
+                VerifyOrReturn(CheckValueAsString("data.Value()", value.data.Value(),
+                                                  chip::ByteSpan(chip::Uint8::from_const_char("data"), 4)));
             }
             break;
         case 4:
@@ -54480,7 +54490,9 @@ private:
                 chip::app::Clusters::ApplicationLauncher::Commands::LauncherResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueAsString("data", value.data, chip::ByteSpan(chip::Uint8::from_const_char("data"), 4)));
+                VerifyOrReturn(CheckValuePresent("data", value.data));
+                VerifyOrReturn(CheckValueAsString("data.Value()", value.data.Value(),
+                                                  chip::ByteSpan(chip::Uint8::from_const_char("data"), 4)));
             }
             break;
         case 5:
@@ -54489,7 +54501,9 @@ private:
                 chip::app::Clusters::ApplicationLauncher::Commands::LauncherResponse::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValue("status", value.status, 0U));
-                VerifyOrReturn(CheckValueAsString("data", value.data, chip::ByteSpan(chip::Uint8::from_const_char("data"), 4)));
+                VerifyOrReturn(CheckValuePresent("data", value.data));
+                VerifyOrReturn(CheckValueAsString("data.Value()", value.data.Value(),
+                                                  chip::ByteSpan(chip::Uint8::from_const_char("data"), 4)));
             }
             break;
         default:
@@ -54534,9 +54548,10 @@ private:
             LogStep(3, "Launch App Command");
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = 123U;
-            value.application.applicationId   = chip::Span<const char>("applicationIdgarbage: not in length on purpose", 13);
+            value.application.Value().catalogVendorID = 123U;
+            value.application.Value().applicationID = chip::Span<const char>("applicationIdgarbage: not in length on purpose", 13);
 
             value.data.Emplace();
             value.data.Value() = chip::ByteSpan(chip::Uint8::from_const_char("datagarbage: not in length on purpose"), 4);
@@ -54549,9 +54564,10 @@ private:
             LogStep(4, "Stop App Command");
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::StopApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = 123U;
-            value.application.applicationId   = chip::Span<const char>("applicationIdgarbage: not in length on purpose", 13);
+            value.application.Value().catalogVendorID = 123U;
+            value.application.Value().applicationID = chip::Span<const char>("applicationIdgarbage: not in length on purpose", 13);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ApplicationLauncher::Id, ApplicationLauncher::Commands::StopApp::Id,
                                value, chip::NullOptional
@@ -54562,9 +54578,10 @@ private:
             LogStep(5, "Hide App Command");
             ListFreer listFreer;
             chip::app::Clusters::ApplicationLauncher::Commands::HideApp::Type value;
+            value.application.Emplace();
 
-            value.application.catalogVendorId = 123U;
-            value.application.applicationId   = chip::Span<const char>("applicationIdgarbage: not in length on purpose", 13);
+            value.application.Value().catalogVendorID = 123U;
+            value.application.Value().applicationID = chip::Span<const char>("applicationIdgarbage: not in length on purpose", 13);
 
             return SendCommand(kIdentityAlpha, GetEndpoint(1), ApplicationLauncher::Id, ApplicationLauncher::Commands::HideApp::Id,
                                value, chip::NullOptional
