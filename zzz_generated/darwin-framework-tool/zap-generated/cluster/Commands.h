@@ -74020,11 +74020,15 @@ public:
         __auto_type * params = [[MTRApplicationLauncherClusterLaunchAppParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.application = [MTRApplicationLauncherClusterApplication new];
-        params.application.catalogVendorId = [NSNumber numberWithUnsignedShort:mRequest.application.catalogVendorId];
-        params.application.applicationId = [[NSString alloc] initWithBytes:mRequest.application.applicationId.data()
-                                                                    length:mRequest.application.applicationId.size()
-                                                                  encoding:NSUTF8StringEncoding];
+        if (mRequest.application.HasValue()) {
+            params.application = [MTRApplicationLauncherClusterApplicationStruct new];
+            params.application.catalogVendorID = [NSNumber numberWithUnsignedShort:mRequest.application.Value().catalogVendorID];
+            params.application.applicationID = [[NSString alloc] initWithBytes:mRequest.application.Value().applicationID.data()
+                                                                        length:mRequest.application.Value().applicationID.size()
+                                                                      encoding:NSUTF8StringEncoding];
+        } else {
+            params.application = nil;
+        }
         if (mRequest.data.HasValue()) {
             params.data = [NSData dataWithBytes:mRequest.data.Value().data() length:mRequest.data.Value().size()];
         } else {
@@ -74052,7 +74056,8 @@ public:
 
 private:
     chip::app::Clusters::ApplicationLauncher::Commands::LaunchApp::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::ApplicationLauncher::Structs::Application::Type> mComplex_Application;
+    TypedComplexArgument<chip::Optional<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationStruct::Type>>
+        mComplex_Application;
 };
 
 /*
@@ -74079,11 +74084,15 @@ public:
         __auto_type * params = [[MTRApplicationLauncherClusterStopAppParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.application = [MTRApplicationLauncherClusterApplication new];
-        params.application.catalogVendorId = [NSNumber numberWithUnsignedShort:mRequest.application.catalogVendorId];
-        params.application.applicationId = [[NSString alloc] initWithBytes:mRequest.application.applicationId.data()
-                                                                    length:mRequest.application.applicationId.size()
-                                                                  encoding:NSUTF8StringEncoding];
+        if (mRequest.application.HasValue()) {
+            params.application = [MTRApplicationLauncherClusterApplicationStruct new];
+            params.application.catalogVendorID = [NSNumber numberWithUnsignedShort:mRequest.application.Value().catalogVendorID];
+            params.application.applicationID = [[NSString alloc] initWithBytes:mRequest.application.Value().applicationID.data()
+                                                                        length:mRequest.application.Value().applicationID.size()
+                                                                      encoding:NSUTF8StringEncoding];
+        } else {
+            params.application = nil;
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -74106,7 +74115,8 @@ public:
 
 private:
     chip::app::Clusters::ApplicationLauncher::Commands::StopApp::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::ApplicationLauncher::Structs::Application::Type> mComplex_Application;
+    TypedComplexArgument<chip::Optional<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationStruct::Type>>
+        mComplex_Application;
 };
 
 /*
@@ -74133,11 +74143,15 @@ public:
         __auto_type * params = [[MTRApplicationLauncherClusterHideAppParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.application = [MTRApplicationLauncherClusterApplication new];
-        params.application.catalogVendorId = [NSNumber numberWithUnsignedShort:mRequest.application.catalogVendorId];
-        params.application.applicationId = [[NSString alloc] initWithBytes:mRequest.application.applicationId.data()
-                                                                    length:mRequest.application.applicationId.size()
-                                                                  encoding:NSUTF8StringEncoding];
+        if (mRequest.application.HasValue()) {
+            params.application = [MTRApplicationLauncherClusterApplicationStruct new];
+            params.application.catalogVendorID = [NSNumber numberWithUnsignedShort:mRequest.application.Value().catalogVendorID];
+            params.application.applicationID = [[NSString alloc] initWithBytes:mRequest.application.Value().applicationID.data()
+                                                                        length:mRequest.application.Value().applicationID.size()
+                                                                      encoding:NSUTF8StringEncoding];
+        } else {
+            params.application = nil;
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -74160,7 +74174,8 @@ public:
 
 private:
     chip::app::Clusters::ApplicationLauncher::Commands::HideApp::Type mRequest;
-    TypedComplexArgument<chip::app::Clusters::ApplicationLauncher::Structs::Application::Type> mComplex_Application;
+    TypedComplexArgument<chip::Optional<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationStruct::Type>>
+        mComplex_Application;
 };
 
 /*
@@ -74254,7 +74269,7 @@ public:
                                                                                endpointID:@(endpointId)
                                                                                     queue:callbackQueue];
         [cluster readAttributeCurrentAppWithCompletion:^(
-            MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable error) {
+            MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value, NSError * _Nullable error) {
             NSLog(@"ApplicationLauncher.CurrentApp response %@", [value description]);
             if (error != nil) {
                 LogNSError("ApplicationLauncher CurrentApp read Error", error);
@@ -74289,15 +74304,15 @@ public:
         params.timedWriteTimeout
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.dataVersion = mDataVersion.HasValue() ? [NSNumber numberWithUnsignedInt:mDataVersion.Value()] : nil;
-        MTRApplicationLauncherClusterApplicationEP * _Nullable value;
+        MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value;
         if (mValue.IsNull()) {
             value = nil;
         } else {
-            value = [MTRApplicationLauncherClusterApplicationEP new];
-            value.application = [MTRApplicationLauncherClusterApplication new];
-            value.application.catalogVendorId = [NSNumber numberWithUnsignedShort:mValue.Value().application.catalogVendorId];
-            value.application.applicationId = [[NSString alloc] initWithBytes:mValue.Value().application.applicationId.data()
-                                                                       length:mValue.Value().application.applicationId.size()
+            value = [MTRApplicationLauncherClusterApplicationEPStruct new];
+            value.application = [MTRApplicationLauncherClusterApplicationStruct new];
+            value.application.catalogVendorID = [NSNumber numberWithUnsignedShort:mValue.Value().application.catalogVendorID];
+            value.application.applicationID = [[NSString alloc] initWithBytes:mValue.Value().application.applicationID.data()
+                                                                       length:mValue.Value().application.applicationID.size()
                                                                      encoding:NSUTF8StringEncoding];
             if (mValue.Value().endpoint.HasValue()) {
                 value.endpoint = [NSNumber numberWithUnsignedShort:mValue.Value().endpoint.Value()];
@@ -74318,8 +74333,9 @@ public:
     }
 
 private:
-    chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEP::Type> mValue;
-    TypedComplexArgument<chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEP::Type>>
+    chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEPStruct::Type> mValue;
+    TypedComplexArgument<
+        chip::app::DataModel::Nullable<chip::app::Clusters::ApplicationLauncher::Structs::ApplicationEPStruct::Type>>
         mComplex;
 };
 
@@ -74353,7 +74369,7 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable error) {
+            reportHandler:^(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationLauncher.CurrentApp response %@", [value description]);
                 SetCommandExitStatus(error);
             }];

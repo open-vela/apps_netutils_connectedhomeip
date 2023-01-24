@@ -90359,7 +90359,7 @@ using chip::System::Clock::Timeout;
     return self;
 }
 
-- (void)launchAppWithParams:(MTRApplicationLauncherClusterLaunchAppParams *)params
+- (void)launchAppWithParams:(MTRApplicationLauncherClusterLaunchAppParams * _Nullable)params
                  completion:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data,
                                 NSError * _Nullable error))completion
 {
@@ -90386,11 +90386,16 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
-            request.application.applicationId = [self asCharSpan:params.application.applicationId];
-            if (params.data != nil) {
-                auto & definedValue_0 = request.data.Emplace();
-                definedValue_0 = [self asByteSpan:params.data];
+            if (params != nil) {
+                if (params.application != nil) {
+                    auto & definedValue_0 = request.application.Emplace();
+                    definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
+                    definedValue_0.applicationID = [self asCharSpan:params.application.applicationID];
+                }
+                if (params.data != nil) {
+                    auto & definedValue_0 = request.data.Emplace();
+                    definedValue_0 = [self asByteSpan:params.data];
+                }
             }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
@@ -90399,7 +90404,7 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)stopAppWithParams:(MTRApplicationLauncherClusterStopAppParams *)params
+- (void)stopAppWithParams:(MTRApplicationLauncherClusterStopAppParams * _Nullable)params
                completion:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data,
                               NSError * _Nullable error))completion
 {
@@ -90426,8 +90431,13 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
-            request.application.applicationId = [self asCharSpan:params.application.applicationId];
+            if (params != nil) {
+                if (params.application != nil) {
+                    auto & definedValue_0 = request.application.Emplace();
+                    definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
+                    definedValue_0.applicationID = [self asCharSpan:params.application.applicationID];
+                }
+            }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
                 timedInvokeTimeoutMs, invokeTimeout);
@@ -90435,7 +90445,7 @@ using chip::System::Clock::Timeout;
     std::move(*bridge).DispatchAction(self.device);
 }
 
-- (void)hideAppWithParams:(MTRApplicationLauncherClusterHideAppParams *)params
+- (void)hideAppWithParams:(MTRApplicationLauncherClusterHideAppParams * _Nullable)params
                completion:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data,
                               NSError * _Nullable error))completion
 {
@@ -90462,8 +90472,13 @@ using chip::System::Clock::Timeout;
                     invokeTimeout.SetValue(Seconds16(serverSideProcessingTimeout.unsignedShortValue));
                 }
             }
-            request.application.catalogVendorId = params.application.catalogVendorId.unsignedShortValue;
-            request.application.applicationId = [self asCharSpan:params.application.applicationId];
+            if (params != nil) {
+                if (params.application != nil) {
+                    auto & definedValue_0 = request.application.Emplace();
+                    definedValue_0.catalogVendorID = params.application.catalogVendorID.unsignedShortValue;
+                    definedValue_0.applicationID = [self asCharSpan:params.application.applicationID];
+                }
+            }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
                 timedInvokeTimeoutMs, invokeTimeout);
@@ -90514,24 +90529,24 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeCurrentAppWithCompletion:(void (^)(MTRApplicationLauncherClusterApplicationEP * _Nullable value,
+- (void)readAttributeCurrentAppWithCompletion:(void (^)(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value,
                                                   NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = ApplicationLauncher::Attributes::CurrentApp::TypeInfo;
     return MTRReadAttribute<MTRApplicationLauncherCurrentAppStructAttributeCallbackBridge,
-        MTRApplicationLauncherClusterApplicationEP, TypeInfo::DecodableType>(
+        MTRApplicationLauncherClusterApplicationEPStruct, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
-- (void)writeAttributeCurrentAppWithValue:(MTRApplicationLauncherClusterApplicationEP * _Nullable)value
+- (void)writeAttributeCurrentAppWithValue:(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable)value
                                completion:(MTRStatusCompletion)completion
 {
-    [self writeAttributeCurrentAppWithValue:(MTRApplicationLauncherClusterApplicationEP * _Nullable) value
+    [self writeAttributeCurrentAppWithValue:(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable) value
                                      params:nil
                                  completion:completion];
 }
-- (void)writeAttributeCurrentAppWithValue:(MTRApplicationLauncherClusterApplicationEP * _Nullable)value
+- (void)writeAttributeCurrentAppWithValue:(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable)value
                                    params:(MTRWriteParams * _Nullable)params
                                completion:(MTRStatusCompletion)completion
 {
@@ -90560,8 +90575,8 @@ using chip::System::Clock::Timeout;
                 cppValue.SetNull();
             } else {
                 auto & nonNullValue_0 = cppValue.SetNonNull();
-                nonNullValue_0.application.catalogVendorId = value.application.catalogVendorId.unsignedShortValue;
-                nonNullValue_0.application.applicationId = [self asCharSpan:value.application.applicationId];
+                nonNullValue_0.application.catalogVendorID = value.application.catalogVendorID.unsignedShortValue;
+                nonNullValue_0.application.applicationID = [self asCharSpan:value.application.applicationID];
                 if (value.endpoint != nil) {
                     auto & definedValue_2 = nonNullValue_0.endpoint.Emplace();
                     definedValue_2 = value.endpoint.unsignedShortValue;
@@ -90576,19 +90591,19 @@ using chip::System::Clock::Timeout;
 
 - (void)subscribeAttributeCurrentAppWithParams:(MTRSubscribeParams * _Nonnull)params
                        subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                 reportHandler:(void (^)(MTRApplicationLauncherClusterApplicationEP * _Nullable value,
+                                 reportHandler:(void (^)(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value,
                                                    NSError * _Nullable error))reportHandler
 {
     using TypeInfo = ApplicationLauncher::Attributes::CurrentApp::TypeInfo;
     MTRSubscribeAttribute<MTRApplicationLauncherCurrentAppStructAttributeCallbackSubscriptionBridge,
-        MTRApplicationLauncherClusterApplicationEP, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        MTRApplicationLauncherClusterApplicationEPStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
         self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeCurrentAppWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                             endpoint:(NSNumber *)endpoint
                                                queue:(dispatch_queue_t)queue
-                                          completion:(void (^)(MTRApplicationLauncherClusterApplicationEP * _Nullable value,
+                                          completion:(void (^)(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value,
                                                          NSError * _Nullable error))completion
 {
     auto * bridge = new MTRApplicationLauncherCurrentAppStructAttributeCallbackBridge(queue, completion);
@@ -90836,7 +90851,7 @@ using chip::System::Clock::Timeout;
 
 @implementation MTRBaseClusterApplicationLauncher (Deprecated)
 
-- (void)launchAppWithParams:(MTRApplicationLauncherClusterLaunchAppParams *)params
+- (void)launchAppWithParams:(MTRApplicationLauncherClusterLaunchAppParams * _Nullable)params
           completionHandler:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data,
                                 NSError * _Nullable error))completionHandler
 {
@@ -90846,7 +90861,7 @@ using chip::System::Clock::Timeout;
                        completionHandler(static_cast<MTRApplicationLauncherClusterLauncherResponseParams *>(data), error);
                    }];
 }
-- (void)stopAppWithParams:(MTRApplicationLauncherClusterStopAppParams *)params
+- (void)stopAppWithParams:(MTRApplicationLauncherClusterStopAppParams * _Nullable)params
         completionHandler:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data,
                               NSError * _Nullable error))completionHandler
 {
@@ -90856,7 +90871,7 @@ using chip::System::Clock::Timeout;
                      completionHandler(static_cast<MTRApplicationLauncherClusterLauncherResponseParams *>(data), error);
                  }];
 }
-- (void)hideAppWithParams:(MTRApplicationLauncherClusterHideAppParams *)params
+- (void)hideAppWithParams:(MTRApplicationLauncherClusterHideAppParams * _Nullable)params
         completionHandler:(void (^)(MTRApplicationLauncherClusterLauncherResponseParams * _Nullable data,
                               NSError * _Nullable error))completionHandler
 {
@@ -90913,7 +90928,7 @@ using chip::System::Clock::Timeout;
                                                          NSError * _Nullable error))completionHandler
 {
     [self readAttributeCurrentAppWithCompletion:^(
-        MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable error) {
+        MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<MTRApplicationLauncherClusterApplicationEP *>(value), error);
     }];
@@ -90945,8 +90960,8 @@ using chip::System::Clock::Timeout;
     }
     [self subscribeAttributeCurrentAppWithParams:subscribeParams
                          subscriptionEstablished:subscriptionEstablishedHandler
-                                   reportHandler:^(
-                                       MTRApplicationLauncherClusterApplicationEP * _Nullable value, NSError * _Nullable error) {
+                                   reportHandler:^(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value,
+                                       NSError * _Nullable error) {
                                        // Cast is safe because subclass does not add any selectors.
                                        reportHandler(static_cast<MTRApplicationLauncherClusterApplicationEP *>(value), error);
                                    }];
@@ -90960,7 +90975,7 @@ using chip::System::Clock::Timeout;
     [self readAttributeCurrentAppWithClusterStateCache:attributeCacheContainer.realContainer
                                               endpoint:endpoint
                                                  queue:queue
-                                            completion:^(MTRApplicationLauncherClusterApplicationEP * _Nullable value,
+                                            completion:^(MTRApplicationLauncherClusterApplicationEPStruct * _Nullable value,
                                                 NSError * _Nullable error) {
                                                 // Cast is safe because subclass does not add any selectors.
                                                 completionHandler(
