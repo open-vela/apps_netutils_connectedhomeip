@@ -34781,9 +34781,9 @@ private:
         case 5:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::ApplicationBasic::Structs::ApplicationBasicApplication::DecodableType value;
+                chip::app::Clusters::ApplicationBasic::Structs::ApplicationStruct::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckConstraintType("value", "ApplicationBasicApplication", "ApplicationBasicApplication"));
+                VerifyOrReturn(CheckConstraintType("value", "ApplicationStruct", "ApplicationStruct"));
             }
             break;
         case 6:
@@ -55006,11 +55006,11 @@ private:
         case 6:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
-                chip::app::Clusters::ApplicationBasic::Structs::ApplicationBasicApplication::DecodableType value;
+                chip::app::Clusters::ApplicationBasic::Structs::ApplicationStruct::DecodableType value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-                VerifyOrReturn(CheckValue("application.catalogVendorId", value.catalogVendorId, 123U));
+                VerifyOrReturn(CheckValue("application.catalogVendorID", value.catalogVendorID, 123U));
                 VerifyOrReturn(
-                    CheckValueAsString("application.applicationId", value.applicationId, chip::CharSpan("applicationId", 13)));
+                    CheckValueAsString("application.applicationID", value.applicationID, chip::CharSpan("applicationId", 13)));
             }
             break;
         case 7:

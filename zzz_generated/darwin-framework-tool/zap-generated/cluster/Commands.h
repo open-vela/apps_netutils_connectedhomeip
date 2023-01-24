@@ -75052,7 +75052,7 @@ public:
                                                                             endpointID:@(endpointId)
                                                                                  queue:callbackQueue];
         [cluster readAttributeApplicationWithCompletion:^(
-            MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable error) {
+            MTRApplicationBasicClusterApplicationStruct * _Nullable value, NSError * _Nullable error) {
             NSLog(@"ApplicationBasic.Application response %@", [value description]);
             if (error != nil) {
                 LogNSError("ApplicationBasic Application read Error", error);
@@ -75093,7 +75093,7 @@ public:
             subscriptionEstablished:^() {
                 mSubscriptionEstablished = YES;
             }
-            reportHandler:^(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable error) {
+            reportHandler:^(MTRApplicationBasicClusterApplicationStruct * _Nullable value, NSError * _Nullable error) {
                 NSLog(@"ApplicationBasic.Application response %@", [value description]);
                 SetCommandExitStatus(error);
             }];
