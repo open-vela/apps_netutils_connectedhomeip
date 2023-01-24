@@ -46584,12 +46584,12 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeApplicationWithCompletion:^(
-            MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable err) {
+            MTRApplicationBasicClusterApplicationStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Reads the Application attribute Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-            VerifyOrReturn(CheckConstraintType("application", "ApplicationBasicApplication", "ApplicationBasicApplication"));
+            VerifyOrReturn(CheckConstraintType("application", "ApplicationStruct", "ApplicationStruct"));
             NextTest();
         }];
 
@@ -74437,17 +74437,17 @@ private:
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
         [cluster readAttributeApplicationWithCompletion:^(
-            MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable err) {
+            MTRApplicationBasicClusterApplicationStruct * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute application status Error: %@", err);
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
             {
                 id actualValue = value;
-                VerifyOrReturn(CheckValue("catalogVendorId",
-                    ((MTRApplicationBasicClusterApplicationBasicApplication *) actualValue).catalogVendorId, 123U));
-                VerifyOrReturn(CheckValueAsString("applicationId",
-                    ((MTRApplicationBasicClusterApplicationBasicApplication *) actualValue).applicationId, @"applicationId"));
+                VerifyOrReturn(CheckValue(
+                    "CatalogVendorID", ((MTRApplicationBasicClusterApplicationStruct *) actualValue).catalogVendorID, 123U));
+                VerifyOrReturn(CheckValueAsString("ApplicationID",
+                    ((MTRApplicationBasicClusterApplicationStruct *) actualValue).applicationID, @"applicationId"));
             }
 
             NextTest();

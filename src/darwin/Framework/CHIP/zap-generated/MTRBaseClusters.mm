@@ -91397,33 +91397,32 @@ using chip::System::Clock::Timeout;
         });
 }
 
-- (void)readAttributeApplicationWithCompletion:(void (^)(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value,
+- (void)readAttributeApplicationWithCompletion:(void (^)(MTRApplicationBasicClusterApplicationStruct * _Nullable value,
                                                    NSError * _Nullable error))completion
 {
     MTRReadParams * params = [[MTRReadParams alloc] init];
     using TypeInfo = ApplicationBasic::Attributes::Application::TypeInfo;
     return MTRReadAttribute<MTRApplicationBasicApplicationStructAttributeCallbackBridge,
-        MTRApplicationBasicClusterApplicationBasicApplication, TypeInfo::DecodableType>(
+        MTRApplicationBasicClusterApplicationStruct, TypeInfo::DecodableType>(
         params, completion, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 - (void)subscribeAttributeApplicationWithParams:(MTRSubscribeParams * _Nonnull)params
                         subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
-                                  reportHandler:(void (^)(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value,
+                                  reportHandler:(void (^)(MTRApplicationBasicClusterApplicationStruct * _Nullable value,
                                                     NSError * _Nullable error))reportHandler
 {
     using TypeInfo = ApplicationBasic::Attributes::Application::TypeInfo;
     MTRSubscribeAttribute<MTRApplicationBasicApplicationStructAttributeCallbackSubscriptionBridge,
-        MTRApplicationBasicClusterApplicationBasicApplication, TypeInfo::DecodableType>(params, subscriptionEstablished,
-        reportHandler, self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
+        MTRApplicationBasicClusterApplicationStruct, TypeInfo::DecodableType>(params, subscriptionEstablished, reportHandler,
+        self.callbackQueue, self.device, self->_endpoint, TypeInfo::GetClusterId(), TypeInfo::GetAttributeId());
 }
 
 + (void)readAttributeApplicationWithClusterStateCache:(MTRClusterStateCacheContainer *)clusterStateCacheContainer
                                              endpoint:(NSNumber *)endpoint
                                                 queue:(dispatch_queue_t)queue
-                                           completion:
-                                               (void (^)(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value,
-                                                   NSError * _Nullable error))completion
+                                           completion:(void (^)(MTRApplicationBasicClusterApplicationStruct * _Nullable value,
+                                                          NSError * _Nullable error))completion
 {
     auto * bridge = new MTRApplicationBasicApplicationStructAttributeCallbackBridge(queue, completion);
     std::move(*bridge).DispatchLocalAction(clusterStateCacheContainer.baseDevice,
@@ -91976,7 +91975,7 @@ using chip::System::Clock::Timeout;
     (void (^)(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable error))completionHandler
 {
     [self readAttributeApplicationWithCompletion:^(
-        MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value, NSError * _Nullable error) {
+        MTRApplicationBasicClusterApplicationStruct * _Nullable value, NSError * _Nullable error) {
         // Cast is safe because subclass does not add any selectors.
         completionHandler(static_cast<MTRApplicationBasicClusterApplicationBasicApplication *>(value), error);
     }];
@@ -91998,8 +91997,8 @@ using chip::System::Clock::Timeout;
     }
     [self subscribeAttributeApplicationWithParams:subscribeParams
                           subscriptionEstablished:subscriptionEstablishedHandler
-                                    reportHandler:^(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value,
-                                        NSError * _Nullable error) {
+                                    reportHandler:^(
+                                        MTRApplicationBasicClusterApplicationStruct * _Nullable value, NSError * _Nullable error) {
                                         // Cast is safe because subclass does not add any selectors.
                                         reportHandler(
                                             static_cast<MTRApplicationBasicClusterApplicationBasicApplication *>(value), error);
@@ -92015,7 +92014,7 @@ using chip::System::Clock::Timeout;
     [self readAttributeApplicationWithClusterStateCache:attributeCacheContainer.realContainer
                                                endpoint:endpoint
                                                   queue:queue
-                                             completion:^(MTRApplicationBasicClusterApplicationBasicApplication * _Nullable value,
+                                             completion:^(MTRApplicationBasicClusterApplicationStruct * _Nullable value,
                                                  NSError * _Nullable error) {
                                                  // Cast is safe because subclass does not add any selectors.
                                                  completionHandler(
