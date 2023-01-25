@@ -1461,8 +1461,8 @@ public:
         : ClusterCommand("add-scene")
         , mComplex_ExtensionFieldSets(&mRequest.extensionFieldSets)
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         AddArgument("SceneName", &mRequest.sceneName);
         AddArgument("ExtensionFieldSets", &mComplex_ExtensionFieldSets);
@@ -1478,8 +1478,8 @@ public:
         __auto_type * params = [[MTRScenesClusterAddSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         params.sceneName = [[NSString alloc] initWithBytes:mRequest.sceneName.data()
                                                     length:mRequest.sceneName.size()
@@ -1489,16 +1489,16 @@ public:
             for (auto & entry_0 : mRequest.extensionFieldSets) {
                 MTRScenesClusterExtensionFieldSet * newElement_0;
                 newElement_0 = [MTRScenesClusterExtensionFieldSet new];
-                newElement_0.clusterId = [NSNumber numberWithUnsignedInt:entry_0.clusterId];
+                newElement_0.clusterID = [NSNumber numberWithUnsignedInt:entry_0.clusterID];
                 { // Scope for our temporary variables
                     auto * array_2 = [NSMutableArray new];
                     for (auto & entry_2 : entry_0.attributeValueList) {
                         MTRScenesClusterAttributeValuePair * newElement_2;
                         newElement_2 = [MTRScenesClusterAttributeValuePair new];
-                        if (entry_2.attributeId.HasValue()) {
-                            newElement_2.attributeId = [NSNumber numberWithUnsignedInt:entry_2.attributeId.Value()];
+                        if (entry_2.attributeID.HasValue()) {
+                            newElement_2.attributeID = [NSNumber numberWithUnsignedInt:entry_2.attributeID.Value()];
                         } else {
-                            newElement_2.attributeId = nil;
+                            newElement_2.attributeID = nil;
                         }
                         { // Scope for our temporary variables
                             auto * array_4 = [NSMutableArray new];
@@ -1550,8 +1550,8 @@ public:
     ScenesViewScene()
         : ClusterCommand("view-scene")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         ClusterCommand::AddArguments();
     }
 
@@ -1564,8 +1564,8 @@ public:
         __auto_type * params = [[MTRScenesClusterViewSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1597,8 +1597,8 @@ public:
     ScenesRemoveScene()
         : ClusterCommand("remove-scene")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         ClusterCommand::AddArguments();
     }
 
@@ -1611,8 +1611,8 @@ public:
         __auto_type * params = [[MTRScenesClusterRemoveSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1645,7 +1645,7 @@ public:
     ScenesRemoveAllScenes()
         : ClusterCommand("remove-all-scenes")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
         ClusterCommand::AddArguments();
     }
 
@@ -1658,7 +1658,7 @@ public:
         __auto_type * params = [[MTRScenesClusterRemoveAllScenesParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1691,8 +1691,8 @@ public:
     ScenesStoreScene()
         : ClusterCommand("store-scene")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         ClusterCommand::AddArguments();
     }
 
@@ -1705,8 +1705,8 @@ public:
         __auto_type * params = [[MTRScenesClusterStoreSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1739,8 +1739,8 @@ public:
     ScenesRecallScene()
         : ClusterCommand("recall-scene")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         ClusterCommand::AddArguments();
     }
@@ -1754,8 +1754,8 @@ public:
         __auto_type * params = [[MTRScenesClusterRecallSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         if (mRequest.transitionTime.HasValue()) {
             if (mRequest.transitionTime.Value().IsNull()) {
                 params.transitionTime = nil;
@@ -1795,7 +1795,7 @@ public:
     ScenesGetSceneMembership()
         : ClusterCommand("get-scene-membership")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
         ClusterCommand::AddArguments();
     }
 
@@ -1808,7 +1808,7 @@ public:
         __auto_type * params = [[MTRScenesClusterGetSceneMembershipParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1842,8 +1842,8 @@ public:
         : ClusterCommand("enhanced-add-scene")
         , mComplex_ExtensionFieldSets(&mRequest.extensionFieldSets)
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         AddArgument("TransitionTime", 0, UINT16_MAX, &mRequest.transitionTime);
         AddArgument("SceneName", &mRequest.sceneName);
         AddArgument("ExtensionFieldSets", &mComplex_ExtensionFieldSets);
@@ -1859,8 +1859,8 @@ public:
         __auto_type * params = [[MTRScenesClusterEnhancedAddSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         params.transitionTime = [NSNumber numberWithUnsignedShort:mRequest.transitionTime];
         params.sceneName = [[NSString alloc] initWithBytes:mRequest.sceneName.data()
                                                     length:mRequest.sceneName.size()
@@ -1870,16 +1870,16 @@ public:
             for (auto & entry_0 : mRequest.extensionFieldSets) {
                 MTRScenesClusterExtensionFieldSet * newElement_0;
                 newElement_0 = [MTRScenesClusterExtensionFieldSet new];
-                newElement_0.clusterId = [NSNumber numberWithUnsignedInt:entry_0.clusterId];
+                newElement_0.clusterID = [NSNumber numberWithUnsignedInt:entry_0.clusterID];
                 { // Scope for our temporary variables
                     auto * array_2 = [NSMutableArray new];
                     for (auto & entry_2 : entry_0.attributeValueList) {
                         MTRScenesClusterAttributeValuePair * newElement_2;
                         newElement_2 = [MTRScenesClusterAttributeValuePair new];
-                        if (entry_2.attributeId.HasValue()) {
-                            newElement_2.attributeId = [NSNumber numberWithUnsignedInt:entry_2.attributeId.Value()];
+                        if (entry_2.attributeID.HasValue()) {
+                            newElement_2.attributeID = [NSNumber numberWithUnsignedInt:entry_2.attributeID.Value()];
                         } else {
-                            newElement_2.attributeId = nil;
+                            newElement_2.attributeID = nil;
                         }
                         { // Scope for our temporary variables
                             auto * array_4 = [NSMutableArray new];
@@ -1932,8 +1932,8 @@ public:
     ScenesEnhancedViewScene()
         : ClusterCommand("enhanced-view-scene")
     {
-        AddArgument("GroupId", 0, UINT16_MAX, &mRequest.groupId);
-        AddArgument("SceneId", 0, UINT8_MAX, &mRequest.sceneId);
+        AddArgument("GroupID", 0, UINT16_MAX, &mRequest.groupID);
+        AddArgument("SceneID", 0, UINT8_MAX, &mRequest.sceneID);
         ClusterCommand::AddArguments();
     }
 
@@ -1946,8 +1946,8 @@ public:
         __auto_type * params = [[MTRScenesClusterEnhancedViewSceneParams alloc] init];
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
-        params.groupId = [NSNumber numberWithUnsignedShort:mRequest.groupId];
-        params.sceneId = [NSNumber numberWithUnsignedChar:mRequest.sceneId];
+        params.groupID = [NSNumber numberWithUnsignedShort:mRequest.groupID];
+        params.sceneID = [NSNumber numberWithUnsignedChar:mRequest.sceneID];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
@@ -1981,10 +1981,10 @@ public:
         : ClusterCommand("copy-scene")
     {
         AddArgument("Mode", 0, UINT8_MAX, &mRequest.mode);
-        AddArgument("GroupIdFrom", 0, UINT16_MAX, &mRequest.groupIdFrom);
-        AddArgument("SceneIdFrom", 0, UINT8_MAX, &mRequest.sceneIdFrom);
-        AddArgument("GroupIdTo", 0, UINT16_MAX, &mRequest.groupIdTo);
-        AddArgument("SceneIdTo", 0, UINT8_MAX, &mRequest.sceneIdTo);
+        AddArgument("GroupIdentifierFrom", 0, UINT16_MAX, &mRequest.groupIdentifierFrom);
+        AddArgument("SceneIdentifierFrom", 0, UINT8_MAX, &mRequest.sceneIdentifierFrom);
+        AddArgument("GroupIdentifierTo", 0, UINT16_MAX, &mRequest.groupIdentifierTo);
+        AddArgument("SceneIdentifierTo", 0, UINT8_MAX, &mRequest.sceneIdentifierTo);
         ClusterCommand::AddArguments();
     }
 
@@ -1998,10 +1998,10 @@ public:
         params.timedInvokeTimeoutMs
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.mode = [NSNumber numberWithUnsignedChar:mRequest.mode.Raw()];
-        params.groupIdFrom = [NSNumber numberWithUnsignedShort:mRequest.groupIdFrom];
-        params.sceneIdFrom = [NSNumber numberWithUnsignedChar:mRequest.sceneIdFrom];
-        params.groupIdTo = [NSNumber numberWithUnsignedShort:mRequest.groupIdTo];
-        params.sceneIdTo = [NSNumber numberWithUnsignedChar:mRequest.sceneIdTo];
+        params.groupIdentifierFrom = [NSNumber numberWithUnsignedShort:mRequest.groupIdentifierFrom];
+        params.sceneIdentifierFrom = [NSNumber numberWithUnsignedChar:mRequest.sceneIdentifierFrom];
+        params.groupIdentifierTo = [NSNumber numberWithUnsignedShort:mRequest.groupIdentifierTo];
+        params.sceneIdentifierTo = [NSNumber numberWithUnsignedChar:mRequest.sceneIdentifierTo];
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
