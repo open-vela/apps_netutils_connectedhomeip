@@ -152,6 +152,8 @@ public:
         printf("Test_TC_PSCFG_2_1\n");
         printf("Test_TC_RH_1_1\n");
         printf("Test_TC_RH_2_1\n");
+        printf("Test_TC_SC_5_1\n");
+        printf("Test_TC_SC_5_2\n");
         printf("Test_TC_SWTCH_1_1\n");
         printf("Test_TC_TMP_1_1\n");
         printf("Test_TC_TMP_2_1\n");
@@ -57975,6 +57977,1263 @@ private:
 
             NextTest();
         }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SC_5_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_SC_5_1()
+        : TestCommandBridge("Test_TC_SC_5_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_SC_5_1() {}
+
+    // Allow yaml to access the current commissioner node id.
+    // Default to 0 (undefined node id) so we know if this isn't
+    // set correctly.
+    // Reset on every step in case it changed.
+    chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SC_5_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SC_5_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH adds ACL Operate privileges for Group 0x0103\n");
+            err = TestThAddsAclOperatePrivilegesForGroup0x0103_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends KeySetWrite command with incorrect key\n");
+            err = TestThSendsKeySetWriteCommandWithIncorrectKey_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH sends KeySetWrite command with TH key\n");
+            err = TestThSendsKeySetWriteCommandWithThKey_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH binds GroupId to GroupKeySet\n");
+            err = TestThBindsGroupIdToGroupKeySet_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends RemoveAllGroups command\n");
+            err = TestThSendsRemoveAllGroupsCommand_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends AddGroup command\n");
+            err = TestThSendsAddGroupCommand_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends ViewGroup command\n");
+            if (ShouldSkip("G.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsViewGroupCommand_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH sends ViewGroup command\n");
+            if (ShouldSkip("!(G.S.F00)")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsViewGroupCommand_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH sends KeySetRead\n");
+            err = TestThSendsKeySetRead_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH reads GroupTable attribute\n");
+            if (ShouldSkip("G.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsGroupTableAttribute_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads GroupTable attribute\n");
+            if (ShouldSkip("!(G.S.F00)")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsGroupTableAttribute_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH removes the GroupKeySet\n");
+            err = TestThRemovesTheGroupKeySet_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH verifies the corresponding GroupKeyMap entry has been removed\n");
+            err = TestThVerifiesTheCorrespondingGroupKeyMapEntryHasBeenRemoved_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH cleans up groups using RemoveAllGroups command\n");
+            err = TestThCleansUpGroupsUsingRemoveAllGroupsCommand_14();
+            break;
+        case 15:
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH verifies the group has been removed in the GroupTable\n");
+            err = TestThVerifiesTheGroupHasBeenRemovedInTheGroupTable_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH removes ACL Operate privileges for Group 0x0103\n");
+            err = TestThRemovesAclOperatePrivilegesForGroup0x0103_16();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 17;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThAddsAclOperatePrivilegesForGroup0x0103_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:259ULL];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH adds ACL Operate privileges for Group 0x0103 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsKeySetWriteCommandWithIncorrectKey_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:419U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"0x00000000000000000000000000000001" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:111ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"0x00000000000000000000000000000002" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:222ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"0x00000000000000000000000000000003" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:333ULL];
+
+        [cluster keySetWriteWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"TH sends KeySetWrite command with incorrect key Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsKeySetWriteCommandWithThKey_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:419U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"0xd0d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:2220000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"0xd1d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:2220001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"0xd2d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:2220002ULL];
+
+        [cluster keySetWriteWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"TH sends KeySetWrite command with TH key Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThBindsGroupIdToGroupKeySet_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id groupKeyMapArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:259U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            groupKeyMapArgument = temp_0;
+        }
+        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"TH binds GroupId to GroupKeySet Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsRemoveAllGroupsCommand_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster removeAllGroupsWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"TH sends RemoveAllGroups command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsAddGroupCommand_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        params.groupName = @"Test Group";
+        [cluster addGroupWithParams:params
+                         completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends AddGroup command Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsViewGroupCommand_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        [cluster viewGroupWithParams:params
+                          completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                              NSLog(@"TH sends ViewGroup command Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                              {
+                                  id actualValue = values.status;
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                              }
+
+                              {
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 259U));
+                              }
+
+                              {
+                                  id actualValue = values.groupName;
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Test Group"));
+                              }
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsViewGroupCommand_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        [cluster viewGroupWithParams:params
+                          completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                              NSLog(@"TH sends ViewGroup command Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                              {
+                                  id actualValue = values.status;
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                              }
+
+                              {
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 259U));
+                              }
+
+                              {
+                                  id actualValue = values.groupName;
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @""));
+                              }
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsKeySetRead_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetReadParams alloc] init];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+        [cluster
+            keySetReadWithParams:params
+                      completion:^(
+                          MTRGroupKeyManagementClusterKeySetReadResponseParams * _Nullable values, NSError * _Nullable err) {
+                          NSLog(@"TH sends KeySetRead Error: %@", err);
+
+                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                          {
+                              id actualValue = values.groupKeySet;
+                              VerifyOrReturn(CheckValue("GroupKeySetID",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySetID, 419U));
+                              VerifyOrReturn(CheckValue("GroupKeySecurityPolicy",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).groupKeySecurityPolicy, 0U));
+                              VerifyOrReturn(CheckValueNull(
+                                  "EpochKey0", ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochKey0));
+                              VerifyOrReturn(CheckValueNonNull("EpochStartTime0",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochStartTime0));
+                              VerifyOrReturn(CheckValue("EpochStartTime0",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochStartTime0, 2220000ULL));
+                              VerifyOrReturn(CheckValueNull(
+                                  "EpochKey1", ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochKey1));
+                              VerifyOrReturn(CheckValueNonNull("EpochStartTime1",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochStartTime1));
+                              VerifyOrReturn(CheckValue("EpochStartTime1",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochStartTime1, 2220001ULL));
+                              VerifyOrReturn(CheckValueNull(
+                                  "EpochKey2", ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochKey2));
+                              VerifyOrReturn(CheckValueNonNull("EpochStartTime2",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochStartTime2));
+                              VerifyOrReturn(CheckValue("EpochStartTime2",
+                                  ((MTRGroupKeyManagementClusterGroupKeySetStruct *) actualValue).epochStartTime2, 2220002ULL));
+                          }
+
+                          NextTest();
+                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGroupTableAttribute_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupTableWithParams:params
+                                   completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                       NSLog(@"TH reads GroupTable attribute Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = value;
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 259U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               mEndpoint.HasValue() ? mEndpoint.Value() : 1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName,
+                                               @"Test Group"));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGroupTableAttribute_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupTableWithParams:params
+                                   completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                       NSLog(@"TH reads GroupTable attribute Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = value;
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("GroupId",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupId, 259U));
+                                           VerifyOrReturn(CheckValue("Endpoints",
+                                               [((MTRGroupKeyManagementClusterGroupInfoMapStruct *)
+                                                       actualValue[0]).endpoints count],
+                                               static_cast<uint32_t>(1)));
+                                           VerifyOrReturn(CheckValue("",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).endpoints[0],
+                                               mEndpoint.HasValue() ? mEndpoint.Value() : 1U));
+                                           VerifyOrReturn(CheckValueAsString("GroupName",
+                                               ((MTRGroupKeyManagementClusterGroupInfoMapStruct *) actualValue[0]).groupName, @""));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThRemovesTheGroupKeySet_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetRemoveParams alloc] init];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+        [cluster keySetRemoveWithParams:params
+                             completion:^(NSError * _Nullable err) {
+                                 NSLog(@"TH removes the GroupKeySet Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThVerifiesTheCorrespondingGroupKeyMapEntryHasBeenRemoved_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"TH verifies the corresponding GroupKeyMap entry has been removed Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(0)));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThCleansUpGroupsUsingRemoveAllGroupsCommand_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster removeAllGroupsWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"TH cleans up groups using RemoveAllGroups command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThVerifiesTheGroupHasBeenRemovedInTheGroupTable_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupTableWithParams:params
+                                   completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                       NSLog(@"TH verifies the group has been removed in the GroupTable Error: %@", err);
+
+                                       VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                       {
+                                           id actualValue = value;
+                                           VerifyOrReturn(CheckValue("GroupTable", [actualValue count], static_cast<uint32_t>(0)));
+                                       }
+
+                                       NextTest();
+                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThRemovesAclOperatePrivilegesForGroup0x0103_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH removes ACL Operate privileges for Group 0x0103 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_SC_5_2 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_SC_5_2()
+        : TestCommandBridge("Test_TC_SC_5_2")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_SC_5_2() {}
+
+    // Allow yaml to access the current commissioner node id.
+    // Default to 0 (undefined node id) so we know if this isn't
+    // set correctly.
+    // Reset on every step in case it changed.
+    chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_SC_5_2\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_SC_5_2\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH adds ACL Operate privileges for Group 0x0103\n");
+            err = TestThAddsAclOperatePrivilegesForGroup0x0103_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : TH sends KeySetWrite command with TH key\n");
+            err = TestThSendsKeySetWriteCommandWithThKey_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TH binds GroupId to GroupKeySet\n");
+            err = TestThBindsGroupIdToGroupKeySet_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : TH sends RemoveAllGroups command\n");
+            err = TestThSendsRemoveAllGroupsCommand_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH sends AddGroup command\n");
+            err = TestThSendsAddGroupCommand_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH sends ViewGroup command using group messaging\n");
+            if (ShouldSkip("G.S.F00")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsViewGroupCommandUsingGroupMessaging_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH sends ViewGroup command using group messaging\n");
+            if (ShouldSkip("!(G.S.F00)")) {
+                NextTest();
+                return;
+            }
+            err = TestThSendsViewGroupCommandUsingGroupMessaging_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH removes the GroupKeySet\n");
+            err = TestThRemovesTheGroupKeySet_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH cleans up groups using RemoveAllGroups command\n");
+            err = TestThCleansUpGroupsUsingRemoveAllGroupsCommand_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH removes ACL Operate privileges for Group 0x0103\n");
+            err = TestThRemovesAclOperatePrivilegesForGroup0x0103_10();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 11;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestThAddsAclOperatePrivilegesForGroup0x0103_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:259ULL];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH adds ACL Operate privileges for Group 0x0103 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsKeySetWriteCommandWithThKey_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetWriteParams alloc] init];
+        params.groupKeySet = [[MTRGroupKeyManagementClusterGroupKeySetStruct alloc] init];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySetID =
+            [NSNumber numberWithUnsignedShort:419U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).groupKeySecurityPolicy =
+            [NSNumber numberWithUnsignedChar:0U];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey0 =
+            [[NSData alloc] initWithBytes:"0xd0d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime0 =
+            [NSNumber numberWithUnsignedLongLong:2220000ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey1 =
+            [[NSData alloc] initWithBytes:"0xd1d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime1 =
+            [NSNumber numberWithUnsignedLongLong:2220001ULL];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochKey2 =
+            [[NSData alloc] initWithBytes:"0xd2d1d2d3d4d5d6d7d8d9dadbdcdddedf" length:34];
+        ((MTRGroupKeyManagementClusterGroupKeySetStruct *) params.groupKeySet).epochStartTime2 =
+            [NSNumber numberWithUnsignedLongLong:2220002ULL];
+
+        [cluster keySetWriteWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"TH sends KeySetWrite command with TH key Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThBindsGroupIdToGroupKeySet_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id groupKeyMapArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRGroupKeyManagementClusterGroupKeyMapStruct alloc] init];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupId = [NSNumber numberWithUnsignedShort:259U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+            ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            groupKeyMapArgument = temp_0;
+        }
+        [cluster writeAttributeGroupKeyMapWithValue:groupKeyMapArgument
+                                         completion:^(NSError * _Nullable err) {
+                                             NSLog(@"TH binds GroupId to GroupKeySet Error: %@", err);
+
+                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                             NextTest();
+                                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsRemoveAllGroupsCommand_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster removeAllGroupsWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"TH sends RemoveAllGroups command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsAddGroupCommand_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterAddGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        params.groupName = @"Test Group";
+        [cluster addGroupWithParams:params
+                         completion:^(MTRGroupsClusterAddGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                             NSLog(@"TH sends AddGroup command Error: %@", err);
+
+                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                             NextTest();
+                         }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsViewGroupCommandUsingGroupMessaging_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        [cluster viewGroupWithParams:params
+                          completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                              NSLog(@"TH sends ViewGroup command using group messaging Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                              {
+                                  id actualValue = values.status;
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                              }
+
+                              {
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 259U));
+                              }
+
+                              {
+                                  id actualValue = values.groupName;
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @"Test Group"));
+                              }
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThSendsViewGroupCommandUsingGroupMessaging_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupsClusterViewGroupParams alloc] init];
+        params.groupID = [NSNumber numberWithUnsignedShort:259U];
+        [cluster viewGroupWithParams:params
+                          completion:^(MTRGroupsClusterViewGroupResponseParams * _Nullable values, NSError * _Nullable err) {
+                              NSLog(@"TH sends ViewGroup command using group messaging Error: %@", err);
+
+                              VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                              {
+                                  id actualValue = values.status;
+                                  VerifyOrReturn(CheckValue("Status", actualValue, 0U));
+                              }
+
+                              {
+                                  id actualValue = values.groupID;
+                                  VerifyOrReturn(CheckValue("GroupID", actualValue, 259U));
+                              }
+
+                              {
+                                  id actualValue = values.groupName;
+                                  VerifyOrReturn(CheckValueAsString("GroupName", actualValue, @""));
+                              }
+
+                              NextTest();
+                          }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThRemovesTheGroupKeySet_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGroupKeyManagementClusterKeySetRemoveParams alloc] init];
+        params.groupKeySetID = [NSNumber numberWithUnsignedShort:419U];
+        [cluster keySetRemoveWithParams:params
+                             completion:^(NSError * _Nullable err) {
+                                 NSLog(@"TH removes the GroupKeySet Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThCleansUpGroupsUsingRemoveAllGroupsCommand_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGroups alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster removeAllGroupsWithCompletion:^(NSError * _Nullable err) {
+            NSLog(@"TH cleans up groups using RemoveAllGroups command Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThRemovesAclOperatePrivilegesForGroup0x0103_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH removes ACL Operate privileges for Group 0x0103 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
 
         return CHIP_NO_ERROR;
     }
@@ -134327,6 +135586,8 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_PSCFG_2_1>(),
         make_unique<Test_TC_RH_1_1>(),
         make_unique<Test_TC_RH_2_1>(),
+        make_unique<Test_TC_SC_5_1>(),
+        make_unique<Test_TC_SC_5_2>(),
         make_unique<Test_TC_SWTCH_1_1>(),
         make_unique<Test_TC_TMP_1_1>(),
         make_unique<Test_TC_TMP_2_1>(),
