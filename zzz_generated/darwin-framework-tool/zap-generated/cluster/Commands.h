@@ -97854,6 +97854,8 @@ void registerClusterAccessControl(Commands & commands)
         make_unique<SubscribeAttributeAccessControlFeatureMap>(), //
         make_unique<ReadAccessControlClusterRevision>(), //
         make_unique<SubscribeAttributeAccessControlClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -97897,6 +97899,8 @@ void registerClusterActions(Commands & commands)
         make_unique<SubscribeAttributeActionsFeatureMap>(), //
         make_unique<ReadActionsClusterRevision>(), //
         make_unique<SubscribeAttributeActionsClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -97965,6 +97969,8 @@ void registerClusterBasicInformation(Commands & commands)
         make_unique<SubscribeAttributeBasicInformationFeatureMap>(), //
         make_unique<ReadBasicInformationClusterRevision>(), //
         make_unique<SubscribeAttributeBasicInformationClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98028,6 +98034,8 @@ void registerClusterOtaSoftwareUpdateRequestor(Commands & commands)
         make_unique<SubscribeAttributeOtaSoftwareUpdateRequestorFeatureMap>(), //
         make_unique<ReadOtaSoftwareUpdateRequestorClusterRevision>(), //
         make_unique<SubscribeAttributeOtaSoftwareUpdateRequestorClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98233,6 +98241,8 @@ void registerClusterPowerSource(Commands & commands)
         make_unique<SubscribeAttributePowerSourceFeatureMap>(), //
         make_unique<ReadPowerSourceClusterRevision>(), //
         make_unique<SubscribeAttributePowerSourceClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98390,6 +98400,8 @@ void registerClusterGeneralDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeGeneralDiagnosticsFeatureMap>(), //
         make_unique<ReadGeneralDiagnosticsClusterRevision>(), //
         make_unique<SubscribeAttributeGeneralDiagnosticsClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98424,6 +98436,8 @@ void registerClusterSoftwareDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeSoftwareDiagnosticsFeatureMap>(), //
         make_unique<ReadSoftwareDiagnosticsClusterRevision>(), //
         make_unique<SubscribeAttributeSoftwareDiagnosticsClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98576,6 +98590,8 @@ void registerClusterThreadNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsFeatureMap>(), //
         make_unique<ReadThreadNetworkDiagnosticsClusterRevision>(), //
         make_unique<SubscribeAttributeThreadNetworkDiagnosticsClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98628,6 +98644,8 @@ void registerClusterWiFiNetworkDiagnostics(Commands & commands)
         make_unique<SubscribeAttributeWiFiNetworkDiagnosticsFeatureMap>(), //
         make_unique<ReadWiFiNetworkDiagnosticsClusterRevision>(), //
         make_unique<SubscribeAttributeWiFiNetworkDiagnosticsClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98728,6 +98746,8 @@ void registerClusterBridgedDeviceBasicInformation(Commands & commands)
         make_unique<SubscribeAttributeBridgedDeviceBasicInformationFeatureMap>(), //
         make_unique<ReadBridgedDeviceBasicInformationClusterRevision>(), //
         make_unique<SubscribeAttributeBridgedDeviceBasicInformationClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98759,6 +98779,8 @@ void registerClusterSwitch(Commands & commands)
         make_unique<SubscribeAttributeSwitchFeatureMap>(), //
         make_unique<ReadSwitchClusterRevision>(), //
         make_unique<SubscribeAttributeSwitchClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -98958,6 +98980,8 @@ void registerClusterBooleanState(Commands & commands)
         make_unique<SubscribeAttributeBooleanStateFeatureMap>(), //
         make_unique<ReadBooleanStateClusterRevision>(), //
         make_unique<SubscribeAttributeBooleanStateClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -99131,6 +99155,8 @@ void registerClusterDoorLock(Commands & commands)
         make_unique<SubscribeAttributeDoorLockFeatureMap>(), //
         make_unique<ReadDoorLockClusterRevision>(), //
         make_unique<SubscribeAttributeDoorLockClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -99336,6 +99362,8 @@ void registerClusterPumpConfigurationAndControl(Commands & commands)
         make_unique<SubscribeAttributePumpConfigurationAndControlFeatureMap>(), //
         make_unique<ReadPumpConfigurationAndControlClusterRevision>(), //
         make_unique<SubscribeAttributePumpConfigurationAndControlClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -101011,6 +101039,8 @@ void registerClusterUnitTesting(Commands & commands)
         make_unique<SubscribeAttributeUnitTestingFeatureMap>(), //
         make_unique<ReadUnitTestingClusterRevision>(), //
         make_unique<SubscribeAttributeUnitTestingClusterRevision>(), //
+        make_unique<ReadEvent>(Id), //
+        make_unique<SubscribeEvent>(Id), //
     };
 
     commands.Register(clusterName, clusterCommands);
@@ -101025,6 +101055,8 @@ void registerClusterAny(Commands & commands)
         make_unique<ReadAttribute>(), //
         make_unique<WriteAttribute>(), //
         make_unique<SubscribeAttribute>(), //
+        make_unique<ReadEvent>(), //
+        make_unique<SubscribeEvent>(chip::kInvalidClusterId, true), //
         make_unique<SubscribeEvent>(), //
     };
 
