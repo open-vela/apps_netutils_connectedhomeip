@@ -41,6 +41,7 @@ public:
         printf("Test_TC_ACL_2_1\n");
         printf("Test_TC_ACL_2_2\n");
         printf("Test_TC_ACL_2_3\n");
+        printf("Test_TC_ACE_1_5\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
         printf("Test_TC_BRBINFO_1_1\n");
@@ -4193,6 +4194,541 @@ private:
 
                                       NextTest();
                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACE_1_5 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACE_1_5()
+        : TestCommandBridge("Test_TC_ACE_1_5")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("payload", &mPayload);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACE_1_5() {}
+
+    // Allow yaml to access the current commissioner node id.
+    // Default to 0 (undefined node id) so we know if this isn't
+    // set correctly.
+    // Reset on every step in case it changed.
+    chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACE_1_5\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACE_1_5\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved for TH1\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForTh1_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TH1 reads the fabric index\n");
+            err = TestTh1ReadsTheFabricIndex_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool, " ***** Test Step 2 : Open Commissioning Window from alpha\n");
+            err = TestOpenCommissioningWindowFromAlpha_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : Commission from TH2\n");
+            err = TestCommissionFromTh2_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool, " ***** Test Step 4 : Wait for the commissioned device to be retrieved for TH2\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrievedForTh2_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TH2 reads the fabric index\n");
+            err = TestTh2ReadsTheFabricIndex_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TH1 writes ACL giving view privilege for descriptor cluster\n");
+            err = TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TH2 writes ACL giving view privilge for basic cluster\n");
+            err = TestTh2WritesAclGivingViewPrivilgeForBasicCluster_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TH1 reads descriptor cluster - expect SUCCESS\n");
+            err = TestTh1ReadsDescriptorClusterExpectSuccess_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool, " ***** Test Step 9 : TH1 reads basic cluster - expect UNSUPPORTED_ACCESS\n");
+            err = TestTh1ReadsBasicClusterExpectUnsupportedAccess_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS\n");
+            err = TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH2 reads basic cluster - expect SUCCESS\n");
+            err = TestTh2ReadsBasicClusterExpectSuccess_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TH1 resets ACL to default\n");
+            err = TestTh1ResetsAclToDefault_12();
+            break;
+        case 13:
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH1 sends RemoveFabric command for TH2\n");
+            err = TestTh1SendsRemoveFabricCommandForTh2_13();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 14;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForTh1_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+    NSNumber * _Nonnull th1FabricIndex;
+
+    CHIP_ERROR TestTh1ReadsTheFabricIndex_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentFabricIndexWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads the fabric index Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                th1FabricIndex = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestOpenCommissioningWindowFromAlpha_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAdministratorCommissioning alloc] initWithDevice:device
+                                                                                      endpointID:@(0)
+                                                                                           queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
+        [cluster openBasicCommissioningWindowWithParams:params
+                                             completion:^(NSError * _Nullable err) {
+                                                 NSLog(@"Open Commissioning Window from alpha Error: %@", err);
+
+                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                                 NextTest();
+                                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestCommissionFromTh2_3()
+    {
+
+        chip::app::Clusters::CommissionerCommands::Commands::PairWithCode::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        value.payload = mPayload.HasValue() ? mPayload.Value() : chip::Span<const char>("MT:-24J0AFN00KA0648G00", 22);
+        return PairWithCode("beta", value);
+    }
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForTh2_4()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("beta", value);
+    }
+    NSNumber * _Nonnull th2FabricIndex;
+
+    CHIP_ERROR TestTh2ReadsTheFabricIndex_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeCurrentFabricIndexWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH2 reads the fabric index Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            {
+                th2FabricIndex = value;
+            }
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1WritesAclGivingViewPrivilegeForDescriptorCluster_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:31UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [th1FabricIndex copy];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:29UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [th1FabricIndex copy];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH1 writes ACL giving view privilege for descriptor cluster Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh2WritesAclGivingViewPrivilgeForBasicCluster_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:31UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [th2FabricIndex copy];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = nil;
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:40UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [th2FabricIndex copy];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH2 writes ACL giving view privilge for basic cluster Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsDescriptorClusterExpectSuccess_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDeviceTypeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads descriptor cluster - expect SUCCESS Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ReadsBasicClusterExpectUnsupportedAccess_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH1 reads basic cluster - expect UNSUPPORTED_ACCESS Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh2ReadsDescriptorClusterExpectUnsupportedAccess_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterDescriptor alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeDeviceTypeListWithCompletion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH2 reads descriptor cluster - expect UNSUPPORTED_ACCESS Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh2ReadsBasicClusterExpectSuccess_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("beta");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TH2 reads basic cluster - expect SUCCESS Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1ResetsAclToDefault_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TH1 resets ACL to default Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTh1SendsRemoveFabricCommandForTh2_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterRemoveFabricParams alloc] init];
+        params.fabricIndex = [th2FabricIndex copy];
+        [cluster removeFabricWithParams:params
+                             completion:^(
+                                 MTROperationalCredentialsClusterNOCResponseParams * _Nullable values, NSError * _Nullable err) {
+                                 NSLog(@"TH1 sends RemoveFabric command for TH2 Error: %@", err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
 
         return CHIP_NO_ERROR;
     }
@@ -135475,6 +136011,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_ACL_2_1>(),
         make_unique<Test_TC_ACL_2_2>(),
         make_unique<Test_TC_ACL_2_3>(),
+        make_unique<Test_TC_ACE_1_5>(),
         make_unique<Test_TC_BOOL_1_1>(),
         make_unique<Test_TC_BOOL_2_1>(),
         make_unique<Test_TC_BRBINFO_1_1>(),
