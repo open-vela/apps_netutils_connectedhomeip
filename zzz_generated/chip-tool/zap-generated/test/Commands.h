@@ -12449,6 +12449,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -12470,6 +12471,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12483,6 +12485,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12496,6 +12499,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12523,6 +12527,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 2s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 2000UL;
@@ -12553,6 +12558,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -12574,6 +12580,7 @@ private:
         }
         case 18: {
             LogStep(18, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12587,6 +12594,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12600,6 +12608,7 @@ private:
         }
         case 22: {
             LogStep(22, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12627,6 +12636,7 @@ private:
         }
         case 25: {
             LogStep(25, "Wait 2s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 2000UL;
@@ -12917,6 +12927,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -12939,6 +12950,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12952,6 +12964,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -12965,6 +12978,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -12995,6 +13009,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -13017,6 +13032,7 @@ private:
         }
         case 15: {
             LogStep(15, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13030,6 +13046,7 @@ private:
         }
         case 17: {
             LogStep(17, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13043,6 +13060,7 @@ private:
         }
         case 19: {
             LogStep(19, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -13296,6 +13314,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -13317,6 +13336,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13330,6 +13350,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13343,6 +13364,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13356,6 +13378,7 @@ private:
         }
         case 12: {
             LogStep(12, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -13691,6 +13714,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -13712,6 +13736,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13725,6 +13750,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13738,6 +13764,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -13765,6 +13792,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -13786,6 +13814,7 @@ private:
         }
         case 15: {
             LogStep(15, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13799,6 +13828,7 @@ private:
         }
         case 17: {
             LogStep(17, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13812,6 +13842,7 @@ private:
         }
         case 19: {
             LogStep(19, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13839,6 +13870,7 @@ private:
         }
         case 22: {
             LogStep(22, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -13860,6 +13892,7 @@ private:
         }
         case 24: {
             LogStep(24, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -13893,6 +13926,7 @@ private:
         }
         case 28: {
             LogStep(28, "Wait 2s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 2000UL;
@@ -14211,6 +14245,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -14233,6 +14268,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14246,6 +14282,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14259,6 +14296,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -14287,6 +14325,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14314,6 +14353,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -14337,6 +14377,7 @@ private:
         }
         case 18: {
             LogStep(18, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14350,6 +14391,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14363,6 +14405,7 @@ private:
         }
         case 22: {
             LogStep(22, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -14392,6 +14435,7 @@ private:
         }
         case 25: {
             LogStep(25, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14678,6 +14722,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -14712,6 +14757,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14731,6 +14777,7 @@ private:
         }
         case 11: {
             LogStep(11, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -14750,6 +14797,7 @@ private:
         }
         case 14: {
             LogStep(14, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -15259,6 +15307,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15295,6 +15344,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -15314,6 +15364,7 @@ private:
         }
         case 11: {
             LogStep(11, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -15333,6 +15384,7 @@ private:
         }
         case 14: {
             LogStep(14, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -15393,6 +15445,7 @@ private:
         }
         case 21: {
             LogStep(21, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15438,6 +15491,7 @@ private:
         }
         case 26: {
             LogStep(26, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15474,6 +15528,7 @@ private:
         }
         case 30: {
             LogStep(30, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15510,6 +15565,7 @@ private:
         }
         case 34: {
             LogStep(34, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15570,6 +15626,7 @@ private:
         }
         case 41: {
             LogStep(41, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15615,6 +15672,7 @@ private:
         }
         case 46: {
             LogStep(46, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15651,6 +15709,7 @@ private:
         }
         case 50: {
             LogStep(50, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15687,6 +15746,7 @@ private:
         }
         case 54: {
             LogStep(54, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15971,6 +16031,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -15992,6 +16053,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16011,6 +16073,7 @@ private:
         }
         case 9: {
             LogStep(9, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16030,6 +16093,7 @@ private:
         }
         case 12: {
             LogStep(12, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16326,6 +16390,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -16348,6 +16413,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16367,6 +16433,7 @@ private:
         }
         case 9: {
             LogStep(9, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16386,6 +16453,7 @@ private:
         }
         case 12: {
             LogStep(12, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F03"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -16698,6 +16766,7 @@ private:
         }
         case 7: {
             LogStep(7, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -16720,6 +16789,7 @@ private:
         }
         case 9: {
             LogStep(9, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16733,6 +16803,7 @@ private:
         }
         case 11: {
             LogStep(11, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16746,6 +16817,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -16759,6 +16831,7 @@ private:
         }
         case 15: {
             LogStep(15, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -17129,6 +17202,7 @@ private:
         }
         case 7: {
             LogStep(7, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -17154,6 +17228,7 @@ private:
         }
         case 9: {
             LogStep(9, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17167,6 +17242,7 @@ private:
         }
         case 11: {
             LogStep(11, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17180,6 +17256,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -17211,6 +17288,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17224,6 +17302,7 @@ private:
         }
         case 18: {
             LogStep(18, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17237,6 +17316,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -17268,6 +17348,7 @@ private:
         }
         case 23: {
             LogStep(23, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17299,6 +17380,7 @@ private:
         }
         case 26: {
             LogStep(26, "Wait 2s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 2000UL;
@@ -17637,6 +17719,7 @@ private:
         }
         case 7: {
             LogStep(7, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -17663,6 +17746,7 @@ private:
         }
         case 9: {
             LogStep(9, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17676,6 +17760,7 @@ private:
         }
         case 11: {
             LogStep(11, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17689,6 +17774,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -17722,6 +17808,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17735,6 +17822,7 @@ private:
         }
         case 18: {
             LogStep(18, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -17748,6 +17836,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F04"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -18070,6 +18159,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -18091,6 +18181,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18104,6 +18195,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18117,6 +18209,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18144,6 +18237,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait 2s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 2000UL;
@@ -18174,6 +18268,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -18195,6 +18290,7 @@ private:
         }
         case 18: {
             LogStep(18, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18208,6 +18304,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18221,6 +18318,7 @@ private:
         }
         case 22: {
             LogStep(22, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18248,6 +18346,7 @@ private:
         }
         case 25: {
             LogStep(25, "Wait 2s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 2000UL;
@@ -18564,6 +18663,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -18587,6 +18687,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18600,6 +18701,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18613,6 +18715,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18626,6 +18729,7 @@ private:
         }
         case 12: {
             LogStep(12, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -18656,6 +18760,7 @@ private:
         }
         case 15: {
             LogStep(15, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -18680,6 +18785,7 @@ private:
         }
         case 17: {
             LogStep(17, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18693,6 +18799,7 @@ private:
         }
         case 19: {
             LogStep(19, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18706,6 +18813,7 @@ private:
         }
         case 21: {
             LogStep(21, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -18719,6 +18827,7 @@ private:
         }
         case 23: {
             LogStep(23, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -19005,6 +19114,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -19041,6 +19151,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -19060,6 +19171,7 @@ private:
         }
         case 11: {
             LogStep(11, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -19079,6 +19191,7 @@ private:
         }
         case 14: {
             LogStep(14, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -110654,6 +110767,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -110678,6 +110792,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110691,6 +110806,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110704,6 +110820,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110717,6 +110834,7 @@ private:
         }
         case 12: {
             LogStep(12, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -110747,6 +110865,7 @@ private:
         }
         case 15: {
             LogStep(15, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -110771,6 +110890,7 @@ private:
         }
         case 17: {
             LogStep(17, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110789,6 +110909,7 @@ private:
         }
         case 19: {
             LogStep(19, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110802,6 +110923,7 @@ private:
         }
         case 21: {
             LogStep(21, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110815,6 +110937,7 @@ private:
         }
         case 23: {
             LogStep(23, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -110845,6 +110968,7 @@ private:
         }
         case 26: {
             LogStep(26, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -110867,6 +110991,7 @@ private:
         }
         case 28: {
             LogStep(28, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110880,6 +111005,7 @@ private:
         }
         case 30: {
             LogStep(30, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110893,6 +111019,7 @@ private:
         }
         case 32: {
             LogStep(32, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110906,6 +111033,7 @@ private:
         }
         case 34: {
             LogStep(34, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -110936,6 +111064,7 @@ private:
         }
         case 37: {
             LogStep(37, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -110958,6 +111087,7 @@ private:
         }
         case 39: {
             LogStep(39, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110971,6 +111101,7 @@ private:
         }
         case 41: {
             LogStep(41, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110984,6 +111115,7 @@ private:
         }
         case 43: {
             LogStep(43, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -110997,6 +111129,7 @@ private:
         }
         case 45: {
             LogStep(45, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -111434,6 +111567,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -111458,6 +111592,7 @@ private:
         }
         case 6: {
             LogStep(6, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111471,6 +111606,7 @@ private:
         }
         case 8: {
             LogStep(8, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111484,6 +111620,7 @@ private:
         }
         case 10: {
             LogStep(10, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111497,6 +111634,7 @@ private:
         }
         case 12: {
             LogStep(12, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -111527,6 +111665,7 @@ private:
         }
         case 15: {
             LogStep(15, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -111551,6 +111690,7 @@ private:
         }
         case 17: {
             LogStep(17, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111564,6 +111704,7 @@ private:
         }
         case 19: {
             LogStep(19, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111577,6 +111718,7 @@ private:
         }
         case 21: {
             LogStep(21, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111590,6 +111732,7 @@ private:
         }
         case 23: {
             LogStep(23, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -111620,6 +111763,7 @@ private:
         }
         case 26: {
             LogStep(26, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -111644,6 +111788,7 @@ private:
         }
         case 28: {
             LogStep(28, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111657,6 +111802,7 @@ private:
         }
         case 30: {
             LogStep(30, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111670,6 +111816,7 @@ private:
         }
         case 32: {
             LogStep(32, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111683,6 +111830,7 @@ private:
         }
         case 34: {
             LogStep(34, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -111713,6 +111861,7 @@ private:
         }
         case 37: {
             LogStep(37, "Wait 100ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 100UL;
@@ -111737,6 +111886,7 @@ private:
         }
         case 39: {
             LogStep(39, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111750,6 +111900,7 @@ private:
         }
         case 41: {
             LogStep(41, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111763,6 +111914,7 @@ private:
         }
         case 43: {
             LogStep(43, "Wait 10s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 10000UL;
@@ -111776,6 +111928,7 @@ private:
         }
         case 45: {
             LogStep(45, "Wait 5s");
+            VerifyOrDo(!ShouldSkip("CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 5000UL;
@@ -112381,6 +112534,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait for 1000ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
@@ -112525,6 +112679,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112546,6 +112701,7 @@ private:
         }
         case 19: {
             LogStep(19, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112659,6 +112815,7 @@ private:
         }
         case 30: {
             LogStep(30, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112680,6 +112837,7 @@ private:
         }
         case 33: {
             LogStep(33, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112751,6 +112909,7 @@ private:
         }
         case 40: {
             LogStep(40, "Wait 1000ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
@@ -112824,6 +112983,7 @@ private:
         }
         case 47: {
             LogStep(47, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112845,6 +113005,7 @@ private:
         }
         case 50: {
             LogStep(50, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112958,6 +113119,7 @@ private:
         }
         case 61: {
             LogStep(61, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -112979,6 +113141,7 @@ private:
         }
         case 64: {
             LogStep(64, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F02 && CC.S.F01"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -113352,6 +113515,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait for 1000ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
@@ -113439,6 +113603,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -113460,6 +113625,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -113500,6 +113666,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -113521,6 +113688,7 @@ private:
         }
         case 23: {
             LogStep(23, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -113885,6 +114053,7 @@ private:
         }
         case 4: {
             LogStep(4, "Wait for 1000ms");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 1000UL;
@@ -113972,6 +114141,7 @@ private:
         }
         case 13: {
             LogStep(13, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -113993,6 +114163,7 @@ private:
         }
         case 16: {
             LogStep(16, "Wait for 30S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 30000UL;
@@ -114031,6 +114202,7 @@ private:
         }
         case 20: {
             LogStep(20, "Wait for 60S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 60000UL;
@@ -114045,6 +114217,7 @@ private:
         }
         case 22: {
             LogStep(22, "Wait for 60S");
+            VerifyOrDo(!ShouldSkip("CC.S.F01 && CC.S.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DelayCommands::Commands::WaitForMs::Type value;
             value.ms = 60000UL;

@@ -11290,6 +11290,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -11303,6 +11307,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -11315,6 +11323,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -11327,6 +11339,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_10();
             break;
         case 11:
@@ -11348,6 +11364,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 2s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait2s_13();
             break;
         case 14:
@@ -11370,6 +11390,10 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_16();
             break;
         case 17:
@@ -11383,6 +11407,10 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_18();
             break;
         case 19:
@@ -11395,6 +11423,10 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_20();
             break;
         case 21:
@@ -11407,6 +11439,10 @@ public:
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_22();
             break;
         case 23:
@@ -11428,6 +11464,10 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Wait 2s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait2s_25();
             break;
         case 26:
@@ -12230,6 +12270,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -12244,6 +12288,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -12256,6 +12304,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -12268,6 +12320,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_10();
             break;
         case 11:
@@ -12290,6 +12346,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_13();
             break;
         case 14:
@@ -12304,6 +12364,10 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_15();
             break;
         case 16:
@@ -12316,6 +12380,10 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_17();
             break;
         case 18:
@@ -12328,6 +12396,10 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_19();
             break;
         case 20:
@@ -13009,6 +13081,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -13022,6 +13098,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -13034,6 +13114,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -13046,6 +13130,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_10();
             break;
         case 11:
@@ -13058,6 +13146,10 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_12();
             break;
         case 13:
@@ -13592,6 +13684,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -13605,6 +13701,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -13617,6 +13717,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -13629,6 +13733,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_10();
             break;
         case 11:
@@ -13651,6 +13759,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_13();
             break;
         case 14:
@@ -13664,6 +13776,10 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_15();
             break;
         case 16:
@@ -13676,6 +13792,10 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_17();
             break;
         case 18:
@@ -13688,6 +13808,10 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_19();
             break;
         case 20:
@@ -13710,6 +13834,10 @@ public:
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_22();
             break;
         case 23:
@@ -13723,6 +13851,10 @@ public:
             break;
         case 24:
             ChipLogProgress(chipTool, " ***** Test Step 24 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_24();
             break;
         case 25:
@@ -13752,6 +13884,10 @@ public:
             break;
         case 28:
             ChipLogProgress(chipTool, " ***** Test Step 28 : Wait 2s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait2s_28();
             break;
         case 29:
@@ -14628,6 +14764,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -14642,6 +14782,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -14654,6 +14798,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -14666,6 +14814,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_10();
             break;
         case 11:
@@ -14688,6 +14840,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_13();
             break;
         case 14:
@@ -14710,6 +14866,10 @@ public:
             break;
         case 16:
             ChipLogProgress(chipTool, " ***** Test Step 16 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_16();
             break;
         case 17:
@@ -14724,6 +14884,10 @@ public:
             break;
         case 18:
             ChipLogProgress(chipTool, " ***** Test Step 18 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_18();
             break;
         case 19:
@@ -14736,6 +14900,10 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_20();
             break;
         case 21:
@@ -14748,6 +14916,10 @@ public:
             break;
         case 22:
             ChipLogProgress(chipTool, " ***** Test Step 22 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_22();
             break;
         case 23:
@@ -14770,6 +14942,10 @@ public:
             break;
         case 25:
             ChipLogProgress(chipTool, " ***** Test Step 25 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_25();
             break;
         case 26:
@@ -15584,6 +15760,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -15614,6 +15794,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -15634,6 +15818,10 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_11();
             break;
         case 12:
@@ -15654,6 +15842,10 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F00")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_14();
             break;
         case 15:
@@ -16287,6 +16479,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -16317,6 +16513,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -16337,6 +16537,10 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_11();
             break;
         case 12:
@@ -16357,6 +16561,10 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_14();
             break;
         case 15:
@@ -16411,6 +16619,10 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_21();
             break;
         case 22:
@@ -16449,6 +16661,10 @@ public:
             break;
         case 26:
             ChipLogProgress(chipTool, " ***** Test Step 26 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_26();
             break;
         case 27:
@@ -16479,6 +16695,10 @@ public:
             break;
         case 30:
             ChipLogProgress(chipTool, " ***** Test Step 30 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_30();
             break;
         case 31:
@@ -16509,6 +16729,10 @@ public:
             break;
         case 34:
             ChipLogProgress(chipTool, " ***** Test Step 34 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_34();
             break;
         case 35:
@@ -16563,6 +16787,10 @@ public:
             break;
         case 41:
             ChipLogProgress(chipTool, " ***** Test Step 41 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_41();
             break;
         case 42:
@@ -16601,6 +16829,10 @@ public:
             break;
         case 46:
             ChipLogProgress(chipTool, " ***** Test Step 46 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_46();
             break;
         case 47:
@@ -16631,6 +16863,10 @@ public:
             break;
         case 50:
             ChipLogProgress(chipTool, " ***** Test Step 50 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_50();
             break;
         case 51:
@@ -16661,6 +16897,10 @@ public:
             break;
         case 54:
             ChipLogProgress(chipTool, " ***** Test Step 54 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_54();
             break;
         case 55:
@@ -18168,6 +18408,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -18180,6 +18424,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -18200,6 +18448,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_9();
             break;
         case 10:
@@ -18220,6 +18472,10 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_12();
             break;
         case 13:
@@ -18907,6 +19163,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -18921,6 +19181,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -18941,6 +19205,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_9();
             break;
         case 10:
@@ -18961,6 +19229,10 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F03")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_12();
             break;
         case 13:
@@ -19567,6 +19839,10 @@ public:
             break;
         case 7:
             ChipLogProgress(chipTool, " ***** Test Step 7 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F04")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_7();
             break;
         case 8:
@@ -19581,6 +19857,10 @@ public:
             break;
         case 9:
             ChipLogProgress(chipTool, " ***** Test Step 9 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F04")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_9();
             break;
         case 10:
@@ -19593,6 +19873,10 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F04")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_11();
             break;
         case 12:
@@ -19605,6 +19889,10 @@ public:
             break;
         case 13:
             ChipLogProgress(chipTool, " ***** Test Step 13 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F04")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_13();
             break;
         case 14:
@@ -19617,6 +19905,10 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F04")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_15();
             break;
         case 16:
@@ -20238,6 +20530,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -20252,6 +20548,10 @@ public:
             break;
         case 6:
             ChipLogProgress(chipTool, " ***** Test Step 6 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_6();
             break;
         case 7:
@@ -20264,6 +20564,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -20276,6 +20580,10 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_10();
             break;
         case 11:
@@ -20288,6 +20596,10 @@ public:
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_12();
             break;
         case 13:
@@ -20310,6 +20622,10 @@ public:
             break;
         case 15:
             ChipLogProgress(chipTool, " ***** Test Step 15 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_15();
             break;
         case 16:
@@ -20324,6 +20640,10 @@ public:
             break;
         case 17:
             ChipLogProgress(chipTool, " ***** Test Step 17 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_17();
             break;
         case 18:
@@ -20336,6 +20656,10 @@ public:
             break;
         case 19:
             ChipLogProgress(chipTool, " ***** Test Step 19 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_19();
             break;
         case 20:
@@ -20348,6 +20672,10 @@ public:
             break;
         case 21:
             ChipLogProgress(chipTool, " ***** Test Step 21 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_21();
             break;
         case 22:
@@ -20360,6 +20688,10 @@ public:
             break;
         case 23:
             ChipLogProgress(chipTool, " ***** Test Step 23 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_23();
             break;
         case 24:
@@ -21114,6 +21446,10 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Wait 100ms\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait100ms_4();
             break;
         case 5:
@@ -21144,6 +21480,10 @@ public:
             break;
         case 8:
             ChipLogProgress(chipTool, " ***** Test Step 8 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_8();
             break;
         case 9:
@@ -21164,6 +21504,10 @@ public:
             break;
         case 11:
             ChipLogProgress(chipTool, " ***** Test Step 11 : Wait 10s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait10s_11();
             break;
         case 12:
@@ -21184,6 +21528,10 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Wait 5s\n");
+            if (ShouldSkip("CC.S.F01")) {
+                NextTest();
+                return;
+            }
             err = TestWait5s_14();
             break;
         case 15:
