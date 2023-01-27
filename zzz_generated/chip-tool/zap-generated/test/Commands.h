@@ -34637,6 +34637,10 @@ private:
                 chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber,
+                                          mMajornumber.HasValue() ? mMajornumber.Value() : 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber,
+                                          mMinornumber.HasValue() ? mMinornumber.Value() : 1U));
             }
             break;
         default:
@@ -34718,6 +34722,8 @@ public:
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("majornumber", 0, UINT16_MAX, &mMajornumber);
         AddArgument("minornumber", 0, UINT16_MAX, &mMinornumber);
+        AddArgument("majornumber2", 0, UINT16_MAX, &mMajornumber2);
+        AddArgument("minornumber2", 0, UINT16_MAX, &mMinornumber2);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
@@ -34734,6 +34740,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mMajornumber;
     chip::Optional<uint16_t> mMinornumber;
+    chip::Optional<uint16_t> mMajornumber2;
+    chip::Optional<uint16_t> mMinornumber2;
     chip::Optional<uint16_t> mTimeout;
 
     chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
@@ -34781,6 +34789,10 @@ private:
                 chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber,
+                                          mMajornumber.HasValue() ? mMajornumber.Value() : 6U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber,
+                                          mMinornumber.HasValue() ? mMinornumber.Value() : 0U));
             }
             break;
         case 4:
@@ -34796,6 +34808,10 @@ private:
                 chip::app::DataModel::Nullable<chip::app::Clusters::Channel::Structs::ChannelInfoStruct::DecodableType> value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("currentChannel", value));
+                VerifyOrReturn(CheckValue("currentChannel.Value().majorNumber", value.Value().majorNumber,
+                                          mMajornumber2.HasValue() ? mMajornumber2.Value() : 9U));
+                VerifyOrReturn(CheckValue("currentChannel.Value().minorNumber", value.Value().minorNumber,
+                                          mMinornumber2.HasValue() ? mMinornumber2.Value() : 1U));
                 VerifyOrReturn(CheckConstraintType("value", "ChannelInfoStruct", "ChannelInfoStruct"));
             }
             break;
