@@ -45565,6 +45565,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber,
+                    mMajornumber.HasValue() ? mMajornumber.Value() : 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber,
+                    mMinornumber.HasValue() ? mMinornumber.Value() : 1U));
             }
 
             NextTest();
@@ -45586,6 +45590,8 @@ public:
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("majornumber", 0, UINT16_MAX, &mMajornumber);
         AddArgument("minornumber", 0, UINT16_MAX, &mMinornumber);
+        AddArgument("majornumber2", 0, UINT16_MAX, &mMajornumber2);
+        AddArgument("minornumber2", 0, UINT16_MAX, &mMinornumber2);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -45727,6 +45733,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mMajornumber;
     chip::Optional<uint16_t> mMinornumber;
+    chip::Optional<uint16_t> mMajornumber2;
+    chip::Optional<uint16_t> mMinornumber2;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
@@ -45796,6 +45804,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber,
+                    mMajornumber.HasValue() ? mMajornumber.Value() : 6U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber,
+                    mMinornumber.HasValue() ? mMinornumber.Value() : 0U));
             }
 
             NextTest();
@@ -45854,6 +45866,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("CurrentChannel", actualValue));
+                VerifyOrReturn(CheckValue("MajorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).majorNumber,
+                    mMajornumber2.HasValue() ? mMajornumber2.Value() : 9U));
+                VerifyOrReturn(CheckValue("MinorNumber", ((MTRChannelClusterChannelInfoStruct *) actualValue).minorNumber,
+                    mMinornumber2.HasValue() ? mMinornumber2.Value() : 1U));
             }
             if (value != nil) {
 
