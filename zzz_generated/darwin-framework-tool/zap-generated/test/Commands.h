@@ -41,6 +41,7 @@ public:
         printf("Test_TC_ACL_2_1\n");
         printf("Test_TC_ACL_2_2\n");
         printf("Test_TC_ACL_2_3\n");
+        printf("Test_TC_ACE_1_1\n");
         printf("Test_TC_ACE_1_5\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
@@ -4194,6 +4195,1464 @@ private:
 
                                       NextTest();
                                   }];
+
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACE_1_1 : public TestCommandBridge {
+public:
+    // NOLINTBEGIN(clang-analyzer-nullability.NullPassedToNonnull): Test constructor nullability not enforced
+    Test_TC_ACE_1_1()
+        : TestCommandBridge("Test_TC_ACE_1_1")
+        , mTestIndex(0)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+    // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
+
+    ~Test_TC_ACE_1_1() {}
+
+    // Allow yaml to access the current commissioner node id.
+    // Default to 0 (undefined node id) so we know if this isn't
+    // set correctly.
+    // Reset on every step in case it changed.
+    chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+    /////////// TestCommand Interface /////////
+    void NextTest() override
+    {
+        CHIP_ERROR err = CHIP_NO_ERROR;
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+
+        if (0 == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Start: Test_TC_ACE_1_1\n");
+        }
+
+        if (mTestCount == mTestIndex) {
+            ChipLogProgress(chipTool, " **** Test Complete: Test_TC_ACE_1_1\n");
+            SetCommandExitStatus(CHIP_NO_ERROR);
+            return;
+        }
+
+        Wait();
+
+        // Ensure we increment mTestIndex before we start running the relevant
+        // command.  That way if we lose the timeslice after we send the message
+        // but before our function call returns, we won't end up with an
+        // incorrect mTestIndex value observed when we get the response.
+        switch (mTestIndex++) {
+        case 0:
+            ChipLogProgress(chipTool, " ***** Test Step 0 : Wait for the commissioned device to be retrieved\n");
+            err = TestWaitForTheCommissionedDeviceToBeRetrieved_0();
+            break;
+        case 1:
+            ChipLogProgress(chipTool, " ***** Test Step 1 : TP2 - Write ACL giving admin privilege on all EP0\n");
+            err = TestTp2WriteAclGivingAdminPrivilegeOnAllEp0_1();
+            break;
+        case 2:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 2 : TP3 - Read the NOC attribute (Node operational credentials - requires administer)\n");
+            err = TestTp3ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_2();
+            break;
+        case 3:
+            ChipLogProgress(chipTool, " ***** Test Step 3 : TP4 - Write the location attribute (Basic - requires administer)\n");
+            err = TestTp4WriteTheLocationAttributeBasicRequiresAdminister_3();
+            break;
+        case 4:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 4 : TP5 - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                "administer)\n");
+            err = TestTp5SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_4();
+            break;
+        case 5:
+            ChipLogProgress(chipTool, " ***** Test Step 5 : TP6 - Write NodeLabel attribute (Basic - requires manage)\n");
+            err = TestTp6WriteNodeLabelAttributeBasicRequiresManage_5();
+            break;
+        case 6:
+            ChipLogProgress(chipTool, " ***** Test Step 6 : TP7 - Send TestEventTrigger (General Diagnostics - requires manage)\n");
+            err = TestTp7SendTestEventTriggerGeneralDiagnosticsRequiresManage_6();
+            break;
+        case 7:
+            ChipLogProgress(chipTool, " ***** Test Step 7 : TP8 - Tead the VendorID attribute (Basic - requires view)\n");
+            err = TestTp8TeadTheVendorIDAttributeBasicRequiresView_7();
+            break;
+        case 8:
+            ChipLogProgress(chipTool, " ***** Test Step 8 : TP9 - Write ACL giving admin privilege ACL, manage for rest of EP0\n");
+            err = TestTp9WriteAclGivingAdminPrivilegeAclManageForRestOfEp0_8();
+            break;
+        case 9:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 9 : TP10 - Read the NOC attribute (Node operational credentials - requires administer)\n");
+            err = TestTp10ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_9();
+            break;
+        case 10:
+            ChipLogProgress(chipTool, " ***** Test Step 10 : TP11 - Write the location attribute (Basic - requires administer)\n");
+            err = TestTp11WriteTheLocationAttributeBasicRequiresAdminister_10();
+            break;
+        case 11:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 11 : TP12 - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                "administer)\n");
+            err = TestTp12SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_11();
+            break;
+        case 12:
+            ChipLogProgress(chipTool, " ***** Test Step 12 : TP13(6) - Write NodeLabel attribute (Basic - requires manage)\n");
+            err = TestTp136WriteNodeLabelAttributeBasicRequiresManage_12();
+            break;
+        case 13:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 13 : TP13(7) - Send TestEventTrigger (General Diagnostics - requires manage)\n");
+            err = TestTp137SendTestEventTriggerGeneralDiagnosticsRequiresManage_13();
+            break;
+        case 14:
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TP13(8) - Tead the VendorID attribute (Basic - requires view)\n");
+            err = TestTp138TeadTheVendorIDAttributeBasicRequiresView_14();
+            break;
+        case 15:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 15 : TP14 - Write ACL giving admin privilege ACL, operate for rest of EP0\n");
+            err = TestTp14WriteAclGivingAdminPrivilegeAclOperateForRestOfEp0_15();
+            break;
+        case 16:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 16 : TP15(10) - Read the NOC attribute (Node operational credentials - requires administer)\n");
+            err = TestTp1510ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_16();
+            break;
+        case 17:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 17 : TP15(11) - Write the location attribute (Basic - requires administer)\n");
+            err = TestTp1511WriteTheLocationAttributeBasicRequiresAdminister_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 18 : TP15(12) - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                "administer)\n");
+            err = TestTp1512SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_18();
+            break;
+        case 19:
+            ChipLogProgress(chipTool, " ***** Test Step 19 : TP16 - Write NodeLabel attribute (Basic - requires manage)\n");
+            err = TestTp16WriteNodeLabelAttributeBasicRequiresManage_19();
+            break;
+        case 20:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 20 : TP17 - Send TestEventTrigger (General Diagnostics - requires manage)\n");
+            err = TestTp17SendTestEventTriggerGeneralDiagnosticsRequiresManage_20();
+            break;
+        case 21:
+            ChipLogProgress(chipTool, " ***** Test Step 21 : TP18(8) - Tead the VendorID attribute (Basic - requires view)\n");
+            err = TestTp188TeadTheVendorIDAttributeBasicRequiresView_21();
+            break;
+        case 22:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 22 : TP19 - Write ACL giving admin privilege ACL, operate for rest of EP0\n");
+            err = TestTp19WriteAclGivingAdminPrivilegeAclOperateForRestOfEp0_22();
+            break;
+        case 23:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 23 : TP20(10) - Read the NOC attribute (Node operational credentials - requires administer)\n");
+            err = TestTp2010ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_23();
+            break;
+        case 24:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 24 : TP20(11) - Write the location attribute (Basic - requires administer)\n");
+            err = TestTp2011WriteTheLocationAttributeBasicRequiresAdminister_24();
+            break;
+        case 25:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 25 : TP20(12) - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                "administer)\n");
+            err = TestTp2012SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_25();
+            break;
+        case 26:
+            ChipLogProgress(chipTool, " ***** Test Step 26 : TP21(16) - Write NodeLabel attribute (Basic - requires manage)\n");
+            err = TestTp2116WriteNodeLabelAttributeBasicRequiresManage_26();
+            break;
+        case 27:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 27 : TP21(17) - Send TestEventTrigger (General Diagnostics - requires manage)\n");
+            err = TestTp2117SendTestEventTriggerGeneralDiagnosticsRequiresManage_27();
+            break;
+        case 28:
+            ChipLogProgress(chipTool, " ***** Test Step 28 : TP22(8) - Tead the VendorID attribute (Basic - requires view)\n");
+            err = TestTp228TeadTheVendorIDAttributeBasicRequiresView_28();
+            break;
+        case 29:
+            ChipLogProgress(chipTool, " ***** Test Step 29 : TP23 - Write ACL giving only admin privilege ACL cluster\n");
+            err = TestTp23WriteAclGivingOnlyAdminPrivilegeAclCluster_29();
+            break;
+        case 30:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 30 : TP24(10) - Read the NOC attribute (Node operational credentials - requires administer)\n");
+            err = TestTp2410ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_30();
+            break;
+        case 31:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 31 : TP24(11) - Write the location attribute (Basic - requires administer)\n");
+            err = TestTp2411WriteTheLocationAttributeBasicRequiresAdminister_31();
+            break;
+        case 32:
+            ChipLogProgress(chipTool,
+                " ***** Test Step 32 : TP24(12) - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                "administer)\n");
+            err = TestTp2412SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_32();
+            break;
+        case 33:
+            ChipLogProgress(chipTool, " ***** Test Step 33 : TP25(16) - Write NodeLabel attribute (Basic - requires manage)\n");
+            err = TestTp2516WriteNodeLabelAttributeBasicRequiresManage_33();
+            break;
+        case 34:
+            ChipLogProgress(
+                chipTool, " ***** Test Step 34 : TP25(17) - Send TestEventTrigger (General Diagnostics - requires manage)\n");
+            err = TestTp2517SendTestEventTriggerGeneralDiagnosticsRequiresManage_34();
+            break;
+        case 35:
+            ChipLogProgress(chipTool, " ***** Test Step 35 : TP26 - Tead the VendorID attribute (Basic - requires view)\n");
+            err = TestTp26TeadTheVendorIDAttributeBasicRequiresView_35();
+            break;
+        case 36:
+            ChipLogProgress(chipTool, " ***** Test Step 36 : TP27 - Write ACL to restore full access\n");
+            err = TestTp27WriteAclToRestoreFullAccess_36();
+            break;
+        }
+
+        if (CHIP_NO_ERROR != err) {
+            ChipLogError(chipTool, " ***** Test Failure: %s\n", chip::ErrorStr(err));
+            SetCommandExitStatus(err);
+        }
+    }
+
+    void OnStatusUpdate(const chip::app::StatusIB & status) override
+    {
+        switch (mTestIndex - 1) {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        }
+
+        // Go on to the next test.
+        ContinueOnChipMainThread(CHIP_NO_ERROR);
+    }
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    std::atomic_uint16_t mTestIndex;
+    const uint16_t mTestCount = 37;
+
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrieved_0()
+    {
+
+        chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+        value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+        return WaitForCommissionee("alpha", value);
+    }
+
+    CHIP_ERROR TestTp2WriteAclGivingAdminPrivilegeOnAllEp0_1()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP2 - Write ACL giving admin privilege on all EP0 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp3ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_2()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeNOCsWithParams:params
+                             completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                 NSLog(
+                                     @"TP3 - Read the NOC attribute (Node operational credentials - requires administer) Error: %@",
+                                     err);
+
+                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                 NextTest();
+                             }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp4WriteTheLocationAttributeBasicRequiresAdminister_3()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id locationArgument;
+        locationArgument = @"XX";
+        [cluster writeAttributeLocationWithValue:locationArgument
+                                      completion:^(NSError * _Nullable err) {
+                                          NSLog(@"TP4 - Write the location attribute (Basic - requires administer) Error: %@", err);
+
+                                          VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                          NextTest();
+                                      }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp5SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_4()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterUpdateFabricLabelParams alloc] init];
+        params.label = @"TestFabric";
+        [cluster updateFabricLabelWithParams:params
+                                  completion:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values,
+                                      NSError * _Nullable err) {
+                                      NSLog(@"TP5 - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                                            @"administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp6WriteNodeLabelAttributeBasicRequiresManage_5()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nodeLabelArgument;
+        nodeLabelArgument = @"TestNode";
+        [cluster writeAttributeNodeLabelWithValue:nodeLabelArgument
+                                       completion:^(NSError * _Nullable err) {
+                                           NSLog(@"TP6 - Write NodeLabel attribute (Basic - requires manage) Error: %@", err);
+
+                                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                           NextTest();
+                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp7SendTestEventTriggerGeneralDiagnosticsRequiresManage_6()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
+        params.enableKey = [[NSData alloc] initWithBytes:"0" length:1];
+        params.eventTrigger = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster testEventTriggerWithParams:params
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP7 - Send TestEventTrigger (General Diagnostics - requires manage) Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp8TeadTheVendorIDAttributeBasicRequiresView_7()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TP8 - Tead the VendorID attribute (Basic - requires view) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp9WriteAclGivingAdminPrivilegeAclManageForRestOfEp0_8()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:31UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:4U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP9 - Write ACL giving admin privilege ACL, manage for rest of EP0 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp10ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_9()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster readAttributeNOCsWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TP10 - Read the NOC attribute (Node operational credentials - requires administer) "
+                                            @"Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp11WriteTheLocationAttributeBasicRequiresAdminister_10()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id locationArgument;
+        locationArgument = @"XX";
+        [cluster
+            writeAttributeLocationWithValue:locationArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP11 - Write the location attribute (Basic - requires administer) Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp12SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterUpdateFabricLabelParams alloc] init];
+        params.label = @"TestFabric";
+        [cluster updateFabricLabelWithParams:params
+                                  completion:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values,
+                                      NSError * _Nullable err) {
+                                      NSLog(@"TP12 - Send the UpdateFabricLabel command (Node operational credentials - requires "
+                                            @"administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp136WriteNodeLabelAttributeBasicRequiresManage_12()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nodeLabelArgument;
+        nodeLabelArgument = @"TestNode";
+        [cluster writeAttributeNodeLabelWithValue:nodeLabelArgument
+                                       completion:^(NSError * _Nullable err) {
+                                           NSLog(@"TP13(6) - Write NodeLabel attribute (Basic - requires manage) Error: %@", err);
+
+                                           VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                           NextTest();
+                                       }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp137SendTestEventTriggerGeneralDiagnosticsRequiresManage_13()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
+        params.enableKey = [[NSData alloc] initWithBytes:"0" length:1];
+        params.eventTrigger = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster
+            testEventTriggerWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"TP13(7) - Send TestEventTrigger (General Diagnostics - requires manage) Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status",
+                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                  : EMBER_ZCL_STATUS_FAILURE)
+                                        : 0,
+                                    EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp138TeadTheVendorIDAttributeBasicRequiresView_14()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TP13(8) - Tead the VendorID attribute (Basic - requires view) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp14WriteAclGivingAdminPrivilegeAclOperateForRestOfEp0_15()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:31UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP14 - Write ACL giving admin privilege ACL, operate for rest of EP0 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp1510ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_16()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster readAttributeNOCsWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TP15(10) - Read the NOC attribute (Node operational credentials - requires "
+                                            @"administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp1511WriteTheLocationAttributeBasicRequiresAdminister_17()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id locationArgument;
+        locationArgument = @"XX";
+        [cluster
+            writeAttributeLocationWithValue:locationArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP15(11) - Write the location attribute (Basic - requires administer) Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp1512SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_18()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterUpdateFabricLabelParams alloc] init];
+        params.label = @"TestFabric";
+        [cluster updateFabricLabelWithParams:params
+                                  completion:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values,
+                                      NSError * _Nullable err) {
+                                      NSLog(@"TP15(12) - Send the UpdateFabricLabel command (Node operational credentials - "
+                                            @"requires administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp16WriteNodeLabelAttributeBasicRequiresManage_19()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nodeLabelArgument;
+        nodeLabelArgument = @"TestNode";
+        [cluster
+            writeAttributeNodeLabelWithValue:nodeLabelArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TP16 - Write NodeLabel attribute (Basic - requires manage) Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp17SendTestEventTriggerGeneralDiagnosticsRequiresManage_20()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
+        params.enableKey = [[NSData alloc] initWithBytes:"0" length:1];
+        params.eventTrigger = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster testEventTriggerWithParams:params
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP17 - Send TestEventTrigger (General Diagnostics - requires manage) Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp188TeadTheVendorIDAttributeBasicRequiresView_21()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TP18(8) - Tead the VendorID attribute (Basic - requires view) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp19WriteAclGivingAdminPrivilegeAclOperateForRestOfEp0_22()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:31UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:1U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = nil;
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP19 - Write ACL giving admin privilege ACL, operate for rest of EP0 Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2010ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_23()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster readAttributeNOCsWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TP20(10) - Read the NOC attribute (Node operational credentials - requires "
+                                            @"administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2011WriteTheLocationAttributeBasicRequiresAdminister_24()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id locationArgument;
+        locationArgument = @"XX";
+        [cluster
+            writeAttributeLocationWithValue:locationArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP20(11) - Write the location attribute (Basic - requires administer) Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2012SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_25()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterUpdateFabricLabelParams alloc] init];
+        params.label = @"TestFabric";
+        [cluster updateFabricLabelWithParams:params
+                                  completion:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values,
+                                      NSError * _Nullable err) {
+                                      NSLog(@"TP20(12) - Send the UpdateFabricLabel command (Node operational credentials - "
+                                            @"requires administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2116WriteNodeLabelAttributeBasicRequiresManage_26()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nodeLabelArgument;
+        nodeLabelArgument = @"TestNode";
+        [cluster
+            writeAttributeNodeLabelWithValue:nodeLabelArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TP21(16) - Write NodeLabel attribute (Basic - requires manage) Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2117SendTestEventTriggerGeneralDiagnosticsRequiresManage_27()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
+        params.enableKey = [[NSData alloc] initWithBytes:"0" length:1];
+        params.eventTrigger = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster
+            testEventTriggerWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"TP21(17) - Send TestEventTrigger (General Diagnostics - requires manage) Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status",
+                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                  : EMBER_ZCL_STATUS_FAILURE)
+                                        : 0,
+                                    EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp228TeadTheVendorIDAttributeBasicRequiresView_28()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TP22(8) - Tead the VendorID attribute (Basic - requires view) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp23WriteAclGivingOnlyAdminPrivilegeAclCluster_29()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [[MTRAccessControlClusterTarget alloc] init];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).cluster = [NSNumber numberWithUnsignedInt:31UL];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).endpoint = [NSNumber numberWithUnsignedShort:0U];
+                ((MTRAccessControlClusterTarget *) temp_3[0]).deviceType = nil;
+
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP23 - Write ACL giving only admin privilege ACL cluster Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2410ReadTheNocAttributeNodeOperationalCredentialsRequiresAdminister_30()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster readAttributeNOCsWithParams:params
+                                  completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                      NSLog(@"TP24(10) - Read the NOC attribute (Node operational credentials - requires "
+                                            @"administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2411WriteTheLocationAttributeBasicRequiresAdminister_31()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id locationArgument;
+        locationArgument = @"XX";
+        [cluster
+            writeAttributeLocationWithValue:locationArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP24(11) - Write the location attribute (Basic - requires administer) Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status",
+                                         err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                       : EMBER_ZCL_STATUS_FAILURE)
+                                             : 0,
+                                         EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                     NextTest();
+                                 }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2412SendTheUpdateFabricLabelCommandNodeOperationalCredentialsRequiresAdminister_32()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterOperationalCredentials alloc] initWithDevice:device
+                                                                                  endpointID:@(0)
+                                                                                       queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTROperationalCredentialsClusterUpdateFabricLabelParams alloc] init];
+        params.label = @"TestFabric";
+        [cluster updateFabricLabelWithParams:params
+                                  completion:^(MTROperationalCredentialsClusterNOCResponseParams * _Nullable values,
+                                      NSError * _Nullable err) {
+                                      NSLog(@"TP24(12) - Send the UpdateFabricLabel command (Node operational credentials - "
+                                            @"requires administer) Error: %@",
+                                          err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2516WriteNodeLabelAttributeBasicRequiresManage_33()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id nodeLabelArgument;
+        nodeLabelArgument = @"TestNode";
+        [cluster
+            writeAttributeNodeLabelWithValue:nodeLabelArgument
+                                  completion:^(NSError * _Nullable err) {
+                                      NSLog(@"TP25(16) - Write NodeLabel attribute (Basic - requires manage) Error: %@", err);
+
+                                      VerifyOrReturn(CheckValue("status",
+                                          err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                        : EMBER_ZCL_STATUS_FAILURE)
+                                              : 0,
+                                          EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                      NextTest();
+                                  }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp2517SendTestEventTriggerGeneralDiagnosticsRequiresManage_34()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterGeneralDiagnostics alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRGeneralDiagnosticsClusterTestEventTriggerParams alloc] init];
+        params.enableKey = [[NSData alloc] initWithBytes:"0" length:1];
+        params.eventTrigger = [NSNumber numberWithUnsignedLongLong:0ULL];
+        [cluster
+            testEventTriggerWithParams:params
+                            completion:^(NSError * _Nullable err) {
+                                NSLog(@"TP25(17) - Send TestEventTrigger (General Diagnostics - requires manage) Error: %@", err);
+
+                                VerifyOrReturn(CheckValue("status",
+                                    err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code
+                                                                                                  : EMBER_ZCL_STATUS_FAILURE)
+                                        : 0,
+                                    EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+                                NextTest();
+                            }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp26TeadTheVendorIDAttributeBasicRequiresView_35()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterBasicInformation alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        [cluster readAttributeVendorIDWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
+            NSLog(@"TP26 - Tead the VendorID attribute (Basic - requires view) Error: %@", err);
+
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            NextTest();
+        }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestTp27WriteAclToRestoreFullAccess_36()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        __auto_type * cluster = [[MTRBaseClusterAccessControl alloc] initWithDevice:device endpointID:@(0) queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        id aclArgument;
+        {
+            NSMutableArray * temp_0 = [[NSMutableArray alloc] init];
+            temp_0[0] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).privilege = [NSNumber numberWithUnsignedChar:5U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).authMode = [NSNumber numberWithUnsignedChar:2U];
+            {
+                NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
+                temp_3[0] = [NSNumber numberWithUnsignedLongLong:commissionerNodeId];
+                ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).subjects = temp_3;
+            }
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).targets = nil;
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
+
+            aclArgument = temp_0;
+        }
+        [cluster writeAttributeACLWithValue:aclArgument
+                                 completion:^(NSError * _Nullable err) {
+                                     NSLog(@"TP27 - Write ACL to restore full access Error: %@", err);
+
+                                     VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                     NextTest();
+                                 }];
 
         return CHIP_NO_ERROR;
     }
@@ -136011,6 +137470,7 @@ void registerCommandsTests(Commands & commands)
         make_unique<Test_TC_ACL_2_1>(),
         make_unique<Test_TC_ACL_2_2>(),
         make_unique<Test_TC_ACL_2_3>(),
+        make_unique<Test_TC_ACE_1_1>(),
         make_unique<Test_TC_ACE_1_5>(),
         make_unique<Test_TC_BOOL_1_1>(),
         make_unique<Test_TC_BOOL_2_1>(),
