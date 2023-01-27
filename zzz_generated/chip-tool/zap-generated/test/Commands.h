@@ -45,6 +45,7 @@ public:
         printf("Test_TC_ACL_2_8\n");
         printf("Test_TC_ACL_2_9\n");
         printf("Test_TC_ACL_2_10\n");
+        printf("Test_TC_ACE_1_1\n");
         printf("Test_TC_ACE_1_5\n");
         printf("Test_TC_BOOL_1_1\n");
         printf("Test_TC_BOOL_2_1\n");
@@ -559,7 +560,6 @@ public:
         printf("Test_TC_ACL_2_6\n");
         printf("Test_TC_BRBINFO_2_2\n");
         printf("Test_TC_BRBINFO_2_3\n");
-        printf("Test_TC_ACE_1_1\n");
         printf("Test_TC_ACE_1_2\n");
 
         return CHIP_NO_ERROR;
@@ -7368,6 +7368,802 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
+class Test_TC_ACE_1_1Suite : public TestCommand
+{
+public:
+    Test_TC_ACE_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_1", 37, credsIssuerConfig)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_ACE_1_1Suite() {}
+
+    chip::System::Clock::Timeout GetWaitDuration() const override
+    {
+        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
+    }
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+
+        // Allow yaml to access the current commissioner node id.
+        // Default to 0 (undefined node id) so we know if this isn't
+        // set correctly.
+        // Reset on every step in case it changed.
+        chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        (void) commissionerNodeId;
+
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        case 1:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 2:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<chip::app::Clusters::OperationalCredentials::Structs::NOCStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 3:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 4:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::Clusters::OperationalCredentials::Commands::NOCResponse::DecodableType value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 5:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 6:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 7:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::VendorId value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 8:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 9:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 10:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 11:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 13:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            break;
+        case 14:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::VendorId value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 15:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 16:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 17:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 19:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 20:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 21:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::VendorId value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 22:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 23:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 24:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 25:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 26:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 27:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 28:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::VendorId value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+            }
+            break;
+        case 29:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        case 30:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 31:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 32:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 33:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 34:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 35:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ACCESS));
+            break;
+        case 36:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        // Allow yaml to access the current commissioner node id.
+        // Default to 0 (undefined node id) so we know if this isn't
+        // set correctly.
+        // Reset on every step in case it changed.
+        chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        (void) commissionerNodeId;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the commissioned device to be retrieved");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissionee::Type value;
+            value.nodeId = mNodeId.HasValue() ? mNodeId.Value() : 305414945ULL;
+            return WaitForCommissionee(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "TP2 - Write ACL giving admin privilege on all EP0");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[0].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[0].fabricIndex = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 2: {
+            LogStep(2, "TP3 - Read the NOC attribute (Node operational credentials - requires administer)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::NOCs::Id, true, chip::NullOptional);
+        }
+        case 3: {
+            LogStep(3, "TP4 - Write the location attribute (Basic - requires administer)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 4: {
+            LogStep(4, "TP5 - Send the UpdateFabricLabel command (Node operational credentials - requires administer)");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::UpdateFabricLabel::Type value;
+            value.label = chip::Span<const char>("TestFabricgarbage: not in length on purpose", 10);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::UpdateFabricLabel::Id, value, chip::NullOptional
+
+            );
+        }
+        case 5: {
+            LogStep(5, "TP6 - Write NodeLabel attribute (Basic - requires manage)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("TestNodegarbage: not in length on purpose", 8);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 6: {
+            LogStep(6, "TP7 - Send TestEventTrigger (General Diagnostics - requires manage)");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = chip::ByteSpan(chip::Uint8::from_const_char("0garbage: not in length on purpose"), 1);
+            value.eventTrigger = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 7: {
+            LogStep(7, "TP8 - Tead the VendorID attribute (Basic - requires view)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
+        }
+        case 8: {
+            LogStep(8, "TP9 - Write ACL giving admin privilege ACL, manage for rest of EP0");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 31UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[0].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[0].fabricIndex = 1U;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(4);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 9: {
+            LogStep(9, "TP10 - Read the NOC attribute (Node operational credentials - requires administer)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::NOCs::Id, true, chip::NullOptional);
+        }
+        case 10: {
+            LogStep(10, "TP11 - Write the location attribute (Basic - requires administer)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 11: {
+            LogStep(11, "TP12 - Send the UpdateFabricLabel command (Node operational credentials - requires administer)");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::UpdateFabricLabel::Type value;
+            value.label = chip::Span<const char>("TestFabricgarbage: not in length on purpose", 10);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::UpdateFabricLabel::Id, value, chip::NullOptional
+
+            );
+        }
+        case 12: {
+            LogStep(12, "TP13(6) - Write NodeLabel attribute (Basic - requires manage)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("TestNodegarbage: not in length on purpose", 8);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 13: {
+            LogStep(13, "TP13(7) - Send TestEventTrigger (General Diagnostics - requires manage)");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = chip::ByteSpan(chip::Uint8::from_const_char("0garbage: not in length on purpose"), 1);
+            value.eventTrigger = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 14: {
+            LogStep(14, "TP13(8) - Tead the VendorID attribute (Basic - requires view)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
+        }
+        case 15: {
+            LogStep(15, "TP14 - Write ACL giving admin privilege ACL, operate for rest of EP0");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 31UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[0].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[0].fabricIndex = 1U;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 16: {
+            LogStep(16, "TP15(10) - Read the NOC attribute (Node operational credentials - requires administer)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::NOCs::Id, true, chip::NullOptional);
+        }
+        case 17: {
+            LogStep(17, "TP15(11) - Write the location attribute (Basic - requires administer)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 18: {
+            LogStep(18, "TP15(12) - Send the UpdateFabricLabel command (Node operational credentials - requires administer)");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::UpdateFabricLabel::Type value;
+            value.label = chip::Span<const char>("TestFabricgarbage: not in length on purpose", 10);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::UpdateFabricLabel::Id, value, chip::NullOptional
+
+            );
+        }
+        case 19: {
+            LogStep(19, "TP16 - Write NodeLabel attribute (Basic - requires manage)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("TestNodegarbage: not in length on purpose", 8);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 20: {
+            LogStep(20, "TP17 - Send TestEventTrigger (General Diagnostics - requires manage)");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = chip::ByteSpan(chip::Uint8::from_const_char("0garbage: not in length on purpose"), 1);
+            value.eventTrigger = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 21: {
+            LogStep(21, "TP18(8) - Tead the VendorID attribute (Basic - requires view)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "TP19 - Write ACL giving admin privilege ACL, operate for rest of EP0");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 31UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[0].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[0].fabricIndex = 1U;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(1);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNull();
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[1].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[1].fabricIndex = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "TP20(10) - Read the NOC attribute (Node operational credentials - requires administer)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::NOCs::Id, true, chip::NullOptional);
+        }
+        case 24: {
+            LogStep(24, "TP20(11) - Write the location attribute (Basic - requires administer)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 25: {
+            LogStep(25, "TP20(12) - Send the UpdateFabricLabel command (Node operational credentials - requires administer)");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::UpdateFabricLabel::Type value;
+            value.label = chip::Span<const char>("TestFabricgarbage: not in length on purpose", 10);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::UpdateFabricLabel::Id, value, chip::NullOptional
+
+            );
+        }
+        case 26: {
+            LogStep(26, "TP21(16) - Write NodeLabel attribute (Basic - requires manage)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("TestNodegarbage: not in length on purpose", 8);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 27: {
+            LogStep(27, "TP21(17) - Send TestEventTrigger (General Diagnostics - requires manage)");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = chip::ByteSpan(chip::Uint8::from_const_char("0garbage: not in length on purpose"), 1);
+            value.eventTrigger = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 28: {
+            LogStep(28, "TP22(8) - Tead the VendorID attribute (Basic - requires view)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
+        }
+        case 29: {
+            LogStep(29, "TP23 - Write ACL giving only admin privilege ACL cluster");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<chip::app::Clusters::AccessControl::Structs::Target::Type>(1);
+                    listFreer.add(listHolder_3);
+
+                    listHolder_3->mList[0].cluster.SetNonNull();
+                    listHolder_3->mList[0].cluster.Value() = 31UL;
+                    listHolder_3->mList[0].endpoint.SetNonNull();
+                    listHolder_3->mList[0].endpoint.Value() = 0U;
+                    listHolder_3->mList[0].deviceType.SetNull();
+
+                    listHolder_0->mList[0].targets.Value() =
+                        chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::Target::Type>(listHolder_3->mList,
+                                                                                                              1);
+                }
+                listHolder_0->mList[0].fabricIndex = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
+        }
+        case 30: {
+            LogStep(30, "TP24(10) - Read the NOC attribute (Node operational credentials - requires administer)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                                 OperationalCredentials::Attributes::NOCs::Id, true, chip::NullOptional);
+        }
+        case 31: {
+            LogStep(31, "TP24(11) - Write the location attribute (Basic - requires administer)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("XXgarbage: not in length on purpose", 2);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::Location::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 32: {
+            LogStep(32, "TP24(12) - Send the UpdateFabricLabel command (Node operational credentials - requires administer)");
+            ListFreer listFreer;
+            chip::app::Clusters::OperationalCredentials::Commands::UpdateFabricLabel::Type value;
+            value.label = chip::Span<const char>("TestFabricgarbage: not in length on purpose", 10);
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), OperationalCredentials::Id,
+                               OperationalCredentials::Commands::UpdateFabricLabel::Id, value, chip::NullOptional
+
+            );
+        }
+        case 33: {
+            LogStep(33, "TP25(16) - Write NodeLabel attribute (Basic - requires manage)");
+            ListFreer listFreer;
+            chip::CharSpan value;
+            value = chip::Span<const char>("TestNodegarbage: not in length on purpose", 8);
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 34: {
+            LogStep(34, "TP25(17) - Send TestEventTrigger (General Diagnostics - requires manage)");
+            ListFreer listFreer;
+            chip::app::Clusters::GeneralDiagnostics::Commands::TestEventTrigger::Type value;
+            value.enableKey    = chip::ByteSpan(chip::Uint8::from_const_char("0garbage: not in length on purpose"), 1);
+            value.eventTrigger = 0ULL;
+            return SendCommand(kIdentityAlpha, GetEndpoint(0), GeneralDiagnostics::Id,
+                               GeneralDiagnostics::Commands::TestEventTrigger::Id, value, chip::NullOptional
+
+            );
+        }
+        case 35: {
+            LogStep(35, "TP26 - Tead the VendorID attribute (Basic - requires view)");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::VendorID::Id,
+                                 true, chip::NullOptional);
+        }
+        case 36: {
+            LogStep(36, "TP27 - Write ACL to restore full access");
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(1);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = commissionerNodeId;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = 1U;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 1);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
         }
         }
         return CHIP_NO_ERROR;
@@ -118395,75 +119191,6 @@ private:
     }
 };
 
-class Test_TC_ACE_1_1Suite : public TestCommand
-{
-public:
-    Test_TC_ACE_1_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_ACE_1_1", 0, credsIssuerConfig)
-    {
-        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
-        AddArgument("cluster", &mCluster);
-        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
-        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
-    }
-
-    ~Test_TC_ACE_1_1Suite() {}
-
-    chip::System::Clock::Timeout GetWaitDuration() const override
-    {
-        return chip::System::Clock::Seconds16(mTimeout.ValueOr(kTimeoutInSeconds));
-    }
-
-private:
-    chip::Optional<chip::NodeId> mNodeId;
-    chip::Optional<chip::CharSpan> mCluster;
-    chip::Optional<chip::EndpointId> mEndpoint;
-    chip::Optional<uint16_t> mTimeout;
-
-    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
-
-    //
-    // Tests methods
-    //
-
-    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
-    {
-
-        // Allow yaml to access the current commissioner node id.
-        // Default to 0 (undefined node id) so we know if this isn't
-        // set correctly.
-        // Reset on every step in case it changed.
-        chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        (void) commissionerNodeId;
-
-        bool shouldContinue = false;
-
-        switch (mTestIndex - 1)
-        {
-        default:
-            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
-        }
-
-        if (shouldContinue)
-        {
-            ContinueOnChipMainThread(CHIP_NO_ERROR);
-        }
-    }
-
-    CHIP_ERROR DoTestStep(uint16_t testIndex) override
-    {
-        using namespace chip::app::Clusters;
-        // Allow yaml to access the current commissioner node id.
-        // Default to 0 (undefined node id) so we know if this isn't
-        // set correctly.
-        // Reset on every step in case it changed.
-        chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-        (void) commissionerNodeId;
-        switch (testIndex)
-        {}
-        return CHIP_NO_ERROR;
-    }
-};
-
 class Test_TC_ACE_1_2Suite : public TestCommand
 {
 public:
@@ -118553,6 +119280,7 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_ACL_2_8Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_9Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACL_2_10Suite>(credsIssuerConfig),
+        make_unique<Test_TC_ACE_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACE_1_5Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_BOOL_2_1Suite>(credsIssuerConfig),
@@ -119056,7 +119784,6 @@ void registerCommandsTests(Commands & commands, CredentialIssuerCommands * creds
         make_unique<Test_TC_ACL_2_6Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_2Suite>(credsIssuerConfig),
         make_unique<Test_TC_BRBINFO_2_3Suite>(credsIssuerConfig),
-        make_unique<Test_TC_ACE_1_1Suite>(credsIssuerConfig),
         make_unique<Test_TC_ACE_1_2Suite>(credsIssuerConfig),
 #endif // CONFIG_ENABLE_YAML_TESTS
     };
