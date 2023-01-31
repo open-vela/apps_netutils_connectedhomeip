@@ -4632,6 +4632,8 @@ private:
 
                                  VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+                                 VerifyOrReturn(CheckConstraintMinLength("NOCs", value, 1));
+                                 VerifyOrReturn(CheckConstraintMaxLength("NOCs", value, 1));
                                  NextTest();
                              }];
 
@@ -46866,6 +46868,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 10000ULL));
             }
 
             NextTest();
@@ -46930,6 +46936,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 0ULL));
             }
 
             NextTest();
@@ -47224,6 +47234,10 @@ private:
             {
                 id actualValue = value;
                 VerifyOrReturn(CheckValueNonNull("SampledPosition", actualValue));
+                VerifyOrReturn(
+                    CheckValueNonNull("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position));
+                VerifyOrReturn(
+                    CheckValue("Position", ((MTRMediaPlaybackClusterPlaybackPositionStruct *) actualValue).position, 10000ULL));
             }
 
             NextTest();

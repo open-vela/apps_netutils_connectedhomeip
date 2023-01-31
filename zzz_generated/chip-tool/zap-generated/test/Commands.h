@@ -7431,6 +7431,8 @@ private:
                 chip::app::DataModel::DecodableList<chip::app::Clusters::OperationalCredentials::Structs::NOCStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckConstraintMinLength("value", value, 1));
+                VerifyOrReturn(CheckConstraintMaxLength("value", value, 1));
             }
             break;
         case 3:
@@ -35295,6 +35297,8 @@ private:
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
+                VerifyOrReturn(CheckValueNonNull("sampledPosition.Value().position", value.Value().position));
+                VerifyOrReturn(CheckValue("sampledPosition.Value().position.Value()", value.Value().position.Value(), 10000ULL));
             }
             break;
         case 15:
@@ -35316,6 +35320,8 @@ private:
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
+                VerifyOrReturn(CheckValueNonNull("sampledPosition.Value().position", value.Value().position));
+                VerifyOrReturn(CheckValue("sampledPosition.Value().position.Value()", value.Value().position.Value(), 0ULL));
             }
             break;
         default:
@@ -35595,6 +35601,8 @@ private:
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
                 VerifyOrReturn(CheckValueNonNull("sampledPosition", value));
+                VerifyOrReturn(CheckValueNonNull("sampledPosition.Value().position", value.Value().position));
+                VerifyOrReturn(CheckValue("sampledPosition.Value().position.Value()", value.Value().position.Value(), 10000ULL));
             }
             break;
         case 5:
