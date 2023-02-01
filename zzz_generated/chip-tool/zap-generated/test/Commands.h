@@ -5818,6 +5818,18 @@ private:
                 {
                     chip::app::Clusters::AccessControl::Events::AccessControlExtensionChanged::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValueNonNull("accessControlExtensionChanged.adminNodeID", value.adminNodeID));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.adminNodeID.Value()", value.adminNodeID.Value(),
+                                              mTH1CommissionerNodeId.HasValue() ? mTH1CommissionerNodeId.Value() : 112233ULL));
+                    VerifyOrReturn(CheckValueNull("accessControlExtensionChanged.adminPasscodeID", value.adminPasscodeID));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.changeType", value.changeType, 1U));
+                    VerifyOrReturn(CheckValueNonNull("accessControlExtensionChanged.latestValue", value.latestValue));
+                    VerifyOrReturn(CheckValueAsString(
+                        "accessControlExtensionChanged.latestValue.Value().data", value.latestValue.Value().data,
+                        mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2)));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.latestValue.Value().fabricIndex",
+                                              value.latestValue.Value().fabricIndex, TH1FabricIndex));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.fabricIndex", value.fabricIndex, TH1FabricIndex));
                 }
                 mTestSubStepIndex++;
                 break;
@@ -5834,6 +5846,25 @@ private:
                 {
                     chip::app::Clusters::AccessControl::Events::AccessControlExtensionChanged::DecodableType value;
                     VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                    VerifyOrReturn(CheckValueNonNull("accessControlExtensionChanged.adminNodeID", value.adminNodeID));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.adminNodeID.Value()", value.adminNodeID.Value(),
+                                              mTH2CommissionerNodeId.HasValue() ? mTH2CommissionerNodeId.Value() : 112233ULL));
+                    VerifyOrReturn(CheckValueNull("accessControlExtensionChanged.adminPasscodeID", value.adminPasscodeID));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.changeType", value.changeType, 1U));
+                    VerifyOrReturn(CheckValueNonNull("accessControlExtensionChanged.latestValue", value.latestValue));
+                    VerifyOrReturn(CheckValueAsString(
+                        "accessControlExtensionChanged.latestValue.Value().data", value.latestValue.Value().data,
+                        mDOkSingle.HasValue()
+                            ? mDOkSingle.Value()
+                            : chip::ByteSpan(chip::Uint8::from_const_char(
+                                                 "\x17\xD0\x00\x00\xF1\xFF\x01\x00\x3D\x48\x65\x6C\x6C\x6F\x20\x57\x6F\x72\x6C\x64"
+                                                 "\x2E\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x73\x69\x6E\x67\x6C\x65\x20\x65"
+                                                 "\x6C\x65\x6D\x65\x6E\x74\x20\x6C\x69\x76\x69\x6E\x67\x20\x61\x73\x20\x61\x20\x63"
+                                                 "\x68\x61\x72\x73\x74\x72\x69\x6E\x67\x00\x18"),
+                                             71)));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.latestValue.Value().fabricIndex",
+                                              value.latestValue.Value().fabricIndex, TH2FabricIndex));
+                    VerifyOrReturn(CheckValue("accessControlExtensionChanged.fabricIndex", value.fabricIndex, TH2FabricIndex));
                 }
                 mTestSubStepIndex++;
                 break;
