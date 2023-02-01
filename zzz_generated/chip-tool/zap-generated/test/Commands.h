@@ -46750,6 +46750,7 @@ private:
             {
                 uint8_t value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                VerifyOrReturn(CheckValue("temperatureDisplayMode", value, 0U));
             }
             break;
         case 4:

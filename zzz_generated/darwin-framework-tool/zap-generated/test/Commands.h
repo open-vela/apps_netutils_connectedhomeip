@@ -62315,6 +62315,11 @@ private:
 
             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
+            {
+                id actualValue = value;
+                VerifyOrReturn(CheckValue("TemperatureDisplayMode", actualValue, 0U));
+            }
+
             NextTest();
         }];
 
