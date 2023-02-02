@@ -65274,6 +65274,7 @@ public:
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("shortDiscriminator", 0, UINT16_MAX, &mShortDiscriminator);
         AddArgument("vendorId", 0, UINT16_MAX, &mVendorId);
         AddArgument("productId", 0, UINT16_MAX, &mProductId);
         AddArgument("deviceType", 0, UINT16_MAX, &mDeviceType);
@@ -65298,6 +65299,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<uint16_t> mShortDiscriminator;
     chip::Optional<uint16_t> mVendorId;
     chip::Optional<uint16_t> mProductId;
     chip::Optional<uint16_t> mDeviceType;
@@ -65619,7 +65621,7 @@ private:
             LogStep(8, "Check Short Discriminator (_S)");
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByShortDiscriminator::Type value;
-            value.value = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840ULL;
+            value.value = mShortDiscriminator.HasValue() ? mShortDiscriminator.Value() : 15ULL;
             return FindCommissionableByShortDiscriminator(kIdentityAlpha, value);
         }
         case 9: {
