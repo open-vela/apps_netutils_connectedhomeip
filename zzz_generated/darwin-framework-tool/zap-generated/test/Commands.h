@@ -130694,17 +130694,10 @@ public:
 
     ~Test_TC_DRLK_2_11() {}
 
-    // Allow yaml to access the current commissioner node id.
-    // Default to 0 (undefined node id) so we know if this isn't
-    // set correctly.
-    // Reset on every step in case it changed.
-    chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
-
     /////////// TestCommand Interface /////////
     void NextTest() override
     {
         CHIP_ERROR err = CHIP_NO_ERROR;
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
 
         if (0 == mTestIndex) {
             ChipLogProgress(chipTool, " **** Test Start: Test_TC_DRLK_2_11\n");
@@ -130952,7 +130945,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -130980,7 +130972,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131059,7 +131050,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131106,7 +131096,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131153,7 +131142,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131200,7 +131188,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131255,7 +131242,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131310,7 +131296,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131365,7 +131350,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131390,7 +131374,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131445,7 +131428,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131500,7 +131482,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131525,7 +131506,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131580,7 +131560,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131605,7 +131584,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131656,7 +131634,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
@@ -131707,7 +131684,6 @@ private:
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
-        commissionerNodeId = mCommissionerNodeId.ValueOr(0);
         __auto_type * cluster = [[MTRBaseClusterDoorLock alloc] initWithDevice:device endpointID:@(1) queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
