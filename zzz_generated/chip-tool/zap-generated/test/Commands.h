@@ -40330,7 +40330,7 @@ private:
         }
         case 14: {
             LogStep(14, "Reads the attribute: EffectiveControlMode");
-            VerifyOrDo(!ShouldSkip("PCC.S.F02 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PCC.S.F05 && PCC.S.A0012"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), PumpConfigurationAndControl::Id,
                                  PumpConfigurationAndControl::Attributes::EffectiveControlMode::Id, true, chip::NullOptional);
         }
@@ -97287,7 +97287,7 @@ private:
         }
         case 12: {
             LogStep(12, "TH_CR1 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptest1garbage: not in length on purpose", 9);
@@ -97296,13 +97296,13 @@ private:
         }
         case 13: {
             LogStep(13, "TH_CR1 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
         case 14: {
             LogStep(14, "TH_CR2 writes the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::CharSpan value;
             value = chip::Span<const char>("chiptest2garbage: not in length on purpose", 9);
@@ -97311,7 +97311,7 @@ private:
         }
         case 15: {
             LogStep(15, "TH_CR2 reads the Basic Information Clusters NodeLabel mandatory attribute of DUT_CE");
-            VerifyOrDo(!ShouldSkip("OPCREDS.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("BINFO.S.A0005"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityBeta, GetEndpoint(0), BasicInformation::Id, BasicInformation::Attributes::NodeLabel::Id,
                                  true, chip::NullOptional);
         }
@@ -99477,11 +99477,11 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
                     VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
                     VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
                 }
@@ -99527,11 +99527,11 @@ private:
                     VerifyOrReturn(CheckValueAsString("fabrics[0].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 1));
                     VerifyOrReturn(CheckValue("fabrics[1].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
+                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[1].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("fabrics", iter_0, 2));
                     VerifyOrReturn(CheckValue("fabrics[2].nodeID", iter_0.GetValue().nodeID,
-                                              mNodeId3.HasValue() ? mNodeId3.Value() : 12586990ULL));
+                                              mNodeId2.HasValue() ? mNodeId2.Value() : 51966ULL));
                     VerifyOrReturn(CheckValueAsString("fabrics[2].label", iter_0.GetValue().label, chip::CharSpan("", 0)));
                     VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("fabrics", iter_0, 3));
                 }

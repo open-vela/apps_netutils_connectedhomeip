@@ -56524,7 +56524,7 @@ public:
             break;
         case 14:
             ChipLogProgress(chipTool, " ***** Test Step 14 : Reads the attribute: EffectiveControlMode\n");
-            if (ShouldSkip("PCC.S.F02 && PCC.S.A0012")) {
+            if (ShouldSkip("PCC.S.F05 && PCC.S.A0012")) {
                 NextTest();
                 return;
             }
