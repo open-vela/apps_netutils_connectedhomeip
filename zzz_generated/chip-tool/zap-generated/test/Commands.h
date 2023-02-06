@@ -6014,6 +6014,28 @@ private:
                     chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mTH1CommissionerNodeId.HasValue() ? mTH1CommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[1]", iter_3.GetValue(), 1111ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 2));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, TH1FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 1));
+                }
             }
             break;
         case 9:
@@ -6023,6 +6045,28 @@ private:
                     chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("acl", iter_0, 0));
+                    VerifyOrReturn(CheckValue("acl[0].privilege", iter_0.GetValue().privilege, 5U));
+                    VerifyOrReturn(CheckValue("acl[0].authMode", iter_0.GetValue().authMode, 2U));
+                    VerifyOrReturn(CheckValueNonNull("acl[0].subjects", iter_0.GetValue().subjects));
+                    {
+                        auto iter_3 = iter_0.GetValue().subjects.Value().begin();
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 0));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[0]", iter_3.GetValue(),
+                                                  mTH2CommissionerNodeId.HasValue() ? mTH2CommissionerNodeId.Value() : 112233ULL));
+                        VerifyOrReturn(CheckNextListItemDecodes<decltype(iter_0.GetValue().subjects.Value())>(
+                            "acl[0].subjects.Value()", iter_3, 1));
+                        VerifyOrReturn(CheckValue("acl[0].subjects.Value()[1]", iter_3.GetValue(), 2222ULL));
+                        VerifyOrReturn(CheckNoMoreListItems<decltype(iter_0.GetValue().subjects.Value())>("acl[0].subjects.Value()",
+                                                                                                          iter_3, 2));
+                    }
+                    VerifyOrReturn(CheckValueNull("acl[0].targets", iter_0.GetValue().targets));
+                    VerifyOrReturn(CheckValue("acl[0].fabricIndex", iter_0.GetValue().fabricIndex, TH2FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("acl", iter_0, 1));
+                }
             }
             break;
         case 10:
@@ -6797,12 +6841,6 @@ private:
             break;
         case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            {
-                chip::app::DataModel::DecodableList<
-                    chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::DecodableType>
-                    value;
-                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
-            }
             break;
         case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -6811,6 +6849,15 @@ private:
                     chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("extension", iter_0, 0));
+                    VerifyOrReturn(CheckValueAsString(
+                        "extension[0].data", iter_0.GetValue().data,
+                        mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2)));
+                    VerifyOrReturn(CheckValue("extension[0].fabricIndex", iter_0.GetValue().fabricIndex, TH1FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("extension", iter_0, 1));
+                }
             }
             break;
         case 16:
@@ -6882,6 +6929,15 @@ private:
                     chip::app::Clusters::AccessControl::Structs::AccessControlExtensionStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("extension", iter_0, 0));
+                    VerifyOrReturn(CheckValueAsString(
+                        "extension[0].data", iter_0.GetValue().data,
+                        mDOkEmpty.HasValue() ? mDOkEmpty.Value() : chip::ByteSpan(chip::Uint8::from_const_char("\x17\x18"), 2)));
+                    VerifyOrReturn(CheckValue("extension[0].fabricIndex", iter_0.GetValue().fabricIndex, TH1FabricIndex));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("extension", iter_0, 1));
+                }
             }
             break;
         case 22:
@@ -7129,12 +7185,54 @@ private:
         case 14: {
             LogStep(14, "Step 10:TH1 writes DUT Endpoint 0 AccessControl cluster ACL attribute");
             VerifyOrDo(!ShouldSkip("ACL.S.A0000"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, true,
-                                 chip::NullOptional);
+            ListFreer listFreer;
+            chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
+
+            {
+                auto * listHolder_0 =
+                    new ListHolder<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(2);
+                listFreer.add(listHolder_0);
+
+                listHolder_0->mList[0].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(5);
+                listHolder_0->mList[0].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(2);
+                listHolder_0->mList[0].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(2);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0] = mTH1CommissionerNodeId.HasValue() ? mTH1CommissionerNodeId.Value() : 112233ULL;
+                    listHolder_3->mList[1] = 1111ULL;
+                    listHolder_0->mList[0].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 2);
+                }
+                listHolder_0->mList[0].targets.SetNull();
+                listHolder_0->mList[0].fabricIndex = TH1FabricIndex;
+
+                listHolder_0->mList[1].privilege =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                listHolder_0->mList[1].authMode =
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
+                listHolder_0->mList[1].subjects.SetNonNull();
+
+                {
+                    auto * listHolder_3 = new ListHolder<uint64_t>(1);
+                    listFreer.add(listHolder_3);
+                    listHolder_3->mList[0]                  = 3333ULL;
+                    listHolder_0->mList[1].subjects.Value() = chip::app::DataModel::List<uint64_t>(listHolder_3->mList, 1);
+                }
+                listHolder_0->mList[1].targets.SetNull();
+                listHolder_0->mList[1].fabricIndex = TH1FabricIndex;
+
+                value = chip::app::DataModel::List<chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type>(
+                    listHolder_0->mList, 2);
+            }
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Acl::Id, value,
+                                  chip::NullOptional, chip::NullOptional);
         }
         case 15: {
             LogStep(15,
-                    "Step 11:TH1 resds DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
+                    "Step 11:TH1 reads DUT Endpoint 0 AccessControl cluster Extension attribute, value is list of "
                     "AccessControlExtensionStruct containing 1 element");
             VerifyOrDo(!ShouldSkip("ACL.S.A0001"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), AccessControl::Id, AccessControl::Attributes::Extension::Id, true,
