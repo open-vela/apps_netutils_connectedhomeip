@@ -30890,7 +30890,7 @@ private:
         }
         case 20: {
             LogStep(20, "Read the optional command(Seek) in AcceptedCommandList");
-            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C0B.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), MediaPlayback::Id,
                                  MediaPlayback::Attributes::AcceptedCommandList::Id, true, chip::NullOptional);
         }
@@ -34582,7 +34582,7 @@ private:
         }
         case 2: {
             LogStep(2, "Sends a Seek command");
-            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C0B.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::MediaPlayback::Commands::Seek::Type value;
             value.position = 10000ULL;
@@ -34593,7 +34593,7 @@ private:
         }
         case 3: {
             LogStep(3, "Verify that the media has moved to 10 seconds from the starting point");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0B.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>(
@@ -34604,7 +34604,7 @@ private:
         }
         case 4: {
             LogStep(4, "Reads the SampledPosition attribute");
-            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.A0003 && MEDIAPLAYBACK.S.C0B.Rsp"),
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.A0003 && MEDIAPLAYBACK.S.C0b.Rsp"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(1), MediaPlayback::Id, MediaPlayback::Attributes::SampledPosition::Id,
                                  true, chip::NullOptional);
@@ -34651,7 +34651,7 @@ private:
         }
         case 9: {
             LogStep(9, "Sends a Seek command Position value beyond the furthest valid position");
-            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C0B.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::MediaPlayback::Commands::Seek::Type value;
             value.position = mSeekPosition.HasValue() ? mSeekPosition.Value() : 100000000ULL;
@@ -34662,7 +34662,7 @@ private:
         }
         case 10: {
             LogStep(10, "verify that the media has not moved.");
-            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0B.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0b.Rsp"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
             value.message = chip::Span<const char>("Please enter 'y' if media has not movedgarbage: not in length on purpose", 39);
@@ -65933,7 +65933,7 @@ private:
         }
         case 10: {
             LogStep(10, "Check Vendor ID (_V)");
-            VerifyOrDo(!ShouldSkip("VENDOR_SUBTYPE"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.VENDOR_SUBTYPE"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionableByVendorId::Type value;
             value.value = mVendorId.HasValue() ? mVendorId.Value() : 65521ULL;
@@ -65947,28 +65947,28 @@ private:
         }
         case 12: {
             LogStep(12, "TXT key for Vendor ID and Product ID (VP)");
-            VerifyOrDo(!ShouldSkip("VP_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.VP_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 13: {
             LogStep(13, "TXT key for Vendor ID and Product ID (VP)");
-            VerifyOrDo(!ShouldSkip("VP_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.VP_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 14: {
-            LogStep(14, "Optional TXT key for MRP Retry Interval Idle (CRI)");
-            VerifyOrDo(!ShouldSkip("CRI_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(14, "Optional TXT key for MRP Sleepy Idle Interval (SII)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.SII_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 15: {
-            LogStep(15, "Optional TXT key for MRP Retry Interval Active (CRA)");
-            VerifyOrDo(!ShouldSkip("CRA_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            LogStep(15, "Optional TXT key for MRP Sleepy Active Interval (SAI)");
+            VerifyOrDo(!ShouldSkip("MCORE.SC.SAI_COMM_DISCOVERY_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
@@ -65981,28 +65981,28 @@ private:
         }
         case 17: {
             LogStep(17, "Optional TXT key for device name (DN)");
-            VerifyOrDo(!ShouldSkip("DN_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.DN_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 18: {
             LogStep(18, "Optional TXT key for rotating device identifier (RI)");
-            VerifyOrDo(!ShouldSkip("RI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.RI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 19: {
             LogStep(19, "Optional TXT key for pairing hint (PH)");
-            VerifyOrDo(!ShouldSkip("PH_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.PH_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
         }
         case 20: {
             LogStep(20, "Optional TXT key for pairing instructions (PI)");
-            VerifyOrDo(!ShouldSkip("PI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            VerifyOrDo(!ShouldSkip("MCORE.SC.PI_KEY"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::DiscoveryCommands::Commands::FindCommissionable::Type value;
             return FindCommissionable(kIdentityAlpha, value);
