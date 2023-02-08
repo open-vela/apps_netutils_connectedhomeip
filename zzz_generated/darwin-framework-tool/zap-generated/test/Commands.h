@@ -39678,7 +39678,7 @@ public:
             break;
         case 20:
             ChipLogProgress(chipTool, " ***** Test Step 20 : Read the optional command(Seek) in AcceptedCommandList\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C0B.Rsp")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -45539,7 +45539,7 @@ public:
             break;
         case 2:
             ChipLogProgress(chipTool, " ***** Test Step 2 : Sends a Seek command\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C0B.Rsp")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -45548,7 +45548,7 @@ public:
         case 3:
             ChipLogProgress(
                 chipTool, " ***** Test Step 3 : Verify that the media has moved to 10 seconds from the starting point\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0B.Rsp")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -45556,7 +45556,7 @@ public:
             break;
         case 4:
             ChipLogProgress(chipTool, " ***** Test Step 4 : Reads the SampledPosition attribute\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.A0003 && MEDIAPLAYBACK.S.C0B.Rsp")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.A0003 && MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -45597,7 +45597,7 @@ public:
         case 9:
             ChipLogProgress(
                 chipTool, " ***** Test Step 9 : Sends a Seek command Position value beyond the furthest valid position\n");
-            if (ShouldSkip("MEDIAPLAYBACK.S.C0B.Rsp")) {
+            if (ShouldSkip("MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
@@ -45605,7 +45605,7 @@ public:
             break;
         case 10:
             ChipLogProgress(chipTool, " ***** Test Step 10 : verify that the media has not moved.\n");
-            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0B.Rsp")) {
+            if (ShouldSkip("PICS_USER_PROMPT && MEDIAPLAYBACK.S.C0b.Rsp")) {
                 NextTest();
                 return;
             }
