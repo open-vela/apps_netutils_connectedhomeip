@@ -5601,6 +5601,8 @@ public:
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("payload", &mPayload);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("D_OK_EMPTY", &mDOkEmpty);
         AddArgument("D_OK_SINGLE", &mDOkSingle);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -5619,6 +5621,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<chip::ByteSpan> mDOkEmpty;
     chip::Optional<chip::ByteSpan> mDOkSingle;
     chip::Optional<uint16_t> mTimeout;
@@ -5835,12 +5839,24 @@ private:
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3:TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            LogStep(3, "Step 3:TH1 puts DUT into commissioning mode");
             ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );
@@ -5964,6 +5980,8 @@ public:
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("payload", &mPayload);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
@@ -5980,6 +5998,8 @@ private:
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<uint16_t> mTimeout;
 
     chip::NodeId TH1CommissionerNodeId;
@@ -6376,12 +6396,24 @@ private:
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            LogStep(3, "TH1 puts DUT into commissioning mode");
             ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );
@@ -6803,6 +6835,7 @@ public:
         AddArgument("nodeId2", 0, UINT64_MAX, &mNodeId2);
         AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
         AddArgument("payload", &mPayload);
+        AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("D_OK_EMPTY", &mDOkEmpty);
         AddArgument("D_OK_SINGLE", &mDOkSingle);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
@@ -6822,6 +6855,7 @@ private:
     chip::Optional<chip::NodeId> mNodeId2;
     chip::Optional<uint16_t> mDiscriminator;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<chip::ByteSpan> mDOkEmpty;
     chip::Optional<chip::ByteSpan> mDOkSingle;
     chip::Optional<uint16_t> mTimeout;
@@ -7058,12 +7092,24 @@ private:
                                  OperationalCredentials::Attributes::CurrentFabricIndex::Id, true, chip::NullOptional);
         }
         case 3: {
-            LogStep(3, "Step 3:TH1 puts DUT into commissioning mode, TH2 commissions DUT using admin node ID N2");
+            LogStep(3, "Step 3:TH1 puts DUT into commissioning mode");
             ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );
@@ -8266,6 +8312,8 @@ public:
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("payload", &mPayload);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
 
@@ -8281,6 +8329,8 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<uint16_t> mTimeout;
 
     uint8_t th1FabricIndex;
@@ -8416,10 +8466,22 @@ private:
         case 2: {
             LogStep(2, "Open Commissioning Window from alpha");
             ListFreer listFreer;
-            chip::app::Clusters::AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Type value;
+            chip::app::Clusters::AdministratorCommissioning::Commands::OpenCommissioningWindow::Type value;
             value.commissioningTimeout = 180U;
+            value.PAKEPasscodeVerifier = mPakeVerifier.HasValue()
+                ? mPakeVerifier.Value()
+                : chip::ByteSpan(
+                      chip::Uint8::from_const_char(
+                          "\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb\x20"
+                          "\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22\x73\x6d"
+                          "\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91\x3c\x53\x51"
+                          "\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"),
+                      97);
+            value.discriminator        = mDiscriminator.HasValue() ? mDiscriminator.Value() : 3840U;
+            value.iterations           = 1000UL;
+            value.salt = chip::ByteSpan(chip::Uint8::from_const_char("SPAKE2P Key Saltgarbage: not in length on purpose"), 16);
             return SendCommand(kIdentityAlpha, GetEndpoint(0), AdministratorCommissioning::Id,
-                               AdministratorCommissioning::Commands::OpenBasicCommissioningWindow::Id, value,
+                               AdministratorCommissioning::Commands::OpenCommissioningWindow::Id, value,
                                chip::Optional<uint16_t>(10000), chip::NullOptional
 
             );

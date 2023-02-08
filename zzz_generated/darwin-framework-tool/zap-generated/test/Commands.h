@@ -5563,6 +5563,8 @@ public:
         AddArgument("cluster", &mCluster);
         AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
         AddArgument("payload", &mPayload);
+        AddArgument("discriminator", 0, UINT16_MAX, &mDiscriminator);
+        AddArgument("PakeVerifier", &mPakeVerifier);
         AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
     }
     // NOLINTEND(clang-analyzer-nullability.NullPassedToNonnull)
@@ -5733,6 +5735,8 @@ private:
     chip::Optional<chip::CharSpan> mCluster;
     chip::Optional<chip::EndpointId> mEndpoint;
     chip::Optional<chip::CharSpan> mPayload;
+    chip::Optional<uint16_t> mDiscriminator;
+    chip::Optional<chip::ByteSpan> mPakeVerifier;
     chip::Optional<uint16_t> mTimeout;
 
     CHIP_ERROR TestWaitForTheCommissionedDeviceToBeRetrievedForTh1_0()
@@ -5777,16 +5781,28 @@ private:
                                                                                            queue:mCallbackQueue];
         VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
 
-        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams alloc] init];
+        __auto_type * params = [[MTRAdministratorCommissioningClusterOpenCommissioningWindowParams alloc] init];
         params.commissioningTimeout = [NSNumber numberWithUnsignedShort:180U];
-        [cluster openBasicCommissioningWindowWithParams:params
-                                             completion:^(NSError * _Nullable err) {
-                                                 NSLog(@"Open Commissioning Window from alpha Error: %@", err);
+        params.pakePasscodeVerifier = mPakeVerifier.HasValue()
+            ? [NSData dataWithBytes:mPakeVerifier.Value().data() length:mPakeVerifier.Value().size()]
+            : [[NSData alloc]
+                initWithBytes:"\xb9\x61\x70\xaa\xe8\x03\x34\x68\x84\x72\x4f\xe9\xa3\xb2\x87\xc3\x03\x30\xc2\xa6\x60\x37\x5d\x17\xbb"
+                              "\x20\x5a\x8c\xf1\xae\xcb\x35\x04\x57\xf8\xab\x79\xee\x25\x3a\xb6\xa8\xe4\x6b\xb0\x9e\x54\x3a\xe4\x22"
+                              "\x73\x6d\xe5\x01\xe3\xdb\x37\xd4\x41\xfe\x34\x49\x20\xd0\x95\x48\xe4\xc1\x82\x40\x63\x0c\x4f\xf4\x91"
+                              "\x3c\x53\x51\x38\x39\xb7\xc0\x7f\xcc\x06\x27\xa1\xb8\x57\x3a\x14\x9f\xcd\x1f\xa4\x66\xcf"
+                       length:97];
+        params.discriminator = mDiscriminator.HasValue() ? [NSNumber numberWithUnsignedShort:mDiscriminator.Value()]
+                                                         : [NSNumber numberWithUnsignedShort:3840U];
+        params.iterations = [NSNumber numberWithUnsignedInt:1000UL];
+        params.salt = [[NSData alloc] initWithBytes:"SPAKE2P Key Salt" length:16];
+        [cluster openCommissioningWindowWithParams:params
+                                        completion:^(NSError * _Nullable err) {
+                                            NSLog(@"Open Commissioning Window from alpha Error: %@", err);
 
-                                                 VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+                                            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
 
-                                                 NextTest();
-                                             }];
+                                            NextTest();
+                                        }];
 
         return CHIP_NO_ERROR;
     }
