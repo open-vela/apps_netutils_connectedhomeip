@@ -41401,7 +41401,7 @@ private:
 class Test_TC_SC_5_1Suite : public TestCommand
 {
 public:
-    Test_TC_SC_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_1", 18, credsIssuerConfig)
+    Test_TC_SC_5_1Suite(CredentialIssuerCommands * credsIssuerConfig) : TestCommand("Test_TC_SC_5_1", 19, credsIssuerConfig)
     {
         AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
         AddArgument("cluster", &mCluster);
@@ -41516,6 +41516,23 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
+                    chip::app::Clusters::GroupKeyManagement::Structs::GroupKeyMapStruct::DecodableType>
+                    value;
+                VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
+                {
+                    auto iter_0 = value.begin();
+                    VerifyOrReturn(CheckNextListItemDecodes<decltype(value)>("groupKeyMap", iter_0, 0));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupId", iter_0.GetValue().groupId, 259U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].groupKeySetID", iter_0.GetValue().groupKeySetID, 419U));
+                    VerifyOrReturn(CheckValue("groupKeyMap[0].fabricIndex", iter_0.GetValue().fabricIndex, 1U));
+                    VerifyOrReturn(CheckNoMoreListItems<decltype(value)>("groupKeyMap", iter_0, 1));
+                }
+            }
+            break;
+        case 12:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            {
+                chip::app::DataModel::DecodableList<
                     chip::app::Clusters::GroupKeyManagement::Structs::GroupInfoMapStruct::DecodableType>
                     value;
                 VerifyOrReturn(CheckDecodeValue(chip::app::DataModel::Decode(*data, value)));
@@ -41539,7 +41556,7 @@ private:
                 }
             }
             break;
-        case 12:
+        case 13:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41566,10 +41583,10 @@ private:
                 }
             }
             break;
-        case 13:
+        case 14:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 14:
+        case 15:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41582,10 +41599,10 @@ private:
                 }
             }
             break;
-        case 15:
+        case 16:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
-        case 16:
+        case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             {
                 chip::app::DataModel::DecodableList<
@@ -41598,7 +41615,7 @@ private:
                 }
             }
             break;
-        case 17:
+        case 18:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         default:
@@ -41804,19 +41821,24 @@ private:
             );
         }
         case 11: {
-            LogStep(11, "TH reads GroupTable attribute");
+            LogStep(11, "TH reads GroupKeyMap Attribute from the GroupKeyManagement cluster");
+            return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
+                                 GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
+        }
+        case 12: {
+            LogStep(12, "TH reads GroupTable attribute");
             VerifyOrDo(!ShouldSkip("G.S.F00"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 12: {
-            LogStep(12, "TH reads GroupTable attribute");
+        case 13: {
+            LogStep(13, "TH reads GroupTable attribute");
             VerifyOrDo(!ShouldSkip("!(G.S.F00)"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 13: {
-            LogStep(13, "TH removes the GroupKeySet");
+        case 14: {
+            LogStep(14, "TH removes the GroupKeySet");
             ListFreer listFreer;
             chip::app::Clusters::GroupKeyManagement::Commands::KeySetRemove::Type value;
             value.groupKeySetID = 419U;
@@ -41825,13 +41847,13 @@ private:
 
             );
         }
-        case 14: {
-            LogStep(14, "TH verifies the corresponding GroupKeyMap entry has been removed");
+        case 15: {
+            LogStep(15, "TH verifies the corresponding GroupKeyMap entry has been removed");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupKeyMap::Id, true, chip::NullOptional);
         }
-        case 15: {
-            LogStep(15, "TH cleans up groups using RemoveAllGroups command");
+        case 16: {
+            LogStep(16, "TH cleans up groups using RemoveAllGroups command");
             ListFreer listFreer;
             chip::app::Clusters::Groups::Commands::RemoveAllGroups::Type value;
             return SendCommand(kIdentityAlpha, GetEndpoint(1), Groups::Id, Groups::Commands::RemoveAllGroups::Id, value,
@@ -41839,13 +41861,13 @@ private:
 
             );
         }
-        case 16: {
-            LogStep(16, "TH verifies the group has been removed in the GroupTable");
+        case 17: {
+            LogStep(17, "TH verifies the group has been removed in the GroupTable");
             return ReadAttribute(kIdentityAlpha, GetEndpoint(0), GroupKeyManagement::Id,
                                  GroupKeyManagement::Attributes::GroupTable::Id, true, chip::NullOptional);
         }
-        case 17: {
-            LogStep(17, "TH removes ACL Operate privileges for Group 0x0103");
+        case 18: {
+            LogStep(18, "TH removes ACL Operate privileges for Group 0x0103");
             ListFreer listFreer;
             chip::app::DataModel::List<const chip::app::Clusters::AccessControl::Structs::AccessControlEntryStruct::Type> value;
 
@@ -42033,7 +42055,7 @@ private:
                 listHolder_0->mList[0].fabricIndex = 1U;
 
                 listHolder_0->mList[1].privilege =
-                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(3);
+                    static_cast<chip::app::Clusters::AccessControl::AccessControlEntryPrivilegeEnum>(4);
                 listHolder_0->mList[1].authMode =
                     static_cast<chip::app::Clusters::AccessControl::AccessControlEntryAuthModeEnum>(3);
                 listHolder_0->mList[1].subjects.SetNonNull();
@@ -44595,13 +44617,13 @@ private:
             break;
         case 23:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 24:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 25:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 26:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -44654,17 +44676,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 36:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 37:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 38:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 39:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 40:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -44714,17 +44736,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 49:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 50:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 51:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 52:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 53:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -44780,17 +44802,17 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 64:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 65:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 66:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 67:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 68:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -44847,13 +44869,13 @@ private:
             break;
         case 79:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 80:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 81:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 82:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -44913,13 +44935,13 @@ private:
             break;
         case 94:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 95:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 96:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 97:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -44973,13 +44995,13 @@ private:
             break;
         case 107:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
             break;
         case 108:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 109:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 110:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -45029,20 +45051,20 @@ private:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 119:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 120:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 121:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
-            shouldContinue = true;
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_CONSTRAINT_ERROR));
             break;
         case 122:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 123:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
             break;
         case 124:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
@@ -45389,7 +45411,27 @@ private:
                                   chip::NullOptional);
         }
         case 21: {
-            LogStep(21, "Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
+            LogStep(21, "Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && !TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 3200;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
+        }
+        case 22: {
+            LogStep(22, "Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = MaxCoolSetpointLimit;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
+        }
+        case 23: {
+            LogStep(23, "Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && !TSTAT.S.F05 && !TSTAT.S.A0017"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45399,8 +45441,8 @@ private:
                                   Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 22: {
-            LogStep(22, "Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
+        case 24: {
+            LogStep(24, "Writes the limit of MinCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && !TSTAT.S.F05 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
@@ -45409,8 +45451,8 @@ private:
                                   Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 23: {
-            LogStep(23,
+        case 25: {
+            LogStep(25,
                     "Writes If TSTAT.S.F05(AUTO) LowerLimit = Max(MinCoolSetpointLimit, (OccupiedHeatingSetpoint + "
                     "MinSetpointDeadBand)) to OccupiedCoolingSetpoint attribute when Auto is enabled");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F05 && TSTAT.S.A0012 && PICS_SKIP_SAMPLE_APP"),
@@ -45421,26 +45463,6 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
-        }
-        case 24: {
-            LogStep(24, "Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && !TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 3200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 25: {
-            LogStep(25, "Writes the limit of MaxCoolSetpointLimit to OccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = MaxCoolSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::OccupiedCoolingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
         }
         case 26: {
             LogStep(26, "Reads OccupiedHeatingSetpoint attribute from Server DUT and verifies that the value is within range");
@@ -45514,27 +45536,7 @@ private:
                                   chip::NullOptional);
         }
         case 34: {
-            LogStep(34, "Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && !TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 700;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 35: {
-            LogStep(35, "Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = MinHeatSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 36: {
-            LogStep(36, "Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
+            LogStep(34, "Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && !TSTAT.S.F05 && !TSTAT.S.A0016"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45544,8 +45546,8 @@ private:
                                   Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 37: {
-            LogStep(37, "Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
+        case 35: {
+            LogStep(35, "Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && !TSTAT.S.F05 && TSTAT.S.A0016"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
@@ -45554,8 +45556,8 @@ private:
                                   Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 38: {
-            LogStep(38, "Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
+        case 36: {
+            LogStep(36, "Writes the limit of MaxHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F05 && !TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
@@ -45564,8 +45566,8 @@ private:
                                   Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 39: {
-            LogStep(39,
+        case 37: {
+            LogStep(37,
                     "Writes If TSTAT.S.F05(AUTO) UpperLimit = Min(MaxHeatSetpointLimit, (OccupiedCoolingSetpoint - "
                     "MinSetpointDeadBand)) to OccupiedHeatingSetpoint attribute when Auto is enabled");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F05 && TSTAT.S.A0011 && TSTAT.S.A0012 && PICS_SKIP_SAMPLE_APP"),
@@ -45576,6 +45578,26 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
+        }
+        case 38: {
+            LogStep(38, "Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && !TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 700;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
+        }
+        case 39: {
+            LogStep(39, "Writes the limit of MinHeatSetpointLimit to OccupiedHeatingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = MinHeatSetpointLimit;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::OccupiedHeatingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 40: {
             LogStep(40, "Reads UnoccupiedCoolingSetpoint attribute from Server DUT and verifies that the value is within range");
@@ -45649,40 +45671,29 @@ private:
                                   chip::NullOptional);
         }
         case 48: {
-            LogStep(48, "Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && !TSTAT.S.A0017 && !TSTAT.S.F05"),
+            LogStep(48, "Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && !TSTAT.S.A0018 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = 1600;
+            value = 3200;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 49: {
-            LogStep(49, "Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && !TSTAT.S.A0017 && TSTAT.S.F05"),
+            LogStep(49, "Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = 1600;
+            value = MaxCoolSetpointLimit;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 50: {
-            LogStep(50, "Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && TSTAT.S.A0017 && !TSTAT.S.F05"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = MinCoolSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 51: {
-            LogStep(51,
+            LogStep(50,
                     "Writes If TSTAT.S.F05(AUTO) LowerLimit = Max(MinCoolSetpointLimit, (UnoccupiedCoolingSetpoint + "
                     "MinSetpointDeadBand)) to UnoccupiedCoolingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && TSTAT.S.A0013 && TSTAT.S.F05 && PICS_SKIP_SAMPLE_APP"),
@@ -45694,24 +45705,35 @@ private:
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
         }
-        case 52: {
-            LogStep(52, "Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && !TSTAT.S.A0018 && !TSTAT.S.F05"),
+        case 51: {
+            LogStep(51, "Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && !TSTAT.S.A0017 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = 3200;
+            value = 1600;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
+        }
+        case 52: {
+            LogStep(52, "Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && !TSTAT.S.A0017 && TSTAT.S.F05"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 1600;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
         case 53: {
-            LogStep(53, "Writes the limit of MaxCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.F05"),
+            LogStep(53, "Writes the limit of MinCoolSetpointLimit to UnoccupiedCoolingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F01 && TSTAT.S.A0017 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             int16_t value;
-            value = MaxCoolSetpointLimit;
+            value = MinCoolSetpointLimit;
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
                                   Thermostat::Attributes::UnoccupiedCoolingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
@@ -45788,27 +45810,7 @@ private:
                                   chip::NullOptional);
         }
         case 62: {
-            LogStep(62, "Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && !TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 700;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 63: {
-            LogStep(63, "Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = MinHeatSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
-                                  Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
-                                  chip::NullOptional);
-        }
-        case 64: {
-            LogStep(64, "Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
+            LogStep(62, "Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && !TSTAT.S.A0016 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45818,8 +45820,8 @@ private:
                                   Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 65: {
-            LogStep(65, "Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
+        case 63: {
+            LogStep(63, "Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && TSTAT.S.A0016 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45829,8 +45831,8 @@ private:
                                   Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 66: {
-            LogStep(66, "Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
+        case 64: {
+            LogStep(64, "Writes the limit of MaxHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && !TSTAT.S.A0016 && TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45840,8 +45842,8 @@ private:
                                   Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
                                   chip::NullOptional);
         }
-        case 67: {
-            LogStep(67,
+        case 65: {
+            LogStep(65,
                     "Writes If TSTAT.S.F05(AUTO) UpperLimit = Min(MaxHeatSetpointLimit, (UnoccupiedCoolingSetpoint - "
                     "MinSetpointDeadBand)) to UnoccupiedHeatingSetpoint attribute when Auto is enabled.");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && TSTAT.S.A0013 && TSTAT.S.F05 && PICS_SKIP_SAMPLE_APP"),
@@ -45852,6 +45854,26 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
+        }
+        case 66: {
+            LogStep(66, "Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && !TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 700;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
+        }
+        case 67: {
+            LogStep(67, "Writes the limit of MinHeatSetpointLimit to UnoccupiedHeatingSetpoint attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F02 && TSTAT.S.F00 && TSTAT.S.A0015"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = MinHeatSetpointLimit;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id,
+                                  Thermostat::Attributes::UnoccupiedHeatingSetpoint::Id, value, chip::NullOptional,
+                                  chip::NullOptional);
         }
         case 68: {
             LogStep(68, "Reads MinHeatSetpointLimit attribute from Server DUT and verifies that the value is within range");
@@ -45933,27 +45955,7 @@ private:
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 77: {
-            LogStep(77, "Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && !TSTAT.S.A0003"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 700;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 78: {
-            LogStep(78, "Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && TSTAT.S.A0003"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = AbsMinHeatSetpointLimitValue;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 79: {
-            LogStep(79, "Writes the limit of MaxHeatSetpointLimit to MinHeatSetpointLimit attribute");
+            LogStep(77, "Writes the limit of MaxHeatSetpointLimit to MinHeatSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && !TSTAT.S.F05 && !TSTAT.S.A0016"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45962,8 +45964,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 80: {
-            LogStep(80, "Writes the limit of MaxHeatSetpointLimit to MinHeatSetpointimit attribute");
+        case 78: {
+            LogStep(78, "Writes the limit of MaxHeatSetpointLimit to MinHeatSetpointimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && !TSTAT.S.F05 && TSTAT.S.A0016"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -45972,8 +45974,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 81: {
-            LogStep(81,
+        case 79: {
+            LogStep(79,
                     "Writes If TSTAT.S.F05(AUTO) UpperLimit = Min(MaxHeatSetpointLimit, (MinCoolSetpointLimit - "
                     "MinSetpointDeadBand)) to MinHeatSetpointLimit attribute when Auto is enabled");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && TSTAT.S.F05 && TSTAT.S.A0005 && PICS_SKIP_SAMPLE_APP"),
@@ -45984,6 +45986,26 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
+        }
+        case 80: {
+            LogStep(80, "Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && !TSTAT.S.A0003"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 700;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 81: {
+            LogStep(81, "Writes the limit of AbsMinHeatSetpointLimit to MinHeatSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0015 && TSTAT.S.A0003"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = AbsMinHeatSetpointLimitValue;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinHeatSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 82: {
             LogStep(82, "Reads MaxHeatSetpointLimit attribute from Server DUT and verifies that the value is within range");
@@ -46074,27 +46096,7 @@ private:
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 92: {
-            LogStep(92, "Writes the limit of MinHeatSetpointLimit to MaxHeatSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016 && !TSTAT.S.A0015"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 700;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 93: {
-            LogStep(93, "Writes the limit of MinHeatSetpointLimit to MaxHeatSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016 && TSTAT.S.A0015"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = MinHeatSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 94: {
-            LogStep(94, "Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute");
+            LogStep(92, "Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016 && !TSTAT.S.F05 && !TSTAT.S.A0004"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46103,8 +46105,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 95: {
-            LogStep(95, "Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute");
+        case 93: {
+            LogStep(93, "Writes the limit of AbsMaxHeatSetpointLimit to MaxHeatSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016 && !TSTAT.S.F05 && TSTAT.S.A0004"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46113,8 +46115,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 96: {
-            LogStep(96,
+        case 94: {
+            LogStep(94,
                     "Writes If TSTAT.S.F05(AUTO) UpperLimit = Min(AbsMaxHeatSetpointLimit, (MaxCoolSetpointLimit - "
                     "MinSetpointDeadBand)) to MaxHeatSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016 && TSTAT.S.F05 && TSTAT.S.A0018 && PICS_SKIP_SAMPLE_APP"),
@@ -46125,6 +46127,26 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
+        }
+        case 95: {
+            LogStep(95, "Writes the limit of MinHeatSetpointLimit to MaxHeatSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00  && TSTAT.S.A0016 && !TSTAT.S.A0015"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 700;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 96: {
+            LogStep(96, "Writes the limit of MinHeatSetpointLimit to MaxHeatSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F00 && TSTAT.S.A0016 && TSTAT.S.A0015"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = MinHeatSetpointLimit;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxHeatSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 97: {
             LogStep(97, "Reads MinCoolSetpointLimit attribute from Server DUT and verifies that the value is within range");
@@ -46197,7 +46219,27 @@ private:
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 105: {
-            LogStep(105, "Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute");
+            LogStep(105, "Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && !TSTAT.S.A0018"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 3200;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 106: {
+            LogStep(106, "Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && TSTAT.S.A0018"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = MaxCoolSetpointLimit;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 107: {
+            LogStep(107, "Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && !TSTAT.S.A0005 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46206,8 +46248,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 106: {
-            LogStep(106, "Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute");
+        case 108: {
+            LogStep(108, "Writes the limit of AbsMinCoolSetpointLimit to MinCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && TSTAT.S.A0005 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46216,8 +46258,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 107: {
-            LogStep(107,
+        case 109: {
+            LogStep(109,
                     "Writes If TSTAT.S.F05(AUTO) LowerLimit = Max(AbsMinCoolSetpointLimit, (MinHeatSetpointLimit + "
                     "MinSetpointDeadBand)) to MinCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && TSTAT.S.A0015 && TSTAT.S.F05 && PICS_SKIP_SAMPLE_APP"),
@@ -46228,26 +46270,6 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
-        }
-        case 108: {
-            LogStep(108, "Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && !TSTAT.S.A0018"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 3200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 109: {
-            LogStep(109, "Writes the limit of MaxCoolSetpointLimit to MinCoolSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0017 && TSTAT.S.A0018"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = MaxCoolSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MinCoolSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 110: {
             LogStep(110, "Reads MaxCoolSetpointLimit attribute from Server DUT and verifies that the value is within range");
@@ -46320,7 +46342,27 @@ private:
                                   value, chip::NullOptional, chip::NullOptional);
         }
         case 118: {
-            LogStep(118, "Writes the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute");
+            LogStep(118, "Writes the limit of AbsMaxCoolSetpointLimit to MaxCoolSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.A0006"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = 3200;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 119: {
+            LogStep(119, "Writes the limit of AbsMaxCoolSetpointLimit to MaxCoolSetpointLimit attribute");
+            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && TSTAT.S.A0006"),
+                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            ListFreer listFreer;
+            int16_t value;
+            value = AbsMaxCoolSetpointLimit;
+            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
+                                  value, chip::NullOptional, chip::NullOptional);
+        }
+        case 120: {
+            LogStep(120, "Writes the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.A0017 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46329,8 +46371,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 119: {
-            LogStep(119, "Writes the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute");
+        case 121: {
+            LogStep(121, "Writes the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.A0017 && TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46339,8 +46381,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 120: {
-            LogStep(120, "Writes the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute");
+        case 122: {
+            LogStep(122, "Writes the limit of MinCoolSetpointLimit to MaxCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && TSTAT.S.A0017 && !TSTAT.S.F05"),
                        return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
@@ -46349,8 +46391,8 @@ private:
             return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
                                   value, chip::NullOptional, chip::NullOptional);
         }
-        case 121: {
-            LogStep(121,
+        case 123: {
+            LogStep(123,
                     "Writes If TSTAT.S.F05(AUTO) LowerLimit = Max(MinCoolSetpointLimit, (MaxHeatSetpointLimit + "
                     "MinSetpointDeadBand)) to MaxCoolSetpointLimit attribute");
             VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && TSTAT.S.A0016 && TSTAT.S.F05 && PICS_SKIP_SAMPLE_APP"),
@@ -46361,26 +46403,6 @@ private:
             value.expectedValue.Emplace();
             value.expectedValue.Value() = chip::Span<const char>("ygarbage: not in length on purpose", 1);
             return UserPrompt(kIdentityAlpha, value);
-        }
-        case 122: {
-            LogStep(122, "Writes the limit of AbsMaxCoolSetpointLimit to MaxCoolSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && !TSTAT.S.A0006"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = 3200;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
-        }
-        case 123: {
-            LogStep(123, "Writes the limit of AbsMaxCoolSetpointLimit to MaxCoolSetpointLimit attribute");
-            VerifyOrDo(!ShouldSkip("TSTAT.S.F01 && TSTAT.S.A0018 && TSTAT.S.A0006"),
-                       return ContinueOnChipMainThread(CHIP_NO_ERROR));
-            ListFreer listFreer;
-            int16_t value;
-            value = AbsMaxCoolSetpointLimit;
-            return WriteAttribute(kIdentityAlpha, GetEndpoint(1), Thermostat::Id, Thermostat::Attributes::MaxCoolSetpointLimit::Id,
-                                  value, chip::NullOptional, chip::NullOptional);
         }
         case 124: {
             LogStep(124, "Writes (sets back) default value of MinHeatSetpointLimit");
@@ -48347,8 +48369,8 @@ private:
         }
         case 13: {
             LogStep(13,
-                    "Read RouteTableList attribute from DUT and Verify that the RouteTableList List size is Zero or greater and "
-                    "verify each node types");
+                    "Read RouteTable attribute from DUT and Verify that the RouteTableList List size is Zero or greater and verify "
+                    "each node types");
             VerifyOrDo(!ShouldSkip("PICS_USER_PROMPT && DGTHREAD.S.A0008"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
             ListFreer listFreer;
             chip::app::Clusters::LogCommands::Commands::UserPrompt::Type value;
