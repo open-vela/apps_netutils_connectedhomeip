@@ -58504,40 +58504,44 @@ public:
             err = TestThSendsKeySetRead_10();
             break;
         case 11:
-            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads GroupTable attribute\n");
-            if (ShouldSkip("G.S.F00")) {
-                NextTest();
-                return;
-            }
-            err = TestThReadsGroupTableAttribute_11();
+            ChipLogProgress(chipTool, " ***** Test Step 11 : TH reads GroupKeyMap Attribute from the GroupKeyManagement cluster\n");
+            err = TestThReadsGroupKeyMapAttributeFromTheGroupKeyManagementCluster_11();
             break;
         case 12:
             ChipLogProgress(chipTool, " ***** Test Step 12 : TH reads GroupTable attribute\n");
-            if (ShouldSkip("!(G.S.F00)")) {
+            if (ShouldSkip("G.S.F00")) {
                 NextTest();
                 return;
             }
             err = TestThReadsGroupTableAttribute_12();
             break;
         case 13:
-            ChipLogProgress(chipTool, " ***** Test Step 13 : TH removes the GroupKeySet\n");
-            err = TestThRemovesTheGroupKeySet_13();
+            ChipLogProgress(chipTool, " ***** Test Step 13 : TH reads GroupTable attribute\n");
+            if (ShouldSkip("!(G.S.F00)")) {
+                NextTest();
+                return;
+            }
+            err = TestThReadsGroupTableAttribute_13();
             break;
         case 14:
-            ChipLogProgress(chipTool, " ***** Test Step 14 : TH verifies the corresponding GroupKeyMap entry has been removed\n");
-            err = TestThVerifiesTheCorrespondingGroupKeyMapEntryHasBeenRemoved_14();
+            ChipLogProgress(chipTool, " ***** Test Step 14 : TH removes the GroupKeySet\n");
+            err = TestThRemovesTheGroupKeySet_14();
             break;
         case 15:
-            ChipLogProgress(chipTool, " ***** Test Step 15 : TH cleans up groups using RemoveAllGroups command\n");
-            err = TestThCleansUpGroupsUsingRemoveAllGroupsCommand_15();
+            ChipLogProgress(chipTool, " ***** Test Step 15 : TH verifies the corresponding GroupKeyMap entry has been removed\n");
+            err = TestThVerifiesTheCorrespondingGroupKeyMapEntryHasBeenRemoved_15();
             break;
         case 16:
-            ChipLogProgress(chipTool, " ***** Test Step 16 : TH verifies the group has been removed in the GroupTable\n");
-            err = TestThVerifiesTheGroupHasBeenRemovedInTheGroupTable_16();
+            ChipLogProgress(chipTool, " ***** Test Step 16 : TH cleans up groups using RemoveAllGroups command\n");
+            err = TestThCleansUpGroupsUsingRemoveAllGroupsCommand_16();
             break;
         case 17:
-            ChipLogProgress(chipTool, " ***** Test Step 17 : TH removes ACL Operate privileges for Group 0x0103\n");
-            err = TestThRemovesAclOperatePrivilegesForGroup0x0103_17();
+            ChipLogProgress(chipTool, " ***** Test Step 17 : TH verifies the group has been removed in the GroupTable\n");
+            err = TestThVerifiesTheGroupHasBeenRemovedInTheGroupTable_17();
+            break;
+        case 18:
+            ChipLogProgress(chipTool, " ***** Test Step 18 : TH removes ACL Operate privileges for Group 0x0103\n");
+            err = TestThRemovesAclOperatePrivilegesForGroup0x0103_18();
             break;
         }
 
@@ -58604,6 +58608,9 @@ public:
         case 17:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
+        case 18:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            break;
         }
 
         // Go on to the next test.
@@ -58617,7 +58624,7 @@ public:
 
 private:
     std::atomic_uint16_t mTestIndex;
-    const uint16_t mTestCount = 18;
+    const uint16_t mTestCount = 19;
 
     chip::Optional<chip::NodeId> mNodeId;
     chip::Optional<chip::CharSpan> mCluster;
@@ -58965,7 +58972,45 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGroupTableAttribute_11()
+    CHIP_ERROR TestThReadsGroupKeyMapAttributeFromTheGroupKeyManagementCluster_11()
+    {
+
+        MTRBaseDevice * device = GetDevice("alpha");
+        __auto_type * cluster = [[MTRBaseClusterGroupKeyManagement alloc] initWithDevice:device
+                                                                              endpointID:@(0)
+                                                                                   queue:mCallbackQueue];
+        VerifyOrReturnError(cluster != nil, CHIP_ERROR_INCORRECT_STATE);
+
+        __auto_type * params = [[MTRReadParams alloc] init];
+        params.filterByFabric = true;
+        [cluster
+            readAttributeGroupKeyMapWithParams:params
+                                    completion:^(NSArray * _Nullable value, NSError * _Nullable err) {
+                                        NSLog(@"TH reads GroupKeyMap Attribute from the GroupKeyManagement cluster Error: %@", err);
+
+                                        VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
+
+                                        {
+                                            id actualValue = value;
+                                            VerifyOrReturn(
+                                                CheckValue("GroupKeyMap", [actualValue count], static_cast<uint32_t>(1)));
+                                            VerifyOrReturn(CheckValue("GroupId",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupId, 259U));
+                                            VerifyOrReturn(CheckValue("GroupKeySetID",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).groupKeySetID,
+                                                419U));
+                                            VerifyOrReturn(CheckValue("FabricIndex",
+                                                ((MTRGroupKeyManagementClusterGroupKeyMapStruct *) actualValue[0]).fabricIndex,
+                                                1U));
+                                        }
+
+                                        NextTest();
+                                    }];
+
+        return CHIP_NO_ERROR;
+    }
+
+    CHIP_ERROR TestThReadsGroupTableAttribute_12()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59006,7 +59051,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThReadsGroupTableAttribute_12()
+    CHIP_ERROR TestThReadsGroupTableAttribute_13()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59046,7 +59091,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThRemovesTheGroupKeySet_13()
+    CHIP_ERROR TestThRemovesTheGroupKeySet_14()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59069,7 +59114,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesTheCorrespondingGroupKeyMapEntryHasBeenRemoved_14()
+    CHIP_ERROR TestThVerifiesTheCorrespondingGroupKeyMapEntryHasBeenRemoved_15()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59099,7 +59144,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThCleansUpGroupsUsingRemoveAllGroupsCommand_15()
+    CHIP_ERROR TestThCleansUpGroupsUsingRemoveAllGroupsCommand_16()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59117,7 +59162,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThVerifiesTheGroupHasBeenRemovedInTheGroupTable_16()
+    CHIP_ERROR TestThVerifiesTheGroupHasBeenRemovedInTheGroupTable_17()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59146,7 +59191,7 @@ private:
         return CHIP_NO_ERROR;
     }
 
-    CHIP_ERROR TestThRemovesAclOperatePrivilegesForGroup0x0103_17()
+    CHIP_ERROR TestThRemovesAclOperatePrivilegesForGroup0x0103_18()
     {
 
         MTRBaseDevice * device = GetDevice("alpha");
@@ -59386,7 +59431,7 @@ private:
             ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[0]).fabricIndex = [NSNumber numberWithUnsignedChar:1U];
 
             temp_0[1] = [[MTRAccessControlClusterAccessControlEntryStruct alloc] init];
-            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:3U];
+            ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).privilege = [NSNumber numberWithUnsignedChar:4U];
             ((MTRAccessControlClusterAccessControlEntryStruct *) temp_0[1]).authMode = [NSNumber numberWithUnsignedChar:3U];
             {
                 NSMutableArray * temp_3 = [[NSMutableArray alloc] init];
