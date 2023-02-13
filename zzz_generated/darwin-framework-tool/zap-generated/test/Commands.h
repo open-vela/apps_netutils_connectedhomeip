@@ -80370,10 +80370,10 @@ public:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
             break;
         case 147:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ATTRIBUTE));
             break;
         case 148:
-            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ATTRIBUTE));
             break;
         case 149:
             VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), EMBER_ZCL_STATUS_UNSUPPORTED_ENDPOINT));
@@ -84868,18 +84868,9 @@ private:
         [cluster readAttributeUnsupportedWithCompletion:^(NSNumber * _Nullable value, NSError * _Nullable err) {
             NSLog(@"Read attribute UNSUPPORTED Error: %@", err);
 
-            if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                NextTest();
-                return;
-            }
-
-            VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
-            {
-                id actualValue = value;
-                VerifyOrReturn(CheckValue("unsupported", actualValue, 0));
-            }
-
+            VerifyOrReturn(CheckValue("status",
+                err ? ([err.domain isEqualToString:MTRInteractionErrorDomain] ? err.code : EMBER_ZCL_STATUS_FAILURE) : 0,
+                EMBER_ZCL_STATUS_UNSUPPORTED_ATTRIBUTE));
             NextTest();
         }];
 
@@ -84899,13 +84890,12 @@ private:
                                          completion:^(NSError * _Nullable err) {
                                              NSLog(@"Writeattribute UNSUPPORTED Error: %@", err);
 
-                                             if (err.code == MTRInteractionErrorCodeUnsupportedAttribute) {
-                                                 NextTest();
-                                                 return;
-                                             }
-
-                                             VerifyOrReturn(CheckValue("status", err ? err.code : 0, 0));
-
+                                             VerifyOrReturn(CheckValue("status",
+                                                 err ? ([err.domain isEqualToString:MTRInteractionErrorDomain]
+                                                         ? err.code
+                                                         : EMBER_ZCL_STATUS_FAILURE)
+                                                     : 0,
+                                                 EMBER_ZCL_STATUS_UNSUPPORTED_ATTRIBUTE));
                                              NextTest();
                                          }];
 
