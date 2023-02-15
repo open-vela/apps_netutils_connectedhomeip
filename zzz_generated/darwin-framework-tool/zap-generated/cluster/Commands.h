@@ -22608,8 +22608,13 @@ public:
             = mTimedInteractionTimeoutMs.HasValue() ? [NSNumber numberWithUnsignedShort:mTimedInteractionTimeoutMs.Value()] : nil;
         params.intent = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.intent)];
         params.requestedProtocol = [NSNumber numberWithUnsignedChar:chip::to_underlying(mRequest.requestedProtocol)];
-        params.transferFileDesignator = [NSData dataWithBytes:mRequest.transferFileDesignator.data()
-                                                       length:mRequest.transferFileDesignator.size()];
+        if (mRequest.transferFileDesignator.HasValue()) {
+            params.transferFileDesignator = [[NSString alloc] initWithBytes:mRequest.transferFileDesignator.Value().data()
+                                                                     length:mRequest.transferFileDesignator.Value().size()
+                                                                   encoding:NSUTF8StringEncoding];
+        } else {
+            params.transferFileDesignator = nil;
+        }
         uint16_t repeatCount = mRepeatCount.ValueOr(1);
         uint16_t __block responsesNeeded = repeatCount;
         while (repeatCount--) {
