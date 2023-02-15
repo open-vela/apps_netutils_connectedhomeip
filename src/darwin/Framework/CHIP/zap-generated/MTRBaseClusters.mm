@@ -26585,7 +26585,10 @@ using chip::System::Clock::Timeout;
             request.intent = static_cast<std::remove_reference_t<decltype(request.intent)>>(params.intent.unsignedCharValue);
             request.requestedProtocol = static_cast<std::remove_reference_t<decltype(request.requestedProtocol)>>(
                 params.requestedProtocol.unsignedCharValue);
-            request.transferFileDesignator = [self asByteSpan:params.transferFileDesignator];
+            if (params.transferFileDesignator != nil) {
+                auto & definedValue_0 = request.transferFileDesignator.Emplace();
+                definedValue_0 = [self asCharSpan:params.transferFileDesignator];
+            }
 
             return MTRStartInvokeInteraction(typedBridge, request, exchangeManager, session, successCb, failureCb, self->_endpoint,
                 timedInvokeTimeoutMs, invokeTimeout);
